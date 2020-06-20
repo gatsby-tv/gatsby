@@ -1,0 +1,36 @@
+import React, { Component } from "react";
+
+import "./VideoThumbnail.css";
+
+/**
+ * Stateless component for rendering video thumbnails.
+ *
+ * Props:
+ * title: {String} Title of the video.
+ * views: {Number} total views of the video.
+ * dateUploaded: {String} Unix timestamp of the date the video was uploaded.
+ * thumbnail: {String} URL to the image of the video's thumbnail.
+ * url: {String} URL to view the video.
+ */
+class VideoThumbnail extends Component {
+
+  render() {
+
+    // TODO: Get proper time difference to render how long ago video was uploaded
+    // const date = new Date(parseInt(this.props.dateUploaded) * 1000);
+    // const diff = Date.now() - date;
+
+    return (
+      <div className="VideoThumbnail">
+        <a href={this.props.url}>
+          <img src={this.props.thumbnail} alt={this.props.title} />
+        </a>
+        <div>{this.props.title}</div>
+        {/* TODO: Hardcoded at the moment */}
+        <div>{this.props.views.toLocaleString()} • 20 minutes ago</div>
+      </div>
+    );
+  }
+}
+
+export default VideoThumbnail;

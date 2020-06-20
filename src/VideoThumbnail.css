@@ -1,0 +1,8 @@
+.VideoThumbnail {
+  display: inline-block;
+}
+
+.VideoThumbnail img {
+  width: 200px;
+  border-radius: 10px;
+}

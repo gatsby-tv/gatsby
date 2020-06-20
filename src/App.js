@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './App.css';
+import Home from "./Home";
+
+import "./App.css";
 
 class App extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-    };
-  }
-
   render() {
-    return(
-      <div>
-      </div>
+    return (
+      <Home />
     );
   }
 }

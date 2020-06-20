@@ -1,0 +1,12 @@
+/* TODO: Fix this to wrap correctly/use some sort of grid, not sure yet */
+.Home .VideoThumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.Home .VideoThumbnails .VideoThumbnail {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}

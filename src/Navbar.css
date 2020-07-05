@@ -9,7 +9,7 @@
   padding: 0 20px 0 20px;
 }
 
-/* TODO: Kind of a hack here */
-.Navbar .Login Button:first-child {
-  margin-right: 10px;
+.Navbar a {
+  text-decoration: none;
+  color: white;
 }

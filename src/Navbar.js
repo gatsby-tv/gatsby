@@ -1,24 +1,16 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import "./Navbar.css";
-import Button from "./Button";
 
 class Navbar extends Component {
 
   render() {
     return (
       <div className="Navbar">
-        <span>Vydio</span>
+        <Link to="/"><span>Vydio</span></Link>
         {/* TODO: Search */}
-        {/* TODO: Move user info to it's own component */}
-        <span className="Login">
-          <Button
-            text="Login"
-          />
-          <Button
-            text="Register"
-          />
-        </span>
+        {/* TODO: User registration/login */}
       </div>
     );
   }

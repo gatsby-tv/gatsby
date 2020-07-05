@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import Navbar from "./Navbar";
 import VideoThumbnail from "./VideoThumbnail";
 
+// TODO: Prototyping data, remove later
 import stub from "./json-stubs/get-home.json"
 
 import "./Home.css";
@@ -27,8 +27,6 @@ class Home extends Component {
 
     return (
       <div className="Home">
-        {/* Navbar */}
-        <Navbar />
         {/* Video thumbnails */}
         <div className="VideoThumbnails">
           {thumbnails}

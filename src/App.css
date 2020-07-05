@@ -9,3 +9,7 @@ body {
   background-color: #212D43;
   color: white;
 }
+
+.Content {
+  padding: 0 20px 0 20px;
+}

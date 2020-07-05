@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import "./VideoThumbnail.css";
 
@@ -22,9 +23,9 @@ class VideoThumbnail extends Component {
 
     return (
       <div className="VideoThumbnail">
-        <a href={this.props.url}>
+        <Link to={this.props.url}>
           <img src={this.props.thumbnail} alt={this.props.title} />
-        </a>
+        </Link>
         <div>{this.props.title}</div>
         {/* TODO: Hardcoded at the moment */}
         <div>{this.props.views.toLocaleString()} • 20 minutes ago</div>

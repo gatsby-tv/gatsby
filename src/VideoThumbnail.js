@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 import "./VideoThumbnail.css";
 
@@ -17,9 +18,8 @@ class VideoThumbnail extends Component {
 
   render() {
 
-    // TODO: Get proper time difference to render how long ago video was uploaded
-    // const date = new Date(parseInt(this.props.dateUploaded) * 1000);
-    // const diff = Date.now() - date;
+    // Convert timestamp to Date to get how long ago the video was uploaded
+    const dateUploaded = new Date(parseInt(this.props.dateUploaded) * 1000);
 
     return (
       <div className="VideoThumbnail">
@@ -27,8 +27,7 @@ class VideoThumbnail extends Component {
           <img src={this.props.thumbnail} alt={this.props.title} />
         </Link>
         <div>{this.props.title}</div>
-        {/* TODO: Hardcoded at the moment */}
-        <div>{this.props.views.toLocaleString()} • 20 minutes ago</div>
+        <div>{this.props.views.toLocaleString()} • {moment(dateUploaded).fromNow()}</div>
       </div>
     );
   }

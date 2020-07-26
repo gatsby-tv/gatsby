@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 import VideoThumbnail from "./VideoThumbnail";
 
-// TODO: Prototyping data, remove later
-import stub from "./json-stubs/get-home.json"
+// TODO: Prototyping data, move to tests later
+import stub from "./stubs/get-home.json"
 
 import "./Home.css";
 

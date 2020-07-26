@@ -1,15 +1,43 @@
 /*
 Color scheme so far:
-Background/base color: #212D43
-Higlight: #354A72
-Buttons: #0B9A03
+Background/base color: #212d43
+Higlight: #354a72
+Buttons: #b29c5b
+Button Shadow: #a99355
 */
 
 body {
-  background-color: #212D43;
+  background-color: #212d43;
   color: white;
 }
 
 .Content {
   padding: 0 20px 0 20px;
+}
+
+/* Global component styles */
+
+.LogoAndTypeface {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.LogoAndTypeface .Logo {
+  margin-right: 10px;
+}
+
+.Logo {
+  width: 50px;
+  height: 50px;
+}
+
+button {
+  padding: 10px;
+  color: white;
+  background-color: #b29c5b;
+  border: none;
+  border-bottom: 5px solid #a99355;
+  border-radius: 5px;
+  font-size: 16px;
 }

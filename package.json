@@ -9,6 +9,7 @@
     "hls.js": "^0.13.2",
     "hlsjs-ipfs-loader": "^0.2.3",
     "ipfs": "^0.44.0",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

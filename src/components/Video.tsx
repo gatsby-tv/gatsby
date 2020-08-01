@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import HLS from "hls.js";
 // TODO: Maintained by single dev and doesn't have types...
-// We may want to eventually fork this for our own purposes
+// we may want to eventually fork this for our own purposes
 // @ts-ignore
 import IPFSLoader from "hlsjs-ipfs-loader";
 

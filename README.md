@@ -1,4 +1,4 @@
-# React web-client frontend
+# Gatsby web-client frontend
 
 ## How to run
 1. Install NodeJS (version `>=10.0` recommended)

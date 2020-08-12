@@ -1,5 +1,6 @@
 {
   "name": "gatsby",
+  "description": "The transparent, distributed video sharing platform.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

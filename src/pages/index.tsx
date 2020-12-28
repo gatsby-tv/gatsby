@@ -1,16 +1,22 @@
 import React from "react";
-import { Frame } from "@gatsby-tv/components";
+import { useTheme } from "@gatsby-tv/utilities";
+import { TextDisplay, TextBox } from "@gatsby-tv/components";
 
-import { Topbar } from "@src/components/Topbar";
-import { Stream } from "@src/components/Stream";
-import { Preview } from "@src/components/Preview";
-import { useUser } from "@src/utilities/use-user";
+import { Layout } from "@src/components/Layout";
+import { Listing } from "@src/components/Listing";
 
 export default function IndexPage() {
-  const user = useUser();
+  const theme = useTheme();
 
   return (
-    <Frame topbar={<Topbar />}>
-    </Frame>
+    <Layout>
+      <TextBox
+        $marginTop={theme.spacing.loose}
+        $marginBottom={theme.spacing.loose}
+      >
+        <TextDisplay $size="large">Recommended</TextDisplay>
+      </TextBox>
+      <Listing />
+    </Layout>
   );
 }

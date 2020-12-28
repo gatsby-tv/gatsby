@@ -1,13 +1,20 @@
 {
   "name": "gatsby",
   "description": "The transparent, distributed video sharing platform.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsby-tv/gatsby.git"
+  },
   "version": "0.1.0",
+  "license": "AGPL-3.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.12.9",
     "@babel/preset-react": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
     "@gatsby-tv/components": "^0.4.44",
     "@gatsby-tv/icons": "^0.3.25",
+    "@gatsby-tv/utilities": "^0.4.1",
     "@testing-library/dom": "^7.26.5",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
@@ -19,6 +26,9 @@
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.7",
+    "abort-controller": "^3.0.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-styled-components": "^1.12.0",
     "hls.js": "^0.14.7",
     "hlsjs-ipfs-loader": "^0.3.0",
@@ -37,7 +47,8 @@
     "build": "next build",
     "develop": "next dev",
     "start": "next start",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "types": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,5 +64,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }

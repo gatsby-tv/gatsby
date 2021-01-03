@@ -1,22 +1,43 @@
 import React from "react";
-import { Flex, Box, Image, Avatar, TextMeta } from "@gatsby-tv/components";
-import { Time, useTheme, useIpfsContent } from "@gatsby-tv/utilities";
+import NextLink from "next/link";
+import { CheckmarkFill } from "@gatsby-tv/icons";
+import {
+  Flex,
+  Box,
+  Icon,
+  Image,
+  Optional,
+  TextMeta,
+} from "@gatsby-tv/components";
+import {
+  Time,
+  Age,
+  Value,
+  useTheme,
+  useIPFSContent,
+} from "@gatsby-tv/utilities";
+
+import { Video, Channel } from "@src/types";
+import { Link } from "@src/components/Link";
+
+import { MetaWrapper } from "./components/MetaWrapper";
 
 export interface PreviewProps {
   compact?: boolean;
-  thumbnail: string;
-  avatar: string;
-  title: string;
-  channel: string;
-  views: string;
-  age: string;
-  duration: number;
+  video: Video;
+  channel: Channel;
 }
 
-export function Preview(props: PreviewProps) {
+export function Preview(props: PreviewProps): React.ReactElement {
   const theme = useTheme();
-  const avatar = useIpfsContent(props.avatar, "image/jpg");
-  const thumbnail = useIpfsContent(props.thumbnail, "image/png");
+  const { url: thumbnail } = useIPFSContent(
+    `/ipfs/${props.video.thumbnail[0]}`,
+    props.video.thumbnail[1]
+  );
+  const { url: avatar } = useIPFSContent(
+    `/ipfs/${props.channel.avatar[0]}`,
+    props.channel.avatar[1]
+  );
 
   const overlayMarkup = (
     <Box
@@ -25,28 +46,47 @@ export function Preview(props: PreviewProps) {
       $right={theme.spacing.extraTight}
     >
       <Box
-        $bg={theme.colors.black.fade(0.1)}
+        $bg={theme.colors.black.fade(0.3)}
         $paddingLeft={theme.spacing.extraTight}
         $paddingRight={theme.spacing.extraTight}
       >
         <TextMeta $bold $size="small">
-          {Time(props.duration)}
+          {Time(props.video.duration)}
         </TextMeta>
       </Box>
     </Box>
   );
 
-  const MetaContainer = ({ children }: { children: React.ReactNode }) =>
-    props.compact ? (
-      <>{children}</>
-    ) : (
-      <Flex $gap={theme.spacing.baseTight}>
-        <Flex.Item $shrink={0}>
-          <Avatar src={avatar} $size="small" />
-        </Flex.Item>
-        {children}
+  const titleMarkup = (
+    <TextMeta $bold $clamp={2}>
+      {props.video.title}
+    </TextMeta>
+  );
+
+  const infoMarkup = (
+    <Flex $column>
+      <Flex $gap={theme.spacing.extraTight}>
+        <Box $zIndex={2}>
+          <NextLink href={`/${props.channel.handle}`} passHref>
+            <TextMeta.Link $bold $size="small">
+              {props.channel.name}
+            </TextMeta.Link>
+          </NextLink>
+        </Box>
+        {props.channel.verified && (
+          <Icon $source={CheckmarkFill} $width={theme.icon.extraSmall} />
+        )}
       </Flex>
-    );
+      <TextMeta.List $subdued>
+        <TextMeta $bold $size="small">
+          {Value(props.video.views, "view")}
+        </TextMeta>
+        <TextMeta $bold $size="small">
+          {Age(props.video.age)}
+        </TextMeta>
+      </TextMeta.List>
+    </Flex>
+  );
 
   return (
     <Flex $column={!props.compact} $gap={theme.spacing.tight}>
@@ -56,24 +96,21 @@ export function Preview(props: PreviewProps) {
         $rounded={theme.border.radius.smallest}
         $aspectRatio={0.5625}
       />
-      <Flex.Item $minWidth="20rem">
-        <MetaContainer>
+      <Flex.Item $minWidth="25rem">
+        <Optional
+          $active={!props.compact}
+          $component={MetaWrapper}
+          $props={{ channel: props.channel, avatar }}
+        >
           <Flex $column $gap={theme.spacing.extraTight}>
-            <TextMeta $bold $tooltip $clamp={2}>
-              {props.title}
-            </TextMeta>
-            <Flex $column>
-              <TextMeta.Link $bold $size="small">
-                {props.channel}
-              </TextMeta.Link>
-              <TextMeta.List $bold $subdued $size="small">
-                <TextMeta>{props.views}</TextMeta>
-                <TextMeta>{props.age}</TextMeta>
-              </TextMeta.List>
-            </Flex>
+            {titleMarkup}
+            {infoMarkup}
           </Flex>
-        </MetaContainer>
+        </Optional>
       </Flex.Item>
+      <Link href={`/v/${props.video.hash}`}>
+        <Box $absolute $fill $zIndex={1} />
+      </Link>
     </Flex>
   );
 }

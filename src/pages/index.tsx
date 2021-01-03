@@ -5,14 +5,14 @@ import { TextDisplay, TextBox } from "@gatsby-tv/components";
 import { Layout } from "@src/components/Layout";
 import { Listing } from "@src/components/Listing";
 
-export default function IndexPage() {
+export default function IndexPage(): React.ReactElement {
   const theme = useTheme();
 
   return (
     <Layout>
       <TextBox
-        $marginTop={theme.spacing.loose}
-        $marginBottom={theme.spacing.loose}
+        $marginTop={theme.spacing.baseLoose}
+        $marginBottom={theme.spacing.baseLoose}
       >
         <TextDisplay $size="large">Recommended</TextDisplay>
       </TextBox>

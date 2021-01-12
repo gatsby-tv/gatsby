@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useReducer, useEffect } from "react";
 import { AppProps } from "next/app";
-import { useIPFSNode, IPFSContext } from "@gatsby-tv/utilities";
-import { AppProvider, Portal, Box, TextMeta } from "@gatsby-tv/components";
+import { SWRConfig } from "swr";
+import {
+  useIPFSNode,
+  IPFSContext,
+  GlobalContext,
+  GlobalState,
+  GlobalAction,
+} from "@gatsby-tv/utilities";
+import { AppProvider } from "@gatsby-tv/components";
 import "@gatsby-tv/components/static/fonts.css";
+
+import { PreAlpha } from "@src/components/PreAlpha";
+import { AppLayout } from "@src/components/AppLayout";
+import { fetcher } from "@src/utilities/fetcher";
 
 export default function App({
   Component,
@@ -10,25 +21,41 @@ export default function App({
 }: AppProps): React.ReactElement {
   const node = useIPFSNode();
 
+  const [globals, dispatch] = useReducer(
+    (state: GlobalState, action: GlobalAction) => {
+      switch (action.type) {
+        case "setUser":
+          if (action.store && action.user === undefined) {
+            window.localStorage.removeItem("user");
+          } else if (action.store) {
+            window.localStorage.setItem("user", action.user as string);
+          }
+
+          return { ...state, user: action.user };
+      }
+    },
+    {
+      user: undefined,
+    }
+  );
+
+  useEffect(() => {
+    if (!globals.user) {
+      const user = window.localStorage.getItem("user") ?? undefined;
+      dispatch({ type: "setUser", user });
+    }
+  }, []);
+
   return (
-    <AppProvider $theme="dark">
-      <IPFSContext.Provider value={node}>
-        <Portal id="pre-alpha">
-          <Box $absolute $bottom="2rem" $right="2rem">
-            <Box $rounded="8px" $bg="#010101" $padding="1rem">
-              <TextMeta.Link
-                href="https://github.com/gatsby-tv/gatsby/issues"
-                $external
-                $bold
-                $size="large"
-              >
-                Pre-Alpha
-              </TextMeta.Link>
-            </Box>
-          </Box>
-        </Portal>
-        <Component {...pageProps} />
-      </IPFSContext.Provider>
+    <AppProvider theme="dark">
+      <GlobalContext.Provider value={[globals, dispatch]}>
+        <SWRConfig value={{ fetcher }}>
+          <IPFSContext.Provider value={node}>
+            <PreAlpha />
+            <AppLayout page={Component} $props={pageProps} />
+          </IPFSContext.Provider>
+        </SWRConfig>
+      </GlobalContext.Provider>
     </AppProvider>
   );
 }

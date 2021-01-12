@@ -15,6 +15,7 @@
     "@gatsby-tv/components": "^0.4.44",
     "@gatsby-tv/icons": "^0.3.25",
     "@gatsby-tv/utilities": "^0.4.1",
+    "@gatsby-tv/types": "^0.4.1",
     "@testing-library/dom": "^7.26.5",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",

@@ -3,16 +3,16 @@ import { TextDisplay, TextBox } from "@gatsby-tv/components";
 import { useTheme } from "@gatsby-tv/utilities";
 
 import { Listing } from "@src/components/Listing";
-import { useRecommendedFeed } from "@src/utilities/feeds";
+import { useBrowseFeed } from "@src/utilities/feeds";
 
 export default function IndexPage(): React.ReactElement {
   const theme = useTheme();
-  const feed = useRecommendedFeed();
+  const feed = useBrowseFeed();
 
   return (
     <>
       <TextBox margin={[theme.spacing.baseLoose, theme.spacing.none]}>
-        <TextDisplay font="large">Recommended</TextDisplay>
+        <TextDisplay font="large">Browse</TextDisplay>
       </TextBox>
       <Listing grid generator={feed} />
     </>

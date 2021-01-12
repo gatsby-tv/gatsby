@@ -1,5 +1,86 @@
+import { BasicVideo, Topic, Genre } from "@gatsby-tv/types";
+
+export const BLENDER_CHANNEL = {
+  _id: "b77d279bdef3cf0cab84a77649ed76b339c26a6f",
+  avatar: {
+    hash: "QmeERq8yXYZcKVnoHdZ9Tpri3meDKB85y7T4ksozSKXiSW",
+    mimeType: "image/jpeg",
+  },
+  name: "Blender Animation Studio",
+  handle: "blender",
+  description:
+    "This is the official Blender Institute channel. Here we post our open movies with advertisement enabled. For non-advertisement viewing pleasure visit the Blender Foundation channel!",
+  verified: true,
+  subscribers: 245000,
+  creationDate: new Date("November 23 2013"),
+};
+
 export const SPRING_VIDEO_SOURCE =
   "https://upload.wikimedia.org/wikipedia/commons/a/a5/Spring_-_Blender_Open_Movie.webm";
+
+export const SPRING_CONTRIBUTORS = [
+  {
+    _id: "96b077da5a37e71f8ca854bcca944a4f00170a4b",
+    avatar: {
+      hash: "QmTUTKwwoLnFqQPfAiKLJ5gmNMnW94zYwyb91abCmQ6Bhs",
+      mimeType: "image/jpeg",
+    },
+    name: "Andy Goralczyk",
+    handle: "artificial3d",
+    description:
+      "Art Director at @blender, been using Blender for about 20 years. Recently I directed a short film titled 'Spring'.",
+    verified: true,
+    followers: 11500,
+    creationDate: new Date("December 2008"),
+  },
+  {
+    _id: "cc94af8a757135fc3807f125a07cdff30c6ccfb1",
+    avatar: {
+      hash: "QmPJLk1AthNJa1kXXQ8PU2YPDLSYGoUZjsrSxRCEcxmK8D",
+      mimeType: "image/jpeg",
+    },
+    name: "Francesco Siddi",
+    handle: "fsiddi",
+    description: "Producer and Studio Manager @blender",
+    verified: true,
+    followers: 5795,
+    creationDate: new Date("August 2009"),
+  },
+  {
+    _id: "a90a6d81bd6efea5be0fec04cd12da997a695795",
+    avatar: {
+      hash: "QmTYWahgZrpRb5RYtUpWTPue8Zes2NRiKTx4NrB77hLugp",
+      mimeType: "image/jpeg",
+    },
+    name: "Torin Borrowdale",
+    handle: "TorinBorrowdale",
+    description: "Composer: LOCKE & KEY, SEARCHING, RUN",
+    verified: false,
+    followers: 226,
+    creationDate: new Date("June 2011"),
+  },
+  {
+    _id: "87e06d296331c08d0c45e333fff4b1856d3c896b",
+    avatar: {
+      hash: "QmPc4L9FCnXmYeBkVGfutMZcrxHLj7PmTEyY5BRdnj2Jty",
+      mimeType: "image/jpeg",
+    },
+    name: "Hjalti Hjalmarsson",
+    handle: "hjalti",
+    description:
+      "Animator / Director / Designer / Rigger / Layout artist / Retired programmer / Boardgame geek / Science enthusiast ...and sometimes a person.",
+    verified: true,
+    followers: 5450,
+    creationDate: new Date("May 2008"),
+  },
+];
+
+export const SPRING_CONTRIBUTIONS = {
+  "96b077da5a37e71f8ca854bcca944a4f00170a4b": new Set(["Director"]),
+  cc94af8a757135fc3807f125a07cdff30c6ccfb1: new Set(["Producer"]),
+  a90a6d81bd6efea5be0fec04cd12da997a695795: new Set(["Music"]),
+  "87e06d296331c08d0c45e333fff4b1856d3c896b": new Set(["Animation Director"]),
+};
 
 export const SPRING_VIDEO_DESCRIPTION = `Produced by Blender Animation Studio. Made in Blender 2.8.
 Get the production files, assets and exclusive making-of videos by joining Blender Cloud at https://cloud.blender.org
@@ -27,21 +108,26 @@ The Spring team used the development version of Blender 2.80 for the entire prod
 
 Format: 3D animated film, 7:44 minutes. 5.1 sound. No dialogs. Fit for an audience of 6 years and older (PG). Everything you see was made with Blender, GIMP, Krita and Inkscape.`;
 
-export const SPRING_VIDEO = {
-  hash: "QmSaMcnrPga65Thu6wFa4zesHAczjLVEus4U7rceeCVA86",
-  thumbnail: ["QmRm8aSK3ScRet1BwjLmNm8eEA4crGNhYUmpqZXkiRhbZY", "image/webp"],
+export const SPRING_VIDEO: BasicVideo = {
+  _id: "7bbdd71d495caa32b18246d626b40d8950f43167",
+  content: "QmSaMcnrPga65Thu6wFa4zesHAczjLVEus4U7rceeCVA86",
+  thumbnail: {
+    hash: "QmRm8aSK3ScRet1BwjLmNm8eEA4crGNhYUmpqZXkiRhbZY",
+    mimeType: "image/webp",
+  },
   title: "Spring - Blender Open Movie",
   description: SPRING_VIDEO_DESCRIPTION,
-  topic: "Animation",
-  genre: "Short Film",
+  channel: BLENDER_CHANNEL,
+  tags: new Set([]),
+  topic: Topic.Animation,
+  genre: Genre.ShortFilm,
   views: 6007258,
-  age: +new Date("April 4, 2019"),
+  collaborators: [],
+  contributors: SPRING_CONTRIBUTORS,
+  contributions: SPRING_CONTRIBUTIONS,
+  sponsors: [],
+  explicit: false,
+  unlisted: false,
+  releaseDate: new Date("April 4 2019"),
   duration: 465,
-};
-
-export const BLENDER_CHANNEL = {
-  avatar: ["QmeERq8yXYZcKVnoHdZ9Tpri3meDKB85y7T4ksozSKXiSW", "image/jpeg"],
-  name: "Blender Animation Studio",
-  handle: "blender",
-  verified: true,
 };

@@ -30,7 +30,7 @@ export function Info(props: InfoProps) {
           <TextMeta>{FullReleaseDate(props.releaseDate)}</TextMeta>
         </TextMeta.List>
         <TextMeta subdued>
-          <Flex gap={theme.spacing.extraTight}>
+          <Flex gap={theme.spacing.extratight}>
             <Icon src={Transfer} w={theme.icon.small} />
             {Value(peers.length, "peer")}
           </Flex>

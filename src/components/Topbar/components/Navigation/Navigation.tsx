@@ -1,32 +1,33 @@
 import React from "react";
 import NextLink from "next/link";
+import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { Flex, Icon, Tabs } from "@gatsby-tv/components";
 import { GatsbyPlain } from "@gatsby-tv/icons";
 import { useSelect, useTheme } from "@gatsby-tv/utilities";
 
-import { useUser } from "@src/utilities/use-user";
 import { Link } from "@src/components/Link";
+
+function getCurrentTab(route: string): string | undefined {
+  switch (route) {
+    case "/d/browse":
+      return "browse";
+    case "/d/subscriptions":
+      return "subscriptions";
+    default:
+      return;
+  }
+}
 
 export function Navigation(): React.ReactElement {
   const theme = useTheme();
-  const user = useUser();
+  const [session, loading] = useSession();
   const router = useRouter();
 
-  let defaultTab: string | undefined = undefined;
-
-  switch (router.pathname) {
-    case "/d/browse":
-      defaultTab = "browse";
-      break;
-
-    case "/d/subscriptions":
-      defaultTab = "subscriptions";
-      break;
-  }
+  const defaultTab = getCurrentTab(router.pathname);
 
   const [tab, setTab] = useSelect(
-    user ? ["subscriptions", "browse"] : ["browse"],
+    session ? ["subscriptions", "browse"] : ["browse"],
     defaultTab
   );
 
@@ -42,11 +43,11 @@ export function Navigation(): React.ReactElement {
       </Link>
       <Tabs
         font="large"
-        gap={theme.spacing.baseLoose}
+        gap={theme.spacing.baseloose}
         selection={tab}
         onSelect={setTab}
       >
-        {user && (
+        {session && (
           <NextLink href="/d/subscriptions" passHref>
             <Tabs.Link id="subscriptions">Subscriptions</Tabs.Link>
           </NextLink>

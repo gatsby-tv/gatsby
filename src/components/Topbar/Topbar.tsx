@@ -1,23 +1,30 @@
 import React from "react";
+import { css } from "styled-components";
+import { useSession } from "next-auth/client";
 import { Box, Flex } from "@gatsby-tv/components";
-import { useTheme } from "@gatsby-tv/utilities";
+import { useTheme, useFrame } from "@gatsby-tv/utilities";
 
-import { cssTopbarShadow } from "@src/styles/shadows";
-import { useUser } from "@src/utilities/use-user";
+import { cssShadow } from "@src/styles/shadows";
 
 import { Navigation } from "./components/Navigation";
 import { Search } from "./components/Search";
 import { Account } from "./components/Account";
-import { Login } from "./components/Login";
+import { SignedOut } from "./components/SignedOut";
 
 export function Topbar(): React.ReactElement {
   const theme = useTheme();
-  const user = useUser();
+  const [session, loading] = useSession();
+  const { fullscreen } = useFrame();
+
+  const style = css`
+    transition: transform ${theme.duration.fast} ease;
+    transform: translateY(${fullscreen ? "-50px" : "0px"});
+  `;
 
   return (
     <Box
-      css={cssTopbarShadow}
-      h="50px"
+      css={cssShadow}
+      h={fullscreen ? "0px" : "50px"}
       bg={theme.colors.background[1]}
       zIndex={5}
     >
@@ -44,7 +51,7 @@ export function Topbar(): React.ReactElement {
             align="center"
             gap={theme.spacing.tight}
           >
-            {user ? <Account /> : <Login />}
+            {session ? <Account /> : <SignedOut />}
           </Flex>
         </Flex.Item>
       </Flex>

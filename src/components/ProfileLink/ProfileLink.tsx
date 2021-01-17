@@ -21,6 +21,7 @@ import { Link, LinkProps } from "@src/components/Link";
 type DateProps = LinkProps & {
   avatar: IPFSContent;
   name: string;
+  handle: string;
   creationDate: Date;
   verified?: boolean;
 };
@@ -33,14 +34,14 @@ function isBlurbProps(props: ProfileLinkProps): props is BlurbProps {
   return (props as BlurbProps).blurb !== undefined;
 }
 
-function parseBlurbProps(props: BlurbProps): [string, linkProps] {
+function parseBlurbProps(props: BlurbProps): [string, LinkProps] {
   const { blurb, ...linkProps } = props;
   return [blurb, linkProps];
 }
 
-function parseDateProps(props: DateProps): [string, linkProps] {
-  const { date, ...linkProps } = props;
-  return [`Joined ${ReleaseDate(date)}`, linkProps];
+function parseDateProps(props: DateProps): [string, LinkProps] {
+  const { creationDate, ...linkProps } = props;
+  return [`Joined ${ReleaseDate(creationDate)}`, linkProps];
 }
 
 export function ProfileLink(props: ProfileLinkProps): React.ReactElement {
@@ -51,7 +52,7 @@ export function ProfileLink(props: ProfileLinkProps): React.ReactElement {
     : parseDateProps(props);
 
   const verifiedMarkup = props.verified ? (
-    <Icon src={CheckmarkFill} w={theme.icon.extraSmall} />
+    <Icon src={CheckmarkFill} w={theme.icon.extrasmall} />
   ) : null;
 
   return (
@@ -63,13 +64,16 @@ export function ProfileLink(props: ProfileLinkProps): React.ReactElement {
         <Optional
           active={ifExists(props.verified)}
           component={Flex}
-          $props={{ gap: theme.spacing.extraTight }}
+          $props={{ gap: theme.spacing.extratight }}
         >
           <TextMeta bold font="medium">
             {props.name}
           </TextMeta>
           {verifiedMarkup}
         </Optional>
+        <TextMeta subdued bold font="small">
+          {props.handle}
+        </TextMeta>
         <TextMeta subdued bold font="small">
           {blurb}
         </TextMeta>

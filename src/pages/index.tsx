@@ -1,5 +1,5 @@
 import React from "react";
-import { TextDisplay, TextBox } from "@gatsby-tv/components";
+import { Box, TextDisplay, TextBox } from "@gatsby-tv/components";
 import { useTheme } from "@gatsby-tv/utilities";
 
 import { Listing } from "@src/components/Listing";
@@ -10,11 +10,11 @@ export default function IndexPage(): React.ReactElement {
   const feed = useRecommendedFeed();
 
   return (
-    <>
-      <TextBox margin={[theme.spacing.baseLoose, theme.spacing.none]}>
+    <Box margin={[theme.spacing.none, theme.spacing.loose]}>
+      <TextBox margin={[theme.spacing.baseloose, theme.spacing.none]}>
         <TextDisplay font="large">Recommended</TextDisplay>
       </TextBox>
       <Listing grid generator={feed} />
-    </>
+    </Box>
   );
 }

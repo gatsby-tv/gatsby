@@ -9,13 +9,13 @@ export function PreAlpha(): React.ReactElement {
     <Portal id="pre-alpha">
       <Box
         absolute
-        bottom={theme.spacing.baseLoose}
-        right={theme.spacing.baseLoose}
+        bottom={theme.spacing.baseloose}
+        right={theme.spacing.baseloose}
       >
         <Box
           rounded={theme.border.radius.large}
           bg={theme.colors.black}
-          padding={[theme.spacing.tight, theme.spacing.baseTight]}
+          padding={[theme.spacing.tight, theme.spacing.basetight]}
         >
           <TextMeta.Link
             href="https://github.com/gatsby-tv/gatsby/issues"

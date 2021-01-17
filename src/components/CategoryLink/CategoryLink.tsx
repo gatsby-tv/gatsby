@@ -44,15 +44,18 @@ export function CategoryLink(props: CategoryLinkProps): React.ReactElement {
       padding={[
         theme.spacing.tight,
         theme.spacing.base,
-        theme.spacing.extraTight,
+        theme.spacing.extratight,
       ]}
       bg={theme.colors.background[3]}
-      gap={theme.spacing.extraTight}
+      gap={theme.spacing.extratight}
+      justify="space-between"
     >
       <TextSubheading>{category}</TextSubheading>
-      <Flex gap={theme.spacing.base}>
+      <Flex gap={theme.spacing.base} align="center">
         <TextDisplay thin>{tag}</TextDisplay>
-        <Icon src={ExtendRight} w={theme.icon.baseSmall} />
+        <Flex.Item shrink={0}>
+          <Icon src={ExtendRight} w={theme.icon.basesmall} />
+        </Flex.Item>
       </Flex>
       <Link {...linkProps}>
         <Box absolute expand />

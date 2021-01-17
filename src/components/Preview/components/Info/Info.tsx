@@ -18,7 +18,7 @@ export function Info(props: InfoProps) {
   const verifiedMarkup = props.verified ? (
     <Icon
       src={CheckmarkFill}
-      w={theme.icon.extraSmall}
+      w={theme.icon.extrasmall}
       fg={theme.colors.font.subdued}
     />
   ) : null;
@@ -28,7 +28,7 @@ export function Info(props: InfoProps) {
       <Optional
         active={ifExists(props.verified)}
         component={Flex}
-        $props={{ gap: theme.spacing.extraTight }}
+        $props={{ gap: theme.spacing.extratight }}
       >
         <Box zIndex={2}>
           <NextLink href={`/${props.handle}`} passHref>

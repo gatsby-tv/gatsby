@@ -1,6 +1,7 @@
 import "styled-components";
 import {} from "styled-components/cssprop";
 import "@gatsby-tv/utilities";
+import { UserAccount } from "@gatsby-tv/types";
 
 declare module "styled-components" {
   export interface DefaultTheme {
@@ -10,12 +11,12 @@ declare module "styled-components" {
 
 declare module "@gatsby-tv/utilities" {
   export interface GlobalState {
-    user?: string;
+    user?: UserAccount;
+    token?: string;
   }
 
   export interface GlobalAction {
     type: "setUser";
-    user?: string;
-    store?: boolean;
+    token?: string;
   }
 }

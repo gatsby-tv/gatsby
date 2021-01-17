@@ -2,7 +2,7 @@ import React from "react";
 import NextLink from "next/link";
 import { Box, Flex, Image, Optional, TextMeta } from "@gatsby-tv/components";
 import { Video } from "@gatsby-tv/types";
-import { Time, useTheme, useIPFSContent } from "@gatsby-tv/utilities";
+import { Time, ifExists, useTheme } from "@gatsby-tv/utilities";
 
 import { Link } from "@src/components/Link";
 
@@ -13,29 +13,28 @@ import { InfoWrapper } from "./components/InfoWrapper";
 export interface PreviewProps {
   compact?: boolean;
   video: Video;
+  avatar?: string;
 }
 
 export function Preview(props: PreviewProps): React.ReactElement {
   const [video, channel] = [props.video, props.video.channel];
   const theme = useTheme();
-  const { url: thumbnail } = useIPFSContent(video.thumbnail);
-  const { url: avatar } = useIPFSContent(channel.avatar);
 
   return (
     <Flex column={!props.compact} gap={theme.spacing.tight}>
       <Image
-        src={thumbnail}
+        src={video.thumbnail}
         overlay={<Overlay duration={video.duration} />}
         rounded={theme.border.radius.smallest}
         aspectRatio={0.5625}
       />
-      <Flex.Item minw="25rem">
+      <Flex.Item basis={ifExists(props.compact, 1)} minw="25rem">
         <Optional
           active={!props.compact}
           component={InfoWrapper}
-          $props={{ avatar, handle: channel.handle }}
+          $props={{ avatar: channel.avatar, handle: channel.handle, size: props.avatar }}
         >
-          <Flex column gap={theme.spacing.extraTight}>
+          <Flex column gap={theme.spacing.extratight}>
             <TextMeta bold clamp={2}>
               {video.title}
             </TextMeta>

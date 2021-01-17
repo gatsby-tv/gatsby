@@ -12,7 +12,7 @@ export function Content(props: ContentProps): React.ReactElement {
   const grid = useListing();
 
   return (
-    <Flex.Item marginBottom={ifExists(grid, theme.spacing.tight)}>
+    <Flex.Item>
       <Preview compact={ifNotExists(grid)} {...props} />
     </Flex.Item>
   );

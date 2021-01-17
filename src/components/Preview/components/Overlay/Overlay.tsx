@@ -12,10 +12,10 @@ export function Overlay(props: OverlayProps): React.ReactElement {
   return (
     <Box
       absolute
-      bottom={theme.spacing.extraTight}
-      right={theme.spacing.extraTight}
+      bottom={theme.spacing.extratight}
+      right={theme.spacing.extratight}
       bg={theme.colors.black.fade(0.3)}
-      padding={[theme.spacing.none, theme.spacing.extraTight]}
+      padding={[theme.spacing.none, theme.spacing.extratight]}
     >
       <TextMeta font="small" bold>
         {Time(props.duration)}

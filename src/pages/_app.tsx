@@ -1,13 +1,8 @@
-import React, { useReducer, useEffect } from "react";
+import React from "react";
 import { AppProps } from "next/app";
+import { Provider } from "next-auth/client";
 import { SWRConfig } from "swr";
-import {
-  useIPFSNode,
-  IPFSContext,
-  GlobalContext,
-  GlobalState,
-  GlobalAction,
-} from "@gatsby-tv/utilities";
+import { useIPFSNode, IPFSContext } from "@gatsby-tv/utilities";
 import { AppProvider } from "@gatsby-tv/components";
 import "@gatsby-tv/components/static/fonts.css";
 
@@ -19,43 +14,18 @@ export default function App({
   Component,
   pageProps,
 }: AppProps): React.ReactElement {
-  const node = useIPFSNode();
-
-  const [globals, dispatch] = useReducer(
-    (state: GlobalState, action: GlobalAction) => {
-      switch (action.type) {
-        case "setUser":
-          if (action.store && action.user === undefined) {
-            window.localStorage.removeItem("user");
-          } else if (action.store) {
-            window.localStorage.setItem("user", action.user as string);
-          }
-
-          return { ...state, user: action.user };
-      }
-    },
-    {
-      user: undefined,
-    }
-  );
-
-  useEffect(() => {
-    if (!globals.user) {
-      const user = window.localStorage.getItem("user") ?? undefined;
-      dispatch({ type: "setUser", user });
-    }
-  }, []);
+  const node = useIPFSNode("/ipfs.js");
 
   return (
     <AppProvider theme="dark">
-      <GlobalContext.Provider value={[globals, dispatch]}>
+      <Provider session={pageProps.session}>
         <SWRConfig value={{ fetcher }}>
           <IPFSContext.Provider value={node}>
             <PreAlpha />
             <AppLayout page={Component} $props={pageProps} />
           </IPFSContext.Provider>
         </SWRConfig>
-      </GlobalContext.Provider>
+      </Provider>
     </AppProvider>
   );
 }

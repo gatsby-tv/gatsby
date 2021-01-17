@@ -1,4 +1,18 @@
+import JWT from "jsonwebtoken";
 import { BasicVideo, Topic, Genre } from "@gatsby-tv/types";
+
+export const CJAYROSS_USER = {
+  _id: "2421964912596325c7eb33f3bcad445646a82396",
+  avatar: {
+    hash: "QmSUid1NmgSuAqfGwm3thwy13H9VHVmAKLjJmkrNr3UdZU",
+    mimeType: "image/png",
+  },
+  handle: "cjayross",
+  name: "Calvin Jay Ross",
+  verified: true,
+  description: "Then wear the gold hat, if that will move her...",
+  creationDate: new Date("Jan 14 2021"),
+};
 
 export const BLENDER_CHANNEL = {
   _id: "b77d279bdef3cf0cab84a77649ed76b339c26a6f",

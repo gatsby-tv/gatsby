@@ -15,7 +15,7 @@ export function AppLayout<T>(props: AppLayoutProps<T>): React.ReactElement {
   const { page: Page, $props } = props;
 
   return (
-    <Frame topbar={Topbar} sidebar={ifExists(false, Sidebar)}>
+    <Frame topbar={Topbar} sidebar={ifExists(false, Sidebar)} scrollHidden>
       <Page {...$props} />
     </Frame>
   );

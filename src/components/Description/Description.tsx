@@ -85,7 +85,7 @@ export function Description(props: DescriptionProps) {
   const CompactCreditsMarkup =
     breakpoint < 3 ? (
       <>
-        <Credits channel={video.channel} />
+        <Credits compact channel={video.channel} />
         {!clamp && (
           <Flex gap={theme.spacing.baseloose}>
             <Credits compact collaborators={video.collaborators} />
@@ -123,11 +123,13 @@ export function Description(props: DescriptionProps) {
           <Engagement breakpoint={breakpoint} />
           {CompactCreditsMarkup}
           {TextMarkup}
-          <Category
-            breakpoint={breakpoint}
-            topic={video.topic}
-            genre={video.genre}
-          />
+          {(breakpoint !== 0 || !clamp) && (
+            <Category
+              breakpoint={breakpoint}
+              topic={video.topic}
+              genre={video.genre}
+            />
+          )}
           {ShowButtonMarkup}
         </Flex>
         {CreditsMarkup}

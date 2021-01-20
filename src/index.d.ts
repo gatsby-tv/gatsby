@@ -10,13 +10,6 @@ declare module "styled-components" {
 }
 
 declare module "@gatsby-tv/utilities" {
-  export interface GlobalState {
-    user?: UserAccount;
-    token?: string;
-  }
-
-  export interface GlobalAction {
-    type: "setUser";
-    token?: string;
-  }
+  export interface GlobalState {}
+  export interface GlobalAction {}
 }

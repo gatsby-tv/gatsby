@@ -23,6 +23,7 @@ import {
   ChannelHandle,
   UserHandle,
   ifExists,
+  ifNotExists,
   useTheme,
   useModal,
 } from "@gatsby-tv/utilities";
@@ -31,6 +32,7 @@ import { ProfileLink } from "@src/components/ProfileLink";
 import { AvatarCollation } from "@src/components/AvatarCollation";
 
 type ChannelProps = {
+  compact?: boolean;
   channel: ChannelAccount;
 };
 
@@ -52,7 +54,7 @@ type SponsorProps = {
 
 type CreditsBaseProps = {
   children?: React.ReactNode;
-  title: string;
+  title?: string;
   compact?: boolean;
   avatars?: IPFSContent[];
 };
@@ -81,7 +83,7 @@ function CreditsBase(props: CreditsBaseProps): React.ReactElement | null {
 
   const ProfileListMarkup = (
     <Flex column gap={theme.spacing.basetight}>
-      <TextSubheading>{props.title}</TextSubheading>
+      {props.title && <TextSubheading>{props.title}</TextSubheading>}
       {props.children}
     </Flex>
   );
@@ -112,10 +114,10 @@ function CreditsBase(props: CreditsBaseProps): React.ReactElement | null {
 
 export function Credits(props: CreditsProps): React.ReactElement | null {
   if (isChannelProps(props)) {
-    const { channel } = props;
+    const { channel, compact } = props;
 
     return (
-      <CreditsBase title="Channel">
+      <CreditsBase title={ifNotExists(compact, "Channel")}>
         <ProfileLink
           href={`/${channel.handle}`}
           avatar={channel.avatar}

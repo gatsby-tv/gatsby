@@ -51,7 +51,6 @@ export function SignIn(props: SignInProps): React.ReactElement {
 
   const card = {
     w: "42rem",
-    maxw: 1,
     bg: theme.colors.background[2],
     padding: theme.spacing.loose,
   };
@@ -88,9 +87,7 @@ export function SignIn(props: SignInProps): React.ReactElement {
       <Card {...card}>
         <Flex as="span" {...title}>
           <Icon src={GatsbyPlain} w={theme.icon.extralarge} />
-          <TextDisplay font="small">
-            Sign In to Gatsby
-          </TextDisplay>
+          <TextDisplay font="small">Sign In to Gatsby</TextDisplay>
         </Flex>
         <Rule {...firstRule} />
         <Flex column center gap={theme.spacing.tight}>

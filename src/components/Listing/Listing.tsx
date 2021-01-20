@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Stream } from "@gatsby-tv/components";
 import {
   ifExists,
@@ -22,14 +22,13 @@ export interface ListingProps {
 export function Listing(props: ListingProps): React.ReactElement {
   const theme = useTheme();
   const breakpoint = useBreakpoints({
-    0: "(max-width: 500px)",
-    1: "(min-width: 500px) and (max-width: 768px)",
-    2: "(min-width: 768px) and (max-width: 1200px)",
-    3: "(min-width: 1200px)",
+    1: "(max-width: 650px)",
+    2: "(min-width: 651px) and (max-width: 1200px)",
+    3: "(min-width: 1201px)",
   }) as number;
 
   return (
-    <ListingContext.Provider value={Boolean(props.grid)}>
+    <ListingContext.Provider value={Boolean(props.grid) || breakpoint === 1}>
       <Stream
         center={ifExists(props.grid)}
         wrapped={ifExists(props.grid)}

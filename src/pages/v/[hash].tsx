@@ -18,6 +18,7 @@ import {
 import { Listing } from "@src/components/Listing";
 import { Description } from "@src/components/Description";
 import { useRelatedFeed } from "@src/utilities/feeds";
+import { usePageMargin } from "@src/utilities/use-page-margin";
 import { useVideo } from "@src/utilities/use-video";
 
 export default function VideoPage(): React.ReactElement {
@@ -26,6 +27,7 @@ export default function VideoPage(): React.ReactElement {
   const player = useIPFSVideoStream(router.query.hash as string);
   const video = useVideo(router.query.hash as string);
   const feed = useRelatedFeed();
+  const margin = usePageMargin();
   const breakpoint = useBreakpoints({
     0: "(max-width: 620px)",
     1: "(min-width: 620px) and (max-width: 1100px)",
@@ -38,7 +40,7 @@ export default function VideoPage(): React.ReactElement {
       <Player ref={player} video={{ muted: true }} />
       <Flex
         column={breakpoint < 2}
-        margin={[theme.spacing.base, theme.spacing.loose, theme.spacing.none]}
+        margin={[theme.spacing.base, margin, theme.spacing.none]}
         gap={breakpoint < 2 ? theme.spacing.base : theme.spacing.none}
       >
         <Flex.Item
@@ -59,7 +61,7 @@ export default function VideoPage(): React.ReactElement {
           )}
         </Flex.Item>
         <Flex.Item
-          minw="45rem"
+          minw={ifExists(breakpoint >= 2, "45rem")}
           basis={ifExists(breakpoint >= 2, 0.35)}
           shrink={1}
           grow={1}

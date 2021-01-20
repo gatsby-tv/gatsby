@@ -4,13 +4,17 @@ import { useTheme, useSelect } from "@gatsby-tv/utilities";
 import { Topic } from "@gatsby-tv/types";
 
 import { Listing } from "@src/components/Listing";
-import { TopicPreview } from "@src/components/TopicPreview";
-import { useBrowseFeed } from "@src/utilities/feeds";
+import { TopicListing } from "@src/components/TopicListing";
+import { useNewFeed, usePopularFeed, useTopicFeed } from "@src/utilities/feeds";
+import { usePageMargin } from "@src/utilities/use-page-margin";
 
 export default function IndexPage(): React.ReactElement {
   const theme = useTheme();
+  const margin = usePageMargin();
   const [tab, setTab] = useSelect(["topics", "popular", "new"], "topics");
-  const feed = useBrowseFeed();
+  const newFeed = useNewFeed();
+  const popularFeed = usePopularFeed();
+  const topicFeed = useTopicFeed();
 
   const headerProps = {
     column: true,
@@ -26,11 +30,15 @@ export default function IndexPage(): React.ReactElement {
 
   const ruleProps = {
     bg: theme.colors.background[4],
-    margin: ["-2px", theme.spacing.none, tab["topics"] ? theme.spacing.base : theme.spacing.loose],
+    margin: [
+      "-2px",
+      theme.spacing.none,
+      tab["topics"] ? theme.spacing.base : theme.spacing.loose,
+    ],
   };
 
   return (
-    <Box margin={[theme.spacing.none, theme.spacing.loose]}>
+    <Box margin={[theme.spacing.none, margin]}>
       <Flex {...headerProps}>
         <TextDisplay font="large">Browse</TextDisplay>
         <Tabs selection={tab} onSelect={setTab} {...tabsProps}>
@@ -40,13 +48,10 @@ export default function IndexPage(): React.ReactElement {
         </Tabs>
       </Flex>
       <Rule {...ruleProps} />
-      {tab["topics"] ?  (
-        <TopicPreview
-          topic={Topic.Animation}
-          videos={feed().map((item) => item.video)}
-        />
+      {tab["topics"] ? (
+        <TopicListing generator={topicFeed} />
       ) : (
-        <Listing grid generator={feed} />
+        <Listing grid generator={tab["popular"] ? popularFeed : newFeed} />
       )}
     </Box>
   );

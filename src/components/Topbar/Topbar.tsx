@@ -2,7 +2,7 @@ import React from "react";
 import { css } from "styled-components";
 import { useSession } from "next-auth/client";
 import { Box, Flex } from "@gatsby-tv/components";
-import { useTheme, useFrame } from "@gatsby-tv/utilities";
+import { Negative, useTheme, useFrame } from "@gatsby-tv/utilities";
 
 import { cssShadow } from "@src/styles/shadows";
 
@@ -14,17 +14,19 @@ import { SignedOut } from "./components/SignedOut";
 export function Topbar(): React.ReactElement {
   const theme = useTheme();
   const [session, loading] = useSession();
-  const { fullscreen } = useFrame();
+  const { screen, fullscreen } = useFrame();
+
+  const height = screen !== "desktop" ? "42px" : "50px";
 
   const style = css`
     transition: transform ${theme.duration.fast} ease;
-    transform: translateY(${fullscreen ? "-50px" : "0px"});
+    transform: translateY(${fullscreen ? Negative(height) : "0px"});
   `;
 
   return (
     <Box
       css={cssShadow}
-      h={fullscreen ? "0px" : "50px"}
+      h={fullscreen ? "0px" : height}
       bg={theme.colors.background[1]}
       zIndex={5}
     >

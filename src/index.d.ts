@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
+
 import "styled-components";
 import {} from "styled-components/cssprop";
 import "@gatsby-tv/utilities";
-import { UserAccount } from "@gatsby-tv/types";
+import { Theme } from "@gatsby-tv/components";
 
 declare module "styled-components" {
-  export interface DefaultTheme {
-    [key: string]: any;
-  }
+  export interface DefaultTheme extends Theme {}
 }
 
 declare module "@gatsby-tv/utilities" {

@@ -14,7 +14,7 @@ import {
   Rule,
   TextDisplay,
 } from "@gatsby-tv/components";
-import { useTheme, useModal } from "@gatsby-tv/utilities";
+import { useTheme } from "@gatsby-tv/utilities";
 import { GatsbyPlain, Github, Google, Email } from "@gatsby-tv/icons";
 
 export interface SignInProps extends Omit<ModalProps, "fullscreen" | "zIndex"> {
@@ -24,95 +24,113 @@ export interface SignInProps extends Omit<ModalProps, "fullscreen" | "zIndex"> {
 export function SignIn(props: SignInProps): React.ReactElement {
   const theme = useTheme();
 
-  const button = {
+  const googleButtonProps = {
     w: 0.7,
     font: "large",
     bg: theme.colors.background[5],
-    padding: theme.spacing.basetight,
+    padding: theme.spacing[1],
     highlight: [
       theme.colors.background[5].lighten(0.2),
       theme.colors.background[5].fade(0.1),
     ],
   };
 
-  const githubButton = {
-    ...button,
+  const githubButtonProps = {
+    ...googleButtonProps,
     tooltip: "For Contributors!",
   };
 
-  const goldButton = {
-    w: 1,
-    font: "base",
-    bg: theme.colors.gold,
-    fg: theme.colors.background[1],
-    padding: theme.spacing.tight,
-    highlight: [theme.colors.gold.lighten(0.1), theme.colors.gold.fade(0.1)],
-  };
-
-  const card = {
+  const cardProps = {
     w: "42rem",
     bg: theme.colors.background[2],
-    padding: theme.spacing.loose,
+    padding: theme.spacing[3],
   };
 
-  const title = {
+  const titleProps = {
     center: true,
-    gap: theme.spacing.base,
-    marginBottom: theme.spacing.base,
+    gap: theme.spacing[1.5],
+    marginBottom: theme.spacing[1.5],
     align: "center",
   };
 
-  const firstRule = {
+  const firstRuleProps = {
     bg: theme.colors.background[4],
-    margin: ["-2px", theme.spacing.none, theme.spacing.baseloose],
+    margin: ["-2px", theme.spacing[0], theme.spacing[2]],
   };
 
-  const secondRule = {
-    ...firstRule,
-    margin: [theme.spacing.base, theme.spacing.none],
+  const secondRuleProps = {
+    ...firstRuleProps,
+    margin: [theme.spacing[1.5], theme.spacing[0]],
   };
 
   const emailProps = {
-    type: "text",
     id: "email",
     name: "email",
+    label: "Email",
+    labelHidden: true,
     placeholder: "Email",
-    prefix: <Icon src={Email} w={theme.icon.small} />,
+    font: theme.font[4],
+    prefix: <Icon src={Email} w={theme.icon.smaller} />,
     spellCheck: false,
     autoComplete: true,
   };
 
+  const submitButtonProps = {
+    w: 1,
+    font: theme.font[4],
+    bg: theme.colors.gold,
+    fg: theme.colors.background[1],
+    padding: theme.spacing[0.5],
+    highlight: [theme.colors.gold.lighten(0.1), theme.colors.gold.fade(0.1)],
+  };
+
+  const TitleMarkup = (
+    <Flex as="span" {...titleProps}>
+      <Icon src={GatsbyPlain} w={theme.icon.largest} />
+      <TextDisplay size="small">Sign In to Gatsby</TextDisplay>
+    </Flex>
+  );
+
+  const GoogleMarkup = (
+    <Button onClick={() => signIn("credentials")} {...googleButtonProps}>
+      <Flex center gap={theme.spacing[1]}>
+        <Icon src={Google} w={theme.icon.base} />
+        Sign In with Google
+      </Flex>
+    </Button>
+  );
+
+  const GithubMarkup = (
+    <Button onClick={() => signIn("github")} {...githubButtonProps}>
+      <Flex center gap={theme.spacing[1]}>
+        <Icon src={Github} w={theme.icon.base} />
+        Sign In with Github
+      </Flex>
+    </Button>
+  );
+
+  const EmailMarkup = (
+    <Form method="post" action="/api/auth/signin/email">
+      <Box marginBottom={theme.spacing[2]}>
+        <FormField type="text" {...emailProps} />
+      </Box>
+      <Button type="submit" {...submitButtonProps}>
+        Sign In
+      </Button>
+    </Form>
+  );
+
   return (
     <Modal fullscreen zIndex={100} {...props}>
-      <Card {...card}>
-        <Flex as="span" {...title}>
-          <Icon src={GatsbyPlain} w={theme.icon.extralarge} />
-          <TextDisplay font="small">Sign In to Gatsby</TextDisplay>
+      <Card {...cardProps}>
+        {TitleMarkup}
+        <Rule {...firstRuleProps} />
+        <Flex column center gap={theme.spacing[1]}>
+          {GoogleMarkup}
+          {GithubMarkup}
         </Flex>
-        <Rule {...firstRule} />
-        <Flex column center gap={theme.spacing.tight}>
-          <Button onClick={() => signIn("google")} {...button}>
-            <Flex gap={theme.spacing.base} align="center">
-              <Icon src={Google} w={theme.icon.base} />
-              Sign In with Google
-            </Flex>
-          </Button>
-          <Button onClick={() => signIn("github")} {...githubButton}>
-            <Flex gap={theme.spacing.base} align="center">
-              <Icon src={Github} w={theme.icon.base} />
-              Sign In with Github
-            </Flex>
-          </Button>
-        </Flex>
-        <Rule {...secondRule}>Or</Rule>
-        <Form method="post" action="/api/auth/signin/email">
-          <Box marginBottom={theme.spacing.baseloose}>
-            <FormField {...emailProps} />
-          </Box>
-          <Button type="submit" {...goldButton}>
-            Sign In
-          </Button>
-        </Form>
+        <Rule {...secondRuleProps}>Or</Rule>
+        {EmailMarkup}
       </Card>
       <Fireworks infinite zIndex={50} />
     </Modal>

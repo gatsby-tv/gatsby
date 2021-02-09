@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Avatar,
   Box,
   Button,
   Card,
@@ -9,54 +8,40 @@ import {
   Icon,
   TextSubheading,
   Modal,
-  Rule,
 } from "@gatsby-tv/components";
-import {
-  ChannelAccount,
-  UserAccount,
-  Contributions,
-  IPFSContent,
-} from "@gatsby-tv/types";
+import { Channel, User, Contributions, IPFSContent } from "@gatsby-tv/types";
 import { Plus } from "@gatsby-tv/icons";
-import {
-  Value,
-  ChannelHandle,
-  UserHandle,
-  ifExists,
-  ifNotExists,
-  useTheme,
-  useModal,
-} from "@gatsby-tv/utilities";
+import { Value, ifNotExists, useTheme, useModal } from "@gatsby-tv/utilities";
 
-import { ProfileLink } from "@src/components/ProfileLink";
+import { AccountLink } from "@src/components/AccountLink";
 import { AvatarCollation } from "@src/components/AvatarCollation";
 
 type ChannelProps = {
   compact?: boolean;
-  channel: ChannelAccount;
+  channel: Channel;
 };
 
 type CollaboratorProps = {
   compact?: boolean;
-  collaborators: UserAccount[];
+  collaborators: User[];
 };
 
 type ContributorProps = {
   compact?: boolean;
-  contributors: UserAccount[];
+  contributors: User[];
   contributions: Contributions;
 };
 
 type SponsorProps = {
   compact?: boolean;
-  sponsors: UserAccount[];
+  sponsors: User[];
 };
 
 type CreditsBaseProps = {
   children?: React.ReactNode;
   title?: string;
+  avatars?: (IPFSContent | string)[];
   compact?: boolean;
-  avatars?: IPFSContent[];
 };
 
 export type CreditsProps =
@@ -78,54 +63,63 @@ function isContributorProps(props: CreditsProps): props is ContributorProps {
 }
 
 function CreditsBase(props: CreditsBaseProps): React.ReactElement | null {
+  const { children, title, avatars, compact } = props;
   const theme = useTheme();
   const modal = useModal();
 
+  const TitleMarkup = title ? <TextSubheading>{title}</TextSubheading> : null;
+
   const ProfileListMarkup = (
-    <Flex column gap={theme.spacing.basetight}>
-      {props.title && <TextSubheading>{props.title}</TextSubheading>}
-      {props.children}
+    <Flex column gap={theme.spacing[1]}>
+      {TitleMarkup}
+      {children}
     </Flex>
   );
 
-  const CompactMarkup = props.avatars ? (
-    <Flex column gap={theme.spacing.basetight}>
-      <TextSubheading>{props.title}</TextSubheading>
-      <Box w="fit-width">
-        <Button onClick={modal.activate} padding={theme.spacing.none}>
-          <Flex gap={theme.spacing.basetight}>
-            <AvatarCollation avatars={props.avatars.slice(0, 4)} />
-            <Icon src={Plus} w="17px" />
-          </Flex>
-        </Button>
-      </Box>
-      <Modal fullscreen active={modal.active} onExit={modal.deactivate}>
-        <Card bg={theme.colors.background[2]} padding={theme.spacing.loose}>
-          <Box w="24rem" h="24rem">
-            <Scroll>{ProfileListMarkup}</Scroll>
-          </Box>
-        </Card>
-      </Modal>
+  const CollationMarkup = avatars ? (
+    <Box w="fit-width">
+      <Button padding={theme.spacing[0]} onClick={modal.activate}>
+        <Flex gap={theme.spacing[1]}>
+          <AvatarCollation avatars={avatars.slice(0, 4)} />
+          <Icon src={Plus} w="1.7rem" />
+        </Flex>
+      </Button>
+    </Box>
+  ) : null;
+
+  const ModalMarkup = avatars ? (
+    <Modal fullscreen active={modal.active} onExit={modal.deactivate}>
+      <Card bg={theme.colors.background[2]} padding={theme.spacing[3]}>
+        <Box w="30rem" h="40rem">
+          <Scroll>{ProfileListMarkup}</Scroll>
+        </Box>
+      </Card>
+    </Modal>
+  ) : null;
+
+  const CompactMarkup = avatars ? (
+    <Flex column gap={theme.spacing[1]}>
+      {TitleMarkup}
+      {CollationMarkup}
+      {ModalMarkup}
     </Flex>
   ) : null;
 
-  return props.compact ? CompactMarkup : ProfileListMarkup;
+  return compact ? CompactMarkup : ProfileListMarkup;
 }
 
 export function Credits(props: CreditsProps): React.ReactElement | null {
   if (isChannelProps(props)) {
     const { channel, compact } = props;
 
+    const accountProps = {
+      channel,
+      blurb: Value(channel.subscribers, "subscriber") as string,
+    };
+
     return (
       <CreditsBase title={ifNotExists(compact, "Channel")}>
-        <ProfileLink
-          href={`/${channel.handle}`}
-          avatar={channel.avatar}
-          name={channel.name}
-          handle={ChannelHandle(props.channel.handle)}
-          verified={channel.verified}
-          blurb={Value(channel.subscribers, "subscriber") as string}
-        />
+        <AccountLink {...accountProps} />
       </CreditsBase>
     );
   } else if (isCollaboratorProps(props)) {
@@ -134,74 +128,62 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
 
     if (!collaborators.length) return null;
 
-    return (
-      <CreditsBase
-        title={Value(collaborators.length, "Collaborator") as string}
-        avatars={avatars}
-        compact={compact}
-      >
-        {collaborators.map((collaborator, index) => (
-          <ProfileLink
-            key={index}
-            href={`/u/${collaborator.handle}`}
-            avatar={collaborator.avatar}
-            name={collaborator.name}
-            handle={UserHandle(collaborator.handle)}
-            verified={collaborator.verified}
-            blurb={Value(collaborator.followers, "follower") as string}
-          />
-        ))}
-      </CreditsBase>
-    );
+    const creditsProps = {
+      title: Value(collaborators.length, "Collaborator") as string,
+      avatars,
+      compact,
+    };
+
+    const AccountsMarkup = collaborators.map((user) => (
+      <AccountLink
+        key={user._id}
+        user={user}
+        blurb={Value(user.followers, "follower") as string}
+      />
+    ));
+
+    return <CreditsBase {...creditsProps}>{AccountsMarkup}</CreditsBase>;
   } else if (isContributorProps(props)) {
     const { contributors, contributions, compact } = props;
     const avatars = contributors.map((contributor) => contributor.avatar);
 
     if (!contributors.length) return null;
 
-    return (
-      <CreditsBase
-        title={Value(contributors.length, "Contributor") as string}
-        avatars={avatars}
-        compact={compact}
-      >
-        {contributors.map((contributor, index) => (
-          <ProfileLink
-            key={index}
-            href={`/u/${contributor.handle}`}
-            avatar={contributor.avatar}
-            name={contributor.name}
-            handle={UserHandle(contributor.handle)}
-            verified={contributor.verified}
-            blurb={Array.from(contributions[contributor._id]).join(", ")}
-          />
-        ))}
-      </CreditsBase>
-    );
+    const creditsProps = {
+      title: Value(contributors.length, "Contributor") as string,
+      avatars,
+      compact,
+    };
+
+    const AccountsMarkup = contributors.map((user) => (
+      <AccountLink
+        key={user._id}
+        user={user}
+        blurb={Array.from(contributions[user._id]).join(", ")}
+      />
+    ));
+
+    return <CreditsBase {...creditsProps}>{AccountsMarkup}</CreditsBase>;
   } else {
     const { sponsors, compact } = props;
     const avatars = sponsors.map((sponsor) => sponsor.avatar);
 
     if (!sponsors.length) return null;
 
-    return (
-      <CreditsBase
-        title={Value(sponsors.length, "Sponsor") as string}
-        avatars={avatars}
-        compact={compact}
-      >
-        {sponsors.map((sponsor, index) => (
-          <ProfileLink
-            key={index}
-            href={`/u/${sponsor.handle}`}
-            avatar={sponsor.avatar}
-            name={sponsor.name}
-            handle={UserHandle(sponsor.handle)}
-            verified={sponsor.verified}
-            blurb={Value(sponsor.followers, "follower") as string}
-          />
-        ))}
-      </CreditsBase>
-    );
+    const creditsProps = {
+      title: Value(sponsors.length, "Sponsor") as string,
+      avatars,
+      compact,
+    };
+
+    const AccountsMarkup = sponsors.map((user) => (
+      <AccountLink
+        key={user._id}
+        user={user}
+        blurb={Value(user.followers, "follower") as string}
+      />
+    ));
+
+    return <CreditsBase {...creditsProps}>{AccountsMarkup}</CreditsBase>;
   }
 }

@@ -1,39 +1,18 @@
 import React from "react";
-import { DefaultTheme } from "styled-components";
-import { Flex } from "@gatsby-tv/components";
-import { ifNotExists, useFrame, useTheme } from "@gatsby-tv/utilities";
+import { Grid } from "@gatsby-tv/components";
+import { Content as ContentType } from "@gatsby-tv/types";
 
-import { Preview, PreviewProps } from "@src/components/Preview";
+import { Preview } from "@src/components/Preview";
 import { useListing } from "@src/utilities/listing";
 
-export type ContentProps = Omit<PreviewProps, "compact">;
-
-function getAvatarSize(theme: DefaultTheme, screen: string): string {
-  switch (screen) {
-    case "mobile":
-      return theme.avatar.small;
-
-    case "tablet":
-      return theme.avatar.basesmall;
-
-    default:
-      return theme.avatar.base;
-  }
-}
+export type ContentProps = ContentType;
 
 export function Content(props: ContentProps): React.ReactElement {
-  const theme = useTheme();
-  const grid = useListing();
-  const { screen } = useFrame();
+  const { groups, format } = useListing();
 
   return (
-    <Flex.Item>
-      <Preview
-        expand
-        compact={ifNotExists(grid)}
-        avatar={getAvatarSize(theme, screen)}
-        {...props}
-      />
-    </Flex.Item>
+    <Grid.Item>
+      <Preview format={groups > 1 ? format : "compact"} content={props} />
+    </Grid.Item>
   );
 }

@@ -6,9 +6,8 @@ import {
   Rule,
   Scroll,
   TextBox,
-  Optional,
 } from "@gatsby-tv/components";
-import { Video, Topic, Genre } from "@gatsby-tv/types";
+import { Video } from "@gatsby-tv/types";
 import {
   ifExists,
   useTheme,
@@ -19,16 +18,17 @@ import { Info } from "./components/Info";
 import { Engagement } from "./components/Engagement";
 import { Credits } from "./components/Credits";
 import { Category } from "./components/Category";
+import { Skeleton } from "./components/Skeleton";
 
 export interface DescriptionProps {
   video: Video;
-  breakpoint: number;
+  compact?: boolean;
 }
 
-export function Description(props: DescriptionProps) {
-  const { video, breakpoint } = props;
-  const [clamp, setClamp] = useState(true);
+function DescriptionBase(props: DescriptionProps) {
   const theme = useTheme();
+  const { video, compact } = props;
+  const [clamp, setClamp] = useState(true);
 
   const toggleClamp = useStabilizedCallback(
     () => setClamp((current) => !current),
@@ -36,14 +36,18 @@ export function Description(props: DescriptionProps) {
   );
 
   const TextMarkup = (
-    <TextBox font="basesmall" fontHeight="large" clamp={ifExists(clamp, 3)}>
+    <TextBox font={theme.font[4]} clamp={ifExists(clamp, 3)}>
       {video.description}
     </TextBox>
   );
 
   const ShowButtonMarkup = (
     <Box w="fit-content">
-      <Button font="small" padding={theme.spacing.none} onClick={toggleClamp}>
+      <Button
+        font={theme.font[6]}
+        padding={theme.spacing[0]}
+        onClick={toggleClamp}
+      >
         {clamp ? "Show More" : "Show Less"}
       </Button>
     </Box>
@@ -56,84 +60,68 @@ export function Description(props: DescriptionProps) {
       <Rule
         thin
         margin={[
-          theme.spacing.none,
-          theme.spacing.tight,
-          theme.spacing.none,
-          theme.spacing.none,
+          theme.spacing[0],
+          theme.spacing[1],
+          theme.spacing[0],
+          theme.spacing[0],
         ]}
       />
     ) : null;
 
-  const CreditsMarkup =
-    breakpoint === 3 ? (
-      <Flex.Item shrink={0} minw="28rem">
-        <Scroll>
-          <Flex column gap={theme.spacing.base}>
-            <Credits channel={video.channel} />
-            {CreditsDividerMarkup}
-            <Credits collaborators={video.collaborators} />
-            <Credits
-              contributors={video.contributors}
-              contributions={video.contributions}
-            />
-            <Credits sponsors={video.sponsors} />
-          </Flex>
-        </Scroll>
-      </Flex.Item>
-    ) : null;
+  const CreditsMarkup = !compact ? (
+    <Flex.Item shrink={0} minw="30rem">
+      <Scroll>
+        <Flex column gap={theme.spacing[1.5]}>
+          <Credits channel={video.channel} />
+          {CreditsDividerMarkup}
+          <Credits collaborators={video.collaborators} />
+          <Credits
+            contributors={video.contributors}
+            contributions={video.contributions}
+          />
+          <Credits sponsors={video.sponsors} />
+        </Flex>
+      </Scroll>
+    </Flex.Item>
+  ) : null;
 
-  const CompactCreditsMarkup =
-    breakpoint < 3 ? (
-      <>
-        <Credits compact channel={video.channel} />
-        {!clamp && (
-          <Flex gap={theme.spacing.baseloose}>
-            <Credits compact collaborators={video.collaborators} />
-            <Credits
-              compact
-              contributors={video.contributors}
-              contributions={video.contributions}
-            />
-            <Credits compact sponsors={video.sponsors} />
-          </Flex>
-        )}
-      </>
-    ) : null;
+  const CreditsCompactHiddenMarkup = !clamp ? (
+    <Flex gap={theme.spacing[2]}>
+      <Credits compact collaborators={video.collaborators} />
+      <Credits
+        compact
+        contributors={video.contributors}
+        contributions={video.contributions}
+      />
+      <Credits compact sponsors={video.sponsors} />
+    </Flex>
+  ) : null;
+
+  const CreditsCompactMarkup = compact ? (
+    <>
+      <Credits compact channel={video.channel} />
+      {CreditsCompactHiddenMarkup}
+    </>
+  ) : null;
 
   return (
     <>
-      <Info
-        title={video.title}
-        views={video.views}
-        releaseDate={video.releaseDate}
-      />
-      <Rule
-        margin={[
-          theme.spacing.tight,
-          theme.spacing.none,
-          theme.spacing.basetight,
-        ]}
-      />
-      <Optional
-        active={breakpoint === 3}
-        component={Flex}
-        $props={{ gap: theme.spacing.base }}
-      >
-        <Flex column gap={theme.spacing.base}>
-          <Engagement breakpoint={breakpoint} />
-          {CompactCreditsMarkup}
+      <Flex justify="space-between">
+        <Info video={video} />
+        <Engagement />
+      </Flex>
+      <Rule margin={[theme.spacing[1], theme.spacing[0], theme.spacing[1.5]]} />
+      <Flex>
+        <Flex column gap={theme.spacing[1.5]}>
+          {CreditsCompactMarkup}
           {TextMarkup}
-          {(breakpoint !== 0 || !clamp) && (
-            <Category
-              breakpoint={breakpoint}
-              topic={video.topic}
-              genre={video.genre}
-            />
-          )}
+          <Category topic={video.topic} genre={video.genre} />
           {ShowButtonMarkup}
         </Flex>
         {CreditsMarkup}
-      </Optional>
+      </Flex>
     </>
   );
 }
+
+export const Description = Object.assign(DescriptionBase, { Skeleton });

@@ -1,27 +1,40 @@
 import React from "react";
-import { Stream } from "@gatsby-tv/components";
-import { useTheme, useFrame } from "@gatsby-tv/utilities";
+import { Flex, Stream } from "@gatsby-tv/components";
+import { TopicBrowsable } from "@gatsby-tv/types";
+import { useTheme } from "@gatsby-tv/utilities";
 
-import { Content, ContentProps } from "./components/Content";
+import { ListingContext } from "@src/utilities/listing";
 
-export type TopicListingContentProps = ContentProps;
-export type TopicListingGenerator = () => TopicListingContentProps[];
+import { Content } from "./components/Content";
+import { Skeleton, SkeletonProps } from "./components/Skeleton";
+
+export type { SkeletonProps as TopicListingSkeletonProps };
 
 export interface TopicListingProps {
-  generator: TopicListingGenerator;
+  topics: TopicBrowsable[];
+  groups: number;
+  generator?: () => void;
+  loading?: boolean;
 }
 
-export function TopicListing(props: TopicListingProps): React.ReactElement {
+function TopicListingBase(props: TopicListingProps): React.ReactElement {
   const theme = useTheme();
-  const { screen } = useFrame();
+  const { topics, groups, loading, generator = () => undefined } = props;
+
+  const streamProps = {
+    component: Content,
+    data: topics,
+    generator,
+    loading,
+  };
 
   return (
-    <Stream
-      column
-      gap={screen === "desktop" ? theme.spacing.basetight : theme.spacing.tight}
-      max={20}
-      component={Content}
-      generator={props.generator}
-    />
+    <ListingContext.Provider value={{ groups, format: "default" }}>
+      <Flex column gap={theme.spacing[2]}>
+        <Stream {...streamProps} />
+      </Flex>
+    </ListingContext.Provider>
   );
 }
+
+export const TopicListing = Object.assign(TopicListingBase, { Skeleton });

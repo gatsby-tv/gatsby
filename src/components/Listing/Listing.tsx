@@ -1,48 +1,55 @@
 import React from "react";
-import { Stream } from "@gatsby-tv/components";
-import {
-  ifExists,
-  ifNotExists,
-  useTheme,
-  useBreakpoints,
-} from "@gatsby-tv/utilities";
+import { Grid, Stream } from "@gatsby-tv/components";
+import { Content as ContentType } from "@gatsby-tv/types";
+import { ifExists, useTheme } from "@gatsby-tv/utilities";
 
+import { ListingFormat } from "@src/types";
 import { ListingContext } from "@src/utilities/listing";
 
-import { Content, ContentProps } from "./components/Content";
+import { Content } from "./components/Content";
+import { Skeleton, SkeletonProps } from "./components/Skeleton";
 
-export type ListingContentProps = ContentProps;
-export type ListingGenerator = () => ListingContentProps[];
+export type { SkeletonProps as ListingSkeletonProps };
 
 export interface ListingProps {
-  generator: ListingGenerator;
-  grid?: boolean;
+  content: ContentType[];
+  generator?: () => void;
+  loading?: boolean;
+  groups?: number;
+  format?: ListingFormat;
 }
 
-export function Listing(props: ListingProps): React.ReactElement {
+function ListingBase(props: ListingProps): React.ReactElement {
+  const {
+    content,
+    loading,
+    generator = () => undefined,
+    groups = 1,
+    format = "default",
+  } = props;
   const theme = useTheme();
-  const breakpoint = useBreakpoints({
-    1: "(max-width: 650px)",
-    2: "(min-width: 651px) and (max-width: 1200px)",
-    3: "(min-width: 1201px)",
-  }) as number;
+
+  const gridProps = {
+    template: `repeat(${groups}, 1fr)`,
+    justify: "stretch",
+    center: ifExists(groups > 1),
+    gap: theme.spacing[1.5],
+  };
+
+  const streamProps = {
+    component: Content,
+    data: content,
+    generator,
+    loading,
+  };
 
   return (
-    <ListingContext.Provider value={Boolean(props.grid) || breakpoint === 1}>
-      <Stream
-        center={ifExists(props.grid)}
-        wrapped={ifExists(props.grid)}
-        column={ifNotExists(props.grid)}
-        gap={
-          props.grid && breakpoint > 1
-            ? theme.spacing.baseloose
-            : theme.spacing.base
-        }
-        max={20}
-        groups={ifExists(props.grid, Math.max(breakpoint, 1))}
-        component={Content}
-        generator={props.generator}
-      />
+    <ListingContext.Provider value={{ groups, format }}>
+      <Grid {...gridProps}>
+        <Stream {...streamProps} />
+      </Grid>
     </ListingContext.Provider>
   );
 }
+
+export const Listing = Object.assign(ListingBase, { Skeleton });

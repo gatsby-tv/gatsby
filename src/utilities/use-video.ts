@@ -1,5 +1,14 @@
-import { SPRING_VIDEO } from "@src/example";
+import useSWR from "swr";
+import { Video } from "@gatsby-tv/types";
 
-export function useVideo(hash: string) {
-  return SPRING_VIDEO;
+import { FetchResponse } from "@src/types";
+
+export function useVideo(id?: string): FetchResponse<"video", Video> {
+  const { data, error } = useSWR(id ? `/video/${id}` : null);
+
+  return {
+    video: data,
+    loading: !error && !data,
+    error,
+  };
 }

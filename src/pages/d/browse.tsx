@@ -1,58 +1,83 @@
 import React from "react";
 import { Box, Flex, Rule, Tabs, TextDisplay } from "@gatsby-tv/components";
-import { useTheme, useSelect } from "@gatsby-tv/utilities";
-import { Topic } from "@gatsby-tv/types";
+import { useTheme, useSelect, useBreakpoints } from "@gatsby-tv/utilities";
 
 import { Listing } from "@src/components/Listing";
 import { TopicListing } from "@src/components/TopicListing";
-import { useNewFeed, usePopularFeed, useTopicFeed } from "@src/utilities/feeds";
-import { usePageMargin } from "@src/utilities/use-page-margin";
+import { usePopularFeed } from "@src/utilities/use-popular-feed";
+import { useNewFeed } from "@src/utilities/use-new-feed";
+import { useTopicsFeed } from "@src/utilities/use-topics-feed";
 
-export default function IndexPage(): React.ReactElement {
+export default function BrowsePage(): React.ReactElement {
   const theme = useTheme();
-  const margin = usePageMargin();
   const [tab, setTab] = useSelect(["topics", "popular", "new"], "topics");
-  const newFeed = useNewFeed();
-  const popularFeed = usePopularFeed();
-  const topicFeed = useTopicFeed();
+  const { content: recent, ...recentProps } = useNewFeed();
+  const { content: popular, ...popularProps } = usePopularFeed();
+  const { topics, ...topicsProps } = useTopicsFeed();
+  const listing = tab["popular"] ? popular : recent;
+  const listingProps = tab["popular"] ? popularProps : recentProps;
+
+  const topicGroups =
+    (useBreakpoints({
+      3: "(max-width: 1100px)",
+      4: "(min-width: 1101px) and (max-width: 1400px)",
+      5: "(min-width: 1400px)",
+    }) as number) ?? 5;
+
+  const listingGroups =
+    (useBreakpoints({
+      2: "(max-width: 1200px)",
+      3: "(min-width: 1201px)",
+    }) as number) ?? 3;
 
   const headerProps = {
     column: true,
-    margin: [theme.spacing.baseloose, theme.spacing.none, theme.spacing.none],
-    gap: theme.spacing.base,
+    gap: theme.spacing[1.5],
   };
 
   const tabsProps = {
-    h: "3rem",
-    font: "large",
-    gap: theme.spacing.base,
+    h: theme.spacing[3],
+    font: theme.font[3],
+    gap: theme.spacing[1.5],
   };
 
   const ruleProps = {
     bg: theme.colors.background[4],
-    margin: [
-      "-2px",
-      theme.spacing.none,
-      tab["topics"] ? theme.spacing.base : theme.spacing.loose,
-    ],
+    margin: ["-2px", theme.spacing[0], theme.spacing[3]],
   };
 
+  const TabsMarkup = (
+    <Tabs selection={tab} onSelect={setTab} {...tabsProps}>
+      <Tabs.Item id="topics">Topics</Tabs.Item>
+      <Tabs.Item id="popular">Popular</Tabs.Item>
+      <Tabs.Item id="new">New</Tabs.Item>
+    </Tabs>
+  );
+
+  const TopicListingMarkup = topics ? (
+    <TopicListing topics={topics} groups={topicGroups} {...topicsProps} />
+  ) : (
+    <TopicListing.Skeleton groups={topicGroups} />
+  );
+
+  const ListingMarkup = listing ? (
+    <Listing content={listing} groups={listingGroups} {...listingProps} />
+  ) : (
+    <Listing.Skeleton groups={listingGroups} />
+  );
+
+  const ContentMarkup = tab["topics"] ? TopicListingMarkup : ListingMarkup;
+
   return (
-    <Box margin={[theme.spacing.none, margin]}>
-      <Flex {...headerProps}>
-        <TextDisplay font="large">Browse</TextDisplay>
-        <Tabs selection={tab} onSelect={setTab} {...tabsProps}>
-          <Tabs.Item id="topics">Topics</Tabs.Item>
-          <Tabs.Item id="popular">Popular</Tabs.Item>
-          <Tabs.Item id="new">New</Tabs.Item>
-        </Tabs>
-      </Flex>
-      <Rule {...ruleProps} />
-      {tab["topics"] ? (
-        <TopicListing generator={topicFeed} />
-      ) : (
-        <Listing grid generator={tab["popular"] ? popularFeed : newFeed} />
-      )}
+    <Box margin={theme.spacing[3]}>
+      <Box maxw="200rem" margin={[theme.spacing[0], "auto"]}>
+        <Flex {...headerProps}>
+          <TextDisplay size="large">Browse</TextDisplay>
+          {TabsMarkup}
+        </Flex>
+        <Rule {...ruleProps} />
+        {ContentMarkup}
+      </Box>
     </Box>
   );
 }

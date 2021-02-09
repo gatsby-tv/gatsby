@@ -6,37 +6,34 @@ import { Topic, Genre } from "@gatsby-tv/types";
 import { CategoryLink } from "@src/components/CategoryLink";
 
 export interface CategoryProps {
-  breakpoint: number;
   topic?: Topic;
   genre?: Genre;
 }
 
 export function Category(props: CategoryProps): React.ReactElement {
+  const { topic, genre } = props;
   const theme = useTheme();
 
+  const optionalProps = {
+    active: ifExists(topic && genre),
+    $props: { gap: theme.spacing[1.5], w: "fit-content" },
+  };
+
+  const TopicMarkup = topic ? (
+    <CategoryLink topic={topic} href={`/d/topic/${topic}`} />
+  ) : null;
+
+  const GenreMarkup = genre ? (
+    <CategoryLink
+      genre={genre}
+      href={topic ? `/d/topic/${topic}/${genre}` : `/d/genre/${genre}`}
+    />
+  ) : null;
+
   return (
-    <Optional
-      active={ifExists(props.topic && props.genre)}
-      component={Flex}
-      $props={{
-        gap: theme.spacing.base,
-        column: props.breakpoint === 0,
-        w: "fit-content",
-      }}
-    >
-      {props.topic && (
-        <CategoryLink topic={props.topic} href={`/d/topic/${props.topic}`} />
-      )}
-      {props.genre && (
-        <CategoryLink
-          genre={props.genre}
-          href={
-            props.topic
-              ? `/d/topic/${props.topic}/${props.genre}`
-              : `/d/genre/${props.genre}`
-          }
-        />
-      )}
+    <Optional component={Flex} {...optionalProps}>
+      {TopicMarkup}
+      {GenreMarkup}
     </Optional>
   );
 }

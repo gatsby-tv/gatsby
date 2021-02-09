@@ -1,19 +1,22 @@
 import React from "react";
+import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { css } from "styled-components";
-import { Avatar, Box, Flex } from "@gatsby-tv/components";
+import { Box } from "@gatsby-tv/components";
+import { User, UserContentFeeds } from "@gatsby-tv/types";
 import { useTheme } from "@gatsby-tv/utilities";
 
-import { useSubscriptions } from "@src/utilities/use-subscriptions";
+import { useUserFeeds } from "@src/utilities/use-user-feeds";
 
-export interface SidebarProps {
-  disabled?: boolean;
-}
+import { SignedOut } from "./components/SignedOut";
+import { SignedIn } from "./components/SignedIn";
+import { Skeleton } from "./components/Skeleton";
 
-export function Sidebar(props: SidebarProps): React.ReactElement {
+export function Sidebar(): React.ReactElement {
   const theme = useTheme();
   const router = useRouter();
-  const subscriptions = useSubscriptions();
+  const [session, loading] = useSession();
+  const { feeds } = useUserFeeds((session?.user as User | undefined)?._id);
 
   const disabled = router.pathname.startsWith("/v/");
 
@@ -22,33 +25,25 @@ export function Sidebar(props: SidebarProps): React.ReactElement {
     transform: translateX(${disabled ? "-50px" : "0px"});
   `;
 
+  const boxProps = {
+    w: disabled ? "0px" : "50px",
+    h: 1,
+    bg: theme.colors.background[2],
+    zIndex: 4,
+  };
+
+  const BodyMarkup =
+    loading || (session && !feeds) ? (
+      <Skeleton />
+    ) : session ? (
+      <SignedIn subscriptions={(feeds as UserContentFeeds).subscriptions} />
+    ) : (
+      <SignedOut />
+    );
+
   return (
-    <Box
-      css={style}
-      w={disabled ? "0px" : "50px"}
-      h={1}
-      bg={theme.colors.background[2]}
-      zIndex={4}
-    >
-      <Flex
-        column
-        align="center"
-        distribute="fill-evenly"
-        gap={theme.spacing.tight}
-        padding={[
-          theme.spacing.basetight,
-          theme.spacing.none,
-          theme.spacing.none,
-        ]}
-      >
-        {subscriptions.slice(0, 9).map((subscription, index) => (
-          <Avatar
-            key={index}
-            src={subscription.avatar}
-            size={theme.avatar.basesmall}
-          />
-        ))}
-      </Flex>
+    <Box css={style} {...boxProps}>
+      {BodyMarkup}
     </Box>
   );
 }

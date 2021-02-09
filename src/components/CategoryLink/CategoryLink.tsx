@@ -37,29 +37,31 @@ export function CategoryLink(props: CategoryLinkProps): React.ReactElement {
     ? parseTopicProps(props)
     : parseGenreProps(props);
 
+  const flexProps = {
+    column: true,
+    rounded: theme.border.radius.smallest,
+    padding: [theme.spacing[1], theme.spacing[1.5], theme.spacing[0.5]],
+    bg: theme.colors.background[3],
+    gap: theme.spacing[0.5],
+    justify: "space-between",
+  };
+
+  const LinkMarkup = (
+    <Link {...linkProps}>
+      <Box absolute expand />
+    </Link>
+  );
+
   return (
-    <Flex
-      column
-      rounded={theme.border.radius.smallest}
-      padding={[
-        theme.spacing.tight,
-        theme.spacing.base,
-        theme.spacing.extratight,
-      ]}
-      bg={theme.colors.background[3]}
-      gap={theme.spacing.extratight}
-      justify="space-between"
-    >
+    <Flex {...flexProps}>
       <TextSubheading>{category}</TextSubheading>
-      <Flex gap={theme.spacing.base} align="center">
+      <Flex gap={theme.spacing[1.5]} align="center">
         <TextDisplay thin>{tag}</TextDisplay>
         <Flex.Item shrink={0}>
-          <Icon src={ExtendRight} w={theme.icon.basesmall} />
+          <Icon src={ExtendRight} w={theme.icon.small} />
         </Flex.Item>
       </Flex>
-      <Link {...linkProps}>
-        <Box absolute expand />
-      </Link>
+      {LinkMarkup}
     </Flex>
   );
 }

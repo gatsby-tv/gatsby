@@ -1,25 +1,55 @@
 import React from "react";
 import { Box, TextMeta } from "@gatsby-tv/components";
-import { Time, useTheme } from "@gatsby-tv/utilities";
+import {
+  Content,
+  isVideo,
+  isEpisodicShow,
+  isSeasonedShow,
+  isPlaylist,
+} from "@gatsby-tv/types";
+import { Value, Time, useTheme } from "@gatsby-tv/utilities";
 
 export interface OverlayProps {
-  duration: number;
+  content: Content;
 }
 
-export function Overlay(props: OverlayProps): React.ReactElement {
+export function Overlay(props: OverlayProps): React.ReactElement | null {
+  const { content } = props;
   const theme = useTheme();
 
-  return (
-    <Box
-      absolute
-      bottom={theme.spacing.extratight}
-      right={theme.spacing.extratight}
-      bg={theme.colors.black.fade(0.3)}
-      padding={[theme.spacing.none, theme.spacing.extratight]}
-    >
-      <TextMeta font="small" bold>
-        {Time(props.duration)}
-      </TextMeta>
-    </Box>
-  );
+  const boxProps = {
+    absolute: true,
+    bottom: theme.spacing[0.5],
+    right: theme.spacing[0.5],
+    bg: theme.colors.black.fade(0.3),
+    padding: [theme.spacing[0], theme.spacing[0.5]],
+  };
+
+  if (isVideo(content)) {
+    return (
+      <Box {...boxProps}>
+        <TextMeta bold>{Time(content.duration)}</TextMeta>
+      </Box>
+    );
+  } else if (isSeasonedShow(content)) {
+    return (
+      <Box {...boxProps}>
+        <TextMeta bold>{Value(content.seasons.length, "season")}</TextMeta>
+      </Box>
+    );
+  } else if (isEpisodicShow(content)) {
+    return (
+      <Box {...boxProps}>
+        <TextMeta bold>{Value(content.episodes.length, "episode")}</TextMeta>
+      </Box>
+    );
+  } else if (isPlaylist(content)) {
+    return (
+      <Box {...boxProps}>
+        <TextMeta bold>{Value(content.videos.length, "video")}</TextMeta>
+      </Box>
+    );
+  } else {
+    return null;
+  }
 }

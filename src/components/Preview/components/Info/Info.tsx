@@ -1,51 +1,73 @@
 import React from "react";
-import NextLink from "next/link";
-import { Flex, Box, TextMeta, Optional, Icon } from "@gatsby-tv/components";
+import {
+  Flex,
+  Box,
+  Button,
+  TextMeta,
+  Optional,
+  Icon,
+} from "@gatsby-tv/components";
+import { Channel, Content, isVideo } from "@gatsby-tv/types";
 import { CheckmarkFill } from "@gatsby-tv/icons";
-import { Value, ReleaseDate, ifExists, useTheme } from "@gatsby-tv/utilities";
+import { Value, ReleaseDate, useTheme, useModal } from "@gatsby-tv/utilities";
+
+import { ListingFormat } from "@src/types";
+import { ChannelModal } from "@src/components/ChannelModal";
 
 export interface InfoProps {
-  name: string;
-  handle: string;
-  views: number;
-  releaseDate: Date;
-  verified?: boolean;
+  format: ListingFormat;
+  channel: Channel;
+  content: Content;
 }
 
-export function Info(props: InfoProps) {
+export function Info(props: InfoProps): React.ReactElement {
+  const { format, channel, content } = props;
   const theme = useTheme();
+  const modal = useModal();
 
-  const verifiedMarkup = props.verified ? (
+  const date = isVideo(content) ? content.releaseDate : content.creationDate;
+
+  const verifiedOptionalProps = {
+    active: channel.verified,
+    component: Flex,
+    $props: { gap: theme.spacing[0.5] },
+  };
+
+  const modalProps = {
+    channel,
+    active: modal.active,
+    onExit: modal.deactivate,
+  };
+
+  const VerifiedMarkup = channel.verified ? (
     <Icon
       src={CheckmarkFill}
-      w={theme.icon.extrasmall}
+      w={theme.icon.smallest}
       fg={theme.colors.font.subdued}
     />
   ) : null;
 
+  const NameMarkup =
+    format !== "nochannel" ? (
+      <Box css={{ lineHeight: theme.lineHeight.heading }}>
+        <Optional {...verifiedOptionalProps}>
+          <Box zIndex={2}>
+            <Button unstyled onClick={modal.activate}>
+              <TextMeta.Link bold>{channel.name}</TextMeta.Link>
+            </Button>
+          </Box>
+          {VerifiedMarkup}
+        </Optional>
+        <ChannelModal {...modalProps} />
+      </Box>
+    ) : null;
+
   return (
-    <Flex column box={theme.spacing.none}>
-      <Optional
-        active={ifExists(props.verified)}
-        component={Flex}
-        $props={{ gap: theme.spacing.extratight }}
-      >
-        <Box zIndex={2}>
-          <NextLink href={`/${props.handle}`} passHref>
-            <TextMeta.Link bold font="small">
-              {props.name}
-            </TextMeta.Link>
-          </NextLink>
-        </Box>
-        {verifiedMarkup}
-      </Optional>
+    <Flex column>
+      {NameMarkup}
       <TextMeta.List subdued>
-        <TextMeta bold font="small">
-          {Value(props.views, "view")}
-        </TextMeta>
-        <TextMeta bold font="small">
-          {ReleaseDate(props.releaseDate)}
-        </TextMeta>
+        <TextMeta bold>{Value(content.views, "view")}</TextMeta>
+        <TextMeta bold>{ReleaseDate(date)}</TextMeta>
       </TextMeta.List>
     </Flex>
   );

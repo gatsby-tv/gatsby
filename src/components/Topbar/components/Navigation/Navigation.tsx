@@ -2,9 +2,9 @@ import React from "react";
 import NextLink from "next/link";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import { Flex, Icon, Tabs } from "@gatsby-tv/components";
-import { GatsbyPlain, Browse, Subscribe } from "@gatsby-tv/icons";
-import { useSelect, useTheme, useFrame } from "@gatsby-tv/utilities";
+import { Icon, Tabs } from "@gatsby-tv/components";
+import { GatsbyPlain } from "@gatsby-tv/icons";
+import { useSelect, useTheme } from "@gatsby-tv/utilities";
 
 import { Link } from "@src/components/Link";
 
@@ -21,8 +21,7 @@ function getCurrentTab(route: string): string | undefined {
 
 export function Navigation(): React.ReactElement {
   const theme = useTheme();
-  const { screen } = useFrame();
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const router = useRouter();
 
   const defaultTab = getCurrentTab(router.pathname);
@@ -32,52 +31,44 @@ export function Navigation(): React.ReactElement {
     defaultTab
   );
 
-  const tabsMarkup =
-    screen !== "desktop" ? (
-      <>
-        {session && (
-          <NextLink href="/d/subscriptions" passHref>
-            <Tabs.Link id="subscriptions">
-              <Icon src={Subscribe} w={theme.icon.basesmall} />
-            </Tabs.Link>
-          </NextLink>
-        )}
-        <NextLink href="/d/browse" passHref>
-          <Tabs.Link id="browse">
-            <Icon src={Browse} w={theme.icon.basesmall} />
-          </Tabs.Link>
-        </NextLink>
-      </>
-    ) : (
-      <>
-        {session && (
-          <NextLink href="/d/subscriptions" passHref>
-            <Tabs.Link id="subscriptions">Subscriptions</Tabs.Link>
-          </NextLink>
-        )}
-        <NextLink href="/d/browse" passHref>
-          <Tabs.Link id="browse">Browse</Tabs.Link>
-        </NextLink>
-      </>
-    );
+  const logoProps = {
+    src: GatsbyPlain,
+    w: theme.icon.larger,
+    h: 1,
+    padding: [theme.spacing[0], theme.spacing[1]],
+  };
+
+  const tabsProps = {
+    font: "large",
+    gap: theme.spacing[2],
+    selection: tab,
+    onSelect: setTab,
+  };
+
+  const LogoMarkup = (
+    <Link href="/" onClick={setTab}>
+      <Icon {...logoProps} />
+    </Link>
+  );
+
+  const SubscriptionsMarkup = session ? (
+    <NextLink href="/d/subscriptions" passHref>
+      <Tabs.Link id="subscriptions">Subscriptions</Tabs.Link>
+    </NextLink>
+  ) : null;
+
+  const BrowseMarkup = (
+    <NextLink href="/d/browse" passHref>
+      <Tabs.Link id="browse">Browse</Tabs.Link>
+    </NextLink>
+  );
 
   return (
     <>
-      <Link href="/" onClick={setTab}>
-        <Icon
-          src={GatsbyPlain}
-          w={screen !== "desktop" ? theme.icon.baselarge : theme.icon.large}
-          h={1}
-          padding={[theme.spacing.none, theme.spacing.tight]}
-        />
-      </Link>
-      <Tabs
-        font="large"
-        gap={theme.spacing.baseloose}
-        selection={tab}
-        onSelect={setTab}
-      >
-        {tabsMarkup}
+      {LogoMarkup}
+      <Tabs {...tabsProps}>
+        {SubscriptionsMarkup}
+        {BrowseMarkup}
       </Tabs>
     </>
   );

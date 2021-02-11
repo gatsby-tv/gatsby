@@ -1,7 +1,14 @@
 import React from "react";
-import { Box, Flex, Image, Optional, TextMeta } from "@gatsby-tv/components";
+import {
+  Box,
+  Flex,
+  Image,
+  Optional,
+  TextMeta,
+  Labelled,
+} from "@gatsby-tv/components";
 import { Content } from "@gatsby-tv/types";
-import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import { ifExists, useTheme, useUniqueId } from "@gatsby-tv/utilities";
 
 import { ListingFormat } from "@src/types";
 import { Link } from "@src/components/Link";
@@ -17,12 +24,24 @@ export interface PreviewProps {
   content: Content;
   format?: ListingFormat;
   avatar?: string;
+  ariaPosInSet?: number;
+  ariaSetSize?: number;
 }
 
 function PreviewBase(props: PreviewProps): React.ReactElement {
   const [content, channel] = [props.content, props.content.channel];
+  const id = useUniqueId("preview-label");
   const theme = useTheme();
-  const { format = "default", avatar: size = theme.avatar.base } = props;
+  const { format = "default", avatar: size = theme.avatar.base, ariaPosInSet, ariaSetSize } = props;
+
+  const titleProps = {
+    id,
+    bold: true,
+    heading: true,
+    clamp: 2,
+    font: theme.font[4],
+    "data-label": true,
+  };
 
   const imageProps = {
     src: content.thumbnail,
@@ -46,11 +65,14 @@ function PreviewBase(props: PreviewProps): React.ReactElement {
     gap: ifExists(format !== "nochannel", theme.spacing[0.5]),
   };
 
-  const TitleMarkup = (
-    <TextMeta bold clamp={2} heading font={theme.font[4]}>
-      {content.title}
-    </TextMeta>
-  );
+  const flexProps = {
+    column: format !== "compact",
+    gap: theme.spacing[1],
+    "aria-posinset": ariaPosInSet,
+    "aria-setsize": ariaSetSize,
+  };
+
+  const TitleMarkup = <TextMeta {...titleProps}>{content.title}</TextMeta>;
 
   const InfoMarkup = (
     <Optional component={Flex.Item} {...itemOptionalProps}>
@@ -63,19 +85,16 @@ function PreviewBase(props: PreviewProps): React.ReactElement {
     </Optional>
   );
 
-  const LinkMarkup = (
-    <Link href={`/v/${content._id}`}>
-      <Box absolute expand zIndex={1} />
-    </Link>
-  );
-
   return (
-    <Flex column={format !== "compact"} gap={theme.spacing[1]}>
+    <Labelled as="article" component={Flex} $props={flexProps}>
       <Image {...imageProps} />
       {InfoMarkup}
-      {LinkMarkup}
-    </Flex>
+      <Link href={`/v/${content._id}`} overlay zIndex={1} />
+    </Labelled>
   );
 }
 
-export const Preview = Object.assign(PreviewBase, { Skeleton });
+export const Preview = Object.assign(PreviewBase, {
+  Skeleton,
+  displayName: "Preview",
+});

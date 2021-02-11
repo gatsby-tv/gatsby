@@ -124,4 +124,7 @@ function DescriptionBase(props: DescriptionProps) {
   );
 }
 
-export const Description = Object.assign(DescriptionBase, { Skeleton });
+export const Description = Object.assign(DescriptionBase, {
+  Skeleton,
+  displayName: "Description",
+});

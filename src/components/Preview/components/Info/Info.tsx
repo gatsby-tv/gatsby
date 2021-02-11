@@ -9,7 +9,13 @@ import {
 } from "@gatsby-tv/components";
 import { Channel, Content, isVideo } from "@gatsby-tv/types";
 import { CheckmarkFill } from "@gatsby-tv/icons";
-import { Value, ReleaseDate, useTheme, useModal } from "@gatsby-tv/utilities";
+import {
+  Value,
+  ReleaseDate,
+  useTheme,
+  useModal,
+  useUniqueId,
+} from "@gatsby-tv/utilities";
 
 import { ListingFormat } from "@src/types";
 import { ChannelModal } from "@src/components/ChannelModal";
@@ -22,10 +28,15 @@ export interface InfoProps {
 
 export function Info(props: InfoProps): React.ReactElement {
   const { format, channel, content } = props;
+  const titleId = useUniqueId("preview-description");
+  const viewsId = useUniqueId("preview-description");
+  const releaseId = useUniqueId("preview-description");
   const theme = useTheme();
   const modal = useModal();
 
-  const date = isVideo(content) ? content.releaseDate : content.creationDate;
+  const date = new Date(
+    isVideo(content) ? content.releaseDate : content.creationDate
+  );
 
   const verifiedOptionalProps = {
     active: channel.verified,
@@ -37,6 +48,20 @@ export function Info(props: InfoProps): React.ReactElement {
     channel,
     active: modal.active,
     onExit: modal.deactivate,
+  };
+
+  const viewsProps = {
+    id: viewsId,
+    value: content.views,
+    bold: true,
+    "data-description": true,
+  };
+
+  const releaseProps = {
+    id: releaseId,
+    date,
+    bold: true,
+    "data-description": true,
   };
 
   const VerifiedMarkup = channel.verified ? (
@@ -51,11 +76,11 @@ export function Info(props: InfoProps): React.ReactElement {
     format !== "nochannel" ? (
       <Box css={{ lineHeight: theme.lineHeight.heading }}>
         <Optional {...verifiedOptionalProps}>
-          <Box zIndex={2}>
-            <Button unstyled onClick={modal.activate}>
-              <TextMeta.Link bold>{channel.name}</TextMeta.Link>
-            </Button>
-          </Box>
+          <Button unstyled onClick={modal.activate} zIndex={2}>
+            <TextMeta.Link id={titleId} bold data-description>
+              {channel.name}
+            </TextMeta.Link>
+          </Button>
           {VerifiedMarkup}
         </Optional>
         <ChannelModal {...modalProps} />
@@ -66,8 +91,10 @@ export function Info(props: InfoProps): React.ReactElement {
     <Flex column>
       {NameMarkup}
       <TextMeta.List subdued>
-        <TextMeta bold>{Value(content.views, "view")}</TextMeta>
-        <TextMeta bold>{ReleaseDate(date)}</TextMeta>
+        <TextMeta.Data {...viewsProps}>
+          {Value(content.views, "view")}
+        </TextMeta.Data>
+        <TextMeta.Time {...releaseProps}>{ReleaseDate(date)}</TextMeta.Time>
       </TextMeta.List>
     </Flex>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Rule, TextDisplay } from "@gatsby-tv/components";
-import { useTheme, useBreakpoints } from "@gatsby-tv/utilities";
+import { useTheme, useBreakpoints, useUniqueId } from "@gatsby-tv/utilities";
 
 import { ChannelCarousel } from "@src/components/ChannelCarousel";
 import { PreviewSlider } from "@src/components/PreviewSlider";
@@ -11,6 +11,7 @@ import { useFeaturedChannels } from "@src/utilities/use-featured-channels";
 
 export default function IndexPage(): React.ReactElement {
   const theme = useTheme();
+  const recommendedId = useUniqueId("section-label");
   const { content: recommended, ...recommendedProps } = useRecommendedFeed();
   const { content: popular, ...popularProps } = usePopularFeed();
   const { channels } = useFeaturedChannels();
@@ -66,6 +67,7 @@ export default function IndexPage(): React.ReactElement {
     <Listing
       content={recommended}
       groups={recommendedGroups}
+      ariaLabelledBy={recommendedId}
       {...recommendedProps}
     />
   ) : (
@@ -82,7 +84,7 @@ export default function IndexPage(): React.ReactElement {
           {SliderMarkup}
           <Rule {...ruleProps} />
           <Flex column gap={theme.spacing[1.5]}>
-            <TextDisplay>Recommended</TextDisplay>
+            <TextDisplay id={recommendedId}>Recommended</TextDisplay>
             {ListingMarkup}
           </Flex>
         </Flex>

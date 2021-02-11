@@ -8,10 +8,11 @@ import {
 export type LinkProps = GatsbyLinkProps;
 
 export function Link(props: LinkProps): React.ReactElement {
-  const { href = "", ...linkProps } = props;
+  const { href, ...linkProps } = props;
 
   return (
     <NextLink href={href} passHref>
+      {/* @ts-ignore */}
       <GatsbyLink {...linkProps} />
     </NextLink>
   );

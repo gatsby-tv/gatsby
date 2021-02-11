@@ -42,4 +42,7 @@ function PreviewSliderBase(props: PreviewSliderProps): React.ReactElement {
   );
 }
 
-export const PreviewSlider = Object.assign(PreviewSliderBase, { Skeleton });
+export const PreviewSlider = Object.assign(PreviewSliderBase, {
+  Skeleton,
+  displayName: "PreviewSlider",
+});

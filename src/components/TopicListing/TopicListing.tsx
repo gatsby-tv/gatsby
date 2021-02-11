@@ -37,4 +37,7 @@ function TopicListingBase(props: TopicListingProps): React.ReactElement {
   );
 }
 
-export const TopicListing = Object.assign(TopicListingBase, { Skeleton });
+export const TopicListing = Object.assign(TopicListingBase, {
+  Skeleton,
+  displayName: "TopicListing",
+});

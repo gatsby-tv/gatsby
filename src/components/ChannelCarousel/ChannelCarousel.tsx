@@ -28,4 +28,7 @@ function ChannelCarouselBase(props: ChannelCarouselProps): React.ReactElement {
   );
 }
 
-export const ChannelCarousel = Object.assign(ChannelCarouselBase, { Skeleton });
+export const ChannelCarousel = Object.assign(ChannelCarouselBase, {
+  Skeleton,
+  displayName: "ChannelCarousel",
+});

@@ -17,6 +17,8 @@ export interface ListingProps {
   loading?: boolean;
   groups?: number;
   format?: ListingFormat;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
 }
 
 function ListingBase(props: ListingProps): React.ReactElement {
@@ -26,6 +28,8 @@ function ListingBase(props: ListingProps): React.ReactElement {
     generator = () => undefined,
     groups = 1,
     format = "default",
+    ariaLabel,
+    ariaLabelledBy,
   } = props;
   const theme = useTheme();
 
@@ -33,7 +37,14 @@ function ListingBase(props: ListingProps): React.ReactElement {
     template: `repeat(${groups}, 1fr)`,
     justify: "stretch",
     center: ifExists(groups > 1),
-    gap: theme.spacing[1.5],
+    gap: [
+      theme.spacing[1.5],
+      format === "compact" ? theme.spacing[1.5] : theme.spacing[3],
+    ],
+    role: "feed",
+    "aria-busy": loading,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
   };
 
   const streamProps = {
@@ -45,11 +56,14 @@ function ListingBase(props: ListingProps): React.ReactElement {
 
   return (
     <ListingContext.Provider value={{ groups, format }}>
-      <Grid {...gridProps}>
+      <Grid as="section" {...gridProps}>
         <Stream {...streamProps} />
       </Grid>
     </ListingContext.Provider>
   );
 }
 
-export const Listing = Object.assign(ListingBase, { Skeleton });
+export const Listing = Object.assign(ListingBase, {
+  Skeleton,
+  displayName: "Listing",
+});

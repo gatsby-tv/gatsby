@@ -96,4 +96,7 @@ function ReleaseListingBase(props: ReleaseListingProps): React.ReactElement {
   );
 }
 
-export const ReleaseListing = Object.assign(ReleaseListingBase, { Skeleton });
+export const ReleaseListing = Object.assign(ReleaseListingBase, {
+  Skeleton,
+  displayName: "ReleaseListing",
+});

@@ -6,6 +6,7 @@ import {
   useScroll,
   useIPFSVideoStream,
   useBreakpoints,
+  useFrame,
 } from "@gatsby-tv/utilities";
 
 import { Listing } from "@src/components/Listing";
@@ -17,18 +18,31 @@ export default function VideoPage(): React.ReactElement {
   const theme = useTheme();
   const router = useRouter();
   const id = [router.query.id].flat()[0];
+  const { fullscreen, toggleFullscreen } = useFrame();
   const { setScrollPosition } = useScroll();
   const { video } = useVideo(id);
   const { content, ...related } = useRelatedFeed(id);
   const player = useIPFSVideoStream([video?.content].flat()[0]);
 
-  const compact =
-    useBreakpoints({
-      1: "(max-width: 1350px)",
-      0: "(min-width: 1351px)",
-    }) ?? 1;
+  const compact = useBreakpoints({
+    1: "(max-width: 1350px)",
+    0: "(min-width: 1351px)",
+  }, 1);
 
   useEffect(() => setScrollPosition(0), [setScrollPosition]);
+
+  useEffect(() => {
+    if (fullscreen) {
+      setScrollPosition(0);
+    }
+  }, [fullscreen, setScrollPosition]);
+
+  const playerProps = {
+    ref: player,
+    muted: true,
+    fullscreen,
+    toggleFullscreen,
+  };
 
   const leftItemProps = {
     basis: 0.65,
@@ -59,7 +73,7 @@ export default function VideoPage(): React.ReactElement {
 
   return (
     <>
-      <Player ref={player} muted />
+      <Player {...playerProps} />
       <Box margin={[theme.spacing[1.5], theme.spacing[3], theme.spacing[0]]}>
         <Flex maxw="200rem" margin={[theme.spacing[0], "auto"]}>
           <Flex.Item {...leftItemProps}>{DescriptionMarkup}</Flex.Item>

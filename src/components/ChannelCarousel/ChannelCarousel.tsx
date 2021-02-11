@@ -17,8 +17,8 @@ function ChannelCarouselBase(props: ChannelCarouselProps): React.ReactElement {
   const { groups, channels } = props;
   const theme = useTheme();
 
-  const SlidesMarkup = channels.map((channel) => (
-    <ChannelSlide key={channel._id} channel={channel} />
+  const SlidesMarkup = channels.map((channel, index) => (
+    <ChannelSlide key={`${channel._id}.${index}`} channel={channel} />
   ));
 
   return (

@@ -31,6 +31,7 @@ export function SignedIn(props: SignedInProps): React.ReactElement | null {
   const menuProps = {
     w: "20rem",
     placement: "bottom-end" as Placement,
+    offset: [0, 7],
     active: settings.active,
     onExit: settings.deactivate,
   };

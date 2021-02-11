@@ -12,20 +12,26 @@ import { Skeleton, SkeletonProps } from "./components/Skeleton";
 export type { SkeletonProps as ReleaseListingSkeletonProps };
 
 export interface ReleaseListingProps {
+  id?: string;
   videos: Video[];
   groups: number;
   generator?: () => void;
   loading?: boolean;
   format?: ListingFormat;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
 }
 
 function ReleaseListingBase(props: ReleaseListingProps): React.ReactElement {
   const {
+    id,
     videos,
     groups,
     loading,
     generator = () => undefined,
     format = "default",
+    ariaLabel,
+    ariaLabelledBy,
   } = props;
   const theme = useTheme();
 
@@ -72,6 +78,16 @@ function ReleaseListingBase(props: ReleaseListingProps): React.ReactElement {
     },
   ];
 
+  const flexProps = {
+    id,
+    column: true,
+    gap: theme.spacing[3],
+    role: "feed",
+    "aria-busy": loading,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+  };
+
   const streamProps = {
     component: Section,
     data: sections,
@@ -89,7 +105,7 @@ function ReleaseListingBase(props: ReleaseListingProps): React.ReactElement {
 
   return (
     <ListingContext.Provider value={{ groups, format }}>
-      <Flex column gap={theme.spacing[3]}>
+      <Flex {...flexProps}>
         {StreamMarkup}
       </Flex>
     </ListingContext.Provider>

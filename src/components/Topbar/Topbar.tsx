@@ -3,7 +3,7 @@ import { css } from "styled-components";
 import { useSession } from "next-auth/client";
 import { Box, Flex } from "@gatsby-tv/components";
 import { User } from "@gatsby-tv/types";
-import { useTheme, useFrame } from "@gatsby-tv/utilities";
+import { ifExists, useTheme, useFrame } from "@gatsby-tv/utilities";
 
 import { cssShadow } from "@src/styles/shadows";
 
@@ -18,14 +18,22 @@ export function Topbar(): React.ReactElement {
   const [session, loading] = useSession();
   const { fullscreen } = useFrame();
 
+  const fullscreenStyle = css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  `;
+
   const style = css`
     ${cssShadow}
-    transition: transform ${theme.duration.fast} ease;
+    ${ifExists(fullscreen, fullscreenStyle)}
+    transition: transform ${theme.duration.fast} ease ${theme.duration.fastest};
     transform: translateY(${fullscreen ? "-50px" : "0px"});
   `;
 
   const boxProps = {
-    h: fullscreen ? "0px" : "50px",
+    h: theme.spacing[5],
     bg: theme.colors.background[1],
     zIndex: 5,
   };
@@ -61,7 +69,7 @@ export function Topbar(): React.ReactElement {
   const NavigationMarkup = (
     <Flex.Item>
       <Flex {...navigationFlexProps}>
-        <Navigation />
+        <Navigation session={Boolean(session?.user)} />
       </Flex>
     </Flex.Item>
   );

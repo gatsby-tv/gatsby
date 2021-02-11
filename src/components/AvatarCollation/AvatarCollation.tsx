@@ -15,8 +15,8 @@ export function AvatarCollation(
   const { avatars } = props;
   avatars.reverse();
 
-  const AvatarsMarkup = avatars.map((avatar) => (
-    <Avatar key={JSON.stringify(avatar)} src={avatar} size={props.size} />
+  const AvatarsMarkup = avatars.map((avatar, index) => (
+    <Avatar key={`${JSON.stringify(avatar)}.${index}`} src={avatar} size={props.size} />
   ));
 
   return (

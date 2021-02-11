@@ -23,9 +23,9 @@ export function Section(props: SectionProps): React.ReactElement | null {
     gap: theme.spacing[1.5],
   };
 
-  const PreviewsMarkup = content.map((item) => (
+  const PreviewsMarkup = content.map((item, index) => (
     <Preview
-      key={item._id}
+      key={`${item._id}.${index}`}
       content={item}
       avatar={theme.avatar.small}
       format={format}

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Box,
   Flex,
   Image,
   Optional,
@@ -60,6 +59,11 @@ function PreviewBase(props: PreviewProps): React.ReactElement {
     $props: { basis: 0.8 },
   };
 
+  const linkProps = {
+    overlay: true,
+    zIndex: 1,
+  };
+
   const infoFlexProps = {
     column: true,
     gap: ifExists(format !== "nochannel", theme.spacing[0.5]),
@@ -89,7 +93,7 @@ function PreviewBase(props: PreviewProps): React.ReactElement {
     <Labelled as="article" component={Flex} $props={flexProps}>
       <Image {...imageProps} />
       {InfoMarkup}
-      <Link href={`/v/${content._id}`} overlay zIndex={1} />
+      <Link href={`/v/${content._id}`} $props={linkProps} />
     </Labelled>
   );
 }

@@ -1,9 +1,21 @@
 import React from "react";
 import { Portal, Box, TextMeta } from "@gatsby-tv/components";
-import { useTheme } from "@gatsby-tv/utilities";
+import { ifExists, useTheme, useFrame } from "@gatsby-tv/utilities";
 
 export function PreAlpha(): React.ReactElement {
+  const { fullscreen } = useFrame();
   const theme = useTheme();
+
+  const style = {
+    display: ifExists(fullscreen, "none"),
+  };
+
+  const containerProps = {
+    style,
+    absolute: true,
+    bottom: theme.spacing[2],
+    right: theme.spacing[2],
+  };
 
   const boxProps = {
     rounded: theme.border.radius.large,
@@ -20,7 +32,7 @@ export function PreAlpha(): React.ReactElement {
 
   return (
     <Portal id="pre-alpha">
-      <Box absolute bottom={theme.spacing[2]} right={theme.spacing[2]}>
+      <Box {...containerProps}>
         <Box {...boxProps}>
           <TextMeta.Link {...linkProps}>Pre-Alpha</TextMeta.Link>
         </Box>

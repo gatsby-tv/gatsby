@@ -17,7 +17,7 @@ export function Title(props: TitleProps): React.ReactElement | null {
 
   return title && href ? (
     <Box w="fit-content">
-      <Link underline href={href}>
+      <Link href={href} $props={{ underline: true }}>
         <Flex gap={theme.spacing[1]} align="center" paddingBottom=".2rem">
           <TextDisplay thin={thin}>{props.title}</TextDisplay>
           <Icon src={ExtendRight} w={theme.icon.small} />

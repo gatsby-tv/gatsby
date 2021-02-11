@@ -143,17 +143,19 @@ function ChannelLink(props: ChannelProps): React.ReactElement {
   );
 
   return (
-    <Button unstyled onClick={activate}>
-      <Flex gap={theme.spacing[1]} align="center">
-        {AvatarMarkup}
-        <Flex column gap={theme.spacing[0]}>
-          {NameMarkup}
-          {HandleMarkup}
-          {BlurbMarkup}
+    <>
+      <Button unstyled onClick={activate}>
+        <Flex gap={theme.spacing[1]} align="center">
+          {AvatarMarkup}
+          <Flex column gap={theme.spacing[0]}>
+            {NameMarkup}
+            {HandleMarkup}
+            {BlurbMarkup}
+          </Flex>
         </Flex>
-        <ChannelModal channel={channel} active={active} onExit={deactivate} />
-      </Flex>
-    </Button>
+      </Button>
+      <ChannelModal channel={channel} active={active} onExit={deactivate} />
+    </>
   );
 }
 

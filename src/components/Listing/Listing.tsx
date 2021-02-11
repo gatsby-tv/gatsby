@@ -12,6 +12,7 @@ import { Skeleton, SkeletonProps } from "./components/Skeleton";
 export type { SkeletonProps as ListingSkeletonProps };
 
 export interface ListingProps {
+  id?: string;
   content: ContentType[];
   generator?: () => void;
   loading?: boolean;
@@ -23,6 +24,7 @@ export interface ListingProps {
 
 function ListingBase(props: ListingProps): React.ReactElement {
   const {
+    id,
     content,
     loading,
     generator = () => undefined,
@@ -34,6 +36,7 @@ function ListingBase(props: ListingProps): React.ReactElement {
   const theme = useTheme();
 
   const gridProps = {
+    id,
     template: `repeat(${groups}, 1fr)`,
     justify: "stretch",
     center: ifExists(groups > 1),
@@ -49,7 +52,10 @@ function ListingBase(props: ListingProps): React.ReactElement {
 
   const streamProps = {
     component: Content,
-    data: content,
+    data: content.map((item, index) => ({
+      ariaPosInSet: index + 1,
+      ...item,
+    })),
     generator,
     loading,
   };

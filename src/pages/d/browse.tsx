@@ -1,6 +1,11 @@
 import React from "react";
 import { Box, Flex, Rule, Tabs, TextDisplay } from "@gatsby-tv/components";
-import { useTheme, useSelect, useBreakpoints } from "@gatsby-tv/utilities";
+import {
+  useTheme,
+  useSelect,
+  useBreakpoints,
+  useUniqueId,
+} from "@gatsby-tv/utilities";
 
 import { Listing } from "@src/components/Listing";
 import { TopicListing } from "@src/components/TopicListing";
@@ -16,23 +21,31 @@ export default function BrowsePage(): React.ReactElement {
   const { topics, ...topicsProps } = useTopicsFeed();
   const listing = tab["popular"] ? popular : recent;
   const listingProps = tab["popular"] ? popularProps : recentProps;
+  const topicsId = useUniqueId("tab");
+  const popularId = useUniqueId("tab");
+  const newId = useUniqueId("tab");
+  const panelId = useUniqueId("panel");
 
-  const topicGroups =
-    (useBreakpoints({
-      3: "(max-width: 1100px)",
-      4: "(min-width: 1101px) and (max-width: 1400px)",
-      5: "(min-width: 1400px)",
-    }) as number) ?? 5;
+  const panelLabel = tab["topics"]
+    ? topicsId
+    : tab["popular"]
+    ? popularId
+    : newId;
 
-  const listingGroups =
-    (useBreakpoints({
-      2: "(max-width: 1200px)",
-      3: "(min-width: 1201px)",
-    }) as number) ?? 3;
+  const topicGroups = useBreakpoints({
+    3: "(max-width: 1100px)",
+    4: "(min-width: 1101px) and (max-width: 1400px)",
+    5: "(min-width: 1400px)",
+  }, 5);
+
+  const listingGroups = useBreakpoints({
+    2: "(max-width: 1200px)",
+    3: "(min-width: 1201px)",
+  }, 3);
 
   const headerProps = {
     column: true,
-    gap: theme.spacing[1.5],
+    gap: theme.spacing[2],
   };
 
   const tabsProps = {
@@ -48,20 +61,38 @@ export default function BrowsePage(): React.ReactElement {
 
   const TabsMarkup = (
     <Tabs selection={tab} onSelect={setTab} {...tabsProps}>
-      <Tabs.Item id="topics">Topics</Tabs.Item>
-      <Tabs.Item id="popular">Popular</Tabs.Item>
-      <Tabs.Item id="new">New</Tabs.Item>
+      <Tabs.Item id={topicsId} option="topics" ariaControls={panelId}>
+        Topics
+      </Tabs.Item>
+      <Tabs.Item id={popularId} option="popular" ariaControls={panelId}>
+        Popular
+      </Tabs.Item>
+      <Tabs.Item id={newId} option="new" ariaControls={panelId}>
+        New
+      </Tabs.Item>
     </Tabs>
   );
 
   const TopicListingMarkup = topics ? (
-    <TopicListing topics={topics} groups={topicGroups} {...topicsProps} />
+    <TopicListing
+      id={panelId}
+      topics={topics}
+      groups={topicGroups}
+      ariaLabelledBy={panelLabel}
+      {...topicsProps}
+    />
   ) : (
     <TopicListing.Skeleton groups={topicGroups} />
   );
 
   const ListingMarkup = listing ? (
-    <Listing content={listing} groups={listingGroups} {...listingProps} />
+    <Listing
+      id={panelId}
+      content={listing}
+      groups={listingGroups}
+      ariaLabelledBy={panelLabel}
+      {...listingProps}
+    />
   ) : (
     <Listing.Skeleton groups={listingGroups} />
   );

@@ -14,11 +14,10 @@ export default function SubscriptionsPage(): React.ReactElement {
   );
   const theme = useTheme();
 
-  const groups =
-    (useBreakpoints({
-      3: "(max-width: 1200px)",
-      4: "(min-width: 1201px)",
-    }) as number) ?? 4;
+  const groups = useBreakpoints({
+    3: "(max-width: 1200px)",
+    4: "(min-width: 1201px)",
+  }, 4);
 
   const ReleaseListingMarkup = videos ? (
     <ReleaseListing groups={groups} videos={videos} {...subscriptions} />

@@ -23,7 +23,7 @@ export interface ChannelModalProps {
 }
 
 export function ChannelModal(props: ChannelModalProps): React.ReactElement {
-  const { channel, active, onExit = () => undefined } = props;
+  const { channel, active, onExit } = props;
   const container = useRef<HTMLDivElement>(null);
   const theme = useTheme();
 
@@ -42,7 +42,6 @@ export function ChannelModal(props: ChannelModalProps): React.ReactElement {
   };
 
   const cancelProps = {
-    animate: true, // for some reason this is required.
     rounded: theme.border.radius.full,
     bg: theme.colors.inverted[5].darken(0.6).fade(0.2),
     highlight: theme.colors.inverted[5].darken(0.5).fade(0.2),
@@ -56,7 +55,7 @@ export function ChannelModal(props: ChannelModalProps): React.ReactElement {
   };
 
   return (
-    <Modal fullscreen active={active} onExit={onExit}>
+    <Modal id="channel" fullscreen active={active} onExit={onExit}>
       <Card {...cardProps}>
         <Box {...cancelBoxProps}>
           <Button {...cancelProps}>

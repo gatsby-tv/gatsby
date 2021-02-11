@@ -21,9 +21,11 @@ export function ChannelSlide(props: ChannelSlideProps): React.ReactElement {
   };
 
   return (
-    <Carousel.Slide onClick={activate}>
-      <Image {...imageProps} />
+    <>
+      <Carousel.Slide onClick={activate}>
+        <Image {...imageProps} />
+      </Carousel.Slide>
       <ChannelModal channel={channel} active={active} onExit={deactivate} />
-    </Carousel.Slide>
+    </>
   );
 }

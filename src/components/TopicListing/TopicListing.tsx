@@ -11,15 +11,28 @@ import { Skeleton, SkeletonProps } from "./components/Skeleton";
 export type { SkeletonProps as TopicListingSkeletonProps };
 
 export interface TopicListingProps {
+  id?: string;
   topics: TopicBrowsable[];
   groups: number;
   generator?: () => void;
   loading?: boolean;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
 }
 
 function TopicListingBase(props: TopicListingProps): React.ReactElement {
   const theme = useTheme();
-  const { topics, groups, loading, generator = () => undefined } = props;
+  const { id, topics, groups, loading, generator = () => undefined, ariaLabel, ariaLabelledBy } = props;
+
+  const flexProps = {
+    id,
+    column: true,
+    gap: theme.spacing[2],
+    role: "feed",
+    "aria-busy": loading,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+  };
 
   const streamProps = {
     component: Content,
@@ -30,7 +43,7 @@ function TopicListingBase(props: TopicListingProps): React.ReactElement {
 
   return (
     <ListingContext.Provider value={{ groups, format: "default" }}>
-      <Flex column gap={theme.spacing[2]}>
+      <Flex as="section" {...flexProps}>
         <Stream {...streamProps} />
       </Flex>
     </ListingContext.Provider>

@@ -1,6 +1,4 @@
 import React from "react";
-import NextLink from "next/link";
-import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { Icon, Tabs } from "@gatsby-tv/components";
 import { GatsbyPlain } from "@gatsby-tv/icons";
@@ -19,9 +17,13 @@ function getCurrentTab(route: string): string | undefined {
   }
 }
 
-export function Navigation(): React.ReactElement {
+export interface NavigationProps {
+  session?: boolean;
+}
+
+export function Navigation(props: NavigationProps): React.ReactElement {
+  const { session } = props;
   const theme = useTheme();
-  const [session] = useSession();
   const router = useRouter();
 
   const defaultTab = getCurrentTab(router.pathname);
@@ -46,21 +48,29 @@ export function Navigation(): React.ReactElement {
   };
 
   const LogoMarkup = (
-    <Link href="/" onClick={setTab}>
+    <Link href="/" $props={{ onClick: setTab }}>
       <Icon {...logoProps} />
     </Link>
   );
 
   const SubscriptionsMarkup = session ? (
-    <NextLink href="/d/subscriptions" passHref>
-      <Tabs.Link id="subscriptions">Subscriptions</Tabs.Link>
-    </NextLink>
+    <Link
+      component={Tabs.Link}
+      href="/d/subscriptions"
+      $props={{ option: "subscriptions" }}
+    >
+      Subscriptions
+    </Link>
   ) : null;
 
   const BrowseMarkup = (
-    <NextLink href="/d/browse" passHref>
-      <Tabs.Link id="browse">Browse</Tabs.Link>
-    </NextLink>
+    <Link
+      component={Tabs.Link}
+      href="/d/browse"
+      $props={{ option: "browse" }}
+    >
+      Browse
+    </Link>
   );
 
   return (

@@ -28,8 +28,8 @@ function PreviewSliderBase(props: PreviewSliderProps): React.ReactElement {
     $props: { column: true, gap: theme.spacing[1] },
   };
 
-  const PreviewsMarkup = content.map((item) => (
-    <Preview key={item._id} content={item} avatar={theme.avatar.smaller} />
+  const PreviewsMarkup = content.map((item, index) => (
+    <Preview key={`${item._id}.${index}`} content={item} avatar={theme.avatar.smaller} />
   ));
 
   return (

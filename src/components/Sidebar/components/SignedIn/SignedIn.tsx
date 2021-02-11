@@ -21,9 +21,9 @@ export function SignedIn(props: SignedInProps): React.ReactElement {
 
   const AvatarsMarkup = subscriptions
     .slice(0, 8)
-    .map((channel) => (
+    .map((channel, index) => (
       <Avatar
-        key={channel._id}
+        key={`${channel._id}.${index}`}
         src={channel.avatar}
         size={theme.avatar.small}
       />

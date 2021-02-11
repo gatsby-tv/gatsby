@@ -134,9 +134,9 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
       compact,
     };
 
-    const AccountsMarkup = collaborators.map((user) => (
+    const AccountsMarkup = collaborators.map((user, index) => (
       <AccountLink
-        key={user._id}
+        key={`${user._id}.${index}`}
         user={user}
         blurb={Value(user.followers, "follower") as string}
       />
@@ -155,9 +155,9 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
       compact,
     };
 
-    const AccountsMarkup = contributors.map((user) => (
+    const AccountsMarkup = contributors.map((user, index) => (
       <AccountLink
-        key={user._id}
+        key={`${user._id}.${index}`}
         user={user}
         blurb={Array.from(contributions[user._id]).join(", ")}
       />
@@ -176,9 +176,9 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
       compact,
     };
 
-    const AccountsMarkup = sponsors.map((user) => (
+    const AccountsMarkup = sponsors.map((user, index) => (
       <AccountLink
-        key={user._id}
+        key={`${user._id}.${index}`}
         user={user}
         blurb={Value(user.followers, "follower") as string}
       />

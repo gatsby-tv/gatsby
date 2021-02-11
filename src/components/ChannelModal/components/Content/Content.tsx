@@ -1,7 +1,7 @@
 import React from "react";
 import { TextBox, Tabs, Rule } from "@gatsby-tv/components";
 import { Channel } from "@gatsby-tv/types";
-import { useTheme, useSelect } from "@gatsby-tv/utilities";
+import { useTheme, useSelect, useUniqueId } from "@gatsby-tv/utilities";
 
 import { useChannelContent } from "@src/utilities/use-channel-content";
 import { Listing } from "@src/components/Listing";
@@ -15,6 +15,10 @@ export function Content(props: ContentProps): React.ReactElement {
   const { channel } = props;
   const { content } = useChannelContent(channel._id);
   const [tab, setTab] = useSelect(["videos", "playlists", "shows"], "videos");
+  const videosId = useUniqueId("tab");
+  const playlistsId = useUniqueId("tab");
+  const showsId = useUniqueId("tab");
+  const panelId = useUniqueId("panel");
 
   const listing = tab["videos"]
     ? content?.videos
@@ -27,6 +31,12 @@ export function Content(props: ContentProps): React.ReactElement {
     : tab["playlists"]
     ? "playlists"
     : "shows";
+
+  const panelLabel = tab["videos"]
+    ? videosId
+    : tab["playlists"]
+    ? playlistsId
+    : showsId;
 
   const tabsProps = {
     h: theme.spacing[3],
@@ -43,18 +53,30 @@ export function Content(props: ContentProps): React.ReactElement {
 
   const TabsMarkup = (
     <Tabs {...tabsProps}>
-      <Tabs.Item id="videos">Videos</Tabs.Item>
-      <Tabs.Item id="playlists">Playlists</Tabs.Item>
-      <Tabs.Item id="shows">Shows</Tabs.Item>
+      <Tabs.Item id={videosId} option="videos" ariaControls={panelId}>
+        Videos
+      </Tabs.Item>
+      <Tabs.Item id={playlistsId} option="playlists" ariaControls={panelId}>
+        Playlists
+      </Tabs.Item>
+      <Tabs.Item id={showsId} option="shows" ariaControls={panelId}>
+        Shows
+      </Tabs.Item>
     </Tabs>
   );
 
   const ListingMarkup = !listing ? (
     <Listing.Skeleton format="nochannel" groups={2} />
   ) : listing.length ? (
-    <Listing format="nochannel" groups={2} content={listing} />
+    <Listing
+      id={panelId}
+      format="nochannel"
+      groups={2}
+      content={listing}
+      ariaLabelledBy={panelLabel}
+    />
   ) : (
-    <TextBox expand font={theme.font[4]} align="center">
+    <TextBox id={panelId} expand font={theme.font[4]} align="center">
       {`This channel has not created any ${contentType}...`}
     </TextBox>
   );

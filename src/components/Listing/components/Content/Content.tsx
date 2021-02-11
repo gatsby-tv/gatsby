@@ -5,14 +5,24 @@ import { Content as ContentType } from "@gatsby-tv/types";
 import { Preview } from "@src/components/Preview";
 import { useListing } from "@src/utilities/listing";
 
-export type ContentProps = ContentType;
+export type ContentProps = ContentType & {
+  ariaPosInSet: number;
+};
 
 export function Content(props: ContentProps): React.ReactElement {
-  const { groups, format } = useListing();
+  const { ariaPosInSet, ...content } = props;
+  const { format } = useListing();
+
+  const previewProps = {
+    format,
+    content,
+    ariaPosInSet,
+    ariaSetSize: -1,
+  };
 
   return (
     <Grid.Item>
-      <Preview format={groups > 1 ? format : "compact"} content={props} />
+      <Preview {...previewProps} />
     </Grid.Item>
   );
 }

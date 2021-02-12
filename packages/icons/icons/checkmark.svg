@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="gz-svg-checkmark"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   sodipodi:docname="checkmark.svg"
+   aria-hidden="true"
+   focusable="false"
+   role="img">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     inkscape:object-nodes="false"
+     inkscape:snap-bbox="true"
+     inkscape:showpageshadow="false"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-svg-checkmark"
+     inkscape:document-units="px"
+     inkscape:cy="309.35707"
+     inkscape:cx="362.76925"
+     inkscape:zoom="0.9899495"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:snap-page="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     showborder="true"
+     inkscape:window-width="1904"
+     inkscape:window-height="1048"
+     inkscape:window-x="1928"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="fill:currentcolor"
+     d="M 468.99805,42.00973 175.95703,327.06051 70.945312,225.07223 0,312.58398 176.01172,483.52734 540,129.46484 Z"
+     id="checkmark" />
+</svg>

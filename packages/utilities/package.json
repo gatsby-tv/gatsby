@@ -1,0 +1,69 @@
+{
+  "name": "@gatsby-tv/utilities",
+  "description": "Gatsby shared Typescript utility library.",
+  "version": "0.4.8",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "license": "AGPL-3.0",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint": "eslint lib",
+    "types": "tsc --noEmit",
+    "types:watch": "yarn run check -- --watch",
+    "clean": "rm -rf dist",
+    "build": "yarn run build:tsc && yarn run build:babel",
+    "build:tsc": "tsc --emitDeclarationOnly",
+    "build:babel": "babel lib --out-dir dist --extensions \".ts,.tsx\" --source-maps inline"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-is": "^17.0.1",
+    "styled-components": "^5.2.1"
+  },
+  "optionalDependencies": {
+    "hls.js": "^0.14.17",
+    "hlsjs-ipfs-loader": "^0.3.0",
+    "ipfs": "^0.54.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-private-methods": "^7.12.1",
+    "@babel/plugin-proposal-private-property-in-object": "^7.12.1",
+    "@babel/plugin-transform-object-assign": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "@babel/preset-typescript": "^7.12.1",
+    "@gatsby-tv/types": "^0.4.6",
+    "@types/hls.js": "^0.13.3",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-is": "^17.0.0",
+    "@types/resize-observer-browser": "^0.1.5",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-styled-components": "^1.12.0",
+    "core-js": "^3.7.0",
+    "eslint": "^7.16.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "hls.js": "^0.14.17",
+    "hlsjs-ipfs-loader": "^0.3.0",
+    "ipfs": "^0.54.2",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-is": "^17.0.1",
+    "styled-components": "^5.2.1",
+    "typescript": "^4.0.5",
+    "webpack": "^5.21.2"
+  },
+  "dependencies": {
+    "it-all": "^1.0.5",
+    "regenerator-runtime": "^0.13.7"
+  }
+}

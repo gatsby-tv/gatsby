@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   aria-hidden="true"
+   focusable="false"
+   sodipodi:docname="misc.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="gz-svg-misc"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   role="img">
+  <defs
+     id="defs1289" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-x="1928"
+     inkscape:window-height="1044"
+     inkscape:window-width="1900"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-svg-misc"
+     inkscape:document-units="px"
+     inkscape:cy="235.7415"
+     inkscape:cx="344.56474"
+     inkscape:zoom="0.98994949"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     units="px"
+     inkscape:snap-page="true"
+     inkscape:snap-bbox="true"
+     inkscape:object-nodes="false"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid11823" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1292">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 73.765625 196.23438 A 73.764732 73.764732 0 0 0 0 270 A 73.764732 73.764732 0 0 0 73.765625 343.76562 A 73.764732 73.764732 0 0 0 147.5293 270 A 73.764732 73.764732 0 0 0 73.765625 196.23438 z M 270 196.23438 A 73.764732 73.764732 0 0 0 196.23438 270 A 73.764732 73.764732 0 0 0 270 343.76562 A 73.764732 73.764732 0 0 0 343.76562 270 A 73.764732 73.764732 0 0 0 270 196.23438 z M 466.23438 196.23438 A 73.764732 73.764732 0 0 0 392.4707 270 A 73.764732 73.764732 0 0 0 466.23438 343.76562 A 73.764732 73.764732 0 0 0 540 270 A 73.764732 73.764732 0 0 0 466.23438 196.23438 z "
+     style="fill:currentcolor"
+     id="misc" />
+</svg>

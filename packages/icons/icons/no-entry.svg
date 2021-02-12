@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="no-entry.svg"
+   focusable="false"
+   aria-hidden="true"
+   role="img"
+   width="540"
+   height="540"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-no-entry"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-x="1928"
+     inkscape:window-height="1048"
+     inkscape:window-width="1904"
+     showborder="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-page="true"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.22627417"
+     inkscape:cx="102.08877"
+     inkscape:cy="-99.857737"
+     inkscape:document-units="px"
+     inkscape:current-layer="gz-svg-no-entry"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:showpageshadow="false"
+     inkscape:snap-bbox="true"
+     inkscape:object-nodes="false" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 270 0 A 270 270 0 0 0 0 270 A 270 270 0 0 0 270 540 A 270 270 0 0 0 540 270 A 270 270 0 0 0 270 0 z M 120.35938 230 L 160.35938 230 L 379.64062 230 L 419.64062 230 L 419.64062 310 L 379.64062 310 L 160.35938 310 L 120.35938 310 L 120.35938 230 z "
+     style="fill:currentcolor"
+     id="no-entry" />
+</svg>

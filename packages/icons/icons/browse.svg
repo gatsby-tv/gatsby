@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="gz-svg-browse"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   sodipodi:docname="browse.svg"
+   aria-hidden="true"
+   focusable="false"
+   role="img">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     inkscape:object-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:showpageshadow="false"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-svg-browse"
+     inkscape:document-units="px"
+     inkscape:cy="431.75997"
+     inkscape:cx="310.66142"
+     inkscape:zoom="0.7"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-page="true"
+     inkscape:window-width="1904"
+     inkscape:window-height="1048"
+     inkscape:window-x="1928"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 36.480469 -0.42773438 L 36.480469 32.927734 L 36.480469 409.06445 L 103.20508 409.06445 L 103.20508 342.35742 L 103.20508 66.28125 L 306.25977 66.28125 L 372.98438 66.28125 L 372.98438 -0.42773438 L 36.480469 -0.42773438 z M 168.73828 131.78906 L 168.73828 164.28906 L 168.73828 539.57227 L 503.51953 539.57227 L 503.51953 131.78906 L 168.73828 131.78906 z M 233.73828 196.78906 L 438.51953 196.78906 L 438.51953 474.57227 L 233.73828 474.57227 L 233.73828 196.78906 z "
+     style="fill:currentcolor"
+     id="browse" />
+</svg>

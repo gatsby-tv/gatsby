@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   aria-hidden="true"
+   focusable="false"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-pause"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   width="540"
+   height="540"
+   sodipodi:docname="pause.svg"
+   role="img">
+  <metadata
+     id="metadata1704">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1702" />
+  <sodipodi:namedview
+     inkscape:object-nodes="true"
+     inkscape:snap-center="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-midpoints="true"
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1900"
+     inkscape:window-height="1044"
+     id="namedview1700"
+     showgrid="false"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="false"
+     inkscape:bbox-paths="true"
+     showguides="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="0.78306554"
+     inkscape:cx="78.334021"
+     inkscape:cy="284.73126"
+     inkscape:window-x="8"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="gz-svg-pause"
+     inkscape:snap-bbox-edge-midpoints="true" />
+  <path
+     style="fill: currentcolor"
+     id="pause"
+     d="M 32.333823,0 V 540 H 190.77795 V 0 Z M 349.22205,0 V 540 H 507.66618 V 0 Z" />
+</svg>

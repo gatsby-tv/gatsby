@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="540"
+   width="540"
+   aria-hidden="true"
+   focusable="false"
+   role="img"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-previous"
+   sodipodi:docname="previous.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <metadata
+     id="metadata1704">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1702" />
+  <sodipodi:namedview
+     showborder="true"
+     inkscape:showpageshadow="false"
+     inkscape:object-nodes="false"
+     inkscape:snap-center="true"
+     inkscape:snap-intersection-paths="false"
+     inkscape:snap-bbox-midpoints="false"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-midpoints="false"
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1904"
+     inkscape:window-height="1048"
+     id="namedview1700"
+     showgrid="false"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     showguides="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="0.45254834"
+     inkscape:cx="295.99208"
+     inkscape:cy="291.83579"
+     inkscape:window-x="1928"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="gz-svg-previous"
+     inkscape:snap-bbox-edge-midpoints="false" />
+  <path
+     style="fill:currentcolor"
+     d="M 540,21.894951 V 518.10505 L 110.26891,269.99999 Z m -448.10924,0 V 518.10505 H 0 V 21.894951 Z"
+     id="previous" />
+</svg>

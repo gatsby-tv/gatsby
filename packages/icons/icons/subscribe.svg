@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="540"
+   height="540"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-subscribe"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="subscribe.svg"
+   aria-hidden="true"
+   role="img"
+   focusable="false">
+  <defs
+     id="defs1289" />
+  <sodipodi:namedview
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:object-nodes="false"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-page="true"
+     units="px"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="-48.825686"
+     inkscape:cy="348.67657"
+     inkscape:document-units="px"
+     inkscape:current-layer="gz-svg-subscribe"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1904"
+     inkscape:window-height="1048"
+     inkscape:window-x="8"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata1292">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="subscribe"
+     d="M 108.00959,2.24e-6 V 53.980828 H 431.99037 V 2.24e-6 Z M 53.980827,108.00959 v 53.9808 H 486.01913 v -53.9808 z m 0,108.00957 C 24.281371,216.01916 0,240.30054 0,269.99999 v 216.01917 c 0,29.70036 24.281371,53.98083 53.980827,53.98083 H 486.01913 C 515.71858,539.99999 540,515.71952 540,486.01916 V 269.99999 c 0,-29.69945 -24.28142,-53.98083 -53.98087,-53.98083 z m 162.038333,73.6843 161.99041,88.30611 -161.99041,88.0185 z"
+     style="fill: currentcolor" />
+</svg>

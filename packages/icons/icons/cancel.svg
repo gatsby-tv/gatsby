@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="540"
+   height="540"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-cancel"
+   aria-hidden="true"
+   focusable="false"
+   role="img"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="cancel.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="120.62712"
+     inkscape:cy="398.29068"
+     inkscape:document-units="px"
+     inkscape:current-layer="gz-svg-cancel"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:object-nodes="false"
+     inkscape:snap-page="true"
+     units="px"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     inkscape:window-width="1904"
+     inkscape:window-height="1048"
+     inkscape:window-x="8"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 83.078376,0.00255024 1.8179601e-6,83.080908 186.92477,270.00255 1.8179601e-6,456.92419 83.078376,539.99943 270.00001,353.07779 456.92164,539.99943 540.00002,456.92419 353.07525,270.00255 540.00002,83.080908 456.92164,0.00255024 270.00001,186.92731 Z"
+     style="fill:currentcolor"
+     id="cancel" />
+</svg>

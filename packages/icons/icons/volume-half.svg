@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="volume-half.svg"
+   role="img"
+   aria-hidden="true"
+   focusable="false"
+   width="540"
+   height="540"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-volume-half"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     showborder="true"
+     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-x="1928"
+     inkscape:window-height="1048"
+     inkscape:window-width="1904"
+     inkscape:snap-midpoints="false"
+     inkscape:object-paths="false"
+     inkscape:guide-bbox="true"
+     showguides="false"
+     inkscape:bbox-paths="false"
+     inkscape:bbox-nodes="false"
+     inkscape:snap-page="true"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="603.14143"
+     inkscape:cy="252.01328"
+     inkscape:document-units="px"
+     inkscape:current-layer="gz-svg-volume-half"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:showpageshadow="false"
+     inkscape:snap-bbox="true"
+     inkscape:object-nodes="false">
+    <sodipodi:guide
+       id="guide901"
+       orientation="1,0"
+       position="270,499.5086" />
+    <sodipodi:guide
+       id="guide907"
+       orientation="1,0"
+       position="135,438.28376" />
+    <sodipodi:guide
+       id="guide911"
+       orientation="1,0"
+       position="405,438.28376" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="fill:currentcolor"
+     d="M 296.41016,26.408203 146.19531,166.04883 H 0 V 373.95117 H 146.19531 L 296.41016,513.5918 Z m 48.8164,126.804687 V 386.78711 C 390.95488,367.80214 422.86328,322.84964 422.86328,270 c 0,-52.84965 -31.9084,-97.80214 -77.63672,-116.78711 z"
+     id="volume-half" />
+</svg>

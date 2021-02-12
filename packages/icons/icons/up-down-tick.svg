@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   role="img"
+   focusable="false"
+   aria-hidden="true"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="gz-svg-up-down-tick"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   sodipodi:docname="up-down-tick.svg">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     inkscape:object-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:showpageshadow="false"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-svg-up-down-tick"
+     inkscape:document-units="px"
+     inkscape:cy="306.96306"
+     inkscape:cx="293.4794"
+     inkscape:zoom="0.7"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:bbox-paths="false"
+     inkscape:bbox-nodes="false"
+     inkscape:snap-page="true"
+     inkscape:snap-to-guides="true"
+     inkscape:window-width="1900"
+     inkscape:window-height="1044"
+     inkscape:window-x="8"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 270 0 L 89.994141 179.99023 L 450.00586 179.99023 L 270 0 z M 89.994141 360.00977 L 270 540 L 450.00586 360.00977 L 89.994141 360.00977 z "
+     style="fill:currentcolor"
+     id="up-down-tick" />
+</svg>

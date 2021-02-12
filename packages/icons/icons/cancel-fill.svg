@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="cancel-fill.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   role="img"
+   focusable="false"
+   aria-hidden="true"
+   id="gz-svg-cancel-fill"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-x="8"
+     inkscape:window-height="1048"
+     inkscape:window-width="1904"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox="true"
+     units="px"
+     inkscape:snap-page="true"
+     inkscape:object-nodes="false"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-svg-cancel-fill"
+     inkscape:document-units="px"
+     inkscape:cy="398.29068"
+     inkscape:cx="-128.65859"
+     inkscape:zoom="0.7"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="fill:currentcolor"
+     d="M 269.34765,7.82029e-4 A 270.00173,270.00047 0 0 0 79.080806,79.082951 a 270.00173,270.00047 0 0 0 0,381.836589 270.00173,270.00047 0 0 0 381.838384,0 270.00173,270.00047 0 0 0 0,-381.836589 A 270.00173,270.00047 0 0 0 269.34765,7.82029e-4 Z M 153.20433,101.29784 269.99999,218.09296 386.79563,101.29784 438.70419,153.20613 321.90853,270.00125 438.70419,386.79635 386.79563,438.70465 269.99999,321.90955 153.20433,438.70465 101.2958,386.79635 218.09146,270.00125 101.2958,153.20613 Z"
+     id="circle-cancel" />
+</svg>

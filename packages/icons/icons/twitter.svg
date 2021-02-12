@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="twitter.svg"
+   role="img"
+   focusable="false"
+   aria-hidden="true"
+   width="540"
+   height="540"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-twitter"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-x="8"
+     inkscape:window-height="1048"
+     inkscape:window-width="1904"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-page="true"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="400"
+     inkscape:cy="560"
+     inkscape:document-units="px"
+     inkscape:current-layer="gz-svg-twitter"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:showpageshadow="false"
+     inkscape:snap-bbox="true"
+     inkscape:object-nodes="false" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="fill:currentcolor"
+     d="M 270,0 C 120.90591,0 0,120.90591 0,270 0,419.09408 120.90591,540 270,540 419.09408,540 540,419.09408 540,270 540,120.90591 419.09408,0 270,0 Z m 123.27896,210.51727 c 0.11948,2.65732 0.17716,5.327 0.17716,8.00903 0,81.89072 -62.33368,176.32233 -176.32645,176.32645 h 0.004 -0.004 c -34.99832,0 -67.56592,-10.25848 -94.99191,-27.83798 4.84908,0.57266 9.7847,0.85693 14.7821,0.85693 29.03687,0 55.75836,-9.90417 76.97159,-26.52786 -27.12937,-0.50262 -50.0029,-18.41995 -57.89658,-43.04443 3.77793,0.72509 7.66297,1.1206 11.64689,1.1206 5.65658,0 11.13601,-0.76217 16.34353,-2.18353 -28.35708,-5.67719 -49.71863,-30.73837 -49.71863,-60.74753 0,-0.28015 0,-0.53146 0.008,-0.79101 8.35098,4.64309 17.90084,7.43637 28.06869,7.74947 -16.64017,-11.10305 -27.57843,-30.08331 -27.57843,-51.58492 0,-11.35438 3.06931,-21.99188 8.39218,-31.15036 30.56122,37.49908 76.23413,62.16064 127.74079,64.75204 -1.06293,-4.5401 -1.61088,-9.26971 -1.61088,-14.13117 0,-34.21142 27.75559,-61.967 61.97938,-61.967 17.82669,0 33.92715,7.53524 45.2362,19.58175 14.11881,-2.78503 27.37656,-7.94311 39.35303,-15.04166 -4.63486,14.46488 -14.45664,26.60202 -27.25296,34.27735 12.53677,-1.49963 24.4844,-4.82437 35.58746,-9.75998 -8.2933,12.42966 -18.81134,23.34732 -30.9114,32.09381 z m 0,0"
+     id="twitter" />
+</svg>

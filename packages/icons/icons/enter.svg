@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   aria-hidden="true"
+   focusable="false"
+   role="img"
+   sodipodi:docname="enter.svg"
+   width="540"
+   height="540"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-svg-enter"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-x="1928"
+     inkscape:window-height="1048"
+     inkscape:window-width="1904"
+     showborder="true"
+     inkscape:snap-smooth-nodes="false"
+     inkscape:object-paths="false"
+     inkscape:snap-center="false"
+     inkscape:snap-midpoints="false"
+     inkscape:snap-intersection-paths="false"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-page="true"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.32"
+     inkscape:cx="356.93066"
+     inkscape:cy="407.22094"
+     inkscape:document-units="px"
+     inkscape:current-layer="gz-svg-enter"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:showpageshadow="false"
+     inkscape:snap-bbox="true"
+     inkscape:object-nodes="false" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 268.11328 0.001953125 C 236.23184 0.21935328 204.44324 6.0598082 174.50195 17.382812 C 138.64293 30.875664 106.00484 52.065221 79.021484 79.111328 L 56.066406 102.11914 L 102.08008 148.0293 L 125.03516 125.02148 C 145.47218 104.53692 170.42084 88.362408 197.41602 78.208984 L 197.44531 78.199219 L 197.47461 78.185547 C 228.89284 66.300453 263.59915 62.342807 296.95117 66.775391 L 296.97852 66.779297 L 297.00781 66.785156 C 327.87139 70.831398 357.97424 82.136787 383.77344 99.443359 L 383.79102 99.453125 L 383.80664 99.464844 C 414.50758 120.00532 439.76946 149.19978 455.42773 182.50977 L 455.44141 182.53906 L 455.45508 182.57031 C 469.48603 212.25856 476.18837 245.70457 474.78711 278.58984 L 474.78711 278.61914 L 474.78516 278.64648 C 473.48643 310.41105 464.60885 342.05916 449.13867 369.74023 L 449.12695 369.76367 L 449.11133 369.78711 C 428.92046 406.05203 397.01716 436.28425 359.7207 454.38281 L 359.69141 454.39844 L 359.66016 454.41211 C 330.13543 468.81499 296.75531 475.92409 263.83984 474.91406 L 263.8125 474.91406 L 263.7832 474.91211 C 231.60809 473.98136 199.45702 465.27651 171.33398 449.78711 L 171.3125 449.77734 L 171.29102 449.76367 C 149.81746 437.97905 130.38885 422.13431 114.33594 403.45508 L 93.152344 378.80469 L 43.855469 421.17188 L 65.039062 445.81836 C 70.309589 451.95117 75.850539 457.84775 81.642578 463.48828 C 99.007084 480.39856 118.62578 495.00136 139.97461 506.72266 C 139.98111 506.72623 139.98764 506.7308 139.99414 506.73438 C 177.34213 527.30051 219.32616 538.64362 261.8457 539.88281 C 261.84939 539.88293 261.85373 539.8827 261.85742 539.88281 C 305.34769 541.21554 348.89982 531.9704 388.09766 512.86133 C 388.10192 512.85925 388.10706 512.85559 388.11133 512.85352 C 437.70798 488.78282 479.0953 449.53772 505.88477 401.43555 C 526.42538 364.67578 538.00354 323.33527 539.72852 281.35742 C 539.72879 281.35098 539.72824 281.34433 539.72852 281.33789 C 541.57698 237.88357 532.85908 194.2434 514.24023 154.83203 C 493.4098 110.53169 460.51009 72.58378 419.96484 45.453125 C 419.95998 45.449858 419.95604 45.444673 419.95117 45.441406 C 385.68274 22.461016 346.31449 7.6948114 305.47656 2.3378906 C 293.07798 0.69184614 280.58863 -0.083116501 268.11328 0.001953125 z M 217.65625 126.05273 L 171.69336 172.01367 L 237.17773 237.49805 L 0 237.49805 L 0 302.49805 L 237.17969 302.49805 L 171.69336 367.98438 L 217.65625 413.94727 L 315.64062 315.96094 L 326.76562 304.83789 L 361.60352 270 L 361.60352 269.99805 L 315.64062 224.03711 L 217.65625 126.05273 z "
+     style="fill:currentcolor"
+     id="enter" />
+</svg>

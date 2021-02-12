@@ -1335,10 +1335,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@gatsby-tv/components@^0.4.61":
-  version "0.4.61"
-  resolved "https://registry.yarnpkg.com/@gatsby-tv/components/-/components-0.4.61.tgz#32f60727f0777360b630e98a1e6fa8beda19e6f6"
-  integrity sha512-pqo2Je0Eg8uTLJJDhTKuicF7nMQM3X08QZG+8U9G/n5yIuxOubu7N6nQEHQQVlgTlW8oh9Dx6eevSUY3KrJLlA==
+"@gatsby-tv/components@^0.4.63":
+  version "0.4.63"
+  resolved "https://registry.yarnpkg.com/@gatsby-tv/components/-/components-0.4.63.tgz#46625a84ef72dd6b62dd2cf24a692075a852fde4"
+  integrity sha512-a1BOlBNffZW0vdlDw1CY4BGp4fgdwQMzEBmQKzDdubxFdodpjCwAkYVJI05bScdpP4G4INXUgxZyOhs+KvC4gw==
   dependencies:
     "@popperjs/core" "^2.5.4"
     color "^3.1.2"
@@ -1355,10 +1355,10 @@
   resolved "https://registry.yarnpkg.com/@gatsby-tv/types/-/types-0.4.6.tgz#84d8d77748ca5414b53404c97cfd3556f4a2faa9"
   integrity sha512-8ni95ftdnBk40R/tizxXrjc9MyudjKtvTL/GqjcHXu09moVjKeExguCKvPqjYTgCh9SnK3lYAmhNXpiSZnDUDg==
 
-"@gatsby-tv/utilities@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@gatsby-tv/utilities/-/utilities-0.4.6.tgz#2a2e74683ecd941beb236248df76bfc267bf0305"
-  integrity sha512-8p9BBmZs6LylrBxmXD1vpVHsX9yVIqzOELm8N/PrQ0iYNvrgUsMkIjhSuoI9WVrGECkyAKLHlBKE9wskJb2X1w==
+"@gatsby-tv/utilities@^0.4.7":
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/@gatsby-tv/utilities/-/utilities-0.4.8.tgz#de6f2c34c7be405657a0dab12407155e76682ba0"
+  integrity sha512-9u5WGtDvnpqbrthOnRVx+FV+5uH5t38GAAhCxPXvjJcTie9PsBJ02zeo6OAhjgRk/0UsNdOMh7as9khQmzN/DA==
   optionalDependencies:
     hls.js "^0.14.17"
     hlsjs-ipfs-loader "^0.3.0"

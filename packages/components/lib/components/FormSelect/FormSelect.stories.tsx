@@ -1,19 +1,11 @@
 import React, { useState, useCallback } from "react";
 import { css } from "styled-components";
 import { Story, Meta } from "@storybook/react/types-6-0";
+import { useSelect } from "@gatsby-tv/utilities";
 
 import { AppProvider } from "@lib/components/AppProvider";
 
 import { FormSelect, FormSelectProps } from "./FormSelect";
-
-const selectStyle = css`
-  border-radius: ${(props) => props.theme.border.radius.small};
-  background-color: ${(props) => props.theme.colors.background[3]};
-
-  option {
-    color: ${(props) => props.theme.colors.font.inverted};
-  }
-`;
 
 export default {
   title: "FormSelect",
@@ -21,8 +13,7 @@ export default {
 } as Meta;
 
 export const Example: Story<FormSelectProps> = () => {
-  const [selection, setSelection] = useState("one");
-  const onChange = useCallback((value) => setSelection(value), []);
+  const [selection, setSelection] = useSelect(["one", "two", "three"]);
   const options = [
     { label: "One", value: "one" },
     { label: "Two", value: "two" },
@@ -32,11 +23,11 @@ export const Example: Story<FormSelectProps> = () => {
   return (
     <AppProvider theme="dark">
       <FormSelect
-        css={selectStyle}
         label="Example Selection"
+        placeholder="Example selection..."
         options={options}
         selection={selection}
-        onChange={onChange}
+        onChange={setSelection}
       />
     </AppProvider>
   );

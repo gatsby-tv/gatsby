@@ -1,11 +1,19 @@
 import React, { useState, useRef } from "react";
 import { css } from "styled-components";
 import { UpDownTick } from "@gatsby-tv/icons";
-import { ifExists, useUniqueId, useTheme } from "@gatsby-tv/utilities";
+import {
+  ifNotExists,
+  ifExists,
+  SelectionState,
+  useUniqueId,
+  useTheme,
+} from "@gatsby-tv/utilities";
 
-import { FlexAlignItems } from "@lib/types";
+import { Margin, FlexAlignItems } from "@lib/types";
 import { cssTextInput } from "@lib/styles/typography";
 import { cssInputBorder } from "@lib/styles/borders";
+import { cssProperty } from "@lib/styles/property";
+import { cssMargin } from "@lib/styles/size";
 import { Box } from "@lib/components/Box";
 import { Flex } from "@lib/components/Flex";
 import { Icon } from "@lib/components/Icon";
@@ -16,11 +24,20 @@ export interface FormSelectProps {
   className?: string;
   label: string;
   labelHidden?: boolean;
-  options?: (FormSelectOption | FormSelectGroup)[];
-  selected?: string;
-  focused?: boolean;
+  options: (FormSelectOption | FormSelectGroup)[];
+  selection: SelectionState;
+  padding?: Margin;
+  font?: string;
   help?: string;
   error?: Error;
+  placeholder?: string;
+  align?: "left" | "center" | "right";
+  disabled?: boolean;
+  focused?: boolean;
+  required?: boolean;
+  autoFocus?: boolean;
+  autoComplete?: string;
+  name?: string;
   onChange?: (value: string, id: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -71,13 +88,14 @@ const flattenOptions = (options: (FormSelectOption | FormSelectGroup)[]) =>
 
 const getFormSelectedLabel = (
   options: (FormSelectOption | FormSelectGroup)[],
-  value?: string
+  value?: string,
+  placeholder?: string
 ) => {
-  if (value == null) return "";
+  if (value == null) return placeholder;
   const selected = flattenOptions(options).find(
     (option) => option.value === value
   );
-  return selected ? selected.label : "";
+  return selected ? selected.label : placeholder;
 };
 
 export function FormSelect(props: FormSelectProps): React.ReactElement {
@@ -89,7 +107,11 @@ export function FormSelect(props: FormSelectProps): React.ReactElement {
     label,
     labelHidden,
     options = [],
-    selected,
+    selection,
+    placeholder,
+    font,
+    padding = [theme.spacing[0.5], theme.spacing[1]],
+    align,
     help,
     error,
     onChange = () => undefined,
@@ -98,6 +120,7 @@ export function FormSelect(props: FormSelectProps): React.ReactElement {
 
   const [focus, setFocus] = useState(Boolean(props.focused));
   const select = useRef<HTMLSelectElement>(null);
+  const value = Object.keys(selection).find((item) => selection[item]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(event.currentTarget.value, id);
@@ -107,17 +130,31 @@ export function FormSelect(props: FormSelectProps): React.ReactElement {
   const handleBlur = () => setFocus(false);
   const handleClick = () => select?.current?.focus();
 
+  const placeholderStyle = css`
+    color: ${theme.colors.font.body.fade(0.5).toString()};
+  `;
+
   const selectStyle = css`
     ${cssTextInput}
     ${cssInputBorder}
+    ${cssProperty("font-size", font)}
+    cursor: pointer;
+    border-radius: ${theme.border.radius.small};
+    background-color: ${theme.colors.background[4].toString()};
 
     select {
       ${cssTextInput}
+      ${cssProperty("text-align", align, "left")}
+      ${cssProperty("font-size", font)}
       outline: none;
       background-color: transparent;
       opacity: 0.001;
       appearance: none;
       text-rendering: auto;
+    }
+
+    option {
+      ${cssProperty("font-size", font)}
     }
   `;
 
@@ -135,7 +172,7 @@ export function FormSelect(props: FormSelectProps): React.ReactElement {
     "data-error": ifExists(error),
     gap: theme.spacing[0.5],
     align: "center" as FlexAlignItems,
-    padding: [theme.spacing[0.5], theme.spacing[1]],
+    padding,
     onFocus: handleFocus,
     onBlur: handleBlur,
     onClick: handleClick,
@@ -152,15 +189,17 @@ export function FormSelect(props: FormSelectProps): React.ReactElement {
     ...selectProps,
   };
 
+  const ValueMarkup = (
+    <Flex.Item as="span" css={ifNotExists(value, placeholderStyle)} grow={1}>
+      {getFormSelectedLabel(options, value, placeholder)}
+    </Flex.Item>
+  );
+
   return (
     <FormLabel {...labelledProps}>
       <Flex css={selectStyle} {...flexProps}>
-        <Flex.Item as="span" grow={1}>
-          {getFormSelectedLabel(options, selected)}
-        </Flex.Item>
-        <Flex.Item as="span">
-          <Icon src={UpDownTick} h={1} ariaLabel="Selection Arrows" />
-        </Flex.Item>
+        {ValueMarkup}
+        <Icon src={UpDownTick} h={1} />
         <Box as="select" {...selectBoxProps}>
           {options.map(parseOptionOrGroup)}
         </Box>

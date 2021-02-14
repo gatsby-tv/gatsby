@@ -97,7 +97,7 @@ export function FormField(props: FormFieldProps): React.ReactElement {
       background-color: transparent;
 
       &::placeholder {
-        color: ${theme.colors.font.body.fade(0.5).toString()};
+        ${placeholderStyle}
       }
     }
   `;

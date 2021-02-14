@@ -18,6 +18,7 @@ export function useBreakpoints<T extends string | number = number>(
   points: BreakpointSet,
   defaultValue: T
 ): T {
+  const key = JSON.stringify(points);
   const queries = useRef<MediaQuerySpecification>({});
   const [selection, setSelection] = useSelect(Object.keys(points));
 
@@ -47,7 +48,7 @@ export function useBreakpoints<T extends string | number = number>(
         query[0].removeEventListener("change", query[1])
       );
     };
-  }, [points, setSelection]);
+  }, [key]);
 
   const result = Object.keys(selection).find((item) => selection[item]);
 

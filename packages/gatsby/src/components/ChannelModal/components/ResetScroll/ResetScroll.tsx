@@ -23,7 +23,7 @@ export function ResetScroll(props: ResetScrollProps): React.ReactPortal | null {
     const handler = () => setActive(scroll.current !== 0);
     addScrollListener(handler);
     () => removeScrollListener(handler);
-  }, [scroll]);
+  }, []);
 
   const resetScroll = useCallback(() => setScroll(0), []);
 

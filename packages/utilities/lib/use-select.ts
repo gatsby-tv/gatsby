@@ -12,6 +12,7 @@ export function useSelect(
   items: string[],
   initial?: string
 ): [SelectionState, SelectionCallback] {
+  const key = JSON.stringify(items);
   const fresh = Object.fromEntries(items.map((id) => [id, false]));
   const [state, setState] = useState<SelectionState>(
     initial ? { ...fresh, [initial]: true } : fresh
@@ -20,7 +21,7 @@ export function useSelect(
     (id?: string) => {
       setState(id ? { ...fresh, [id as string]: true } : fresh);
     },
-    [items]
+    [key]
   );
 
   return [state, setSelection];

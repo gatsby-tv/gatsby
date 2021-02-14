@@ -24,9 +24,9 @@ export const Example: Story<TabsProps> = () => {
         selection={tab}
         onSelect={setTab}
       >
-        <Tabs.Item id="one">One</Tabs.Item>
-        <Tabs.Item id="two">Two</Tabs.Item>
-        <Tabs.Item id="three">Three</Tabs.Item>
+        <Tabs.Item option="one">One</Tabs.Item>
+        <Tabs.Item option="two">Two</Tabs.Item>
+        <Tabs.Item option="three">Three</Tabs.Item>
       </Tabs>
     </AppProvider>
   );

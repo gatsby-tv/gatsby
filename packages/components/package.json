@@ -14,7 +14,7 @@
     "build": "yarn run build:tsc && yarn run build:babel",
     "build:tsc": "tsc --emitDeclarationOnly",
     "build:babel": "babel lib --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
-    "storybook": "start-storybook -p 6006 --no-dll",
+    "storybook": "start-storybook -p 6006 --no-dll --ci",
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {

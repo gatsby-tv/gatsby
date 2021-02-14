@@ -8,11 +8,9 @@ import {
   DependencyList,
 } from "react";
 
-import { ModalContext } from "./context";
+import { EventHandler } from "@lib/types";
 
-export interface ModalCallback {
-  (event: any): void;
-}
+import { ModalContext, ModalContextType } from "./context";
 
 export interface ModalType {
   active: boolean;
@@ -20,8 +18,38 @@ export interface ModalType {
   deactivate: () => void;
 }
 
+export function useModalContext(): ModalContextType {
+  const [callbacks, setCallbacks] = useState<EventHandler[]>([]);
+
+  const addModalCallback = useCallback(
+    (callback: EventHandler) =>
+      setCallbacks((current) => [...current, callback]),
+    []
+  );
+
+  const removeModalCallback = useCallback(
+    (callback: EventHandler) =>
+      setCallbacks((current) => current.filter((entry) => entry !== callback)),
+    []
+  );
+
+  useEffect(() => {
+    function handler(event: any) {
+      callbacks.forEach((callback) => callback(event));
+    }
+
+    document.addEventListener("pointerdown", handler);
+    return () => document.removeEventListener("pointerdown", handler);
+  }, [callbacks]);
+
+  return {
+    addModalCallback,
+    removeModalCallback,
+  };
+}
+
 export function useModalCallback(
-  callback: ModalCallback,
+  callback: EventHandler,
   deps: DependencyList
 ): void {
   const context = useContext(ModalContext);
@@ -30,14 +58,14 @@ export function useModalCallback(
     throw new Error("No Modal context provided for component.");
   }
 
-  const [addModalCallback, removeModalCallback] = context;
+  const { addModalCallback, removeModalCallback } = context;
 
   const _callback = useCallback(callback, deps);
 
   useEffect(() => {
     addModalCallback(_callback);
     return () => removeModalCallback(_callback);
-  }, [addModalCallback, _callback]);
+  }, [_callback]);
 }
 
 export function useModal(): ModalType {

@@ -20,7 +20,7 @@ export function useSelect(
     (id?: string) => {
       setState(id ? { ...fresh, [id as string]: true } : fresh);
     },
-    [fresh]
+    [items]
   );
 
   return [state, setSelection];

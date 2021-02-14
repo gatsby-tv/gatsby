@@ -19,7 +19,7 @@ export default function VideoPage(): React.ReactElement {
   const router = useRouter();
   const id = [router.query.id].flat()[0];
   const { fullscreen, toggleFullscreen } = useFrame();
-  const { setScrollPosition } = useScroll();
+  const { setScroll } = useScroll();
   const { video } = useVideo(id);
   const { content, ...related } = useRelatedFeed(id);
   const player = useIPFSVideoStream([video?.content].flat()[0]);
@@ -32,13 +32,13 @@ export default function VideoPage(): React.ReactElement {
     1
   );
 
-  useEffect(() => setScrollPosition(0), [setScrollPosition]);
+  useEffect(() => setScroll(0), []);
 
   useEffect(() => {
     if (fullscreen) {
-      setScrollPosition(0);
+      setScroll(0);
     }
-  }, [fullscreen, setScrollPosition]);
+  }, [fullscreen]);
 
   const playerProps = {
     ref: player,

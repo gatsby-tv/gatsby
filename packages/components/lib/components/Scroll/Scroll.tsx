@@ -4,6 +4,7 @@ import {
   ifExists,
   ifNotExists,
   ScrollContext,
+  useScrollContext,
   useParentRef,
   useResizeObserver,
 } from "@gatsby-tv/utilities";
@@ -52,53 +53,15 @@ const ScrollStyle = styled.div<ScrollProps>`
 
 export function Scroll(props: ScrollProps): React.ReactElement {
   const { children, maxw, maxh, ...rest } = props;
-  const [callbacks, setCallbacks] = useState<EventHandler[]>([]);
   const [height, setHeight] = useState<number | undefined>(undefined);
   const scroll = useRef<HTMLDivElement>(null);
   const container = useRef<HTMLDivElement>(null);
   const parent = useParentRef<HTMLDivElement>(container);
-  const scrollPosition = useRef<number>(0);
+  const context = useScrollContext<HTMLDivElement>(scroll);
 
   useResizeObserver(parent, (content) => setHeight(content.blockSize));
 
-  const addScrollListener = useCallback(
-    (callback: EventHandler) =>
-      setCallbacks((current) => [...current, callback]),
-    []
-  );
-
-  const removeScrollListener = useCallback(
-    (callback: EventHandler) =>
-      setCallbacks((current) => current.filter((entry) => entry !== callback)),
-    []
-  );
-
-  const handleScroll: EventHandler = useCallback(
-    (event) => {
-      if (scroll.current) {
-        (scrollPosition as any).current = scroll.current.scrollTop;
-      }
-      callbacks.forEach((callback) => callback(event));
-    },
-    [callbacks]
-  );
-
-  const setScrollPosition = useCallback((value: number) => {
-    (scrollPosition as any).current = value;
-    if (scroll.current) {
-      scroll.current.scrollTop = value;
-    }
-  }, []);
-
-  const context = {
-    scrollPosition,
-    setScrollPosition,
-    addScrollListener,
-    removeScrollListener,
-  };
-
   const boxProps = {
-    ref: container,
     absolute: ifNotExists(maxh),
     expand: true,
     h: ifExists(height && ifNotExists(maxh), `${height}px`),
@@ -108,8 +71,8 @@ export function Scroll(props: ScrollProps): React.ReactElement {
 
   return (
     <ScrollContext.Provider value={context}>
-      <Box {...boxProps}>
-        <ScrollStyle ref={scroll} onScroll={handleScroll} {...rest}>
+      <Box ref={container} {...boxProps}>
+        <ScrollStyle ref={scroll} {...rest}>
           {children}
         </ScrollStyle>
       </Box>

@@ -4,6 +4,7 @@ import {
   UniqueIdContext,
   useUniqueIdGenerator,
   ModalContext,
+  useModalContext,
 } from "@gatsby-tv/utilities";
 
 import { EventHandler } from "@lib/types";
@@ -22,7 +23,7 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
   const theme: DefaultTheme = props.theme === "light" ? LightTheme : DarkTheme;
   const uniqueIdGenerator = useUniqueIdGenerator();
   const [loadingSemaphore, setLoadingSemaphore] = useState(0);
-  const [modalCallbacks, setModalCallbacks] = useState<EventHandler[]>([]);
+  const modalContext = useModalContext();
 
   useSupports();
 
@@ -36,31 +37,6 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
     []
   );
 
-  const addModalCallback = useCallback(
-    (callback: EventHandler) =>
-      setModalCallbacks((current) => [...current, callback]),
-    []
-  );
-
-  const removeModalCallback = useCallback(
-    (callback: EventHandler) =>
-      setModalCallbacks((current) =>
-        current.filter((entry) => entry !== callback)
-      ),
-    []
-  );
-
-  const handlePointerDown: EventHandler = useCallback(
-    (event) => modalCallbacks.forEach((callback) => callback(event)),
-    [modalCallbacks]
-  );
-
-  useEffect(() => {
-    document.addEventListener("pointerdown", handlePointerDown as any);
-    return () =>
-      document.removeEventListener("pointerdown", handlePointerDown as any);
-  }, [handlePointerDown]);
-
   const context = {
     startLoading,
     stopLoading,
@@ -69,7 +45,7 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
 
   return (
     <AppContext.Provider value={context}>
-      <ModalContext.Provider value={[addModalCallback, removeModalCallback]}>
+      <ModalContext.Provider value={modalContext}>
         <UniqueIdContext.Provider value={uniqueIdGenerator}>
           <ThemeProvider theme={theme}>
             <Global />

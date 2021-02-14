@@ -13,21 +13,19 @@ export function ResetScroll(props: ResetScrollProps): React.ReactPortal | null {
   const { container } = props;
   const [active, setActive] = useState(false);
   const {
-    scrollPosition,
-    setScrollPosition,
+    scroll,
+    setScroll,
     addScrollListener,
     removeScrollListener,
   } = useScroll();
 
   useEffect(() => {
-    const handler = () => setActive(scrollPosition.current !== 0);
+    const handler = () => setActive(scroll.current !== 0);
     addScrollListener(handler);
     () => removeScrollListener(handler);
-  }, [scrollPosition, addScrollListener, removeScrollListener]);
+  }, [scroll]);
 
-  const resetScroll = useCallback(() => setScrollPosition(0), [
-    setScrollPosition,
-  ]);
+  const resetScroll = useCallback(() => setScroll(0), []);
 
   const boxProps = {
     absolute: true,

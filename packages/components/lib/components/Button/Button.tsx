@@ -30,6 +30,7 @@ export type ButtonProps = {
   font?: string;
   tooltip?: string;
   zIndex?: number;
+  asLabelFor?: string;
   onClick?: () => void;
 } & React.ButtonHTMLAttributes<HTMLElement>;
 
@@ -107,7 +108,8 @@ const ButtonStyle = styled.button<ButtonProps>`
   ${(props) => ifNotExists(props.unstyled, cssTextButton)}
   ${(props) => cssProperty("text-align", ifExists(props.unstyled, "inherit"))}
   ${(props) => ifExists(props.shadow, cssShadow)}
-  ${(props) => cssSize("width", props.w)}
+  ${(props) =>
+    cssSize("width", props.w, ifExists(props.asLabelFor, "fit-content"))}
   ${(props) => cssSize("height", props.h)}
   ${(props) => cssProperty("z-index", props.zIndex?.toString())}
   ${(props) => cssProperty("font-size", props.font)}
@@ -144,9 +146,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
     const key = useRef(0);
     const button = useForwardedRef<HTMLButtonElement>(ref);
+    const [reset, setReset] = useState(false);
     const [active, setActive] = useState(0);
     const [held, setHeld] = useState(false);
-    const { onClick = () => undefined, ...rest } = props;
+    const { animate, tooltip, asLabelFor, ...rest } = props;
 
     useEffect(() => {
       if (active) {
@@ -155,63 +158,52 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       }
     }, [active]);
 
-    /*
-     * The reason that we don't just pass onClick to the component
-     * like all of the other event handlers is due to a pretty interesting
-     * edge case.
-     *
-     * Since React insists that it handles all events itself, the onClick
-     * handler will not fire if we force React to remount the button on
-     * the onPointerDown event. When the onPointerDown event fires, the
-     * first stage of an onClick event initiates for our button, however,
-     * we also simultaneously force React to remount the button by
-     * changing the button's key. Thus, the button that saw the initiation
-     * of the onClick event is no longer the same button that sees the
-     * onClick event's conclusion when the mouse is released --- preventing
-     * the onClick handler from ever firing.
-     */
-    useEffect(() => {
-      key.current && !held && onClick();
-    }, [held]); // eslint-disable-line react-hooks/exhaustive-deps
-
     const handlePointerDown = useCallback(
-      (event: React.SyntheticEvent) => {
-        if (props.animate) {
-          key.current++;
+      (event) => {
+        event.stopPropagation();
+        if (animate) {
+          setReset(true);
           setHeld(true);
           setActive((current) => current + 1);
-        }
 
-        event.stopPropagation();
+          const id = window.requestAnimationFrame(() => setReset(false));
+          return () => window.cancelAnimationFrame(id);
+        }
       },
-      [props.animate]
+      [animate]
     );
 
-    const handlePointerUp = useCallback(() => props.animate && setHeld(false), [
-      props.animate,
-    ]);
+    const handlePointerUp = useCallback(() => {
+      if (animate) {
+        setHeld(false);
+      }
+    }, [animate]);
 
     const buttonProps = {
       ref: button,
       key: key.current,
-      "data-animating": ifExists(props.animate && (active || held)),
+      asLabelFor,
+      animate,
+      htmlFor: asLabelFor,
+      tabIndex: ifExists(asLabelFor, -1),
+      "aria-label": tooltip,
+      "data-animating": ifExists(animate && !reset && (active || held)),
       onPointerDown: handlePointerDown,
       onPointerUp: handlePointerUp,
       onPointerLeave: handlePointerUp,
-      onClick: ifNotExists(props.animate, onClick),
       ...rest,
     };
 
     const TooltipMarkup =
-      props.tooltip && !held ? (
+      tooltip && !held ? (
         <Tooltip for={button} offset={7}>
-          {props.tooltip}
+          {tooltip}
         </Tooltip>
       ) : null;
 
     return (
       <>
-        <ButtonStyle {...buttonProps} />
+        <ButtonStyle as={ifExists(asLabelFor, "label")} {...buttonProps} />
         {TooltipMarkup}
       </>
     );

@@ -8153,6 +8153,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "clsx@npm:1.1.1"
+  checksum: d8ae10ac0546da19fe8c9516886f6582a64a382cf4d09ea7d36d5287cafbdab1192ab249adc2cdf0310e0b0aeac4f4142cf7c738c98d9cb68c19ba24b6f673d5
+  languageName: node
+  linkType: hard
+
 "coa@npm:^2.0.2":
   version: 2.0.2
   resolution: "coa@npm:2.0.2"
@@ -12623,6 +12630,7 @@ fsevents@~2.1.1:
     prettier: ^2.2.1
     react: ^17.0.1
     react-dom: ^17.0.1
+    react-image-crop: ^8.6.6
     react-is: ^17.0.1
     react-router-dom: ^5.2.0
     styled-components: ^5.2.1
@@ -22647,6 +22655,19 @@ fsevents@~2.1.1:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: 265054ddd45ac37a0ee110af9f282bd6a54f54bb4a47d111d738051432ce5b975b810c7a8ef51fbcdc293dfc57b96ceaf57a9be8c6bc6e65e5045d7320e553d7
+  languageName: node
+  linkType: hard
+
+"react-image-crop@npm:^8.6.6":
+  version: 8.6.6
+  resolution: "react-image-crop@npm:8.6.6"
+  dependencies:
+    clsx: ^1.1.1
+    core-js: ^3.6.5
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 9f6450a72e7535ad6521d08d0df237868496612f2e49e6048694009493cfb5975e02e63f938ebb2f76628a1633857dc5fc358f851ba14ef80b6125d80aac8a02
   languageName: node
   linkType: hard
 

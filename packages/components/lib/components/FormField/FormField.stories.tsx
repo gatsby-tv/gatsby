@@ -2,6 +2,7 @@ import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
 
 import { AppProvider } from "@lib/components/AppProvider";
+import { Form } from "@lib/components/Form";
 
 import { FormField, FormFieldProps } from "./FormField";
 
@@ -12,7 +13,9 @@ export default {
 
 const Template: Story<FormFieldProps> = (args) => (
   <AppProvider theme="dark">
-    <FormField placeholder="Example text..." {...args} />
+    <Form>
+      <FormField placeholder="Example text..." {...args} />
+    </Form>
   </AppProvider>
 );
 

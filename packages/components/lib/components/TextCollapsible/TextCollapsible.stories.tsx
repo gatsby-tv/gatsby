@@ -7,11 +7,11 @@ import { AppProvider } from "@lib/components/AppProvider";
 import { Box } from "@lib/components/Box";
 import { TextBox } from "@lib/components/TextBox";
 
-import { Collapsible, CollapsibleProps } from "./Collapsible";
+import { TextCollapsible, TextCollapsibleProps } from "./TextCollapsible";
 
 export default {
-  title: "Collapsible",
-  component: Collapsible,
+  title: "TextCollapsible",
+  component: TextCollapsible,
 } as Meta;
 
 const style = css`
@@ -30,14 +30,14 @@ const contentStyle = css`
   background-color: ${(props) => props.theme.colors.background[2]};
 `;
 
-export const Example: Story<CollapsibleProps> = () => (
+export const Example: Story<TextCollapsibleProps> = () => (
   <AppProvider theme="dark">
     <Box w="42rem">
-      <Collapsible css={labelStyle} label="Click Me">
+      <TextCollapsible css={labelStyle} label="Click Me">
         <TextBox css={contentStyle}>
           <LoremIpsum p={2} />
         </TextBox>
-      </Collapsible>
+      </TextCollapsible>
     </Box>
   </AppProvider>
 );

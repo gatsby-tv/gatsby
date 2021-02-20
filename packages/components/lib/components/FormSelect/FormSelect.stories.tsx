@@ -4,6 +4,7 @@ import { Story, Meta } from "@storybook/react/types-6-0";
 import { useSelect } from "@gatsby-tv/utilities";
 
 import { AppProvider } from "@lib/components/AppProvider";
+import { Form } from "@lib/components/Form";
 
 import { FormSelect, FormSelectProps } from "./FormSelect";
 
@@ -22,13 +23,15 @@ export const Example: Story<FormSelectProps> = () => {
 
   return (
     <AppProvider theme="dark">
-      <FormSelect
-        label="Example Selection"
-        placeholder="Example selection..."
-        options={options}
-        selection={selection}
-        onChange={setSelection}
-      />
+      <Form>
+        <FormSelect
+          label="Example Selection"
+          placeholder="Example selection..."
+          options={options}
+          selection={selection}
+          onChange={setSelection}
+        />
+      </Form>
     </AppProvider>
   );
 };

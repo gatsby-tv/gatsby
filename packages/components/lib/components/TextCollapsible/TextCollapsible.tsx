@@ -8,19 +8,16 @@ import { Box } from "@lib/components/Box";
 import { TextBox } from "@lib/components/TextBox";
 import { Flex } from "@lib/components/Flex";
 import { Icon } from "@lib/components/Icon";
+import { VisuallyHidden } from "@lib/components/VisuallyHidden";
 
-export interface CollapsibleProps {
+export interface TextCollapsibleProps {
   children?: React.ReactNode;
   className?: string;
   label?: string;
   active?: boolean;
 }
 
-const CollapsibleStyle = styled.div`
-  input[type="checkbox"] {
-    display: none;
-  }
-
+const TextCollapsibleStyle = styled.div`
   ${Box}[data-collapsible="content"] {
     max-height: 0px;
     overflow: hidden;
@@ -73,7 +70,7 @@ const CollapsibleStyle = styled.div`
   }
 `;
 
-export function Collapsible(props: CollapsibleProps): React.ReactElement {
+export function TextCollapsible(props: TextCollapsibleProps): React.ReactElement {
   const { children, className, active, label } = props;
   const id = useUniqueId("collapsible");
   const labelRef = useRef<HTMLLabelElement>(null);
@@ -96,6 +93,12 @@ export function Collapsible(props: CollapsibleProps): React.ReactElement {
     });
   }, []);
 
+  const inputProps = {
+    id,
+    type: "checkbox",
+    checked: ifExists(active),
+  };
+
   const flexProps = {
     ref: labelRef,
     htmlFor: id,
@@ -108,8 +111,8 @@ export function Collapsible(props: CollapsibleProps): React.ReactElement {
   };
 
   return (
-    <CollapsibleStyle>
-      <input id={id} type="checkbox" checked={ifExists(active)} />
+    <TextCollapsibleStyle>
+      <VisuallyHidden as="input" {...inputProps} />
       <Flex as="label" {...flexProps}>
         <TextBox>{label}</TextBox>
         <Icon src={DownTick} w="1.2rem" />
@@ -117,6 +120,6 @@ export function Collapsible(props: CollapsibleProps): React.ReactElement {
       <Box ref={contentRef} data-collapsible="content">
         {children}
       </Box>
-    </CollapsibleStyle>
+    </TextCollapsibleStyle>
   );
 }

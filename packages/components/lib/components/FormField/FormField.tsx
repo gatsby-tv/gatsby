@@ -3,6 +3,7 @@ import { css } from "styled-components";
 import { ifExists, useTheme, useUniqueId } from "@gatsby-tv/utilities";
 
 import { Margin, FlexAlignItems } from "@lib/types";
+import { useForm } from "@lib/utilities/form";
 import { cssProperty } from "@lib/styles/property";
 import { cssTextInput } from "@lib/styles/typography";
 import { cssInputBorder } from "@lib/styles/borders";
@@ -46,6 +47,7 @@ export interface FormFieldProps {
 export function FormField(props: FormFieldProps): React.ReactElement {
   const theme = useTheme();
   const id = useUniqueId(props.id ? `textfield-${props.id}` : "textfield");
+  const { form } = useForm();
 
   const {
     className,
@@ -59,6 +61,7 @@ export function FormField(props: FormFieldProps): React.ReactElement {
     help,
     error,
     focused,
+    name,
     autoComplete,
     padding = [theme.spacing[0.5], theme.spacing[1]],
     onChange = () => undefined,
@@ -69,7 +72,11 @@ export function FormField(props: FormFieldProps): React.ReactElement {
   const input = useRef<HTMLInputElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.currentTarget.value, id);
+    const value = event.currentTarget.value;
+    onChange(value, id);
+    if (name) {
+      form.set(name, value);
+    }
   };
 
   const handleFocus = () => setFocus(true);

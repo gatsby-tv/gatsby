@@ -10,6 +10,7 @@ import {
 } from "@gatsby-tv/utilities";
 
 import { Margin, FlexAlignItems } from "@lib/types";
+import { useForm } from "@lib/utilities/form";
 import { cssTextInput } from "@lib/styles/typography";
 import { cssInputBorder } from "@lib/styles/borders";
 import { cssProperty } from "@lib/styles/property";
@@ -101,6 +102,7 @@ const getFormSelectedLabel = (
 export function FormSelect(props: FormSelectProps): React.ReactElement {
   const theme = useTheme();
   const id = useUniqueId(props.id ? `select-${props.id}` : "select");
+  const { form } = useForm();
 
   const {
     className,
@@ -114,6 +116,7 @@ export function FormSelect(props: FormSelectProps): React.ReactElement {
     align,
     help,
     error,
+    name,
     onChange = () => undefined,
     ...selectProps
   } = props;
@@ -123,7 +126,11 @@ export function FormSelect(props: FormSelectProps): React.ReactElement {
   const value = Object.keys(selection).find((item) => selection[item]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(event.currentTarget.value, id);
+    const value = event.currentTarget.value;
+    onChange(value, id);
+    if (name) {
+      form.set(name, value);
+    }
   };
 
   const handleFocus = () => setFocus(true);

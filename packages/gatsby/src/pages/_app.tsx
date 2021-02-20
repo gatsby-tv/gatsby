@@ -5,6 +5,7 @@ import { Provider } from "next-auth/client";
 import { SWRConfig } from "swr";
 import { useIPFSNode, IPFSContext } from "@gatsby-tv/utilities";
 import { AppProvider } from "@gatsby-tv/components";
+import "react-image-crop/dist/ReactCrop.css";
 
 import { AppLayout } from "@src/components/AppLayout";
 import { fetcher } from "@src/utilities/fetcher";

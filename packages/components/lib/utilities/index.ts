@@ -4,4 +4,6 @@ export * from "./switch";
 export * from "./carousel";
 export * from "./connected";
 export * from "./scroll";
+export * from "./form";
+export * from "./supports";
 export * from "./size";

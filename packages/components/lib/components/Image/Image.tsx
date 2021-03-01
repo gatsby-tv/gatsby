@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { IPFSContent } from "@gatsby-tv/types";
-import { useIPFSContent } from "@gatsby-tv/utilities";
+import { Negative, ifExists, useIPFSContent } from "@gatsby-tv/utilities";
 
-import { Size } from "@lib/types";
+import { Size, Margin } from "@lib/types";
 import { Box } from "@lib/components/Box";
 import { Viewport } from "@lib/components/Viewport";
 
 export type ImageProps = {
   src?: IPFSContent | string;
   w?: Size;
+  crop?: Margin;
   rounded?: Size;
   aspectRatio?: number;
   overlay?: React.ReactNode;
@@ -27,6 +28,7 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
   const {
     aspectRatio = 1,
     w,
+    crop,
     overlay,
     rounded,
     ariaLabel,
@@ -52,6 +54,10 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
       ? { paddingTop: `${100 * aspectRatio}%`, height: 0 }
       : undefined,
     alt: "",
+    margin: ifExists(
+      crop,
+      [crop as Margin].flat().map((margin) => Negative(margin))
+    ),
     expand: true,
     rounded,
     onLoad: handleLoad,

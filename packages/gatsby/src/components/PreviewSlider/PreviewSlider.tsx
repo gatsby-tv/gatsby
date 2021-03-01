@@ -6,7 +6,8 @@ import { ifExists, useTheme } from "@gatsby-tv/utilities";
 import { Preview } from "@src/components/Preview";
 
 import { Title } from "./components/Title";
-import { Skeleton, SkeletonProps } from "./components/Skeleton";
+
+import { Skeleton, SkeletonProps } from "./Skeleton";
 
 export type { SkeletonProps as PreviewSliderSkeletonProps };
 

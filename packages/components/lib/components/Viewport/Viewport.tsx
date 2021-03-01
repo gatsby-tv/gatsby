@@ -49,7 +49,7 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps & BoxProps>(
     ) : null;
 
     return (
-      <Box as="figure" {...figureProps}>
+      <Box as="figure" css={{ overflow: "hidden" }} {...figureProps}>
         <Box {...boxProps} />
         {children}
         {OverlayMarkup}

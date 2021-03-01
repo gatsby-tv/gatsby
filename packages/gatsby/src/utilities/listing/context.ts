@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
-import { ListingFormat } from "@src/types";
+import { PreviewFormat } from "@src/types";
 
 export type ListingContextType = {
   groups: number;
-  format: ListingFormat;
+  format: PreviewFormat;
 };
 
 export const ListingContext = createContext<ListingContextType | undefined>(

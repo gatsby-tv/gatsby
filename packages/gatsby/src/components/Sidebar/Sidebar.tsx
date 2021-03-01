@@ -10,7 +10,8 @@ import { useUserFeeds } from "@src/utilities/use-user-feeds";
 
 import { SignedOut } from "./components/SignedOut";
 import { SignedIn } from "./components/SignedIn";
-import { Skeleton } from "./components/Skeleton";
+
+import { Skeleton } from "./Skeleton";
 
 export function Sidebar(): React.ReactElement {
   const theme = useTheme();

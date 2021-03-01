@@ -3,11 +3,12 @@ import { Grid, Stream } from "@gatsby-tv/components";
 import { Content as ContentType } from "@gatsby-tv/types";
 import { ifExists, useTheme } from "@gatsby-tv/utilities";
 
-import { ListingFormat } from "@src/types";
+import { PreviewFormat } from "@src/types";
 import { ListingContext } from "@src/utilities/listing";
 
 import { Content } from "./components/Content";
-import { Skeleton, SkeletonProps } from "./components/Skeleton";
+
+import { Skeleton, SkeletonProps } from "./Skeleton";
 
 export type { SkeletonProps as ListingSkeletonProps };
 
@@ -17,7 +18,7 @@ export interface ListingProps {
   generator?: () => void;
   loading?: boolean;
   groups?: number;
-  format?: ListingFormat;
+  format?: PreviewFormat;
   ariaLabel?: string;
   ariaLabelledBy?: string;
 }

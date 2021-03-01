@@ -1,4 +1,4 @@
-export type ListingFormat = "default" | "compact" | "nochannel";
+export type PreviewFormat = "default" | "compact" | "nochannel";
 
 export type FetchResponse<K extends string, T> = {
   [key in K]?: T;

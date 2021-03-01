@@ -4,9 +4,9 @@ import { ChannelContent } from "@gatsby-tv/types";
 import { FetchResponse } from "@src/types";
 
 export function useChannelContent(
-  id: string
+  id?: string
 ): FetchResponse<"content", ChannelContent> {
-  const { data, error } = useSWR(`/channel/${id}/content`);
+  const { data, error } = useSWR(id ? `/channel/${id}/content` : null);
 
   return {
     content: data,

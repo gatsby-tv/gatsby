@@ -18,7 +18,8 @@ import { Info } from "./components/Info";
 import { Engagement } from "./components/Engagement";
 import { Credits } from "./components/Credits";
 import { Category } from "./components/Category";
-import { Skeleton } from "./components/Skeleton";
+
+import { Skeleton } from "./Skeleton";
 
 export interface DescriptionProps {
   video: Video;

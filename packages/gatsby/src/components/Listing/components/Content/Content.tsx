@@ -14,8 +14,8 @@ export function Content(props: ContentProps): React.ReactElement {
   const { format } = useListing();
 
   const previewProps = {
-    format,
     content,
+    format,
     ariaPosInSet,
     ariaSetSize: -1,
   };

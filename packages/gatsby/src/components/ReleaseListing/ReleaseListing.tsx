@@ -4,10 +4,11 @@ import { TextBox, Flex, Stream } from "@gatsby-tv/components";
 import { useTheme } from "@gatsby-tv/utilities";
 
 import { ListingContext } from "@src/utilities/listing";
-import { ListingFormat } from "@src/types";
+import { PreviewFormat } from "@src/types";
 
 import { Section } from "./components/Section";
-import { Skeleton, SkeletonProps } from "./components/Skeleton";
+
+import { Skeleton, SkeletonProps } from "./Skeleton";
 
 export type { SkeletonProps as ReleaseListingSkeletonProps };
 
@@ -17,7 +18,7 @@ export interface ReleaseListingProps {
   groups: number;
   generator?: () => void;
   loading?: boolean;
-  format?: ListingFormat;
+  format?: PreviewFormat;
   ariaLabel?: string;
   ariaLabelledBy?: string;
 }

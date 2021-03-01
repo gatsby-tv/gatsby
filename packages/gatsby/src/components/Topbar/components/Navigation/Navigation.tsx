@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Icon, Tabs } from "@gatsby-tv/components";
+import { Flex, Icon, Tabs } from "@gatsby-tv/components";
 import { GatsbyPlain } from "@gatsby-tv/icons";
 import { useSelect, useTheme } from "@gatsby-tv/utilities";
 

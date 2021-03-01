@@ -9,9 +9,10 @@ import { cssShadow } from "@src/styles/shadows";
 
 import { Navigation } from "./components/Navigation";
 import { Search } from "./components/Search";
-import { Skeleton } from "./components/Skeleton";
 import { SignedIn } from "./components/SignedIn";
 import { SignedOut } from "./components/SignedOut";
+
+import { Skeleton } from "./Skeleton";
 
 export function Topbar(): React.ReactElement {
   const theme = useTheme();

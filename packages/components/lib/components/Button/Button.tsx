@@ -117,7 +117,7 @@ const ButtonStyle = styled.button<ButtonProps>`
     cssProperty(
       "color",
       props.fg?.toString(),
-      props.theme.colors.font.body.darken(0.1).toString()
+      props.theme.colors.font.body.toString()
     )}
   ${(props) =>
     cssSize("border-radius", props.rounded, props.theme.border.radius.small)}

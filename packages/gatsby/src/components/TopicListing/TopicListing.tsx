@@ -6,7 +6,8 @@ import { useTheme } from "@gatsby-tv/utilities";
 import { ListingContext } from "@src/utilities/listing";
 
 import { Content } from "./components/Content";
-import { Skeleton, SkeletonProps } from "./components/Skeleton";
+
+import { Skeleton, SkeletonProps } from "./Skeleton";
 
 export type { SkeletonProps as TopicListingSkeletonProps };
 

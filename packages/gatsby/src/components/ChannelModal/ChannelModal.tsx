@@ -12,8 +12,9 @@ import { Channel } from "@gatsby-tv/types";
 import { Cancel } from "@gatsby-tv/icons";
 import { useTheme } from "@gatsby-tv/utilities";
 
+import { ChannelContent } from "@src/components/ChannelContent";
+
 import { BannerOverlay } from "./components/BannerOverlay";
-import { Content } from "./components/Content";
 import { ResetScroll } from "./components/ResetScroll";
 
 export interface ChannelModalProps {
@@ -65,7 +66,7 @@ export function ChannelModal(props: ChannelModalProps): React.ReactElement {
         <Scroll smooth hide>
           <Image {...bannerProps} />
           <Box margin={[theme.spacing[0], theme.spacing[3]]}>
-            <Content channel={channel} />
+            <ChannelContent channel={channel} groups={2} />
           </Box>
           <ResetScroll container={container} />
         </Scroll>

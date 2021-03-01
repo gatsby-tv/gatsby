@@ -13,7 +13,7 @@ import { Channel, User, Contributions, IPFSContent } from "@gatsby-tv/types";
 import { Plus } from "@gatsby-tv/icons";
 import { Value, ifNotExists, useTheme, useModal } from "@gatsby-tv/utilities";
 
-import { AccountLink } from "@src/components/AccountLink";
+import { Info } from "@src/components/Info";
 import { AvatarCollation } from "@src/components/AvatarCollation";
 
 type ChannelProps = {
@@ -115,11 +115,12 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
     const accountProps = {
       channel,
       blurb: Value(channel.subscribers, "subscriber") as string,
+      link: true,
     };
 
     return (
       <CreditsBase title={ifNotExists(compact, "Channel")}>
-        <AccountLink {...accountProps} />
+        <Info {...accountProps} />
       </CreditsBase>
     );
   } else if (isCollaboratorProps(props)) {
@@ -135,8 +136,9 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
     };
 
     const AccountsMarkup = collaborators.map((user, index) => (
-      <AccountLink
+      <Info
         key={`${user._id}.${index}`}
+        link
         user={user}
         blurb={Value(user.followers, "follower") as string}
       />
@@ -156,8 +158,9 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
     };
 
     const AccountsMarkup = contributors.map((user, index) => (
-      <AccountLink
+      <Info
         key={`${user._id}.${index}`}
+        link
         user={user}
         blurb={Array.from(contributions[user._id]).join(", ")}
       />
@@ -177,8 +180,9 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
     };
 
     const AccountsMarkup = sponsors.map((user, index) => (
-      <AccountLink
+      <Info
         key={`${user._id}.${index}`}
+        link
         user={user}
         blurb={Value(user.followers, "follower") as string}
       />

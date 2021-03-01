@@ -4,7 +4,7 @@ import { Channel } from "@gatsby-tv/types";
 import { useTheme } from "@gatsby-tv/utilities";
 
 import { ChannelSlide } from "./components/ChannelSlide";
-import { Skeleton, SkeletonProps } from "./components/Skeleton";
+import { Skeleton, SkeletonProps } from "./Skeleton";
 
 export type { SkeletonProps as ChannelCarouselSkeletonProps };
 

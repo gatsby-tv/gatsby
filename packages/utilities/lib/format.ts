@@ -127,7 +127,7 @@ export function Negative(size: string | number): string | number {
     if (size[0] === "-") {
       return size.slice(1);
     } else {
-      return `-${size}`;
+      return size === "0" ? size : `-${size}`;
     }
   } else {
     return -size;

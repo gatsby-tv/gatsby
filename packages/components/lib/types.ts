@@ -42,7 +42,7 @@ export type BorderRadius =
   | "largest"
   | "full";
 
-type DiscreteSize =
+export type DiscreteSize =
   | "smallest"
   | "smaller"
   | "small"

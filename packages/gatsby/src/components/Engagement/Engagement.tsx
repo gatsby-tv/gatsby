@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Icon } from "@gatsby-tv/components";
 import { IconSource } from "@gatsby-tv/components/dist/types";
-import { Subscribe, Promote, Donate, Tip, Misc } from "@gatsby-tv/icons";
+import { Subscribe, Follow, Promote, Donate, Tip, Misc } from "@gatsby-tv/icons";
 import { useTheme } from "@gatsby-tv/utilities";
 
 export interface EngagementProps {
-  type: "subscribe" | "promote" | "donate" | "tip" | "misc";
+  type: "subscribe" | "follow" | "promote" | "donate" | "tip" | "misc";
+  shadow?: boolean;
 }
 
 export function Engagement(props: EngagementProps): React.ReactElement {
@@ -18,6 +19,11 @@ export function Engagement(props: EngagementProps): React.ReactElement {
     case "subscribe":
       icon = Subscribe;
       tooltip = "Subscribe";
+      break;
+
+    case "follow":
+      icon = Follow;
+      tooltip = "Follow";
       break;
 
     case "promote":
@@ -43,6 +49,7 @@ export function Engagement(props: EngagementProps): React.ReactElement {
 
   const buttonProps = {
     animate: true,
+    shadow: props.shadow,
     rounded: theme.border.radius.full,
     padding: "0.8rem",
     bg: theme.colors.inverted[5].darken(0.1),

@@ -1,15 +1,20 @@
 import React from "react";
-import { Avatar, Flex } from "@gatsby-tv/components";
-import { Channel } from "@gatsby-tv/types";
+import { Flex } from "@gatsby-tv/components";
+import { User } from "@gatsby-tv/types";
 import { useTheme } from "@gatsby-tv/utilities";
 
+import { useUserFeeds } from "@src/utilities/use-user-feeds";
+
+import { AvatarTooltip } from "../AvatarTooltip";
+
 export interface SignedInProps {
-  subscriptions: Channel[];
+  user: User;
 }
 
 export function SignedIn(props: SignedInProps): React.ReactElement {
   const theme = useTheme();
-  const { subscriptions } = props;
+  const { user } = props;
+  const { feeds } = useUserFeeds(user._id);
 
   const flexProps = {
     column: true,
@@ -19,14 +24,10 @@ export function SignedIn(props: SignedInProps): React.ReactElement {
     padding: [theme.spacing[1], theme.spacing[0], theme.spacing[0]],
   };
 
-  const AvatarsMarkup = subscriptions
+  const AvatarsMarkup = feeds?.subscriptions
     .slice(0, 8)
     .map((channel, index) => (
-      <Avatar
-        key={`${channel._id}.${index}`}
-        src={channel.avatar}
-        size={theme.avatar.small}
-      />
+      <AvatarTooltip key={`${channel._id}.${index}`} channel={channel} />
     ));
 
   return <Flex {...flexProps}>{AvatarsMarkup}</Flex>;

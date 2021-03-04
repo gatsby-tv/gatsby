@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Box, Flex, Player } from "@gatsby-tv/components";
 import {
@@ -9,6 +10,7 @@ import {
   useFrame,
 } from "@gatsby-tv/utilities";
 
+import { PageBody } from "@src/components/PageBody";
 import { Listing } from "@src/components/Listing";
 import { Description } from "@src/components/Description";
 import { useRelatedFeed } from "@src/utilities/use-related-feed";
@@ -62,6 +64,12 @@ export default function VideoPage(): React.ReactElement {
     marginTop: theme.spacing[0.5],
   };
 
+  const HeaderMarkup = (
+    <Head>
+      <title>{video ? `${video.title} - Gatsby` : null}</title>
+    </Head>
+  );
+
   const DescriptionMarkup = video ? (
     <Description video={video} compact={Boolean(compact)} />
   ) : (
@@ -76,13 +84,14 @@ export default function VideoPage(): React.ReactElement {
 
   return (
     <>
+      {HeaderMarkup}
       <Player {...playerProps} />
-      <Box margin={[theme.spacing[1.5], theme.spacing[3], theme.spacing[0]]}>
-        <Flex maxw="200rem" margin={[theme.spacing[0], "auto"]}>
+      <PageBody tight>
+        <Flex>
           <Flex.Item {...leftItemProps}>{DescriptionMarkup}</Flex.Item>
           <Flex.Item {...rightItemProps}>{ListingMarkup}</Flex.Item>
         </Flex>
-      </Box>
+      </PageBody>
     </>
   );
 }

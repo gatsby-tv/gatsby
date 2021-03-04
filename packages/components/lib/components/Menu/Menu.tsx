@@ -13,8 +13,10 @@ import { cssProperty } from "@lib/styles/property";
 import { cssShadow } from "@lib/styles/shadows";
 
 import { Item, ItemProps } from "./components/Item";
+import { Link, LinkProps } from "./components/Link";
 
 export type { ItemProps as MenuItemProps };
+export type { LinkProps as MenuLinkProps };
 
 export interface MenuProps {
   children?: React.ReactNode;
@@ -71,7 +73,7 @@ function MenuBase(props: MenuProps): React.ReactElement {
     ${cssProperty("background-color", bg.toString())}
     border-radius: ${(props) => props.theme.border.radius.smallest};
 
-    ${Item} {
+    ${Connected.Item} {
       cursor: pointer;
       border-radius: ${(props) => props.theme.border.radius.smallest};
       ${(props) =>
@@ -81,7 +83,7 @@ function MenuBase(props: MenuProps): React.ReactElement {
         ])}
     }
 
-    ${Item}:hover {
+    ${Connected.Item}:hover {
       ${cssProperty("background-color", highlight.toString())}
     }
   `;
@@ -104,4 +106,8 @@ function MenuBase(props: MenuProps): React.ReactElement {
   );
 }
 
-export const Menu = Object.assign(MenuBase, { Item, displayName: "Menu" });
+export const Menu = Object.assign(MenuBase, {
+  Item,
+  Link,
+  displayName: "Menu",
+});

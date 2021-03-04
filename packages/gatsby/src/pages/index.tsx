@@ -3,6 +3,7 @@ import Head from "next/head";
 import { Box, Flex, Rule, TextDisplay } from "@gatsby-tv/components";
 import { useTheme, useBreakpoints, useUniqueId } from "@gatsby-tv/utilities";
 
+import { PageBody } from "@src/components/PageBody";
 import { ChannelCarousel } from "@src/components/ChannelCarousel";
 import { PreviewSlider } from "@src/components/PreviewSlider";
 import { Listing } from "@src/components/Listing";
@@ -88,9 +89,9 @@ export default function IndexPage(): React.ReactElement {
   );
 
   return (
-    <Box margin={theme.spacing[3]}>
+    <>
       {HeaderMarkup}
-      <Box maxw="200rem" margin={[theme.spacing[0], "auto"]}>
+      <PageBody>
         <Box margin={[theme.spacing[3], theme.spacing[0]]}>
           {CarouselMarkup}
         </Box>
@@ -102,7 +103,7 @@ export default function IndexPage(): React.ReactElement {
             {ListingMarkup}
           </Flex>
         </Flex>
-      </Box>
-    </Box>
+      </PageBody>
+    </>
   );
 }

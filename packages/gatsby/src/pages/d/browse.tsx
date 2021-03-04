@@ -7,6 +7,7 @@ import {
   useUniqueId,
 } from "@gatsby-tv/utilities";
 
+import { PageBody } from "@src/components/PageBody";
 import { Listing } from "@src/components/Listing";
 import { TopicListing } from "@src/components/TopicListing";
 import { usePopularFeed } from "@src/utilities/use-popular-feed";
@@ -106,15 +107,13 @@ export default function BrowsePage(): React.ReactElement {
   const ContentMarkup = tab["topics"] ? TopicListingMarkup : ListingMarkup;
 
   return (
-    <Box margin={theme.spacing[3]}>
-      <Box maxw="200rem" margin={[theme.spacing[0], "auto"]}>
-        <Flex {...headerProps}>
-          <TextDisplay size="large">Browse</TextDisplay>
-          {TabsMarkup}
-        </Flex>
-        <Rule {...ruleProps} />
-        {ContentMarkup}
-      </Box>
-    </Box>
+    <PageBody>
+      <Flex {...headerProps}>
+        <TextDisplay size="large">Browse</TextDisplay>
+        {TabsMarkup}
+      </Flex>
+      <Rule {...ruleProps} />
+      {ContentMarkup}
+    </PageBody>
   );
 }

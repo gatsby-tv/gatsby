@@ -17,7 +17,6 @@ export function Sidebar(): React.ReactElement {
   const theme = useTheme();
   const router = useRouter();
   const [session, loading] = useSession();
-  const { feeds } = useUserFeeds((session?.user as User | undefined)?._id);
 
   const disabled = router.pathname.startsWith("/v/");
 
@@ -34,10 +33,10 @@ export function Sidebar(): React.ReactElement {
   };
 
   const BodyMarkup =
-    loading || (session && !feeds) ? (
+    loading ? (
       <Skeleton />
     ) : session ? (
-      <SignedIn subscriptions={(feeds as UserContentFeeds).subscriptions} />
+      <SignedIn user={session.user} />
     ) : (
       <SignedOut />
     );

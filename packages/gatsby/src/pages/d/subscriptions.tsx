@@ -4,6 +4,7 @@ import { Box, Flex, TextDisplay } from "@gatsby-tv/components";
 import { useTheme, useBreakpoints } from "@gatsby-tv/utilities";
 import { User } from "@gatsby-tv/types";
 
+import { PageBody } from "@src/components/PageBody";
 import { ReleaseListing } from "@src/components/ReleaseListing";
 import { useSubscriptionsFeed } from "@src/utilities/use-subscriptions-feed";
 
@@ -29,13 +30,11 @@ export default function SubscriptionsPage(): React.ReactElement {
   );
 
   return (
-    <Box margin={theme.spacing[3]}>
-      <Box maxw="200rem" margin={[theme.spacing[0], "auto"]}>
-        <Flex column gap={theme.spacing[3]}>
-          <TextDisplay size="large">Subscriptions</TextDisplay>
-          {ReleaseListingMarkup}
-        </Flex>
-      </Box>
-    </Box>
+    <PageBody>
+      <Flex column gap={theme.spacing[3]}>
+        <TextDisplay size="large">Subscriptions</TextDisplay>
+        {ReleaseListingMarkup}
+      </Flex>
+    </PageBody>
   );
 }

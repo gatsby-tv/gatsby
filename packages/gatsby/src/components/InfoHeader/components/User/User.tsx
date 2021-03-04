@@ -9,7 +9,7 @@ import {
   TextDisplay,
 } from "@gatsby-tv/components";
 import { CheckmarkFill } from "@gatsby-tv/icons";
-import { FullValue, ifExists, useTheme } from "@gatsby-tv/utilities";
+import { FullValue, UserHandle, ifExists, useTheme } from "@gatsby-tv/utilities";
 import { User as UserType } from "@gatsby-tv/types";
 
 import { Link } from "@src/components/Link";
@@ -33,7 +33,7 @@ export function isUserProps(
 
 function UserBase(props: UserProps): React.ReactElement {
   const theme = useTheme();
-  const { user, link, blurb = FullValue(user.followers, "follower") } = props;
+  const { user, link, blurb = [UserHandle(user.handle), FullValue(user.followers, "follower")] } = props;
 
   const verifiedProps = {
     active: user.verified,

@@ -42,7 +42,10 @@ export function BannerOverlay(props: BannerOverlayProps): React.ReactElement {
   const infoProps = {
     channel,
     link: true,
-    blurb: [ChannelHandle(channel.handle), FullValue(channel.subscribers, "subscriber")],
+    blurb: [
+      ChannelHandle(channel.handle),
+      FullValue(channel.subscribers, "subscriber"),
+    ],
   };
 
   const engagementFlexProps = {

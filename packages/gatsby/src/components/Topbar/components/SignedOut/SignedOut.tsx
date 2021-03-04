@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Icon } from "@gatsby-tv/components";
-import { Misc } from "@gatsby-tv/icons";
+import { User } from "@gatsby-tv/icons";
 import { useTheme, useModal } from "@gatsby-tv/utilities";
 
 import { SignIn } from "@src/components/SignIn";
@@ -29,7 +29,7 @@ export function SignedOut(): React.ReactElement {
 
   const MiscMarkup = (
     <Button {...miscProps}>
-      <Icon src={Misc} w={theme.icon.small} />
+      <Icon src={User} fg={theme.colors.font.body.fade(0.2)} w={theme.icon.small} />
     </Button>
   );
 

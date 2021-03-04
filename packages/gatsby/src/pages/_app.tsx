@@ -18,8 +18,9 @@ export default function App({
 
   const HeaderMarkup = (
     <Head>
-      <link rel="stylesheet" type="text/css" href="/fonts.css" />
+      <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="preconnect" href="http://localhost:6001" />
+      <link rel="stylesheet" type="text/css" href="/fonts.css" />
       <link
         rel="preload"
         href="/fonts/Inter.var.woff2"

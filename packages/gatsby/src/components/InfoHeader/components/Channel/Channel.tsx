@@ -9,7 +9,12 @@ import {
   TextDisplay,
 } from "@gatsby-tv/components";
 import { CheckmarkFill } from "@gatsby-tv/icons";
-import { FullValue, ifExists, useTheme } from "@gatsby-tv/utilities";
+import {
+  ChannelHandle,
+  FullValue,
+  ifExists,
+  useTheme,
+} from "@gatsby-tv/utilities";
 import { Channel as ChannelType } from "@gatsby-tv/types";
 
 import { Link } from "@src/components/Link";
@@ -34,7 +39,10 @@ function ChannelBase(props: ChannelProps): React.ReactElement {
   const {
     channel,
     link,
-    blurb = FullValue(channel.subscribers, "subscriber"),
+    blurb = [
+      ChannelHandle(channel.handle),
+      FullValue(channel.subscribers, "subscriber"),
+    ],
   } = props;
 
   const verifiedProps = {
@@ -42,12 +50,22 @@ function ChannelBase(props: ChannelProps): React.ReactElement {
     $props: { gap: theme.spacing[1] },
   };
 
-  const linkBoxProps = {
+  const avatarLinkBoxProps = {
+    active: ifExists(link),
+    $props: { h: "fit-content" },
+  };
+
+  const avatarLinkProps = {
+    active: ifExists(link),
+    $props: { href: `/${channel.handle}` },
+  };
+
+  const textLinkBoxProps = {
     active: ifExists(link),
     $props: { w: "fit-content" },
   };
 
-  const linkProps = {
+  const textLinkProps = {
     active: ifExists(link),
     $props: {
       href: `/${channel.handle}`,
@@ -59,7 +77,11 @@ function ChannelBase(props: ChannelProps): React.ReactElement {
 
   const AvatarMarkup = (
     <Flex.Item shrink={0}>
-      <Avatar src={channel.avatar} size={theme.avatar.largest} />
+      <Optional component={Box} {...avatarLinkBoxProps}>
+        <Optional component={Link} {...avatarLinkProps}>
+          <Avatar src={channel.avatar} size={theme.avatar.largest} />
+        </Optional>
+      </Optional>
     </Flex.Item>
   );
 
@@ -69,8 +91,8 @@ function ChannelBase(props: ChannelProps): React.ReactElement {
 
   const NameMarkup = (
     <Optional component={Flex} {...verifiedProps}>
-      <Optional component={Box} {...linkBoxProps}>
-        <Optional component={Link} {...linkProps}>
+      <Optional component={Box} {...textLinkBoxProps}>
+        <Optional component={Link} {...textLinkProps}>
           <TextDisplay>{channel.name}</TextDisplay>
         </Optional>
       </Optional>

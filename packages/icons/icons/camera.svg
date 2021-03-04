@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   id="gz-svg-camera"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   aria-hidden="true"
+   focusable="false"
+   role="img"
+   sodipodi:docname="camera.svg">
+  <defs
+     id="defs12591">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect835"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,10,0,1 @ F,0,0,1,0,10,0,1 @ F,0,0,1,0,10,0,1 @ F,0,0,1,0,10,0,1 @ F,0,0,1,0,10,0,1 @ F,0,0,1,0,10,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="10"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:object-nodes="false"
+     inkscape:snap-bbox="true"
+     inkscape:showpageshadow="false"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-svg-camera"
+     inkscape:document-units="px"
+     inkscape:cy="406.12129"
+     inkscape:cx="417.37981"
+     inkscape:zoom="0.4542466"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:snap-page="false"
+     inkscape:bbox-paths="false"
+     inkscape:bbox-nodes="false"
+     inkscape:window-width="1904"
+     inkscape:window-height="1048"
+     inkscape:window-x="1928"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="camera"
+     style="fill:currentcolor"
+     d="M 193.64844 65.171875 A 17.320508 17.320508 0 0 0 178.64844 73.833984 L 147.66406 127.49805 L 20 127.49805 C 8.92 127.49805 0 136.41805 0 147.49805 L 0 432.14453 C 0 443.22453 8.92 452.14453 20 452.14453 L 520 452.14453 C 531.08 452.14453 540 443.22453 540 432.14453 L 540 147.49805 C 540 136.41805 531.08 127.49805 520 127.49805 L 392.33594 127.49805 L 361.35156 73.833984 A 17.320508 17.320508 0 0 0 346.35156 65.171875 L 193.64844 65.171875 z M 474.85742 164.84766 A 22.077459 22.077459 0 0 1 496.93359 186.92383 A 22.077459 22.077459 0 0 1 474.85742 209.00195 A 22.077459 22.077459 0 0 1 452.7793 186.92383 A 22.077459 22.077459 0 0 1 474.85742 164.84766 z M 270 165.49023 C 340.39506 165.49023 397.99805 223.09323 397.99805 293.48828 C 397.99805 363.88334 340.39506 421.48633 270 421.48633 C 199.60494 421.48633 142.00195 363.88334 142.00195 293.48828 C 142.00195 223.09323 199.60494 165.49023 270 165.49023 z M 270 215.49023 C 226.62695 215.49023 192.00195 250.11523 192.00195 293.48828 C 192.00195 336.86133 226.62695 371.48633 270 371.48633 C 313.37305 371.48633 347.99805 336.86133 347.99805 293.48828 C 347.99805 250.11523 313.37305 215.49023 270 215.49023 z " />
+</svg>

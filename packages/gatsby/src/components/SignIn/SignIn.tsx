@@ -92,7 +92,7 @@ export function SignIn(props: SignInProps): React.ReactElement {
   );
 
   const GoogleMarkup = (
-    <Button onClick={() => signIn("credentials")} {...googleButtonProps}>
+    <Button onClick={() => signIn("google")} {...googleButtonProps}>
       <Flex center gap={theme.spacing[1]}>
         <Icon src={Google} w={theme.icon.base} />
         Sign In with Google
@@ -114,7 +114,11 @@ export function SignIn(props: SignInProps): React.ReactElement {
       <Box marginBottom={theme.spacing[2]}>
         <FormField type="text" {...emailProps} />
       </Box>
-      <Button type="submit" {...submitButtonProps}>
+      <Button
+        type="submit"
+        onClick={() => signIn("credentials")}
+        {...submitButtonProps}
+      >
         Sign In
       </Button>
     </Form>

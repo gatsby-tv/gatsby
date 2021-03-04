@@ -1,9 +1,14 @@
 import React from "react";
-import { Avatar, Flex } from "@gatsby-tv/components";
+import { Flex } from "@gatsby-tv/components";
 import { useTheme } from "@gatsby-tv/utilities";
+
+import { useFeaturedChannels } from "@src/utilities/use-featured-channels";
+
+import { AvatarTooltip } from "../AvatarTooltip";
 
 export function SignedOut(): React.ReactElement {
   const theme = useTheme();
+  const { channels } = useFeaturedChannels();
 
   const flexProps = {
     column: true,
@@ -13,9 +18,11 @@ export function SignedOut(): React.ReactElement {
     padding: [theme.spacing[1], theme.spacing[0], theme.spacing[0]],
   };
 
-  const AvatarsMarkup = [...Array(8)].map((_, index) => (
-    <Avatar key={index} size={theme.avatar.small} />
-  ));
+  const AvatarsMarkup = channels
+    ?.slice(0, 8)
+    .map((channel, index) => (
+      <AvatarTooltip key={`${channel._id}.${index}`} channel={channel} />
+    ));
 
   return <Flex {...flexProps}>{AvatarsMarkup}</Flex>;
 }

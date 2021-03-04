@@ -3,28 +3,25 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Box, Flex, Rule, Image } from "@gatsby-tv/components";
 import {
-  ChannelHandle,
+  UserHandle,
   FullValue,
   useTheme,
   useSelect,
   useUniqueId,
 } from "@gatsby-tv/utilities";
 
-import { PageBody } from "@src/components/PageBody";
 import { InfoHeader } from "@src/components/InfoHeader";
 import { Engagement } from "@src/components/Engagement";
-import { ChannelContent } from "@src/components/ChannelContent";
-import { useChannel } from "@src/utilities/use-channel";
-import { useChannelContent } from "@src/utilities/use-channel-content";
+import { useUser } from "@src/utilities/use-user";
 
-export default function ChannelPage(): React.ReactElement {
+export default function UserPage(): React.ReactElement {
   const theme = useTheme();
   const router = useRouter();
   const handle = [router.query.handle].flat()[0];
-  const { channel } = useChannel(handle?.toLowerCase());
+  const { user } = useUser(handle?.toLowerCase());
 
   const imageProps = {
-    src: channel?.banner,
+    src: user?.banner,
     aspectRatio: 1 / 2,
     crop: [0.125, theme.spacing[0]],
   };
@@ -36,7 +33,7 @@ export default function ChannelPage(): React.ReactElement {
   };
 
   const infoFlexProps = {
-    w: channel ? "fit-content" : "50rem",
+    w: user ? "fit-content" : "50rem",
     bg: theme.colors.background[4],
     padding: theme.spacing[1.5],
     shadow: true,
@@ -50,15 +47,13 @@ export default function ChannelPage(): React.ReactElement {
   };
 
   const HeaderMarkup = (
-    <Head>
-      <title>{channel ? `${channel.name} - Gatsby` : null}</title>
-    </Head>
+    <title>{user ? `${user.name} - Gatsby` : null}</title>
   );
 
-  const InfoMarkup = channel ? (
-    <InfoHeader channel={channel} />
+  const InfoMarkup = user ? (
+    <InfoHeader user={user} />
   ) : (
-    <InfoHeader.Skeleton channel />
+    <InfoHeader.Skeleton user />
   );
 
   const OverlayMarkup = (
@@ -67,7 +62,7 @@ export default function ChannelPage(): React.ReactElement {
         <Flex {...infoFlexProps}>{InfoMarkup}</Flex>
       </Box>
       <Flex {...engagementFlexProps}>
-        <Engagement type="subscribe" shadow />
+        <Engagement type="follow" shadow />
         <Engagement type="donate" shadow />
         <Engagement type="misc" shadow />
       </Flex>
@@ -80,9 +75,6 @@ export default function ChannelPage(): React.ReactElement {
     <>
       {HeaderMarkup}
       {BannerMarkup}
-      <PageBody>
-        <ChannelContent channel={channel} groups={4} />
-      </PageBody>
     </>
   );
 }

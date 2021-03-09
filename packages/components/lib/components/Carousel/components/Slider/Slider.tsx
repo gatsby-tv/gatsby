@@ -34,7 +34,7 @@ export function Slider(props: SliderProps): React.ReactElement {
 
     const shift = (direction * 100) / (groups + 2);
     style.transform = `translateX(${shift}%)`;
-    style.transition = `transform ${theme.duration.base} ease`;
+    style.transition = `transform ${theme.duration.base}ms ease`;
   }
 
   return (

@@ -1,7 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
+import { css } from "styled-components";
+import { Box, TextBox, Flex, Icon, Button } from "@gatsby-tv/components";
 import {
   Play,
   Pause,
+  Previous,
   Next,
   Playlist,
   Expand,
@@ -9,44 +12,28 @@ import {
 } from "@gatsby-tv/icons";
 import { useTheme, Time } from "@gatsby-tv/utilities";
 
-import { Box } from "@lib/components/Box";
-import { TextBox } from "@lib/components/TextBox";
-import { Flex } from "@lib/components/Flex";
-import { Icon } from "@lib/components/Icon";
-import { Button } from "@lib/components/Button";
-
-export interface ControlsProps {
-  paused: boolean;
-  fullscreen?: boolean;
-  position: number;
-  duration: number;
-  nextVideo?: unknown;
-  playlist?: unknown;
-  togglePlayback: () => void;
-  toggleFullscreen?: () => void;
-}
+import { ControlsProps } from "@src/types";
 
 export function Controls(props: ControlsProps): React.ReactElement {
   const {
     paused,
     fullscreen,
-    position,
+    prevVideo,
     nextVideo,
     playlist,
-    togglePlayback,
-    toggleFullscreen,
+    setPlayback,
+    setFullscreen,
   } = props;
 
   const theme = useTheme();
-  const noop = () => null;
-  const play = useRef<HTMLButtonElement>(null);
 
-  const progress = Time(position * props.duration);
+  const time = Time(props.time * props.duration);
   const duration = Time(props.duration);
 
-  const progressStyle = {
-    fontVariantNumeric: "tabular-nums",
-  };
+  const progressStyle = css`
+    user-select: none;
+    font-variant-numeric: tabular-nums;
+  `;
 
   const progressProps = {
     font: theme.font[4],
@@ -55,32 +42,38 @@ export function Controls(props: ControlsProps): React.ReactElement {
 
   const ProgressMarkup = (
     <TextBox as="span" css={progressStyle} {...progressProps}>
-      {`${progress} / ${duration}`}
+      {`${time} / ${duration}`}
     </TextBox>
   );
 
   const PlayMarkup = (
-    <Button ref={play} onClick={togglePlayback}>
+    <Button onClick={() => setPlayback((current) => !current)}>
       <Box paddingRight={theme.spacing[0.5]}>
         <Icon src={paused ? Play : Pause} w={theme.icon.small} />
       </Box>
     </Button>
   );
 
+  const PrevMarkup = prevVideo ? (
+    <Button>
+      <Icon src={Previous} w="17px" />
+    </Button>
+  ) : null;
+
   const NextMarkup = nextVideo ? (
-    <Button onClick={noop}>
+    <Button>
       <Icon src={Next} w="17px" />
     </Button>
   ) : null;
 
   const PlaylistMarkup = playlist ? (
-    <Button onClick={noop}>
+    <Button>
       <Icon src={Playlist} w={theme.icon.base} />
     </Button>
   ) : null;
 
   const FullscreenMarkup = (
-    <Button onClick={toggleFullscreen}>
+    <Button onClick={() => setFullscreen((current) => !current)}>
       <Icon src={fullscreen ? Compress : Expand} w={theme.icon.small} />
     </Button>
   );
@@ -90,6 +83,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
       <Flex.Item grow={1}>
         <Flex expand justify="flex-start" align="stretch">
           {PlayMarkup}
+          {PrevMarkup}
           {NextMarkup}
           {PlaylistMarkup}
           <Flex center paddingLeft={theme.spacing[0.5]}>

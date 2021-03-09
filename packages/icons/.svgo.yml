@@ -40,8 +40,8 @@ plugins:
   - removeUnusedNS: true
   - removeUselessDefs: true
   - removeUselessStrokeAndFill: true
-  - removeViewBox: true
-  - removeXMLNS: false
+  - removeViewBox: false
+  - removeXMLNS: true
   - removeXMLProcInst: true
   - sortAttrs: true
   - transformsWithOnePath: true

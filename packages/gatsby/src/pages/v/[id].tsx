@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Box, Flex, Player } from "@gatsby-tv/components";
+import Player from "@gatsby-tv/player";
+import { Box, Flex } from "@gatsby-tv/components";
 import {
   useTheme,
   useScroll,

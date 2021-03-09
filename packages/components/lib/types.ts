@@ -89,6 +89,8 @@ export type Size = number | string;
 
 export type Margin = Size | Size[];
 
+export type Time = number | string;
+
 export type FlexDistribute = "fill" | "fill-evenly";
 
 export type FlexJustifyContent =
@@ -170,7 +172,7 @@ export interface Theme {
   };
 
   spacing: Record<SpacingSize, string>;
-  duration: Record<Duration, string>;
+  duration: Record<Duration, number>;
 
   lineHeight: Record<LineHeight, number>;
   weight: Record<FontWeight, number>;

@@ -112,14 +112,14 @@ export const DarkTheme: DefaultTheme = {
   },
 
   duration: {
-    instant: "0ms",
-    fastest: "100ms",
-    faster: "200ms",
-    fast: "300ms",
-    base: "500ms",
-    slow: "700ms",
-    slower: "1s",
-    slowest: "2s",
+    instant: 0,
+    fastest: 100,
+    faster: 200,
+    fast: 300,
+    base: 500,
+    slow: 700,
+    slower: 1000,
+    slowest: 2000, 
   },
 
   lineHeight: {

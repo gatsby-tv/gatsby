@@ -12,6 +12,7 @@ import {
 import { Box } from "@lib/components/Box";
 import { cssProperty } from "@lib/styles/property";
 import { EventHandler, Size } from "@lib/types";
+import { cssTransition } from "@lib/styles/transition";
 
 export interface ScrollProps {
   children?: React.ReactNode;
@@ -47,7 +48,7 @@ const ScrollStyle = styled.div<ScrollProps>`
     background-color: ${(props) =>
       props.hide ? "transparent" : props.theme.colors.background[3].toString()};
     border-radius: 2rem;
-    transition: all 100ms ease;
+    ${(props) => cssTransition("all", props.theme.duration.fastest, "ease")}
   }
 `;
 

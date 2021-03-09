@@ -2,13 +2,7 @@ import * as React from "react";
 
 function SvgExtendUp() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      id="gz-svg-extend-up"
-      viewBox="0 0 540 540"
-      width="1em"
-      height="1em"
-    >
+    <svg id="gz-extend-up" viewBox="0 0 540 540" width="1em" height="1em">
       <path
         id="extend-up"
         fill="currentcolor"

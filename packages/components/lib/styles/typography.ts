@@ -86,13 +86,6 @@ export const cssTextUppercase = css`
   text-transform: uppercase;
 `;
 
-export const cssTextTimeline = css`
-  ${cssTextCondensed}
-  font-size: ${(props) => props.theme.font[4]};
-  font-weight: 600;
-  user-select: none;
-`;
-
 export const cssTextTab = (size?: string): CSSProp => css`
   ${cssTextCondensed}
   ${cssProperty("font-size", size)}

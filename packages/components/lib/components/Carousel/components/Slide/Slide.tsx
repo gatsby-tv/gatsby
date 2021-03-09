@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useTheme } from "@gatsby-tv/utilities";
 
 import { cssShadow } from "@lib/styles/shadows";
+import { cssTransition } from "@lib/styles/transition";
 import { Box, BoxProps } from "@lib/components/Box";
 import { useCarousel } from "@lib/utilities/carousel";
 
@@ -19,7 +20,7 @@ const SlideStyle = styled(Box)<BoxProps>`
   box-sizing: border-box;
   color: inherit;
   background-color: transparent;
-  transition: transform ${(props) => props.theme.duration.fast} ease;
+  ${(props) => cssTransition("transform", props.theme.duration.fast, "ease")}
 
   &:hover {
     z-index: 1;

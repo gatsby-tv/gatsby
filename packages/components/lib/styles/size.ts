@@ -1,7 +1,7 @@
 import { css, CSSProp } from "styled-components";
 
 import { Size, Margin } from "@lib/types";
-import { parseSize, parseMargin } from "@lib/utilities/size";
+import { parseSize, parseMargin } from "@lib/utilities/parse";
 
 export const cssSize = (
   property: string,

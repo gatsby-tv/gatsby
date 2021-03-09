@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { IPFSContent } from "@gatsby-tv/types";
-import { Negative, ifExists, useIPFSContent } from "@gatsby-tv/utilities";
+import { ifExists, useIPFSContent } from "@gatsby-tv/utilities";
 
 import { Size, Margin } from "@lib/types";
 import { Box } from "@lib/components/Box";
@@ -42,6 +42,7 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
 
   const viewportProps = {
     placeholder: true,
+    crop,
     w,
     overlay,
     aspectRatio,
@@ -54,10 +55,6 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
       ? { paddingTop: `${100 * aspectRatio}%`, height: 0 }
       : undefined,
     alt: "",
-    margin: ifExists(
-      crop,
-      [crop as Margin].flat().map((margin) => Negative(margin))
-    ),
     expand: true,
     rounded,
     onLoad: handleLoad,

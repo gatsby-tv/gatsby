@@ -17,7 +17,6 @@ export * from "./TextCollapsible";
 export * from "./TextPlaceholder";
 export * from "./Viewport";
 export * from "./Video";
-export * from "./Player";
 export * from "./Image";
 export * from "./Avatar";
 export * from "./Icon";

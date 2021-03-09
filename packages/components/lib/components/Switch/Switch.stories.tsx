@@ -6,6 +6,7 @@ import { useSelect } from "@gatsby-tv/utilities";
 import { AppProvider } from "@lib/components/AppProvider";
 import { Box } from "@lib/components/Box";
 import { TextBox } from "@lib/components/TextBox";
+import { cssTransition } from "@lib/styles/transition";
 
 import { Switch, SwitchProps } from "./Switch";
 
@@ -25,7 +26,7 @@ const switchStyle = css`
     border-radius: ${(props) => props.theme.border.radius.small};
     padding: ${(props) => props.theme.spacing[0.5]}
       ${(props) => props.theme.spacing[1.5]};
-    transition: all ${(props) => props.theme.duration.fastest} ease;
+    ${(props) => cssTransition("all", props.theme.duration.fastest, "ease")}
   }
 `;
 

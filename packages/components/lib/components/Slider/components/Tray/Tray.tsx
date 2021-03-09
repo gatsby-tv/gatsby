@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { Flex } from "@lib/components/Flex";
 import { cssFlexGroups, cssFlexGap } from "@lib/styles/flex";
+import { cssTransition } from "@lib/styles/transition";
 import { Size } from "@lib/types";
 
 export interface TrayProps {
@@ -11,7 +12,7 @@ export interface TrayProps {
 
 export const Tray = styled.div<TrayProps>`
   display: flex;
-  transition: transform ${(props) => props.theme.duration.fast} ease;
+  ${(props) => cssTransition("transform", props.theme.duration.fast, "ease")}
   ${(props) => cssFlexGap(props.gap, false)}
   ${(props) => cssFlexGroups(`${Flex.Item}`, props.groups, props.gap)}
 `;

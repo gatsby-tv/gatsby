@@ -4,8 +4,8 @@ import { Box, BoxProps } from "@lib/components/Box";
 import { cssProperty } from "@lib/styles/property";
 
 export interface ItemProps extends BoxProps {
-  columns?: number | number[];
-  rows?: number | number[];
+  columns?: (number | string) | (number | string)[];
+  rows?: (number | string) | (number | string)[];
 }
 
 export const Item = styled(Box)<ItemProps>`

@@ -4,6 +4,7 @@ import { DownTick } from "@gatsby-tv/icons";
 import { ifExists, useUniqueId, useTheme } from "@gatsby-tv/utilities";
 
 import { FlexJustifyContent } from "@lib/types";
+import { cssTransition } from "@lib/styles/transition";
 import { Box } from "@lib/components/Box";
 import { TextBox } from "@lib/components/TextBox";
 import { Flex } from "@lib/components/Flex";
@@ -21,7 +22,8 @@ const TextCollapsibleStyle = styled.div`
   ${Box}[data-collapsible="content"] {
     max-height: 0px;
     overflow: hidden;
-    transition: max-height ${(props) => props.theme.duration.fast} ease-in-out;
+    ${(props) =>
+      cssTransition("max-height", props.theme.duration.fast, "ease-in-out")}
   }
 
   input:checked ~ ${Box}[data-collapsible="content"] {
@@ -30,39 +32,51 @@ const TextCollapsibleStyle = styled.div`
 
   ${Box}[data-collapsible="content"] > * {
     transition: border-top-left-radius
-        ${(props) => props.theme.duration.instant} linear
-        ${(props) => props.theme.duration.fast},
-      border-top-right-radius ${(props) => props.theme.duration.instant} linear
-        ${(props) => props.theme.duration.fast};
+        ${(props) => `${props.theme.duration.instant}ms`} linear
+        ${(props) => `${props.theme.duration.fast}ms`},
+      border-top-right-radius ${(props) =>
+        `${props.theme.duration.instant}ms`} linear
+        ${(props) => `${props.theme.duration.fast}ms`};
   }
 
   input:checked ~ ${Box}[data-collapsible="content"] > * {
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     transition: border-top-left-radius
-        ${(props) => props.theme.duration.instant} linear
-        ${(props) => props.theme.duration.instant},
-      border-top-right-radius ${(props) => props.theme.duration.instant} linear
-        ${(props) => props.theme.duration.instant};
+        ${(props) => `${props.theme.duration.instant}ms`} linear
+        ${(props) => `${props.theme.duration.instant}ms`},
+      border-top-right-radius ${(props) =>
+        `${props.theme.duration.instant}ms`} linear
+        ${(props) => `${props.theme.duration.instant}ms`};
   }
 
   ${Box}[data-collapsible="label"] {
     cursor: pointer;
     display: inline-flex;
     outline: none;
-    transition: all ${(props) => props.theme.duration.instant} linear
-      ${(props) => props.theme.duration.fast};
+    ${(props) =>
+      cssTransition(
+        "all",
+        props.theme.duration.instant,
+        "linear",
+        props.theme.duration.fast
+      )}
   }
 
   input:checked ~ ${Box}[data-collapsible="label"] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    transition: all ${(props) => props.theme.duration.instant} linear
-      ${(props) => props.theme.duration.instant};
+    ${(props) =>
+      cssTransition(
+        "all",
+        props.theme.duration.instant,
+        "linear",
+        props.theme.duration.instant
+      )}
   }
 
   ${Box}[data-collapsible="label"] svg {
-    transition: all ${(props) => props.theme.duration.fast} ease-in-out;
+    ${(props) => cssTransition("all", props.theme.duration.fast, "ease-in-out")}
   }
 
   input:checked ~ ${Box}[data-collapsible="label"] svg {
@@ -70,7 +84,9 @@ const TextCollapsibleStyle = styled.div`
   }
 `;
 
-export function TextCollapsible(props: TextCollapsibleProps): React.ReactElement {
+export function TextCollapsible(
+  props: TextCollapsibleProps
+): React.ReactElement {
   const { children, className, active, label } = props;
   const id = useUniqueId("collapsible");
   const labelRef = useRef<HTMLLabelElement>(null);

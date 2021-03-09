@@ -1,17 +1,17 @@
 import React, {
   useState,
-  useRef,
   useEffect,
   useCallback,
   forwardRef,
 } from "react";
 import styled, { css } from "styled-components";
 import Color from "color";
-import { ifExists, ifNotExists, useForwardedRef } from "@gatsby-tv/utilities";
+import { ifExists, ifNotExists, useTheme, useForwardedRef } from "@gatsby-tv/utilities";
 
 import { Tooltip } from "@lib/components/Tooltip";
 import { Size, Margin } from "@lib/types";
 import { cssShadow } from "@lib/styles/shadows";
+import { cssTransition } from "@lib/styles/transition";
 import { cssSize, cssMargin } from "@lib/styles/size";
 import { cssProperty } from "@lib/styles/property";
 import { cssTextButton } from "@lib/styles/typography";
@@ -21,6 +21,7 @@ export type ButtonProps = {
   animate?: boolean;
   shadow?: boolean;
   rounded?: Size;
+  margin?: Margin;
   padding?: Margin;
   w?: Size;
   h?: Size;
@@ -31,7 +32,8 @@ export type ButtonProps = {
   tooltip?: string;
   zIndex?: number;
   asLabelFor?: string;
-  onClick?: () => void;
+  onClick?: (event: any) => void;
+  onDblClick?: (event: any) => void;
 } & React.ButtonHTMLAttributes<HTMLElement>;
 
 const cssHighlight = (highlight?: Color | Color[], animated?: boolean) => css`
@@ -68,13 +70,13 @@ const cssAnimate = (highlight?: Color | Color[], rounded?: Size) => css`
     left: 0;
     opacity: 0;
     z-index: 1;
-    transition: all ${(props) => props.theme.duration.faster} ease;
+    ${(props) => cssTransition("all", props.theme.duration.faster, "ease")}
   }
 
   &[data-animating]:before {
     opacity: 0.2;
     animation-name: highlight;
-    animation-duration: ${(props) => props.theme.duration.faster};
+    animation-duration: ${(props) => `${props.theme.duration.faster}ms`};
     animation-timing-function: cubic-bezier(0.2, 1, 0.6, 1);
   }
 
@@ -123,6 +125,7 @@ const ButtonStyle = styled.button<ButtonProps>`
     cssSize("border-radius", props.rounded, props.theme.border.radius.small)}
   ${(props) =>
     ifNotExists(props.unstyled, cssPadding(props.padding, props.rounded))}
+  ${(props) => cssMargin("margin", props.margin)}
   ${(props) =>
     ifExists(props.highlight, cssHighlight(props.highlight, props.animate))}
   ${(props) =>
@@ -144,21 +147,64 @@ const ButtonStyle = styled.button<ButtonProps>`
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
-    const key = useRef(0);
+    const theme = useTheme();
     const button = useForwardedRef<HTMLButtonElement>(ref);
+    const [click, setClick] = useState<MouseEvent>();
+    const [dblClick, setDblClick] = useState<MouseEvent>();
     const [reset, setReset] = useState(false);
     const [active, setActive] = useState(0);
     const [held, setHeld] = useState(false);
-    const { animate, tooltip, asLabelFor, ...rest } = props;
+    const {
+      animate,
+      tooltip,
+      asLabelFor,
+      onClick: onClickHandler,
+      onDblClick: onDblClickHandler,
+      ...rest
+    } = props;
+
+    useEffect(() => {
+      if (dblClick && onDblClickHandler) {
+        onDblClickHandler(dblClick);
+      }
+    }, [dblClick]);
+
+    useEffect(() => {
+      if (click) {
+        const id = setTimeout(() => {
+          if (onClickHandler) {
+            onClickHandler(click);
+          }
+          setClick(undefined);
+        }, theme.duration.fast);
+        return () => clearTimeout(id);
+      }
+    }, [click]);
 
     useEffect(() => {
       if (active) {
-        const id = setTimeout(() => setActive(0), 200);
+        const id = setTimeout(() => setActive(0), theme.duration.faster);
         return () => clearTimeout(id);
       }
     }, [active]);
 
-    const handlePointerDown = useCallback(
+    const onClick = useCallback((event: any) => {
+      if (onDblClickHandler) {
+        setClick((current) => {
+          if (current) {
+            // We can't potentially update our parent's state here, so
+            // we wait until a useEffect handler is invoked instead.
+            setDblClick(event);
+          } else {
+            return event;
+          }
+        });
+      } else if (onClickHandler) {
+        onClickHandler(event);
+      }
+    }, [onClickHandler, onDblClickHandler]);
+
+    const onPointerDown = useCallback(
       (event) => {
         event.stopPropagation();
         if (animate) {
@@ -173,24 +219,29 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [animate]
     );
 
-    const handlePointerUp = useCallback(() => {
-      if (animate) {
-        setHeld(false);
-      }
-    }, [animate]);
+    const onPointerUp = useCallback(
+      (event) => {
+        event.stopPropagation();
+        if (animate) {
+          setHeld(false);
+        }
+      },
+      [animate]
+    );
 
     const buttonProps = {
       ref: button,
-      key: key.current,
       asLabelFor,
       animate,
       htmlFor: asLabelFor,
       tabIndex: ifExists(asLabelFor, -1),
       "aria-label": tooltip,
       "data-animating": ifExists(animate && !reset && (active || held)),
-      onPointerDown: handlePointerDown,
-      onPointerUp: handlePointerUp,
-      onPointerLeave: handlePointerUp,
+      onClick,
+      onPointerDown,
+      onPointerUp,
+      onPointerLeave: onPointerUp,
+      onPointerCancel: onPointerUp,
       ...rest,
     };
 

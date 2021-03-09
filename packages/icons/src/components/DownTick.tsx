@@ -3,8 +3,7 @@ import * as React from "react";
 function SvgDownTick() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      id="gz-svg-down-tick"
+      id="gz-down-tick"
       aria-hidden="true"
       viewBox="0 0 540 540"
       width="1em"

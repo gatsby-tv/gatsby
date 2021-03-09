@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { ifExists } from "@gatsby-tv/utilities";
 
 import { cssProperty } from "@lib/styles/property";
+import { cssTransition } from "@lib/styles/transition";
 
 export interface LinkProps {
   href: string;
@@ -34,7 +35,7 @@ const cssUnderline = css`
     background-color: currentcolor;
     transform: scaleX(0);
     transform-origin: bottom left;
-    transition: transform ${(props) => props.theme.duration.faster} ease;
+    ${(props) => cssTransition("transform", props.theme.duration.faster, "ease")}
   }
 
   &:hover:after {

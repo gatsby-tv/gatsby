@@ -1,18 +1,19 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
+import { AppProvider } from "@gatsby-tv/components";
 
-import { AppProvider } from "@lib/components/AppProvider";
+import { PlayerProps } from "@src/types";
 
-import { Player, PlayerProps } from "./Player";
+import { Mobile } from "./Mobile";
 
 export default {
-  title: "Player",
-  component: Player,
+  title: "Mobile",
+  component: Mobile,
 } as Meta;
 
 const Template: Story<PlayerProps> = (args) => (
   <AppProvider theme="dark">
-    <Player {...args} />
+    <Mobile {...args} />
   </AppProvider>
 );
 

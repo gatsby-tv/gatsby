@@ -6,6 +6,7 @@ import { useSelect } from "@gatsby-tv/utilities";
 import { AppProvider } from "@lib/components/AppProvider";
 import { TextBox } from "@lib/components/TextBox";
 import { Box } from "@lib/components/Box";
+import { cssTransition } from "@lib/components/transition";
 
 import { Selection, SelectionProps } from "./Selection";
 
@@ -23,7 +24,7 @@ const selectionStyle = css`
   ${Selection.Item} {
     padding: ${(props) => props.theme.spacing[1]}
       ${(props) => props.theme.spacing[1.5]};
-    transition: all ${(props) => props.theme.duration.fastest} ease;
+    ${(props) => cssTransition("all", props.theme.duration.fastest, "ease")}
   }
 
   ${Selection.Section.Title} {

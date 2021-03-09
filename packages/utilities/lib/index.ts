@@ -8,6 +8,8 @@ export * from "./use-forwarded-ref";
 export * from "./use-parent-ref";
 export * from "./use-isomorphic-layout-effect";
 export * from "./use-resize-observer";
+export * from "./use-mobile-detector";
+export * from "./use-volatile-key";
 export * from "./if-exists";
 export * from "./format";
 export * from "./unique-id";

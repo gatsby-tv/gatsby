@@ -3,6 +3,7 @@ import { css } from "styled-components";
 
 import { Size } from "@lib/types";
 import { cssTextTab } from "@lib/styles/typography";
+import { cssTransition } from "@lib/styles/transition";
 import { cssSize } from "@lib/styles/size";
 import { Selection, SelectionItemProps } from "@lib/components/Selection";
 
@@ -55,7 +56,7 @@ function TabsBase(props: TabsProps): React.ReactElement {
       height: 2px;
       background-color: ${(props) => props.theme.colors.gold.toString()};
       transform: scaleX(0);
-      transition: transform ${(props) => props.theme.duration.fast} ease;
+      ${(props) => cssTransition("transform", props.theme.duration.fast, "ease")}
     }
 
     ${Selection.Item}[aria-selected]:after {

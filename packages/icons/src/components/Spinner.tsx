@@ -2,13 +2,7 @@ import * as React from "react";
 
 function SvgSpinner() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      id="gz-svg-spinner"
-      viewBox="0 0 540 540"
-      width="1em"
-      height="1em"
-    >
+    <svg id="gz-spinner" viewBox="0 0 540 540" width="1em" height="1em">
       <circle
         id="spinner"
         cx={270}

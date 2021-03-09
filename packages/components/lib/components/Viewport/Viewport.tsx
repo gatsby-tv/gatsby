@@ -1,10 +1,14 @@
 import React, { forwardRef } from "react";
-import { useTheme } from "@gatsby-tv/utilities";
+import { css } from "styled-components";
+import { Negative, useTheme } from "@gatsby-tv/utilities";
 
 import { Box, BoxProps } from "@lib/components/Box";
+import { cssMargin } from "@lib/styles/size";
+import { Margin } from "@lib/types";
 
 export interface ViewportProps {
   children?: React.ReactNode;
+  crop?: Margin;
   ariaLabel?: string;
   overlay?: React.ReactNode;
   placeholder?: boolean;
@@ -15,6 +19,7 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps & BoxProps>(
   (props: ViewportProps & BoxProps, ref) => {
     const {
       children,
+      crop,
       ariaLabel,
       overlay,
       placeholder,
@@ -26,8 +31,21 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps & BoxProps>(
 
     const theme = useTheme();
 
+    const figureStyle = crop
+      ? css`
+          overflow: hidden;
+
+          & > *:nth-child(2) {
+            ${cssMargin(
+              "margin",
+              [crop as Margin].flat().map((margin) => Negative(margin))
+            )}
+          }
+        `
+      : css``;
+
     const figureProps = {
-      ref: ref as React.RefObject<HTMLElement>,
+      ref,
       w,
       rounded,
       "aria-label": ariaLabel,
@@ -49,7 +67,7 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps & BoxProps>(
     ) : null;
 
     return (
-      <Box as="figure" css={{ overflow: "hidden" }} {...figureProps}>
+      <Box as="figure" css={figureStyle} {...figureProps}>
         <Box {...boxProps} />
         {children}
         {OverlayMarkup}

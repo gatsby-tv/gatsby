@@ -3,8 +3,7 @@ import * as React from "react";
 function SvgCancelFill() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      id="gz-svg-cancel-fill"
+      id="gz-cancel-fill"
       aria-hidden="true"
       viewBox="0 0 540 540"
       width="1em"

@@ -10,6 +10,7 @@
     "@babel/preset-typescript": "^7.12.7",
     "@gatsby-tv/components": "^0.4.63",
     "@gatsby-tv/icons": "^0.3.27",
+    "@gatsby-tv/player": "workspace:packages/player",
     "@gatsby-tv/types": "^0.4.6",
     "@gatsby-tv/utilities": "^0.4.8",
     "@testing-library/dom": "^7.26.5",

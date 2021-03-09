@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { ifExists } from "@gatsby-tv/utilities";
 
 import { cssTextSubdued } from "@lib/styles/typography";
+import { cssTransition } from "@lib/styles/transition";
 import { Optional } from "@lib/components/Optional";
 import { EventListener } from "@lib/components/EventListener";
 import { Link as LinkComponent } from "@lib/components/Link";
@@ -23,7 +24,7 @@ interface LinkBaseProps {
 
 const LinkBase = styled(Item)<LinkBaseProps>`
   ${cssTextSubdued}
-  transition: color ${(props) => props.theme.duration.fastest} ease;
+  ${(props) => cssTransition("color", props.theme.duration.fastest, "ease")}
   width: fit-content;
 
   &:hover {

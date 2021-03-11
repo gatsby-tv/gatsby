@@ -23,10 +23,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
 
   const PreviewsMarkup = [...Array(24)].map((_, index) => (
     <Grid.Item key={`skeleton.${index}`}>
-      <Preview.Skeleton
-        format={groups !== 1 ? format : "compact"}
-        avatar={theme.avatar.small}
-      />
+      <Preview.Skeleton format={format} avatar={theme.avatar.small} />
     </Grid.Item>
   ));
 

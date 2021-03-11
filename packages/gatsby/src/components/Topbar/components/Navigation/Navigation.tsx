@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Flex, Icon, Tabs } from "@gatsby-tv/components";
-import { GatsbyPlain } from "@gatsby-tv/icons";
-import { useSelect, useTheme } from "@gatsby-tv/utilities";
+import { GatsbyPlain, Subscribe, Browse } from "@gatsby-tv/icons";
+import { useFrame, useSelect, useTheme } from "@gatsby-tv/utilities";
 
 import { Link } from "@src/components/Link";
 
@@ -25,6 +25,7 @@ export function Navigation(props: NavigationProps): React.ReactElement {
   const { session } = props;
   const theme = useTheme();
   const router = useRouter();
+  const { screen } = useFrame();
 
   const defaultTab = getCurrentTab(router.pathname);
 

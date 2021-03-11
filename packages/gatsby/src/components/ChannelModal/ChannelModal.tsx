@@ -10,7 +10,7 @@ import {
 } from "@gatsby-tv/components";
 import { Channel } from "@gatsby-tv/types";
 import { Cancel } from "@gatsby-tv/icons";
-import { useTheme } from "@gatsby-tv/utilities";
+import { useFrame, useTheme } from "@gatsby-tv/utilities";
 
 import { ChannelContent } from "@src/components/ChannelContent";
 
@@ -27,11 +27,12 @@ export function ChannelModal(props: ChannelModalProps): React.ReactElement {
   const { channel, active, onExit } = props;
   const container = useRef<HTMLDivElement>(null);
   const theme = useTheme();
+  const { screen } = useFrame();
 
   const cardProps = {
     ref: container,
     bg: theme.colors.background[2],
-    w: "90rem",
+    w: "min(80vw, 90rem)",
     h: "calc(100vh - 12rem)",
   };
 

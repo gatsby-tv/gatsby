@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import { Box, Flex, Rule, TextDisplay } from "@gatsby-tv/components";
-import { useTheme, useBreakpoints, useUniqueId } from "@gatsby-tv/utilities";
+import {
+  ifExists,
+  useTheme,
+  useFrame,
+  useUniqueId,
+} from "@gatsby-tv/utilities";
 
 import { PageBody } from "@src/components/PageBody";
 import { ChannelCarousel } from "@src/components/ChannelCarousel";
@@ -14,36 +19,28 @@ import { useFeaturedChannels } from "@src/utilities/use-featured-channels";
 export default function IndexPage(): React.ReactElement {
   const theme = useTheme();
   const recommendedId = useUniqueId("section-label");
+  const { screen } = useFrame();
   const { content: recommended, ...recommendedProps } = useRecommendedFeed();
   const { content: popular, ...popularProps } = usePopularFeed();
   const { channels } = useFeaturedChannels();
 
-  const recommendedGroups = useBreakpoints(
-    {
-      2: "(max-width: 1199px)",
-      3: "(min-width: 1200px)",
-    },
-    3
-  );
-
-  const popularGroups = useBreakpoints(
-    {
-      3: "(max-width: 1099px)",
-      4: "(min-width: 1100px) and (max-width: 1399px)",
-      5: "(min-width: 1400px)",
-    },
-    5
-  );
-
-  const carouselGroups = useBreakpoints(
-    {
-      4: "(max-width: 1099px)",
-      5: "(min-width: 1100px) and (max-width: 1299px)",
-      6: "(min-width: 1300px) and (max-width: 1599px)",
-      7: "(min-width: 1600px)",
-    },
-    6
-  );
+  const recommendedGroups = screen.width < 1200 ? 2 : 3;
+  const popularGroups =
+    screen.width < 900
+      ? 2
+      : screen.width < 1100
+      ? 3
+      : screen.width < 1400
+      ? 4
+      : 5;
+  const carouselGroups =
+    screen.width < 1100
+      ? 4
+      : screen.width < 1300
+      ? 5
+      : screen.width < 1600
+      ? 6
+      : 7;
 
   const ruleProps = {
     margin: [theme.spacing[1], theme.spacing[0], theme.spacing[2]],
@@ -88,6 +85,18 @@ export default function IndexPage(): React.ReactElement {
     <Listing.Skeleton groups={recommendedGroups} />
   );
 
+  const RecommendedMarkup = (
+    <Flex column gap={theme.spacing[1.5]}>
+      <TextDisplay
+        id={recommendedId}
+        marginLeft={ifExists(screen.width < 450, theme.spacing[3])}
+      >
+        Recommended
+      </TextDisplay>
+      {ListingMarkup}
+    </Flex>
+  );
+
   return (
     <>
       {HeaderMarkup}
@@ -98,10 +107,7 @@ export default function IndexPage(): React.ReactElement {
         <Flex column gap={theme.spacing[1]}>
           {SliderMarkup}
           <Rule {...ruleProps} />
-          <Flex column gap={theme.spacing[1.5]}>
-            <TextDisplay id={recommendedId}>Recommended</TextDisplay>
-            {ListingMarkup}
-          </Flex>
+          {RecommendedMarkup}
         </Flex>
       </PageBody>
     </>

@@ -9,7 +9,7 @@ import { TextBox } from "@lib/components/TextBox";
 import { Portal } from "@lib/components/Portal";
 
 export interface TooltipProps {
-  children?: string | string[];
+  children?: React.ReactNode;
   for: React.RefObject<HTMLElement>;
   offset?: number;
   placement?: Placement;
@@ -46,9 +46,9 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
     pointer-events: none;
     opacity: 0;
     animation-name: appear;
-    animation-duration: ${(props) => props.theme.duration.fast};
+    animation-duration: ${(props) => `${props.theme.duration.fast}ms`};
     animation-fill-mode: forwards;
-    animation-delay: ${(props) => props.theme.duration.base};
+    animation-delay: ${(props) => `${props.theme.duration.base}ms`};
 
     @keyframes appear {
       from {
@@ -62,15 +62,15 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
   `;
 
   useEffect(() => {
-    const mouseEnterHandler = () => setActive(true);
-    const mouseLeaveHandler = () => setActive(false);
-    props.for.current?.addEventListener("mouseenter", mouseEnterHandler);
-    props.for.current?.addEventListener("mouseleave", mouseLeaveHandler);
+    const onPointerEnter = () => setActive(true);
+    const onPointerLeave = () => setActive(false);
+    props.for.current?.addEventListener("pointerenter", onPointerEnter);
+    props.for.current?.addEventListener("pointerleave", onPointerLeave);
     return () => {
-      props.for.current?.removeEventListener("mouseenter", mouseEnterHandler);
-      props.for.current?.removeEventListener("mouseleave", mouseLeaveHandler);
+      props.for.current?.removeEventListener("pointerenter", onPointerEnter);
+      props.for.current?.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, [props.for]);
+  }, []);
 
   const popperProps = {
     ref: setPopper,

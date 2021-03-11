@@ -5,16 +5,16 @@ import { Scroll } from "@lib/components/Scroll";
 
 export interface MainFrameProps {
   children?: React.ReactNode;
-  fullscreen?: boolean;
+  scrollHidden?: boolean;
   offsetX?: number;
   offsetY?: number;
 }
 
 export function MainFrame(props: MainFrameProps): React.ReactElement {
-  const { fullscreen, offsetX, offsetY } = props;
+  const { scrollHidden, offsetX, offsetY } = props;
 
   const scrollProps = {
-    hide: fullscreen,
+    hide: scrollHidden,
     maxw: offsetX ? `calc(100vw - ${offsetX}px)` : "100vw",
     maxh: offsetY ? `calc(100vh - ${offsetY}px)` : "100vh",
   };

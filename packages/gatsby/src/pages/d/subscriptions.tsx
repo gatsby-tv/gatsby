@@ -1,7 +1,7 @@
 import React from "react";
 import { useSession } from "next-auth/client";
 import { Box, Flex, TextDisplay } from "@gatsby-tv/components";
-import { useTheme, useBreakpoints } from "@gatsby-tv/utilities";
+import { useFrame, useTheme } from "@gatsby-tv/utilities";
 import { User } from "@gatsby-tv/types";
 
 import { PageBody } from "@src/components/PageBody";
@@ -14,14 +14,9 @@ export default function SubscriptionsPage(): React.ReactElement {
     (session?.user as User | undefined)?._id
   );
   const theme = useTheme();
+  const { screen } = useFrame();
 
-  const groups = useBreakpoints(
-    {
-      3: "(max-width: 1200px)",
-      4: "(min-width: 1201px)",
-    },
-    4
-  );
+  const groups = screen.width < 1200 ? 3 : 4;
 
   const ReleaseListingMarkup = videos ? (
     <ReleaseListing groups={groups} videos={videos} {...subscriptions} />

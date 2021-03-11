@@ -11,9 +11,9 @@ const PlayerBase = forwardRef<HTMLVideoElement, PlayerProps>(
   (props: PlayerProps, ref: Ref<HTMLVideoElement>) => {
     const mobile = useMobileDetector();
     return mobile ? (
-      <Mobile ref={ref} {...props} />
+      <Player.Mobile ref={ref} {...props} />
     ) : (
-      <Desktop ref={ref} {...props} />
+      <Player.Desktop ref={ref} {...props} />
     );
   }
 );

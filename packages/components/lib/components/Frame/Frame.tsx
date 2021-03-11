@@ -26,17 +26,24 @@ export interface FrameProps {
 }
 
 export function Frame(props: FrameProps): React.ReactElement {
+  const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  const [offsetX, setOffsetX] = useState<number | undefined>(undefined);
-  const [offsetY, setOffsetY] = useState<number | undefined>(undefined);
+  const [screenX, setScreenX] = useState<number>(0);
+  const [screenY, setScreenY] = useState<number>(0);
+  const [offsetX, setOffsetX] = useState<number>(0);
+  const [offsetY, setOffsetY] = useState<number>(0);
   const [fullscreen, toggleFullscreen, setFullscreen] = useToggle(false);
 
   const handleFullscreen = useCallback(() => {
     setFullscreen(Boolean(document.fullscreenElement));
   }, [setFullscreen]);
 
+  useResizeObserver(screen, (content) => {
+    setScreenX(content.inlineSize);
+    setScreenY(content.blockSize);
+  });
   useResizeObserver(sideframe, (content) => setOffsetX(content.inlineSize));
   useResizeObserver(topframe, (content) => setOffsetY(content.blockSize));
 
@@ -55,21 +62,23 @@ export function Frame(props: FrameProps): React.ReactElement {
     setFullscreen(Boolean(document.fullscreenElement));
   }, [setFullscreen]);
 
+  const mainProps = {
+    scrollHidden: fullscreen || screenX < 450,
+    offsetX,
+    offsetY,
+  };
+
   const context = {
+    screen: { width: screenX, height: screenY },
+    offset: { x: offsetX, y: offsetY },
     fullscreen: fullscreen as boolean,
     toggleFullscreen,
     setFullscreen,
   };
 
-  const mainProps = {
-    fullscreen,
-    offsetX,
-    offsetY,
-  };
-
   return (
     <FrameContext.Provider value={context}>
-      <FrameStyle>
+      <FrameStyle ref={screen}>
         <TopFrame ref={topframe} topbar={props.topbar}>
           <SideFrame ref={sideframe} sidebar={props.sidebar}>
             <MainFrame {...mainProps}>{props.children}</MainFrame>

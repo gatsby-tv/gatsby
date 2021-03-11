@@ -12,7 +12,7 @@ export interface AvatarTooltipProps {
 export function AvatarTooltip(props: AvatarTooltipProps): React.ReactElement {
   const { channel } = props;
   const theme = useTheme();
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
   const { active, activate, deactivate } = useModal();
 
   return (
@@ -20,7 +20,7 @@ export function AvatarTooltip(props: AvatarTooltipProps): React.ReactElement {
       <Button ref={ref} unstyled onClick={activate}>
         <Avatar src={channel.avatar} size={theme.avatar.small} />
       </Button>
-      <Tooltip for={ref} fade placement="right">
+      <Tooltip for={ref} placement="right">
         <Flex column>
           <TextMeta font={theme.font[4]} heading bold>
             {channel.name}

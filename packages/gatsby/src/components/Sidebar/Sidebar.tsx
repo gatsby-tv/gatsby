@@ -13,7 +13,7 @@ import { SignedIn } from "./components/SignedIn";
 
 import { Skeleton } from "./Skeleton";
 
-export function Sidebar(): React.ReactElement {
+export function Sidebar(): React.ReactElement | null {
   const theme = useTheme();
   const router = useRouter();
   const [session, loading] = useSession();
@@ -36,7 +36,7 @@ export function Sidebar(): React.ReactElement {
     loading ? (
       <Skeleton />
     ) : session ? (
-      <SignedIn user={session.user} />
+      <SignedIn user={session.user as any} />
     ) : (
       <SignedOut />
     );

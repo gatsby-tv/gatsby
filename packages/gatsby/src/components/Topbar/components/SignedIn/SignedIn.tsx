@@ -11,7 +11,7 @@ import {
   Placement,
 } from "@gatsby-tv/components";
 import { User, Exit } from "@gatsby-tv/icons";
-import { UserType } from "@gatsby-tv/types";
+import { User as UserType } from "@gatsby-tv/types";
 import { useTheme, useMenu } from "@gatsby-tv/utilities";
 
 export interface SignedInProps {

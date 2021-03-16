@@ -29,7 +29,7 @@ export function Overlay(props: OverlayProps): React.ReactElement {
     }
 
     animation-name: fade;
-    animation-duration: ${(props) => props.theme.duration.fast};
+    animation-duration: ${(props) => `${props.theme.duration.fast}ms`};
     animation-fill-mode: forwards;
     animation-timing-function: ease;
 
@@ -47,7 +47,7 @@ export function Overlay(props: OverlayProps): React.ReactElement {
       }
 
       animation-name: slide;
-      animation-duration: ${(props) => props.theme.duration.fast};
+      animation-duration: ${(props) => `${props.theme.duration.fast}ms`};
       animation-fill-mode: forwards;
       animation-timing-function: ease;
     }

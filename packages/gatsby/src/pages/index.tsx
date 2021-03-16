@@ -7,14 +7,16 @@ import {
   useFrame,
   useUniqueId,
 } from "@gatsby-tv/utilities";
+import {
+  usePopularFeed,
+  useRecommendedFeed,
+  useFeaturedChannels,
+} from "@gatsby-tv/next";
 
 import { PageBody } from "@src/components/PageBody";
 import { ChannelCarousel } from "@src/components/ChannelCarousel";
 import { PreviewSlider } from "@src/components/PreviewSlider";
 import { Listing } from "@src/components/Listing";
-import { usePopularFeed } from "@src/utilities/use-popular-feed";
-import { useRecommendedFeed } from "@src/utilities/use-recommended-feed";
-import { useFeaturedChannels } from "@src/utilities/use-featured-channels";
 
 export default function IndexPage(): React.ReactElement {
   const theme = useTheme();
@@ -87,10 +89,7 @@ export default function IndexPage(): React.ReactElement {
 
   const RecommendedMarkup = (
     <Flex column gap={theme.spacing[1.5]}>
-      <TextDisplay
-        id={recommendedId}
-        marginLeft={ifExists(screen.width < 450, theme.spacing[3])}
-      >
+      <TextDisplay id={recommendedId}>
         Recommended
       </TextDisplay>
       {ListingMarkup}

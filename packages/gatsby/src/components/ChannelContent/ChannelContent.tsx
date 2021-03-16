@@ -2,8 +2,8 @@ import React from "react";
 import { TextBox, Tabs, Rule } from "@gatsby-tv/components";
 import { Channel } from "@gatsby-tv/types";
 import { useTheme, useSelect, useUniqueId } from "@gatsby-tv/utilities";
+import { useChannelContent } from "@gatsby-tv/next";
 
-import { useChannelContent } from "@src/utilities/use-channel-content";
 import { Listing } from "@src/components/Listing";
 
 export interface ChannelContentProps {

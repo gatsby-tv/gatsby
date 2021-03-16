@@ -1,9 +1,8 @@
 import React from "react";
 import { Flex } from "@gatsby-tv/components";
-import { User } from "@gatsby-tv/types";
+import { User, Channel } from "@gatsby-tv/types";
 import { useTheme } from "@gatsby-tv/utilities";
-
-import { useUserFeeds } from "@src/utilities/use-user-feeds";
+import { useUserFeeds } from "@gatsby-tv/next";
 
 import { AvatarTooltip } from "../AvatarTooltip";
 
@@ -26,7 +25,7 @@ export function SignedIn(props: SignedInProps): React.ReactElement {
 
   const AvatarsMarkup = feeds?.subscriptions
     .slice(0, 8)
-    .map((channel, index) => (
+    .map((channel: Channel, index: number) => (
       <AvatarTooltip key={`${channel._id}.${index}`} channel={channel} />
     ));
 

@@ -9,12 +9,11 @@ import {
   useIPFSVideoStream,
   useFrame,
 } from "@gatsby-tv/utilities";
+import { useVideo, useRelatedFeed } from "@gatsby-tv/next";
 
 import { PageBody } from "@src/components/PageBody";
 import { Listing } from "@src/components/Listing";
 import { Description } from "@src/components/Description";
-import { useRelatedFeed } from "@src/utilities/use-related-feed";
-import { useVideo } from "@src/utilities/use-video";
 
 export default function VideoPage(): React.ReactElement {
   const theme = useTheme();

@@ -9,10 +9,10 @@ import {
   useSelect,
   useUniqueId,
 } from "@gatsby-tv/utilities";
+import { useUser } from "@gatsby-tv/next";
 
 import { InfoHeader } from "@src/components/InfoHeader";
 import { Engagement } from "@src/components/Engagement";
-import { useUser } from "@src/utilities/use-user";
 
 export default function UserPage(): React.ReactElement {
   const theme = useTheme();

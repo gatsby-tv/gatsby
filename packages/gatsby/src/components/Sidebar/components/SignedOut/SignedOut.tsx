@@ -1,8 +1,8 @@
 import React from "react";
 import { Flex } from "@gatsby-tv/components";
+import { Channel } from "@gatsby-tv/types";
 import { useTheme } from "@gatsby-tv/utilities";
-
-import { useFeaturedChannels } from "@src/utilities/use-featured-channels";
+import { useFeaturedChannels } from "@gatsby-tv/next";
 
 import { AvatarTooltip } from "../AvatarTooltip";
 
@@ -20,7 +20,7 @@ export function SignedOut(): React.ReactElement {
 
   const AvatarsMarkup = channels
     ?.slice(0, 8)
-    .map((channel, index) => (
+    .map((channel: Channel, index: number) => (
       <AvatarTooltip key={`${channel._id}.${index}`} channel={channel} />
     ));
 

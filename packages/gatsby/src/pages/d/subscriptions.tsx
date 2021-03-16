@@ -1,12 +1,12 @@
 import React from "react";
 import { useSession } from "next-auth/client";
 import { Box, Flex, TextDisplay } from "@gatsby-tv/components";
-import { useFrame, useTheme } from "@gatsby-tv/utilities";
 import { User } from "@gatsby-tv/types";
+import { useFrame, useTheme } from "@gatsby-tv/utilities";
+import { useSubscriptionsFeed } from "@gatsby-tv/next";
 
 import { PageBody } from "@src/components/PageBody";
 import { ReleaseListing } from "@src/components/ReleaseListing";
-import { useSubscriptionsFeed } from "@src/utilities/use-subscriptions-feed";
 
 export default function SubscriptionsPage(): React.ReactElement {
   const [session] = useSession();

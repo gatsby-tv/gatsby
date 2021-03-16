@@ -5,8 +5,7 @@ import { css } from "styled-components";
 import { Box } from "@gatsby-tv/components";
 import { User, UserContentFeeds } from "@gatsby-tv/types";
 import { useTheme } from "@gatsby-tv/utilities";
-
-import { useUserFeeds } from "@src/utilities/use-user-feeds";
+import { useUserFeeds } from "@gatsby-tv/next";
 
 import { SignedOut } from "./components/SignedOut";
 import { SignedIn } from "./components/SignedIn";

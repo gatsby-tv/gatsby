@@ -6,13 +6,11 @@ import {
   useSelect,
   useUniqueId,
 } from "@gatsby-tv/utilities";
+import { usePopularFeed, useNewFeed, useTopicsFeed } from "@gatsby-tv/next";
 
 import { PageBody } from "@src/components/PageBody";
 import { Listing } from "@src/components/Listing";
 import { TopicListing } from "@src/components/TopicListing";
-import { usePopularFeed } from "@src/utilities/use-popular-feed";
-import { useNewFeed } from "@src/utilities/use-new-feed";
-import { useTopicsFeed } from "@src/utilities/use-topics-feed";
 
 export default function BrowsePage(): React.ReactElement {
   const theme = useTheme();

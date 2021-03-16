@@ -9,13 +9,12 @@ import {
   useSelect,
   useUniqueId,
 } from "@gatsby-tv/utilities";
+import { useChannel } from "@gatsby-tv/next";
 
 import { PageBody } from "@src/components/PageBody";
 import { InfoHeader } from "@src/components/InfoHeader";
 import { Engagement } from "@src/components/Engagement";
 import { ChannelContent } from "@src/components/ChannelContent";
-import { useChannel } from "@src/utilities/use-channel";
-import { useChannelContent } from "@src/utilities/use-channel-content";
 
 export default function ChannelPage(): React.ReactElement {
   const theme = useTheme();

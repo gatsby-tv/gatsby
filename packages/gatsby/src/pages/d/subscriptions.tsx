@@ -19,9 +19,14 @@ export default function SubscriptionsPage(): React.ReactElement {
   const groups = screen.width < 1200 ? 3 : 4;
 
   const ReleaseListingMarkup = videos ? (
-    <ReleaseListing groups={groups} videos={videos} {...subscriptions} />
+    <ReleaseListing
+      groups={groups}
+      videos={videos}
+      avatar={theme.avatar.small}
+      {...subscriptions}
+    />
   ) : (
-    <ReleaseListing.Skeleton groups={groups} />
+    <ReleaseListing.Skeleton groups={groups} avatar={theme.avatar.small} />
   );
 
   return (

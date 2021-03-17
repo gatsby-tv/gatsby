@@ -68,9 +68,9 @@ export default function VideoPage(): React.ReactElement {
   );
 
   const ListingMarkup = content ? (
-    <Listing format="compact" content={content} {...related} />
+    <Listing format="row" content={content} {...related} />
   ) : (
-    <Listing.Skeleton format="compact" />
+    <Listing.Skeleton format="row" />
   );
 
   return (

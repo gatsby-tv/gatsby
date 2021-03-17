@@ -11,8 +11,7 @@ import {
 import { CheckmarkFill } from "@gatsby-tv/icons";
 import { FullValue, UserHandle, ifExists, useTheme } from "@gatsby-tv/utilities";
 import { User as UserType } from "@gatsby-tv/types";
-
-import { Link } from "@src/components/Link";
+import { Link } from "@gatsby-tv/next";
 
 import { Skeleton, SkeletonProps, isSkeletonProps } from "./Skeleton";
 

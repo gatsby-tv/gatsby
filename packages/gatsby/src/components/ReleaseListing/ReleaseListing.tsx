@@ -19,22 +19,26 @@ export interface ReleaseListingProps {
   generator?: () => void;
   loading?: boolean;
   format?: PreviewFormat;
+  nochannel?: boolean;
+  avatar?: string;
   ariaLabel?: string;
   ariaLabelledBy?: string;
 }
 
 function ReleaseListingBase(props: ReleaseListingProps): React.ReactElement {
+  const theme = useTheme();
   const {
     id,
     videos,
     groups,
     loading,
     generator = () => undefined,
-    format = "default",
+    format = "column",
+    nochannel,
+    avatar,
     ariaLabel,
     ariaLabelledBy,
   } = props;
-  const theme = useTheme();
 
   // Temporary accomodation, since releaseDate is a string when
   // being pulled from our testing API.
@@ -105,7 +109,7 @@ function ReleaseListingBase(props: ReleaseListingProps): React.ReactElement {
   );
 
   return (
-    <ListingContext.Provider value={{ groups, format }}>
+    <ListingContext.Provider value={{ groups, format, nochannel, avatar }}>
       <Flex {...flexProps}>{StreamMarkup}</Flex>
     </ListingContext.Provider>
   );

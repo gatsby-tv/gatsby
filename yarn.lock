@@ -2231,6 +2231,66 @@ __metadata:
     webpack: ^5.21.2
   peerDependencies:
     "@gatsby-tv/components": "*"
+    "@gatsby-tv/icons": "*"
+    "@gatsby-tv/utilities": "*"
+    react: ^17.0.1
+    react-dom: ^17.0.1
+    react-is: ^17.0.1
+    react-router-dom: ^5.2.0
+    styled-components: ^5.2.1
+  languageName: unknown
+  linkType: soft
+
+"@gatsby-tv/preview@workspace:packages/preview":
+  version: 0.0.0-use.local
+  resolution: "@gatsby-tv/preview@workspace:packages/preview"
+  dependencies:
+    "@babel/cli": ^7.12.1
+    "@babel/core": ^7.11.6
+    "@babel/plugin-proposal-class-properties": ^7.12.1
+    "@babel/plugin-proposal-private-methods": ^7.12.1
+    "@babel/plugin-proposal-private-property-in-object": ^7.12.1
+    "@babel/plugin-transform-object-assign": ^7.12.1
+    "@babel/preset-env": ^7.12.1
+    "@babel/preset-react": ^7.12.5
+    "@babel/preset-typescript": ^7.12.1
+    "@gatsby-tv/components": "workspace:packages/components"
+    "@gatsby-tv/icons": "workspace:packages/icons"
+    "@gatsby-tv/types": ^0.4.7
+    "@gatsby-tv/utilities": "workspace:packages/utilities"
+    "@popperjs/core": ^2.5.4
+    "@storybook/addon-actions": ^6.0.28
+    "@storybook/addon-essentials": ^6.0.28
+    "@storybook/addon-links": ^6.0.28
+    "@storybook/addons": ^6.0.28
+    "@storybook/react": ^6.0.28
+    "@storybook/theming": ^6.0.28
+    "@types/color": ^3.0.1
+    "@types/react": ^17.0.0
+    "@types/react-dom": ^17.0.0
+    "@types/react-router-dom": ^5.1.5
+    "@types/styled-components": ^5.1.3
+    "@typescript-eslint/eslint-plugin": ^4.11.1
+    "@typescript-eslint/parser": ^4.11.1
+    babel-loader: ^8.2.2
+    babel-plugin-module-resolver: ^4.0.0
+    babel-plugin-styled-components: ^1.11.1
+    color: ^3.1.3
+    core-js: ^3.7.0
+    eslint: ^7.16.0
+    eslint-plugin-react: ^7.21.5
+    eslint-plugin-react-hooks: ^4.2.0
+    react: ^17.0.1
+    react-dom: ^17.0.1
+    react-is: ^17.0.1
+    react-lorem-ipsum: ^1.4.7
+    react-router-dom: ^5.2.0
+    styled-components: ^5.2.1
+    typescript: ^4.0.5
+    webpack: ^5.21.2
+  peerDependencies:
+    "@gatsby-tv/components": "*"
+    "@gatsby-tv/icons": "*"
     "@gatsby-tv/utilities": "*"
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -12689,6 +12749,7 @@ fsevents@~2.1.1:
     "@gatsby-tv/icons": "workspace:packages/icons"
     "@gatsby-tv/next": "workspace:packages/next"
     "@gatsby-tv/player": "workspace:packages/player"
+    "@gatsby-tv/preview": "workspace:packages/preview"
     "@gatsby-tv/types": ^0.4.7
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@testing-library/dom": ^7.26.5

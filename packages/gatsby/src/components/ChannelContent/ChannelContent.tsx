@@ -67,13 +67,13 @@ export function ChannelContent(props: ChannelContentProps): React.ReactElement {
   );
 
   const ListingMarkup = !listing ? (
-    <Listing.Skeleton format="nochannel" groups={groups} />
+    <Listing.Skeleton groups={groups} nochannel />
   ) : listing.length ? (
     <Listing
       id={panelId}
-      format="nochannel"
       groups={groups}
       content={listing}
+      nochannel
       ariaLabelledBy={panelLabel}
     />
   ) : (

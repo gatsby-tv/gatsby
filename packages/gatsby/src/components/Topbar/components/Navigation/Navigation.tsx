@@ -2,9 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Flex, Icon, Tabs } from "@gatsby-tv/components";
 import { GatsbyPlain, Subscribe, Browse } from "@gatsby-tv/icons";
+import { Link } from "@gatsby-tv/next";
 import { useFrame, useSelect, useTheme } from "@gatsby-tv/utilities";
-
-import { Link } from "@src/components/Link";
 
 function getCurrentTab(route: string): string | undefined {
   switch (route) {

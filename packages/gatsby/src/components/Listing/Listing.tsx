@@ -1,40 +1,43 @@
 import React from "react";
 import { Grid, Stream } from "@gatsby-tv/components";
-import { Content as ContentType } from "@gatsby-tv/types";
+import { Content } from "@gatsby-tv/types";
 import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import { PreviewFormat } from "@gatsby-tv/preview";
 
-import { PreviewFormat } from "@src/types";
 import { ListingContext } from "@src/utilities/listing";
 
-import { Content } from "./components/Content";
-
+import { Article } from "./components/Article";
 import { Skeleton, SkeletonProps } from "./Skeleton";
 
 export type { SkeletonProps as ListingSkeletonProps };
 
 export interface ListingProps {
   id?: string;
-  content: ContentType[];
+  content: Content[];
   generator?: () => void;
   loading?: boolean;
   groups?: number;
   format?: PreviewFormat;
+  nochannel?: boolean;
+  avatar?: string;
   ariaLabel?: string;
   ariaLabelledBy?: string;
 }
 
 function ListingBase(props: ListingProps): React.ReactElement {
+  const theme = useTheme();
   const {
     id,
     content,
     loading,
     generator = () => undefined,
     groups = 1,
-    format = "default",
+    format = "column",
+    avatar,
+    nochannel,
     ariaLabel,
     ariaLabelledBy,
   } = props;
-  const theme = useTheme();
 
   const gridProps = {
     id,
@@ -43,7 +46,7 @@ function ListingBase(props: ListingProps): React.ReactElement {
     center: ifExists(groups > 1),
     gap: [
       theme.spacing[1.5],
-      format === "compact" ? theme.spacing[1.5] : theme.spacing[3],
+      format !== "column" ? theme.spacing[1.5] : theme.spacing[3],
     ],
     role: "feed",
     "aria-busy": loading,
@@ -52,7 +55,7 @@ function ListingBase(props: ListingProps): React.ReactElement {
   };
 
   const streamProps = {
-    component: Content,
+    component: Article,
     data: content.map((item, index) => ({
       ariaPosInSet: index + 1,
       ...item,
@@ -62,7 +65,7 @@ function ListingBase(props: ListingProps): React.ReactElement {
   };
 
   return (
-    <ListingContext.Provider value={{ groups, format }}>
+    <ListingContext.Provider value={{ groups, format, nochannel, avatar }}>
       <Grid as="section" {...gridProps}>
         <Stream {...streamProps} />
       </Grid>

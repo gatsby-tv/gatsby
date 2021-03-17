@@ -2,9 +2,11 @@ import React from "react";
 import { Rule, Flex, Grid, TextDisplay } from "@gatsby-tv/components";
 import { Browsable } from "@gatsby-tv/types";
 import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import { Link } from "@gatsby-tv/next";
+import Preview from "@gatsby-tv/preview";
 
+import { Info } from "@src/components/Info";
 import { useListing } from "@src/utilities/listing";
-import { Preview } from "@src/components/Preview";
 
 export interface SectionProps {
   title: string;
@@ -13,7 +15,7 @@ export interface SectionProps {
 
 export function Section(props: SectionProps): React.ReactElement | null {
   const { title, content } = props;
-  const { groups, format } = useListing();
+  const { groups, format, nochannel, avatar } = useListing();
   const theme = useTheme();
 
   const gridProps = {
@@ -26,9 +28,10 @@ export function Section(props: SectionProps): React.ReactElement | null {
   const PreviewsMarkup = content.map((item, index) => (
     <Preview
       key={`${item._id}.${index}`}
-      content={item}
-      avatar={theme.avatar.small}
       format={format}
+      content={item}
+      info={<Info content={item} channel={!nochannel} avatar={avatar} />}
+      link={<Link href={`/v/${item._id}`} />}
     />
   ));
 

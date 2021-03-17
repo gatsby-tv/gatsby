@@ -12,6 +12,7 @@
     "@gatsby-tv/icons": "workspace:packages/icons",
     "@gatsby-tv/next": "workspace:packages/next",
     "@gatsby-tv/player": "workspace:packages/player",
+    "@gatsby-tv/preview": "workspace:packages/preview",
     "@gatsby-tv/types": "^0.4.7",
     "@gatsby-tv/utilities": "workspace:packages/utilities",
     "@testing-library/dom": "^7.26.5",

@@ -29,7 +29,7 @@ export function Topbar(): React.ReactElement {
   const style = css`
     ${cssShadow}
     ${ifExists(fullscreen, fullscreenStyle)}
-    transition: transform ${theme.duration.fast} ease ${theme.duration.fastest};
+    transition: transform ${theme.duration.fast}ms ease ${theme.duration.faster}ms;
     transform: translateY(${fullscreen ? "-50px" : "0px"});
   `;
 

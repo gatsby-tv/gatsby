@@ -6,33 +6,24 @@ import {
   useSelect,
   useUniqueId,
 } from "@gatsby-tv/utilities";
-import { usePopularFeed, useNewFeed, useTopicsFeed } from "@gatsby-tv/next";
+import { usePopularFeed, useNewFeed } from "@gatsby-tv/next";
 
 import { PageBody } from "@src/components/PageBody";
 import { Listing } from "@src/components/Listing";
-import { TopicListing } from "@src/components/TopicListing";
 
 export default function BrowsePage(): React.ReactElement {
   const theme = useTheme();
   const { screen } = useFrame();
-  const [tab, setTab] = useSelect(["topics", "popular", "new"], "topics");
+  const [tab, setTab] = useSelect(["popular", "new"], "popular");
   const { content: recent, ...recentProps } = useNewFeed();
   const { content: popular, ...popularProps } = usePopularFeed();
-  const { topics, ...topicsProps } = useTopicsFeed();
   const listing = tab["popular"] ? popular : recent;
   const listingProps = tab["popular"] ? popularProps : recentProps;
-  const topicsId = useUniqueId("tab");
   const popularId = useUniqueId("tab");
   const newId = useUniqueId("tab");
   const panelId = useUniqueId("panel");
 
-  const panelLabel = tab["topics"]
-    ? topicsId
-    : tab["popular"]
-    ? popularId
-    : newId;
-
-  const topicGroups = screen.width < 1100 ? 3 : screen.width < 1400 ? 4 : 5;
+  const panelLabel = tab["popular"] ? popularId : newId;
   const listingGroups = screen.width < 1200 ? 2 : 3;
 
   const headerProps = {
@@ -53,9 +44,6 @@ export default function BrowsePage(): React.ReactElement {
 
   const TabsMarkup = (
     <Tabs selection={tab} onSelect={setTab} {...tabsProps}>
-      <Tabs.Item id={topicsId} option="topics" ariaControls={panelId}>
-        Topics
-      </Tabs.Item>
       <Tabs.Item id={popularId} option="popular" ariaControls={panelId}>
         Popular
       </Tabs.Item>
@@ -65,31 +53,18 @@ export default function BrowsePage(): React.ReactElement {
     </Tabs>
   );
 
-  const TopicListingMarkup = topics ? (
-    <TopicListing
-      id={panelId}
-      topics={topics}
-      groups={topicGroups}
-      ariaLabelledBy={panelLabel}
-      {...topicsProps}
-    />
-  ) : (
-    <TopicListing.Skeleton groups={topicGroups} />
-  );
-
   const ListingMarkup = listing ? (
     <Listing
       id={panelId}
       content={listing}
       groups={listingGroups}
+      avatar={theme.avatar.base}
       ariaLabelledBy={panelLabel}
       {...listingProps}
     />
   ) : (
     <Listing.Skeleton groups={listingGroups} />
   );
-
-  const ContentMarkup = tab["topics"] ? TopicListingMarkup : ListingMarkup;
 
   return (
     <PageBody>
@@ -98,7 +73,7 @@ export default function BrowsePage(): React.ReactElement {
         {TabsMarkup}
       </Flex>
       <Rule {...ruleProps} />
-      {ContentMarkup}
+      {ListingMarkup}
     </PageBody>
   );
 }

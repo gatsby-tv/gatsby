@@ -1,18 +1,25 @@
 import React from "react";
 import { Box, Grid, Flex, Rule, TextPlaceholder } from "@gatsby-tv/components";
 import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import Preview, { PreviewFormat } from "@gatsby-tv/preview";
 
-import { PreviewFormat } from "@src/types";
-import { Preview } from "@src/components/Preview";
+import { Info } from "@src/components/Info";
 
 export interface SkeletonProps {
   groups: number;
   format?: PreviewFormat;
+  nochannel?: boolean;
+  avatar?: string;
 }
 
 export function Skeleton(props: SkeletonProps): React.ReactElement {
-  const { groups, format = "default" } = props;
   const theme = useTheme();
+  const {
+    groups,
+    format = "column",
+    nochannel,
+    avatar,
+  } = props;
 
   const gridProps = {
     template: `repeat(${groups}, 1fr)`,
@@ -21,9 +28,14 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
     gap: theme.spacing[1.5],
   };
 
+  const previewProps = {
+    format,
+    info: <Info.Skeleton content channel={!nochannel} avatar={avatar} />,
+  };
+
   const PreviewsMarkup = [...Array(24)].map((_, index) => (
     <Grid.Item key={`skeleton.${index}`}>
-      <Preview.Skeleton format={format} avatar={theme.avatar.small} />
+      <Preview.Skeleton {...previewProps} />
     </Grid.Item>
   ));
 

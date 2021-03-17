@@ -13,7 +13,7 @@ export interface OverlayProps {
   content: Content;
 }
 
-export function Overlay(props: OverlayProps): React.ReactElement | null {
+export function Overlay(props: OverlayProps): React.ReactElement {
   const { content } = props;
   const theme = useTheme();
 
@@ -50,6 +50,6 @@ export function Overlay(props: OverlayProps): React.ReactElement | null {
       </Box>
     );
   } else {
-    return null;
+    throw new Error("Overlay component was passed incorrect prop");
   }
 }

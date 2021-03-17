@@ -1,6 +1,6 @@
 {
-  "name": "@gatsby-tv/player",
-  "description": "Gatsby's video player.",
+  "name": "@gatsby-tv/preview",
+  "description": "Gatsby's video preview component.",
   "version": "0.4.1",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -71,8 +71,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "color": "^3.1.2",
-    "core-js": "^3.7.0",
-    "react-popper": "^2.2.4"
+    "color": "^3.1.3",
+    "core-js": "^3.7.0"
   }
 }

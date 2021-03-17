@@ -9,8 +9,7 @@ import {
 import { useTheme } from "@gatsby-tv/utilities";
 import { ExtendRight } from "@gatsby-tv/icons";
 import { Topic, Genre } from "@gatsby-tv/types";
-
-import { Link, LinkProps } from "@src/components/Link";
+import { Link, LinkProps } from "@gatsby-tv/next";
 
 type TopicProps = { topic: Topic } & LinkProps;
 type GenreProps = { genre: Genre } & LinkProps;

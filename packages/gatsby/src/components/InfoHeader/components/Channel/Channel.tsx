@@ -16,8 +16,7 @@ import {
   useTheme,
 } from "@gatsby-tv/utilities";
 import { Channel as ChannelType } from "@gatsby-tv/types";
-
-import { Link } from "@src/components/Link";
+import { Link } from "@gatsby-tv/next";
 
 import { Skeleton, SkeletonProps, isSkeletonProps } from "./Skeleton";
 

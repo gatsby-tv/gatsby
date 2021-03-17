@@ -29,7 +29,7 @@ export { isSkeletonProps as isContentSkeletonProps };
 
 export interface ContentProps {
   content: ContentType;
-  channel?: Channel;
+  channel?: boolean;
   avatar?: string;
 }
 
@@ -38,7 +38,8 @@ export function isContentProps(props: any): props is ContentProps {
 }
 
 function ContentBase(props: ContentProps): React.ReactElement {
-  const { content, channel, avatar } = props;
+  const { content, avatar } = props;
+  const channel = props.channel ? content.channel : undefined;
   const theme = useTheme();
   const modal = useModal();
   const titleId = useUniqueId("content-info");

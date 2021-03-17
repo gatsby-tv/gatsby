@@ -3,8 +3,7 @@ import { Avatar, Box, Flex, Icon, Optional, TextMeta } from "@gatsby-tv/componen
 import { CheckmarkFill } from "@gatsby-tv/icons";
 import { ReleaseDate, UserHandle, ifExists, useTheme } from "@gatsby-tv/utilities";
 import { User as UserType } from "@gatsby-tv/types";
-
-import { Link } from "@src/components/Link";
+import { Link } from "@gatsby-tv/next";
 
 import { Skeleton, SkeletonProps, isSkeletonProps } from "./Skeleton";
 

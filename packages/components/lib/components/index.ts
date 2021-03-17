@@ -19,6 +19,7 @@ export * from "./Viewport";
 export * from "./Video";
 export * from "./Image";
 export * from "./Avatar";
+export * from "./AvatarCollation";
 export * from "./Icon";
 export * from "./Labelled";
 export * from "./Form";

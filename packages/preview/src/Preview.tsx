@@ -7,7 +7,7 @@ import { PreviewProps } from "@src/types";
 import { Overlay } from "@src/components/Overlay";
 import { Skeleton } from "@src/variants/Skeleton";
 
-function PreviewBase(props: PreviewProps): React.ReactNode {
+function PreviewBase(props: PreviewProps): React.ReactElement {
   const {
     content,
     format = "column",

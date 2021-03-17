@@ -1,8 +1,9 @@
 import React from "react";
-import { Avatar, Flex } from "@gatsby-tv/components";
 import { IPFSContent } from "@gatsby-tv/types";
 
-import { cssCollation } from "@src/styles/collation";
+import { Flex } from "@lib/components/Flex";
+import { Avatar } from "@lib/components/Avatar";
+import { cssCollation } from "@lib/styles/collation";
 
 export interface AvatarCollationProps {
   avatars: (IPFSContent | string)[];

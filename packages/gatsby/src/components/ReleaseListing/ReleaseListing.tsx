@@ -2,9 +2,9 @@ import React from "react";
 import { Video } from "@gatsby-tv/types";
 import { TextBox, Flex, Stream } from "@gatsby-tv/components";
 import { useTheme } from "@gatsby-tv/utilities";
+import { PreviewFormat } from "@gatsby-tv/preview";
 
 import { ListingContext } from "@src/utilities/listing";
-import { PreviewFormat } from "@src/types";
 
 import { Section } from "./components/Section";
 

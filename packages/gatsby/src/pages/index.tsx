@@ -9,6 +9,7 @@ import {
   Slider,
 } from "@gatsby-tv/components";
 import { ExtendRight } from "@gatsby-tv/icons";
+import { Content } from "@gatsby-tv/types";
 import {
   ifExists,
   useTheme,
@@ -72,7 +73,7 @@ export default function IndexPage(): React.ReactElement {
 
   const SliderMarkup = popular ? (
     <Slider groups={popularGroups} gap={theme.spacing[1]}>
-      {popular.slice(0, 10).map((item, index) => (
+      {popular.slice(0, 10).map((item: Content, index: number) => (
         <Preview
           key={`${item._id}.${index}`}
           content={item}

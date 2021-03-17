@@ -2,6 +2,7 @@ import React from "react";
 import {
   Box,
   Button,
+  AvatarCollation,
   Card,
   Flex,
   Scroll,
@@ -14,7 +15,6 @@ import { Plus } from "@gatsby-tv/icons";
 import { Value, ifNotExists, useTheme, useModal } from "@gatsby-tv/utilities";
 
 import { Info } from "@src/components/Info";
-import { AvatarCollation } from "@src/components/AvatarCollation";
 
 type ChannelProps = {
   compact?: boolean;

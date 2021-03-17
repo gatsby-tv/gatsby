@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { PreviewFormat } from "@src/types";
+import { PreviewFormat } from "@gatsby-tv/preview";
 
 export type ListingContextType = {
   groups: number;

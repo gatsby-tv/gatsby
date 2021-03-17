@@ -70,17 +70,6 @@ export default function IndexPage(): React.ReactElement {
     <ChannelCarousel.Skeleton groups={carouselGroups} />
   );
 
-  const PopularTitleMarkup = (
-    <Box w="fit-content">
-      <Link href={"/d/browse"} $props={{ underline: true }}>
-        <Flex gap={theme.spacing[1]} align="center" paddingBottom="0.2rem">
-          <TextDisplay>Popular</TextDisplay>
-          <Icon src={ExtendRight} w={theme.icon.small} />
-        </Flex>
-      </Link>
-    </Box>
-  );
-
   const SliderMarkup = popular ? (
     <Slider groups={popularGroups} gap={theme.spacing[1]}>
       {popular.slice(0, 10).map((item, index) => (
@@ -117,7 +106,9 @@ export default function IndexPage(): React.ReactElement {
 
   const PopularMarkup = (
     <Flex column gap={theme.spacing[1]}>
-      {PopularTitleMarkup}
+      <Link href={`/d/browse`} component={TextDisplay.Link}>
+        Popular
+      </Link>
       {SliderMarkup}
     </Flex>
   );

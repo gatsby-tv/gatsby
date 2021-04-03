@@ -1,7 +1,7 @@
 import React from "react";
 import { Rule, Flex, Grid, TextDisplay } from "@gatsby-tv/components";
 import { Browsable } from "@gatsby-tv/types";
-import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import { ifExists, useTheme, useUniqueId } from "@gatsby-tv/utilities";
 import { Link } from "@gatsby-tv/next";
 import Preview from "@gatsby-tv/preview";
 
@@ -16,6 +16,7 @@ export interface SectionProps {
 export function Section(props: SectionProps): React.ReactElement | null {
   const { title, content } = props;
   const { groups, format, nochannel, avatar } = useListing();
+  const id = useUniqueId("section");
   const theme = useTheme();
 
   const gridProps = {
@@ -23,6 +24,7 @@ export function Section(props: SectionProps): React.ReactElement | null {
     justify: "stretch",
     center: ifExists(groups > 1),
     gap: theme.spacing[1.5],
+    "aria-labelledby": id,
   };
 
   const PreviewsMarkup = content.map((item, index) => (
@@ -32,6 +34,8 @@ export function Section(props: SectionProps): React.ReactElement | null {
       content={item}
       info={<Info content={item} channel={!nochannel} avatar={avatar} />}
       link={<Link href={`/v/${item._id}`} />}
+      ariaPosInSet={index + 1}
+      ariaSetSize={content.length}
     />
   ));
 

@@ -63,7 +63,7 @@ export function Frame(props: FrameProps): React.ReactElement {
   }, [setFullscreen]);
 
   const mainProps = {
-    scrollHidden: fullscreen || screenX < 450,
+    scrollHidden: fullscreen || screenX <= 650,
     offsetX,
     offsetY,
   };

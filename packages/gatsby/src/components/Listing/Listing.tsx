@@ -43,7 +43,7 @@ function ListingBase(props: ListingProps): React.ReactElement {
     id,
     template: `repeat(${groups}, 1fr)`,
     justify: "stretch",
-    center: ifExists(groups > 1),
+    center: groups > 1,
     gap: [
       theme.spacing[1.5],
       format !== "column" ? theme.spacing[1.5] : theme.spacing[3],

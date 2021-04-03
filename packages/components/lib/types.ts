@@ -23,7 +23,7 @@ export type SpacingSize =
   | 9
   | 10;
 
-export type DisplaySize = "small" | "large";
+export type DisplaySize = "small" | "medium" | "large";
 
 export type BorderWidth =
   | "none"

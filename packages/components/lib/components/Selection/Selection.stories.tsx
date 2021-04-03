@@ -6,7 +6,7 @@ import { useSelect } from "@gatsby-tv/utilities";
 import { AppProvider } from "@lib/components/AppProvider";
 import { TextBox } from "@lib/components/TextBox";
 import { Box } from "@lib/components/Box";
-import { cssTransition } from "@lib/components/transition";
+import { cssTransition } from "@lib/styles/transition";
 
 import { Selection, SelectionProps } from "./Selection";
 

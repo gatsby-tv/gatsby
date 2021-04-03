@@ -105,7 +105,7 @@ export const Mobile = forwardRef<HTMLVideoElement, PlayerProps>(
 
     const viewportProps = {
       h: "calc((9 / 16) * 100vw)",
-      maxh: "100vh",
+      maxh: fullscreen ? "none" : "calc(100vh - 140px)",
       aspectRatio: player.dimensions.height / player.dimensions.width,
       overlay: <Overlay {...overlayProps} />,
       onPointerUp,

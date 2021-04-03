@@ -40,7 +40,11 @@ export const cssTextBody = css`
 
 export const cssTextDisplay = (size: DisplaySize): CSSProp => css`
   font-size: ${(props) =>
-    size === "small" ? props.theme.font[2] : props.theme.font[1]};
+    size === "small"
+      ? props.theme.font[3]
+      : size === "medium"
+      ? props.theme.font[2]
+      : props.theme.font[1]};
   line-height: ${(props) => props.theme.lineHeight.heading};
   font-weight: 700;
 `;

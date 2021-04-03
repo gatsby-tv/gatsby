@@ -20,6 +20,7 @@ export interface ScrollProps {
   hide?: boolean;
   maxw?: Size;
   maxh?: Size;
+  onScroll?: (event: any) => void;
 }
 
 const ScrollStyle = styled.div<ScrollProps>`
@@ -46,8 +47,7 @@ const ScrollStyle = styled.div<ScrollProps>`
 
   &::-webkit-scrollbar-thumb {
     background-color: ${(props) =>
-      props.hide ? "transparent" : props.theme.colors.background[3].toString()};
-    border-radius: 2rem;
+      props.hide ? "transparent" : props.theme.colors.background[5].toString()};
     ${(props) => cssTransition("all", props.theme.duration.fastest, "ease")}
   }
 `;

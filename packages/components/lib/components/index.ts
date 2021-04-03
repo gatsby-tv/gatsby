@@ -37,6 +37,7 @@ export * from "./Card";
 export * from "./Modal";
 export * from "./Switch";
 export * from "./Slider";
+export * from "./Panel";
 export * from "./Carousel";
 export * from "./Stream";
 export * from "./Rule";

@@ -27,8 +27,10 @@ const LinkBase = styled(Item)<LinkBaseProps>`
   ${(props) => cssTransition("color", props.theme.duration.fastest, "ease")}
   width: fit-content;
 
-  &:hover {
-    color: ${(props) => props.theme.colors.font.body.toString()};
+  @media(hover: hover) and (pointer: fine) {
+    &:hover {
+      color: ${(props) => props.theme.colors.font.body.toString()};
+    }
   }
 `;
 

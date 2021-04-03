@@ -37,9 +37,11 @@ export type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLElement>;
 
 const cssHighlight = (highlight?: Color | Color[], animated?: boolean) => css`
-  &:not(:disabled):hover,
-  &:not(:disabled):active {
-    ${cssProperty("background-color", [highlight].flat()[0]?.toString())}
+  @media(hover: hover) and (pointer: fine) {
+    &:not(:disabled):hover,
+    &:not(:disabled):active {
+      ${cssProperty("background-color", [highlight].flat()[0]?.toString())}
+    }
   }
 
   &:not(:disabled):active {

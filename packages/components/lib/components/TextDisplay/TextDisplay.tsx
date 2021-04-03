@@ -15,7 +15,7 @@ export interface TextDisplayProps {
 }
 
 const TextDisplayBase = styled.h1<TextDisplayProps>`
-  ${(props) => cssTextDisplay(props.size ?? "small")}
+  ${(props) => cssTextDisplay(props.size ?? "medium")}
   ${(props) => cssProperty("font-weight", ifExists(props.thin, 500))}
 `;
 

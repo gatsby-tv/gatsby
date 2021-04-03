@@ -42,13 +42,16 @@ export function useScrollContext<T extends HTMLElement>(
   useEffect(() => {
     function handler(event: any) {
       callbacks.forEach((callback) => callback(event));
-      if (ref.current) {
-        (scroll as any).current = ref.current.scrollTop;
-      }
+      (scroll as any).current = event.target.scrollTop;
     }
 
     if (ref.current) {
-      ref.current.onscroll = handler;
+      ref.current.addEventListener("scroll", handler);
+      return () => {
+        if (ref.current) {
+          ref.current.removeEventListener("scroll", handler);
+        }
+      };
     }
   }, [callbacks]);
 

@@ -30,9 +30,9 @@ export function Modal(props: ModalProps): React.ReactElement | null {
 
   useModalCallback(onExit, [onExit]);
 
-  const handleKeydown: EventHandler = useCallback(
-    (event) => {
-      if ((event as any).code === "Escape") {
+  const onKeyDown = useCallback(
+    (event: any) => {
+      if (event.code === "Escape") {
         onExit();
       }
     },
@@ -49,7 +49,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
       <Optional component={Overlay} {...optionalProps}>
         <Box onPointerDown={(event) => event.stopPropagation()}>{children}</Box>
       </Optional>
-      <EventListener event="keydown" handler={handleKeydown} />
+      <EventListener event="keydown" handler={onKeyDown} />
     </Portal>
   ) : null;
 }

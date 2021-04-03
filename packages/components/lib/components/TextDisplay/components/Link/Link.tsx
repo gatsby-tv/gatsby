@@ -25,7 +25,7 @@ type TextProps = {
 export type LinkProps = TextProps & Omit<LinkBaseProps, "underline">;
 
 const LinkStyle = styled.h1<TextProps>`
-  ${(props) => cssTextDisplay(props.size ?? "small")}
+  ${(props) => cssTextDisplay(props.size ?? "medium")}
   ${(props) => cssProperty("font-weight", ifExists(props.thin, 500))}
 `;
 

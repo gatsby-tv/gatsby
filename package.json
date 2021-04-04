@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "yarn workspace gatsby run dev",
     "start": "yarn workspace gatsby run start",
-    "build": "yarn workspaces foreach --topological-dev run build",
+    "build": "yarn workspaces foreach -pvA run build",
     "format": "yarn workspaces foreach run format"
   },
   "workspaces": {

@@ -1,0 +1,35 @@
+@use 'styles' as *;
+
+.Frame {
+  @include expand(fixed);
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.TopFrame {
+  @include expand();
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.SideFrame {
+  @include expand();
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.MainFrame {
+  @include expand();
+  flex: 1 1 auto;
+}
+
+.Bar {
+  flex-shrink: 0;
+  transition: transform duration(fast) ease duration(faster);
+}
+
+.Hidden {
+  position: absolute;
+}

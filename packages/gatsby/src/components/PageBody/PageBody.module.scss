@@ -1,0 +1,14 @@
+@use 'styles' as *;
+
+.Page {
+  margin: spacing(3);
+}
+
+.Tight {
+  margin: spacing(1.5) spacing(3);
+}
+
+.Body {
+  max-width: rem(2000px);
+  margin: 0 auto;
+}

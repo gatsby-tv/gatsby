@@ -1,33 +1,38 @@
-import styled from "styled-components";
-import { ifExists } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from "react";
+import { classNames, ifExists } from "@gatsby-tv/utilities";
 
-import { cssTextBreakWord, cssTextLineClamp } from "@lib/styles/typography";
-import { cssProperty } from "@lib/styles/property";
-import { Box, BoxProps } from "@lib/components/Box";
+import { Spacing } from "@lib/types";
 
-export interface TextBoxProps extends BoxProps {
-  spacing?: string;
-  font?: string;
-  italic?: boolean;
+import styles from "./TextBox.scss";
+
+export interface TextBoxProps extends React.HTMLAttributes<Element> {
+  children?: React.ReactNode;
+  className?: string;
+  gap?: Spacing;
   clamp?: number;
-  stretch?: "condensed" | "semi-condensed";
-  weight?: number;
-  align?: string;
-  color?: string;
 }
 
-export const TextBox = styled(Box)<TextBoxProps>`
-  white-space: pre-line;
-  ${(props) => cssProperty("font-size", props.font)}
-  ${(props) => cssProperty("font-weight", props.weight?.toString())}
-  ${(props) => cssProperty("font-stretch", props.stretch)}
-  ${(props) => cssProperty("font-style", ifExists(props.italic, "italic"))}
-  ${(props) => ifExists(props.clamp, cssTextLineClamp(props.clamp as number))}
-  ${(props) => ifExists(props.clamp, cssTextBreakWord)}
-  ${(props) => cssProperty("color", props.color)}
-  ${(props) => cssProperty("text-align", props.align)}
+export const TextBox = forwardRef<HTMLDivElement, TextBoxProps>(
+  (props: TextBoxProps, ref: Ref<HTMLDivElement>) => {
+    const { children, className, gap = "base", clamp, ...attributes } = props;
 
-  > *:not(:first-child) {
-    margin-top: ${(props) => props.spacing ?? props.theme.spacing[1.5]};
+    const classes = classNames(
+      className,
+      styles[`TextBox-spacing-${gap}`],
+      clamp && styles.Clamp
+    );
+
+    return (
+      <div
+        ref={ref}
+        style={ifExists(clamp, { WebkitLineClamp: clamp })}
+        className={classes}
+        {...attributes}
+      >
+        {children}
+      </div>
+    );
   }
-`;
+);
+
+TextBox.displayName = "TextBox";

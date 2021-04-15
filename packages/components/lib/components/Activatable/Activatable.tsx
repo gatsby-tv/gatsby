@@ -1,23 +1,32 @@
-import styled from "styled-components";
-import { ifExists } from "@gatsby-tv/utilities";
+import React from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { Time } from "@lib/types";
-import { cssTransition } from "@lib/styles/transition";
-import { cssProperty } from "@lib/styles/property";
-import { Box, BoxProps } from "@lib/components/Box";
+import { Duration } from "@lib/types";
 
-export interface ActivatableProps extends BoxProps {
+import styles from "./Activatable.scss";
+
+export interface ActivatableProps extends React.DOMAttributes<Element> {
+  children?: React.ReactNode;
+  className?: string;
   active?: boolean;
-  duration?: Time;
-  delay?: Time;
+  duration?: Duration;
+  delay?: Duration;
 }
 
-export const Activatable = styled(Box)<ActivatableProps>`
-  opacity: ${(props) => (props.active ? 1 : 0)};
-  ${(props) => cssTransition(
-    "opacity",
-    props.duration ?? props.theme.duration.base,
-    "ease",
-    ifExists(props.active && props.delay, props.delay)
-  )}
-`;
+export function Activatable(props: ActivatableProps): React.ReactElement {
+  const { children, className, active, duration, delay, ...events } = props;
+
+  const classes = classNames(
+    className,
+    styles.Activatable,
+    active && styles.Active,
+    duration && styles[`Duration-${duration}`],
+    active && delay && styles[`Delay-${delay}`],
+  );
+
+  return (
+    <div className={classes} {...events}>
+      {children}
+    </div>
+  );
+}

@@ -1,40 +1,29 @@
 import React from "react";
 import { useSession } from "next-auth/client";
-import { Box, Flex, TextDisplay } from "@gatsby-tv/components";
-import { User } from "@gatsby-tv/types";
-import { useFrame, useTheme } from "@gatsby-tv/utilities";
-import { useSubscriptionsFeed } from "@gatsby-tv/next";
+import { TextDisplay } from "@gatsby-tv/components";
+import { User } from "@gatsby-tv/content";
+import { useUniqueId } from "@gatsby-tv/utilities";
+import { User as UserType } from "@gatsby-tv/types";
 
 import { PageBody } from "@src/components/PageBody";
-import { ReleaseListing } from "@src/components/ReleaseListing";
+
+import styles from "@src/styles/Subscriptions.module.scss";
 
 export default function SubscriptionsPage(): React.ReactElement {
   const [session] = useSession();
-  const { videos, ...subscriptions } = useSubscriptionsFeed(
-    (session?.user as User | undefined)?._id
-  );
-  const theme = useTheme();
-  const { screen } = useFrame();
-
-  const groups = screen.width < 1200 ? 3 : 4;
-
-  const ReleaseListingMarkup = videos ? (
-    <ReleaseListing
-      groups={groups}
-      videos={videos}
-      avatar={theme.avatar.small}
-      {...subscriptions}
-    />
-  ) : (
-    <ReleaseListing.Skeleton groups={groups} avatar={theme.avatar.small} />
-  );
+  const label = useUniqueId("heading");
 
   return (
     <PageBody>
-      <Flex column gap={theme.spacing[3]}>
-        <TextDisplay size="large">Subscriptions</TextDisplay>
-        {ReleaseListingMarkup}
-      </Flex>
+      <TextDisplay id={label} className={styles.Heading} size="large">
+        Subscriptions
+      </TextDisplay>
+      <User.Subscriptions
+        id="subscriptions"
+        user={session?.user as UserType | undefined}
+        avatar="small"
+        aria-labelledby={label}
+      />
     </PageBody>
   );
 }

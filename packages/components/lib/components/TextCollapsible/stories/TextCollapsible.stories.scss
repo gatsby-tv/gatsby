@@ -1,0 +1,17 @@
+@use 'styles' as *;
+
+@mixin card {
+  @include border-radius(small);
+  padding: spacing(0.5) spacing(1);
+}
+
+.Label {
+  @include card;
+  width: rem(420px);
+  background-color: background(base);
+}
+
+.Content {
+  @include card;
+  background-color: background(light);
+}

@@ -1,23 +1,15 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { useConnected } from "@lib/utilities/connected";
-import { Box, BoxProps } from "@lib/components/Box";
+import styles from "../../Connected.scss";
 
-export type ItemProps = { className?: string } & BoxProps;
+export interface ItemProps extends React.HTMLAttributes<Element> {
+  children?: React.ReactNode;
+  className?: string;
+}
 
-const ItemBase: React.FC<ItemProps> = (props) => {
-  const { column } = useConnected();
-
-  const style = css`
-    flex: 1 1 auto;
-
-    &:not(:first-child) {
-      ${column ? "margin-top" : "margin-left"}: -1px;
-    }
-  `;
-
-  return <Box css={style} {...props} />;
-};
-
-export const Item = styled(ItemBase)``;
+export function Item(props: ItemProps): React.ReactElement {
+  const { className, ...rest } = props;
+  const classes = classNames(className, styles.Item);
+  return <div className={classes} {...rest} />;
+}

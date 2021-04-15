@@ -1,11 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-import { ifExists } from "@gatsby-tv/utilities";
+import { classNames, ifExists } from "@gatsby-tv/utilities";
 
-import { FlexAlignItems } from "@lib/types";
 import { useSelection } from "@lib/utilities/selection";
-import { Flex } from "@lib/components/Flex";
 import { TextSubheading } from "@lib/components/TextSubheading";
+
+import styles from "../../Selection.scss";
 
 export interface SectionProps {
   children?: React.ReactNode;
@@ -14,29 +13,20 @@ export interface SectionProps {
   flush?: boolean;
 }
 
-const SectionBase: React.FC<SectionProps> = (props: SectionProps) => {
+export function Section(props: SectionProps): React.ReactElement {
   const { children, className, title, flush } = props;
-  const { column } = useSelection();
 
-  const flexProps = {
-    className,
-    "data-flush": ifExists(flush),
-    expand: true,
-    column,
-    align: "stretch" as FlexAlignItems,
-  };
+  const classes = classNames(className, styles.Section);
 
   const TitleMarkup =
-    column && title ? <TextSubheading>{title}</TextSubheading> : null;
+    title ? <TextSubheading>{title}</TextSubheading> : null;
 
   return (
-    <Flex as="ul" {...flexProps}>
+    <div className={classes} data-flush={ifExists(flush)}>
       {TitleMarkup}
       {children}
-    </Flex>
+    </div>
   );
 };
 
-export const Section = styled(
-  Object.assign(SectionBase, { Title: TextSubheading, displayName: "Section" })
-)``;
+Section.Title = TextSubheading;

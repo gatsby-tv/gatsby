@@ -1,0 +1,48 @@
+@use 'styles' as *;
+
+.Listing {
+  display: grid;
+  flex-direction: column;
+  gap: spacing(3);
+}
+
+.NoContentText {
+  @include expand();
+  @include font-size(body-large);
+  text-align: center;
+}
+
+.SkeletonSection {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: stretch;
+  gap: spacing(1.5);
+}
+
+@media screen and (min-width: 650px) {
+  .SkeletonSection {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .SkeletonSection {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .SkeletonSection {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.SkeletonRule {
+  margin: spacing(3) 0;
+}
+
+.SkeletonHeader {
+  margin-bottom: spacing(3);
+}

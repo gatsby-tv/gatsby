@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
-import { useTheme, useUniqueId } from "@gatsby-tv/utilities";
+import { useUniqueId } from "@gatsby-tv/utilities";
 
 import { useForm } from "@lib/utilities/form";
 import { Button, ButtonProps } from "@lib/components/Button";
-import { VisuallyHidden } from "@lib/components/VisuallyHidden";
+
+import styles from "./FormFileSelect.scss";
 
 export interface FormFileSelectProps extends Omit<ButtonProps, "onChange"> {
   id?: string;
@@ -12,35 +13,37 @@ export interface FormFileSelectProps extends Omit<ButtonProps, "onChange"> {
 }
 
 export function FormFileSelect(props: FormFileSelectProps): React.ReactElement {
-  const theme = useTheme();
-  const id = useUniqueId(props.id ? `fileselect-${props.id}` : "fileselect");
-  const { form } = useForm();
-  const { name, onChange = () => undefined, ...rest } = props;
-
-  const handleChange = useCallback((event) => {
-    const value = event.currentTarget.value;
-    onChange(value, id);
-    if (name) {
-      form.set(name, value);
-    }
-  }, [])
-
-  const inputProps = {
-    id,
+  const {
+    id: idProp,
     name,
-    type: "file",
-    onChange: handleChange,
-  };
+    onChange: onChangeHandler = () => undefined,
+    ...rest
+  } = props;
 
-  const buttonProps = {
-    asLabelFor: id,
-    ...rest,
-  };
+  const id = useUniqueId(idProp ? `fileselect-${idProp}` : "fileselect");
+  const { form } = useForm();
+
+  const onChange = useCallback(
+    (event) => {
+      const value = event.currentTarget.value;
+      onChangeHandler(value, id);
+      if (name) {
+        form.set(name, value);
+      }
+    },
+    [id, form]
+  );
 
   return (
     <>
-      <VisuallyHidden as="input" {...inputProps} />
-      <Button {...buttonProps} />
+      <input
+        id={id}
+        className={styles.VisuallyHidden}
+        name={name}
+        type="file"
+        onChange={onChange}
+      />
+      <Button asLabelFor={id} {...rest} />
     </>
   );
 }

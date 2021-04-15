@@ -1,0 +1,20 @@
+@use 'styles' as *;
+
+.Topbar {
+  width: 100%;
+  height: rem(52px);
+  background-color: background(dark);
+}
+
+.Sidebar {
+  width: rem(52px);
+  height: 100%;
+  background-color: background(base);
+}
+
+.Content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: rem(16px);
+  margin: rem(52px);
+}

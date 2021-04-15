@@ -1,14 +1,10 @@
-import React, { useState, useRef } from "react";
-import { css } from "styled-components";
-import { ifExists, useTheme, useUniqueId } from "@gatsby-tv/utilities";
+import React, { useState, useRef, useCallback } from "react";
+import { ifExists, classNames, useUniqueId } from "@gatsby-tv/utilities";
 
-import { Margin, FlexAlignItems } from "@lib/types";
 import { useForm } from "@lib/utilities/form";
-import { cssProperty } from "@lib/styles/property";
-import { cssTextInput } from "@lib/styles/typography";
-import { cssInputBorder } from "@lib/styles/borders";
-import { Flex } from "@lib/components/Flex";
 import { FormLabel } from "@lib/components/FormLabel";
+
+import styles from "./FormField.scss";
 
 export interface FormFieldProps {
   id?: string;
@@ -16,8 +12,6 @@ export interface FormFieldProps {
   label: string;
   labelHidden?: boolean;
   multiline?: boolean;
-  padding?: Margin;
-  font?: string;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   align?: "left" | "center" | "right";
@@ -40,18 +34,14 @@ export interface FormFieldProps {
   role?: string;
   defaultValue?: string;
   onChange?: (value: string, id: string) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
+  onFocus?: (event: any) => void;
+  onBlur?: (event: any) => void;
 }
 
 export function FormField(props: FormFieldProps): React.ReactElement {
-  const theme = useTheme();
-  const id = useUniqueId(props.id ? `textfield-${props.id}` : "textfield");
-  const { form } = useForm();
-
   const {
+    id: idProp,
     className,
-    font,
     label,
     labelHidden,
     multiline,
@@ -63,103 +53,86 @@ export function FormField(props: FormFieldProps): React.ReactElement {
     focused,
     name,
     autoComplete,
-    padding = [theme.spacing[0.5], theme.spacing[1]],
-    onChange = () => undefined,
+    onChange: onChangeHandler = () => undefined,
+    onFocus: onFocusHandler = () => undefined,
+    onBlur: onBlurHandler = () => undefined,
     ...inputProps
   } = props;
+
+  const id = useUniqueId(idProp ? `textfield-${idProp}` : "textfield");
+  const { form } = useForm();
 
   const [focus, setFocus] = useState(Boolean(focused));
   const input = useRef<HTMLInputElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((event: any) => {
     const value = event.currentTarget.value;
-    onChange(value, id);
+    onChangeHandler(value, id);
     if (name) {
       form.set(name, value);
     }
-  };
+  }, [onChangeHandler]);
 
-  const handleFocus = () => setFocus(true);
-  const handleBlur = () => setFocus(false);
-  const handleClick = () => input?.current?.focus();
+  const onFocus = useCallback((event: any) => {
+    setFocus(true);
+    onFocusHandler(event);
+  }, [onFocusHandler]);
 
-  const placeholderStyle = css`
-    color: ${theme.colors.font.body.fade(0.5).toString()};
-  `;
+  const onBlur = useCallback((event: any) => {
+    setFocus(false);
+    onBlurHandler(event);
+  }, [onBlurHandler]);
 
-  const inputStyle = css`
-    ${cssTextInput}
-    ${cssInputBorder}
-    ${cssProperty("font-size", font)}
-    cursor: text;
-    border-radius: ${theme.border.radius.small};
-    background-color: ${theme.colors.background[4].toString()};
+  const onClick = () => input?.current?.focus();
+  const onKeyPress = (event: any) => event.stopPropagation();
 
-    input {
-      ${cssTextInput}
-      ${cssProperty("text-align", align, "left")}
-      ${cssProperty("font-size", font)}
-      color: ${theme.colors.font.body.darken(0.1).toString()};
-      outline: none;
-      background-color: transparent;
-
-      &::placeholder {
-        ${placeholderStyle}
-      }
-    }
-  `;
-
-  const labelledProps = {
-    id,
-    font,
-    label,
-    help,
-    error,
-    hidden: labelHidden,
-  };
-
-  const flexProps = {
+  const classes = classNames(
     className,
-    padding,
-    "data-focus": ifExists(focus),
-    "data-error": ifExists(error),
-    gap: theme.spacing[1],
-    align: "center" as FlexAlignItems,
-    onFocus: handleFocus,
-    onBlur: handleBlur,
-    onClick: handleClick,
-  };
-
-  const flexItemProps = {
-    ref: input,
-    id,
-    w: 1,
-    grow: 1,
-    autoComplete: autoComplete ? "on" : "off",
-    onChange: handleChange,
-    onKeyPress: (event: React.SyntheticEvent) => event.stopPropagation(),
-    ...inputProps,
-  };
+    styles.Input,
+    align && styles[`Input-align-${align}`],
+  );
 
   const PrefixMarkup = prefix ? (
-    <Flex.Item css={placeholderStyle} shrink={0}>
+    <div className={styles.Decorator}>
       {prefix}
-    </Flex.Item>
+    </div>
   ) : null;
 
   const SuffixMarkup = suffix ? (
-    <Flex.Item css={placeholderStyle} shrink={0}>
+    <div className={styles.Decorator}>
       {suffix}
-    </Flex.Item>
+    </div>
   ) : null;
 
+  const InputMarkup = React.createElement(multiline ? "textarea" : "input", {
+    ref: input,
+    id,
+    autoComplete: autoComplete ? "on" : "off",
+    onChange,
+    onFocus,
+    onBlur,
+    onKeyPress,
+    ...inputProps
+  });
+
   return (
-    <FormLabel {...labelledProps}>
-      <Flex css={inputStyle} {...flexProps}>
+    <FormLabel
+      id={id}
+      label={label}
+      help={help}
+      error={error}
+      hidden={labelHidden}
+    >
+      <div
+        className={classes}
+        data-focus={ifExists(focus)}
+        data-error={ifExists(error)}
+        onClick={onClick}
+      >
         {PrefixMarkup}
-        <Flex.Item as={multiline ? "textarea" : "input"} {...flexItemProps} />
+        {InputMarkup}
         {SuffixMarkup}
-      </Flex>
+      </div>
     </FormLabel>
   );
 }

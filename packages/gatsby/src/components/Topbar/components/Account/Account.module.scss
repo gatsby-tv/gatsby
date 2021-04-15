@@ -1,0 +1,41 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Avatar {
+  padding: 0;
+}
+
+.Menu {
+  min-width: rem(200px);
+  background-color: background(dark);
+}
+
+.MenuItem {
+  padding: spacing(1) spacing(1.5);
+
+  &:hover {
+    background-color: background(base);
+  }
+}
+
+.SignIn {
+  background-color: palette("gold");
+  color: background(darker);
+  padding: spacing(0.5) spacing(1);
+
+  @include hover {
+    background-color: color.adjust(palette("gold"), $lightness: 5%);
+  }
+
+  @include active {
+    background-color: color.adjust(palette("gold"), $alpha: -0.1);
+  }
+}
+
+.Misc {
+  background-color: foreground(placeholder);
+
+  @include hover {
+    background-color: color.adjust(foreground(placeholder), $alpha: 0.1);
+  }
+}

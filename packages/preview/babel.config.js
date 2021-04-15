@@ -18,7 +18,6 @@ module.exports = {
     "@babel/preset-react",
   ],
   plugins: [
-    "babel-plugin-styled-components",
     "@babel/plugin-transform-object-assign",
     ["@babel/plugin-proposal-class-properties", { loose: true }],
     ["@babel/plugin-proposal-private-methods", { loose: true }],

@@ -1,0 +1,20 @@
+@use 'styles' as *;
+
+.Blue {
+  @include border-radius(largest);
+  height: rem(20px);
+  width: rem(60px);
+  background-color: palette("blue");
+}
+
+.White {
+  @include border-radius(largest);
+  height: rem(20px);
+  width: 100%;
+  background-color: palette("white");
+}
+
+.Column {
+  width: 100%;
+  height: rem(20px);
+}

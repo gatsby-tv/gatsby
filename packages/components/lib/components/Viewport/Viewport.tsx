@@ -1,77 +1,50 @@
-import React, { forwardRef } from "react";
-import { css } from "styled-components";
-import { Negative, useTheme } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { Box, BoxProps } from "@lib/components/Box";
-import { cssMargin } from "@lib/styles/size";
-import { Margin } from "@lib/types";
+import { BorderRadius } from "@lib/types";
 
-export interface ViewportProps {
+import styles from "./Viewport.scss";
+
+export interface ViewportProps extends Omit<React.HTMLAttributes<Element>, "placeholder"> {
   children?: React.ReactNode;
-  crop?: Margin;
-  ariaLabel?: string;
+  className?: string;
   overlay?: React.ReactNode;
   placeholder?: boolean;
   aspectRatio?: number;
+  rounded?: BorderRadius;
 }
 
-export const Viewport = forwardRef<HTMLElement, ViewportProps & BoxProps>(
-  (props: ViewportProps & BoxProps, ref) => {
+export const Viewport = forwardRef<HTMLElement, ViewportProps>(
+  (props: ViewportProps, ref: Ref<HTMLElement>) => {
     const {
       children,
-      crop,
-      ariaLabel,
+      className,
       overlay,
       placeholder,
       rounded,
       aspectRatio = 0.5625,
-      w = 1,
-      ...rest
+      ...attributes
     } = props;
 
-    const theme = useTheme();
-
-    const figureStyle = crop
-      ? css`
-          overflow: hidden;
-
-          & > *:nth-child(2) {
-            ${cssMargin(
-              "margin",
-              [crop as Margin].flat().map((margin) => Negative(margin))
-            )}
-          }
-        `
-      : css``;
-
-    const figureProps = {
-      ref,
-      w,
-      rounded,
-      "aria-label": ariaLabel,
-      ...rest,
-    };
-
-    const boxProps = {
-      style: { paddingTop: `${100 * aspectRatio}%` },
-      absolute: true,
-      bg: placeholder ? theme.colors.placeholder : theme.colors.trueblack,
-      w: 1,
-      rounded,
-    };
+    const classes = classNames(
+      styles.Placeholder,
+      placeholder && styles.AlphaBackground,
+      rounded && styles[`Radius-${rounded}`]
+    );
 
     const OverlayMarkup = overlay ? (
-      <Box absolute expand>
-        {overlay}
-      </Box>
+      <div className={styles.Overlay}>{overlay}</div>
     ) : null;
 
     return (
-      <Box as="figure" css={figureStyle} {...figureProps}>
-        <Box {...boxProps} />
+      <figure ref={ref} className={className} {...attributes}>
+        <div
+          style={{ paddingTop: `${100 * aspectRatio}%` }}
+          className={classes}
+        />
         {children}
         {OverlayMarkup}
-      </Box>
+      </figure>
     );
   }
 );

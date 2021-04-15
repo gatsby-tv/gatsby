@@ -1,31 +1,29 @@
 import React from "react";
-import { css } from "styled-components";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { IconSource } from "@lib/types";
-import { Box, BoxProps } from "@lib/components/Box";
+import { IconSize, IconSource } from "@lib/types";
 
-export type IconProps = BoxProps & {
+import styles from "./Icon.scss";
+
+export interface IconProps extends React.AriaAttributes {
   src: IconSource;
-  ariaLabel?: string;
-};
+  className?: string;
+  size?: IconSize;
+}
 
 export function Icon(props: IconProps): React.ReactElement {
-  const { src: SvgComponent, ariaLabel, ...boxProps } = props;
+  const {
+    src: SvgComponent,
+    className,
+    size = "base",
+    ...aria
+  } = props;
 
-  const style = css`
-    & > svg {
-      display: block;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      max-width: 100%;
-      max-height: 100%;
-    }
-  `;
+  const classes = classNames(className, styles.Icon, styles[`Icon-${size}`]);
 
   return (
-    <Box as="span" css={style} aria-label={ariaLabel} {...boxProps}>
+    <span className={classes} {...aria}>
       <SvgComponent aria-hidden="true" focusable="false" />
-    </Box>
+    </span>
   );
 }

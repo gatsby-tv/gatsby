@@ -1,0 +1,110 @@
+@use 'sass:map';
+@use './colors' as *;
+@use './font' as *;
+
+$display-font-size-map: (
+  small: font-size(display-small),
+  medium: font-size(display-medium),
+  large: font-size(display-large),
+);
+
+@mixin subdued {
+  color: foreground(subdued);
+}
+
+@mixin condensed {
+  font-stretch: condensed;
+}
+
+@mixin semi-condensed {
+  font-stretch: semi-condensed;
+}
+
+@mixin break-word {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin clamp($lines: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
+@mixin uppercase {
+  @include font-weight(bold);
+  appearance: none;
+  text-transform: uppercase;
+}
+
+@mixin body {
+  @include font-weight(normal);
+  white-space: pre-line;
+}
+
+@mixin display($size) {
+  @include line-height(heading);
+  @include font-weight(extra-bold);
+  font-size: map.get($display-font-size-map, $size);
+}
+
+@mixin heading {
+  @include font-size(display-small);
+  @include line-height(heading);
+  @include font-weight(bold);
+}
+
+@mixin subheading {
+  @include uppercase;
+  @include font-size(body);
+  @include line-height(heading);
+}
+
+@mixin error {
+  color: palette('red');
+  @include font-weight(semi-bold);
+}
+
+@mixin label {
+  @include condensed;
+  @include font-weight(semi-bold);
+}
+
+@mixin caption {
+  @include semi-condensed;
+  @include font-size(caption);
+  @include font-weight(normal);
+}
+
+@mixin input {
+  @include font-weight(normal);
+  white-space: pre-line;
+  appearance: none;
+}
+
+@mixin tab {
+  @include condensed;
+  @include font-weight(bold);
+  text-align: center;
+  user-select: none;
+}
+
+@mixin button {
+  @include uppercase;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+}
+
+@mixin tabular-nums {
+  @include font-weight(semi-bold);
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}

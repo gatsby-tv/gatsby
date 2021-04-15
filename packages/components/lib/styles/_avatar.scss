@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use './rem' as *;
+
+$avatar-size-map: (
+  smallest: rem(32px),
+  smaller: rem(36px),
+  small: rem(40px),
+  base: rem(44px),
+  large: rem(48px),
+  larger: rem(52px),
+  largest: rem(72px),
+);
+
+@function avatar($size) {
+  @return map.get($avatar-size-map, $size);
+}

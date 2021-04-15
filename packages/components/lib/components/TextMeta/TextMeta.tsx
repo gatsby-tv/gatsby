@@ -4,11 +4,12 @@ import { Link, LinkProps } from "./components/Link";
 import { Time, TimeProps } from "./components/Time";
 import { Data, DataProps } from "./components/Data";
 
+export type TextMetaProps = Omit<ItemProps, "element" | "dateTime" | "value">;
+
 export type { ListProps as TextMetaListProps };
 export type { LinkProps as TextMetaLinkProps };
 export type { TimeProps as TextMetaTimeProps };
 export type { DataProps as TextMetaDataProps };
-export type { ItemProps as TextMetaProps };
 
 export const TextMeta = Object.assign(Item, {
   List,

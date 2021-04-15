@@ -1,33 +1,44 @@
-import styled from "styled-components";
-import { ifExists, ifNotExists } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from "react";
+import { classNames, ifExists } from "@gatsby-tv/utilities";
 
-import { cssProperty } from "@lib/styles/property";
-import {
-  cssTextBreakWord,
-  cssTextLineClamp,
-  cssTextTruncate,
-  cssTextSubdued,
-} from "@lib/styles/typography";
+import styles from "../../TextMeta.scss";
 
-export interface ItemProps {
-  font?: string;
+export interface ItemProps extends React.HTMLAttributes<Element> {
+  children?: React.ReactNode;
+  element?: string;
+  className?: string;
   clamp?: number;
-  bold?: boolean;
-  subdued?: boolean;
-  heading?: boolean;
+  dateTime?: string;
+  value?: number;
 }
 
-export const Item = styled.span<ItemProps>`
-  ${cssTextBreakWord}
-  ${cssTextTruncate}
-  ${(props) => cssProperty("font-size", props.font)}
-  ${(props) => cssProperty("font-weight", ifExists(props.bold, 600))}
-  ${(props) => cssProperty("white-space", ifNotExists(props.clamp, "nowrap"))}
-  ${(props) =>
-    cssProperty(
-      "line-height",
-      ifExists(props.heading, props.theme.lineHeight.heading)
-    )}
-  ${(props) => ifExists(props.clamp, cssTextLineClamp(props.clamp as number))}
-  ${(props) => ifExists(props.subdued, cssTextSubdued)}
-`;
+export const Item = forwardRef<HTMLElement, ItemProps>(
+  (props: ItemProps, ref: Ref<HTMLElement>) => {
+    const {
+      children,
+      element: Element = "span",
+      className,
+      clamp,
+      ...rest
+    } = props;
+
+    const classes = classNames(
+      className,
+      styles.Item,
+      clamp && styles.Clamp,
+    );
+
+    return (
+      <Element
+        ref={ref}
+        style={ifExists(clamp, { WebkitLineClamp: clamp })}
+        className={classes}
+        {...(rest as any)}
+      >
+        {children}
+      </Element>
+    );
+  }
+);
+
+Item.displayName = "Item";

@@ -1,0 +1,24 @@
+@use 'styles' as *;
+
+.Activatable {
+  opacity: 0;
+  transition: {
+    property: opacity;
+    duration: duration(base);
+    timing-function: ease;
+  }
+}
+
+.Active {
+  opacity: 1;
+}
+
+@each $key, $value in $duration-map {
+  .Duration-#{$key} {
+    transition-duration: $value;
+  }
+
+  .Delay-#{$key} {
+    transition-delay: $value;
+  }
+}

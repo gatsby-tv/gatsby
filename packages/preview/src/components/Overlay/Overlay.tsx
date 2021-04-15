@@ -1,55 +1,31 @@
 import React from "react";
-import { Box, TextMeta } from "@gatsby-tv/components";
-import {
-  Content,
-  isVideo,
-  isEpisodicShow,
-  isSeasonedShow,
-  isPlaylist,
-} from "@gatsby-tv/types";
-import { Value, Time, useTheme } from "@gatsby-tv/utilities";
+import { Browsable, VideoBookmark } from "@gatsby-tv/types";
+
+import { Duration } from "@src/components/Duration";
+
+import styles from "@src/Preview.scss";
 
 export interface OverlayProps {
-  content: Content;
+  content: Browsable;
+  bookmark?: VideoBookmark;
 }
 
 export function Overlay(props: OverlayProps): React.ReactElement {
-  const { content } = props;
-  const theme = useTheme();
+  const { content, bookmark } = props;
 
-  const boxProps = {
-    absolute: true,
-    bottom: theme.spacing[0.5],
-    right: theme.spacing[0.5],
-    bg: theme.colors.black.fade(0.3),
-    padding: [theme.spacing[0], theme.spacing[0.5]],
-  };
+  const TimelineMarkup = bookmark ? (
+    <div className={styles.Timeline}>
+      <div
+        style={{ right: `${100 * (1 - bookmark.timestamp)}%` }}
+        className={styles.TimelineProgress}
+      />
+    </div>
+  ) : null;
 
-  if (isVideo(content)) {
-    return (
-      <Box {...boxProps}>
-        <TextMeta bold>{Time(content.duration)}</TextMeta>
-      </Box>
-    );
-  } else if (isSeasonedShow(content)) {
-    return (
-      <Box {...boxProps}>
-        <TextMeta bold>{Value(content.seasons.length, "season")}</TextMeta>
-      </Box>
-    );
-  } else if (isEpisodicShow(content)) {
-    return (
-      <Box {...boxProps}>
-        <TextMeta bold>{Value(content.episodes.length, "episode")}</TextMeta>
-      </Box>
-    );
-  } else if (isPlaylist(content)) {
-    return (
-      <Box {...boxProps}>
-        <TextMeta bold>{Value(content.videos.length, "video")}</TextMeta>
-      </Box>
-    );
-  } else {
-    throw new Error("Overlay component was passed incorrect prop");
-  }
+  return (
+    <>
+      <Duration content={content} />
+      {TimelineMarkup}
+    </>
+  );
 }

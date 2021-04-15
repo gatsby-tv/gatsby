@@ -1,0 +1,43 @@
+@use 'styles' as *;
+
+.ScrollBar {
+  min-width: 100%;
+  max-width: 100%;
+  box-sizing: content-box;
+  backface-visibility: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: spacing(1);
+    height: spacing(1);
+  }
+
+  &::-webkit-scrollbar-corner {
+    color: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: background(lighter);
+    transition: all duration(fastest) ease;
+  }
+}
+
+.Hidden {
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+.Smooth {
+  scroll-behavior: smooth;
+}

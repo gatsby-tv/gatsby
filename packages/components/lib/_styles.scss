@@ -1,0 +1,16 @@
+@forward './styles/rem';
+@forward './styles/colors';
+@forward './styles/avatar';
+@forward './styles/icon';
+@forward './styles/border' as border-*;
+@forward './styles/duration';
+@forward './styles/highlight';
+@forward './styles/expand';
+@forward './styles/center';
+@forward './styles/hover';
+@forward './styles/font';
+@forward './styles/spacing';
+@forward './styles/shadows';
+@forward './styles/collation';
+@forward './styles/typography' as text-*;
+@forward './styles/visually-hidden';

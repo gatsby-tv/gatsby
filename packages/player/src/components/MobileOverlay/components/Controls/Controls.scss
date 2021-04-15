@@ -1,0 +1,59 @@
+@use 'styles' as *;
+
+.Controls {
+  @include expand(absolute);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: [skip-backward] 1fr [previous] spacing(7) [playback] spacing(9) [next] spacing(7) [skip-forward] 1fr;
+}
+
+.BottomRow {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  bottom: rem(16px);
+}
+
+.Playback {
+  grid-column: playback;
+  padding: spacing(2);
+
+  svg:global(#gz-play) {
+    transform: translateX(rem(2px));
+  }
+}
+
+.Backward {
+  @include expand();
+  grid-column: skip-backward;
+}
+
+.Forward {
+  @include expand();
+  grid-column: skip-forward;
+}
+
+.Previous {
+  grid-column: previous;
+}
+
+.Next {
+  grid-column: next;
+}
+
+.Disabled {
+  color: foreground(placeholder);
+}
+
+.Fullscreen {
+  padding: spacing(1) spacing(2);
+}
+
+.ProgressText {
+  @include text-tabular-nums;
+  @include font-size(caption);
+  padding: spacing(1) spacing(2);
+}

@@ -1,18 +1,23 @@
 import React from "react";
 import { AppProvider } from "@gatsby-tv/components";
-import "@gatsby-tv/components/static/fonts.css";
+import { useIPFSNode, IPFSContext } from "@gatsby-tv/utilities";
+import "@gatsby-tv/components/dist/fonts.css";
+import "@gatsby-tv/components/dist/styles.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
-  layout: "fullscreen",
 };
 
 export const decorators = [
-  (Story) => (
-    <AppProvider theme="dark">
-      <div style={{ overflow: "hidden", height: "100vh" }}>
-        <Story />
-      </div>
-    </AppProvider>
-  ),
+  (Story) => {
+    const node = useIPFSNode();
+
+    return (
+      <AppProvider>
+        <IPFSContext.Provider value={node}>
+          <Story />
+        </IPFSContext.Provider>
+      </AppProvider>
+    );
+  },
 ];

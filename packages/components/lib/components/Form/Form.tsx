@@ -1,9 +1,8 @@
 import React, { useCallback, useMemo } from "react";
 
-import { Box, BoxProps } from "@lib/components/Box";
 import { FormContext } from "@lib/utilities/form";
 
-export type FormProps = BoxProps & React.FormHTMLAttributes<HTMLElement>;
+export type FormProps = React.FormHTMLAttributes<HTMLElement>;
 
 export function Form(props: FormProps): React.ReactElement {
   const { method = "POST", action = "", ...rest } = props;
@@ -17,14 +16,9 @@ export function Form(props: FormProps): React.ReactElement {
     request.send(context.form);
   }, []);
 
-  const formProps = {
-    onSubmit,
-    ...rest,
-  };
-
   return (
     <FormContext.Provider value={context}>
-      <Box as="form" {...formProps} />
+      <form onSubmit={onSubmit} {...rest} />
     </FormContext.Provider>
   );
 }

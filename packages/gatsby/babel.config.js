@@ -4,7 +4,5 @@ module.exports = {
     "@babel/preset-typescript",
     "@babel/preset-react",
   ],
-  plugins: [
-    ["styled-components", { ssr: true }],
-  ],
+  plugins: [],
 };

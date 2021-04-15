@@ -1,9 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Flex, Icon, Tabs } from "@gatsby-tv/components";
+import { useSession } from "next-auth/client";
+import { Icon, Tabs } from "@gatsby-tv/components";
 import { GatsbyPlain, Subscribe, Browse } from "@gatsby-tv/icons";
-import { Link } from "@gatsby-tv/next";
-import { useFrame, useSelect, useTheme } from "@gatsby-tv/utilities";
+import { useSelect } from "@gatsby-tv/utilities";
+
+import { Link } from "@src/components/Link";
+
+import styles from "./Navigation.module.scss";
 
 function getCurrentTab(route: string): string | undefined {
   switch (route) {
@@ -16,65 +20,42 @@ function getCurrentTab(route: string): string | undefined {
   }
 }
 
-export interface NavigationProps {
-  session?: boolean;
-}
-
-export function Navigation(props: NavigationProps): React.ReactElement {
-  const { session } = props;
-  const theme = useTheme();
+export function Navigation(): React.ReactElement {
+  const [session, loading] = useSession();
   const router = useRouter();
-  const { screen } = useFrame();
-
   const defaultTab = getCurrentTab(router.pathname);
-
   const [tab, setTab] = useSelect(
     session ? ["subscriptions", "browse"] : ["browse"],
     defaultTab
   );
 
-  const logoProps = {
-    src: GatsbyPlain,
-    w: theme.icon.larger,
-    h: 1,
-    padding: [theme.spacing[0], theme.spacing[1]],
-  };
-
-  const tabsProps = {
-    font: "large",
-    gap: theme.spacing[2],
-    selection: tab,
-    onSelect: setTab,
-  };
-
-  const LogoMarkup = (
-    <Link href="/" $props={{ onClick: setTab }}>
-      <Icon {...logoProps} />
-    </Link>
-  );
-
-  const SubscriptionsMarkup = session ? (
-    <Link
-      component={Tabs.Link}
-      href="/d/subscriptions"
-      $props={{ option: "subscriptions" }}
-    >
-      Subscriptions
-    </Link>
-  ) : null;
-
-  const BrowseMarkup = (
-    <Link component={Tabs.Link} href="/d/browse" $props={{ option: "browse" }}>
-      Browse
-    </Link>
-  );
-
   return (
     <>
-      {LogoMarkup}
-      <Tabs {...tabsProps}>
-        {SubscriptionsMarkup}
-        {BrowseMarkup}
+      <Link href="/" $props={{ className: styles.HomeLink, onClick: setTab }}>
+        <Icon className={styles.Logo} src={GatsbyPlain} size="larger" />
+      </Link>
+      <Tabs
+        className={styles.Tabs}
+        gap="loose"
+        selection={tab}
+        onSelect={setTab}
+      >
+        {session && (
+          <Link
+            component={Tabs.Link}
+            href="/d/subscriptions"
+            $props={{ option: "subscriptions" }}
+          >
+            Subscriptions
+          </Link>
+        )}
+        <Link
+          component={Tabs.Link}
+          href="/d/browse"
+          $props={{ option: "browse" }}
+        >
+          Browse
+        </Link>
       </Tabs>
     </>
   );

@@ -2,17 +2,17 @@ import React from "react";
 
 export interface OptionalProps {
   children?: React.ReactNode;
-  component: React.FC<any>;
+  component?: React.FC<any> | string;
   active?: boolean;
   $props?: any;
 }
 
 export function Optional(props: OptionalProps): React.ReactElement {
-  const { component: Component, $props = {} } = props;
+  const { children, active, component, $props = {} } = props;
 
-  return props.active ? (
-    <Component {...$props}>{props.children}</Component>
+  return component && active ? (
+    React.createElement(component, { children, ...$props })
   ) : (
-    <>{props.children}</>
+    <>{children}</>
   );
 }

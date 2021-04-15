@@ -1,95 +1,43 @@
 import React from "react";
-import { css } from "styled-components";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { ConnectedContext } from "@lib/utilities/connected";
-import { Flex, FlexProps } from "@lib/components/Flex";
-
-import { Item, ItemProps, Connection } from "./components";
+import { Item, ItemProps } from "./components";
+import styles from "./Connected.scss";
 
 export type { ItemProps as ConnectedItemProps };
 
-export interface ConnectedProps extends FlexProps {
-  className?: string;
-  style?: React.CSSProperties;
+export interface ConnectedProps {
   children?: React.ReactNode;
+  className?: string;
   column?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
 }
 
-function ConnectedBase(props: ConnectedProps) {
-  const { children, prefix, suffix, column, ...flexProps } = props;
+export function Connected(props: ConnectedProps) {
+  const { children, className, column, prefix, suffix } = props;
 
-  const style = css`
-    > ${Connection}:first-child * {
-      ${column
-        ? "border-bottom-left-radius"
-        : "border-top-right-radius"}: 0 !important;
-      border-bottom-right-radius: 0 !important;
+  const classes = classNames(
+    className,
+    styles.Connected,
+    column ? styles.ConnectedColumn : styles.ConnectedRow
+  );
 
-      &:after {
-        ${column
-          ? "border-bottom-left-radius"
-          : "border-top-right-radius"}: 0 !important;
-        border-bottom-right-radius: 0 !important;
-      }
-    }
+  const PrefixMarkup = prefix ? (
+    <div className={styles.Connection}>{prefix}</div>
+  ) : null;
 
-    > ${Connection}:last-child * {
-      border-top-left-radius: 0 !important;
-      ${column
-        ? "border-top-right-radius"
-        : "border-bottom-left-radius"}: 0 !important;
-
-      &:after {
-        border-top-left-radius: 0 !important;
-        ${column
-          ? "border-top-right-radius"
-          : "border-bottom-left-radius"}: 0 !important;
-      }
-    }
-
-    > ${Item}:not(:first-child) * {
-      border-top-left-radius: 0 !important;
-      ${column
-        ? "border-top-right-radius"
-        : "border-bottom-left-radius"}: 0 !important;
-
-      &:after {
-        border-top-left-radius: 0 !important;
-        ${column
-          ? "border-top-right-radius"
-          : "border-bottom-left-radius"}: 0 !important;
-      }
-    }
-
-    > ${Item}:not(:last-child) * {
-      ${column
-        ? "border-bottom-left-radius"
-        : "border-top-right-radius"}: 0 !important;
-      border-bottom-right-radius: 0 !important;
-
-      &:after {
-        ${column
-          ? "border-bottom-left-radius"
-          : "border-top-right-radius"}: 0 !important;
-        border-bottom-right-radius: 0 !important;
-      }
-    }
-  `;
-
-  const PrefixMarkup = prefix ? <Connection>{prefix}</Connection> : null;
-  const SuffixMarkup = suffix ? <Connection>{suffix}</Connection> : null;
+  const SuffixMarkup = suffix ? (
+    <div className={styles.Connection}>{suffix}</div>
+  ) : null;
 
   return (
-    <ConnectedContext.Provider value={{ column: column }}>
-      <Flex css={style} column={column} {...flexProps}>
-        {PrefixMarkup}
-        {children}
-        {SuffixMarkup}
-      </Flex>
-    </ConnectedContext.Provider>
+    <div className={classes}>
+      {PrefixMarkup}
+      {children}
+      {SuffixMarkup}
+    </div>
   );
 }
 
-export const Connected = Object.assign(ConnectedBase, { Item });
+Connected.Item = Item;

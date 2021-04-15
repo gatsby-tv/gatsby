@@ -1,35 +1,43 @@
 import React from "react";
-import styled from "styled-components";
-import { ifExists } from "@gatsby-tv/utilities";
+import { classNames, ifExists } from "@gatsby-tv/utilities";
 
 import { useSelection } from "@lib/utilities/selection";
-import { Flex } from "@lib/components/Flex";
+import { useItem } from "@lib/utilities/item";
 
-export interface ItemProps {
+import styles from "../../Selection.scss";
+
+export interface ItemProps extends React.AriaAttributes {
   children?: React.ReactNode;
   id?: string;
   className?: string;
   option: string;
-  ariaControls?: string;
 }
 
-const ItemBase: React.FC<ItemProps> = (props: ItemProps) => {
-  const { children, id, option, className, ariaControls } = props;
-  const { selection, onSelect } = useSelection();
-  const handleClick = () => onSelect(option);
-
-  const itemProps = {
+export function Item(props: ItemProps): React.ReactElement {
+  const {
+    children,
     id,
     className,
-    grow: 1,
-    role: "tab",
-    tabindex: selection[option] ? 0 : -1,
-    "aria-selected": ifExists(selection[option]),
-    "aria-controls": ariaControls,
-    onClick: handleClick,
-  };
+    option,
+    ...aria
+  } = props;
+  const { selection, onSelect } = useSelection();
+  const { itemClass } = useItem();
+  const onClick = () => onSelect(option);
 
-  return <Flex.Item {...itemProps}>{children}</Flex.Item>;
-};
+  const classes = classNames(className, itemClass, styles.Item);
 
-export const Item = styled(ItemBase)<ItemProps>``;
+  return (
+    <div
+      id={id}
+      className={classes}
+      role="tab"
+      tabIndex={selection[option] ? 0 : -1}
+      onClick={onClick}
+      aria-selected={ifExists(selection[option])}
+      {...aria}
+    >
+      {children}
+    </div>
+  );
+}

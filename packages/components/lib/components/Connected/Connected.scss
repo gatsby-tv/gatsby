@@ -1,0 +1,111 @@
+@use 'styles' as *;
+
+.Connection {
+  flex: 0 0 auto;
+}
+
+.Item {
+  flex: 1 1 auto;
+}
+
+.Connected {
+  display: flex;
+}
+
+.ConnectedColumn {
+  flex-direction: column;
+
+  & > .Connection:not(first-child) {
+    margin-top: -1px;
+  }
+
+  & > .Connection:first-child {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+
+    & * {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  & > .Connection:last-child {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+
+    & * {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+    }
+  }
+
+  & > .Item:not(:first-child) {
+    margin-top: -1px;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+
+    & * {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+    }
+  }
+
+  & > .Item:not(:last-child) {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+
+    & * {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+}
+
+.ConnectedRow {
+  flex-direction: row;
+
+  & > .Connection:not(:first-child) {
+    margin-left: -1px;
+  }
+
+  & > .Connection:first-child {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+
+    & * {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  & > .Connection:last-child {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+
+    & * {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+
+  & > .Item:not(:first-child) {
+    margin-left: -1px;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+
+    & * {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+
+  & > .Item:not(:last-child) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+
+    & * {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+}

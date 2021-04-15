@@ -1,4 +1,4 @@
 import { Player } from "./Player";
 export default Player;
 
-export { PlayerProps } from "./types";
+export type { PlayerProps } from "./types";

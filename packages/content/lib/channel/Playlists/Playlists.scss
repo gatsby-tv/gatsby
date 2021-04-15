@@ -1,0 +1,33 @@
+@use 'styles' as *;
+
+.Listing {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: stretch;
+  column-gap: spacing(1.5);
+  row-gap: spacing(1.5);
+}
+
+.Column {
+  row-gap: spacing(3);
+}
+
+.NoContentText {
+  @include expand();
+  @include font-size(body-large);
+  text-align: center;
+}
+
+@media screen and (min-width: 650px) {
+  .Listing {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .Listing {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

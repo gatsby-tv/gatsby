@@ -1,0 +1,74 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Timeline {
+  cursor: pointer;
+  transition: transform 150ms ease;
+  height: rem(4px);
+  background-color: color.adjust(palette("white"), $alpha: -0.85);
+
+  &:hover {
+    transform: scaleY(1.5);
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: rem(-10px);
+    right: 0;
+    left: 0;
+    height: rem(20px);
+  }
+
+  &:hover .Progress:after {
+    transform: scale(1, 0.66);
+  }
+}
+
+.Buffer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: color.adjust(palette("white"), $alpha: -0.85);
+}
+
+.Progress {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: palette("gold");
+
+  &:after {
+    @include border-radius(full);
+    content: "";
+    position: absolute;
+    right: rem(-7px);
+    width: rem(14px);
+    height: rem(14px);
+    background-color: palette("gold");
+    transform: scale(0);
+    transition: transform 150ms ease;
+  }
+}
+
+.ScrubReference {
+  position: absolute;
+}
+
+.Text {
+  @include font-weight(bold);
+  font-stretch: condensed;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  pointer-events: none;
+}
+
+
+.TextActive {
+  opacity: 1;
+}

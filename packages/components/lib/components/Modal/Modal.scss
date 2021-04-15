@@ -1,0 +1,52 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateY(spacing(4));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.Overlay {
+  @include center;
+  @include expand(fixed);
+
+  background-color: color.adjust(palette("black"), $alpha: -0.7);
+  backface-visibility: hidden;
+
+  animation: {
+    name: fade;
+    duration: duration(fast);
+    fill-mode: forwards;
+    timing-function: ease;
+  }
+
+  & > .Modal {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.1);
+
+    animation: {
+      name: slide;
+      duration: duration(fast);
+      fill-mode: forwards;
+      timing-function: ease;
+    }
+  }
+}
+
+.Modal {
+  display: block;
+}

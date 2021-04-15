@@ -1,0 +1,16 @@
+@use 'sass:map';
+
+$duration-map: (
+  instant: 0,
+  fastest: 100ms,
+  faster: 200ms,
+  fast: 300ms,
+  base: 500ms,
+  slow: 700ms,
+  slower: 1s,
+  slowest: 2s,
+);
+
+@function duration($speed) {
+  @return map.get($duration-map, $speed);
+}

@@ -1,0 +1,11 @@
+@use 'styles' as *;
+
+.Credits {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(1);
+}
+
+.Heading {
+  margin-top: spacing(0.5);
+}

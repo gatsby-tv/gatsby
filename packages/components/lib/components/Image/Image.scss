@@ -1,0 +1,14 @@
+@use 'styles' as *;
+
+.Image {
+  @include expand();
+  display: block;
+}
+
+@each $key, $value in $border-radius-map {
+  @if $key != none {
+    .Radius-#{$key} {
+      border-radius: $value;
+    }
+  }
+}

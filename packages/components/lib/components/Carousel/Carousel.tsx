@@ -6,31 +6,28 @@ import React, {
   useCallback,
 } from "react";
 import { ExtendLeft, ExtendRight } from "@gatsby-tv/icons";
-import { Negative, useTheme, useResizeObserver } from "@gatsby-tv/utilities";
+import { classNames, useResizeObserver, useMobileDetector } from "@gatsby-tv/utilities";
 
-import { Size } from "@lib/types";
 import { CarouselContext } from "@lib/utilities/carousel";
-import { Box } from "@lib/components/Box";
-import { Flex } from "@lib/components/Flex";
 import { Button } from "@lib/components/Button";
-import { Icon } from "@lib/components/Icon";
 
 import { Slider, SliderState, SliderAction } from "./components/Slider";
 import { Slide, SlideProps } from "./components/Slide";
+
+import styles from "./Carousel.scss";
 
 export type { SlideProps as CarouselSlideProps };
 
 export interface CarouselProps {
   children?: React.ReactNode;
   groups: number;
-  gap?: Size;
 }
 
-function CarouselBase(props: CarouselProps): React.ReactElement {
-  const theme = useTheme();
+export function Carousel(props: CarouselProps): React.ReactElement | null {
+  const { children, groups } = props;
   const mask = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState<string>("100%");
-  const { children, groups, gap = theme.spacing[0] } = props;
+  const isMobile = useMobileDetector();
 
   /* We need the number of items to divide the number of visible slides evenly.
    * Thus, perhaps controversially, we will remove any remainders. */
@@ -82,71 +79,55 @@ function CarouselBase(props: CarouselProps): React.ReactElement {
     [state.slide, chunks.length]
   );
 
-  const maskStyle = {
-    clipPath: `polygon(calc(${Negative(
-      gap
-    )} / 2) -10%, calc(100% + ${gap} / 2) -10%, calc(100% + ${gap} / 2) 110%, calc(${Negative(
-      gap
-    )} / 2) 110%)`,
-  };
-
-  const buttonProps = {
-    animate: true,
-    shadow: true,
-    rounded: theme.border.radius.full,
-    bg: theme.colors.background[5],
-    padding: theme.spacing[1],
-  };
-
-  const buttonBoxProps = {
-    absolute: true,
-    top: `calc(50% - ${theme.spacing[2]})`,
-  };
+  if (isMobile === undefined) return null;
 
   const GroupsMarkup = chunks.map((chunk, index) => (
-    <Flex key={index} style={{ width }}>
+    <div
+      key={`CarouselGroup-${index}`}
+      style={{ width }}
+      className={styles.Group}
+    >
       {chunk}
-    </Flex>
+    </div>
   ));
 
-  const SliderMarkup = (
-    <Slider state={state} groups={chunks.length}>
-      <Flex style={{ width }}>{chunks[chunks.length - 1]}</Flex>
-      {GroupsMarkup}
-      <Flex style={{ width }}>{chunks[0]}</Flex>
-    </Slider>
-  );
-
-  const ExtendLeftMarkup = (
-    <Box left={theme.spacing[1.5]} {...buttonBoxProps}>
-      <Button onClick={prev} {...buttonProps}>
-        <Icon src={ExtendLeft} w={theme.icon.base} />
-      </Button>
-    </Box>
-  );
-
-  const ExtendRightMarkup = (
-    <Box right={theme.spacing[1.5]} {...buttonBoxProps}>
-      <Button onClick={next} {...buttonProps}>
-        <Icon src={ExtendRight} w={theme.icon.base} />
-      </Button>
-    </Box>
+  const ContentMarkup = !isMobile ? (
+    <>
+      <Slider state={state} groups={chunks.length}>
+        <div style={{ width }} className={styles.Group}>
+          {chunks[chunks.length - 1]}
+        </div>
+        {GroupsMarkup}
+        <div style={{ width }} className={styles.Group}>
+          {chunks[0]}
+        </div>
+      </Slider>
+      <Button
+        className={classNames(styles.Button, styles.ButtonLeft)}
+        icon={ExtendLeft}
+        animate
+        onClick={prev}
+      />
+      <Button
+        className={classNames(styles.Button, styles.ButtonRight)}
+        icon={ExtendRight}
+        animate
+        onClick={next}
+      />
+    </>
+  ) : (
+    GroupsMarkup
   );
 
   return (
-    <CarouselContext.Provider value={{ gap, groups }}>
-      <Box margin={[theme.spacing[0], `calc(${Negative(gap)} / 2)`]}>
-        <Box ref={mask} css={maskStyle} w={1}>
-          {SliderMarkup}
-          {ExtendLeftMarkup}
-          {ExtendRightMarkup}
-        </Box>
-      </Box>
+    <CarouselContext.Provider value={{ groups }}>
+      <div className={styles.Carousel}>
+        <div ref={mask} className={classNames(styles.Mask, isMobile && styles.Mobile)}>
+          {ContentMarkup}
+        </div>
+      </div>
     </CarouselContext.Provider>
   );
 }
 
-export const Carousel = Object.assign(CarouselBase, {
-  Slide,
-  displayName: "Carousel",
-});
+Carousel.Slide = Slide;

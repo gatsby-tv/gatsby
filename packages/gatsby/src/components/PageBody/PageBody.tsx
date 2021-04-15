@@ -1,27 +1,21 @@
 import React from "react";
-import { Box } from "@gatsby-tv/components";
-import { useTheme } from "@gatsby-tv/utilities";
+import { classNames } from "@gatsby-tv/utilities";
+
+import styles from "./PageBody.module.scss";
 
 export interface PageBodyProps {
   children?: React.ReactNode;
+  className?: string;
   tight?: boolean;
 }
 
 export function PageBody(props: PageBodyProps): React.ReactElement {
-  const { children, tight } = props;
-  const theme = useTheme();
-
-  const boxProps = tight ? {
-    margin: [theme.spacing[1.5], theme.spacing[3]],
-  } : {
-    margin: theme.spacing[3],
-  };
+  const { children, className, tight } = props;
+  const classes = classNames(styles.Page, tight && styles.Tight);
 
   return (
-    <Box {...boxProps}>
-      <Box maxw="200rem" margin={[theme.spacing[0], "auto"]}>
-        {children}
-      </Box>
-    </Box>
+    <div className={classes}>
+      <div className={classNames(className, styles.Body)}>{children}</div>
+    </div>
   );
 }

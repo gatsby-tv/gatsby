@@ -1,43 +1,23 @@
 import { ReactNode, ReactElement, Dispatch, SetStateAction } from "react";
 import { VideoProps } from "@gatsby-tv/components";
 
-export type PlayerProps = VideoProps & {
+import { PlayerState } from "@src/utilities/use-player";
+import { TimelineState } from "@src/utilities/use-timeline";
+
+export interface PlayerProps extends VideoProps {
   children?: ReactNode;
   fullscreen?: boolean;
   setFullscreen?: Dispatch<SetStateAction<boolean>>;
-};
+}
 
-export type ControlsProps = {
-  paused?: boolean;
-  loading?: boolean;
+export interface OverlayProps {
+  player: PlayerState;
+  timeline: TimelineState;
+  signal?: string;
   fullscreen?: boolean;
-  time: number;
-  duration: number;
-  prevVideo?: unknown;
-  nextVideo?: unknown;
-  playlist?: unknown;
-  setPlayback: Dispatch<SetStateAction<boolean>>;
   setFullscreen: Dispatch<SetStateAction<boolean>>;
+  setActive: Dispatch<SetStateAction<boolean>>;
+  setPlayback: Dispatch<SetStateAction<boolean>>;
   setSeek: Dispatch<SetStateAction<number>>;
   setSignal: Dispatch<SetStateAction<string | undefined>>;
-};
-
-export type TimelineProps = {
-  active?: boolean;
-  scrubbing: boolean;
-  position: number;
-  time: number;
-  progress: number;
-  duration: number;
-  onSeek: (value: number) => void;
-};
-
-export type OverlayProps = {
-  active?: boolean;
-  scrubbing?: boolean;
-  loading?: boolean;
-  fullscreen?: boolean;
-  signal?: string;
-  controls: ReactElement;
-  timeline: ReactElement;
-};
+}

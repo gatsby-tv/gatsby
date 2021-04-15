@@ -1,6 +1,7 @@
 import React from "react";
 import { AppProvider } from "@gatsby-tv/components";
-import "@gatsby-tv/components/static/fonts.css";
+import "@gatsby-tv/components/dist/fonts.css";
+import "@gatsby-tv/components/dist/styles.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,7 +10,7 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <AppProvider theme="dark">
+    <AppProvider>
       <div style={{ overflow: "hidden", height: "100vh" }}>
         <Story />
       </div>

@@ -4,14 +4,17 @@ import React, {
   useReducer,
   useEffect,
   useCallback,
+  RefObject,
 } from "react";
-import { ifExists, ifNotExists, useTheme } from "@gatsby-tv/utilities";
+import { classNames, ifExists } from "@gatsby-tv/utilities";
 
-import { Box } from "@lib/components/Box";
 import { Portal } from "@lib/components/Portal";
 import { Optional } from "@lib/components/Optional";
 import { EventListener } from "@lib/components/EventListener";
-import { cssTransition } from "@lib/styles/transition";
+
+import styles from "./Panel.scss";
+
+type Touch = { clientX: number; clientY: number };
 
 interface TouchState {
   active: boolean;
@@ -26,12 +29,47 @@ type TouchAction =
   | { type: "move"; position: number; time: number }
   | { type: "end" };
 
+function getOffset(
+  ref: RefObject<HTMLElement>,
+  touch: Touch,
+  direction: string
+): number {
+  switch (direction) {
+    case "right":
+      return getOffset.value(ref, touch.clientX, "left", "width");
+    case "left":
+      return 1 - getOffset.value(ref, touch.clientX, "left", "width");
+    case "bottom":
+      return getOffset.value(ref, touch.clientY, "top", "height");
+    case "top":
+      return 1 - getOffset.value(ref, touch.clientY, "top", "height");
+    default:
+      throw new Error(
+        `getOffset called with incorrect direction: ${direction}`
+      );
+  }
+}
+
+getOffset.value = (
+  ref: RefObject<HTMLElement>,
+  base: number,
+  direction: string,
+  dimension: string
+) => {
+  const {
+    [direction]: x,
+    [dimension]: y,
+  } = ref.current?.getBoundingClientRect() as any;
+  return Math.min(Math.max((base - x) / y, 0), 1);
+};
+
 export interface PanelProps {
   children?: React.ReactNode;
   id?: string;
+  className?: string;
   direction?: "top" | "right" | "bottom" | "left";
   draggable?: boolean;
-  fullscreen?: boolean;
+  overlay?: boolean;
   active?: boolean;
   zIndex?: number;
   onExit?: () => void;
@@ -41,14 +79,14 @@ export function Panel(props: PanelProps): React.ReactElement | null {
   const {
     children,
     id,
+    className,
     direction = "right",
     draggable = true,
-    fullscreen,
+    overlay,
     active,
     zIndex,
     onExit = () => undefined,
   } = props;
-  const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
   const [visibleBase, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -125,14 +163,14 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     if (active) {
       setMounted(true);
     } else {
-      const id = setTimeout(() => setMounted(false), theme.duration.fast);
+      const id = setTimeout(() => setMounted(false), 300);
       return () => clearTimeout(id);
     }
   }, [active]);
 
   useEffect(() => {
     if (!draggable) {
-      setTouch({ type: "end" })
+      setTouch({ type: "end" });
     }
   }, [draggable]);
 
@@ -149,24 +187,11 @@ export function Panel(props: PanelProps): React.ReactElement | null {
   const onTouchStart = useCallback(
     (event: any) => {
       if (!ref.current || !draggable) return;
-      const { clientX, clientY } = event.touches[0];
-      if (direction === "right") {
-        const { left, width } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientX - left) / width, 0), 1);
-        setTouch({ type: "start", offset: value, time: event.timeStamp });
-      } else if (direction === "left") {
-        const { left, width } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientX - left) / width, 0), 1);
-        setTouch({ type: "start", offset: 1 - value, time: event.timeStamp });
-      } else if (direction === "bottom") {
-        const { top, height } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientY - top) / height, 0), 1);
-        setTouch({ type: "start", offset: value, time: event.timeStamp });
-      } else {
-        const { top, height } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientY - top) / height, 0), 1);
-        setTouch({ type: "start", offset: 1 - value, time: event.timeStamp });
-      }
+      setTouch({
+        type: "start",
+        offset: getOffset(ref, event.touches[0] as Touch, direction),
+        time: event.timeStamp,
+      });
     },
     [direction, draggable]
   );
@@ -174,24 +199,11 @@ export function Panel(props: PanelProps): React.ReactElement | null {
   const onTouchMove = useCallback(
     (event: any) => {
       if (!ref.current || !draggable) return;
-      const { clientX, clientY } = event.touches[0];
-      if (direction === "right") {
-        const { left, width } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientX - left) / width, 0), 1);
-        setTouch({ type: "move", position: value, time: event.timeStamp });
-      } else if (direction === "left") {
-        const { left, width } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientX - left) / width, 0), 1);
-        setTouch({ type: "move", position: 1 - value, time: event.timeStamp });
-      } else if (direction === "bottom") {
-        const { top, height } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientY - top) / height, 0), 1);
-        setTouch({ type: "move", position: value, time: event.timeStamp });
-      } else {
-        const { top, height } = ref.current.getBoundingClientRect();
-        const value = Math.min(Math.max((clientY - top) / height, 0), 1);
-        setTouch({ type: "move", position: 1 - value, time: event.timeStamp });
-      }
+      setTouch({
+        type: "move",
+        position: getOffset(ref, event.touches[0] as Touch, direction),
+        time: event.timeStamp,
+      });
     },
     [direction, draggable]
   );
@@ -209,10 +221,10 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     [touch]
   );
 
-  const transition = cssTransition(
-    "transform",
-    theme.duration.fast,
-    "ease-out"
+  const classes = classNames(
+    className,
+    styles.Container,
+    !touch.active && styles.Slider
   );
 
   const transform =
@@ -232,34 +244,31 @@ export function Panel(props: PanelProps): React.ReactElement | null {
           transform: `translateY(${-100 * (visible ? touch.position : 1)}%)`,
         };
 
-  const portalProps = {
-    active: fullscreen,
-    $props: { id: id ? `panel-${id}` : "panel" },
-  };
-
-  const outerBoxProps = {
-    ref,
-    absolute: true,
-    expand: true,
-    zIndex: ifExists(fullscreen, zIndex),
-    onTouchStart,
-    onTouchMove,
-    onTouchEnd,
-  };
-
-  const innerBoxProps = {
-    style: transform,
-    expand: true,
-  };
-
   return mounted ? (
-    <Optional component={Portal} {...portalProps}>
-      <Box css={{ overflow: "hidden" }} {...outerBoxProps}>
-        <Box css={ifNotExists(touch.active, transition)} {...innerBoxProps}>
+    <Optional
+      component={Portal}
+      active={overlay}
+      $props={{ id: id ? `panel-${id}` : "panel" }}
+    >
+      <div
+        ref={ref}
+        style={ifExists(zIndex, { zIndex })}
+        className={classNames(
+          styles.Panel,
+          overlay ? styles.Fixed : styles.Absolute
+        )}
+      >
+        <div
+          style={transform}
+          className={classes}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           {children}
-        </Box>
+        </div>
         <EventListener event="keydown" handler={onKeyDown} />
-      </Box>
+      </div>
     </Optional>
   ) : null;
 }

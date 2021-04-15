@@ -1,0 +1,31 @@
+@use 'styles' as *;
+
+.Title {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: spacing(1);
+}
+
+.TitleSkeleton {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.TitleText {
+  @include font-size(display-small);
+  @include font-weight(bold);
+  @include line-height(heading);
+}
+
+.InfoText {
+  @include text-subdued;
+  @include font-size(body-large);
+}
+
+.Peers {
+  display: flex;
+  gap: rem(2px);
+  align-items: center;
+}

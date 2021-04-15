@@ -1,0 +1,18 @@
+@use 'sass:map';
+@use 'styles' as *;
+
+.Placeholder {
+  @include border-radius(smallest);
+  background-color: foreground(placeholder);
+  margin: spacing(0.5) 0;
+}
+
+@each $key, $value in $font-size-map {
+  .Placeholder-#{$key} {
+    height: $value;
+  }
+
+  .Placeholder-heading-#{$key} {
+    height: calc(#{map.get($line-height-map, heading)} * #{$value});
+  }
+}

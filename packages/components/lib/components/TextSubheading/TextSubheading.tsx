@@ -1,12 +1,15 @@
-import styled from "styled-components";
+import React from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { cssTextSubheading } from "@lib/styles/typography";
-import { TextHeading } from "@lib/components/TextHeading";
+import styles from "./TextSubheading.scss";
 
-export const TextSubheading = styled.h3`
-  ${cssTextSubheading}
+export interface TextSubheadingProps {
+  children?: React.ReactNode;
+  className?: string;
+}
 
-  ${TextHeading} + & {
-    margin-top: ${(props) => props.theme.spacing[0.5]};
-  }
-`;
+export function TextSubheading(props: TextSubheadingProps): React.ReactElement {
+  const { className, ...rest } = props;
+  const classes = classNames(className, styles.Subheading);
+  return <h3 className={classes} {...rest} />;
+}

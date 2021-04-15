@@ -1,0 +1,11 @@
+@use 'styles' as *;
+
+.Overlay {
+  @include border-radius(full);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: rem(15px);
+  height: rem(15px);
+  background-color: palette("red");
+}

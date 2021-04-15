@@ -1,0 +1,72 @@
+@use 'styles' as *;
+
+.Carousel {
+  margin: 0 -#{spacing(0.5)};
+}
+
+.Mobile {
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.Mask {
+  width: 100%;
+  clip-path: polygon(
+    -#{spacing(0.5)} -10%,
+    calc(100% + #{spacing(0.5)}) -10%,
+    calc(100% + #{spacing(0.5)}) 110%,
+    -#{spacing(0.5)} 110%
+  );
+}
+
+.Button {
+  @include shadow();
+  position: absolute;
+  top: calc(50% - #{spacing(2)});
+  background-color: background(base);
+}
+
+.ButtonLeft {
+  left: spacing(1.5);
+}
+
+.ButtonRight {
+  right: spacing(1.5);
+}
+
+.Slide {
+  display: block;
+  cursor: pointer;
+  outline: none;
+  z-index: 0;
+  margin: 0 spacing(0.5);
+  color: inherit;
+  background-color: transparent;
+  transition: transform duration(fast) ease;
+
+  &:hover {
+    z-index: 1;
+    transform: scale(1.075);
+    @include shadow();
+  }
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.Group {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.Slider {
+  display: flex;
+  align-items: center;
+  will-change: left, transform;
+}

@@ -1,0 +1,20 @@
+@mixin expand($type: relative) {
+  @if $type == absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  } @else if $type == fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  } @else if $type == relative {
+    width: 100%;
+    height: 100%;
+  } @else {
+    @error 'Expand must either be relative or absolute.';
+  }
+}

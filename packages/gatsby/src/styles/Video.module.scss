@@ -1,0 +1,29 @@
+@use 'styles' as *;
+
+.Container {
+  display: flex;
+}
+
+.Info {
+  flex: 2 2 65%;
+  padding-right: spacing(3);
+}
+
+.Description {
+  flex: 1 1 auto;
+  padding-right: spacing(1);
+}
+
+.Credits {
+  flex: 0 0 25%;
+}
+
+.Related {
+  flex: 1 1 35%;
+  margin-top: spacing(0.5);
+  min-width: rem(450px);
+}
+
+.Rule {
+  margin: spacing(1) 0 spacing(1.5);
+}

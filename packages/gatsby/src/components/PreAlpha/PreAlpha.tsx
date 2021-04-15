@@ -1,42 +1,22 @@
 import React from "react";
-import { Portal, Box, TextMeta } from "@gatsby-tv/components";
-import { ifExists, useTheme, useFrame } from "@gatsby-tv/utilities";
+import { Portal, TextMeta } from "@gatsby-tv/components";
+import { classNames, useFrame } from "@gatsby-tv/utilities";
+
+import styles from "./PreAlpha.module.scss";
 
 export function PreAlpha(): React.ReactElement {
   const { fullscreen } = useFrame();
-  const theme = useTheme();
-
-  const style = {
-    display: ifExists(fullscreen, "none"),
-  };
-
-  const containerProps = {
-    style,
-    absolute: true,
-    bottom: theme.spacing[2],
-    right: theme.spacing[2],
-  };
-
-  const boxProps = {
-    rounded: theme.border.radius.large,
-    bg: theme.colors.black,
-    padding: [theme.spacing[1], theme.spacing[1.5]],
-  };
-
-  const linkProps = {
-    href: "https://github.com/gatsby-tv/gatsby/issues",
-    font: theme.font[3],
-    bold: true,
-    external: true,
-  };
+  const classes = classNames(styles.PreAlpha, fullscreen && styles.Fullscreen);
 
   return (
     <Portal id="pre-alpha">
-      <Box {...containerProps}>
-        <Box {...boxProps}>
-          <TextMeta.Link {...linkProps}>Pre-Alpha</TextMeta.Link>
-        </Box>
-      </Box>
+      <TextMeta.Link
+        className={classes}
+        href="https://github.com/gatsby-tv/gatsby/issues"
+        external
+      >
+        Pre-Alpha
+      </TextMeta.Link>
     </Portal>
   );
 }

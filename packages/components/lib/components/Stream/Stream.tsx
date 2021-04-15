@@ -1,24 +1,30 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Spinner } from "@gatsby-tv/icons";
-import { useScroll, useTheme } from "@gatsby-tv/utilities";
+import { useScroll } from "@gatsby-tv/utilities";
 
-import { Flex } from "@lib/components/Flex";
 import { Icon } from "@lib/components/Icon";
+
+import styles from "./Stream.scss";
 
 export interface StreamProps<T> {
   component: React.FC<T>;
-  generator: () => void;
+  generator?: () => void;
   data?: T[];
   loading?: boolean;
 }
 
 export function Stream<T>(props: StreamProps<T>): React.ReactElement {
-  const { component: SourceComponent, generator, loading, data = [] } = props;
+  const {
+    component: SourceComponent,
+    generator = () => undefined,
+    loading,
+    data = [],
+  } = props;
+
   const { addScrollListener, removeScrollListener } = useScroll();
   const [waiting, setWaiting] = useState(false);
-  const theme = useTheme();
 
-  const handleScroll = useCallback(
+  const onScroll = useCallback(
     (event) => {
       const target = event.currentTarget;
       if (
@@ -41,9 +47,9 @@ export function Stream<T>(props: StreamProps<T>): React.ReactElement {
   }, [loading]);
 
   useEffect(() => {
-    addScrollListener(handleScroll);
-    return () => removeScrollListener(handleScroll);
-  }, [addScrollListener, removeScrollListener, handleScroll]);
+    addScrollListener(onScroll);
+    return () => removeScrollListener(onScroll);
+  }, [addScrollListener, removeScrollListener, onScroll]);
 
   const children = useMemo(
     () =>
@@ -54,9 +60,9 @@ export function Stream<T>(props: StreamProps<T>): React.ReactElement {
   );
 
   const LoadingMarkup = waiting ? (
-    <Flex css={{ gridColumn: "1 / -1" }} expand center>
-      <Icon src={Spinner} w={theme.icon.largest} />
-    </Flex>
+    <div className={styles.Loading}>
+      <Icon src={Spinner} size="largest" />
+    </div>
   ) : null;
 
   return (

@@ -1,0 +1,12 @@
+@use 'styles' as *;
+
+.Card {
+  color: foreground(inverted);
+  background-color: palette("white");
+  width: 60vw;
+  height: 70vh;
+}
+
+.Text {
+  padding: spacing(2);
+}

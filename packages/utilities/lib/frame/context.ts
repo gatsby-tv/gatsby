@@ -4,8 +4,9 @@ export interface FrameContextType {
   screen: { width: number; height: number; };
   offset: { x: number; y: number; };
   fullscreen: boolean;
-  toggleFullscreen: () => void;
-  setFullscreen: (value: boolean) => void;
+  setFullscreen: (value: boolean | ((value: boolean) => boolean)) => void;
+  setTopbar: (value: boolean | ((value: boolean) => boolean)) => void;
+  setSidebar: (value: boolean | ((value: boolean) => boolean)) => void;
 }
 
 export const FrameContext = createContext<FrameContextType | undefined>(

@@ -1,82 +1,48 @@
-import React, { useRef, useState, useCallback } from "react";
-import styled from "styled-components";
+import React, { useRef, useState } from "react";
 import {
+  classNames,
   ifExists,
-  ifNotExists,
   ScrollContext,
   useScrollContext,
   useParentRef,
   useResizeObserver,
 } from "@gatsby-tv/utilities";
 
-import { Box } from "@lib/components/Box";
-import { cssProperty } from "@lib/styles/property";
-import { EventHandler, Size } from "@lib/types";
-import { cssTransition } from "@lib/styles/transition";
+import styles from "./Scroll.scss";
 
 export interface ScrollProps {
   children?: React.ReactNode;
+  className?: string;
   smooth?: boolean;
   hide?: boolean;
-  maxw?: Size;
-  maxh?: Size;
   onScroll?: (event: any) => void;
 }
 
-const ScrollStyle = styled.div<ScrollProps>`
-  min-width: 100%;
-  max-height: 100%;
-  box-sizing: content-box;
-  backface-visibility: hidden;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  ${(props) => cssProperty("scroll-behavior", ifExists(props.smooth, "smooth"))}
-
-  &::-webkit-scrollbar {
-    width: ${(props) => (props.hide ? "0" : "1rem")};
-    height: ${(props) => (props.hide ? "0" : "1rem")};
-  }
-
-  &::-webkit-scrollbar-corner {
-    color: transparent;
-  }
-
-  &::-webkit-scrollbar-track {
-    color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${(props) =>
-      props.hide ? "transparent" : props.theme.colors.background[5].toString()};
-    ${(props) => cssTransition("all", props.theme.duration.fastest, "ease")}
-  }
-`;
-
 export function Scroll(props: ScrollProps): React.ReactElement {
-  const { children, maxw, maxh, ...rest } = props;
+  const { children, className, smooth, hide } = props;
   const [height, setHeight] = useState<number | undefined>(undefined);
   const scroll = useRef<HTMLDivElement>(null);
-  const container = useRef<HTMLDivElement>(null);
-  const parent = useParentRef<HTMLDivElement>(container);
+  const parent = useParentRef<HTMLDivElement>(scroll);
   const context = useScrollContext<HTMLDivElement>(scroll);
 
   useResizeObserver(parent, (content) => setHeight(content.blockSize));
 
-  const boxProps = {
-    absolute: ifNotExists(maxh),
-    expand: true,
-    h: ifExists(height && ifNotExists(maxh), `${height}px`),
-    maxh,
-    maxw,
-  };
+  const classes = classNames(
+    className,
+    styles.ScrollBar,
+    hide && styles.Hidden,
+    smooth && styles.Smooth
+  );
 
   return (
     <ScrollContext.Provider value={context}>
-      <Box ref={container} {...boxProps}>
-        <ScrollStyle ref={scroll} {...rest}>
-          {children}
-        </ScrollStyle>
-      </Box>
+      <div
+        ref={scroll}
+        style={ifExists(height, { height: `${height}px` })}
+        className={classes}
+      >
+        {children}
+      </div>
     </ScrollContext.Provider>
   );
 }

@@ -1,0 +1,16 @@
+@use 'styles' as *;
+
+.Container {
+  width: rem(300px);
+  height: rem(300px);
+}
+
+.Image {
+  margin-bottom: spacing(2);
+}
+
+.Stream {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+}

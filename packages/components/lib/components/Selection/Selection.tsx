@@ -1,86 +1,62 @@
 import React from "react";
-import { css } from "styled-components";
-import { ifNotExists } from "@gatsby-tv/utilities";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { FlexAlignItems } from "@lib/types";
 import { SelectionContext } from "@lib/utilities/selection";
-import { Flex } from "@lib/components/Flex";
+import { ItemContext } from "@lib/utilities/item";
 import { Scroll } from "@lib/components/Scroll";
 import { Optional } from "@lib/components/Optional";
 
 import { Section, SectionProps, Item, ItemProps } from "./components";
 
+import styles from "./Selection.scss";
+
 export type { SectionProps as SelectionSectionProps };
 export type { ItemProps as SelectionItemProps };
 
-export interface SelectionProps {
+export interface SelectionProps extends React.AriaAttributes {
   children?: React.ReactNode;
   className?: string;
+  itemClass?: string;
   selection: Record<string, boolean>;
   row?: boolean;
   scrollHidden?: boolean;
-  ariaLabel?: string;
   onSelect: (option: string) => void;
 }
 
-function SelectionBase(props: SelectionProps): React.ReactElement {
+export function Selection(props: SelectionProps): React.ReactElement {
   const {
     children,
     className,
+    itemClass,
     selection,
     row,
     scrollHidden = true,
-    ariaLabel,
     onSelect,
+    "aria-label": ariaLabel,
   } = props;
 
-  const style = css`
-    > ${Section}:not(:first-child) {
-      ${props.row ? "margin-left" : "margin-top"}: ${(props) =>
-        props.theme.spacing[1.5]};
-    }
-
-    > ${Section}[data-flush] {
-      ${props.row ? "margin-left" : "margin-top"}: auto;
-    }
-
-    ${Item} {
-      cursor: pointer;
-    }
-  `;
-
-  const context = {
-    column: !row,
-    selection,
-    onSelect,
-  };
-
-  const optionalProps = {
-    active: !row,
-    $props: { hide: scrollHidden },
-  };
-
-  const flexProps = {
+  const classes = classNames(
     className,
-    role: "tablist",
-    column: ifNotExists(row),
-    align: "stretch" as FlexAlignItems,
-    "aria-label": ariaLabel,
-  };
+    styles.Selection,
+    row ? styles.SelectionRow : styles.SelectionColumn
+  );
 
   return (
-    <SelectionContext.Provider value={context}>
-      <Optional component={Scroll} {...optionalProps}>
-        <Flex css={style} {...flexProps}>
-          {children}
-        </Flex>
-      </Optional>
+    <SelectionContext.Provider value={{ selection, onSelect }}>
+      <ItemContext.Provider value={{ itemClass }}>
+        <Optional
+          component={Scroll}
+          active={!row}
+          $props={{ hide: scrollHidden }}
+        >
+          <div className={classes} role="tablist" aria-label={ariaLabel}>
+            {children}
+          </div>
+        </Optional>
+      </ItemContext.Provider>
     </SelectionContext.Provider>
   );
 }
 
-export const Selection = Object.assign(SelectionBase, {
-  Section,
-  Item,
-  displayName: "Selection",
-});
+Selection.Item = Item;
+Selection.Section = Section;

@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use './rem' as *;
+
+$spacing-map: (
+  none: 0,
+  extratight: rem(5px),
+  tight: rem(10px),
+  base: rem(15px),
+  loose: rem(20px),
+  extraloose: rem(40px),
+);
+
+$spacing-rem-map: (
+  0: 0,
+  0.5: rem(5px),
+  1: rem(10px),
+  1.5: rem(15px),
+  2: rem(20px),
+  3: rem(30px),
+  4: rem(40px),
+  5: rem(50px),
+  6: rem(60px),
+  7: rem(70px),
+  8: rem(80px),
+  9: rem(90px),
+  10: rem(100px),
+);
+
+@function spacing($size) {
+  @return map.get(map.merge($spacing-map, $spacing-rem-map), $size);
+}

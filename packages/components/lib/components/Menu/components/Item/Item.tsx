@@ -1,40 +1,41 @@
 import React from "react";
-import styled from "styled-components";
-import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { TextBox } from "@lib/components/TextBox";
-import { Flex } from "@lib/components/Flex";
 import { Connected } from "@lib/components/Connected";
 import { Optional } from "@lib/components/Optional";
 import { Icon } from "@lib/components/Icon";
 import { Button, ButtonProps } from "@lib/components/Button";
 import { IconSource } from "@lib/types";
+import { useItem } from "@lib/utilities/item";
 
-export type ItemProps = { children?: React.ReactNode; icon?: IconSource } & Omit<ButtonProps, "unstyled">;
+import styles from "../../Menu.scss";
+
+export interface ItemProps extends Omit<ButtonProps, "unstyled"> {
+  children?: React.ReactNode;
+  className?: string;
+  icon?: IconSource;
+}
 
 export function Item(props: ItemProps): React.ReactElement {
-  const theme = useTheme();
-  const { children, icon: IconComponent, ...rest } = props;
+  const { children, className, icon: IconComponent, ...rest } = props;
+  const { itemClass } = useItem();
 
-  const flexProps = {
-    active: ifExists(IconComponent),
-    $props: {
-      gap: theme.spacing[1],
-    },
-  };
+  const classes = classNames(className, itemClass, styles.Item);
 
   const IconMarkup = IconComponent ? (
-    <Icon src={IconComponent} w={theme.icon.smaller} />
+    <Icon src={IconComponent} size="smaller" />
   ) : null;
 
   return (
-    <Connected.Item>
+    <Connected.Item className={classes}>
       <Button unstyled {...rest}>
-        <Optional component={Flex} {...flexProps}>
+        <Optional
+          component="div"
+          active={Boolean(IconComponent)}
+          $props={{ className: styles.Container }}
+        >
           {IconMarkup}
-          <TextBox font={theme.font[4]} weight={600}>
-            {children}
-          </TextBox>
+          <div className={styles.Text}>{children}</div>
         </Optional>
       </Button>
     </Connected.Item>

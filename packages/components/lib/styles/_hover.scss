@@ -1,0 +1,19 @@
+@mixin mouse-hover {
+  @media(hover: hover) and (pointer: fine) {
+    &:not([disabled]):hover {
+      @content;
+    }
+  }
+}
+
+@mixin hover {
+  &:not([disabled]):hover {
+    @content;
+  }
+}
+
+@mixin active {
+  &:not([disabled]):active {
+    @content;
+  }
+}

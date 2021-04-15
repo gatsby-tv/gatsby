@@ -1,0 +1,6 @@
+@use 'styles' as *;
+
+.Caption {
+  @include text-caption;
+  margin: 0;
+}

@@ -16,7 +16,7 @@ interface MediaQuerySpecification {
 
 export function useBreakpoints<T extends string | number = number>(
   points: BreakpointSet,
-  defaultValue: T
+  defaultValue?: T
 ): T {
   const key = JSON.stringify(points);
   const queries = useRef<MediaQuerySpecification>({});

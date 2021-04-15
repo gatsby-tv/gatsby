@@ -2,18 +2,14 @@ import React from "react";
 
 import { Item, ItemProps } from "../Item";
 
-export interface TimeProps extends ItemProps {
-  children?: React.ReactNode;
-  id?: string;
+export interface TimeProps extends Omit<ItemProps, "element" | "dateTime" | "value"> {
   date: Date;
 }
 
 export function Time(props: TimeProps): React.ReactElement {
-  const { children, date, ...rest } = props;
+  const { date, ...rest } = props;
 
   return (
-    <Item as="time" dateTime={date.toISOString()} {...rest}>
-      {children}
-    </Item>
+    <Item element="time" dateTime={date.toISOString()} {...rest} />
   );
 }

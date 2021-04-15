@@ -1,0 +1,7 @@
+@use 'styles' as *;
+
+.Loading {
+  @include expand();
+  @include center;
+  grid-column: 1 / -1;
+}

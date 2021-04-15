@@ -1,0 +1,5 @@
+@use 'styles' as *;
+
+.Video {
+  @include expand();
+}

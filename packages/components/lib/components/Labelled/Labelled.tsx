@@ -2,13 +2,12 @@ import React, { useRef, useState, useEffect } from "react";
 
 export interface LabelledProps {
   children?: React.ReactNode;
-  as?: string;
-  component: React.FC<any>;
+  component: React.FC<any> | string;
   $props?: any;
 }
 
 export function Labelled(props: LabelledProps): React.ReactElement {
-  const { children, as: tag, component: Component, $props = {} } = props;
+  const { children, component, $props = {} } = props;
   const ref = useRef<HTMLElement>(null);
   const [label, setLabel] = useState<string | undefined>(undefined);
   const [descriptions, setDescriptions] = useState<string | undefined>(
@@ -29,16 +28,11 @@ export function Labelled(props: LabelledProps): React.ReactElement {
     );
   }, []);
 
-  const componentProps = {
+  return React.createElement(component, {
     ref,
+    children,
     "aria-labelledby": label,
     "aria-describedby": descriptions,
     ...$props,
-  };
-
-  return (
-    <Component as={tag} {...componentProps}>
-      {children}
-    </Component>
-  );
+  });
 }

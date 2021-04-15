@@ -1,0 +1,62 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Modal {
+  width: rem(420px);
+  background-color: background(dark);
+  padding: spacing(3);
+}
+
+.Rule {
+  background-color: background(light);
+}
+
+.Title {
+  @include center;
+  align-items: center;
+  gap: spacing(1.5);
+}
+
+.Email {
+  @include font-size(body-large);
+  margin-bottom: spacing(2);
+}
+
+.Submit {
+  @include font-size(body-large);
+  width: 100%;
+  color: background(darker);
+  background-color: palette("gold");
+  padding: spacing(0.5);
+
+  @include hover {
+    background-color: color.adjust(palette("gold"), $lightness: 5%);
+  }
+
+  @include active {
+    background-color: color.adjust(palette("gold"), $alpha: -0.1);
+  }
+}
+
+.Options {
+  @include center;
+  flex-direction: column;
+  gap: spacing(1);
+}
+
+.Option {
+  @include font-size(display-small);
+  @include center;
+  gap: spacing(1.5);
+  width: 80%;
+  background-color: background(light);
+  padding: spacing(1);
+
+  @include hover {
+    background-color: background(lighter);
+  }
+
+  @include active {
+    background-color: color.adjust(background(lighter), $alpha: -0.1);
+  }
+}

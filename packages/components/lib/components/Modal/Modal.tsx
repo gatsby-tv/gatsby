@@ -1,18 +1,18 @@
 import React, { useCallback } from "react";
-import { ifExists, useModalCallback } from "@gatsby-tv/utilities";
+import { ifExists, classNames, useModalCallback } from "@gatsby-tv/utilities";
 
-import { EventHandler } from "@lib/types";
-import { Box } from "@lib/components/Box";
 import { Optional } from "@lib/components/Optional";
 import { Portal } from "@lib/components/Portal";
 import { EventListener } from "@lib/components/EventListener";
+import { EventHandler } from "@lib/types";
 
-import { Overlay } from "./components";
+import styles from "./Modal.scss";
 
 export interface ModalProps {
   children?: React.ReactNode;
   id?: string;
-  fullscreen?: boolean;
+  className?: string;
+  overlay?: boolean;
   active?: boolean;
   zIndex?: number;
   onExit?: () => void;
@@ -22,7 +22,8 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   const {
     children,
     id,
-    fullscreen,
+    className,
+    overlay,
     active,
     zIndex,
     onExit = () => undefined,
@@ -39,15 +40,23 @@ export function Modal(props: ModalProps): React.ReactElement | null {
     [onExit]
   );
 
-  const optionalProps = {
-    active: ifExists(fullscreen),
-    $props: { zIndex },
-  };
+  const onPointerDown = (event: any) => event.stopPropagation();
+
+  const classes = classNames(className, styles.Modal);
 
   return active ? (
     <Portal id={id ? `modal-${id}` : "modal"}>
-      <Optional component={Overlay} {...optionalProps}>
-        <Box onPointerDown={(event) => event.stopPropagation()}>{children}</Box>
+      <Optional
+        component="div"
+        active={overlay}
+        $props={{
+          className: styles.Overlay,
+          style: ifExists(zIndex, { zIndex }),
+        }}
+      >
+        <div className={classes} onPointerDown={onPointerDown}>
+          {children}
+        </div>
       </Optional>
       <EventListener event="keydown" handler={onKeyDown} />
     </Portal>

@@ -1,0 +1,24 @@
+@use 'styles' as *;
+
+.Menu {
+  @include shadow();
+  @include border-radius(smallest);
+  align-items: stretch;
+}
+
+.Item {
+  @include border-radius(smallest);
+  cursor: pointer;
+  padding: spacing(0.5) spacing(1);
+}
+
+.Container {
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+}
+
+.Text {
+  @include font-size(body-large);
+  @include font-weight(bold);
+}

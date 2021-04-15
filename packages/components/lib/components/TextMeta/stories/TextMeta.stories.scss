@@ -1,0 +1,13 @@
+@use 'styles' as *;
+
+.TextMeta-small {
+  @include font-size(caption);
+}
+
+.TextMeta-medium {
+  @include font-size(body);
+}
+
+.TextMeta-large {
+  @include font-size(body-large);
+}

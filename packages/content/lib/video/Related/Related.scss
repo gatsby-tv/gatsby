@@ -1,0 +1,8 @@
+@use 'styles' as *;
+
+.Listing {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: spacing(1.5);
+}

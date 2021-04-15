@@ -1,16 +1,17 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { IPFSContent } from "@gatsby-tv/types";
-import { useTheme, useIPFSContent } from "@gatsby-tv/utilities";
+import { classNames, useIPFSContent } from "@gatsby-tv/utilities";
 
-import { Box } from "@lib/components/Box";
+import { DiscreteSize } from "@lib/types";
 import { Viewport } from "@lib/components/Viewport";
 
-export type AvatarProps = {
+import styles from "./Avatar.scss";
+
+export interface AvatarProps extends Omit<React.ImgHTMLAttributes<Element>, "src"> {
   src?: IPFSContent | string;
-  ariaLabel?: string;
-  size?: string;
+  size?: DiscreteSize;
   overlay?: React.ReactNode;
-} & Omit<React.ImgHTMLAttributes<HTMLElement>, "src">;
+}
 
 type AvatarURLProps = AvatarProps & { src?: string };
 
@@ -21,34 +22,32 @@ function isAvatarURLProps(props: AvatarProps): props is AvatarURLProps {
 }
 
 function AvatarURL(props: AvatarURLProps): React.ReactElement {
-  const theme = useTheme();
-  const { size = theme.avatar.base, overlay, ariaLabel, ...imgProps } = props;
+  const {
+    className,
+    size = "base",
+    overlay,
+    "aria-label": ariaLabel,
+    ...imgProps
+  } = props;
   const [loading, setLoading] = useState(true);
 
-  const handleLoad = useCallback(() => setLoading(false), []);
+  const onLoad = useCallback(() => setLoading(false), []);
 
-  const viewportProps = {
-    placeholder: true,
-    rounded: 1,
-    w: size,
-    h: size,
-    aspectRatio: 1,
-    overlay,
-    ariaLabel,
-  };
+  useEffect(() => setLoading(true), [imgProps.src]);
 
-  const boxProps = {
-    style: loading ? { paddingTop: "100%", height: 0 } : undefined,
-    alt: "",
-    expand: true,
-    rounded: theme.border.radius.full,
-    onLoad: handleLoad,
-    ...imgProps,
-  };
+  const classes = classNames(className, styles[`Viewport-${size}`]);
+  const imageClasses = classNames(styles.Image, loading && styles.Loading);
 
   return (
-    <Viewport {...viewportProps}>
-      <Box as="img" {...boxProps} />
+    <Viewport
+      className={classes}
+      placeholder
+      aspectRatio={1}
+      rounded="full"
+      overlay={overlay}
+      aria-label={ariaLabel}
+    >
+      <img className={imageClasses} alt="" onLoad={onLoad} {...imgProps} />
     </Viewport>
   );
 }

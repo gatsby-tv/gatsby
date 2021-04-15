@@ -6,7 +6,23 @@ export interface EventHandler {
   (event: React.SyntheticEvent): void;
 }
 
-export type FontSize = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export type TextElement = "h1" | "h2" | "h3" | "h4" | "p";
+
+export type Spacing =
+  | "none"
+  | "extratight"
+  | "tight"
+  | "base"
+  | "loose"
+  | "extraloose";
+
+export type FontSize =
+  | "caption"
+  | "body"
+  | "body-large"
+  | "display-small"
+  | "display-medium"
+  | "display-large";
 
 export type SpacingSize =
   | 0
@@ -63,117 +79,39 @@ export type Duration =
 
 export type LineHeight = "body" | "heading";
 
-export type FontWeight = "normal" | "semiBold" | "bold";
+export type FontWeight = "normal" | "semi-bold" | "bold" | "extra-bold";
 
-export type FontColor = "body" | "subdued" | "inverted";
+export type BackgroundColor =
+  | "darkest"
+  | "darker"
+  | "dark"
+  | "base"
+  | "light"
+  | "lighter"
+  | "lighest";
 
-export type BackgroundColor = 0 | 1 | 2 | 3 | 4 | 5;
+export type ForegroundColor = BackgroundColor;
 
-export type ShadowColor = "dark" | "light";
-
-export type ColorHue =
-  | "placeholder"
-  | "popover"
-  | "error"
+export type Palette =
   | "gold"
-  | "blue"
-  | "pink"
+  | "red"
   | "green"
+  | "blue"
+  | "cyan"
+  | "yellow"
+  | "orange"
+  | "grey"
   | "white"
   | "black"
   | "trueblack";
 
 export type IconSource = React.FC<React.SVGProps<SVGSVGElement>>;
 
-export type Size = number | string;
-
-export type Margin = Size | Size[];
-
-export type Time = number | string;
-
-export type FlexDistribute = "fill" | "fill-evenly";
-
-export type FlexJustifyContent =
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-around"
-  | "space-evenly"
-  | "start"
-  | "end"
-  | "left"
-  | "right";
-
-export type FlexAlignItems =
-  | "stretch"
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "baseline"
-  | "first baseline"
-  | "last baseline"
-  | "start"
-  | "end"
-  | "self-start"
-  | "self-end";
-
-export type FlexAlignContent =
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-around"
-  | "space-evenly"
-  | "stretch"
-  | "start"
-  | "end"
-  | "baseline"
-  | "first baseline"
-  | "last baseline";
-
-export type GridJustifyItems = "start" | "end" | "center" | "stretch";
-
-export type GridAlignItems = "start" | "end" | "center" | "stretch";
-
-export type GridJustifyContent =
-  | "start"
-  | "end"
-  | "center"
-  | "stretch"
-  | "space-around"
-  | "space-between"
-  | "space-evenly";
-
-export type GridAlignContent =
-  | "start"
-  | "end"
-  | "center"
-  | "stretch"
-  | "space-around"
-  | "space-between"
-  | "space-evenly";
-
-export interface Theme {
-  colors: {
-    font: Record<FontColor, Color>;
-    background: Record<BackgroundColor, Color>;
-    inverted: Record<BackgroundColor, Color>;
-    shadow: Record<ShadowColor, Color>;
-  } & Record<ColorHue, Color>;
-
-  font: Record<FontSize, string>;
-  icon: Record<DiscreteSize, string>;
-  avatar: Record<DiscreteSize, string>;
-
-  border: {
-    radius: Record<BorderRadius, string>;
-    width: Record<BorderWidth, string>;
-  };
-
-  spacing: Record<SpacingSize, string>;
-  duration: Record<Duration, number>;
-
-  lineHeight: Record<LineHeight, number>;
-  weight: Record<FontWeight, number>;
-}
+export type IconSize =
+  | "smallest"
+  | "smaller"
+  | "small"
+  | "base"
+  | "large"
+  | "larger"
+  | "largest";

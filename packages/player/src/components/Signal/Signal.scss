@@ -1,0 +1,44 @@
+@use 'styles' as *;
+
+@keyframes signal-enter {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.6);
+  }
+
+  30% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.Signal {
+  @include border-radius(full);
+  opacity: 0;
+  color: palette("white");
+  background-color: palette("black");
+
+  svg:global(#gz-pause) {
+    transform: scale(0.9);
+  }
+
+  svg:global(#gz-play) {
+    transform: scale(0.9) translateX(rem(2px));
+  }
+
+  animation: {
+    name: signal-enter;
+    duration: duration(slow);
+    fill-direction: forwards;
+  }
+}
+
+.SignalContainer {
+  @include expand(absolute);
+  @include center;
+  pointer-events: none;
+}

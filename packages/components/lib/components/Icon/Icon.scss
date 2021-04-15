@@ -1,0 +1,17 @@
+@use 'styles' as *;
+
+.Icon {
+  & > svg {
+    width: inherit;
+    height: inherit;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+@each $key, $value in $icon-size-map {
+  .Icon-#{$key} {
+    font-size: $value;
+  }
+}

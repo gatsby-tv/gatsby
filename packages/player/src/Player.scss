@@ -1,0 +1,16 @@
+@use 'styles' as *;
+
+.Viewport {
+  @include center;
+  height: calc((9 / 16) * 100vw);
+  max-height: calc(100vh - #{rem(140px)});
+}
+
+.ViewportFullscreen {
+  height: 100vh;
+  max-height: none;
+}
+
+.ViewportMinHeight {
+  min-height: rem(480px);
+}

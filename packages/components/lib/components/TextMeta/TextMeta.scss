@@ -1,0 +1,34 @@
+@use 'styles' as *;
+
+.Item {
+  @include text-break-word;
+  @include text-truncate;
+  white-space: nowrap;
+}
+
+.Clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.List {
+  display: flex;
+  align-items: center;
+
+  & > .Item:not(:last-child):after {
+    content: "•";
+    margin: 0 spacing(0.5);
+  }
+}
+
+.Link {
+  @include text-subdued;
+  @include mouse-hover {
+    color: foreground(body);
+  }
+
+  cursor: pointer;
+  transition: color duration(fastest) ease;
+  width: fit-content;
+}

@@ -1,0 +1,17 @@
+@use 'styles' as *;
+
+.Switch {
+  width: rem(200px);
+}
+
+.Item {
+  @include border-radius(small);
+  padding: spacing(0.5) spacing(1.5);
+  background-color: background(dark);
+  transition: all duration(fastest) ease;
+
+  &[aria-selected] {
+    color: palette("blue");
+    background-color: background(base);
+  }
+}

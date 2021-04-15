@@ -1,0 +1,36 @@
+@use 'styles' as *;
+
+.Controls {
+  display: flex;
+  align-items: stretch;
+  height: rem(39px);
+}
+
+.Section {
+  @include expand();
+  display: flex;
+  flex-grow: 1;
+  align-items: stretch;
+}
+
+.Playback {
+  justify-content: flex-start;
+
+  & > *:first-child {
+    margin-right: spacing(0.5);
+  }
+
+  & > *:last-child {
+    margin-left: spacing(0.5);
+  }
+}
+
+.Settings {
+  justify-content: flex-end;
+}
+
+.ProgressText {
+  @include center;
+  @include text-tabular-nums;
+  @include font-size(body);
+}

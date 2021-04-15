@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use './rem' as *;
+
+$icon-size-map: (
+  smallest: rem(11px),
+  smaller: rem(15px),
+  small: rem(19px),
+  base: rem(23px),
+  large: rem(27px),
+  larger: rem(31px),
+  largest: rem(39px),
+);
+
+@function icon($size) {
+  @return map.get($icon-size-map, $size);
+}

@@ -1,0 +1,50 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+@mixin placeholder {
+  color: color.adjust(foreground(body), $alpha: -0.5);
+}
+
+.Input {
+  @include text-input;
+  @include border-input;
+  @include border-radius(small);
+
+  display: flex;
+  padding: spacing(0.5) spacing(1);
+  gap: spacing(1);
+  align-items: center;
+
+  cursor: text;
+  background-color: background(light);
+
+  textarea, input {
+    width: 100%;
+    flex-grow: 1;
+
+    white-space: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    appearance: none;
+    outline: none;
+    color: color.adjust(foreground(body), $lightness: -10%);
+    background-color: transparent;
+
+    &::placeholder {
+      @include placeholder;
+    }
+  }
+}
+
+@each $align in left, center, right {
+  .Input-align-#{$align} {
+    textarea, input {
+      text-align: $align;
+    }
+  }
+}
+
+.Decorator {
+  flex-shrink: 0;
+  @include placeholder;
+}

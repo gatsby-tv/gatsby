@@ -1,0 +1,44 @@
+@use 'styles' as *;
+
+.Label {
+  @include text-break-word;
+  @include text-label;
+  display: block;
+  margin-bottom: spacing(0.5);
+}
+
+.Help {
+  @include text-label;
+  @include text-break-word;
+  @include text-subdued;
+  @include font-size(caption);
+  margin-top: spacing(0.5);
+}
+
+.Error {
+  @include text-break-word;
+  @include text-error;
+  @include font-size(caption);
+  margin-top: spacing(0.5);
+
+  &:before {
+    content: "*";
+    margin-right: spacing(0.5);
+  }
+}
+
+.ErrorContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: spacing(0.5);
+}
+
+.ErrorIcon {
+  color: palette("red");
+  margin-bottom: spacing(0.5);
+}
+
+.VisuallyHidden {
+  @include visually-hidden;
+}

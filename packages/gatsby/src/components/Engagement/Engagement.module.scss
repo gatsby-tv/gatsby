@@ -1,0 +1,16 @@
+@use 'styles' as *;
+
+.Button {
+  @include shadow();
+  padding: rem(8px);
+  background-color: inverted(darkest);
+  color: background(darkest);
+
+  @include hover {
+    background-color: inverted(darker);
+  }
+
+  &:before {
+    background-color: background(darkest);
+  }
+}

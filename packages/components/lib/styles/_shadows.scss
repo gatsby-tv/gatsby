@@ -1,0 +1,5 @@
+@use './rem' as *;
+
+@mixin shadow($radius: rem(10px)) {
+  box-shadow: 0 0 $radius rgba(0, 0, 0, 0.9);
+}

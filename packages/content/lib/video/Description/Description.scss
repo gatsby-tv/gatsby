@@ -1,0 +1,18 @@
+@use 'styles' as *;
+
+.Description {
+  @include font-size(body-large);
+}
+
+.ShowMoreButton {
+  @include font-size(caption);
+  width: fit-content;
+  padding: 0;
+  margin-top: spacing(1);
+}
+
+.ShowMoreIcon {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

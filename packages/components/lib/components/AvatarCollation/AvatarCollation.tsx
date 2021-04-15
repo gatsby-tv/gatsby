@@ -1,32 +1,33 @@
 import React from "react";
 import { IPFSContent } from "@gatsby-tv/types";
 
-import { Flex } from "@lib/components/Flex";
+import { DiscreteSize } from "@lib/types";
 import { Avatar } from "@lib/components/Avatar";
-import { cssCollation } from "@lib/styles/collation";
+
+import styles from "./AvatarCollation.scss";
 
 export interface AvatarCollationProps {
   avatars: (IPFSContent | string)[];
-  size?: string;
+  size?: DiscreteSize;
 }
 
 export function AvatarCollation(
   props: AvatarCollationProps
 ): React.ReactElement {
-  const { avatars } = props;
+  const { avatars, size } = props;
   avatars.reverse();
 
   const AvatarsMarkup = avatars.map((avatar, index) => (
     <Avatar
       key={`${JSON.stringify(avatar)}.${index}`}
       src={avatar}
-      size={props.size}
+      size={size}
     />
   ));
 
   return (
-    <Flex css={cssCollation()} reverse justify="flex-end">
+    <div className={styles.AvatarCollation}>
       {AvatarsMarkup}
-    </Flex>
+    </div>
   );
 }

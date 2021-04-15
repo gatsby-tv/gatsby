@@ -1,0 +1,38 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Overlay {
+  @include expand(absolute);
+}
+
+.Tint {
+  background-color: color.adjust(palette("black"), $alpha: -0.5);
+}
+
+.Signal {
+  font-size: icon(larger);
+  padding: spacing(1);
+  z-index: 2;
+}
+
+.Timeline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.Loading {
+  @include expand(absolute);
+  @include center;
+  pointer-events: none;
+  transform: rotate(-65deg);
+}
+
+.Controls {
+  @include expand(absolute);
+}
+
+.ControlsDisabled {
+  pointer-events: none;
+}

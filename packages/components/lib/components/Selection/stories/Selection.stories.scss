@@ -1,0 +1,33 @@
+@use 'styles' as *;
+
+.Selection {
+  width: rem(200px);
+  padding: spacing(0.5);
+  background-color: background(dark);
+
+  h3 {
+    padding: spacing(0.5) spacing(1.5);
+  }
+}
+
+.Selection:not(.Wide) {
+  height: rem(200px);
+}
+
+.Wide {
+  width: rem(250px);
+
+  .Item {
+    text-align: center;
+  }
+}
+
+.Item {
+  padding: spacing(1) spacing(1.5);
+  transition: all duration(fastest) ease;
+
+  &[aria-selected] {
+    color: palette("blue");
+    background-color: background(base);
+  }
+}

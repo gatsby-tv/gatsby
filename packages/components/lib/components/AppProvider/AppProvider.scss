@@ -1,0 +1,36 @@
+@use 'styles' as *;
+
+* {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  vertical-align: baseline;
+}
+
+:root {
+  font-size: 62.5%;
+  text-size-adjust: 100%;
+  background-color: background(darkest);
+}
+
+:not(:root):fullscreen::backdrop {
+  background-color: background(darkest);
+}
+
+html, body {
+  @include expand();
+  @include font-size(body);
+  @include line-height(body);
+
+  color: foreground(body);
+  overflow: hidden;
+  font-family: "Inter", "Nunito Sans", "Noto Sans", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+}

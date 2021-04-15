@@ -1,43 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { Provider } from "next-auth/client";
 import { SWRConfig } from "swr";
-import { useIPFSNode, IPFSContext } from "@gatsby-tv/utilities";
 import { AppProvider } from "@gatsby-tv/components";
-import { fetcher } from "@gatsby-tv/next";
+import { useIPFSNode, IPFSContext } from "@gatsby-tv/utilities";
+import { Channel } from "@gatsby-tv/types";
+import "@gatsby-tv/components/dist/styles.css";
+import "@gatsby-tv/components/dist/fonts.css";
+import "@gatsby-tv/player/dist/styles.css";
+import "@gatsby-tv/preview/dist/styles.css";
+import "@gatsby-tv/content/dist/styles.css";
 import "react-image-crop/dist/ReactCrop.css";
 
 import { AppLayout } from "@src/components/AppLayout";
+import { fetcher } from "@src/utilities/fetcher";
+import { ChannelModalContext } from "@src/utilities/channel-modal";
 
 export default function App({
   Component,
   pageProps,
 }: AppProps): React.ReactElement {
+  const channel = useState<Channel | undefined>(undefined);
   const node = useIPFSNode();
 
   const HeaderMarkup = (
     <Head>
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="preconnect" href="http://localhost:6001" />
-      <link rel="stylesheet" type="text/css" href="/fonts.css" />
-      <link
-        rel="preload"
-        href="/fonts/Inter.var.woff2"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
-      />
     </Head>
   );
 
   return (
-    <AppProvider theme="dark">
+    <AppProvider>
       <Provider session={pageProps.session}>
         <SWRConfig value={{ fetcher }}>
           <IPFSContext.Provider value={node}>
-            {HeaderMarkup}
-            <AppLayout page={Component} $props={pageProps} />
+            <ChannelModalContext.Provider value={channel}>
+              {HeaderMarkup}
+              <AppLayout page={Component} $props={pageProps} />
+            </ChannelModalContext.Provider>
           </IPFSContext.Provider>
         </SWRConfig>
       </Provider>

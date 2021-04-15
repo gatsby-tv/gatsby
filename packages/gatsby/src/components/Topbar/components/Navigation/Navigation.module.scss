@@ -1,0 +1,13 @@
+@use 'styles' as *;
+
+.HomeLink {
+  padding: 0 spacing(1);
+}
+
+.Logo {
+  height: 100%;
+}
+
+.Tabs {
+  @include font-size(display-small);
+}

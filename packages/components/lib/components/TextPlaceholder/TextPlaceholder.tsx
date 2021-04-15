@@ -1,23 +1,34 @@
-import styled from "styled-components";
+import React from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { Size } from "@lib/types";
-import { cssSize } from "@lib/styles/size";
-import { Box } from "@lib/components/Box";
+import { FontSize } from "@lib/types";
+
+import styles from "./TextPlaceholder.scss";
 
 export interface TextPlaceholderProps {
-  w?: Size;
-  font?: string;
+  className?: string;
+  font?: FontSize;
   heading?: boolean;
+  width?: number;
 }
 
-export const TextPlaceholder = styled(Box)<TextPlaceholderProps>`
-  ${(props) => cssSize("width", props.w ?? 1)}
-  height: ${(props) =>
-    props.heading
-      ? `calc(${props.theme.lineHeight.heading} * ${
-          props.font ?? props.theme.font[5]
-        })`
-      : props.font ?? props.theme.font[5]};
-  border-radius: ${(props) => props.theme.border.radius.smallest};
-  background-color: ${(props) => props.theme.colors.placeholder.toString()};
-`;
+export function TextPlaceholder(
+  props: TextPlaceholderProps
+): React.ReactElement {
+  const { className, font = "body", heading, width = 1 } = props;
+
+  const classes = classNames(
+    className,
+    styles.Placeholder,
+    heading
+      ? styles[`Placeholder-heading-${font}`]
+      : styles[`Placeholder-${font}`]
+  );
+
+  return (
+    <div
+      style={{ width: `${100 * Math.min(width, 1)}%` }}
+      className={classes}
+    />
+  );
+}

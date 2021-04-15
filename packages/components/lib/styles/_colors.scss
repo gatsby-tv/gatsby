@@ -1,0 +1,58 @@
+@use 'sass:map';
+
+$color-palette-map: (
+  'gold': rgb(178, 155, 92),
+  'red': rgb(191, 7, 17),
+  'green': rgb(0, 133, 62),
+  'blue': rgb(0, 111, 187),
+  'cyan': rgb(94, 186, 165),
+  'yellow': rgb(238, 194, 0),
+  'orange': rgb(244, 147, 66),
+  'grey': rgb(80, 80, 80),
+  'black': rgb(1, 1, 1),
+  'trueblack': rgb(0, 0, 0),
+  'white': rgb(255, 255, 255),
+);
+
+$background-palette-map: (
+  darkest: rgb(20, 20, 20),
+  darker: rgb(26, 26, 26),
+  dark: rgb(32, 32, 32),
+  base: rgb(38, 38, 38),
+  light: rgb(44, 44, 44),
+  lighter: rgb(50, 50, 50),
+  lightest: rgb(56, 56, 56),
+);
+
+$inverted-palette-map: (
+  lightest: rgb(235, 235, 235),
+  lighter: rgb(223, 223, 223),
+  light: rgb(211, 211, 211),
+  base: rgb(199, 199, 199),
+  dark: rgb(187, 187, 187),
+  darker: rgb(175, 175, 175),
+  darkest: rgb(163, 163, 163),
+);
+
+$foreground-palette-map: (
+  body: rgba(255, 255, 255, 0.9),
+  subdued: rgba(255, 255, 255, 0.6),
+  inverted: rgba(0, 0, 0, 0.9),
+  placeholder: rgba(255, 255, 255, 0.1),
+);
+
+@function palette($name) {
+  @return map.get($color-palette-map, $name);
+}
+
+@function background($variant) {
+  @return map.get($background-palette-map, $variant);
+}
+
+@function inverted($variant) {
+  @return map.get($inverted-palette-map, $variant);
+}
+
+@function foreground($variant) {
+  @return map.get($foreground-palette-map, $variant);
+}

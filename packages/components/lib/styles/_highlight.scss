@@ -1,0 +1,14 @@
+@mixin highlight($hover, $active : null) {
+  @media(hover: hover) and (pointer: fine) {
+    &:not(:disabled):hover,
+    &:not(:disabled):active {
+      background-color: $color;
+    }
+  }
+
+  @if $active {
+    &:not(:disabled):active {
+      background-color: $active;
+    }
+  }
+}

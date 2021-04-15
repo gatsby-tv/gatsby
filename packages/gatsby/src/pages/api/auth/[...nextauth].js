@@ -5,12 +5,6 @@ import Providers from "next-auth/providers";
 
 import { CJAYROSS_USER } from "@src/example";
 
-const pages = {
-  signIn: null,
-  signOut: null,
-  newUser: null,
-};
-
 const providers = [
   Providers.Credentials({
     name: "credentials",
@@ -55,7 +49,6 @@ const callbacks = {
 };
 
 const options = {
-  pages,
   providers,
   session,
   jwt,

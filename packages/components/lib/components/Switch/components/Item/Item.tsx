@@ -1,33 +1,44 @@
 import React from "react";
-import styled from "styled-components";
-import { ifExists } from "@gatsby-tv/utilities";
+import { classNames, ifExists } from "@gatsby-tv/utilities";
 
+import { Connected } from "@lib/components/Connected";
 import { useSwitch } from "@lib/utilities/switch";
-import { Flex } from "@lib/components/Flex";
+import { useItem } from "@lib/utilities/item";
 
-export interface ItemProps {
+import styles from "../../Switch.scss";
+
+export interface ItemProps extends React.AriaAttributes {
   children?: React.ReactNode;
-  id: string;
+  id?: string;
   className?: string;
+  option: string;
 }
 
-const ItemBase: React.FC<ItemProps> = (props: ItemProps) => {
-  const { children, id, className } = props;
-  const { selection, onSelect } = useSwitch();
-  const handleClick = () => onSelect(props.id);
-
-  const flexProps = {
+export function Item(props: ItemProps): React.ReactElement {
+  const {
+    children,
+    id,
     className,
-    "data-selected": ifExists(selection[id]),
-    grow: 1,
-    onClick: handleClick,
-  };
+    option,
+    "aria-controls": ariaControls,
+  } = props;
+  const { selection, onSelect } = useSwitch();
+  const { itemClass } = useItem();
+  const onClick = () => onSelect(option);
+
+  const classes = classNames(className, itemClass, styles.Item);
 
   return (
-    <Flex.Item {...flexProps}>
-      <Flex center>{children}</Flex>
-    </Flex.Item>
+    <Connected.Item
+      id={id}
+      className={classes}
+      role="tab"
+      tabIndex={selection[option] ? 0 : -1}
+      aria-selected={ifExists(selection[option])}
+      aria-controls={ariaControls}
+      onClick={onClick}
+    >
+      {children}
+    </Connected.Item>
   );
-};
-
-export const Item = styled(ItemBase)``;
+}

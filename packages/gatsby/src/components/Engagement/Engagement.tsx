@@ -1,17 +1,22 @@
 import React from "react";
 import { Button, Icon } from "@gatsby-tv/components";
 import { IconSource } from "@gatsby-tv/components/dist/types";
-import { Subscribe, Follow, Promote, Donate, Tip, Misc } from "@gatsby-tv/icons";
-import { useTheme } from "@gatsby-tv/utilities";
+import {
+  Subscribe,
+  Follow,
+  Promote,
+  Donate,
+  Tip,
+  Misc,
+} from "@gatsby-tv/icons";
 
-export interface EngagementProps {
+import styles from "./Engagement.module.scss";
+
+export type EngagementProps = {
   type: "subscribe" | "follow" | "promote" | "donate" | "tip" | "misc";
-  shadow?: boolean;
-}
+};
 
 export function Engagement(props: EngagementProps): React.ReactElement {
-  const theme = useTheme();
-
   let icon: IconSource;
   let tooltip: string;
 
@@ -47,20 +52,13 @@ export function Engagement(props: EngagementProps): React.ReactElement {
       break;
   }
 
-  const buttonProps = {
-    animate: true,
-    shadow: props.shadow,
-    rounded: theme.border.radius.full,
-    padding: "0.8rem",
-    bg: theme.colors.inverted[5].darken(0.1),
-    fg: theme.colors.background[0],
-    highlight: [theme.colors.inverted[5], theme.colors.background[0]],
-    tooltip,
-  };
-
   return (
-    <Button {...buttonProps}>
-      <Icon src={icon} w={theme.icon.base} />
-    </Button>
+    <Button
+      className={styles.Button}
+      animate
+      icon={icon}
+      size="base"
+      tooltip={tooltip}
+    />
   );
 }

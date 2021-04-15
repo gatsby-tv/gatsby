@@ -1,10 +1,14 @@
 import React from "react";
 import { NextComponentType, NextPageContext } from "next";
-import { Frame, Box } from "@gatsby-tv/components";
+import { Frame } from "@gatsby-tv/components";
+import { Channel } from "@gatsby-tv/content";
 
 import { PreAlpha } from "@src/components/PreAlpha";
 import { Topbar } from "@src/components/Topbar";
-import { Sidebar } from "@src/components/Sidebar";
+import { Link } from "@src/components/Link";
+import { useChannelModal } from "@src/utilities/channel-modal";
+
+import styles from "./AppLayout.module.scss";
 
 export interface AppLayoutProps<T> {
   page: NextComponentType<NextPageContext, any, T>;
@@ -13,13 +17,18 @@ export interface AppLayoutProps<T> {
 
 export function AppLayout<T>(props: AppLayoutProps<T>): React.ReactElement {
   const { page: Page, $props } = props;
+  const [channel, setChannel] = useChannelModal();
 
   return (
-    <Box absolute expand>
-      <Frame topbar={Topbar} sidebar={Sidebar}>
-        <PreAlpha />
-        <Page {...$props} />
-      </Frame>
-    </Box>
+    <Frame topbar={<Topbar className={styles.Topbar} />}>
+      <PreAlpha />
+      <Channel.Modal
+        channel={channel}
+        active={Boolean(channel)}
+        link={Link.Channel}
+        onExit={() => setChannel(undefined)}
+      />
+      <Page {...$props} />
+    </Frame>
   );
 }

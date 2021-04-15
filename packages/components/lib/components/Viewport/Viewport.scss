@@ -1,0 +1,23 @@
+@use 'styles' as *;
+
+.Overlay {
+  @include expand(absolute);
+}
+
+.Placeholder {
+  position: absolute;
+  background-color: palette('trueblack');
+  width: 100%;
+}
+
+.AlphaBackground {
+  background-color: foreground(placeholder);
+}
+
+@each $key, $value in $border-radius-map {
+  @if $key != none {
+    .Radius-#{$key} {
+      border-radius: $value;
+    }
+  }
+}

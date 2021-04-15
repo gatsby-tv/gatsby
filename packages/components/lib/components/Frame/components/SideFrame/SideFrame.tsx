@@ -1,25 +1,36 @@
 import React, { forwardRef, Ref } from "react";
+import { classNames, useForwardedRef } from "@gatsby-tv/utilities";
 
-import { Flex } from "@lib/components/Flex";
+import styles from "../../Frame.scss";
 
 export interface SideFrameProps {
   children?: React.ReactNode;
-  sidebar?: React.FC<any>;
+  sidebar?: React.ReactElement;
+  active?: boolean;
 }
 
 export const SideFrame = forwardRef<HTMLDivElement, SideFrameProps>(
   (props: SideFrameProps, ref: Ref<HTMLDivElement>) => {
-    const { children, sidebar: Sidebar } = props;
+    const { children, sidebar: Sidebar, active } = props;
+    const frame = useForwardedRef<HTMLDivElement>(ref);
+
+    const classes = classNames(styles.Bar, !active && styles.Hidden);
+    const hidden =
+      frame.current && !active
+        ? {
+            transform: `translateX(-${
+              frame.current.getBoundingClientRect().width
+            }px)`,
+          }
+        : undefined;
 
     return Sidebar ? (
-      <Flex expand>
-        <Flex.Item ref={ref} shrink={0}>
-          <Sidebar />
-        </Flex.Item>
-        <Flex.Item shrink={1} grow={1} basis={1}>
-          {children}
-        </Flex.Item>
-      </Flex>
+      <div className={styles.SideFrame}>
+        <div ref={frame} style={hidden} className={classes}>
+          {Sidebar}
+        </div>
+        {children}
+      </div>
     ) : (
       <>{children}</>
     );

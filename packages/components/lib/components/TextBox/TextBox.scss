@@ -1,0 +1,17 @@
+@use 'styles' as *;
+
+.Clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+@each $key, $value in $spacing-map {
+  .TextBox-spacing-#{$key} {
+    white-space: pre-line;
+
+    & > *:not(:first-child) {
+      margin-top: $value;
+    }
+  }
+}

@@ -1,18 +1,15 @@
 import React from "react";
-import styled from "styled-components";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { TextBox } from "@lib/components/TextBox";
-import { cssTextCaption } from "@lib/styles/typography";
+import styles from "./TextCaption.scss";
 
 export interface TextCaptionProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-export const TextCaption = styled.p<TextCaptionProps>`
-  ${cssTextCaption}
-  margin: 0;
-
-  ${TextBox} > & {
-    margin-top: 0 !important;
-  }
-`;
+export function TextCaption(props: TextCaptionProps): React.ReactElement {
+  const { className, ...rest } = props;
+  const classes = classNames(className, styles.Caption);
+  return <h4 className={classes} {...rest} />;
+}

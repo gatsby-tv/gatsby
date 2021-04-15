@@ -1,4 +1,3 @@
-export * from "./use-theme";
 export * from "./use-toggle";
 export * from "./use-select";
 export * from "./use-menu";
@@ -11,6 +10,7 @@ export * from "./use-resize-observer";
 export * from "./use-mobile-detector";
 export * from "./use-volatile-key";
 export * from "./if-exists";
+export * from "./class-names";
 export * from "./format";
 export * from "./unique-id";
 export * from "./scroll";

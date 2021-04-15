@@ -1,24 +1,17 @@
 import React from "react";
-import { css } from "styled-components";
 import { NoEntry } from "@gatsby-tv/icons";
-import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import { ifExists, classNames } from "@gatsby-tv/utilities";
 
-import {
-  cssTextBreakWord,
-  cssTextSubdued,
-  cssTextError,
-  cssTextLabel,
-} from "@lib/styles/typography";
-import { cssVisuallyHidden } from "@lib/styles/visually-hidden";
-import { cssProperty } from "@lib/styles/property";
-import { Box } from "@lib/components/Box";
-import { Flex } from "@lib/components/Flex";
 import { Icon } from "@lib/components/Icon";
 import { Optional } from "@lib/components/Optional";
+import { VisuallyHidden } from "@lib/components/VisuallyHidden";
+
+import styles from "./FormLabel.scss";
 
 export interface FormLabelProps {
   children?: React.ReactNode;
   id: string;
+  className?: string;
   label: string;
   font?: string;
   help?: string;
@@ -27,70 +20,45 @@ export interface FormLabelProps {
 }
 
 export function FormLabel(props: FormLabelProps): React.ReactElement {
-  const theme = useTheme();
-  const { children, id, label, font, help, error, hidden } = props;
+  const { children, id, className, label, font, help, error, hidden } = props;
 
-  const helpStyle = css`
-    margin-top: ${theme.spacing[0.5]};
-    font-size: ${theme.font[6]};
-    ${cssTextBreakWord}
-    ${cssTextSubdued}
-    ${cssTextLabel}
-  `;
+  const classes = classNames(
+    className,
+    styles.Label,
+    hidden && styles.VisuallyHidden
+  );
 
-  const errorStyle = css`
-    margin-top: ${theme.spacing[0.5]};
-    font-size: ${theme.font[6]};
-    gap: ${theme.spacing[0.5]};
-    ${cssTextBreakWord}
-    ${cssTextError}
-
-    &:before {
-      content: "*";
-      margin-right: ${theme.spacing[0.5]};
-    }
-  `;
-
-  const labelStyle = css`
-    margin-bottom: ${theme.spacing[0.5]};
-    ${cssProperty("font-size", font)}
-    ${ifExists(hidden, cssVisuallyHidden)}
-    ${cssTextBreakWord}
-    ${cssTextLabel}
-  `;
-
-  const optionalProps = {
-    active: ifExists(error),
-    $props: { gap: theme.spacing[0.5] },
-  };
-
-  const HelpMarkup = help && !error ? <Box css={helpStyle}>{help}</Box> : null;
+  const HelpMarkup =
+    help && !error ? <div className={styles.Help}>{help}</div> : null;
 
   const ErrorMarkup = error ? (
-    <Box css={errorStyle}>{error.message}</Box>
+    <div className={styles.Error}>{error.message}</div>
   ) : null;
 
   const ErrorIconMarkup = error ? (
     <Icon
+      className={styles.ErrorIcon}
       src={NoEntry}
-      w={theme.icon.smaller}
-      fg={theme.colors.error}
-      marginBottom={theme.spacing[0.5]}
-      ariaLabel="Error"
+      size="smaller"
+      aria-label="Error"
     />
   ) : null;
 
   return (
-    <Box>
-      <Optional component={Flex} {...optionalProps}>
-        <Box as="label" htmlFor={id} hidden={hidden} css={labelStyle}>
+    <>
+      <Optional
+        component="span"
+        active={Boolean(error)}
+        $props={{ className: styles.ErrorContainer }}
+      >
+        <label className={classes} htmlFor={id}>
           {label}
-        </Box>
+        </label>
         {ErrorIconMarkup}
       </Optional>
       {children}
       {ErrorMarkup}
       {HelpMarkup}
-    </Box>
+    </>
   );
 }

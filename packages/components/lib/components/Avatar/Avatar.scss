@@ -1,0 +1,19 @@
+@use 'styles' as *;
+
+.Image {
+  @include expand();
+  @include border-radius(full);
+  display: block;
+}
+
+.Loading {
+  padding-top: 100%;
+  height: 0;
+}
+
+@each $key, $value in $avatar-size-map {
+  .Viewport-#{$key} {
+    width: $value;
+    height: $value;
+  }
+}

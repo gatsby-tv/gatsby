@@ -1,0 +1,21 @@
+@use 'styles' as *;
+
+.Panel {
+  overflow: hidden;
+}
+
+.Absolute {
+  @include expand(absolute);
+}
+
+.Fixed {
+  @include expand(fixed);
+}
+
+.Container {
+  @include expand();
+}
+
+.Slider {
+  transition: transform duration(fast) ease-out;
+}

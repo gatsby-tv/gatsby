@@ -1,0 +1,67 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Modal {
+  background-color: background(dark);
+  width: min(80vw, 90rem);
+  height: calc(100vh - 12rem);
+}
+
+.Panel {
+  background-color: background(dark);
+}
+
+.Cancel {
+  position: absolute;
+  top: spacing(1.5);
+  right: spacing(1.5);
+  z-index: 2;
+  background-color: background(lighter);
+
+  @include hover {
+    background-color: background(lightest);
+  }
+}
+
+.Overlay {
+  @include expand(absolute);
+  background-image: linear-gradient(to top, background(dark), transparent 50%);
+}
+
+.Header {
+  position: absolute;
+  bottom: spacing(3);
+  left: spacing(3);
+  display: flex;
+  align-items: center;
+  gap: spacing(1.5);
+}
+
+.HeaderTextArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.HeaderInfo {
+  @include text-subdued;
+  @include font-size(display-small);
+  @include font-weight(bold);
+}
+
+@media screen and (min-width: 650px) {
+  .Container {
+    margin: 0 spacing(3);
+  }
+}
+
+.Tabs {
+  @include font-size(display-small);
+  position: sticky;
+  height: spacing(3);
+}
+
+.Rule {
+  background-color: background(lighter);
+  margin: rem(-2px) 0 spacing(1.5);
+  z-index: -1;
+}

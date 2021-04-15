@@ -7,3 +7,4 @@ export * from "./scroll";
 export * from "./form";
 export * from "./supports";
 export * from "./size";
+export * from "./injection";

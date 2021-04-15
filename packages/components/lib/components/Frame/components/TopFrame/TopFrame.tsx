@@ -1,25 +1,36 @@
 import React, { forwardRef, Ref } from "react";
+import { classNames, useForwardedRef } from "@gatsby-tv/utilities";
 
-import { Flex } from "@lib/components/Flex";
+import styles from "../../Frame.scss";
 
 export interface TopFrameProps {
   children?: React.ReactNode;
-  topbar?: React.FC<any>;
+  topbar?: React.ReactElement;
+  active?: boolean;
 }
 
 export const TopFrame = forwardRef<HTMLDivElement, TopFrameProps>(
   (props: TopFrameProps, ref: Ref<HTMLDivElement>) => {
-    const { children, topbar: Topbar } = props;
+    const { children, topbar: Topbar, active } = props;
+    const frame = useForwardedRef<HTMLDivElement>(ref);
+
+    const classes = classNames(styles.Bar, !active && styles.Hidden);
+    const hidden =
+      frame.current && !active
+        ? {
+            transform: `translateY(-${
+              frame.current.getBoundingClientRect().height
+            }px)`,
+          }
+        : undefined;
 
     return Topbar ? (
-      <Flex column expand>
-        <Flex.Item ref={ref} as="nav" shrink={0}>
-          <Topbar />
-        </Flex.Item>
-        <Flex.Item shrink={1} grow={1} basis={1}>
-          {children}
-        </Flex.Item>
-      </Flex>
+      <div className={styles.TopFrame}>
+        <nav ref={frame} style={hidden} className={classes}>
+          {Topbar}
+        </nav>
+        {children}
+      </div>
     ) : (
       <>{children}</>
     );

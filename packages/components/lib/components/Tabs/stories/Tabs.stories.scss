@@ -1,0 +1,7 @@
+@use 'styles' as *;
+
+.Tabs {
+  @include font-size(body-large);
+  width: rem(250px);
+  height: spacing(2);
+}

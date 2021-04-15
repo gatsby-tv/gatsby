@@ -1,7 +1,6 @@
 import React, { CSSProperties } from "react";
-import { useTheme } from "@gatsby-tv/utilities";
 
-import { Flex } from "@lib/components";
+import styles from "../../Carousel.scss";
 
 export type SliderState = {
   slide: number;
@@ -18,7 +17,6 @@ export interface SliderProps {
 
 export function Slider(props: SliderProps): React.ReactElement {
   const { children, state, groups } = props;
-  const theme = useTheme();
   const distance = state.slide - state.desired;
 
   const style: CSSProperties = {
@@ -34,12 +32,12 @@ export function Slider(props: SliderProps): React.ReactElement {
 
     const shift = (direction * 100) / (groups + 2);
     style.transform = `translateX(${shift}%)`;
-    style.transition = `transform ${theme.duration.base}ms ease`;
+    style.transition = `transform 500ms ease`;
   }
 
   return (
-    <Flex style={style} css={{ willChange: "left, transform" }} align="center">
+    <div style={style} className={styles.Slider}>
       {children}
-    </Flex>
+    </div>
   );
 }

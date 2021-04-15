@@ -1,18 +1,14 @@
 import React, { forwardRef } from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { Box, BoxProps } from "@lib/components/Box";
+import styles from "./Video.scss";
 
-export type VideoProps = React.VideoHTMLAttributes<HTMLElement> & BoxProps;
+export type VideoProps = React.VideoHTMLAttributes<HTMLElement>;
 
 export const Video = forwardRef<HTMLVideoElement, VideoProps>((props, ref) => {
-  const videoProps = {
-    ref: ref as React.RefObject<HTMLVideoElement>,
-    w: 1,
-    h: 1,
-    ...props,
-  };
-
-  return <Box as="video" {...videoProps} />;
+  const { className, ...rest } = props;
+  const classes = classNames(className, styles.Video);
+  return <video ref={ref} className={classes} {...rest} />;
 });
 
 Video.displayName = "Video";

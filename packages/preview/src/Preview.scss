@@ -1,0 +1,67 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Preview-column {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(1);
+}
+
+.Preview-row, .Preview-compact {
+  display: flex;
+  gap: spacing(1);
+}
+
+.Skeleton {
+  width: 100%;
+}
+
+.Link {
+  @include expand(absolute);
+
+  & > a {
+    @include expand(absolute);
+    z-index: 1;
+  }
+}
+
+.Item-row {
+  flex-basis: 125%;
+}
+
+.Item-compact {
+  flex-basis: 250%;
+}
+
+.Duration {
+  @include border-radius(smallest);
+  position: absolute;
+  bottom: spacing(0.5);
+  right: spacing(0.5);
+  padding: 0 spacing(0.5);
+  background-color: color.adjust(palette("black"), $alpha: -0.3);
+}
+
+.DurationText {
+  @include font-weight(bold);
+}
+
+.Timeline {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: rem(3px);
+  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  border-bottom-left-radius: border-radius(smallest);
+  border-bottom-right-radius: border-radius(smallest);
+}
+
+.TimelineProgress {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: palette("gold");
+}

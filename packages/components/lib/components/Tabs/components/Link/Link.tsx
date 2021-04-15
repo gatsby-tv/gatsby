@@ -1,22 +1,24 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, Ref } from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
 import {
   Link as LinkBase,
   LinkProps as LinkBaseProps,
 } from "@lib/components/Link";
-import { Flex } from "@lib/components/Flex";
 import { Selection, SelectionItemProps } from "@lib/components/Selection";
+
+import styles from "../../Tabs.scss";
 
 export type LinkProps = SelectionItemProps & LinkBaseProps;
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  (props: LinkProps, ref) => {
+  (props: LinkProps, ref: Ref<HTMLAnchorElement>) => {
     const {
       children,
       id,
       className,
       option,
-      ariaControls,
+      "aria-controls": ariaControls,
       ...linkProps
     } = props;
 
@@ -27,12 +29,17 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       ariaControls,
     };
 
+    const classes = classNames(className, styles.Item);
+
     return (
-      <Selection.Item {...itemProps}>
-        <LinkBase ref={ref} {...linkProps}>
-          <Flex expand center>
-            {children}
-          </Flex>
+      <Selection.Item
+        id={id}
+        className={classes}
+        option={option}
+        aria-controls={ariaControls}
+      >
+        <LinkBase ref={ref} className={styles.Link} {...linkProps}>
+          {children}
         </LinkBase>
       </Selection.Item>
     );

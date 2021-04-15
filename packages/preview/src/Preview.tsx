@@ -1,72 +1,59 @@
 import React from "react";
-import { css } from "styled-components";
-import { Box, Flex, Image, Optional, Labelled } from "@gatsby-tv/components";
-import { useTheme, useUniqueId } from "@gatsby-tv/utilities";
+import { Image, Optional, Labelled } from "@gatsby-tv/components";
+import { useUniqueId } from "@gatsby-tv/utilities";
 
-import { PreviewProps } from "@src/types";
 import { Overlay } from "@src/components/Overlay";
-import { Skeleton } from "@src/variants/Skeleton";
+import { Skeleton } from "@src/Preview.skeleton";
+import { PreviewProps } from "@src/types";
+import styles from "@src/Preview.scss";
 
-function PreviewBase(props: PreviewProps): React.ReactElement {
+export function Preview(props: PreviewProps): React.ReactElement {
   const {
     content,
+    bookmark,
     format = "column",
     info: Info,
     link: Link,
-    ariaPosInSet,
-    ariaSetSize,
+    ...aria
   } = props;
   const id = useUniqueId("preview");
-  const theme = useTheme();
 
-  const style = css`
-    & > a {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-    }
-  `;
-
-  const imageProps = {
-    src: content.thumbnail,
-    rounded: theme.border.radius.smallest,
-    aspectRatio: 0.5625,
-    overlay: <Overlay content={content} />,
-  };
-
-  const itemProps = {
-    active: format !== "column",
-    $props: { basis: format === "compact" ? 2.0 : 0.8 },
-  };
-
-  const flexProps = {
-    column: format === "column",
-    gap: theme.spacing[1],
-    "aria-posinset": ariaPosInSet,
-    "aria-setsize": ariaSetSize,
-  };
+  if (!content) {
+    return <Skeleton format={format} info={Info} />;
+  }
 
   const InfoMarkup = Info ? (
-    <Optional component={Flex.Item} {...itemProps}>
+    <Optional
+      component="div"
+      active={format !== "column"}
+      $props={{ className: styles[`Item-${format}`] }}
+    >
       {Info}
     </Optional>
   ) : null;
 
+  const LinkMarkup = Link ? (
+    <div className={styles.Link}>
+      {Link}
+    </div>
+  ) : null;
+
   return (
-    <Labelled as="article" component={Flex} $props={flexProps}>
-      <Image {...imageProps} />
+    <Labelled
+      component="article"
+      $props={{
+        className: styles[`Preview-${format}`],
+        ...aria
+      }}
+    >
+      <Image
+        src={content.thumbnail}
+        rounded="smallest"
+        aspectRatio={0.5625}
+        overlay={<Overlay content={content} bookmark={bookmark} />}
+      />
       {InfoMarkup}
-      <Box absolute expand css={style}>
-        {Link}
-      </Box>
+      {LinkMarkup}
     </Labelled>
   );
 }
-
-export const Preview = Object.assign(PreviewBase, {
-  Skeleton,
-  displayName: "Preview",
-});

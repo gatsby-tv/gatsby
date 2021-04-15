@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Color from "color";
+import { ifExists } from "@gatsby-tv/utilities";
 
-import { Box } from "@lib/components/Box";
 import { Portal } from "@lib/components/Portal";
 import { EventListener } from "@lib/components/EventListener";
+
+import styles from "./Fireworks.scss";
 
 export interface FireworksProps {
   origin?: Origin;
@@ -260,9 +262,9 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     <>
       {activator}
       <Portal id="fireworks">
-        <Box css={{ pointerEvents: "none", position: "fixed" }} {...boxProps}>
+        <div style={ifExists(zIndex, { zIndex })} className={styles.Fireworks}>
           <canvas ref={setCanvas} />
-        </Box>
+        </div>
         <EventListener event="resize" handler={handleResize} />
       </Portal>
     </>

@@ -1,0 +1,14 @@
+@use 'styles' as *;
+
+.Menu {
+  width: rem(200px);
+  background-color: background(dark);
+}
+
+.Item {
+  padding: spacing(1) spacing(1.5);
+
+  &:hover {
+    background-color: background(base);
+  }
+}

@@ -1,0 +1,48 @@
+@use 'styles' as *;
+
+.Overlay {
+  @include expand(absolute);
+
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.8) 5%,
+    transparent 20%,
+    transparent 80%,
+    rgba(0, 0, 0, 0.5)
+  );
+}
+
+.CursorHidden {
+  &, & * {
+    cursor: none !important;
+  }
+}
+
+.Signal {
+  font-size: rem(52px);
+  padding: rem(32px);
+}
+
+.Loading {
+  @include expand(absolute);
+  @include center;
+  pointer-events: none;
+  font-size: rem(116px);
+  transform: rotate(-65deg);
+}
+
+.Timeline {
+  position: absolute;
+  left: spacing(2);
+  right: spacing(2);
+  bottom: spacing(4);
+}
+
+.Controls {
+  position: absolute;
+  left: spacing(2);
+  right: spacing(2);
+  bottom: spacing(0);
+}
+

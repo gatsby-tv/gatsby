@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ThemeProvider, DefaultTheme } from "styled-components";
 import {
   UniqueIdContext,
   useUniqueIdGenerator,
@@ -9,21 +8,21 @@ import {
 
 import { EventHandler } from "@lib/types";
 import { AppContext } from "@lib/utilities/app";
+import { InjectionContext, useInjectionContext } from "@lib/utilities/injection";
 import { useSupports } from "@lib/utilities/supports";
-import { DarkTheme, LightTheme } from "@lib/styles/theme";
 
-import { Global } from "./components";
+import "./AppProvider.scss";
 
 export interface AppProviderProps {
   children?: React.ReactNode;
-  theme?: "dark" | "light";
 }
 
 export function AppProvider(props: AppProviderProps): React.ReactElement {
-  const theme: DefaultTheme = props.theme === "light" ? LightTheme : DarkTheme;
+  const { children } = props;
   const uniqueIdGenerator = useUniqueIdGenerator();
   const [loadingSemaphore, setLoadingSemaphore] = useState(0);
   const modalContext = useModalContext();
+  const injectionContext = useInjectionContext();
 
   useSupports();
 
@@ -47,10 +46,9 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
     <AppContext.Provider value={context}>
       <ModalContext.Provider value={modalContext}>
         <UniqueIdContext.Provider value={uniqueIdGenerator}>
-          <ThemeProvider theme={theme}>
-            <Global />
-            {props.children}
-          </ThemeProvider>
+          <InjectionContext.Provider value={injectionContext}>
+            {children}
+          </InjectionContext.Provider>
         </UniqueIdContext.Provider>
       </ModalContext.Provider>
     </AppContext.Provider>

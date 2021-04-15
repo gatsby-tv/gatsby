@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use './rem' as *;
+
+$font-size-map: (
+  caption: rem(12px),
+  body: rem(13px),
+  body-large: rem(14px),
+  display-small: rem(18px),
+  display-medium: rem(24px),
+  display-large: rem(36px),
+);
+
+$font-weight-map: (
+  normal: 400,
+  semi-bold: 500,
+  bold: 600,
+  extra-bold: 700,
+);
+
+$line-height-map: (
+  body: 1.5,
+  heading: 1.2,
+);
+
+@mixin font-size($variant) {
+  font-size: map.get($font-size-map, $variant);
+}
+
+@function font-size($variant) {
+  @return map.get($font-size-map, $variant);
+}
+
+@mixin font-weight($variant) {
+  font-weight: map.get($font-weight-map, $variant);
+}
+
+@function font-weight($variant) {
+  @return map.get($font-weight-map, $variant);
+}
+
+@mixin line-height($variant) {
+  line-height: map.get($line-height-map, $variant);
+}
+
+@function line-height($variant) {
+  @return map.get($line-height-map, $variant);
+}

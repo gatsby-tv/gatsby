@@ -1,20 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { IPFSContent } from "@gatsby-tv/types";
-import { ifExists, useIPFSContent } from "@gatsby-tv/utilities";
+import { classNames, ifExists, useIPFSContent } from "@gatsby-tv/utilities";
 
-import { Size, Margin } from "@lib/types";
-import { Box } from "@lib/components/Box";
+import { BorderRadius } from "@lib/types";
 import { Viewport } from "@lib/components/Viewport";
 
-export type ImageProps = {
+import styles from "./Image.scss";
+
+export interface ImageProps
+  extends Omit<React.ImgHTMLAttributes<Element>, "src"> {
   src?: IPFSContent | string;
-  w?: Size;
-  crop?: Margin;
-  rounded?: Size;
+  rounded?: BorderRadius;
   aspectRatio?: number;
   overlay?: React.ReactNode;
-  ariaLabel?: string;
-} & Omit<React.ImgHTMLAttributes<HTMLElement>, "src">;
+}
 
 type ImageURLProps = ImageProps & { src?: string };
 
@@ -26,44 +25,40 @@ function isImageURLProps(props: ImageProps): props is ImageURLProps {
 
 function ImageURL(props: ImageURLProps): React.ReactElement {
   const {
-    aspectRatio = 1,
-    w,
-    crop,
-    overlay,
+    className,
     rounded,
-    ariaLabel,
+    aspectRatio = 1,
+    overlay,
+    "aria-label": ariaLabel,
     ...imgProps
   } = props;
-  const [loading, setLoading] = useState(true);
 
-  const handleLoad = useCallback(() => setLoading(false), []);
+  const [loading, setLoading] = useState(true);
+  const onLoad = useCallback(() => setLoading(false), []);
 
   useEffect(() => setLoading(true), [imgProps.src]);
 
-  const viewportProps = {
-    placeholder: true,
-    crop,
-    w,
-    overlay,
-    aspectRatio,
-    rounded,
-    ariaLabel,
-  };
-
-  const boxProps = {
-    style: loading
-      ? { paddingTop: `${100 * aspectRatio}%`, height: 0 }
-      : undefined,
-    alt: "",
-    expand: true,
-    rounded,
-    onLoad: handleLoad,
-    ...imgProps,
-  };
-
   return (
-    <Viewport {...viewportProps}>
-      <Box as="img" {...boxProps} />
+    <Viewport
+      className={className}
+      placeholder
+      rounded={rounded}
+      overlay={overlay}
+      aspectRatio={aspectRatio}
+      aria-label={ariaLabel}
+    >
+      <img
+        style={ifExists(loading, {
+          paddingTop: `${100 * aspectRatio}%`,
+          height: 0,
+        })}
+        className={classNames(
+          styles.Image,
+          rounded && styles[`Radius-${rounded}`]
+        )}
+        onLoad={onLoad}
+        {...imgProps}
+      />
     </Viewport>
   );
 }

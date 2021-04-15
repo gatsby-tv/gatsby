@@ -1,0 +1,32 @@
+@use 'styles' as *;
+
+.Topbar {
+  display: flex;
+  align-items: stretch;
+
+  & > * {
+    flex: 1 1 auto;
+  }
+}
+
+.NavigationContainer {
+  @include expand();
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: spacing(1.5);
+}
+
+.SearchContainer {
+  @include expand();
+  @include center;
+}
+
+.AccountContainer {
+  @include expand();
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: spacing(1);
+  margin-right: spacing(1);
+}

@@ -1,0 +1,60 @@
+@use 'styles' as *;
+
+.Info {
+  width: 100%;
+
+  & > .TitleText {
+    margin-bottom: spacing(0.5);
+  }
+}
+
+.TitleText {
+  @include font-size(body-large);
+  @include font-weight(bold);
+  @include line-height(heading);
+}
+
+.ShowText {
+  @include font-size(caption);
+  @include text-subdued;
+}
+
+.ChannelText {
+  @include font-weight(bold);
+  @include line-height(heading);
+}
+
+.StatText {
+  @include font-weight(bold);
+  @include text-subdued;
+}
+
+.Avatar {
+  flex-shrink: 0;
+}
+
+.AvatarLink {
+  flex-shrink: 0;
+  height: fit-content;
+  z-index: 2;
+}
+
+.AvatarContainer {
+  display: flex;
+  gap: spacing(1);
+}
+
+.Verified {
+  @include line-height(heading);
+  color: foreground(subdued);
+}
+
+.VerifiedContainer {
+  display: flex;
+  gap: spacing(0.5);
+  align-items: baseline;
+}
+
+.ChannelLink {
+  z-index: 2;
+}

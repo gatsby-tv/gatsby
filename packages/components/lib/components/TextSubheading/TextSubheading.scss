@@ -1,0 +1,5 @@
+@use 'styles' as *;
+
+.Subheading {
+  @include text-subheading;
+}

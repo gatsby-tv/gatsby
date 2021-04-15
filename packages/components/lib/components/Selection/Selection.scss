@@ -1,0 +1,45 @@
+@use 'styles' as *;
+
+.Selection {
+  display: flex;
+  align-items: stretch;
+}
+
+.SelectionColumn {
+  flex-direction: column;
+
+  & > .Section:not(:first-child) {
+    margin-top: spacing(1.5);
+  }
+
+  & > .Section[data-flush] {
+    margin-top: 100%;
+  }
+}
+
+.SelectionRow {
+  & > .Section:not(:first-child) {
+    margin-left: spacing(1.5);
+  }
+
+  & > .Section[data-flush] {
+    margin-left: 100%;
+  }
+}
+
+.Section {
+  @include expand();
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.Heading {
+  @include text-subheading;
+}
+
+.Item {
+  cursor: pointer;
+  flex-grow: 1;
+  outline: none;
+}

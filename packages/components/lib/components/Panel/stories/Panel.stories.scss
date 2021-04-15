@@ -1,0 +1,24 @@
+@use 'styles' as *;
+
+.Selection {
+  background-color: background(base);
+  width: rem(200px);
+  height: rem(200px);
+}
+
+.Item {
+  padding: spacing(1) spacing(1.5);
+  transition: all duration(fastest) ease;
+
+  &[aria-selected] {
+    color: palette("blue");
+    background-color: background(light);
+  }
+}
+
+.Panel {
+  @include center;
+  @include expand();
+  @include text-uppercase;
+  background-color: background(dark);
+}

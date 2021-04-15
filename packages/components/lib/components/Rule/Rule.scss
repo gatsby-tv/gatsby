@@ -1,0 +1,39 @@
+@use 'styles' as *;
+
+.Rule {
+  border: none;
+  height: rem(2px);
+  background-color: background(base);
+}
+
+.Thin {
+  height: rem(1px);
+}
+
+.Split {
+  display: flex;
+  align-items: center;
+
+  & > span {
+    @include text-uppercase;
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+  }
+
+  & > hr:first-of-type {
+    width: 100%;
+    margin-right: spacing(1);
+  }
+
+  & > hr:last-of-type {
+    width: 100%;
+    margin-left: spacing(1);
+  }
+}
+
+@each $key, $value in $spacing-map {
+  .Spacing-#{$key} {
+    margin: $value 0;
+  }
+}

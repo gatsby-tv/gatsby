@@ -1,59 +1,50 @@
-import React, { forwardRef } from "react";
-import styled from "styled-components";
-import { ifExists, useTheme } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { TextBox } from "@lib/components/TextBox";
-import { Flex } from "@lib/components/Flex";
 import { Connected } from "@lib/components/Connected";
 import { Icon } from "@lib/components/Icon";
 import { Optional } from "@lib/components/Optional";
-import { Link as LinkComponent } from "@lib/components/Link";
+import {
+  Link as LinkComponent,
+  LinkProps as LinkComponentProps,
+} from "@lib/components/Link";
+import { useItem } from "@lib/utilities/item";
 import { IconSource } from "@lib/types";
 
-export interface LinkProps {
-  children?: string | [string];
-  icon?: IconSource;
+import styles from "../../Menu.scss";
+
+export interface LinkProps extends Omit<LinkComponentProps, "href"> {
+  children?: React.ReactNode;
+  className?: string;
   href?: string;
-  external?: boolean;
-  onClick?: () => void;
+  icon?: IconSource;
 }
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  (props: LinkProps, ref) => {
-    const theme = useTheme();
-    const { children, icon: IconComponent, href, external, onClick, ...rest } = props;
+  (props: LinkProps, ref: Ref<HTMLAnchorElement>) => {
+    const { children, className, icon: IconComponent, href, ...rest } = props;
+    const { itemClass } = useItem();
 
-    const linkProps = {
-      ref: ref as React.RefObject<HTMLAnchorElement>,
-      href,
-      external,
-      onClick,
-    };
-
-    const optionalProps = {
-      active: ifExists(href),
-      $props: linkProps,
-    };
-
-    const flexProps = {
-      active: ifExists(IconComponent),
-      $props: {
-        gap: theme.spacing[1],
-      },
-    };
+    const classes = classNames(className, itemClass, styles.Item);
 
     const IconMarkup = IconComponent ? (
-      <Icon src={IconComponent} w={theme.icon.smaller} />
+      <Icon src={IconComponent} size="smaller" />
     ) : null;
 
     return (
-      <Connected.Item>
-        <Optional component={LinkComponent} {...optionalProps}>
-          <Optional component={Flex} {...flexProps}>
+      <Connected.Item className={classes}>
+        <Optional
+          component={LinkComponent}
+          active={Boolean(href)}
+          $props={{ ref, href, ...rest }}
+        >
+          <Optional
+            component="div"
+            active={Boolean(IconComponent)}
+            $props={{ className: styles.Container }}
+          >
             {IconMarkup}
-            <TextBox font={theme.font[4]} weight={600}>
-              {children}
-            </TextBox>
+            <div className={styles.Text}>{children}</div>
           </Optional>
         </Optional>
       </Connected.Item>

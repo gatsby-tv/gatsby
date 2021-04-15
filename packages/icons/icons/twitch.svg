@@ -7,44 +7,41 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="twitch.svg"
-   focusable="false"
-   aria-hidden="true"
-   role="img"
-   width="540"
-   height="540"
-   viewBox="0 0 540 540"
-   version="1.1"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
    id="gz-twitch"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   sodipodi:docname="twitch.svg">
   <defs
      id="defs12591" />
   <sodipodi:namedview
-     inkscape:window-maximized="0"
-     inkscape:window-y="24"
-     inkscape:window-x="1928"
-     inkscape:window-height="1048"
-     inkscape:window-width="1904"
-     inkscape:bbox-nodes="true"
-     inkscape:bbox-paths="true"
-     inkscape:snap-page="true"
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.47342419"
-     inkscape:cx="400"
-     inkscape:cy="560"
-     inkscape:document-units="px"
-     inkscape:current-layer="gz-svg-twitch"
-     inkscape:document-rotation="0"
-     showgrid="false"
-     units="px"
-     inkscape:showpageshadow="false"
+     inkscape:object-nodes="false"
      inkscape:snap-bbox="true"
-     inkscape:object-nodes="false" />
+     inkscape:showpageshadow="false"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-twitch"
+     inkscape:document-units="px"
+     inkscape:cy="345.33094"
+     inkscape:cx="248.5053"
+     inkscape:zoom="0.66867968"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:snap-page="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:window-width="1904"
+     inkscape:window-height="1048"
+     inkscape:window-x="1928"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata12594">
     <rdf:RDF>
@@ -57,7 +54,15 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <path
-     d="m 230.04,400.63503 39.96001,-39.96 h 75.2175 l 47.025,-47.025 V 163.21501 H 166.5675 V 360.67503 H 230.04 Z M 317.02501,217.28252 H 345.24 v 82.19251 h -28.21499 z m -75.24001,0 h 28.21501 v 82.19251 H 241.785 Z M 270.00001,0 C 120.8925,0 0,120.89251 0,270.00002 c 0,149.10751 120.8925,270.00001 270.00001,270.00001 149.10751,0 270.00001,-120.8925 270.00001,-270.00001 C 540.00002,120.89251 419.10752,0 270.00001,0 Z m 150.45751,327.75753 -82.28251,82.2825 H 277.065 l -39.9825,39.95999 H 194.78251 V 410.04003 H 119.5425 V 189.06752 l 21.17251,-54.0675 h 279.74251 z"
-     id="twitch" />
+  <g
+     id="twitch">
+    <path
+       id="background"
+       style="fill:#ffffff"
+       d="M 99.199219,44.080078 V 363.67188 h 99.183591 v 66.11328 l 66.12305,-66.11328 h 121.20898 l 77.16211,-77.15626 V 44.080078 Z M 220.41992,132.22852 H 264.5 v 132.26562 h -44.08008 z m 121.21485,0 h 44.08007 v 132.26562 h -44.08007 z" />
+    <path
+       id="logo"
+       style="fill:#6441a5;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.33333"
+       d="M 55.101562 0 L 33.064453 88.166016 L 33.064453 484.88672 L 132.25781 484.88672 L 132.25781 540 L 187.34375 540 L 242.46289 484.88672 L 330.61328 484.88672 L 506.93555 308.58594 L 506.93555 0 L 55.101562 0 z M 99.199219 44.080078 L 462.87695 44.080078 L 462.87695 286.51562 L 385.71484 363.67188 L 264.50586 363.67188 L 198.38281 429.78516 L 198.38281 363.67188 L 99.199219 363.67188 L 99.199219 44.080078 z M 220.41992 132.22852 L 220.41992 264.49414 L 264.5 264.49414 L 264.5 132.22852 L 220.41992 132.22852 z M 341.63477 132.22852 L 341.63477 264.49414 L 385.71484 264.49414 L 385.71484 132.22852 L 341.63477 132.22852 z " />
+  </g>
 </svg>

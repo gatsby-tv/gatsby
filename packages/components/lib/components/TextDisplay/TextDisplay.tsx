@@ -1,25 +1,43 @@
-import styled from "styled-components";
-import { ifExists } from "@gatsby-tv/utilities";
+import React from "react";
+import { classNames } from "@gatsby-tv/utilities";
 
-import { DisplaySize } from "@lib/types";
-import { cssProperty } from "@lib/styles/property";
-import { cssTextDisplay } from "@lib/styles/typography";
+import { DisplaySize, TextElement } from "@lib/types";
 
 import { Link, LinkProps } from "./components/Link";
+import styles from "./TextDisplay.scss";
 
 export type { LinkProps as TextDisplayLinkProps };
 
 export interface TextDisplayProps {
+  children?: React.ReactNode;
+  id?: string;
+  className?: string;
+  element?: TextElement;
   size?: DisplaySize;
   thin?: boolean;
 }
 
-const TextDisplayBase = styled.h1<TextDisplayProps>`
-  ${(props) => cssTextDisplay(props.size ?? "medium")}
-  ${(props) => cssProperty("font-weight", ifExists(props.thin, 500))}
-`;
+export function TextDisplay(props: TextDisplayProps): React.ReactElement {
+  const {
+    children,
+    id,
+    className,
+    element: Element = "h2",
+    size = "medium",
+    thin,
+  } = props;
 
-export const TextDisplay = Object.assign(TextDisplayBase, {
-  Link,
-  displayName: "TextDisplay",
-});
+  const classes = classNames(
+    className,
+    styles[`Display-${size}`],
+    thin && styles.Thin
+  );
+
+  return (
+    <Element id={id} className={classes}>
+      {children}
+    </Element>
+  );
+}
+
+TextDisplay.Link = Link;

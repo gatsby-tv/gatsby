@@ -68,6 +68,7 @@
     "rollup-plugin-postcss": "^4.0.0",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
     "tscpaths": "^0.0.9",
     "typescript": "^4.0.5",
     "webpack": "^5.21.2"

@@ -9,11 +9,8 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint": "eslint lib",
     "types": "tsc --noEmit",
-    "types:watch": "yarn run check -- --watch",
     "clean": "rm -rf dist",
-    "build": "yarn run build:tsc && yarn run build:babel",
-    "build:tsc": "tsc --emitDeclarationOnly",
-    "build:babel": "babel lib --out-dir dist --extensions \".ts,.tsx\" --source-maps inline"
+    "build": "node ./scripts/build.js"
   },
   "peerDependencies": {
     "react": "^17.0.1",

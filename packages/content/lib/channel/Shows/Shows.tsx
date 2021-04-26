@@ -36,9 +36,9 @@ export function Shows(props: ShowsProps): React.ReactElement {
       data={shows.map((item, index) => ({ index, content: item }))}
     />
   ) : (
-    <div
-      className={styles.NoContentText}
-    >{`${(channel as Channel).name} has not posted any shows...`}</div>
+    <div className={styles.NoContentText}>{`${
+      (channel as Channel).name
+    } has not posted any shows...`}</div>
   );
 
   return (

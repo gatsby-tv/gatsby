@@ -60,6 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "copyfiles": "^2.4.1",
     "css-loader": "^5.2.0",
@@ -80,7 +81,8 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "tscpaths": "^0.0.9",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "webpack": "^5.35.1"
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",

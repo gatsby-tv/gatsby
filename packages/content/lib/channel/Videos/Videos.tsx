@@ -36,9 +36,9 @@ export function Videos(props: VideosProps): React.ReactElement {
       data={videos.map((item, index) => ({ index, content: item }))}
     />
   ) : (
-    <div
-      className={styles.NoContentText}
-    >{`${(channel as Channel).name} has not posted any videos...`}</div>
+    <div className={styles.NoContentText}>{`${
+      (channel as Channel).name
+    } has not posted any videos...`}</div>
   );
 
   return (

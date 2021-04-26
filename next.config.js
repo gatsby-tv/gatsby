@@ -1,6 +1,10 @@
 const path = require("path");
 const webpack = require("webpack");
-const withTM = require("next-transpile-modules")(["@gatsby-tv/components", "@gatsby-tv/content", "@gatsby-tv/utilities"]);
+const withTM = require("next-transpile-modules")([
+  "@gatsby-tv/components",
+  "@gatsby-tv/content",
+  "@gatsby-tv/utilities",
+]);
 
 const config = {
   sassOptions: {
@@ -12,4 +16,5 @@ const config = {
   },
 };
 
-module.exports = withTM(config);
+module.exports =
+  process.env.NODE_ENV === "development" ? withTM(config) : config;

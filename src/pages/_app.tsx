@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { Provider } from "next-auth/client";
@@ -21,8 +21,10 @@ export default function App({
   Component,
   pageProps,
 }: AppProps): React.ReactElement {
-  const channel = useState<Channel | undefined>(undefined);
+  const [channel, setChannel] = useState<Channel | undefined>(undefined);
   const node = useIPFSNode();
+
+  useEffect(() => setChannel(undefined), [Component]);
 
   const HeaderMarkup = (
     <Head>
@@ -36,7 +38,7 @@ export default function App({
       <Provider session={pageProps.session}>
         <SWRConfig value={{ fetcher }}>
           <IPFSContext.Provider value={node}>
-            <ChannelModalContext.Provider value={channel}>
+            <ChannelModalContext.Provider value={[channel, setChannel]}>
               {HeaderMarkup}
               <AppLayout page={Component} $props={pageProps} />
             </ChannelModalContext.Provider>

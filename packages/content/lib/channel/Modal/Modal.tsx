@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Avatar,
   Button,
@@ -10,7 +10,6 @@ import {
   Rule,
   Tabs,
   TextDisplay,
-  TextPlaceholder,
   TextMeta,
 } from "@gatsby-tv/components";
 import { Cancel } from "@gatsby-tv/icons";
@@ -28,6 +27,7 @@ import { Playlists } from "@lib/channel/Playlists";
 import { Shows } from "@lib/channel/Shows";
 import { LinkProps } from "@lib/types";
 
+import { Skeleton } from "./Modal.skeleton";
 import styles from "./Modal.scss";
 
 export interface ModalProps {
@@ -43,6 +43,12 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   const [scrolling, setScrolling] = useState<number | undefined>();
   const [tab, setTab] = useSelect(["videos", "playlists", "shows"], "videos");
 
+  useEffect(() => {
+    if (!active) {
+      setTab("videos");
+    }
+  }, [active]);
+
   const onScroll = useCallback(
     (event: any) => {
       if (scrolling !== undefined) {
@@ -55,32 +61,34 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   );
 
   if (isMobile === undefined) return null;
+  if (!channel)
+    return (
+      <Skeleton
+        mobile={isMobile}
+        tab={tab}
+        setTab={setTab}
+        active={active}
+        onExit={onExit}
+        onScroll={onScroll}
+      />
+    );
 
   const Container = isMobile ? PanelComponent : ModalComponent;
   const Listing = tab["videos"] ? Videos : tab["playlists"] ? Playlists : Shows;
 
-  const OverlayInfo = channel ? (
-    <>
-      <Optional component={Link} active={Boolean(Link)} $props={{ channel }}>
-        <TextDisplay.Link>{channel.name}</TextDisplay.Link>
-      </Optional>
-      <TextMeta.List className={styles.HeaderInfo}>
-        <TextMeta>{ChannelHandle(channel.handle)}</TextMeta>
-        <TextMeta>{FullValue(channel.subscribers, "subscriber")}</TextMeta>
-      </TextMeta.List>
-    </>
-  ) : (
-    <>
-      <TextPlaceholder font="display-medium" heading width={0.3} />
-      <TextPlaceholder font="display-small" width={0.15} />
-    </>
-  );
-
   const OverlayMarkup = (
     <div className={styles.Overlay}>
       <div className={styles.Header}>
-        <Avatar src={channel?.avatar} size="largest" />
-        <div className={styles.HeaderTextArea}>{OverlayInfo}</div>
+        <Avatar src={channel.avatar} size="largest" />
+        <div className={styles.HeaderTextArea}>
+          <Optional component={Link} active={Boolean(Link)} $props={{ channel }}>
+            <TextDisplay.Link>{channel.name}</TextDisplay.Link>
+          </Optional>
+          <TextMeta.List className={styles.HeaderInfo}>
+            <TextMeta>{ChannelHandle(channel.handle)}</TextMeta>
+            <TextMeta>{FullValue(channel.subscribers, "subscriber")}</TextMeta>
+          </TextMeta.List>
+        </div>
       </div>
     </div>
   );
@@ -88,7 +96,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   return (
     <Container
       id="channel"
-      className={isMobile ? styles.Panle : styles.Modal}
+      className={isMobile ? styles.Panel : styles.Modal}
       overlay
       draggable={ifExists(isMobile, !scrolling)}
       active={active}
@@ -103,7 +111,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
       />
       <Scroll smooth hide onScroll={onScroll}>
         <Image
-          src={channel?.banner}
+          src={channel.banner}
           aspectRatio={0.5}
           overlay={OverlayMarkup}
         />

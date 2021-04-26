@@ -6,9 +6,7 @@
   "typings": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build:svg": "svgr -d src/components icons",
-    "build:tsc": "tsc -p .",
-    "build": "yarn run build:svg && yarn run build:tsc"
+    "build": "node ./scripts/build.js"
   },
   "devDependencies": {
     "@svgr/cli": "^5.4.0",

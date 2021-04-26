@@ -55,10 +55,6 @@ typings/
 .env*
 !.env.local.example
 
-# gatsby files
-.cache/
-public
-
 # Mac files
 .DS_Store
 

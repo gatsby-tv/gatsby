@@ -18,7 +18,11 @@ export function useResizeObserver<T extends HTMLElement = HTMLElement>(
     const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       for (const entry of entries) {
         if (entry.contentBoxSize) {
-          callback(entry.contentBoxSize[0]);
+          callback(
+            Array.isArray(entry.contentBoxSize)
+              ? entry.contentBoxSize[0]
+              : entry.contentBoxSize
+          );
         } else {
           callback({
             inlineSize: entry.contentRect.width,

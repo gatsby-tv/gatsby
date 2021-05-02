@@ -1,16 +1,15 @@
 import React from "react";
 
-import { Grid } from "@gatsby-tv/components";
-import { useTheme } from "@gatsby-tv/utilities";
-
 import { SignUp } from "@src/components/SignUp";
+
+import styles from "@src/styles/SignUp.module.scss";
 
 export default function SignUpPage(): React.ReactElement {
   return (
     <>
-      <Grid center="true" margin={["100px", "100px", "0px"]}>
+      <div className={styles.SignUpContainer}>
         <SignUp />
-      </Grid>
+      </div>
     </>
   );
 }

@@ -1,0 +1,12 @@
+@use 'styles' as *;
+
+.Heading {
+  margin-bottom: spacing(1.5);
+}
+
+.SignUpContainer {
+   @include center;
+  align-items: center;
+  gap: spacing(1.5);
+  margin: rem(100px) rem(100px) 0;
+}

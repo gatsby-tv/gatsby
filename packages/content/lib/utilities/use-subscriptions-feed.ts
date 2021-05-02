@@ -7,7 +7,7 @@ export function useSubscriptionsFeed(
   id?: string
 ): InfiniteFetchResponse<"videos", Video> {
   const { data, ...props } = useInfinite<Video>((index) =>
-    id ? `/user/${id}/listing/subscriptions/random?page=${index}` : null
+    id ? `/user/${id}/listing/subscriptions?page=${index}` : null
   );
 
   return {

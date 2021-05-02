@@ -6,8 +6,14 @@ build:
 	docker build \
 		--build-arg APP_NAME=$(APP_NAME) \
 		--build-arg APP_VERSION=$(APP_VERSION) \
-		-t $(APP_NAME):$(APP_VERSION)-$(BUILD) \
-		-t $(APP_NAME):latest .
+		-t gatsbytv/$(APP_NAME):$(APP_VERSION)-$(BUILD) \
+		-t gatsbytv/$(APP_NAME):latest .
+
+push:
+	docker push --all-tags gatsbytv/$(APP_NAME)
 
 run:
-	docker run -p 3000:3000 --rm -it $(APP_NAME):latest
+	docker run \
+		-p 3000:3000 \
+		--env-file .env.local \
+		--rm -it $(APP_NAME):latest

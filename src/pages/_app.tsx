@@ -21,15 +21,16 @@ export default function App({
   Component,
   pageProps,
 }: AppProps): React.ReactElement {
+  const bootstrap = process.env.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(",");
   const [channel, setChannel] = useState<Channel | undefined>(undefined);
-  const node = useIPFSNode();
+  const node = useIPFSNode(bootstrap);
 
   useEffect(() => setChannel(undefined), [Component]);
 
   const HeaderMarkup = (
     <Head>
       <link rel="shortcut icon" href="/favicon.ico" />
-      <link rel="preconnect" href="http://localhost:6001" />
+      <link rel="preconnect" href={process.env.NEXT_PUBLIC_WESTEGG_URL} />
     </Head>
   );
 

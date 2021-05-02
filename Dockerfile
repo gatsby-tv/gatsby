@@ -22,16 +22,16 @@ FROM node:alpine
 WORKDIR /app
 ENV NODE_ENV production
 
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
 COPY --from=packages /app .
 COPY --from=builder /app/.yarn .yarn
 COPY --from=builder /app/.pnp.js .
 COPY --from=builder /app/next.config.js .
 COPY --from=builder /app/public public
-COPY --from=builder /app/.next .next
+COPY --from=builder --chown=nextjs:nodejs /app/.next .next
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-RUN chown -R nextjs:nodejs .next
 USER nextjs
 
 EXPOSE 3000

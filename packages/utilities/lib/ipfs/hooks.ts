@@ -26,7 +26,7 @@ const IPFS_DEFAULT_CONFIG = {
   repo: `/ipfs/gatsby/testing`,
 };
 
-export function useIPFSNode(): IPFSContextType {
+export function useIPFSNode(bootstrap: string[] = []): IPFSContextType {
   const [, setReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -35,6 +35,7 @@ export function useIPFSNode(): IPFSContextType {
       try {
         if (ipfs) return;
         ipfs = await IPFS.create(IPFS_DEFAULT_CONFIG);
+        bootstrap.forEach(async (addr) => await ipfs.bootstrap.add(addr));
         const info = await ipfs.id();
         console.log(`IPFS node ready at /p2p/${info.id}`);
       } catch (error) {

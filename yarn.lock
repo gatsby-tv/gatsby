@@ -15072,9 +15072,9 @@ fsevents@~2.1.1:
   languageName: node
   linkType: hard
 
-"gatsby-tv@workspace:.":
+"gatsby@workspace:.":
   version: 0.0.0-use.local
-  resolution: "gatsby-tv@workspace:."
+  resolution: "gatsby@workspace:."
   dependencies:
     "@babel/core": ^7.12.9
     "@babel/preset-react": ^7.12.7

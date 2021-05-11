@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
-import { Icon, Tabs } from "@gatsby-tv/components";
-import { GatsbyPlain, Subscribe, Browse } from "@gatsby-tv/icons";
-import { useSelect } from "@gatsby-tv/utilities";
+import { Button, Icon, Tabs, Menu, Rule } from "@gatsby-tv/components";
+import { GatsbyPlain, Subscribe, Browse, Misc } from "@gatsby-tv/icons";
+import { useFrame, useMenu } from "@gatsby-tv/utilities";
 
 import { Link } from "@src/components/Link";
 
@@ -21,13 +21,12 @@ function getCurrentTab(route: string): string | undefined {
 }
 
 export function Navigation(): React.ReactElement {
+  const { screen } = useFrame();
   const [session, loading] = useSession();
   const router = useRouter();
   const defaultTab = getCurrentTab(router.pathname);
-  const [tab, setTab] = useSelect(
-    session ? ["subscriptions", "browse"] : ["browse"],
-    defaultTab
-  );
+  const menu = useMenu<HTMLButtonElement>();
+  const [tab, setTab] = useState<string | undefined>(defaultTab);
 
   return (
     <>
@@ -36,6 +35,7 @@ export function Navigation(): React.ReactElement {
       </Link>
       <Tabs
         className={styles.Tabs}
+        itemClass={styles.Tab}
         gap="loose"
         selection={tab}
         onSelect={setTab}
@@ -46,7 +46,7 @@ export function Navigation(): React.ReactElement {
             href="/d/subscriptions"
             $props={{ option: "subscriptions" }}
           >
-            Subscriptions
+            {screen.width < 650 ? <Icon src={Subscribe} /> : "Subscriptions"}
           </Link>
         )}
         <Link
@@ -54,9 +54,67 @@ export function Navigation(): React.ReactElement {
           href="/d/browse"
           $props={{ option: "browse" }}
         >
-          Browse
+          {screen.width < 650 ? <Icon src={Browse} /> : "Browse"}
         </Link>
       </Tabs>
+      <Button
+        ref={menu.ref}
+        className={styles.Misc}
+        animate
+        icon={Misc}
+        size="small"
+        onClick={menu.toggle}
+      />
+      <Menu
+        for={menu.ref}
+        className={styles.Menu}
+        placement="bottom-start"
+        offset={[0, 7]}
+        active={menu.active}
+        onExit={menu.deactivate}
+      >
+        <div className={styles.MenuSection}>
+          Information
+        </div>
+        <Link href="/p/about">
+          <div className={styles.MenuItem}>
+            About
+          </div>
+        </Link>
+        <Link href="/p/creators">
+          <div className={styles.MenuItem}>
+            Creators
+          </div>
+        </Link>
+        <Link href="/p/sponsors">
+          <div className={styles.MenuItem}>
+            Sponsors
+          </div>
+        </Link>
+        <Link href="/p/developers">
+          <div className={styles.MenuItem}>
+            Developers
+          </div>
+        </Link>
+        <Rule spacing="extratight" />
+        <div className={styles.MenuSection}>
+          Legal
+        </div>
+        <Link href="/p/terms">
+          <div className={styles.MenuItem}>
+            Terms of Service
+          </div>
+        </Link>
+        <Rule spacing="extratight" />
+        <div className={styles.MenuSection}>
+          Help
+        </div>
+        <Link href="https://github.com/gatsby-tv/gatsby/issues">
+          <div className={styles.MenuItem}>
+            Submit an Issue
+          </div>
+        </Link>
+      </Menu>
     </>
   );
 }

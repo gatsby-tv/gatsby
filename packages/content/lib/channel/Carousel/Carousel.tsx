@@ -18,9 +18,9 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
 
   const groups = useBreakpoints({
     3: "(max-width: 650px)",
-    4: "(min-width: 650px) and (max-width: 1100px)",
-    5: "(min-width: 1100px) and (max-width: 1300px)",
-    6: "(min-width: 1300px) and (max-width: 1600px)",
+    4: "(min-width: 650px) and (max-width: 950px)",
+    5: "(min-width: 950px) and (max-width: 1200px)",
+    6: "(min-width: 1200px) and (max-width: 1600px)",
     7: "(min-width: 1600px)",
   });
 

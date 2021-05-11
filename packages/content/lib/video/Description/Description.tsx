@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
-import { Button, Injection, TextBox, Icon } from "@gatsby-tv/components";
+import { Button, Injection, TextBox, Icon, Rule } from "@gatsby-tv/components";
 import { ExtendDown, ExtendUp } from "@gatsby-tv/icons";
 import {
   ifExists,
@@ -23,14 +23,16 @@ export function Description(
   const { id, content } = props;
   const isMobile = useMobileDetector();
   const [clamp, setClamp] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   const toggleClamp = useStabilizedCallback(
     () => setClamp((current) => !current),
     []
   );
 
-  if (isMobile === undefined) return null;
-  if (!content) return <Skeleton />;
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted || !content) return <Skeleton />;
 
   const TextMarkup = DOMPurify.sanitize(content.description, {
     USE_PROFILES: { html: true },
@@ -43,10 +45,12 @@ export function Description(
         clamp={ifExists(clamp, 3)}
         dangerouslySetInnerHTML={{ __html: TextMarkup }}
       />
-      {id && <Injection.Target id={id} />}
-      <Button className={styles.ShowMoreButton} onClick={toggleClamp}>
-        {clamp ? "Show More" : "Show Less"}
-      </Button>
+      {id && !clamp && <Injection.Target id={id} />}
+      <Rule>
+        <Button className={styles.ShowMoreButton} onClick={toggleClamp}>
+          {clamp ? "Show More" : "Show Less"}
+        </Button>
+     </Rule>
     </>
   ) : (
     <Button unstyled onClick={toggleClamp}>
@@ -55,12 +59,13 @@ export function Description(
         clamp={ifExists(clamp, 3)}
         dangerouslySetInnerHTML={{ __html: TextMarkup }}
       />
-      {id && <Injection.Target id={id} />}
-      <Icon
-        className={styles.ShowMoreIcon}
-        src={clamp ? ExtendDown : ExtendUp}
-        size="smallest"
-      />
+      {id && !clamp && <Injection.Target id={id} />}
+      <Rule>
+        <Icon
+          className={styles.ShowMoreIcon}
+          src={clamp ? ExtendDown : ExtendUp}
+        />
+      </Rule>
     </Button>
   );
 }

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
-import { classNames, useSelect } from "@gatsby-tv/utilities";
+import { classNames } from "@gatsby-tv/utilities";
 
 import { TextBox } from "@lib/components/TextBox";
 import { Selection, SelectionProps } from "@lib/components/Selection";
@@ -14,7 +14,7 @@ export default {
 
 export const OneSection: Story<SelectionProps> = () => {
   const items = ["one", "two", "three"];
-  const [selection, select] = useSelect(items, "one");
+  const [selection, select] = useState("one");
 
   return (
     <div className={styles.Selection}>
@@ -42,7 +42,7 @@ export const OneSection: Story<SelectionProps> = () => {
 
 export const MultipleSections: Story<SelectionProps> = () => {
   const items = ["one", "two", "three", "four", "five"];
-  const [selection, select] = useSelect(items, "one");
+  const [selection, select] = useState("one");
 
   return (
     <div className={styles.Selection}>
@@ -78,7 +78,7 @@ export const MultipleSections: Story<SelectionProps> = () => {
 
 export const Row: Story<SelectionProps> = () => {
   const items = ["one", "two", "three"];
-  const [selection, select] = useSelect(items, "one");
+  const [selection, select] = useState("one");
 
   return (
     <div className={classNames(styles.Selection, styles.Wide)}>

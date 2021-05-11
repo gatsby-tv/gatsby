@@ -26,9 +26,9 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
     >
       {avatar && <Avatar className={styles.Avatar} size={avatar} />}
       <div className={styles.Info}>
-        <TextPlaceholder font="body-large" heading width={0.6} />
-        <TextPlaceholder width={0.4} />
-        {format === "full" && <TextPlaceholder width={0.4} />}
+        <TextPlaceholder font="body-large" heading width={0.7} />
+        <TextPlaceholder width={0.5} />
+        {format === "full" && <TextPlaceholder width={0.5} />}
       </div>
     </Optional>
   );

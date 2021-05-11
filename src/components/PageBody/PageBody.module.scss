@@ -1,11 +1,21 @@
 @use 'styles' as *;
 
 .Page {
-  margin: spacing(3);
+  margin: spacing(2) spacing(1);
 }
 
 .Tight {
-  margin: spacing(1.5) spacing(3);
+  margin: spacing(1.5) spacing(1);
+}
+
+@media screen and (min-width: 650px) {
+  .Page {
+    margin: spacing(3);
+  }
+
+  .Tight {
+    margin: spacing(1.5) spacing(3);
+  }
 }
 
 .Body {

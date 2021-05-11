@@ -41,12 +41,16 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       <div className={styles.FitContent}>
         <LinkBase ref={ref} underline {...linkProps}>
           <div className={styles.Link}>
-            <Element className={classes}>
-              {children}
-            </Element>
+            <Element className={classes}>{children}</Element>
             <Icon
               src={ExtendRight}
-              size={size === "large" ? "large" : "small"}
+              size={
+                size === "large"
+                  ? "large"
+                  : size === "medium"
+                  ? "small"
+                  : "smaller"
+              }
             />
           </div>
         </LinkBase>

@@ -2,7 +2,9 @@
 @use 'styles' as *;
 
 .Modal {
+  @include border-radius(smallest);
   width: rem(420px);
+  max-width: 100%;
   background-color: background(dark);
   padding: spacing(3);
 }
@@ -40,15 +42,12 @@
 
 .Options {
   @include center;
-  flex-direction: column;
-  gap: spacing(1);
 }
 
 .Option {
   @include font-size(display-small);
   @include center;
   gap: spacing(1.5);
-  width: 80%;
   background-color: background(light);
   padding: spacing(1);
 

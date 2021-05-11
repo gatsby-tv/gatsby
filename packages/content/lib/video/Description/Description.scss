@@ -6,13 +6,12 @@
 
 .ShowMoreButton {
   @include font-size(caption);
+  @include text-no-break;
   width: fit-content;
   padding: 0;
-  margin-top: spacing(1);
 }
 
 .ShowMoreIcon {
   display: flex;
-  width: 100%;
   justify-content: center;
 }

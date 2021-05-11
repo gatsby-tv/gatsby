@@ -88,9 +88,8 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     onExit = () => undefined,
   } = props;
   const ref = useRef<HTMLDivElement>(null);
-  const [visibleBase, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const visible = visibleBase && active;
 
   const [touch, setTouch] = useReducer(
     (state: TouchState, action: TouchAction) => {
@@ -144,29 +143,23 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     }
   );
 
+  useEffect(() => setMounted(Boolean(active)), [active]);
+
   useEffect(() => {
     /* Our intention is to change the visibility of the panel only once we
      * know that the browser has had the chance to paint the component in
      * its initial state (offscreen).
-     *
-     * Consequently, since requestAnimationFrame fires *before* repaint, we
-     * therefore have to wait two animation frames before changing the
-     * visibility.
      */
-    const id = window.requestAnimationFrame(() =>
-      window.requestAnimationFrame(() => setVisible(Boolean(active)))
-    );
+    const id = window.requestAnimationFrame(() => setVisible(mounted));
     return () => window.cancelAnimationFrame(id);
-  }, [active]);
+  }, [mounted]);
 
   useEffect(() => {
-    if (active) {
-      setMounted(true);
-    } else {
-      const id = setTimeout(() => setMounted(false), 300);
+    if (!mounted) {
+      const id = setTimeout(() => onExit(), 300);
       return () => clearTimeout(id);
     }
-  }, [active]);
+  }, [mounted]);
 
   useEffect(() => {
     if (!draggable) {
@@ -178,7 +171,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     (event: any) => {
       if (event.code === "Escape") {
         setTouch({ type: "end" });
-        onExit();
+        setMounted(false);
       }
     },
     [onExit]
@@ -215,7 +208,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
         touch.position > 0.5 ||
         (touch.position > 0.15 && touch.velocity > 0.015)
       ) {
-        onExit();
+        setMounted(false);
       }
     },
     [touch]
@@ -230,21 +223,29 @@ export function Panel(props: PanelProps): React.ReactElement | null {
   const transform =
     direction === "right"
       ? {
-          transform: `translateX(${100 * (visible ? touch.position : 1)}%)`,
+          transform: `translateX(${
+            100 * (visible && mounted ? touch.position : 1)
+          }%)`,
         }
       : direction === "left"
       ? {
-          transform: `translateX(${-100 * (visible ? touch.position : 1)}%)`,
+          transform: `translateX(${
+            -100 * (visible && mounted ? touch.position : 1)
+          }%)`,
         }
       : direction === "bottom"
       ? {
-          transform: `translateY(${100 * (visible ? touch.position : 1)}%)`,
+          transform: `translateY(${
+            100 * (visible && mounted ? touch.position : 1)
+          }%)`,
         }
       : {
-          transform: `translateY(${-100 * (visible ? touch.position : 1)}%)`,
+          transform: `translateY(${
+            -100 * (visible && mounted ? touch.position : 1)
+          }%)`,
         };
 
-  return mounted ? (
+  return active ? (
     <Optional
       component={Portal}
       active={overlay}

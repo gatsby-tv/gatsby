@@ -26,6 +26,10 @@ $display-font-size-map: (
   overflow-wrap: break-word;
 }
 
+@mixin no-break {
+  white-space: nowrap;
+}
+
 @mixin truncate {
   overflow: hidden;
   text-overflow: ellipsis;

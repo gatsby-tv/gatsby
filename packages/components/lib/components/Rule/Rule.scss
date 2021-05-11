@@ -19,16 +19,15 @@
     text-align: center;
     vertical-align: middle;
     outline: none;
+    margin: 0 spacing(1);
   }
 
   & > hr:first-of-type {
     width: 100%;
-    margin-right: spacing(1);
   }
 
   & > hr:last-of-type {
     width: 100%;
-    margin-left: spacing(1);
   }
 }
 

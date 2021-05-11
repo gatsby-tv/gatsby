@@ -1,5 +1,19 @@
 @use 'styles' as *;
 
 .AvatarCollation {
-  @include collation();
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+
+  & > *:first-child {
+    margin-right: 0;
+  }
+}
+
+@each $key, $value in $spacing-map {
+  .Gap-#{$key} {
+    & > * {
+      margin-right: -#{$value};
+    }
+  }
 }

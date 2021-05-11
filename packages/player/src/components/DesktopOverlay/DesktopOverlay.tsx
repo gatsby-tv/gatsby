@@ -15,12 +15,8 @@ export function DesktopOverlay(props: OverlayProps): React.ReactElement {
     player,
     timeline,
     signal,
-    fullscreen,
-    setFullscreen,
     setActive,
     setPlayback,
-    setSeek,
-    setSignal,
   } = props;
 
   const active = player.active || timeline.scrubbing;

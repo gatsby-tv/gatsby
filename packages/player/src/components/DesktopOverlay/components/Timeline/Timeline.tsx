@@ -42,6 +42,10 @@ export function Timeline(props: TimelineProps) {
           padding: 8,
         },
       },
+      {
+        name: "flip",
+        enabled: false,
+      },
     ],
   });
 

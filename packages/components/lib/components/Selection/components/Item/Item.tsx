@@ -32,9 +32,9 @@ export function Item(props: ItemProps): React.ReactElement {
       id={id}
       className={classes}
       role="tab"
-      tabIndex={selection[option] ? 0 : -1}
+      tabIndex={selection === option ? 0 : -1}
       onClick={onClick}
-      aria-selected={ifExists(selection[option])}
+      aria-selected={ifExists(selection === option)}
       {...aria}
     >
       {children}

@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 export interface SelectionContextType {
-  selection: Record<string, boolean>;
+  selection: string;
   onSelect: (id: string) => void;
 }
 

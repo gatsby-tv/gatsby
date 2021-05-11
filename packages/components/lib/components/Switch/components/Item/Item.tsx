@@ -33,8 +33,8 @@ export function Item(props: ItemProps): React.ReactElement {
       id={id}
       className={classes}
       role="tab"
-      tabIndex={selection[option] ? 0 : -1}
-      aria-selected={ifExists(selection[option])}
+      tabIndex={selection === option ? 0 : -1}
+      aria-selected={ifExists(selection === option)}
       aria-controls={ariaControls}
       onClick={onClick}
     >

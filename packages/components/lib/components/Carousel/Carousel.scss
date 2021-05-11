@@ -44,19 +44,25 @@
   cursor: pointer;
   outline: none;
   z-index: 0;
-  margin: 0 spacing(0.5);
+  margin: 0 rem(2.5px);
   color: inherit;
   background-color: transparent;
   transition: transform duration(fast) ease;
 
-  &:hover {
+  @include mouse-hover {
+    @include shadow();
     z-index: 1;
     transform: scale(1.075);
-    @include shadow();
   }
 
   & > * {
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .Slide {
+    margin: 0 spacing(0.5);
   }
 }
 

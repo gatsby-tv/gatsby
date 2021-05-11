@@ -1,21 +1,25 @@
 import React from "react";
+import { classNames } from "@gatsby-tv/utilities";
 import { IPFSContent } from "@gatsby-tv/types";
 
-import { DiscreteSize } from "@lib/types";
+import { Spacing, DiscreteSize } from "@lib/types";
 import { Avatar } from "@lib/components/Avatar";
 
 import styles from "./AvatarCollation.scss";
 
 export interface AvatarCollationProps {
-  avatars: (IPFSContent | string)[];
+  avatars: (IPFSContent | string | undefined)[];
   size?: DiscreteSize;
+  spacing?: Spacing;
 }
 
 export function AvatarCollation(
   props: AvatarCollationProps
 ): React.ReactElement {
-  const { avatars, size } = props;
+  const { avatars, size, spacing } = props;
   avatars.reverse();
+
+  const classes = classNames(styles.AvatarCollation, styles[`Gap-${spacing}`]);
 
   const AvatarsMarkup = avatars.map((avatar, index) => (
     <Avatar
@@ -25,9 +29,5 @@ export function AvatarCollation(
     />
   ));
 
-  return (
-    <div className={styles.AvatarCollation}>
-      {AvatarsMarkup}
-    </div>
-  );
+  return <div className={classes}>{AvatarsMarkup}</div>;
 }

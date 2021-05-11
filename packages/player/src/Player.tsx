@@ -1,5 +1,6 @@
 import React, {
   useEffect,
+  useState,
   useCallback,
   forwardRef,
   Ref,
@@ -26,6 +27,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
   (props: PlayerProps, ref: Ref<HTMLVideoElement>) => {
     const {
       children,
+      volume = 1,
       fullscreen,
       setFullscreen = () => undefined,
       ...videoProps
@@ -34,8 +36,18 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const isMobile = useMobileDetector();
     const video = useForwardedRef<HTMLVideoElement>(ref);
     const timeline = useTimeline();
-    const { player, events, setActive, setPlayback, setSeek } = usePlayer(video);
+    const {
+      player,
+      events,
+      setActive,
+      setPinned,
+      setPlayback,
+      setVolume,
+      setMuted,
+      setSeek,
+    } = usePlayer(video, volume);
     const [signal, setSignal] = useSignal();
+    const [mounted, setMounted] = useState<boolean>(false);
 
     const setPlaybackAndSignal: Dispatch<SetStateAction<boolean>> = useCallback(
       (value) =>
@@ -51,39 +63,45 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       []
     );
 
+    useEffect(() => setMounted(true), []);
     useEffect(() => setActive(!Boolean(isMobile)), [isMobile]);
 
-    const OverlayMarkup =
-      isMobile === undefined ? undefined : isMobile ? (
-        <MobileOverlay
-          player={player}
-          timeline={timeline}
-          signal={signal}
-          fullscreen={fullscreen}
-          setFullscreen={setFullscreen}
-          setActive={setActive}
-          setPlayback={setPlayback}
-          setSeek={setSeek}
-          setSignal={setSignal}
-        />
-      ) : (
-        <DesktopOverlay
-          player={player}
-          timeline={timeline}
-          signal={signal}
-          fullscreen={fullscreen}
-          setFullscreen={setFullscreen}
-          setActive={setActive}
-          setPlayback={setPlaybackAndSignal}
-          setSeek={setSeek}
-          setSignal={setSignal}
-        />
-      );
+    const OverlayMarkup = !mounted ? null : isMobile ? (
+      <MobileOverlay
+        player={player}
+        timeline={timeline}
+        signal={signal}
+        fullscreen={fullscreen}
+        setFullscreen={setFullscreen}
+        setActive={setActive}
+        setPinned={setPinned}
+        setPlayback={setPlayback}
+        setVolume={setVolume}
+        setMuted={setMuted}
+        setSeek={setSeek}
+        setSignal={setSignal}
+      />
+    ) : (
+      <DesktopOverlay
+        player={player}
+        timeline={timeline}
+        signal={signal}
+        fullscreen={fullscreen}
+        setFullscreen={setFullscreen}
+        setActive={setActive}
+        setPinned={setPinned}
+        setPlayback={setPlaybackAndSignal}
+        setVolume={setVolume}
+        setMuted={setMuted}
+        setSeek={setSeek}
+        setSignal={setSignal}
+      />
+    );
 
     const classes = classNames(
       styles.Viewport,
       fullscreen && styles.ViewportFullscreen,
-      !isMobile && styles.ViewportMinHeight
+      mounted && !isMobile && styles.ViewportMinHeight
     );
 
     return (

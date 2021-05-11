@@ -252,12 +252,6 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     return () => clearInterval(id);
   }, [origin, count, interval, toggle, infinite]);
 
-  const boxProps = {
-    absolute: true,
-    expand: true,
-    zIndex,
-  };
-
   return (
     <>
       {activator}

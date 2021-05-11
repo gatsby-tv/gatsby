@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
-import { useSelect } from "@gatsby-tv/utilities";
 
 import { TextBox } from "@lib/components/TextBox";
 import { Switch, SwitchProps } from "@lib/components/Switch";
@@ -14,7 +13,7 @@ export default {
 
 export const TwoSettings: Story<SwitchProps> = () => {
   const items = ["one", "two"];
-  const [selection, setSelection] = useSelect(items, "one");
+  const [selection, setSelection] = useState("one");
 
   return (
     <Switch
@@ -35,7 +34,7 @@ export const TwoSettings: Story<SwitchProps> = () => {
 
 export const ThreeSettings: Story<SwitchProps> = () => {
   const items = ["one", "two", "three"];
-  const [selection, setSelection] = useSelect(items, "one");
+  const [selection, setSelection] = useState("one");
 
   return (
     <Switch

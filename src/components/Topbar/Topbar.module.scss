@@ -3,14 +3,19 @@
 .Topbar {
   display: flex;
   align-items: stretch;
+}
 
-  & > * {
-    flex: 1 1 auto;
+@media screen and (min-width: 850px) {
+  .Topbar {
+    .NavigationContainer, .SearchContainer, .AccountContainer {
+      width: 100%;
+      flex: 1 1 auto;
+    }
   }
 }
 
 .NavigationContainer {
-  @include expand();
+  flex: 1 1;
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
@@ -18,12 +23,10 @@
 }
 
 .SearchContainer {
-  @include expand();
   @include center;
 }
 
 .AccountContainer {
-  @include expand();
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -109,6 +109,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [animate]
     );
 
+    const onPointerLeave = useCallback((event) => {
+      if (animate) {
+        setHeld(false);
+      }
+    }, [animate]);
+
     const classes = classNames(
       className,
       styles.Button,
@@ -139,8 +145,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       onPointerDown,
       onPointerUp,
-      onPointerLeave: onPointerUp,
-      onPointerCancel: onPointerUp,
+      onPointerLeave,
+      onPointerCancel: onPointerLeave,
       ...rest
     });
 

@@ -11,7 +11,7 @@ import {
   Rule,
   TextDisplay,
 } from "@gatsby-tv/components";
-import { GatsbyPlain, Google, Twitch, Email } from "@gatsby-tv/icons";
+import { GatsbyPlain, Google, Email } from "@gatsby-tv/icons";
 
 import styles from "./SignIn.module.scss";
 
@@ -35,10 +35,6 @@ export function SignIn(props: SignInProps): React.ReactElement {
         <Button className={styles.Option} onClick={() => signIn("google")}>
           <Icon src={Google} />
           Sign In with Google
-        </Button>
-        <Button className={styles.Option} onClick={() => signIn("twitch")}>
-          <Icon src={Twitch} />
-          Sign In with Twitch
         </Button>
       </div>
       <Rule className={styles.Rule} spacing="loose">Or</Rule>

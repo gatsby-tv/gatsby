@@ -50,11 +50,11 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
       <img
         style={ifExists(loading, {
           paddingTop: `${100 * aspectRatio}%`,
-          height: 0,
         })}
         className={classNames(
           styles.Image,
-          rounded && styles[`Radius-${rounded}`]
+          rounded && styles[`Radius-${rounded}`],
+          loading && styles.Loading
         )}
         onLoad={onLoad}
         {...imgProps}

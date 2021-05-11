@@ -1,13 +1,11 @@
 import React from "react";
-import { Rule, Scroll, TextSubheading } from "@gatsby-tv/components";
+import { Scroll, TextSubheading } from "@gatsby-tv/components";
 import { Value } from "@gatsby-tv/utilities";
 import { Video } from "@gatsby-tv/types";
 
-import { Channel } from "@lib/channel";
 import { User } from "@lib/user";
 import { LinkProps } from "@lib/types";
 
-import { Skeleton } from "./Credits.skeleton";
 import styles from "./Credits.scss";
 
 export interface CreditsProps {
@@ -15,10 +13,16 @@ export interface CreditsProps {
   link?: React.FC<LinkProps>;
 }
 
-export function Credits(props: CreditsProps): React.ReactElement {
+export function Credits(props: CreditsProps): React.ReactElement | null {
   const { content, link } = props;
 
-  if (!content) return <Skeleton />;
+  if (
+    !content ||
+    (!content.collaborators.length &&
+      !content.contributors.length &&
+      !content.sponsors.length)
+  )
+    return null;
 
   const CollaboratorsMarkup = content.collaborators.length
     ? content.collaborators.map((user, index) => (
@@ -55,15 +59,6 @@ export function Credits(props: CreditsProps): React.ReactElement {
 
   return (
     <Scroll className={styles.Credits}>
-      <TextSubheading>Channel</TextSubheading>
-      <Channel.Info
-        channel={content.channel}
-        blurb={Value(content.channel.subscribers, "subscriber")}
-        link={link}
-      />
-      {(CollaboratorsMarkup || ContributorsMarkup || SponsorsMarkup) && (
-        <Rule spacing="none" />
-      )}
       {CollaboratorsMarkup && (
         <TextSubheading className={styles.Heading}>
           Collaborators

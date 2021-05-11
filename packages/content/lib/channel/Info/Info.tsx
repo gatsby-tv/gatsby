@@ -1,5 +1,11 @@
 import React from "react";
-import { Avatar, Icon, Optional, TextMeta, DiscreteSize } from "@gatsby-tv/components";
+import {
+  Avatar,
+  Icon,
+  Optional,
+  TextMeta,
+  DiscreteSize,
+} from "@gatsby-tv/components";
 import { CheckmarkFill } from "@gatsby-tv/icons";
 import { ChannelHandle, Value } from "@gatsby-tv/utilities";
 import { Channel } from "@gatsby-tv/types";
@@ -11,15 +17,18 @@ import styles from "./Info.scss";
 
 export interface InfoProps {
   channel?: Channel;
-  blurb?: string | string[];
+  blurb?: string | string[] | ((channel: Channel) => string | string[]);
   avatar?: DiscreteSize;
   link?: React.FC<LinkProps>;
 }
 
 export function Info(props: InfoProps): React.ReactElement {
-  const { channel, blurb, avatar = "larger", link: Link } = props;
+  const { channel, avatar = "base", link: Link } = props;
 
-  if (!channel) return <Skeleton />;
+  if (!channel) return <Skeleton avatar={avatar} />;
+
+  const blurb =
+    typeof props.blurb === "function" ? props.blurb(channel) : props.blurb;
 
   const VerifiedMarkup = channel.verified ? (
     <Icon className={styles.Verified} src={CheckmarkFill} size="smallest" />
@@ -48,10 +57,12 @@ export function Info(props: InfoProps): React.ReactElement {
             <TextMeta className={styles.NameText}>{channel.name}</TextMeta>
             {VerifiedMarkup}
           </Optional>
-          <TextMeta className={styles.InfoText}>
-            {ChannelHandle(channel.handle)}
-          </TextMeta>
-          {BlurbMarkup}
+          <Optional component={TextMeta.List} active={Boolean(BlurbMarkup)}>
+            <TextMeta className={styles.InfoText}>
+              {ChannelHandle(channel.handle)}
+            </TextMeta>
+            {BlurbMarkup}
+          </Optional>
         </div>
       </div>
     </Optional>

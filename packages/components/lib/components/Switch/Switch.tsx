@@ -14,7 +14,7 @@ export interface SwitchProps {
   children?: React.ReactNode;
   className?: string;
   itemClass?: string;
-  selection: Record<string, boolean>;
+  selection: string;
   onSelect: (id: string) => void;
 }
 

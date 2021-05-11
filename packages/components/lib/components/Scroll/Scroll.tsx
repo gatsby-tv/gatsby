@@ -19,7 +19,7 @@ export interface ScrollProps {
 }
 
 export function Scroll(props: ScrollProps): React.ReactElement {
-  const { children, className, smooth, hide } = props;
+  const { children, className, smooth, hide, onScroll } = props;
   const [height, setHeight] = useState<number | undefined>(undefined);
   const scroll = useRef<HTMLDivElement>(null);
   const parent = useParentRef<HTMLDivElement>(scroll);
@@ -40,6 +40,7 @@ export function Scroll(props: ScrollProps): React.ReactElement {
         ref={scroll}
         style={ifExists(height, { height: `${height}px` })}
         className={classes}
+        onScroll={onScroll}
       >
         {children}
       </div>

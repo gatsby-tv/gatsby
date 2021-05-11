@@ -3,6 +3,7 @@
 
 .Avatar {
   padding: 0;
+  flex-shrink: 0;
 }
 
 .Menu {
@@ -22,6 +23,7 @@
   background-color: palette("gold");
   color: background(darker);
   padding: spacing(0.5) spacing(1);
+  flex-shrink: 0;
 
   @include hover {
     background-color: color.adjust(palette("gold"), $lightness: 5%);
@@ -34,6 +36,7 @@
 
 .Misc {
   background-color: foreground(placeholder);
+  flex-shrink: 0;
 
   @include hover {
     background-color: color.adjust(foreground(placeholder), $alpha: 0.1);

@@ -27,7 +27,11 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
 
   return (
     <div className={classes}>
-      <Image rounded="smallest" aspectRatio={0.5625} />
+      <Image
+        className={styles.Skeleton}
+        rounded="smallest"
+        aspectRatio={0.5625}
+      />
       {InfoMarkup}
     </div>
   );

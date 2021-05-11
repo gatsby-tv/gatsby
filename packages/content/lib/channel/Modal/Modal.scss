@@ -2,8 +2,10 @@
 @use 'styles' as *;
 
 .Modal {
+  @include border-radius(smallest);
   background-color: background(dark);
   width: min(80vw, 90rem);
+  max-width: 100%;
   height: calc(100vh - 12rem);
 }
 
@@ -30,11 +32,15 @@
 
 .Header {
   position: absolute;
-  bottom: spacing(3);
-  left: spacing(3);
+  bottom: spacing(1.5);
+  left: spacing(1);
   display: flex;
   align-items: center;
   gap: spacing(1.5);
+}
+
+.Avatar {
+  flex-shrink: 0;
 }
 
 .HeaderTextArea {
@@ -42,14 +48,31 @@
   flex-direction: column;
 }
 
+.HeaderTitle {
+  @include text-clamp(1);
+}
+
 .HeaderInfo {
   @include text-subdued;
-  @include font-size(display-small);
+  @include font-size(body-large);
   @include font-weight(bold);
 }
 
+.Content {
+  margin: 0 spacing(1);
+}
+
 @media screen and (min-width: 650px) {
-  .Container {
+  .Header {
+    bottom: spacing(3);
+    left: spacing(3);
+  }
+
+  .HeaderInfo {
+    @include font-size(display-small);
+  }
+
+  .Content {
     margin: 0 spacing(3);
   }
 }

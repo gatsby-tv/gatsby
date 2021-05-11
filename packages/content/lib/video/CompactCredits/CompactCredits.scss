@@ -1,0 +1,17 @@
+@use 'styles' as *;
+
+.Credits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing(1);
+}
+
+.Heading {
+  margin-bottom: spacing(0.5);
+}
+
+.Avatars {
+  display: flex;
+  align-items: center;
+  gap: spacing(0.5);
+}

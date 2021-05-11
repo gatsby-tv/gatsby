@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
-import { useSelect, useModal } from "@gatsby-tv/utilities";
+import { useModal } from "@gatsby-tv/utilities";
 
 import { Button } from "@lib/components/Button";
 import { TextBox } from "@lib/components/TextBox";
@@ -15,18 +15,17 @@ export default {
 } as Meta;
 
 export const InsideContainer: Story<PanelProps> = () => {
-  const [selection, select] = useSelect(["top", "right", "bottom", "left"]);
+  const [selection, setSelection] = useState<string | undefined>(undefined);
   const [direction, setDirection] = useState<string | undefined>();
-  const current = Object.keys(selection).find((item) => selection[item]);
 
   useEffect(() => {
-    if (current) {
-      setDirection(current);
+    if (selection) {
+      setDirection(selection);
     } else {
       const id = setTimeout(() => setDirection(undefined), 300);
       return () => clearTimeout(id);
     }
-  }, [current]);
+  }, [selection]);
 
   return (
     <div className={styles.Selection}>
@@ -34,7 +33,7 @@ export const InsideContainer: Story<PanelProps> = () => {
         itemClass={styles.Item}
         scrollHidden
         selection={selection}
-        onSelect={select}
+        onSelect={setSelection}
       >
         <Selection.Item option="top">
           <TextBox>Top</TextBox>
@@ -51,9 +50,9 @@ export const InsideContainer: Story<PanelProps> = () => {
       </Selection>
       <Panel
         className={styles.Panel}
-        active={Boolean(current)}
+        active={Boolean(direction)}
         direction={direction}
-        onExit={select}
+        onExit={setSelection}
       >
         {direction}
       </Panel>

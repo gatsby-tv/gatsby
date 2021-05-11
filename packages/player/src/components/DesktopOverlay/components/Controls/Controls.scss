@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'styles' as *;
 
 .Controls {
@@ -15,22 +16,120 @@
 
 .Playback {
   justify-content: flex-start;
-
-  & > *:first-child {
-    margin-right: spacing(0.5);
-  }
-
-  & > *:last-child {
-    margin-left: spacing(0.5);
-  }
 }
 
 .Settings {
   justify-content: flex-end;
 }
 
+.Volume {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Slider {
+  width: 0;
+  transition: width duration(fast) ease;
+  will-change: width;
+  height: rem(4px);
+  background-color: color.adjust(palette("white"), $alpha: -0.85);
+}
+
+.SliderActive {
+  width: rem(60px);
+
+  .SliderProgress:after {
+    transform: scale(1);
+  }
+}
+
+.SliderProgress {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: foreground(body);
+
+  &:after {
+    @include border-radius(full);
+    content: "";
+    position: absolute;
+    right: rem(-5px);
+    width: rem(10px);
+    height: rem(10px);
+    background-color: foreground(body);
+    transition: transform 150ms ease;
+    transform: scale(0);
+  }
+}
+
 .ProgressText {
   @include center;
   @include text-tabular-nums;
   @include font-size(body);
+  padding: 0 spacing(1);
+}
+
+@keyframes reveal {
+  from {
+    clip-path: polygon(-5% 105%, -5% 105%, 105% 105%, 105% 105%);
+  }
+
+  to {
+    clip-path: polygon(-5% -5%, -5% 105%, 105% 105%, 105% -5%);
+  }
+}
+
+.Menu {
+  min-width: rem(220px);
+  background-color: color.adjust(background(darkest), $alpha: -0.1);
+
+  animation: {
+    name: reveal;
+    duration: duration(faster);
+  }
+
+  & > *:first-child {
+    margin-top: spacing(1);
+  }
+
+  & > *:last-child {
+    margin-bottom: spacing(1);
+  }
+}
+
+.MenuItem {
+  @include font-size(body-large);
+  @include font-weight(semi-bold);
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+  padding: spacing(1) spacing(2);
+
+  @include hover {
+    background-color: color.adjust(background(base), $alpha: -0.1);
+  }
+
+  sup {
+    @include font-size(caption);
+    @include font-weight(bold);
+    margin-left: rem(4px);
+    vertical-align: top;
+    color: color.adjust(palette("red"), $lightness: 5%);
+  }
+
+  &:before {
+    @include border-radius(full);
+    content: "";
+    display: block;
+    width: rem(8px);
+    height: rem(8px);
+  }
+
+  &[aria-selected]:before {
+    background-color: palette("gold");
+  }
 }

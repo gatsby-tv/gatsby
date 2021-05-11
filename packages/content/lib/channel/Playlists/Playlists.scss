@@ -4,12 +4,12 @@
   display: grid;
   grid-template-columns: 1fr;
   justify-content: stretch;
-  column-gap: spacing(1.5);
-  row-gap: spacing(1.5);
+  column-gap: spacing(1);
+  row-gap: spacing(1);
 }
 
 .Column {
-  row-gap: spacing(3);
+  row-gap: spacing(1.5);
 }
 
 .NoContentText {
@@ -23,11 +23,5 @@
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .Listing {
-    grid-template-columns: repeat(3, 1fr);
   }
 }

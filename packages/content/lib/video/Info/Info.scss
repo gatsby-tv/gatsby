@@ -6,6 +6,10 @@
   & > .TitleText {
     margin-bottom: spacing(0.5);
   }
+
+  & > *:first-child {
+    margin-top: 0;
+  }
 }
 
 .TitleText {

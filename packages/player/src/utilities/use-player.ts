@@ -17,6 +17,8 @@ export type VideoAction =
   | { type: "activate" }
   | { type: "deactivate" }
   | { type: "idle" }
+  | { type: "pin" }
+  | { type: "unpin" }
   | { type: "pause" }
   | { type: "waiting" }
   | { type: "playing" }
@@ -25,10 +27,14 @@ export type VideoAction =
   | { type: "seeked" }
   | { type: "timeupdate"; time: number }
   | { type: "progress"; progress: number }
-  | { type: "ended" };
+  | { type: "ended" }
+  | { type: "volumechange"; volume: number }
+  | { type: "mute" }
+  | { type: "unmute" };
 
 export type VideoState = {
   active: boolean;
+  pinned: boolean;
   idle: number;
   playing: boolean;
   paused: boolean;
@@ -38,6 +44,8 @@ export type VideoState = {
   time: number;
   progress: number;
   ended: boolean;
+  volume: number;
+  muted: boolean;
 };
 
 export type VideoReducer = Reducer<VideoState, VideoAction>;
@@ -64,23 +72,29 @@ function bufferProgress(time: number, ranges: TimeRanges): number {
 }
 
 export function usePlayer(
-  video: RefObject<HTMLVideoElement | null>
+  video: RefObject<HTMLVideoElement | null>,
+  volume: number
 ): {
   player: PlayerState;
   setActive: Dispatch<SetStateAction<boolean>>;
+  setPinned: Dispatch<SetStateAction<boolean>>;
   setPlayback: Dispatch<SetStateAction<boolean>>;
+  setVolume: Dispatch<SetStateAction<number>>;
+  setMuted: Dispatch<SetStateAction<boolean>>;
   setSeek: Dispatch<SetStateAction<number>>;
   events: Record<string, (event: any) => void>;
 } {
   const ref = useRef<HTMLElement>(null);
   const active = useRef(false);
+  const pinned = useRef(false);
   const playing = useRef(false);
   const [loading, setLoading] = useState(false);
   const [duration, setDuration] = useState(0);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [state, dispatch] = useReducer(
     (state: VideoState, action: VideoAction) => {
-      const isPinned = state.paused || state.seeking || state.ended;
+      const isPinned =
+        state.pinned || state.paused || state.seeking || state.ended;
       switch (action.type) {
         case "activate":
           return {
@@ -95,6 +109,22 @@ export function usePlayer(
             ...state,
             active: isPinned,
             idle: isNaN(state.idle) ? NaN : isPinned ? -Infinity : Infinity,
+          };
+
+        case "pin":
+          return {
+            ...state,
+            active: true,
+            pinned: true,
+            idle: -Infinity,
+          };
+
+        case "unpin":
+          return {
+            ...state,
+            active: true,
+            pinned: false,
+            idle: 0,
           };
 
         case "idle":
@@ -172,12 +202,31 @@ export function usePlayer(
             paused: false,
           };
 
+        case "volumechange":
+          return {
+            ...state,
+            volume: action.volume,
+          };
+
+        case "mute":
+          return {
+            ...state,
+            muted: true,
+          };
+
+        case "unmute":
+          return {
+            ...state,
+            muted: false,
+          };
+
         default:
           return state;
       }
     },
     {
       active: false,
+      pinned: false,
       idle: NaN,
       time: 0,
       progress: 0,
@@ -187,6 +236,8 @@ export function usePlayer(
       seeking: false,
       waiting: false,
       ended: false,
+      volume,
+      muted: true,
     }
   );
 
@@ -196,6 +247,15 @@ export function usePlayer(
       dispatch({ type: "activate" });
     } else {
       dispatch({ type: "deactivate" });
+    }
+  }, []);
+
+  const setPinned: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
+    const update = typeof value === "function" ? value(pinned.current) : value;
+    if (update) {
+      dispatch({ type: "pin" });
+    } else {
+      dispatch({ type: "unpin" });
     }
   }, []);
 
@@ -213,6 +273,28 @@ export function usePlayer(
     },
     []
   );
+
+  const setVolume: Dispatch<SetStateAction<number>> = useCallback((value) => {
+    if (!video.current) return;
+    const current = video.current.volume;
+    const volume =
+      typeof value === "function"
+        ? Math.min(Math.max(value(current), 0), 1)
+        : Math.min(Math.max(value, 0), 1);
+    video.current.volume = volume;
+    dispatch({ type: "volumechange", volume });
+    setMuted(!Boolean(volume));
+  }, []);
+
+  const setMuted: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
+    if (!video.current) return;
+    const current = video.current.muted;
+    const update = typeof value === "function" ? value(current) : value;
+    if (update !== current) {
+      video.current.muted = update;
+      dispatch({ type: update ? "mute" : "unmute" });
+    }
+  }, []);
 
   const setSeek: Dispatch<SetStateAction<number>> = useCallback((value) => {
     if (!video.current) return;
@@ -248,6 +330,10 @@ export function usePlayer(
   }, [state.active]);
 
   useEffect(() => {
+    pinned.current = state.pinned;
+  }, [state.pinned]);
+
+  useEffect(() => {
     playing.current = state.playing;
   }, [state.playing]);
 
@@ -264,6 +350,11 @@ export function usePlayer(
     if (!video.current || duration) return;
     setDuration(isNaN(video.current.duration) ? 0 : video.current.duration);
   });
+
+  useEffect(() => {
+    if (!video.current) return;
+    dispatch({ type: video.current.muted ? "mute" : "unmute" });
+  }, []);
 
   useEffect(() => {
     const onContextMenu = (event: any) => {
@@ -319,7 +410,10 @@ export function usePlayer(
       ...state,
     },
     setActive,
+    setPinned,
     setPlayback,
+    setVolume,
+    setMuted,
     setSeek,
     events: {
       onPause,
@@ -331,6 +425,6 @@ export function usePlayer(
       onTimeUpdate,
       onProgress,
       onSeeked,
-    }
+    },
   };
 }

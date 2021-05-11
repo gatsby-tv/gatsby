@@ -13,19 +13,28 @@ export type { LinkProps as TabsLinkProps };
 export interface TabsProps {
   children?: React.ReactNode;
   className?: string;
+  itemClass?: string;
   gap?: Spacing;
-  selection: Record<string, boolean>;
+  selection: string;
   onSelect: (id: string) => void;
 }
 
 export function Tabs(props: TabsProps): React.ReactElement {
-  const { children, className, gap = "base", selection, onSelect } = props;
+  const {
+    children,
+    className,
+    itemClass,
+    gap = "base",
+    selection,
+    onSelect,
+  } = props;
 
   const classes = classNames(className, styles.Tabs, styles[`Tabs-gap-${gap}`]);
 
   return (
     <Selection
       className={classes}
+      itemClass={itemClass}
       row
       selection={selection}
       onSelect={onSelect}

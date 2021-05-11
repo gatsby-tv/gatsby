@@ -21,9 +21,10 @@ export default function App({
   Component,
   pageProps,
 }: AppProps): React.ReactElement {
-  const bootstrap = process.env.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(",");
   const [channel, setChannel] = useState<Channel | undefined>(undefined);
-  const node = useIPFSNode(bootstrap);
+  const node = useIPFSNode(
+    process.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(",").filter(Boolean)
+  );
 
   useEffect(() => setChannel(undefined), [Component]);
 

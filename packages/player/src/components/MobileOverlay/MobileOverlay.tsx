@@ -15,12 +15,7 @@ export function MobileOverlay(props: OverlayProps): React.ReactElement {
     player,
     timeline,
     signal,
-    fullscreen,
-    setFullscreen,
     setActive,
-    setPlayback,
-    setSeek,
-    setSignal,
   } = props;
 
   const [disabled, setDisabled] = useState(false);

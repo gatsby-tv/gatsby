@@ -2,28 +2,49 @@
 
 .Container {
   display: flex;
+  flex-direction: column;
 }
 
-.Info {
-  flex: 2 2 65%;
-  padding-right: spacing(3);
+.CreditsContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .Description {
-  flex: 1 1 auto;
-  padding-right: spacing(1);
+  flex: 1 1 100%;
 }
 
 .Credits {
-  flex: 0 0 25%;
+  flex: 0 1 rem(350px);
+  margin-left: spacing(3);
+
+  & > * {
+    @include expand(absolute);
+  }
+}
+
+.CompactCredits {
+  margin-bottom: spacing(1);
 }
 
 .Related {
-  flex: 1 1 35%;
-  margin-top: spacing(0.5);
-  min-width: rem(450px);
+  max-width: rem(650px);
+  margin-top: spacing(1);
 }
 
-.Rule {
-  margin: spacing(1) 0 spacing(1.5);
+@media screen and (min-width: 1000px) {
+  .Container {
+    flex-direction: row;
+  }
+
+  .Info {
+    flex: 2 2 65%;
+    padding-right: spacing(3);
+  }
+
+  .Related {
+    flex: 1 1 35%;
+    margin-top: spacing(0.5);
+    min-width: rem(450px);
+  }
 }

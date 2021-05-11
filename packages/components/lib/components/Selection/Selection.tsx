@@ -17,7 +17,7 @@ export interface SelectionProps extends React.AriaAttributes {
   children?: React.ReactNode;
   className?: string;
   itemClass?: string;
-  selection: Record<string, boolean>;
+  selection: string;
   row?: boolean;
   scrollHidden?: boolean;
   onSelect: (option: string) => void;

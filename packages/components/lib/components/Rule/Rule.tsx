@@ -6,7 +6,7 @@ import { Spacing } from "@lib/types";
 import styles from "./Rule.scss";
 
 export interface RuleProps {
-  children?: string | string[];
+  children?: React.ReactNode;
   className?: string;
   thin?: boolean;
   spacing?: Spacing;

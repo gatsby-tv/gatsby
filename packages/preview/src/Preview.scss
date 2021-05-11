@@ -26,11 +26,11 @@
 }
 
 .Item-row {
-  flex-basis: 125%;
+  min-width: rem(250px);
 }
 
 .Item-compact {
-  flex-basis: 250%;
+  min-width: rem(500px);
 }
 
 .Duration {

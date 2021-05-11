@@ -6,7 +6,11 @@ import React, {
   useCallback,
 } from "react";
 import { ExtendLeft, ExtendRight } from "@gatsby-tv/icons";
-import { classNames, useResizeObserver, useMobileDetector } from "@gatsby-tv/utilities";
+import {
+  classNames,
+  useResizeObserver,
+  useMobileDetector,
+} from "@gatsby-tv/utilities";
 
 import { CarouselContext } from "@lib/utilities/carousel";
 import { Button } from "@lib/components/Button";
@@ -26,11 +30,18 @@ export interface CarouselProps {
 export function Carousel(props: CarouselProps): React.ReactElement | null {
   const { children, groups } = props;
   const mask = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState<string>("100%");
+  const [width, setWidthBase] = useState<string>("100%");
   const isMobile = useMobileDetector();
 
-  /* We need the number of items to divide the number of visible slides evenly.
-   * Thus, perhaps controversially, we will remove any remainders. */
+  const setWidth = useCallback(
+    (value: string) =>
+      setWidthBase(isMobile ? `calc(${value} + ${100 / groups / 2}%)` : value),
+    [isMobile, groups]
+  );
+
+  /* We need the number of visible items per group to divide the total
+   * number of items evenly. Thus, perhaps controversially, we will remove
+   * any remainders. */
 
   const items = React.Children.count(children);
 
@@ -122,7 +133,10 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
   return (
     <CarouselContext.Provider value={{ groups }}>
       <div className={styles.Carousel}>
-        <div ref={mask} className={classNames(styles.Mask, isMobile && styles.Mobile)}>
+        <div
+          ref={mask}
+          className={classNames(styles.Mask, isMobile && styles.Mobile)}
+        >
           {ContentMarkup}
         </div>
       </div>

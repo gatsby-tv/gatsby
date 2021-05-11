@@ -21,8 +21,8 @@ import styles from "./Modal.scss";
 
 export interface SkeletonProps {
   mobile: boolean;
-  tab: Record<string, boolean>;
-  setTab: (id?: string) => void;
+  tab: string;
+  setTab: (id: string) => void;
   active?: boolean;
   onExit?: () => void;
   onScroll: (event: any) => void;
@@ -32,7 +32,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement | null {
   const { mobile, tab, setTab, active, onExit, onScroll } = props;
 
   const Container = mobile ? PanelComponent : ModalComponent;
-  const Listing = tab["videos"] ? Videos : tab["playlists"] ? Playlists : Shows;
+  const Listing = tab === "videos" ? Videos : tab === "playlists" ? Playlists : Shows;
 
   const OverlayMarkup = (
     <div className={styles.Overlay}>
@@ -65,7 +65,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement | null {
           aspectRatio={0.5}
           overlay={OverlayMarkup}
         />
-        <div className={styles.Container}>
+        <div>
           <Tabs
             className={styles.Tabs}
             gap="loose"

@@ -9,7 +9,7 @@
 }
 
 .Column {
-  row-gap: spacing(3);
+  row-gap: spacing(2);
 }
 
 @media screen and (min-width: 650px) {
@@ -18,10 +18,20 @@
     justify-content: center;
     align-items: center;
   }
+
+  .Column {
+    row-gap: spacing(3);
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .Listing {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .Listing {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

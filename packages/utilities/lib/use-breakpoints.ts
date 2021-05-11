@@ -1,6 +1,4 @@
-import { useEffect, useRef } from "react";
-
-import { useSelect } from "@lib/use-select";
+import { useState, useEffect, useRef } from "react";
 
 export interface BreakpointSet {
   [key: string]: string;
@@ -20,7 +18,7 @@ export function useBreakpoints<T extends string | number = number>(
 ): T {
   const key = JSON.stringify(points);
   const queries = useRef<MediaQuerySpecification>({});
-  const [selection, setSelection] = useSelect(Object.keys(points));
+  const [selection, setSelection] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const handleChange = (item: string): MediaQueryHandler => {
@@ -50,11 +48,9 @@ export function useBreakpoints<T extends string | number = number>(
     };
   }, [key]);
 
-  const result = Object.keys(selection).find((item) => selection[item]);
-
-  if (result !== undefined && !isNaN(+result)) {
-    return +result as T;
+  if (selection !== undefined && !isNaN(+selection)) {
+    return +selection as T;
   } else {
-    return (result as T) ?? defaultValue;
+    return (selection as T) ?? defaultValue;
   }
 }

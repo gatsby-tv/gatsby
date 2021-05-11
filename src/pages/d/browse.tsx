@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Rule, Tabs, TextDisplay } from "@gatsby-tv/components";
-import { useSelect, useUniqueId } from "@gatsby-tv/utilities";
+import { useUniqueId } from "@gatsby-tv/utilities";
 import { Listing } from "@gatsby-tv/content";
 
 import { PageBody } from "@src/components/PageBody";
@@ -9,12 +9,12 @@ import { Link } from "@src/components/Link";
 import styles from "@src/styles/Browse.module.scss";
 
 export default function BrowsePage(): React.ReactElement {
-  const [tab, setTab] = useSelect(["popular", "new"], "popular");
-  const Content = tab["popular"] ? Listing.Recommended : Listing.New;
+  const [tab, setTab] = useState("popular");
+  const Content = tab === "popular" ? Listing.Recommended : Listing.New;
   const popularId = useUniqueId("tab");
   const newId = useUniqueId("tab");
   const panelId = useUniqueId("panel");
-  const panelLabel = tab["popular"] ? popularId : newId;
+  const panelLabel = tab === "popular" ? popularId : newId;
 
   return (
     <PageBody>

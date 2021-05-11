@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
-import { useSelect } from "@gatsby-tv/utilities";
 
 import { Tabs, TabsProps } from "@lib/components/Tabs";
 
@@ -12,7 +11,7 @@ export default {
 } as Meta;
 
 export const Example: Story<TabsProps> = () => {
-  const [tab, setTab] = useSelect(["one", "two", "three"]);
+  const [tab, setTab] = useState("one");
 
   return (
     <Tabs className={styles.Tabs} gap="loose" selection={tab} onSelect={setTab}>

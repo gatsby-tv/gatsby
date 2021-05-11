@@ -43,6 +43,10 @@ export function Timeline(props: TimelineProps): React.ReactElement {
           padding: 4,
         },
       },
+      {
+        name: "flip",
+        enabled: false,
+      },
     ],
   });
 

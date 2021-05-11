@@ -39,6 +39,12 @@
   }
 }
 
+@media screen and (min-width: 1600px) {
+  .SkeletonSection {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 .SkeletonRule {
   margin: spacing(3) 0;
 }

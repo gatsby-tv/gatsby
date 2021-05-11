@@ -5,6 +5,10 @@
   display: block;
 }
 
+.Loading {
+  height: 0;
+}
+
 @each $key, $value in $border-radius-map {
   @if $key != none {
     .Radius-#{$key} {

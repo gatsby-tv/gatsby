@@ -1,5 +1,11 @@
 import React from "react";
-import { Avatar, Icon, Optional, TextMeta, DiscreteSize } from "@gatsby-tv/components";
+import {
+  Avatar,
+  Icon,
+  Optional,
+  TextMeta,
+  DiscreteSize,
+} from "@gatsby-tv/components";
 import { CheckmarkFill } from "@gatsby-tv/icons";
 import { UserHandle, Value } from "@gatsby-tv/utilities";
 import { User } from "@gatsby-tv/types";
@@ -11,15 +17,18 @@ import styles from "./Info.scss";
 
 export interface InfoProps {
   user?: User;
-  blurb?: string | string[];
+  blurb?: string | string[] | ((user: User) => string | string[]);
   avatar?: DiscreteSize;
   link?: React.FC<LinkProps>;
 }
 
 export function Info(props: InfoProps): React.ReactElement {
-  const { user, blurb, avatar = "larger", link: Link } = props;
+  const { user, avatar = "base", link: Link } = props;
 
   if (!user) return <Skeleton />;
+
+  const blurb =
+    typeof props.blurb === "function" ? props.blurb(user) : props.blurb;
 
   const VerifiedMarkup = user.verified ? (
     <Icon className={styles.Verified} src={CheckmarkFill} size="smallest" />

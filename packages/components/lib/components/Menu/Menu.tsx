@@ -54,6 +54,7 @@ export function Menu(props: MenuProps): React.ReactElement {
       },
       {
         name: "flip",
+        enabled: false,
       },
     ],
   });

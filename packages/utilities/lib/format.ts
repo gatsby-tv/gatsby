@@ -55,9 +55,10 @@ ReleaseDateFormatter.unit = (entry: [string, number]) =>
 ReleaseDateFormatter.suffix = (entry: [string, number]) =>
   entry[1] < 0 ? "from now" : "ago";
 
-export function ReleaseDate(date: Date | string | number): string | undefined {
+export function ReleaseDate(date: Date | string | number): string {
   const formatter = ReleaseDateFormatter(new Date(date));
-  if (typeof formatter === "undefined") return undefined;
+  if (typeof formatter === "undefined")
+    throw new Error("Release Date could not be formatted.");
   return [
     ReleaseDateFormatter.value(formatter),
     ReleaseDateFormatter.unit(formatter),
@@ -78,9 +79,7 @@ function ValueFormatter(value: number) {
 }
 
 ValueFormatter.round = (value: number) => {
-  if (value >= 1000) {
-    return undefined;
-  } else if (value >= 100) {
+  if (value >= 100) {
     return +value.toPrecision(3);
   } else if (value >= 1) {
     return +value.toPrecision(2);
@@ -89,9 +88,8 @@ ValueFormatter.round = (value: number) => {
   }
 };
 
-export function Value(num: number, unit?: string): string | undefined {
+export function Value(num: number, unit?: string): string {
   const value = ValueFormatter(num);
-  if (typeof value[1] === "undefined") return undefined;
   const suffix = !value[0] && value[1] === 1 ? unit : `${unit}s`;
   const result = value?.reverse().join("");
   return unit ? `${result} ${suffix}` : result;

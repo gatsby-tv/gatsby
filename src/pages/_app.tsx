@@ -23,7 +23,7 @@ export default function App({
 }: AppProps): React.ReactElement {
   const [channel, setChannel] = useState<Channel | undefined>(undefined);
   const node = useIPFSNode(
-    process.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(",").filter(Boolean)
+    process.env.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(",").filter(Boolean)
   );
 
   useEffect(() => setChannel(undefined), [Component]);

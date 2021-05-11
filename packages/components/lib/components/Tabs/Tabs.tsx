@@ -15,7 +15,7 @@ export interface TabsProps {
   className?: string;
   itemClass?: string;
   gap?: Spacing;
-  selection: string;
+  selection?: string;
   onSelect: (id: string) => void;
 }
 

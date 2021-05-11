@@ -29,7 +29,7 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
         <User.Info
           key={`Collaborator.${user._id}`}
           user={user}
-          blurb={Value(user.followers, "follower") as string}
+          blurb={Value(user.followers, "follower")}
           link={link}
         />
       ))
@@ -51,7 +51,7 @@ export function Credits(props: CreditsProps): React.ReactElement | null {
         <User.Info
           key={`Sponsor.${user._id}`}
           user={user}
-          blurb={Value(user.followers, "follower") as string}
+          blurb={Value(user.followers, "follower")}
           link={link}
         />
       ))

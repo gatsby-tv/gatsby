@@ -1,12 +1,28 @@
 import { useContext } from "react";
+import { ContextError } from "@gatsby-tv/utilities";
 
-import { FormContext, FormContextType } from "./context";
+import {
+  FormContext,
+  FormSelectContext,
+  FormContextType,
+  FormSelectContextType,
+} from "./context";
 
 export function useForm(): FormContextType {
   const context = useContext(FormContext);
 
   if (!context) {
-    throw new Error("No Form context provided for component.");
+    throw new ContextError("Form");
+  }
+
+  return context;
+}
+
+export function useFormSelect(): FormSelectContextType {
+  const context = useContext(FormSelectContext);
+
+  if (!context) {
+    throw new ContextError("FormSelect");
   }
 
   return context;

@@ -1,24 +1,54 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useState, useCallback } from "react";
 
-import { FormContext } from "@lib/utilities/form";
+import { FormContext, FormError } from "@lib/utilities/form";
+
+import {
+  Field,
+  FieldProps,
+  File,
+  FileProps,
+  Label,
+  LabelProps,
+  Select,
+  SelectProps,
+} from "./components";
+
+export type {
+  FieldProps as FormFieldProps,
+  FileProps as FormFileProps,
+  LabelProps as FormLabelProps,
+  SelectProps as FormSelectProps,
+};
 
 export type FormProps = React.FormHTMLAttributes<HTMLElement>;
 
 export function Form(props: FormProps): React.ReactElement {
-  const { method = "POST", action = "", ...rest } = props;
-  const form = useMemo(() => new FormData(), []);
-  const context = { form };
+  const [errors, setErrors] = useState<Record<string, FormError | undefined>>(
+    {}
+  );
 
-  const onSubmit = useCallback((event) => {
-    event.preventDefault();
-    const request = new XMLHttpRequest();
-    request.open(method.toUpperCase(), action, true);
-    request.send(context.form);
-  }, []);
+  const setError = useCallback(
+    (id: string, message: string) =>
+      setErrors((current) => ({
+        ...current,
+        [id]: new FormError(id, message),
+      })),
+    []
+  );
+
+  const clearError = useCallback(
+    (id: string) => setErrors((current) => ({ ...current, [id]: undefined })),
+    []
+  );
 
   return (
-    <FormContext.Provider value={context}>
-      <form onSubmit={onSubmit} {...rest} />
+    <FormContext.Provider value={{ errors, setError, clearError }}>
+      <form {...props} />
     </FormContext.Provider>
   );
 }
+
+Form.Field = Field;
+Form.File = File;
+Form.Label = Label;
+Form.Select = Select;

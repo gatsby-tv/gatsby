@@ -38,7 +38,7 @@ export function Menu(props: MenuProps): React.ReactElement {
 
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
   const { styles: style, attributes } = usePopper(props.for.current, popper, {
-    placement: placement,
+    placement,
     modifiers: [
       {
         name: "offset",

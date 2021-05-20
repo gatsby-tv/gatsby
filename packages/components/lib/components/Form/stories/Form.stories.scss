@@ -1,0 +1,5 @@
+@use 'styles' as *;
+
+.Form {
+  @include font-size(body-large);
+}

@@ -42,7 +42,7 @@ export function Selection(props: SelectionProps): React.ReactElement {
   );
 
   return (
-    <SelectionContext.Provider value={{ selection, onSelect }}>
+    <SelectionContext.Provider value={{ selection, setSelection: onSelect }}>
       <ItemContext.Provider value={{ itemClass }}>
         <Optional
           component={Scroll}

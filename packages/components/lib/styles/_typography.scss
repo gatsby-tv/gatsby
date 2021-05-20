@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:map';
 @use './colors' as *;
 @use './font' as *;
@@ -81,6 +82,10 @@ $display-font-size-map: (
   @include font-weight(semi-bold);
 }
 
+@mixin placeholder {
+  color: color.adjust(foreground(body), $alpha: -0.5);
+}
+
 @mixin caption {
   @include semi-condensed;
   @include font-size(caption);
@@ -91,6 +96,7 @@ $display-font-size-map: (
   @include font-weight(normal);
   white-space: pre-line;
   appearance: none;
+  color: color.adjust(foreground(body), $lightness: -10%);
 }
 
 @mixin tab {

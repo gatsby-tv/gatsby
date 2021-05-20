@@ -1,0 +1,150 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Select {
+  @include text-input;
+  @include border-radius(small);
+
+  display: flex;
+  align-items: center;
+  background-color: background(light);
+  box-shadow: inset 0 0 0 border-width(small) background(light);
+  transition: box-shadow duration(faster) ease;
+  cursor: default;
+  padding: rem(2px) 0;
+
+  input {
+    flex: 1 1 0;
+    white-space: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    appearance: inherit;
+    color: inherit;
+    background-color: transparent;
+    outline: none;
+    cursor: default;
+
+    &::placeholder {
+      @include text-placeholder;
+    }
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 0 border-width(small) background(lightest);
+  }
+
+  &:focus,
+  &[data-focus] {
+    box-shadow: inset 0 0 0 border-width(small)
+      color.adjust(inverted(dark), $alpha: -0.2);
+  }
+
+  &[data-error] {
+    box-shadow: inset 0 0 0 border-width(small)
+      color.adjust(palette("red"), $alpha: -0.4);
+  }
+
+  &[data-error]:hover,
+  &[data-error]:focus,
+  &[data-error][data-focus] {
+    box-shadow: inset 0 0 0 border-width(small)
+      color.adjust(palette("red"), $alpha: -0.2);
+  }
+}
+
+.Input {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: spacing(0.5);
+  padding: spacing(0.5) spacing(1);
+}
+
+.Separator {
+  flex-shrink: 0;
+  height: spacing(2);
+  width: rem(1px);
+  background-color: color.adjust(background(lightest), $lightness: 10%);
+}
+
+.Icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  align-self: stretch;
+  color: color.adjust(background(lightest), $lightness: 20%);
+  padding: 0 spacing(1);
+  transition: color duration(fastest) ease;
+  cursor: default;
+
+  @include hover {
+    color: color.adjust(background(lightest), $lightness: 40%);
+  }
+
+  svg:global(#gz-extend-down) {
+    font-size: rem(13px);
+  }
+}
+
+.Selection {
+  @include text-no-break;
+  @include text-truncate;
+  position: absolute;
+  margin: 0 rem(2px);
+}
+
+.Tag {
+  @include border-radius(base);
+  @include font-weight(semi-bold);
+  display: flex;
+  flex-shrink: 0;
+  background-color: color.adjust(background(lightest), $lightness: 10%);
+  cursor: default;
+
+  & > span:first-child {
+    align-self: center;
+    margin: 0 spacing(0.5);
+  }
+}
+
+.TagClear {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: border-radius(base);
+  border-bottom-right-radius: border-radius(base);
+  padding: spacing(0.5);
+
+  @include hover {
+    background-color: inverted(darkest);
+    color: background(lightest);
+  }
+
+  svg {
+    font-size: rem(9px);
+  }
+}
+
+.Mask {
+  @include border-radius(small);
+  overflow: hidden;
+}
+
+.Menu {
+  max-height: rem(200px);
+  background-color: background(lightest);
+}
+
+.Option {
+  width: 100%;
+  padding: spacing(0.5) spacing(1);
+  cursor: default;
+
+  &[aria-selected] {
+    background-color: background(base);
+  }
+
+  &:not([disabled]):not([aria-selected]):hover,
+  &:not([disabled]):not([aria-selected])[data-hover] {
+    background-color: color.adjust(background(lightest), $lightness: 10%);
+  }
+}

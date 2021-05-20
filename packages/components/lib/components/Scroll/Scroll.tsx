@@ -15,11 +15,12 @@ export interface ScrollProps {
   className?: string;
   smooth?: boolean;
   hide?: boolean;
+  floating?: boolean;
   onScroll?: (event: any) => void;
 }
 
 export function Scroll(props: ScrollProps): React.ReactElement {
-  const { children, className, smooth, hide, onScroll } = props;
+  const { children, className, smooth, hide, floating, onScroll } = props;
   const [height, setHeight] = useState<number | undefined>(undefined);
   const scroll = useRef<HTMLDivElement>(null);
   const parent = useParentRef<HTMLDivElement>(scroll);
@@ -38,7 +39,7 @@ export function Scroll(props: ScrollProps): React.ReactElement {
     <ScrollContext.Provider value={context}>
       <div
         ref={scroll}
-        style={ifExists(height, { height: `${height}px` })}
+        style={ifExists(height && !floating, { maxHeight: `${height}px` })}
         className={classes}
         onScroll={onScroll}
       >

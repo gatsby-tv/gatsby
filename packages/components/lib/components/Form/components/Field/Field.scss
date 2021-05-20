@@ -1,0 +1,60 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Input {
+  @include text-input;
+  @include border-radius(small);
+
+  display: flex;
+  padding: rem(7px) spacing(1);
+  gap: spacing(1);
+  align-items: center;
+  cursor: text;
+  background-color: background(light);
+  box-shadow: inset 0 0 0 border-width(small) background(light);
+  transition: box-shadow duration(faster) ease;
+
+  textarea,
+  input {
+    width: 100%;
+    flex-grow: 1;
+    white-space: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    appearance: inherit;
+    color: inherit;
+    background-color: transparent;
+    outline: none;
+
+    &::placeholder {
+      @include text-placeholder;
+    }
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 0 border-width(small) background(lightest);
+  }
+
+  &:focus,
+  &[data-focus] {
+    box-shadow: inset 0 0 0 border-width(small)
+      color.adjust(inverted(dark), $alpha: -0.2);
+  }
+
+  &[data-error] {
+    box-shadow: inset 0 0 0 border-width(small)
+      color.adjust(palette("red"), $alpha: -0.4);
+  }
+
+  &[data-error]:hover,
+  &[data-error]:focus,
+  &[data-error][data-focus] {
+    box-shadow: inset 0 0 0 border-width(small)
+      color.adjust(palette("red"), $alpha: -0.2);
+  }
+}
+
+.Decorator {
+  @include text-placeholder;
+  flex-shrink: 0;
+}

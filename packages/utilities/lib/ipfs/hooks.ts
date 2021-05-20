@@ -17,6 +17,7 @@ import all from "it-all";
 import { IPFSContent } from "@gatsby-tv/types";
 
 import { useAsync } from "@lib/use-async";
+import { ContextError } from "@lib/errors";
 
 import { IPFSContext, IPFSContextType } from "./context";
 
@@ -66,7 +67,7 @@ export function useIPFS(): IPFSContextType {
   const context = useContext(IPFSContext);
 
   if (!context) {
-    throw new Error("No IPFS context provided for component.");
+    throw new ContextError("IPFS");
   }
 
   return context;

@@ -4,23 +4,22 @@ import { ifExists, classNames } from "@gatsby-tv/utilities";
 
 import { Icon } from "@lib/components/Icon";
 import { Optional } from "@lib/components/Optional";
-import { VisuallyHidden } from "@lib/components/VisuallyHidden";
+import { useForm } from "@lib/utilities/form";
 
-import styles from "./FormLabel.scss";
+import styles from "./Label.scss";
 
-export interface FormLabelProps {
+export interface LabelProps {
   children?: React.ReactNode;
-  id: string;
+  for: string;
   className?: string;
   label: string;
-  font?: string;
   help?: string;
-  error?: Error;
   hidden?: boolean;
 }
 
-export function FormLabel(props: FormLabelProps): React.ReactElement {
-  const { children, id, className, label, font, help, error, hidden } = props;
+export function Label(props: LabelProps): React.ReactElement {
+  const { children, for: id, className, label, help, hidden } = props;
+  const { errors } = useForm();
 
   const classes = classNames(
     className,
@@ -29,13 +28,13 @@ export function FormLabel(props: FormLabelProps): React.ReactElement {
   );
 
   const HelpMarkup =
-    help && !error ? <div className={styles.Help}>{help}</div> : null;
+    help && !errors[id] ? <div className={styles.Help}>{help}</div> : null;
 
-  const ErrorMarkup = error ? (
-    <div className={styles.Error}>{error.message}</div>
+  const ErrorMarkup = errors[id] ? (
+    <div className={styles.Error}>{errors[id]?.message}</div>
   ) : null;
 
-  const ErrorIconMarkup = error ? (
+  const ErrorIconMarkup = errors[id] ? (
     <Icon
       className={styles.ErrorIcon}
       src={NoEntry}
@@ -48,7 +47,7 @@ export function FormLabel(props: FormLabelProps): React.ReactElement {
     <>
       <Optional
         component="span"
-        active={Boolean(error)}
+        active={Boolean(ErrorIconMarkup)}
         $props={{ className: styles.ErrorContainer }}
       >
         <label className={classes} htmlFor={id}>

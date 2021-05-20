@@ -38,30 +38,3 @@ $width-map: (
 @function width($width) {
   @return map.get($width-map, $width);
 }
-
-@mixin input {
-  box-shadow: inset 0 0 0 width(small) background(light);
-  transition: box-shadow duration(faster) ease;
-
-  &:hover {
-    box-shadow: inset 0 0 0 width(small) background(lightest);
-  }
-
-  &:focus,
-  &[data-focus] {
-    box-shadow: inset 0 0 0 width(small)
-      color.adjust(inverted(dark), $alpha: -0.2);
-  }
-
-  &[data-error] {
-    box-shadow: inset 0 0 0 width(small)
-      color.adjust(palette("red"), $alpha: -0.4);
-  }
-
-  &[data-error]:hover,
-  &[data-error]:focus,
-  &[data-error][data-focus] {
-    box-shadow: inset 0 0 0 width(small)
-      color.adjust(palette("red"), $alpha: -0.2);
-  }
-}

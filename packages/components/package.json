@@ -16,8 +16,7 @@
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint": "eslint lib",
-    "types": "tsc --noEmit",
-    "types:watch": "yarn run check -- --watch",
+    "types": "tsc",
     "clean": "rm -rf dist",
     "build": "node ./scripts/build.js",
     "storybook": "start-storybook -p 6006 --no-dll --ci",

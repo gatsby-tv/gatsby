@@ -6,6 +6,11 @@ export interface EventHandler {
   (event: React.SyntheticEvent): void;
 }
 
+export type Option<T = string> = {
+  value: T;
+  label: string;
+};
+
 export type TextElement = "h1" | "h2" | "h3" | "h4" | "p";
 
 export type Spacing =

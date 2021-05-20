@@ -7,6 +7,7 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { ContextError } from "@gatsby-tv/utilities";
 
 import { InjectionContext, InjectionContextType } from "./context";
 
@@ -58,7 +59,7 @@ export function useInjectionTarget(id: string): Dispatch<SetStateAction<HTMLElem
   const context = useContext(InjectionContext);
 
   if (!context) {
-    throw new Error("No Injection context provided for component.");
+    throw new ContextError("Injection");
   }
 
   const { targets, injections, addTarget, removeTarget } = context;
@@ -76,7 +77,7 @@ export function useInjection(id: string): HTMLElement | null | undefined {
   const context = useContext(InjectionContext);
 
   if (!context) {
-    throw new Error("No Injection context provided for component.");
+    throw new ContextError("Injection");
   }
 
   const { targets, addInjection, removeInjection } = context;

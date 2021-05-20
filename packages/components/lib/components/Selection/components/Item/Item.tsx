@@ -21,9 +21,9 @@ export function Item(props: ItemProps): React.ReactElement {
     option,
     ...aria
   } = props;
-  const { selection, onSelect } = useSelection();
+  const { selection, setSelection } = useSelection();
   const { itemClass } = useItem();
-  const onClick = () => onSelect(option);
+  const onClick = () => setSelection(option);
 
   const classes = classNames(className, itemClass, styles.Item);
 

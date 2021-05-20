@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import { EventHandler } from "@lib/types";
+import { ContextError } from "@lib/errors";
 
 import { ScrollContext, ScrollContextType } from "./context";
 
@@ -67,7 +68,7 @@ export function useScroll(): ScrollContextType {
   const context = useContext(ScrollContext);
 
   if (!context) {
-    throw new Error("No Scroll context provided for component.");
+    throw new ContextError("Scroll");
   }
 
   return context;

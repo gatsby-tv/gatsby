@@ -9,6 +9,7 @@ import {
 } from "react";
 
 import { EventHandler } from "@lib/types";
+import { ContextError } from "@lib/errors";
 
 import { ModalContext, ModalContextType } from "./context";
 
@@ -55,7 +56,7 @@ export function useModalCallback(
   const context = useContext(ModalContext);
 
   if (!context) {
-    throw new Error("No Modal context provided for component.");
+    throw new ContextError("Modal");
   }
 
   const { addModalCallback, removeModalCallback } = context;

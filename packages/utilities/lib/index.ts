@@ -7,6 +7,7 @@ export * from "./use-isomorphic-layout-effect";
 export * from "./use-resize-observer";
 export * from "./use-mobile-detector";
 export * from "./use-volatile-key";
+export * from "./errors";
 export * from "./if-exists";
 export * from "./class-names";
 export * from "./format";

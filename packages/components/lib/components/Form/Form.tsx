@@ -11,6 +11,8 @@ import {
   LabelProps,
   Select,
   SelectProps,
+  Slider,
+  SliderProps,
 } from "./components";
 
 export type {
@@ -18,6 +20,7 @@ export type {
   FileProps as FormFileProps,
   LabelProps as FormLabelProps,
   SelectProps as FormSelectProps,
+  SliderProps as FormSliderProps,
 };
 
 export type FormProps = React.FormHTMLAttributes<HTMLElement>;
@@ -52,3 +55,4 @@ Form.Field = Field;
 Form.File = File;
 Form.Label = Label;
 Form.Select = Select;
+Form.Slider = Slider;

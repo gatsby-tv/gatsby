@@ -26,7 +26,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
     overlay,
     active,
     zIndex,
-    onExit = () => undefined,
+    onExit,
   } = props;
 
   useModalCallback(onExit, [onExit]);
@@ -34,7 +34,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   const onKeyDown = useCallback(
     (event: any) => {
       if (event.code === "Escape") {
-        onExit();
+        onExit?.();
       }
     },
     [onExit]

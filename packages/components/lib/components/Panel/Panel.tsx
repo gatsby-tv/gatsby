@@ -85,7 +85,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     overlay,
     active,
     zIndex,
-    onExit = () => undefined,
+    onExit,
   } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -156,7 +156,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
 
   useEffect(() => {
     if (!mounted) {
-      const id = setTimeout(() => onExit(), 300);
+      const id = setTimeout(() => onExit?.(), 300);
       return () => clearTimeout(id);
     }
   }, [mounted]);

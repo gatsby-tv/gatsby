@@ -16,7 +16,7 @@ export interface StreamProps<T> {
 export function Stream<T>(props: StreamProps<T>): React.ReactElement {
   const {
     component: SourceComponent,
-    generator = () => undefined,
+    generator,
     loading,
     data = [],
   } = props;
@@ -31,7 +31,7 @@ export function Stream<T>(props: StreamProps<T>): React.ReactElement {
         !loading &&
         target.scrollHeight - target.scrollTop === target.clientHeight
       ) {
-        generator();
+        generator?.();
       }
     },
     [loading, generator]

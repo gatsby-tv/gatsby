@@ -50,7 +50,7 @@ export function useModalContext(): ModalContextType {
 }
 
 export function useModalCallback(
-  callback: EventHandler,
+  callback: EventHandler | null | undefined,
   deps: DependencyList
 ): void {
   const context = useContext(ModalContext);
@@ -61,7 +61,7 @@ export function useModalCallback(
 
   const { addModalCallback, removeModalCallback } = context;
 
-  const _callback = useCallback(callback, deps);
+  const _callback = useCallback(() => callback?.(), deps);
 
   useEffect(() => {
     addModalCallback(_callback);

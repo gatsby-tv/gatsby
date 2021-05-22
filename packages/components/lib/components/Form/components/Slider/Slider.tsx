@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import { usePopper } from "react-popper";
+import { classNames, ifExists } from "@gatsby-tv/utilities";
 
+import { Optional } from "@lib/components/Optional";
 import { useForm } from "@lib/utilities/form";
 import { Option } from "@lib/types";
 
@@ -36,6 +38,7 @@ export interface SliderProps
   min: number;
   max: number;
   stops?: Option<number>[];
+  hideLabels?: boolean;
   value: number;
   onChange?: (
     value: number,
@@ -52,76 +55,164 @@ export function Slider(props: SliderProps): React.ReactElement {
     min,
     max,
     stops,
+    hideLabels,
     value,
-    onChange: onChangeHandler,
+    onChange,
     ...rest
   } = props;
 
-  const ref = useRef<HTMLInputElement>(null);
+  const slider = useRef<HTMLDivElement>(null);
+  const [reference, setReference] = useState<HTMLDivElement | null>(null);
+  const [popper, setPopper] = useState<HTMLDivElement | null>(null);
+  const [position, setPositionBase] = useState(
+    () => (value - min) / (max - min)
+  );
   const [dragging, setDragging] = useState(false);
   const { errors, setError, clearError } = useForm();
 
-  const classes = classNames(className, styles.Slider);
+  const { styles: style, attributes, update } = usePopper(reference, popper, {
+    placement: "top",
+    strategy: "absolute",
+    modifiers: [
+      {
+        name: "offset",
+        options: {
+          offset: [0, 30],
+        },
+      },
+      {
+        name: "preventOverflow",
+        options: {
+          tether: false,
+        },
+      },
+      { name: "flip" },
+      { name: "arrow" },
+    ],
+  });
 
-  const onChange = useCallback(
-    (value: number) => {
-      const denormalized = value * (max - min) + min;
-      const update = stops
-        ? stops
-            .map((stop) => stop.value)
-            .reduce((acc, stop) =>
-              Math.abs(denormalized - stop) < acc ? stop : acc
-            )
-        : denormalized;
+  const classes = classNames(
+    className,
+    styles.Slider,
+    stops && !hideLabels && styles.SliderWithStops
+  );
 
-      onChangeHandler?.(update, id, setError, clearError);
-    },
-    [id, max, min, stops, onChangeHandler]
+  useEffect(() => {
+    onChange?.(
+      Math.round(position * (max - min) + min),
+      id,
+      setError,
+      clearError
+    );
+  }, [position, id, max, min, onChange]);
+
+  const setPosition = useCallback(
+    (value) =>
+      setPositionBase((current) => {
+        const position = typeof value === "function" ? value(current) : value;
+        const denormalized = position * (max - min) + min;
+        const result = stops
+          ? stops
+              .map((stop) => stop.value)
+              .reduce((acc, stop) =>
+                Math.abs(denormalized - stop) < Math.abs(denormalized - acc)
+                  ? stop
+                  : acc
+              )
+          : denormalized;
+
+        return (result - min) / (max - min);
+      }),
+    [max, min, stops]
   );
 
   const onPointerDown = useCallback(
     (event: any) => {
-      if (!ref.current) return;
+      if (!slider.current) return;
       event.preventDefault();
-      ref.current.setPointerCapture(event.pointerId);
+      update?.();
       setDragging(true);
-      const { left, width } = ref.current.getBoundingClientRect();
+      slider.current.setPointerCapture(event.pointerId);
+      const { left, width } = slider.current.getBoundingClientRect();
       const value = Math.min(Math.max((event.clientX - left) / width, 0), 1);
-      onChange(value);
+      setPosition(value);
     },
-    [onChange]
+    [update]
   );
 
   const onPointerMove = useCallback(
     (event: any) => {
-      if (!dragging || !ref.current) return;
-      const { left, width } = ref.current.getBoundingClientRect();
+      if (!dragging || !slider.current) return;
+      update?.();
+      const { left, width } = slider.current.getBoundingClientRect();
       const value = Math.min(Math.max((event.clientX - left) / width, 0), 1);
-      onChange(value);
+      setPosition(value);
     },
-    [dragging, onChange]
+    [dragging, update]
   );
 
   const onPointerUp = useCallback((event: any) => {
-    if (!ref.current) return;
+    if (!slider.current) return;
     setDragging(false);
-    ref.current.releasePointerCapture(event.pointerId);
+    slider.current.releasePointerCapture(event.pointerId);
   }, []);
 
-  return (
-    <div
-      ref={ref}
-      className={classes}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerLeave={onPointerUp}
-      draggable="false"
-    >
-      <span
-        style={{ right: `${100 - (value - min) / (max - min)}` }}
-        className={styles.Progress}
+  const StopsMarkup = stops
+    ? stops.map((stop, index) => (
+        <div
+          key={`Slider.Stop.${stop.value}`}
+          style={{
+            left: `calc(${(100 * (stop.value - min)) / (max - min)}% - 2px)`,
+          }}
+          className={styles.Stop}
+        >
+          {!hideLabels && (
+            <span data-selected={ifExists(stop.value === value)}>
+              {stop.label}
+            </span>
+          )}
+        </div>
+      ))
+    : null;
+
+  const PopperMarkup = !stops ? (
+    <>
+      <div
+        ref={setReference}
+        style={{ right: `${100 * (1 - position)}%` }}
+        className={styles.Reference}
       />
-    </div>
+      <div
+        ref={setPopper}
+        style={style.popper}
+        className={classNames(styles.Popper, dragging && styles.PopperActive)}
+        {...attributes.popper}
+      >
+        <span>{`${Math.round(100 * position)}%`}</span>
+        <div data-popper-arrow />
+      </div>
+    </>
+  ) : null;
+
+  return (
+    <>
+      <div
+        ref={slider}
+        className={classes}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+        draggable="false"
+      >
+        {StopsMarkup}
+        <span
+          style={{ right: `${100 * (1 - position)}%` }}
+          className={styles.Progress}
+        />
+      </div>
+      {PopperMarkup}
+      <input value={value} type="hidden" {...rest} />
+    </>
   );
 }

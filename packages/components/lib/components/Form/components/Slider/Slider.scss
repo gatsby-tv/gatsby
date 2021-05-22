@@ -1,0 +1,111 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Slider {
+  @include border-radius(small);
+  cursor: pointer;
+  margin: rem(10px) 0;
+  height: rem(8px);
+  background-color: color.adjust(palette("white"), $alpha: -0.85);
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: rem(-10px);
+    right: 0;
+    left: 0;
+    height: rem(28px);
+  }
+
+  & > .Stop:first-child {
+    left: 0;
+  }
+}
+
+.SliderWithStops {
+  margin: rem(32px) 0 rem(10px);
+}
+
+.Progress {
+  @include border-radius(small);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: palette("gold");
+
+  &:after {
+    @include border-radius(full);
+    cursor: col-resize;
+    box-shadow: 0 0 rem(3px) rgba(0, 0, 0, 0.5);
+    content: "";
+    position: absolute;
+    right: rem(-8px);
+    width: rem(16px);
+    height: rem(16px);
+    background-color: color.adjust(palette("white"), $lightness: -15%);
+  }
+}
+
+.Stop {
+  @include font-size(caption);
+  @include font-weight(semi-bold);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: rem(-10px);
+  height: rem(28px);
+  width: rem(3px);
+  color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: color.adjust(palette("white"), $alpha: -0.85);
+
+  span {
+    @include text-no-break;
+    top: -75%;
+  }
+
+  span[data-selected] {
+    color: palette("green");
+  }
+}
+
+.Reference {
+  position: absolute;
+}
+
+.Popper {
+  @include border-radius(base);
+  @include font-weight(bold);
+  font-stretch: condensed;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  pointer-events: none;
+  background-color: background(lightest);
+  padding: rem(7px);
+
+  [data-popper-arrow] {
+    position: absolute;
+    left: calc(50% - 5px);
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: rem(10px);
+      height: rem(10px);
+      transform: rotate(45deg);
+      background-color: background(lightest);
+    }
+  }
+
+  &[data-popper-placement^='bottom'] > [data-popper-arrow] {
+    top: rem(-5px);
+  }
+}
+
+.PopperActive {
+  opacity: 1;
+}

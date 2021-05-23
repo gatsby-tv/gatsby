@@ -1,5 +1,5 @@
-import { createContext, Dispatch, SetStateAction } from "react";
-import { Channel } from "@gatsby-tv/types";
+import { createContext, Dispatch, SetStateAction } from 'react';
+import { Channel } from '@gatsby-tv/types';
 
 export type ChannelModalContextType = [
   Channel | undefined,

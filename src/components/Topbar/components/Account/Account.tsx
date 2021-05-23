@@ -1,14 +1,14 @@
-import React from "react";
-import { signOut, useSession } from "next-auth/client";
-import { Avatar, Icon, Button, Rule, Menu } from "@gatsby-tv/components";
-import { User as UserIcon, Exit } from "@gatsby-tv/icons";
-import { useMenu, useModal } from "@gatsby-tv/utilities";
-import { User } from "@gatsby-tv/types";
+import React from 'react';
+import { signOut, useSession } from 'next-auth/client';
+import { Avatar, Icon, Button, Rule, Menu } from '@gatsby-tv/components';
+import { User as UserIcon, Exit } from '@gatsby-tv/icons';
+import { useMenu, useModal } from '@gatsby-tv/utilities';
+import { User } from '@gatsby-tv/types';
 
-import { SignIn } from "@src/components/SignIn";
+import { SignIn } from '@src/components/SignIn';
 
-import { Skeleton } from "./Account.skeleton";
-import styles from "./Account.module.scss";
+import { Skeleton } from './Account.skeleton';
+import styles from './Account.module.scss';
 
 export function Account(): React.ReactElement {
   const [session, loading] = useSession();

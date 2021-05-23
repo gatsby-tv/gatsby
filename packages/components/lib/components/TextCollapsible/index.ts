@@ -1,1 +1,1 @@
-export * from "./TextCollapsible";
+export * from './TextCollapsible';

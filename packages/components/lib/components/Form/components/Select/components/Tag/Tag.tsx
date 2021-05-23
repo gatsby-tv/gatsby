@@ -1,11 +1,11 @@
-import React from "react";
-import { Cancel } from "@gatsby-tv/icons";
+import React from 'react';
+import { Cancel } from '@gatsby-tv/icons';
 
-import { Button } from "@lib/components/Button";
-import { useSelection } from "@lib/utilities/selection";
-import { Option as SelectOption } from "@lib/types";
+import { Button } from '@lib/components/Button';
+import { useSelection } from '@lib/utilities/selection';
+import { Option as SelectOption } from '@lib/types';
 
-import styles from "../../Select.scss";
+import styles from '../../Select.scss';
 
 export interface TagProps {
   option: SelectOption;

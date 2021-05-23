@@ -1,23 +1,17 @@
-import React, { useCallback } from "react";
-import { Activatable, Icon } from "@gatsby-tv/components";
-import { Spinner } from "@gatsby-tv/icons";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { useCallback } from 'react';
+import { Activatable, Icon } from '@gatsby-tv/components';
+import { Spinner } from '@gatsby-tv/icons';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Signal } from "@src/components/Signal";
-import { OverlayProps } from "@src/types";
+import { Signal } from '@src/components/Signal';
+import { OverlayProps } from '@src/types';
 
-import { Controls } from "./components/Controls";
-import { Timeline } from "./components/Timeline";
-import styles from "./DesktopOverlay.scss";
+import { Controls } from './components/Controls';
+import { Timeline } from './components/Timeline';
+import styles from './DesktopOverlay.scss';
 
 export function DesktopOverlay(props: OverlayProps): React.ReactElement {
-  const {
-    player,
-    timeline,
-    signal,
-    setActive,
-    setPlayback,
-  } = props;
+  const { player, timeline, signal, setActive, setPlayback } = props;
 
   const active = player.active || timeline.scrubbing;
   const classes = classNames(styles.Overlay, !active && styles.CursorHidden);

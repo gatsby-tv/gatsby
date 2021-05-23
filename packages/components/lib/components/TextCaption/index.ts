@@ -1,1 +1,1 @@
-export * from "./TextCaption";
+export * from './TextCaption';

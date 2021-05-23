@@ -1,9 +1,9 @@
-import React from "react";
-import { Browsable, VideoBookmark } from "@gatsby-tv/types";
+import React from 'react';
+import { Browsable, VideoBookmark } from '@gatsby-tv/types';
 
-import { Duration } from "@src/components/Duration";
+import { Duration } from '@src/components/Duration';
 
-import styles from "@src/Preview.scss";
+import styles from '@src/Preview.scss';
 
 export interface OverlayProps {
   content: Browsable;

@@ -1,1 +1,1 @@
-export * from "./Labelled";
+export * from './Labelled';

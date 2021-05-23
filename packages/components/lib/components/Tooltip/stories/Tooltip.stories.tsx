@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import React, { useRef } from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Button } from "@lib/components/Button";
-import { Tooltip, TooltipProps } from "@lib/components/Tooltip";
+import { Button } from '@lib/components/Button';
+import { Tooltip, TooltipProps } from '@lib/components/Tooltip';
 
 export default {
-  title: "Tooltip",
+  title: 'Tooltip',
   component: Tooltip,
 } as Meta;
 

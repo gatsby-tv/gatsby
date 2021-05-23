@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback, RefObject } from "react";
+import { useRef, useState, useEffect, useCallback, RefObject } from 'react';
 
 export type TimelineState = {
   ref: RefObject<HTMLDivElement>;

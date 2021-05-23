@@ -1,14 +1,14 @@
-import React from "react";
-import NextLink from "next/link";
-import { Button, Link } from "@gatsby-tv/components";
+import React from 'react';
+import NextLink from 'next/link';
+import { Button, Link } from '@gatsby-tv/components';
 import {
   LinkProps,
   isContentLink,
   isUserLink,
   isChannelLink,
-} from "@gatsby-tv/content";
+} from '@gatsby-tv/content';
 
-import { useChannelModal } from "@src/utilities/channel-modal";
+import { useChannelModal } from '@src/utilities/channel-modal';
 
 export type ContentProps = LinkProps;
 
@@ -38,6 +38,6 @@ export function Content(props: ContentProps): React.ReactElement {
       </Button>
     );
   } else {
-    throw new Error("Content link was passed unknown prop.");
+    throw new Error('Content link was passed unknown prop.');
   }
 }

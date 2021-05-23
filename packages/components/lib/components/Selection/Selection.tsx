@@ -1,14 +1,14 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { SelectionContext } from "@lib/utilities/selection";
-import { ItemContext } from "@lib/utilities/item";
-import { Scroll } from "@lib/components/Scroll";
-import { Optional } from "@lib/components/Optional";
+import { SelectionContext } from '@lib/utilities/selection';
+import { ItemContext } from '@lib/utilities/item';
+import { Scroll } from '@lib/components/Scroll';
+import { Optional } from '@lib/components/Optional';
 
-import { Section, SectionProps, Item, ItemProps } from "./components";
+import { Section, SectionProps, Item, ItemProps } from './components';
 
-import styles from "./Selection.scss";
+import styles from './Selection.scss';
 
 export type { SectionProps as SelectionSectionProps };
 export type { ItemProps as SelectionItemProps };
@@ -32,7 +32,7 @@ export function Selection(props: SelectionProps): React.ReactElement {
     row,
     scrollHidden = true,
     onSelect,
-    "aria-label": ariaLabel,
+    'aria-label': ariaLabel,
   } = props;
 
   const classes = classNames(

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import styles from "./VisuallyHidden.scss";
+import styles from './VisuallyHidden.scss';
 
 export interface VisuallyHiddenProps {
   as: string;

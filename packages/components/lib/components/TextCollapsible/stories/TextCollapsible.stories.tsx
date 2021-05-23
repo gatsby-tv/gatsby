@@ -1,14 +1,17 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { LoremIpsum } from "react-lorem-ipsum";
+import React from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
+import { LoremIpsum } from 'react-lorem-ipsum';
 
-import { TextBox } from "@lib/components/TextBox";
-import { TextCollapsible, TextCollapsibleProps } from "@lib/components/TextCollapsible";
+import { TextBox } from '@lib/components/TextBox';
+import {
+  TextCollapsible,
+  TextCollapsibleProps,
+} from '@lib/components/TextCollapsible';
 
-import styles from "./TextCollapsible.stories.scss";
+import styles from './TextCollapsible.stories.scss';
 
 export default {
-  title: "TextCollapsible",
+  title: 'TextCollapsible',
   component: TextCollapsible,
 } as Meta;
 

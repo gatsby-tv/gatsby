@@ -1,9 +1,9 @@
-import React, { forwardRef, Ref } from "react";
-import { classNames, ifExists } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from 'react';
+import { classNames, ifExists } from '@gatsby-tv/utilities';
 
-import { Spacing } from "@lib/types";
+import { Spacing } from '@lib/types';
 
-import styles from "./TextBox.scss";
+import styles from './TextBox.scss';
 
 export interface TextBoxProps extends React.HTMLAttributes<Element> {
   children?: React.ReactNode;
@@ -14,7 +14,7 @@ export interface TextBoxProps extends React.HTMLAttributes<Element> {
 
 export const TextBox = forwardRef<HTMLDivElement, TextBoxProps>(
   (props: TextBoxProps, ref: Ref<HTMLDivElement>) => {
-    const { children, className, gap = "base", clamp, ...attributes } = props;
+    const { children, className, gap = 'base', clamp, ...attributes } = props;
 
     const classes = classNames(
       className,
@@ -35,4 +35,4 @@ export const TextBox = forwardRef<HTMLDivElement, TextBoxProps>(
   }
 );
 
-TextBox.displayName = "TextBox";
+TextBox.displayName = 'TextBox';

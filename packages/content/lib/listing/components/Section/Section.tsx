@@ -1,13 +1,13 @@
-import React from "react";
-import { Rule, TextDisplay, Injection } from "@gatsby-tv/components";
-import Preview from "@gatsby-tv/preview";
-import { Browsable } from "@gatsby-tv/types";
-import { useUniqueId } from "@gatsby-tv/utilities";
+import React from 'react';
+import { Rule, TextDisplay, Injection } from '@gatsby-tv/components';
+import Preview from '@gatsby-tv/preview';
+import { Browsable } from '@gatsby-tv/types';
+import { useUniqueId } from '@gatsby-tv/utilities';
 
-import { Info } from "@lib/video/Info";
-import { useListing } from "@lib/utilities/listing";
+import { Info } from '@lib/video/Info';
+import { useListing } from '@lib/utilities/listing';
 
-import styles from "./Section.scss";
+import styles from './Section.scss';
 
 export interface SectionProps {
   index: number;
@@ -17,7 +17,7 @@ export interface SectionProps {
 
 export function Section(props: SectionProps): React.ReactElement | null {
   const { index, title, content } = props;
-  const sectionId = useUniqueId("subscriptions-section");
+  const sectionId = useUniqueId('subscriptions-section');
   const { id, preview, info, avatar, link: Link } = useListing();
 
   const PreviewsMarkup = content.map((item, index) => (
@@ -38,9 +38,7 @@ export function Section(props: SectionProps): React.ReactElement | null {
     <>
       <Rule spacing="none" />
       {TargetMarkup}
-      <TextDisplay id={sectionId}>
-        {title}
-      </TextDisplay>
+      <TextDisplay id={sectionId}>{title}</TextDisplay>
       <article
         className={styles.Section}
         role="feed"

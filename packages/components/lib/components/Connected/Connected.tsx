@@ -1,8 +1,8 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Item, ItemProps } from "./components";
-import styles from "./Connected.scss";
+import { Item, ItemProps } from './components';
+import styles from './Connected.scss';
 
 export type { ItemProps as ConnectedItemProps };
 

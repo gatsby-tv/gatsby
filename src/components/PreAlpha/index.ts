@@ -1,1 +1,1 @@
-export * from "./PreAlpha";
+export * from './PreAlpha';

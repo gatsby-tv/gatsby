@@ -1,1 +1,1 @@
-export * from "./Related";
+export * from './Related';

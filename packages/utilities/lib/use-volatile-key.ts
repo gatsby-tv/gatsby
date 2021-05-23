@@ -1,6 +1,6 @@
-import { useRef, useState, useCallback, Dispatch, SetStateAction } from "react";
+import { useRef, useState, useCallback, Dispatch, SetStateAction } from 'react';
 
-import { ifExists } from "@lib/if-exists";
+import { ifExists } from '@lib/if-exists';
 
 export function useVolatileKey(): [
   string | undefined,

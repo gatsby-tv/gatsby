@@ -1,7 +1,7 @@
-import React, { forwardRef, Ref } from "react";
-import { classNames, useForwardedRef } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from 'react';
+import { classNames, useForwardedRef } from '@gatsby-tv/utilities';
 
-import styles from "../../Frame.scss";
+import styles from '../../Frame.scss';
 
 export interface SideFrameProps {
   children?: React.ReactNode;
@@ -37,4 +37,4 @@ export const SideFrame = forwardRef<HTMLDivElement, SideFrameProps>(
   }
 );
 
-SideFrame.displayName = "SideFrame";
+SideFrame.displayName = 'SideFrame';

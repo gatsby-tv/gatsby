@@ -1,1 +1,1 @@
-export * from "./DesktopOverlay";
+export * from './DesktopOverlay';

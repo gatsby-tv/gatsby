@@ -1,9 +1,9 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { IconSize, IconSource } from "@lib/types";
+import { IconSize, IconSource } from '@lib/types';
 
-import styles from "./Icon.scss";
+import styles from './Icon.scss';
 
 export interface IconProps extends React.AriaAttributes {
   src: IconSource;
@@ -12,12 +12,7 @@ export interface IconProps extends React.AriaAttributes {
 }
 
 export function Icon(props: IconProps): React.ReactElement {
-  const {
-    src: SvgComponent,
-    className,
-    size = "base",
-    ...aria
-  } = props;
+  const { src: SvgComponent, className, size = 'base', ...aria } = props;
 
   const classes = classNames(className, styles.Icon, styles[`Icon-${size}`]);
 

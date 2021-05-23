@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 
-import { FormContext, FormError } from "@lib/utilities/form";
+import { FormContext, FormError } from '@lib/utilities/form';
 
 import {
   Field,
@@ -13,7 +13,7 @@ import {
   SelectProps,
   Slider,
   SliderProps,
-} from "./components";
+} from './components';
 
 export type {
   FieldProps as FormFieldProps,

@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { IPFSContent } from "@gatsby-tv/types";
-import { classNames, useIPFSContent } from "@gatsby-tv/utilities";
+import React, { useState, useEffect, useCallback } from 'react';
+import { IPFSContent } from '@gatsby-tv/types';
+import { classNames, useIPFSContent } from '@gatsby-tv/utilities';
 
-import { DiscreteSize } from "@lib/types";
-import { Viewport } from "@lib/components/Viewport";
+import { DiscreteSize } from '@lib/types';
+import { Viewport } from '@lib/components/Viewport';
 
-import styles from "./Avatar.scss";
+import styles from './Avatar.scss';
 
-export interface AvatarProps extends Omit<React.ImgHTMLAttributes<Element>, "src"> {
+export interface AvatarProps
+  extends Omit<React.ImgHTMLAttributes<Element>, 'src'> {
   src?: IPFSContent | string;
   size?: DiscreteSize;
   overlay?: React.ReactNode;
@@ -18,15 +19,15 @@ type AvatarURLProps = AvatarProps & { src?: string };
 type AvatarIPFSProps = AvatarProps & { src: IPFSContent };
 
 function isAvatarURLProps(props: AvatarProps): props is AvatarURLProps {
-  return typeof (props as AvatarURLProps).src !== "object";
+  return typeof (props as AvatarURLProps).src !== 'object';
 }
 
 function AvatarURL(props: AvatarURLProps): React.ReactElement {
   const {
     className,
-    size = "base",
+    size = 'base',
     overlay,
-    "aria-label": ariaLabel,
+    'aria-label': ariaLabel,
     ...imgProps
   } = props;
   const [loading, setLoading] = useState(true);

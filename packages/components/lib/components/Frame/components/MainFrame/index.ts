@@ -1,1 +1,1 @@
-export * from "./MainFrame";
+export * from './MainFrame';

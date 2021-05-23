@@ -8,12 +8,12 @@ import {
   useContext,
   RefObject,
   DependencyList,
-} from "react";
+} from 'react';
 
-import { EventHandler } from "@lib/types";
-import { ContextError } from "@lib/errors";
+import { EventHandler } from '@lib/types';
+import { ContextError } from '@lib/errors';
 
-import { ScrollContext, ScrollContextType } from "./context";
+import { ScrollContext, ScrollContextType } from './context';
 
 export function useScrollContext<T extends HTMLElement>(
   ref: RefObject<T>
@@ -47,10 +47,10 @@ export function useScrollContext<T extends HTMLElement>(
     }
 
     if (ref.current) {
-      ref.current.addEventListener("scroll", handler);
+      ref.current.addEventListener('scroll', handler);
       return () => {
         if (ref.current) {
-          ref.current.removeEventListener("scroll", handler);
+          ref.current.removeEventListener('scroll', handler);
         }
       };
     }
@@ -68,7 +68,7 @@ export function useScroll(): ScrollContextType {
   const context = useContext(ScrollContext);
 
   if (!context) {
-    throw new ContextError("Scroll");
+    throw new ContextError('Scroll');
   }
 
   return context;

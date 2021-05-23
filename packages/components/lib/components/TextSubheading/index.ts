@@ -1,1 +1,1 @@
-export * from "./TextSubheading";
+export * from './TextSubheading';

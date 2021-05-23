@@ -1,7 +1,7 @@
-import React from "react";
-import { TextBox, TextPlaceholder, Rule } from "@gatsby-tv/components";
+import React from 'react';
+import { TextBox, TextPlaceholder, Rule } from '@gatsby-tv/components';
 
-import styles from "./Description.scss";
+import styles from './Description.scss';
 
 export function Skeleton(): React.ReactElement {
   return (

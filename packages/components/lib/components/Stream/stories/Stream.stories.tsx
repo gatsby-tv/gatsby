@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Scroll } from "@lib/components/Scroll";
-import { Image } from "@lib/components/Image";
-import { Stream, StreamProps } from "@lib/components/Stream";
+import { Scroll } from '@lib/components/Scroll';
+import { Image } from '@lib/components/Image';
+import { Stream, StreamProps } from '@lib/components/Stream';
 
-import styles from "./Stream.stories.scss";
+import styles from './Stream.stories.scss';
 
 export default {
-  title: "Stream",
+  title: 'Stream',
   component: Stream,
 } as Meta;
 
@@ -21,7 +21,7 @@ export const Example: Story<StreamProps> = () => {
   useEffect(() => {
     const load = async () => {
       await new Promise((resolve) => setTimeout(resolve, 3000));
-      setData((data) => [...data, { src: "https://loremflickr.com/405/405" }]);
+      setData((data) => [...data, { src: 'https://loremflickr.com/405/405' }]);
       setLoading(false);
     };
 

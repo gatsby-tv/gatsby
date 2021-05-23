@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { useInjectionTarget } from "@lib/utilities/injection";
+import { useInjectionTarget } from '@lib/utilities/injection';
 
 export interface TargetProps {
   id: string;

@@ -1,8 +1,8 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export interface FrameContextType {
-  screen: { width: number; height: number; };
-  offset: { x: number; y: number; };
+  screen: { width: number; height: number };
+  offset: { x: number; y: number };
   fullscreen: boolean;
   setFullscreen: (value: boolean | ((value: boolean) => boolean)) => void;
   setTopbar: (value: boolean | ((value: boolean) => boolean)) => void;

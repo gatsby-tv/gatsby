@@ -1,23 +1,23 @@
-import React, { AriaAttributes } from "react";
-import { Stream } from "@gatsby-tv/components";
-import { classNames } from "@gatsby-tv/utilities";
-import { Channel } from "@gatsby-tv/types";
+import React, { AriaAttributes } from 'react';
+import { Stream } from '@gatsby-tv/components';
+import { classNames } from '@gatsby-tv/utilities';
+import { Channel } from '@gatsby-tv/types';
 
-import { Article } from "@lib/listing/components/Article";
-import { ListingContext, ListingContextType } from "@lib/utilities/listing";
-import { useChannelVideos } from "@lib/utilities/use-channel-videos";
+import { Article } from '@lib/listing/components/Article';
+import { ListingContext, ListingContextType } from '@lib/utilities/listing';
+import { useChannelVideos } from '@lib/utilities/use-channel-videos';
 
-import { Skeleton } from "./Videos.skeleton";
-import styles from "./Videos.scss";
+import { Skeleton } from './Videos.skeleton';
+import styles from './Videos.scss';
 
 export interface VideosProps
-  extends Partial<Omit<ListingContextType, "info" | "avatar">>,
+  extends Partial<Omit<ListingContextType, 'info' | 'avatar'>>,
     AriaAttributes {
   channel?: Channel;
 }
 
 export function Videos(props: VideosProps): React.ReactElement {
-  const { id, channel, preview = "column", link, ...aria } = props;
+  const { id, channel, preview = 'column', link, ...aria } = props;
 
   const { videos, loading, error, generator } = useChannelVideos(channel?._id);
 
@@ -25,7 +25,7 @@ export function Videos(props: VideosProps): React.ReactElement {
 
   const classes = classNames(
     styles.Listing,
-    preview === "column" && styles.Column
+    preview === 'column' && styles.Column
   );
 
   const StreamMarkup = videos.length ? (
@@ -42,7 +42,7 @@ export function Videos(props: VideosProps): React.ReactElement {
   );
 
   return (
-    <ListingContext.Provider value={{ id, preview, info: "nochannel", link }}>
+    <ListingContext.Provider value={{ id, preview, info: 'nochannel', link }}>
       <section
         id={id}
         className={classes}

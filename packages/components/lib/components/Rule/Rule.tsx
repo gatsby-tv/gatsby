@@ -1,9 +1,9 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Spacing } from "@lib/types";
+import { Spacing } from '@lib/types';
 
-import styles from "./Rule.scss";
+import styles from './Rule.scss';
 
 export interface RuleProps {
   children?: React.ReactNode;
@@ -13,7 +13,7 @@ export interface RuleProps {
 }
 
 export function Rule(props: RuleProps): React.ReactElement {
-  const { children, className, thin, spacing = "base" } = props;
+  const { children, className, thin, spacing = 'base' } = props;
 
   const classes = classNames(
     className,

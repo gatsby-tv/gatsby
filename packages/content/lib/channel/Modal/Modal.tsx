@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Avatar,
   Button,
@@ -11,24 +11,24 @@ import {
   Tabs,
   TextDisplay,
   TextMeta,
-} from "@gatsby-tv/components";
-import { Cancel } from "@gatsby-tv/icons";
+} from '@gatsby-tv/components';
+import { Cancel } from '@gatsby-tv/icons';
 import {
   ifExists,
   ChannelHandle,
   FullValue,
   useFrame,
   useMobileDetector,
-} from "@gatsby-tv/utilities";
-import { Channel } from "@gatsby-tv/types";
+} from '@gatsby-tv/utilities';
+import { Channel } from '@gatsby-tv/types';
 
-import { Videos } from "@lib/channel/Videos";
-import { Playlists } from "@lib/channel/Playlists";
-import { Shows } from "@lib/channel/Shows";
-import { LinkProps } from "@lib/types";
+import { Videos } from '@lib/channel/Videos';
+import { Playlists } from '@lib/channel/Playlists';
+import { Shows } from '@lib/channel/Shows';
+import { LinkProps } from '@lib/types';
 
-import { Skeleton } from "./Modal.skeleton";
-import styles from "./Modal.scss";
+import { Skeleton } from './Modal.skeleton';
+import styles from './Modal.scss';
 
 export interface ModalProps {
   channel?: Channel;
@@ -43,13 +43,13 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   const { screen } = useFrame();
   const [mounted, setMounted] = useState(false);
   const [scrolling, setScrolling] = useState<number | undefined>();
-  const [tab, setTab] = useState("videos");
+  const [tab, setTab] = useState('videos');
 
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!active) {
-      setTab("videos");
+      setTab('videos');
     }
   }, [active]);
 
@@ -77,7 +77,8 @@ export function Modal(props: ModalProps): React.ReactElement | null {
     );
 
   const Container = isMobile ? PanelComponent : ModalComponent;
-  const Listing = tab === "videos" ? Videos : tab === "playlists" ? Playlists : Shows;
+  const Listing =
+    tab === 'videos' ? Videos : tab === 'playlists' ? Playlists : Shows;
 
   const OverlayMarkup = (
     <div className={styles.Overlay}>
@@ -87,10 +88,10 @@ export function Modal(props: ModalProps): React.ReactElement | null {
           src={channel.avatar}
           size={
             screen.width > 650
-              ? "largest"
+              ? 'largest'
               : screen.width > 400
-              ? "larger"
-              : "base"
+              ? 'larger'
+              : 'base'
           }
         />
         <div className={styles.HeaderTextArea}>
@@ -101,14 +102,14 @@ export function Modal(props: ModalProps): React.ReactElement | null {
           >
             <TextDisplay.Link
               className={styles.HeaderTitle}
-              size={screen.width > 650 ? "medium" : "small"}
+              size={screen.width > 650 ? 'medium' : 'small'}
             >
               {channel.name}
             </TextDisplay.Link>
           </Optional>
           <TextMeta.List className={styles.HeaderInfo}>
             <TextMeta>{ChannelHandle(channel.handle)}</TextMeta>
-            <TextMeta>{FullValue(channel.subscribers, "subscriber")}</TextMeta>
+            <TextMeta>{FullValue(channel.subscribers, 'subscriber')}</TextMeta>
           </TextMeta.List>
         </div>
       </div>

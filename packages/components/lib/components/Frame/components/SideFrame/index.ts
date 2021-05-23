@@ -1,1 +1,1 @@
-export * from "./SideFrame";
+export * from './SideFrame';

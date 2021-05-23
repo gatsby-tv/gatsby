@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "@gatsby-tv/components";
+import React from 'react';
+import { Button } from '@gatsby-tv/components';
 import {
   Play,
   Pause,
@@ -7,11 +7,11 @@ import {
   Next,
   Expand,
   Compress,
-} from "@gatsby-tv/icons";
-import { classNames, Time } from "@gatsby-tv/utilities";
+} from '@gatsby-tv/icons';
+import { classNames, Time } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from "@src/types";
-import styles from "./Controls.scss";
+import { OverlayProps } from '@src/types';
+import styles from './Controls.scss';
 
 export interface ControlsProps extends OverlayProps {
   className?: string;
@@ -39,7 +39,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
           unstyled
           onDblClick={() => {
             setSeek((current) => current - 5);
-            setSignal("backward");
+            setSignal('backward');
           }}
         />
         <Button
@@ -68,7 +68,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
           unstyled
           onDblClick={() => {
             setSeek((current) => current + 5);
-            setSignal("forward");
+            setSignal('forward');
           }}
         />
       </div>

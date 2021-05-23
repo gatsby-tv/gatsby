@@ -1,1 +1,1 @@
-export * from "./CompactCredits";
+export * from './CompactCredits';

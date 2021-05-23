@@ -4,26 +4,26 @@ import React, {
   useReducer,
   useEffect,
   useCallback,
-} from "react";
-import { usePopper } from "react-popper";
-import { ExtendDown, Cancel } from "@gatsby-tv/icons";
+} from 'react';
+import { usePopper } from 'react-popper';
+import { ExtendDown, Cancel } from '@gatsby-tv/icons';
 import {
   classNames,
   ifExists,
   ifNotExists,
   useResizeObserver,
-} from "@gatsby-tv/utilities";
+} from '@gatsby-tv/utilities';
 
-import { Button } from "@lib/components/Button";
-import { Icon } from "@lib/components/Icon";
-import { Scroll } from "@lib/components/Scroll";
-import { useForm } from "@lib/utilities/form";
-import { SelectionContext } from "@lib/utilities/selection";
-import { FormSelectContext } from "@lib/utilities/form";
-import { Option as SelectOption } from "@lib/types";
+import { Button } from '@lib/components/Button';
+import { Icon } from '@lib/components/Icon';
+import { Scroll } from '@lib/components/Scroll';
+import { useForm } from '@lib/utilities/form';
+import { SelectionContext } from '@lib/utilities/selection';
+import { FormSelectContext } from '@lib/utilities/form';
+import { Option as SelectOption } from '@lib/types';
 
-import { Option, Tag } from "./components";
-import styles from "./Select.scss";
+import { Option, Tag } from './components';
+import styles from './Select.scss';
 
 type SelectState = {
   selection?: string | string[];
@@ -33,17 +33,17 @@ type SelectState = {
 };
 
 type SelectAction =
-  | { type: "select-replace"; option: string }
-  | { type: "select-append"; option: string }
-  | { type: "select-filter"; option: string }
-  | { type: "select-slice" }
-  | { type: "clear" }
-  | { type: "input", query: string }
-  | { type: "toggle" }
-  | { type: "activate" }
-  | { type: "deactivate" }
-  | { type: "focus" }
-  | { type: "blur" };
+  | { type: 'select-replace'; option: string }
+  | { type: 'select-append'; option: string }
+  | { type: 'select-filter'; option: string }
+  | { type: 'select-slice' }
+  | { type: 'clear' }
+  | { type: 'input'; query: string }
+  | { type: 'toggle' }
+  | { type: 'activate' }
+  | { type: 'deactivate' }
+  | { type: 'focus' }
+  | { type: 'blur' };
 
 const OptionsFilter = {
   selected: (
@@ -77,7 +77,7 @@ const OptionsFilter = {
 export interface SelectProps
   extends Omit<
     React.SelectHTMLAttributes<HTMLElement>,
-    "id" | "autoComplete" | "onChange"
+    'id' | 'autoComplete' | 'onChange'
   > {
   id: string;
   options: SelectOption[];
@@ -109,7 +109,7 @@ export function Select(props: SelectProps): React.ReactElement {
     onFocus: onFocusHandler,
     onBlur: onBlurHandler,
     onMouseDown: onMouseDownHandler,
-    onKeyDown: onKeyDownHandler
+    onKeyDown: onKeyDownHandler,
   } = props;
 
   const ref = useRef<HTMLDivElement>(null);
@@ -120,10 +120,10 @@ export function Select(props: SelectProps): React.ReactElement {
   const [hover, setHover] = useState<string | undefined>(options[0]?.value);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
   const { styles: style, attributes } = usePopper(ref.current, popper, {
-    placement: "bottom",
+    placement: 'bottom',
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: [0, 10],
         },
@@ -136,83 +136,83 @@ export function Select(props: SelectProps): React.ReactElement {
       let result: any;
       const selection = [state.selection].flat().filter(Boolean) as string[];
       switch (action.type) {
-        case "select-replace":
+        case 'select-replace':
           return {
             ...state,
-            query: "",
+            query: '',
             active: action.option === selection[0],
             selection: action.option,
           };
 
-        case "select-append":
+        case 'select-append':
           return {
             ...state,
-            query: "",
+            query: '',
             active: false,
             selection: [...selection, action.option],
           };
 
-        case "select-filter":
+        case 'select-filter':
           result = selection.filter((value) => value !== action.option);
           return {
             ...state,
             selection: result.length ? result : undefined,
           };
 
-        case "select-slice":
+        case 'select-slice':
           result = selection.slice(0, -1);
           return {
             ...state,
             selection: result.length ? result : undefined,
           };
 
-        case "clear":
+        case 'clear':
           return {
             ...state,
-            query: "",
+            query: '',
             active: false,
             selection: undefined,
           };
 
-        case "input":
+        case 'input':
           return {
             ...state,
             query: action.query,
             active: true,
           };
 
-        case "toggle":
+        case 'toggle':
           return {
             ...state,
             active: !state.active,
           };
 
-        case "activate":
+        case 'activate':
           return {
             ...state,
             active: true,
           };
 
-        case "deactivate":
+        case 'deactivate':
           return {
             ...state,
             active: false,
           };
 
-        case "focus":
+        case 'focus':
           return {
             ...state,
             focus: true,
             active: state.focus ? state.active : true,
           };
 
-        case "blur":
-          return { ...state, focus: false, active: false, query: "" };
+        case 'blur':
+          return { ...state, focus: false, active: false, query: '' };
       }
     },
     {
       selection: defaultValue,
-      query: "",
+      query: '',
       focus: Boolean(props.autoFocus),
       active: false,
     }
@@ -239,19 +239,19 @@ export function Select(props: SelectProps): React.ReactElement {
   );
 
   const clearSelection = useCallback(
-    (option: string) => multiple && dispatch({ type: "select-filter", option }),
+    (option: string) => multiple && dispatch({ type: 'select-filter', option }),
     [multiple]
   );
 
   const onClear = useCallback((event: any) => {
     event.preventDefault();
     event.stopPropagation();
-    dispatch({ type: "clear" });
+    dispatch({ type: 'clear' });
   }, []);
 
   const onChange = useCallback(
     (option: string) => {
-      dispatch({ type: multiple ? "select-append" : "select-replace", option });
+      dispatch({ type: multiple ? 'select-append' : 'select-replace', option });
       onChangeHandler?.(option, id, setError, clearError);
     },
     [id, multiple, onChangeHandler]
@@ -259,7 +259,7 @@ export function Select(props: SelectProps): React.ReactElement {
 
   const onFocus = useCallback(
     (event: any) => {
-      dispatch({ type: "focus" });
+      dispatch({ type: 'focus' });
       onFocusHandler?.(event);
     },
     [onFocusHandler]
@@ -267,7 +267,7 @@ export function Select(props: SelectProps): React.ReactElement {
 
   const onBlur = useCallback(
     (event: any) => {
-      dispatch({ type: "blur" });
+      dispatch({ type: 'blur' });
       onBlurHandler?.(event);
     },
     [onBlurHandler]
@@ -276,8 +276,8 @@ export function Select(props: SelectProps): React.ReactElement {
   const onMouseDown = useCallback(
     (event: any) => {
       event.preventDefault();
-      dispatch({ type: "toggle" });
-      dispatch({ type: "focus" });
+      dispatch({ type: 'toggle' });
+      dispatch({ type: 'focus' });
       onMouseDownHandler?.(event);
     },
     [onMouseDownHandler]
@@ -290,27 +290,27 @@ export function Select(props: SelectProps): React.ReactElement {
       let index: number;
 
       switch (event.code) {
-        case "Enter":
+        case 'Enter':
           event.preventDefault();
           if (state.active && hover) {
             dispatch({
-              type: multiple ? "select-append" : "select-replace",
+              type: multiple ? 'select-append' : 'select-replace',
               option: hover,
             });
           } else {
-            dispatch({ type: "activate" });
+            dispatch({ type: 'activate' });
           }
           break;
 
-        case "Delete":
-        case "Backspace":
+        case 'Delete':
+        case 'Backspace':
           if (!state.query && state.selection) {
-            dispatch({ type: multiple ? "select-slice" : "clear" });
+            dispatch({ type: multiple ? 'select-slice' : 'clear' });
           }
           break;
 
-        case "Escape":
-          dispatch({ type: "deactivate" });
+        case 'Escape':
+          dispatch({ type: 'deactivate' });
           break;
       }
     },
@@ -417,7 +417,7 @@ export function Select(props: SelectProps): React.ReactElement {
               readOnly={ifNotExists(searchable)}
               onMouseDown={(event: any) => event.preventDefault()}
               onChange={(event: any) =>
-                dispatch({ type: "input", query: event.target.value })
+                dispatch({ type: 'input', query: event.target.value })
               }
               onKeyDown={onKeyDown}
               onFocus={onFocus}

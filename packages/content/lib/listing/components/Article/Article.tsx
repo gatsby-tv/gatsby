@@ -1,12 +1,12 @@
-import React from "react";
-import { Injection } from "@gatsby-tv/components";
-import { Browsable } from "@gatsby-tv/types";
-import Preview from "@gatsby-tv/preview";
+import React from 'react';
+import { Injection } from '@gatsby-tv/components';
+import { Browsable } from '@gatsby-tv/types';
+import Preview from '@gatsby-tv/preview';
 
-import { Info } from "@lib/video/Info";
-import { useListing } from "@lib/utilities/listing";
+import { Info } from '@lib/video/Info';
+import { useListing } from '@lib/utilities/listing';
 
-import styles from "./Article.scss";
+import styles from './Article.scss';
 
 export interface ArticleProps {
   content: Browsable;

@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { ContextError } from "@gatsby-tv/utilities";
+import { useContext } from 'react';
+import { ContextError } from '@gatsby-tv/utilities';
 
-import { SelectionContext, SelectionContextType } from "./context";
+import { SelectionContext, SelectionContextType } from './context';
 
 export function useSelection(): SelectionContextType {
   const selection = useContext(SelectionContext);
 
   if (!selection) {
-    throw new ContextError("Selection");
+    throw new ContextError('Selection');
   }
 
   return selection;

@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { Browsable, Channel, User } from "@gatsby-tv/types";
+import { ReactNode } from 'react';
+import { Browsable, Channel, User } from '@gatsby-tv/types';
 
 export type FetchResponse<K extends string, T> = {
   [key in K]?: T;
@@ -36,5 +36,5 @@ export type UserLinkProps = {
 
 export type LinkProps = ChannelLinkProps | ContentLinkProps | UserLinkProps;
 
-export type VideoInfoFormat = "full" | "nochannel" | "nostats";
-export type ChannelContentTab = "videos" | "playlists" | "shows";
+export type VideoInfoFormat = 'full' | 'nochannel' | 'nostats';
+export type ChannelContentTab = 'videos' | 'playlists' | 'shows';

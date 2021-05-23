@@ -1,7 +1,7 @@
-import React, { forwardRef, Ref } from "react";
-import { classNames, useForwardedRef } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from 'react';
+import { classNames, useForwardedRef } from '@gatsby-tv/utilities';
 
-import styles from "../../Frame.scss";
+import styles from '../../Frame.scss';
 
 export interface TopFrameProps {
   children?: React.ReactNode;
@@ -37,4 +37,4 @@ export const TopFrame = forwardRef<HTMLDivElement, TopFrameProps>(
   }
 );
 
-TopFrame.displayName = "TopFrame";
+TopFrame.displayName = 'TopFrame';

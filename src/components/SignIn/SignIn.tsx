@@ -1,5 +1,5 @@
-import React from "react";
-import { signIn } from "next-auth/client";
+import React from 'react';
+import { signIn } from 'next-auth/client';
 import {
   Button,
   Form,
@@ -10,12 +10,12 @@ import {
   ModalProps,
   Rule,
   TextDisplay,
-} from "@gatsby-tv/components";
-import { GatsbyPlain, Google, Email } from "@gatsby-tv/icons";
+} from '@gatsby-tv/components';
+import { GatsbyPlain, Google, Email } from '@gatsby-tv/icons';
 
-import styles from "./SignIn.module.scss";
+import styles from './SignIn.module.scss';
 
-export type SignInProps = Omit<ModalProps, "overlay" | "zIndex">;
+export type SignInProps = Omit<ModalProps, 'overlay' | 'zIndex'>;
 
 export function SignIn(props: SignInProps): React.ReactElement {
   return (
@@ -32,12 +32,14 @@ export function SignIn(props: SignInProps): React.ReactElement {
       </div>
       <Rule className={styles.Rule} spacing="loose" />
       <div className={styles.Options}>
-        <Button className={styles.Option} onClick={() => signIn("google")}>
+        <Button className={styles.Option} onClick={() => signIn('google')}>
           <Icon src={Google} />
           Sign In with Google
         </Button>
       </div>
-      <Rule className={styles.Rule} spacing="loose">Or</Rule>
+      <Rule className={styles.Rule} spacing="loose">
+        Or
+      </Rule>
       <Form method="post" action="/api/auth/signin/email">
         <FormField
           id="email"
@@ -53,7 +55,7 @@ export function SignIn(props: SignInProps): React.ReactElement {
         <Button
           type="submit"
           className={styles.Submit}
-          onClick={() => signIn("credentials")}
+          onClick={() => signIn('credentials')}
         >
           Sign In
         </Button>

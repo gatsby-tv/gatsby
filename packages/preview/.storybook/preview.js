@@ -1,11 +1,11 @@
-import React from "react";
-import { AppProvider } from "@gatsby-tv/components";
-import { useIPFSNode, IPFSContext } from "@gatsby-tv/utilities";
-import "@gatsby-tv/components/dist/fonts.css";
-import "@gatsby-tv/components/dist/styles.css";
+import React from 'react';
+import { AppProvider } from '@gatsby-tv/components';
+import { useIPFSNode, IPFSContext } from '@gatsby-tv/utilities';
+import '@gatsby-tv/components/dist/fonts.css';
+import '@gatsby-tv/components/dist/styles.css';
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
 };
 
 export const decorators = [

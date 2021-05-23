@@ -1,7 +1,7 @@
-import React from "react";
-import { TextPlaceholder } from "@gatsby-tv/components";
+import React from 'react';
+import { TextPlaceholder } from '@gatsby-tv/components';
 
-import styles from "./Title.scss";
+import styles from './Title.scss';
 
 export function Skeleton(): React.ReactElement {
   return (

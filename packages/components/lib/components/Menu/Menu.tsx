@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { usePopper } from "react-popper";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { useState } from 'react';
+import { usePopper } from 'react-popper';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Modal } from "@lib/components/Modal";
-import { Connected } from "@lib/components/Connected";
-import { ItemContext } from "@lib/utilities/item";
-import { Placement } from "@lib/types";
+import { Modal } from '@lib/components/Modal';
+import { Connected } from '@lib/components/Connected';
+import { ItemContext } from '@lib/utilities/item';
+import { Placement } from '@lib/types';
 
-import { Item, ItemProps } from "./components/Item";
-import { Link, LinkProps } from "./components/Link";
-import styles from "./Menu.scss";
+import { Item, ItemProps } from './components/Item';
+import { Link, LinkProps } from './components/Link';
+import styles from './Menu.scss';
 
 export type { ItemProps as MenuItemProps };
 export type { LinkProps as MenuLinkProps };
@@ -32,7 +32,7 @@ export function Menu(props: MenuProps): React.ReactElement {
     itemClass,
     active,
     onExit,
-    placement = "bottom",
+    placement = 'bottom',
     offset = [0, 10],
   } = props;
 
@@ -41,19 +41,19 @@ export function Menu(props: MenuProps): React.ReactElement {
     placement,
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: offset as [number, number],
         },
       },
       {
-        name: "preventOverflow",
+        name: 'preventOverflow',
         options: {
           altBoundary: true,
         },
       },
       {
-        name: "flip",
+        name: 'flip',
         enabled: false,
       },
     ],

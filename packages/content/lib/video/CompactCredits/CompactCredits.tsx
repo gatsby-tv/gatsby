@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   AvatarCollation,
   Button,
@@ -6,15 +6,15 @@ import {
   TextSubheading,
   Modal,
   Panel,
-} from "@gatsby-tv/components";
-import { Plus } from "@gatsby-tv/icons";
-import { Value, useMobileDetector } from "@gatsby-tv/utilities";
-import { Video } from "@gatsby-tv/types";
+} from '@gatsby-tv/components';
+import { Plus } from '@gatsby-tv/icons';
+import { Value, useMobileDetector } from '@gatsby-tv/utilities';
+import { Video } from '@gatsby-tv/types';
 
-import { User } from "@lib/user";
-import { LinkProps } from "@lib/types";
+import { User } from '@lib/user';
+import { LinkProps } from '@lib/types';
 
-import styles from "./CompactCredits.scss";
+import styles from './CompactCredits.scss';
 
 export interface CompactCreditsProps {
   content?: Video;
@@ -44,7 +44,7 @@ export function CompactCredits(
         <User.Info
           key={`Collaborator.${user._id}`}
           user={user}
-          blurb={Value(user.followers, "follower") as string}
+          blurb={Value(user.followers, 'follower') as string}
           link={link}
         />
       ))
@@ -55,7 +55,7 @@ export function CompactCredits(
         <User.Info
           key={`Contributor.${user._id}`}
           user={user}
-          blurb={Array.from(content.contributions[user._id]).join(", ")}
+          blurb={Array.from(content.contributions[user._id]).join(', ')}
           link={link}
         />
       ))
@@ -66,7 +66,7 @@ export function CompactCredits(
         <User.Info
           key={`Sponsor.${user._id}`}
           user={user}
-          blurb={Value(user.followers, "follower") as string}
+          blurb={Value(user.followers, 'follower') as string}
           link={link}
         />
       ))
@@ -77,7 +77,9 @@ export function CompactCredits(
       <div className={styles.Credits}>
         {CollaboratorsMarkup && (
           <div>
-            <TextSubheading className={styles.Heading}>Collaborators</TextSubheading>
+            <TextSubheading className={styles.Heading}>
+              Collaborators
+            </TextSubheading>
             <Button className={styles.Avatars} unstyled>
               <AvatarCollation
                 avatars={content.collaborators
@@ -92,7 +94,9 @@ export function CompactCredits(
         )}
         {ContributorsMarkup && (
           <div>
-            <TextSubheading className={styles.Heading}>Contributors</TextSubheading>
+            <TextSubheading className={styles.Heading}>
+              Contributors
+            </TextSubheading>
             <Button className={styles.Avatars} unstyled>
               <AvatarCollation
                 avatars={content.contributors

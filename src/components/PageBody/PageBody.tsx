@@ -1,7 +1,7 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import styles from "./PageBody.module.scss";
+import styles from './PageBody.module.scss';
 
 export interface PageBodyProps {
   children?: React.ReactNode;

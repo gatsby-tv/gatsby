@@ -1,12 +1,12 @@
-import React from "react";
-import { NoEntry } from "@gatsby-tv/icons";
-import { ifExists, classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { NoEntry } from '@gatsby-tv/icons';
+import { ifExists, classNames } from '@gatsby-tv/utilities';
 
-import { Icon } from "@lib/components/Icon";
-import { Optional } from "@lib/components/Optional";
-import { useForm } from "@lib/utilities/form";
+import { Icon } from '@lib/components/Icon';
+import { Optional } from '@lib/components/Optional';
+import { useForm } from '@lib/utilities/form';
 
-import styles from "./Label.scss";
+import styles from './Label.scss';
 
 export interface LabelProps {
   children?: React.ReactNode;

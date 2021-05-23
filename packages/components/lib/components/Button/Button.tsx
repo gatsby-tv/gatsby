@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback, forwardRef } from "react";
-import { classNames, ifExists, useForwardedRef } from "@gatsby-tv/utilities";
+import React, { useState, useEffect, useCallback, forwardRef } from 'react';
+import { classNames, ifExists, useForwardedRef } from '@gatsby-tv/utilities';
 
-import { IconSource, IconSize } from "@lib/types";
-import { Icon } from "@lib/components/Icon";
-import { Tooltip } from "@lib/components/Tooltip";
+import { IconSource, IconSize } from '@lib/types';
+import { Icon } from '@lib/components/Icon';
+import { Tooltip } from '@lib/components/Tooltip';
 
-import styles from "./Button.scss";
+import styles from './Button.scss';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
@@ -109,11 +109,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [animate]
     );
 
-    const onPointerLeave = useCallback((event) => {
-      if (animate) {
-        setHeld(false);
-      }
-    }, [animate]);
+    const onPointerLeave = useCallback(
+      (event) => {
+        if (animate) {
+          setHeld(false);
+        }
+      },
+      [animate]
+    );
 
     const classes = classNames(
       className,
@@ -131,23 +134,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         </Tooltip>
       ) : null;
 
-    const ChildrenMarkup = icon ? (
-      <Icon src={icon} size={size} />
-    ) : children;
+    const ChildrenMarkup = icon ? <Icon src={icon} size={size} /> : children;
 
-    const ButtonMarkup = React.createElement(asLabelFor ? "label" : "button", {
+    const ButtonMarkup = React.createElement(asLabelFor ? 'label' : 'button', {
       children: ChildrenMarkup,
       ref: button,
       className: classes,
       htmlFor: asLabelFor,
       tabIndex: ifExists(asLabelFor, -1),
-      "data-animating": ifExists(!unstyled && animate && !reset && (active || held)),
+      'data-animating': ifExists(
+        !unstyled && animate && !reset && (active || held)
+      ),
       onClick,
       onPointerDown,
       onPointerUp,
       onPointerLeave,
       onPointerCancel: onPointerLeave,
-      ...rest
+      ...rest,
     });
 
     return (
@@ -159,4 +162,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = "Button";
+Button.displayName = 'Button';

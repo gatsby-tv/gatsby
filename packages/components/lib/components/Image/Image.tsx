@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { IPFSContent } from "@gatsby-tv/types";
-import { classNames, ifExists, useIPFSContent } from "@gatsby-tv/utilities";
+import React, { useState, useEffect, useCallback } from 'react';
+import { IPFSContent } from '@gatsby-tv/types';
+import { classNames, ifExists, useIPFSContent } from '@gatsby-tv/utilities';
 
-import { BorderRadius } from "@lib/types";
-import { Viewport } from "@lib/components/Viewport";
+import { BorderRadius } from '@lib/types';
+import { Viewport } from '@lib/components/Viewport';
 
-import styles from "./Image.scss";
+import styles from './Image.scss';
 
 export interface ImageProps
-  extends Omit<React.ImgHTMLAttributes<Element>, "src"> {
+  extends Omit<React.ImgHTMLAttributes<Element>, 'src'> {
   src?: IPFSContent | string;
   rounded?: BorderRadius;
   aspectRatio?: number;
@@ -20,7 +20,7 @@ type ImageURLProps = ImageProps & { src?: string };
 type ImageIPFSProps = ImageProps & { src: IPFSContent };
 
 function isImageURLProps(props: ImageProps): props is ImageURLProps {
-  return typeof (props as ImageURLProps).src !== "object";
+  return typeof (props as ImageURLProps).src !== 'object';
 }
 
 function ImageURL(props: ImageURLProps): React.ReactElement {
@@ -29,7 +29,7 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
     rounded,
     aspectRatio = 1,
     overlay,
-    "aria-label": ariaLabel,
+    'aria-label': ariaLabel,
     ...imgProps
   } = props;
 

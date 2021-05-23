@@ -1,1 +1,1 @@
-export * from "./Credits";
+export * from './Credits';

@@ -1,7 +1,7 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import styles from "./TextHeading.scss";
+import styles from './TextHeading.scss';
 
 export interface TextHeadingProps {
   children?: React.ReactNode;

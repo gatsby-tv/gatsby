@@ -1,7 +1,7 @@
-import React from "react";
-import { Image } from "@gatsby-tv/components";
+import React from 'react';
+import { Image } from '@gatsby-tv/components';
 
-import styles from "./Carousel.scss";
+import styles from './Carousel.scss';
 
 export interface SkeletonProps {
   groups: number;

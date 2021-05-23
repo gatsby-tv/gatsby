@@ -1,9 +1,9 @@
-import React from "react";
-import { useFrame } from "@gatsby-tv/utilities";
+import React from 'react';
+import { useFrame } from '@gatsby-tv/utilities';
 
-import { Scroll } from "@lib/components/Scroll";
+import { Scroll } from '@lib/components/Scroll';
 
-import styles from "../../Frame.scss";
+import styles from '../../Frame.scss';
 
 export interface MainFrameProps {
   children?: React.ReactNode;
@@ -15,9 +15,7 @@ export function MainFrame(props: MainFrameProps): React.ReactElement {
 
   return (
     <main className={styles.MainFrame}>
-      <Scroll hide={fullscreen || screen.width < 650}>
-        {children}
-      </Scroll>
+      <Scroll hide={fullscreen || screen.width < 650}>{children}</Scroll>
     </main>
   );
 }

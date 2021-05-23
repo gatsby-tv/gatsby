@@ -1,1 +1,1 @@
-export * from "./TextHeading";
+export * from './TextHeading';

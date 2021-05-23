@@ -1,1 +1,1 @@
-export * from "./Activatable";
+export * from './Activatable';

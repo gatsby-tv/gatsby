@@ -1,1 +1,1 @@
-export * from "./TextMeta";
+export * from './TextMeta';

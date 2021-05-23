@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { useModal } from "@gatsby-tv/utilities";
+import React, { useState, useEffect } from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
+import { useModal } from '@gatsby-tv/utilities';
 
-import { Button } from "@lib/components/Button";
-import { TextBox } from "@lib/components/TextBox";
-import { Selection } from "@lib/components/Selection";
-import { Panel, PanelProps } from "@lib/components/Panel";
+import { Button } from '@lib/components/Button';
+import { TextBox } from '@lib/components/TextBox';
+import { Selection } from '@lib/components/Selection';
+import { Panel, PanelProps } from '@lib/components/Panel';
 
-import styles from "./Panel.stories.scss";
+import styles from './Panel.stories.scss';
 
 export default {
-  title: "Panel",
+  title: 'Panel',
   component: Panel,
 } as Meta;
 

@@ -1,13 +1,13 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties } from 'react';
 
-import styles from "../../Carousel.scss";
+import styles from '../../Carousel.scss';
 
 export type SliderState = {
   slide: number;
   desired: number;
 };
 
-export type SliderAction = { type: "jump"; desired: number } | { type: "sync" };
+export type SliderAction = { type: 'jump'; desired: number } | { type: 'sync' };
 
 export interface SliderProps {
   children?: React.ReactNode;
@@ -22,8 +22,8 @@ export function Slider(props: SliderProps): React.ReactElement {
   const style: CSSProperties = {
     width: `${100 * (groups + 2)}%`,
     left: `${-100 * (state.slide + 1)}%`,
-    transform: "translateX(0)",
-    transition: "none",
+    transform: 'translateX(0)',
+    transition: 'none',
   };
 
   if (distance) {

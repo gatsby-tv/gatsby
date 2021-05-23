@@ -1,8 +1,8 @@
 /// <reference types="resize-observer-browser" />
 
-import { RefObject } from "react";
+import { RefObject } from 'react';
 
-import { useIsomorphicLayoutEffect } from "@lib/use-isomorphic-layout-effect";
+import { useIsomorphicLayoutEffect } from '@lib/use-isomorphic-layout-effect';
 
 export interface ResizeCallback {
   (content: ResizeObserverSize): void;

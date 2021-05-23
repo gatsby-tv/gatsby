@@ -1,1 +1,1 @@
-export * from "./TextPlaceholder";
+export * from './TextPlaceholder';

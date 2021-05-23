@@ -6,10 +6,10 @@ import {
   ReactElement,
   Dispatch,
   SetStateAction,
-} from "react";
-import { ContextError } from "@gatsby-tv/utilities";
+} from 'react';
+import { ContextError } from '@gatsby-tv/utilities';
 
-import { InjectionContext, InjectionContextType } from "./context";
+import { InjectionContext, InjectionContextType } from './context';
 
 export function useInjectionContext(): InjectionContextType {
   const [injections, setInjections] = useState<Record<string, number>>({});
@@ -55,11 +55,13 @@ export function useInjectionContext(): InjectionContextType {
   };
 }
 
-export function useInjectionTarget(id: string): Dispatch<SetStateAction<HTMLElement | null>> | null {
+export function useInjectionTarget(
+  id: string
+): Dispatch<SetStateAction<HTMLElement | null>> | null {
   const context = useContext(InjectionContext);
 
   if (!context) {
-    throw new ContextError("Injection");
+    throw new ContextError('Injection');
   }
 
   const { targets, injections, addTarget, removeTarget } = context;
@@ -77,7 +79,7 @@ export function useInjection(id: string): HTMLElement | null | undefined {
   const context = useContext(InjectionContext);
 
   if (!context) {
-    throw new ContextError("Injection");
+    throw new ContextError('Injection');
   }
 
   const { targets, addInjection, removeInjection } = context;

@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   Avatar,
   Optional,
   TextPlaceholder,
   DiscreteSize,
-} from "@gatsby-tv/components";
+} from '@gatsby-tv/components';
 
-import { VideoInfoFormat } from "@lib/types";
+import { VideoInfoFormat } from '@lib/types';
 
-import styles from "./Info.scss";
+import styles from './Info.scss';
 
 export interface SkeletonProps {
   format?: VideoInfoFormat;
@@ -16,7 +16,7 @@ export interface SkeletonProps {
 }
 
 export function Skeleton(props: SkeletonProps): React.ReactElement {
-  const { format = "full", avatar } = props;
+  const { format = 'full', avatar } = props;
 
   return (
     <Optional
@@ -28,7 +28,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
       <div className={styles.Info}>
         <TextPlaceholder font="body-large" heading width={0.7} />
         <TextPlaceholder width={0.5} />
-        {format === "full" && <TextPlaceholder width={0.5} />}
+        {format === 'full' && <TextPlaceholder width={0.5} />}
       </div>
     </Optional>
   );

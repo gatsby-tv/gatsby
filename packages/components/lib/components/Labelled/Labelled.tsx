@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from 'react';
 
 export interface LabelledProps {
   children?: React.ReactNode;
@@ -17,22 +17,22 @@ export function Labelled(props: LabelledProps): React.ReactElement {
   useEffect(() => {
     if (!ref.current) return;
 
-    const labelNode = ref.current.querySelector("[data-label]");
-    const descNodes = ref.current.querySelectorAll("[data-description]");
+    const labelNode = ref.current.querySelector('[data-label]');
+    const descNodes = ref.current.querySelectorAll('[data-description]');
 
     setLabel(labelNode?.id);
     setDescriptions(
       Array.from(descNodes)
         .map((element) => element.id)
-        .join(" ") || undefined
+        .join(' ') || undefined
     );
   }, []);
 
   return React.createElement(component, {
     ref,
     children,
-    "aria-labelledby": label,
-    "aria-describedby": descriptions,
+    'aria-labelledby': label,
+    'aria-describedby': descriptions,
     ...$props,
   });
 }

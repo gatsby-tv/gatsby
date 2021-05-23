@@ -4,7 +4,7 @@ import {
   ReducerState,
   ReducerAction,
   Dispatch,
-} from "react";
+} from 'react';
 
 export interface GlobalState {}
 

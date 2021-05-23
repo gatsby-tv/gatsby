@@ -10,21 +10,21 @@ TimeFormatter.reduce = (acc: string, value: number) => {
   if (acc.length === 0) {
     return value.toString();
   } else {
-    return `${acc}:${value.toString().padStart(2, "0")}`;
+    return `${acc}:${value.toString().padStart(2, '0')}`;
   }
 };
 
 export function Time(seconds: number): string {
   if (isNaN(seconds)) {
-    return "0:00";
+    return '0:00';
   }
 
   const time = TimeFormatter(seconds);
   const result = time
     .slice(time.findIndex((value) => value !== 0))
-    .reduce(TimeFormatter.reduce, "");
+    .reduce(TimeFormatter.reduce, '');
   if (result.length < 3) {
-    return `0:${result.padStart(2, "0")}`;
+    return `0:${result.padStart(2, '0')}`;
   } else {
     return result;
   }
@@ -53,17 +53,17 @@ ReleaseDateFormatter.unit = (entry: [string, number]) =>
   Math.abs(entry[1]) === 1 ? entry[0] : `${entry[0]}s`;
 
 ReleaseDateFormatter.suffix = (entry: [string, number]) =>
-  entry[1] < 0 ? "from now" : "ago";
+  entry[1] < 0 ? 'from now' : 'ago';
 
 export function ReleaseDate(date: Date | string | number): string {
   const formatter = ReleaseDateFormatter(new Date(date));
-  if (typeof formatter === "undefined")
-    throw new Error("Release Date could not be formatted.");
+  if (typeof formatter === 'undefined')
+    throw new Error('Release Date could not be formatted.');
   return [
     ReleaseDateFormatter.value(formatter),
     ReleaseDateFormatter.unit(formatter),
     ReleaseDateFormatter.suffix(formatter),
-  ].join(" ");
+  ].join(' ');
 }
 
 function ValueFormatter(value: number) {
@@ -73,7 +73,7 @@ function ValueFormatter(value: number) {
     B: value / 1e9,
     M: value / 1e6,
     K: value / 1e3,
-    "": Math.floor(value),
+    '': Math.floor(value),
   }).map((entry) => [entry[0], ValueFormatter.round(entry[1])]);
   return entries[entries.findIndex((entry) => (entry[0] ? !!entry[1] : true))];
 }
@@ -91,12 +91,12 @@ ValueFormatter.round = (value: number) => {
 export function Value(num: number, unit?: string): string {
   const value = ValueFormatter(num);
   const suffix = !value[0] && value[1] === 1 ? unit : `${unit}s`;
-  const result = value?.reverse().join("");
+  const result = value?.reverse().join('');
   return unit ? `${result} ${suffix}` : result;
 }
 
 export function FullValue(num: number, unit?: string): string {
-  const value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   const suffix = num === 1 ? unit : `${unit}s`;
   return unit ? `${value} ${suffix}` : value;
 }
@@ -105,10 +105,10 @@ export function FullReleaseDate(
   date: Date | string | number,
   locale?: string
 ): string {
-  return new Date(date).toLocaleDateString(locale ?? "en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+  return new Date(date).toLocaleDateString(locale ?? 'en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
   });
 }
 
@@ -124,13 +124,13 @@ export function Negative(size: undefined): undefined;
 export function Negative(size: string | number): string | number;
 export function Negative(size: (string | number)[]): (string | number)[];
 export function Negative(size: any): any {
-  if (typeof size === "undefined") {
+  if (typeof size === 'undefined') {
     return undefined;
-  } else if (typeof size === "string") {
-    return size[0] === "-" ? size.slice(1) : size === "0" ? size : `-${size}`;
-  } else if (typeof size === "object") {
+  } else if (typeof size === 'string') {
+    return size[0] === '-' ? size.slice(1) : size === '0' ? size : `-${size}`;
+  } else if (typeof size === 'object') {
     return size.map((item: string) =>
-      item[0] === "-" ? item.slice(1) : item === "0" ? item : `-${item}`
+      item[0] === '-' ? item.slice(1) : item === '0' ? item : `-${item}`
     );
   } else {
     return -size;

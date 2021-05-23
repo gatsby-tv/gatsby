@@ -1,6 +1,6 @@
-import React from "react";
-import { Button, Icon } from "@gatsby-tv/components";
-import { IconSource } from "@gatsby-tv/components/dist/types";
+import React from 'react';
+import { Button, Icon } from '@gatsby-tv/components';
+import { IconSource } from '@gatsby-tv/components/dist/types';
 import {
   Subscribe,
   Follow,
@@ -8,12 +8,12 @@ import {
   Donate,
   Tip,
   Misc,
-} from "@gatsby-tv/icons";
+} from '@gatsby-tv/icons';
 
-import styles from "./Engagement.module.scss";
+import styles from './Engagement.module.scss';
 
 export type EngagementProps = {
-  type: "subscribe" | "follow" | "promote" | "donate" | "tip" | "misc";
+  type: 'subscribe' | 'follow' | 'promote' | 'donate' | 'tip' | 'misc';
 };
 
 export function Engagement(props: EngagementProps): React.ReactElement {
@@ -21,34 +21,34 @@ export function Engagement(props: EngagementProps): React.ReactElement {
   let tooltip: string;
 
   switch (props.type) {
-    case "subscribe":
+    case 'subscribe':
       icon = Subscribe;
-      tooltip = "Subscribe";
+      tooltip = 'Subscribe';
       break;
 
-    case "follow":
+    case 'follow':
       icon = Follow;
-      tooltip = "Follow";
+      tooltip = 'Follow';
       break;
 
-    case "promote":
+    case 'promote':
       icon = Promote;
-      tooltip = "Promote";
+      tooltip = 'Promote';
       break;
 
-    case "donate":
+    case 'donate':
       icon = Donate;
-      tooltip = "Donate";
+      tooltip = 'Donate';
       break;
 
-    case "tip":
+    case 'tip':
       icon = Tip;
-      tooltip = "Tip";
+      tooltip = 'Tip';
       break;
 
-    case "misc":
+    case 'misc':
       icon = Misc;
-      tooltip = "Misc";
+      tooltip = 'Misc';
       break;
   }
 

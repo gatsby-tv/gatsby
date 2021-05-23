@@ -1,14 +1,14 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { LoremIpsum } from "react-lorem-ipsum";
+import React from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
+import { LoremIpsum } from 'react-lorem-ipsum';
 
-import { TextBox } from "@lib/components/TextBox";
-import { Scroll, ScrollProps } from "@lib/components/Scroll";
+import { TextBox } from '@lib/components/TextBox';
+import { Scroll, ScrollProps } from '@lib/components/Scroll';
 
-import styles from "./Scroll.stories.scss";
+import styles from './Scroll.stories.scss';
 
 export default {
-  title: "Scroll",
+  title: 'Scroll',
   component: Scroll,
 } as Meta;
 

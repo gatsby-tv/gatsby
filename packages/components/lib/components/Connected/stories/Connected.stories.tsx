@@ -1,14 +1,12 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Connected, ConnectedProps } from "@lib/components/Connected";
+import { Connected, ConnectedProps } from '@lib/components/Connected';
 
-import styles from "./Connected.stories.scss";
+import styles from './Connected.stories.scss';
 
-const AppendageMarkup = () => (
-  <div className={styles.Blue} />
-);
+const AppendageMarkup = () => <div className={styles.Blue} />;
 
 const AppendageColumnMarkup = () => (
   <div className={classNames(styles.Blue, styles.Column)} />
@@ -25,7 +23,7 @@ const ContentListMarkup = () => (
 );
 
 export default {
-  title: "Connected",
+  title: 'Connected',
   component: Connected,
 } as Meta;
 

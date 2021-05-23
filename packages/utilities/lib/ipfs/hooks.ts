@@ -8,18 +8,18 @@ import {
   useReducer,
   useRef,
   RefObject,
-} from "react";
-import IPFS from "ipfs";
-import HLS from "hls.js";
+} from 'react';
+import IPFS from 'ipfs';
+import HLS from 'hls.js';
 // @ts-ignore
-import HLSIPFSLoader from "hlsjs-ipfs-loader";
-import all from "it-all";
-import { IPFSContent } from "@gatsby-tv/types";
+import HLSIPFSLoader from 'hlsjs-ipfs-loader';
+import all from 'it-all';
+import { IPFSContent } from '@gatsby-tv/types';
 
-import { useAsync } from "@lib/use-async";
-import { ContextError } from "@lib/errors";
+import { useAsync } from '@lib/use-async';
+import { ContextError } from '@lib/errors';
 
-import { IPFSContext, IPFSContextType } from "./context";
+import { IPFSContext, IPFSContextType } from './context';
 
 let ipfs: any = undefined;
 
@@ -67,18 +67,18 @@ export function useIPFS(): IPFSContextType {
   const context = useContext(IPFSContext);
 
   if (!context) {
-    throw new ContextError("IPFS");
+    throw new ContextError('IPFS');
   }
 
   return context;
 }
 
 interface FetchAction {
-  type: "fetch";
+  type: 'fetch';
 }
 
 interface SyncAction {
-  type: "sync";
+  type: 'sync';
   result: any;
 }
 
@@ -99,10 +99,10 @@ export function useIPFSCommand(
   const [state, dispatch] = useReducer(
     (state: IPFSCommandState, action: IPFSAction) => {
       switch (action.type) {
-        case "fetch":
+        case 'fetch':
           return state.loading ? state : { ...state, loading: true };
 
-        case "sync":
+        case 'sync':
           return {
             ...state,
             result: action.result,
@@ -124,11 +124,11 @@ export function useIPFSCommand(
         .reduce((acc: any, key: string) => (acc ? acc[key] : undefined), ipfs);
       return method ? await method(args) : undefined;
     },
-    (result) => dispatch({ type: "sync", result }),
+    (result) => dispatch({ type: 'sync', result }),
     [state.loading, ipfs, commandKey, args]
   );
 
-  useEffect(() => dispatch({ type: "fetch" }), [ipfs]);
+  useEffect(() => dispatch({ type: 'fetch' }), [ipfs]);
 
   return state;
 }
@@ -139,15 +139,15 @@ interface IPFSContentState {
 }
 
 export function useIPFSContent(content: IPFSContent): IPFSContentState {
-  const { result: generator } = useIPFSCommand("cat", `/ipfs/${content.hash}`);
+  const { result: generator } = useIPFSCommand('cat', `/ipfs/${content.hash}`);
 
   const [state, dispatch] = useReducer(
     (state: IPFSContentState, action: IPFSAction) => {
       switch (action.type) {
-        case "fetch":
+        case 'fetch':
           return state.loading ? state : { ...state, loading: true };
 
-        case "sync":
+        case 'sync':
           return {
             ...state,
             url: action.result,
@@ -168,7 +168,7 @@ export function useIPFSContent(content: IPFSContent): IPFSContentState {
       const blob = new Blob([...data], { type: content.mimeType });
       return window.URL.createObjectURL(blob);
     },
-    (url) => dispatch({ type: "sync", result: url }),
+    (url) => dispatch({ type: 'sync', result: url }),
     [generator, content.mimeType]
   );
 
@@ -190,10 +190,10 @@ export function useIPFSPeers(): IPFSPeersState {
   const [state, dispatch] = useReducer(
     (state: IPFSPeersState, action: IPFSAction) => {
       switch (action.type) {
-        case "fetch":
+        case 'fetch':
           return state.loading ? state : { ...state, loading: true };
 
-        case "sync":
+        case 'sync':
           return {
             ...state,
             peers: action.result,
@@ -212,13 +212,13 @@ export function useIPFSPeers(): IPFSPeersState {
       if (!state.loading || !ipfs) return;
       return await ipfs?.swarm?.peers();
     },
-    (result) => dispatch({ type: "sync", result }),
+    (result) => dispatch({ type: 'sync', result }),
     [state.loading, ipfs]
   );
 
   useEffect(() => {
-    dispatch({ type: "fetch" });
-    const id = setInterval(() => dispatch({ type: "fetch" }), 3000);
+    dispatch({ type: 'fetch' });
+    const id = setInterval(() => dispatch({ type: 'fetch' }), 3000);
     return () => clearInterval(id);
   }, [ipfs]);
 
@@ -238,11 +238,11 @@ export function useIPFSVideoStream(hash?: string): RefObject<HTMLVideoElement> {
       hls.config.ipfs = ipfs;
       // @ts-ignore
       hls.config.ipfsHash = hash;
-      hls.loadSource("master.m3u8");
+      hls.loadSource('master.m3u8');
       hls.attachMedia(ref.current as HTMLVideoElement);
       hls.on(HLS.Events.MANIFEST_PARSED, () => ref.current?.play());
     } else {
-      throw new Error("HLS is not supported.");
+      throw new Error('HLS is not supported.');
     }
   }, [ipfs, hash]);
 

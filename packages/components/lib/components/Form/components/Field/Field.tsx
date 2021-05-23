@@ -1,39 +1,39 @@
-import React, { useRef, useState, useCallback } from "react";
-import { ifExists, classNames } from "@gatsby-tv/utilities";
+import React, { useRef, useState, useCallback } from 'react';
+import { ifExists, classNames } from '@gatsby-tv/utilities';
 
-import { useForm } from "@lib/utilities/form";
+import { useForm } from '@lib/utilities/form';
 
-import styles from "./Field.scss";
+import styles from './Field.scss';
 
 export interface FieldProps
   extends Omit<
     React.InputHTMLAttributes<HTMLElement>,
-    | "id"
-    | "accept"
-    | "alt"
-    | "autoComplete"
-    | "capture"
-    | "checked"
-    | "formAction"
-    | "formEncType"
-    | "formMethod"
-    | "formNoValidate"
-    | "formTarget"
-    | "height"
-    | "max"
-    | "min"
-    | "multiple"
-    | "prefix"
-    | "size"
-    | "src"
-    | "step"
-    | "suffix"
-    | "type"
-    | "width"
-    | "onChange"
+    | 'id'
+    | 'accept'
+    | 'alt'
+    | 'autoComplete'
+    | 'capture'
+    | 'checked'
+    | 'formAction'
+    | 'formEncType'
+    | 'formMethod'
+    | 'formNoValidate'
+    | 'formTarget'
+    | 'height'
+    | 'max'
+    | 'min'
+    | 'multiple'
+    | 'prefix'
+    | 'size'
+    | 'src'
+    | 'step'
+    | 'suffix'
+    | 'type'
+    | 'width'
+    | 'onChange'
   > {
   id: string;
-  type?: "text" | "email" | "password" | "tel" | "search";
+  type?: 'text' | 'email' | 'password' | 'tel' | 'search';
   multiline?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -108,7 +108,7 @@ export function Field(props: FieldProps): React.ReactElement {
     [onKeyPressHandler]
   );
 
-  const InputComponent = multiline ? "textarea" : "input";
+  const InputComponent = multiline ? 'textarea' : 'input';
 
   const PrefixMarkup = prefix ? (
     <div className={styles.Decorator}>{prefix}</div>
@@ -129,7 +129,7 @@ export function Field(props: FieldProps): React.ReactElement {
       <InputComponent
         ref={input}
         id={id}
-        autoComplete={autoComplete ? "on" : "off"}
+        autoComplete={autoComplete ? 'on' : 'off'}
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}

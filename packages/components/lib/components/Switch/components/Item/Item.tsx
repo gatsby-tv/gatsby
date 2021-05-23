@@ -1,11 +1,11 @@
-import React from "react";
-import { classNames, ifExists } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames, ifExists } from '@gatsby-tv/utilities';
 
-import { Connected } from "@lib/components/Connected";
-import { useSwitch } from "@lib/utilities/switch";
-import { useItem } from "@lib/utilities/item";
+import { Connected } from '@lib/components/Connected';
+import { useSwitch } from '@lib/utilities/switch';
+import { useItem } from '@lib/utilities/item';
 
-import styles from "../../Switch.scss";
+import styles from '../../Switch.scss';
 
 export interface ItemProps extends React.AriaAttributes {
   children?: React.ReactNode;
@@ -20,7 +20,7 @@ export function Item(props: ItemProps): React.ReactElement {
     id,
     className,
     option,
-    "aria-controls": ariaControls,
+    'aria-controls': ariaControls,
   } = props;
   const { selection, onSelect } = useSwitch();
   const { itemClass } = useItem();

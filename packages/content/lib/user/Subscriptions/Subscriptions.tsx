@@ -1,17 +1,19 @@
-import React, { AriaAttributes } from "react";
-import { Stream } from "@gatsby-tv/components";
-import { PreviewFormat } from "@gatsby-tv/preview";
-import { User } from "@gatsby-tv/types";
+import React, { AriaAttributes } from 'react';
+import { Stream } from '@gatsby-tv/components';
+import { PreviewFormat } from '@gatsby-tv/preview';
+import { User } from '@gatsby-tv/types';
 
-import { Video } from "@lib/video";
-import { Section } from "@lib/listing/components/Section";
-import { ListingContext, ListingContextType } from "@lib/utilities/listing";
-import { useSubscriptionsFeed } from "@lib/utilities/use-subscriptions-feed";
+import { Video } from '@lib/video';
+import { Section } from '@lib/listing/components/Section';
+import { ListingContext, ListingContextType } from '@lib/utilities/listing';
+import { useSubscriptionsFeed } from '@lib/utilities/use-subscriptions-feed';
 
-import { Skeleton } from "./Subscriptions.skeleton";
-import styles from "./Subscriptions.scss";
+import { Skeleton } from './Subscriptions.skeleton';
+import styles from './Subscriptions.scss';
 
-export interface SubscriptionsProps extends Partial<ListingContextType>, AriaAttributes {
+export interface SubscriptionsProps
+  extends Partial<ListingContextType>,
+    AriaAttributes {
   user?: User;
 }
 
@@ -19,8 +21,8 @@ export function Subscriptions(props: SubscriptionsProps): React.ReactElement {
   const {
     id,
     user,
-    preview = "column",
-    info = "full",
+    preview = 'column',
+    info = 'full',
     avatar,
     link,
     ...aria
@@ -47,29 +49,29 @@ export function Subscriptions(props: SubscriptionsProps): React.ReactElement {
 
   const sections = [
     {
-      title: "Today",
+      title: 'Today',
       content: content.filter((video) => video.releaseDate >= today),
     },
     {
-      title: "Yesterday",
+      title: 'Yesterday',
       content: content.filter(
         (video) => video.releaseDate < today && video.releaseDate >= yesterday
       ),
     },
     {
-      title: "This Week",
+      title: 'This Week',
       content: content.filter(
         (video) => video.releaseDate < yesterday && video.releaseDate >= week
       ),
     },
     {
-      title: "This Month",
+      title: 'This Month',
       content: content.filter(
         (video) => video.releaseDate < week && video.releaseDate >= month
       ),
     },
     {
-      title: "Older",
+      title: 'Older',
       content: content.filter((video) => video.releaseDate < month),
     },
   ];

@@ -1,6 +1,6 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
-import { EventHandler } from "@lib/types";
+import { EventHandler } from '@lib/types';
 
 export type ModalContextType = {
   addModalCallback: (handler: EventHandler) => void;

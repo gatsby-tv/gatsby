@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { EventHandler } from "@lib/types";
+import { EventHandler } from '@lib/types';
 
 export interface EventListenerProps {
   event: string;

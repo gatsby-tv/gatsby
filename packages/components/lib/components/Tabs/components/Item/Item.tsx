@@ -1,9 +1,9 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Selection, SelectionItemProps } from "@lib/components/Selection";
+import { Selection, SelectionItemProps } from '@lib/components/Selection';
 
-import styles from "../../Tabs.scss";
+import styles from '../../Tabs.scss';
 
 export type ItemProps = SelectionItemProps;
 

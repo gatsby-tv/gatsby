@@ -6,22 +6,22 @@ import React, {
   Ref,
   Dispatch,
   SetStateAction,
-} from "react";
-import { Video, Viewport } from "@gatsby-tv/components";
+} from 'react';
+import { Video, Viewport } from '@gatsby-tv/components';
 import {
   classNames,
   useForwardedRef,
   useMobileDetector,
-} from "@gatsby-tv/utilities";
+} from '@gatsby-tv/utilities';
 
-import { DesktopOverlay } from "@src/components/DesktopOverlay";
-import { MobileOverlay } from "@src/components/MobileOverlay";
-import { useTimeline } from "@src/utilities/use-timeline";
-import { usePlayer } from "@src/utilities/use-player";
-import { useSignal } from "@src/utilities/use-signal";
-import { PlayerProps } from "@src/types";
+import { DesktopOverlay } from '@src/components/DesktopOverlay';
+import { MobileOverlay } from '@src/components/MobileOverlay';
+import { useTimeline } from '@src/utilities/use-timeline';
+import { usePlayer } from '@src/utilities/use-player';
+import { useSignal } from '@src/utilities/use-signal';
+import { PlayerProps } from '@src/types';
 
-import styles from "./Player.scss";
+import styles from './Player.scss';
 
 export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
   (props: PlayerProps, ref: Ref<HTMLVideoElement>) => {
@@ -52,11 +52,11 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const setPlaybackAndSignal: Dispatch<SetStateAction<boolean>> = useCallback(
       (value) =>
         setPlayback((current) => {
-          const playback = typeof value === "function" ? value(current) : value;
+          const playback = typeof value === 'function' ? value(current) : value;
           if (playback) {
-            setSignal("play");
+            setSignal('play');
           } else {
-            setSignal("pause");
+            setSignal('pause');
           }
           return playback;
         }),

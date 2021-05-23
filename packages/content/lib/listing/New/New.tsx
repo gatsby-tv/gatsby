@@ -1,22 +1,22 @@
-import React, { AriaAttributes } from "react";
-import { Stream } from "@gatsby-tv/components";
-import { classNames } from "@gatsby-tv/utilities";
-import { Browsable } from "@gatsby-tv/types";
+import React, { AriaAttributes } from 'react';
+import { Stream } from '@gatsby-tv/components';
+import { classNames } from '@gatsby-tv/utilities';
+import { Browsable } from '@gatsby-tv/types';
 
-import { Article } from "@lib/listing/components/Article";
-import { ListingContext, ListingContextType } from "@lib/utilities/listing";
-import { useNewFeed } from "@lib/utilities/use-new-feed";
+import { Article } from '@lib/listing/components/Article';
+import { ListingContext, ListingContextType } from '@lib/utilities/listing';
+import { useNewFeed } from '@lib/utilities/use-new-feed';
 
-import { Skeleton } from "./New.skeleton";
-import styles from "./New.scss";
+import { Skeleton } from './New.skeleton';
+import styles from './New.scss';
 
 export type NewProps = Partial<ListingContextType> & AriaAttributes;
 
 export function New(props: NewProps): React.ReactElement {
   const {
     id,
-    preview = "column",
-    info = "full",
+    preview = 'column',
+    info = 'full',
     avatar,
     link,
     ...aria
@@ -29,7 +29,7 @@ export function New(props: NewProps): React.ReactElement {
 
   const classes = classNames(
     styles.Listing,
-    preview === "column" && styles.Column
+    preview === 'column' && styles.Column
   );
 
   return (

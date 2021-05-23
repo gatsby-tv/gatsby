@@ -1,7 +1,10 @@
-import { useEffect, Dispatch, SetStateAction } from "react";
-import { useVolatileKey } from "@gatsby-tv/utilities";
+import { useEffect, Dispatch, SetStateAction } from 'react';
+import { useVolatileKey } from '@gatsby-tv/utilities';
 
-export function useSignal(): [string | undefined, Dispatch<SetStateAction<string | undefined>>] {
+export function useSignal(): [
+  string | undefined,
+  Dispatch<SetStateAction<string | undefined>>
+] {
   const [signal, setSignal] = useVolatileKey();
 
   useEffect(() => {

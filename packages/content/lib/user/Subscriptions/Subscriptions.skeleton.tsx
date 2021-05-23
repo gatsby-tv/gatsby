@@ -1,16 +1,16 @@
-import React from "react";
-import { Rule, TextPlaceholder } from "@gatsby-tv/components";
-import Preview from "@gatsby-tv/preview";
+import React from 'react';
+import { Rule, TextPlaceholder } from '@gatsby-tv/components';
+import Preview from '@gatsby-tv/preview';
 
-import { Info } from "@lib/video/Info";
-import { ListingContextType } from "@lib/utilities/listing";
+import { Info } from '@lib/video/Info';
+import { ListingContextType } from '@lib/utilities/listing';
 
-import styles from "./Subscriptions.scss";
+import styles from './Subscriptions.scss';
 
-export type SkeletonProps = Omit<ListingContextType, "id" | "link">;
+export type SkeletonProps = Omit<ListingContextType, 'id' | 'link'>;
 
 export function Skeleton(props: SkeletonProps): React.ReactElement {
-  const { preview = "column", info = "full", avatar } = props;
+  const { preview = 'column', info = 'full', avatar } = props;
 
   const PreviewsMarkup = [...Array(24)].map((_, index) => (
     <Preview

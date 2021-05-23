@@ -1,7 +1,7 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import styles from "./TextSubheading.scss";
+import styles from './TextSubheading.scss';
 
 export interface TextSubheadingProps {
   children?: React.ReactNode;

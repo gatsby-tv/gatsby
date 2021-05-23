@@ -1,23 +1,23 @@
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react';
 
-import { useForm } from "@lib/utilities/form";
-import { Button, ButtonProps } from "@lib/components/Button";
+import { useForm } from '@lib/utilities/form';
+import { Button, ButtonProps } from '@lib/components/Button';
 
-import styles from "./File.scss";
+import styles from './File.scss';
 
 export interface FileProps
   extends Pick<
       React.InputHTMLAttributes<HTMLElement>,
-      | "capture"
-      | "disabled"
-      | "form"
-      | "name"
-      | "readOnly"
-      | "required"
-      | "value"
-      | Exclude<keyof React.HTMLAttributes<HTMLElement>, "onChange">
+      | 'capture'
+      | 'disabled'
+      | 'form'
+      | 'name'
+      | 'readOnly'
+      | 'required'
+      | 'value'
+      | Exclude<keyof React.HTMLAttributes<HTMLElement>, 'onChange'>
     >,
-    Pick<ButtonProps, "unstyled" | "animate" | "tooltip" | "icon" | "size"> {
+    Pick<ButtonProps, 'unstyled' | 'animate' | 'tooltip' | 'icon' | 'size'> {
   id: string;
   onChange?: (
     value: string,

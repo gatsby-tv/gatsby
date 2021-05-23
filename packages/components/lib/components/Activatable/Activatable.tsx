@@ -1,9 +1,9 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Duration } from "@lib/types";
+import { Duration } from '@lib/types';
 
-import styles from "./Activatable.scss";
+import styles from './Activatable.scss';
 
 export interface ActivatableProps extends React.DOMAttributes<Element> {
   children?: React.ReactNode;
@@ -21,7 +21,7 @@ export function Activatable(props: ActivatableProps): React.ReactElement {
     styles.Activatable,
     active && styles.Active,
     duration && styles[`Duration-${duration}`],
-    active && delay && styles[`Delay-${delay}`],
+    active && delay && styles[`Delay-${delay}`]
   );
 
   return (

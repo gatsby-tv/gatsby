@@ -1,16 +1,18 @@
-import React, { AriaAttributes } from "react";
-import { Stream } from "@gatsby-tv/components";
-import { classNames } from "@gatsby-tv/utilities";
-import { User } from "@gatsby-tv/types";
+import React, { AriaAttributes } from 'react';
+import { Stream } from '@gatsby-tv/components';
+import { classNames } from '@gatsby-tv/utilities';
+import { User } from '@gatsby-tv/types';
 
-import { Article } from "@lib/listing/components/Article";
-import { ListingContext, ListingContextType } from "@lib/utilities/listing";
-import { useRecommendedFeed } from "@lib/utilities/use-recommended-feed";
+import { Article } from '@lib/listing/components/Article';
+import { ListingContext, ListingContextType } from '@lib/utilities/listing';
+import { useRecommendedFeed } from '@lib/utilities/use-recommended-feed';
 
-import { Skeleton } from "./Recommended.skeleton";
-import styles from "./Recommended.scss";
+import { Skeleton } from './Recommended.skeleton';
+import styles from './Recommended.scss';
 
-export interface RecommendedProps extends Partial<ListingContextType>, AriaAttributes {
+export interface RecommendedProps
+  extends Partial<ListingContextType>,
+    AriaAttributes {
   user?: User;
 }
 
@@ -18,8 +20,8 @@ export function Recommended(props: RecommendedProps): React.ReactElement {
   const {
     id,
     user,
-    preview = "column",
-    info = "full",
+    preview = 'column',
+    info = 'full',
     avatar,
     link,
     ...aria
@@ -32,7 +34,7 @@ export function Recommended(props: RecommendedProps): React.ReactElement {
 
   const classes = classNames(
     styles.Listing,
-    preview === "column" && styles.Column
+    preview === 'column' && styles.Column
   );
 
   return (

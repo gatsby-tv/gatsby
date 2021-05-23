@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from "react";
-import { usePopper } from "react-popper";
-import { Activatable } from "@gatsby-tv/components";
-import { classNames, Time, ifExists } from "@gatsby-tv/utilities";
+import React, { useState, useCallback } from 'react';
+import { usePopper } from 'react-popper';
+import { Activatable } from '@gatsby-tv/components';
+import { classNames, Time, ifExists } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from "@src/types";
-import styles from "./Timeline.scss";
+import { OverlayProps } from '@src/types';
+import styles from './Timeline.scss';
 
 export interface TimelineProps extends OverlayProps {
   className?: string;
@@ -27,24 +27,24 @@ export function Timeline(props: TimelineProps): React.ReactElement {
     attributes,
     update = () => undefined,
   }: any = usePopper(reference, popper, {
-    placement: "top",
-    strategy: "absolute",
+    placement: 'top',
+    strategy: 'absolute',
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: [0, 25],
         },
       },
       {
-        name: "preventOverflow",
+        name: 'preventOverflow',
         options: {
           tether: false,
           padding: 4,
         },
       },
       {
-        name: "flip",
+        name: 'flip',
         enabled: false,
       },
     ],

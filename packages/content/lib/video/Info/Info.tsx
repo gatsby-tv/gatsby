@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   Avatar,
   Optional,
   Icon,
   TextMeta,
   DiscreteSize,
-} from "@gatsby-tv/components";
-import { CheckmarkFill } from "@gatsby-tv/icons";
+} from '@gatsby-tv/components';
+import { CheckmarkFill } from '@gatsby-tv/icons';
 import {
   classNames,
   Value,
   ReleaseDate,
   useUniqueId,
-} from "@gatsby-tv/utilities";
+} from '@gatsby-tv/utilities';
 import {
   Browsable,
   Collection,
@@ -20,12 +20,12 @@ import {
   isVideo,
   isEpisodicVideo,
   isSeasonedShow,
-} from "@gatsby-tv/types";
+} from '@gatsby-tv/types';
 
-import { VideoInfoFormat, LinkProps } from "@lib/types";
+import { VideoInfoFormat, LinkProps } from '@lib/types';
 
-import { Skeleton } from "./Info.skeleton";
-import styles from "./Info.scss";
+import { Skeleton } from './Info.skeleton';
+import styles from './Info.scss';
 
 function getShowInfo(
   content: Browsable
@@ -53,17 +53,17 @@ export interface InfoProps {
 }
 
 export function Info(props: InfoProps): React.ReactElement {
-  const { content, format = "full", avatar, link: Link } = props;
-  const seasonId = useUniqueId("content-season");
-  const episodeId = useUniqueId("content-episode");
-  const titleId = useUniqueId("content-title");
-  const channelId = useUniqueId("content-channel");
-  const viewsId = useUniqueId("content-views");
-  const releaseId = useUniqueId("content-release");
+  const { content, format = 'full', avatar, link: Link } = props;
+  const seasonId = useUniqueId('content-season');
+  const episodeId = useUniqueId('content-episode');
+  const titleId = useUniqueId('content-title');
+  const channelId = useUniqueId('content-channel');
+  const viewsId = useUniqueId('content-views');
+  const releaseId = useUniqueId('content-release');
 
   if (!content) return <Skeleton format={format} avatar={avatar} />;
 
-  const channel = format !== "nochannel" ? content.channel : undefined;
+  const channel = format !== 'nochannel' ? content.channel : undefined;
   const [season, episode] = getShowInfo(content);
   const date = new Date(
     isVideo(content)
@@ -132,7 +132,7 @@ export function Info(props: InfoProps): React.ReactElement {
   ) : null;
 
   const StatsMarkup =
-    format !== "nostats" ? (
+    format !== 'nostats' ? (
       <TextMeta.List>
         <TextMeta.Data
           id={viewsId}
@@ -140,7 +140,7 @@ export function Info(props: InfoProps): React.ReactElement {
           value={content.views}
           data-description
         >
-          {Value(content.views, "view")}
+          {Value(content.views, 'view')}
         </TextMeta.Data>
         <TextMeta.Time
           id={releaseId}

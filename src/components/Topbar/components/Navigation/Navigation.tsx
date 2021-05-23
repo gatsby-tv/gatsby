@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/client";
-import { Button, Icon, Tabs, Menu, Rule } from "@gatsby-tv/components";
-import { GatsbyPlain, Subscribe, Browse, Misc } from "@gatsby-tv/icons";
-import { useFrame, useMenu } from "@gatsby-tv/utilities";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/client';
+import { Button, Icon, Tabs, Menu, Rule } from '@gatsby-tv/components';
+import { GatsbyPlain, Subscribe, Browse, Misc } from '@gatsby-tv/icons';
+import { useFrame, useMenu } from '@gatsby-tv/utilities';
 
-import { Link } from "@src/components/Link";
+import { Link } from '@src/components/Link';
 
-import styles from "./Navigation.module.scss";
+import styles from './Navigation.module.scss';
 
 function getCurrentTab(route: string): string | undefined {
   switch (route) {
-    case "/d/browse":
-      return "browse";
-    case "/d/subscriptions":
-      return "subscriptions";
+    case '/d/browse':
+      return 'browse';
+    case '/d/subscriptions':
+      return 'subscriptions';
     default:
       return;
   }
@@ -44,17 +44,17 @@ export function Navigation(): React.ReactElement {
           <Link
             component={Tabs.Link}
             href="/d/subscriptions"
-            $props={{ option: "subscriptions" }}
+            $props={{ option: 'subscriptions' }}
           >
-            {screen.width < 650 ? <Icon src={Subscribe} /> : "Subscriptions"}
+            {screen.width < 650 ? <Icon src={Subscribe} /> : 'Subscriptions'}
           </Link>
         )}
         <Link
           component={Tabs.Link}
           href="/d/browse"
-          $props={{ option: "browse" }}
+          $props={{ option: 'browse' }}
         >
-          {screen.width < 650 ? <Icon src={Browse} /> : "Browse"}
+          {screen.width < 650 ? <Icon src={Browse} /> : 'Browse'}
         </Link>
       </Tabs>
       <Button
@@ -73,46 +73,28 @@ export function Navigation(): React.ReactElement {
         active={menu.active}
         onExit={menu.deactivate}
       >
-        <div className={styles.MenuSection}>
-          Information
-        </div>
+        <div className={styles.MenuSection}>Information</div>
         <Link href="/p/about">
-          <div className={styles.MenuItem}>
-            About
-          </div>
+          <div className={styles.MenuItem}>About</div>
         </Link>
         <Link href="/p/creators">
-          <div className={styles.MenuItem}>
-            Creators
-          </div>
+          <div className={styles.MenuItem}>Creators</div>
         </Link>
         <Link href="/p/sponsors">
-          <div className={styles.MenuItem}>
-            Sponsors
-          </div>
+          <div className={styles.MenuItem}>Sponsors</div>
         </Link>
         <Link href="/p/developers">
-          <div className={styles.MenuItem}>
-            Developers
-          </div>
+          <div className={styles.MenuItem}>Developers</div>
         </Link>
         <Rule spacing="extratight" />
-        <div className={styles.MenuSection}>
-          Legal
-        </div>
+        <div className={styles.MenuSection}>Legal</div>
         <Link href="/p/terms">
-          <div className={styles.MenuItem}>
-            Terms of Service
-          </div>
+          <div className={styles.MenuItem}>Terms of Service</div>
         </Link>
         <Rule spacing="extratight" />
-        <div className={styles.MenuSection}>
-          Help
-        </div>
+        <div className={styles.MenuSection}>Help</div>
         <Link href="https://github.com/gatsby-tv/gatsby/issues">
-          <div className={styles.MenuItem}>
-            Submit an Issue
-          </div>
+          <div className={styles.MenuItem}>Submit an Issue</div>
         </Link>
       </Menu>
     </>

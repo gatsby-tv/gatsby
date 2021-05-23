@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 
 export interface BreakpointSet {
   [key: string]: string;
@@ -34,7 +34,7 @@ export function useBreakpoints<T extends string | number = number>(
         const query = window.matchMedia(points[item]);
         if (query.matches) setSelection(item);
         const handler = handleChange(item);
-        query.addEventListener("change", handler);
+        query.addEventListener('change', handler);
         return [item, [query, handler]];
       })
     );
@@ -43,7 +43,7 @@ export function useBreakpoints<T extends string | number = number>(
       Object.values(
         queries.current
       ).map((query: [MediaQueryList, MediaQueryHandler]) =>
-        query[0].removeEventListener("change", query[1])
+        query[0].removeEventListener('change', query[1])
       );
     };
   }, [key]);

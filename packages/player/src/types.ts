@@ -1,8 +1,8 @@
-import { ReactNode, ReactElement, Dispatch, SetStateAction } from "react";
-import { VideoProps } from "@gatsby-tv/components";
+import { ReactNode, ReactElement, Dispatch, SetStateAction } from 'react';
+import { VideoProps } from '@gatsby-tv/components';
 
-import { PlayerState } from "@src/utilities/use-player";
-import { TimelineState } from "@src/utilities/use-timeline";
+import { PlayerState } from '@src/utilities/use-player';
+import { TimelineState } from '@src/utilities/use-timeline';
 
 export interface PlayerProps extends VideoProps {
   children?: ReactNode;

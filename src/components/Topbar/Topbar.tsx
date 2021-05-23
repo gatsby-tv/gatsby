@@ -1,11 +1,11 @@
-import React from "react";
-import { classNames, useFrame } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames, useFrame } from '@gatsby-tv/utilities';
 
-import { Navigation } from "./components/Navigation";
-import { Search } from "./components/Search";
-import { Account } from "./components/Account";
+import { Navigation } from './components/Navigation';
+import { Search } from './components/Search';
+import { Account } from './components/Account';
 
-import styles from "./Topbar.module.scss";
+import styles from './Topbar.module.scss';
 
 export interface TopbarProps {
   className?: string;

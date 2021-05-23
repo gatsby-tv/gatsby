@@ -1,10 +1,10 @@
-import useSWR from "swr";
-import { Channel } from "@gatsby-tv/types";
+import useSWR from 'swr';
+import { Channel } from '@gatsby-tv/types';
 
-import { FetchResponse } from "@lib/types";
+import { FetchResponse } from '@lib/types';
 
-export function useFeaturedChannels(): FetchResponse<"channels", Channel[]> {
-  const { data, error } = useSWR("/listing/featured/channels");
+export function useFeaturedChannels(): FetchResponse<'channels', Channel[]> {
+  const { data, error } = useSWR('/listing/featured/channels');
 
   return {
     channels: data,

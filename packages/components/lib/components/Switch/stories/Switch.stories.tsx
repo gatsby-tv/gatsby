@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import React, { useState } from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { TextBox } from "@lib/components/TextBox";
-import { Switch, SwitchProps } from "@lib/components/Switch";
+import { TextBox } from '@lib/components/TextBox';
+import { Switch, SwitchProps } from '@lib/components/Switch';
 
-import styles from "./Switch.stories.scss";
+import styles from './Switch.stories.scss';
 
 export default {
-  title: "Switch",
+  title: 'Switch',
   component: Switch,
 } as Meta;
 
 export const TwoSettings: Story<SwitchProps> = () => {
-  const items = ["one", "two"];
-  const [selection, setSelection] = useState("one");
+  const items = ['one', 'two'];
+  const [selection, setSelection] = useState('one');
 
   return (
     <Switch
@@ -33,8 +33,8 @@ export const TwoSettings: Story<SwitchProps> = () => {
 };
 
 export const ThreeSettings: Story<SwitchProps> = () => {
-  const items = ["one", "two", "three"];
-  const [selection, setSelection] = useState("one");
+  const items = ['one', 'two', 'three'];
+  const [selection, setSelection] = useState('one');
 
   return (
     <Switch

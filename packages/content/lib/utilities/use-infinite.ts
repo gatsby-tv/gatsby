@@ -1,11 +1,11 @@
-import { useCallback } from "react";
-import { useSWRInfinite } from "swr";
+import { useCallback } from 'react';
+import { useSWRInfinite } from 'swr';
 
-import { InfiniteFetchResponse } from "@lib/types";
+import { InfiniteFetchResponse } from '@lib/types';
 
 export function useInfinite<T>(
   getKey: (index: number) => string | null
-): InfiniteFetchResponse<"data", T> {
+): InfiniteFetchResponse<'data', T> {
   const { data, error, size, setSize } = useSWRInfinite<T>(getKey);
 
   const generator = useCallback(() => setSize((current) => current + 1), [
@@ -14,7 +14,7 @@ export function useInfinite<T>(
 
   const loading =
     (!data && !error) ||
-    (size > 0 && data && typeof data[size - 1] === "undefined");
+    (size > 0 && data && typeof data[size - 1] === 'undefined');
 
   return {
     data: data?.flat() as T[] | undefined,

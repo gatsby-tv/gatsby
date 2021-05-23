@@ -4,21 +4,21 @@ import React, {
   useEffect,
   useReducer,
   useCallback,
-} from "react";
-import { ExtendLeft, ExtendRight } from "@gatsby-tv/icons";
+} from 'react';
+import { ExtendLeft, ExtendRight } from '@gatsby-tv/icons';
 import {
   classNames,
   useResizeObserver,
   useMobileDetector,
-} from "@gatsby-tv/utilities";
+} from '@gatsby-tv/utilities';
 
-import { CarouselContext } from "@lib/utilities/carousel";
-import { Button } from "@lib/components/Button";
+import { CarouselContext } from '@lib/utilities/carousel';
+import { Button } from '@lib/components/Button';
 
-import { Slider, SliderState, SliderAction } from "./components/Slider";
-import { Slide, SlideProps } from "./components/Slide";
+import { Slider, SliderState, SliderAction } from './components/Slider';
+import { Slide, SlideProps } from './components/Slide';
 
-import styles from "./Carousel.scss";
+import styles from './Carousel.scss';
 
 export type { SlideProps as CarouselSlideProps };
 
@@ -30,7 +30,7 @@ export interface CarouselProps {
 export function Carousel(props: CarouselProps): React.ReactElement | null {
   const { children, groups } = props;
   const mask = useRef<HTMLDivElement>(null);
-  const [width, setWidthBase] = useState<string>("100%");
+  const [width, setWidthBase] = useState<string>('100%');
   const isMobile = useMobileDetector();
 
   const setWidth = useCallback(
@@ -58,10 +58,10 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
   const [state, dispatch] = useReducer(
     (state: SliderState, action: SliderAction) => {
       switch (action.type) {
-        case "jump":
+        case 'jump':
           return { ...state, desired: action.desired };
 
-        case "sync":
+        case 'sync':
           return { ...state, slide: state.desired };
       }
     },
@@ -71,20 +71,20 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
   useResizeObserver(mask, (content) => setWidth(`${content.inlineSize}px`));
 
   useEffect(() => {
-    const id = setTimeout(() => dispatch({ type: "sync" }), 500);
+    const id = setTimeout(() => dispatch({ type: 'sync' }), 500);
     return () => clearTimeout(id);
   }, [state.desired]);
 
   const next = useCallback(
     () =>
-      dispatch({ type: "jump", desired: (state.slide + 1) % chunks.length }),
+      dispatch({ type: 'jump', desired: (state.slide + 1) % chunks.length }),
     [state.slide, chunks.length]
   );
 
   const prev = useCallback(
     () =>
       dispatch({
-        type: "jump",
+        type: 'jump',
         desired: (state.slide + chunks.length - 1) % chunks.length,
       }),
     [state.slide, chunks.length]

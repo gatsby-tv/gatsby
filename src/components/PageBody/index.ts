@@ -1,1 +1,1 @@
-export * from "./PageBody";
+export * from './PageBody';

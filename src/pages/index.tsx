@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import Head from "next/head";
-import { useSession } from "next-auth/client";
-import { Rule, TextDisplay } from "@gatsby-tv/components";
-import { Channel, Listing } from "@gatsby-tv/content";
-import { useUniqueId, useFrame } from "@gatsby-tv/utilities";
-import { User } from "@gatsby-tv/types";
+import React, { useEffect } from 'react';
+import Head from 'next/head';
+import { useSession } from 'next-auth/client';
+import { Rule, TextDisplay } from '@gatsby-tv/components';
+import { Channel, Listing } from '@gatsby-tv/content';
+import { useUniqueId, useFrame } from '@gatsby-tv/utilities';
+import { User } from '@gatsby-tv/types';
 
-import { PageBody } from "@src/components/PageBody";
-import { Link } from "@src/components/Link";
-import { useChannelModal } from "@src/utilities/channel-modal";
-import styles from "@src/styles/Home.module.scss";
+import { PageBody } from '@src/components/PageBody';
+import { Link } from '@src/components/Link';
+import { useChannelModal } from '@src/utilities/channel-modal';
+import styles from '@src/styles/Home.module.scss';
 
 export default function IndexPage(): React.ReactElement {
   const { screen } = useFrame();
-  const recommendedId = useUniqueId("recommended");
-  const recommendedLabel = useUniqueId("heading");
+  const recommendedId = useUniqueId('recommended');
+  const recommendedLabel = useUniqueId('heading');
   const [, setChannel] = useChannelModal();
   const [session, loading] = useSession();
 
@@ -37,7 +37,7 @@ export default function IndexPage(): React.ReactElement {
           id={recommendedId}
           user={session?.user as User | undefined}
           link={Link.Content}
-          avatar={screen.width > 650 ? "base" : "smaller"}
+          avatar={screen.width > 650 ? 'base' : 'smaller'}
           aria-labelledby={recommendedLabel}
         />
       </PageBody>

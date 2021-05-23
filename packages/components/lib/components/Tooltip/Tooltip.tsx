@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import type { Placement } from "@popperjs/core";
-import { usePopper } from "react-popper";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { useState, useEffect } from 'react';
+import type { Placement } from '@popperjs/core';
+import { usePopper } from 'react-popper';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Portal } from "@lib/components/Portal";
+import { Portal } from '@lib/components/Portal';
 
-import styles from "./Tooltip.scss";
+import styles from './Tooltip.scss';
 
 export interface TooltipProps {
   children?: React.ReactNode;
@@ -20,22 +20,22 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
   const [active, setActive] = useState(false);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
   const { styles: style, attributes } = usePopper(target.current, popper, {
-    placement: placement ?? "bottom",
+    placement: placement ?? 'bottom',
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: [0, offset ?? 10],
         },
       },
       {
-        name: "preventOverflow",
+        name: 'preventOverflow',
         options: {
           altBoundary: true,
         },
       },
       {
-        name: "flip",
+        name: 'flip',
       },
     ],
   });
@@ -43,11 +43,11 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
   useEffect(() => {
     const onPointerEnter = () => setActive(true);
     const onPointerLeave = () => setActive(false);
-    target.current?.addEventListener("pointerenter", onPointerEnter);
-    target.current?.addEventListener("pointerleave", onPointerLeave);
+    target.current?.addEventListener('pointerenter', onPointerEnter);
+    target.current?.addEventListener('pointerleave', onPointerLeave);
     return () => {
-      target.current?.removeEventListener("pointerenter", onPointerEnter);
-      target.current?.removeEventListener("pointerleave", onPointerLeave);
+      target.current?.removeEventListener('pointerenter', onPointerEnter);
+      target.current?.removeEventListener('pointerleave', onPointerLeave);
     };
   }, []);
 

@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Color from "color";
-import { ifExists } from "@gatsby-tv/utilities";
+import React, { useState, useEffect, useCallback } from 'react';
+import Color from 'color';
+import { ifExists } from '@gatsby-tv/utilities';
 
-import { Portal } from "@lib/components/Portal";
-import { EventListener } from "@lib/components/EventListener";
+import { Portal } from '@lib/components/Portal';
+import { EventListener } from '@lib/components/EventListener';
 
-import styles from "./Fireworks.scss";
+import styles from './Fireworks.scss';
 
 export interface FireworksProps {
   origin?: Origin;
@@ -111,7 +111,7 @@ Particle.render = (
   if (!Particle.exists(particle)) return;
 
   context.save();
-  context.globalCompositeOperation = "lighter";
+  context.globalCompositeOperation = 'lighter';
   context.fillStyle = String(
     Color.hsl(particle.hue, particle.saturation, particle.value).fade(
       1 - particle.alpha
@@ -161,7 +161,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   }, [canvas]);
 
   const draw = useCallback(() => {
-    const context = canvas?.getContext("2d");
+    const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -212,7 +212,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
 
     const rocketGenerator = () => {
       let position;
-      if (typeof origin === "function") {
+      if (typeof origin === 'function') {
         position = origin();
       } else {
         position = origin;

@@ -1,12 +1,12 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext } from 'react';
 
-import { ContextError } from "@lib/errors";
+import { ContextError } from '@lib/errors';
 
 import {
   UniqueIdGenerator,
   UniqueIdContext,
   UniqueIdContextType,
-} from "./context";
+} from './context';
 
 function newIdGenerator(prefix: string): UniqueIdGenerator {
   let index = 0;
@@ -27,7 +27,7 @@ export function useUniqueId(prefix: string): string {
   const context = useContext(UniqueIdContext);
 
   if (!context) {
-    throw new ContextError("UniqueId");
+    throw new ContextError('UniqueId');
   }
 
   const id = useRef<string | null>(null);

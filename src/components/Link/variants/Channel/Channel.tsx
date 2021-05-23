@@ -1,8 +1,8 @@
-import React from "react";
-import NextLink from "next/link";
-import { LinkProps, isChannelLink } from "@gatsby-tv/content";
+import React from 'react';
+import NextLink from 'next/link';
+import { LinkProps, isChannelLink } from '@gatsby-tv/content';
 
-import { Content } from "../Content";
+import { Content } from '../Content';
 
 export type ChannelProps = LinkProps;
 

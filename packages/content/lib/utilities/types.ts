@@ -3,7 +3,7 @@ import {
   ChannelLinkProps,
   ContentLinkProps,
   UserLinkProps,
-} from "@lib/types";
+} from '@lib/types';
 
 export function isChannelLink(link: LinkProps): link is ChannelLinkProps {
   return (link as ChannelLinkProps).channel !== undefined;

@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, RefObject } from "react";
+import { useState, useRef, useCallback, RefObject } from 'react';
 
 export interface MenuType<T extends HTMLElement> {
   ref: RefObject<T>;

@@ -1,7 +1,7 @@
-import React, { forwardRef, Ref } from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import styles from "./Link.scss";
+import styles from './Link.scss';
 
 export interface LinkProps extends React.AnchorHTMLAttributes<Element> {
   children?: React.ReactNode;
@@ -14,8 +14,8 @@ export interface LinkProps extends React.AnchorHTMLAttributes<Element> {
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   (props: LinkProps, ref: Ref<HTMLAnchorElement>) => {
     const { children, className, href, external, underline, ...rest } = props;
-    const target = external ? "_blank" : undefined;
-    const rel = external ? "noopener noreferrer" : undefined;
+    const target = external ? '_blank' : undefined;
+    const rel = external ? 'noopener noreferrer' : undefined;
 
     const classes = classNames(
       className,
@@ -40,4 +40,4 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   }
 );
 
-Link.displayName = "Link";
+Link.displayName = 'Link';

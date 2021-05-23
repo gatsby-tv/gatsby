@@ -1,11 +1,12 @@
-import React, { forwardRef, Ref } from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { BorderRadius } from "@lib/types";
+import { BorderRadius } from '@lib/types';
 
-import styles from "./Viewport.scss";
+import styles from './Viewport.scss';
 
-export interface ViewportProps extends Omit<React.HTMLAttributes<Element>, "placeholder"> {
+export interface ViewportProps
+  extends Omit<React.HTMLAttributes<Element>, 'placeholder'> {
   children?: React.ReactNode;
   className?: string;
   overlay?: React.ReactNode;
@@ -49,4 +50,4 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps>(
   }
 );
 
-Viewport.displayName = "Viewport";
+Viewport.displayName = 'Viewport';

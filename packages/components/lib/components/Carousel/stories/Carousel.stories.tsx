@@ -1,11 +1,11 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import React from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Image } from "@lib/components/Image";
-import { Carousel, CarouselProps } from "@lib/components/Carousel";
+import { Image } from '@lib/components/Image';
+import { Carousel, CarouselProps } from '@lib/components/Carousel';
 
 export default {
-  title: "Carousel",
+  title: 'Carousel',
   component: Carousel,
 } as Meta;
 

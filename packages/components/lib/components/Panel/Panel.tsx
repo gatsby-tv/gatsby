@@ -5,14 +5,14 @@ import React, {
   useEffect,
   useCallback,
   RefObject,
-} from "react";
-import { classNames, ifExists } from "@gatsby-tv/utilities";
+} from 'react';
+import { classNames, ifExists } from '@gatsby-tv/utilities';
 
-import { Portal } from "@lib/components/Portal";
-import { Optional } from "@lib/components/Optional";
-import { EventListener } from "@lib/components/EventListener";
+import { Portal } from '@lib/components/Portal';
+import { Optional } from '@lib/components/Optional';
+import { EventListener } from '@lib/components/EventListener';
 
-import styles from "./Panel.scss";
+import styles from './Panel.scss';
 
 type Touch = { clientX: number; clientY: number };
 
@@ -25,9 +25,9 @@ interface TouchState {
 }
 
 type TouchAction =
-  | { type: "start"; offset: number; time: number }
-  | { type: "move"; position: number; time: number }
-  | { type: "end" };
+  | { type: 'start'; offset: number; time: number }
+  | { type: 'move'; position: number; time: number }
+  | { type: 'end' };
 
 function getOffset(
   ref: RefObject<HTMLElement>,
@@ -35,14 +35,14 @@ function getOffset(
   direction: string
 ): number {
   switch (direction) {
-    case "right":
-      return getOffset.value(ref, touch.clientX, "left", "width");
-    case "left":
-      return 1 - getOffset.value(ref, touch.clientX, "left", "width");
-    case "bottom":
-      return getOffset.value(ref, touch.clientY, "top", "height");
-    case "top":
-      return 1 - getOffset.value(ref, touch.clientY, "top", "height");
+    case 'right':
+      return getOffset.value(ref, touch.clientX, 'left', 'width');
+    case 'left':
+      return 1 - getOffset.value(ref, touch.clientX, 'left', 'width');
+    case 'bottom':
+      return getOffset.value(ref, touch.clientY, 'top', 'height');
+    case 'top':
+      return 1 - getOffset.value(ref, touch.clientY, 'top', 'height');
     default:
       throw new Error(
         `getOffset called with incorrect direction: ${direction}`
@@ -67,7 +67,7 @@ export interface PanelProps {
   children?: React.ReactNode;
   id?: string;
   className?: string;
-  direction?: "top" | "right" | "bottom" | "left";
+  direction?: 'top' | 'right' | 'bottom' | 'left';
   draggable?: boolean;
   overlay?: boolean;
   active?: boolean;
@@ -80,7 +80,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     children,
     id,
     className,
-    direction = "right",
+    direction = 'right',
     draggable = true,
     overlay,
     active,
@@ -94,7 +94,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
   const [touch, setTouch] = useReducer(
     (state: TouchState, action: TouchAction) => {
       switch (action.type) {
-        case "start":
+        case 'start':
           return {
             ...state,
             active: true,
@@ -102,7 +102,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
             time: action.time,
           };
 
-        case "move":
+        case 'move':
           if (!state.active) {
             return state;
           } else if (action.position - state.offset < 0) {
@@ -123,7 +123,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
             };
           }
 
-        case "end":
+        case 'end':
           return {
             ...state,
             active: false,
@@ -163,14 +163,14 @@ export function Panel(props: PanelProps): React.ReactElement | null {
 
   useEffect(() => {
     if (!draggable) {
-      setTouch({ type: "end" });
+      setTouch({ type: 'end' });
     }
   }, [draggable]);
 
   const onKeyDown = useCallback(
     (event: any) => {
-      if (event.code === "Escape") {
-        setTouch({ type: "end" });
+      if (event.code === 'Escape') {
+        setTouch({ type: 'end' });
         setMounted(false);
       }
     },
@@ -181,7 +181,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     (event: any) => {
       if (!ref.current || !draggable) return;
       setTouch({
-        type: "start",
+        type: 'start',
         offset: getOffset(ref, event.touches[0] as Touch, direction),
         time: event.timeStamp,
       });
@@ -193,7 +193,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     (event: any) => {
       if (!ref.current || !draggable) return;
       setTouch({
-        type: "move",
+        type: 'move',
         position: getOffset(ref, event.touches[0] as Touch, direction),
         time: event.timeStamp,
       });
@@ -203,7 +203,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
 
   const onTouchEnd = useCallback(
     (event: any) => {
-      setTouch({ type: "end" });
+      setTouch({ type: 'end' });
       if (
         touch.position > 0.5 ||
         (touch.position > 0.15 && touch.velocity > 0.015)
@@ -221,19 +221,19 @@ export function Panel(props: PanelProps): React.ReactElement | null {
   );
 
   const transform =
-    direction === "right"
+    direction === 'right'
       ? {
           transform: `translateX(${
             100 * (visible && mounted ? touch.position : 1)
           }%)`,
         }
-      : direction === "left"
+      : direction === 'left'
       ? {
           transform: `translateX(${
             -100 * (visible && mounted ? touch.position : 1)
           }%)`,
         }
-      : direction === "bottom"
+      : direction === 'bottom'
       ? {
           transform: `translateY(${
             100 * (visible && mounted ? touch.position : 1)
@@ -249,7 +249,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     <Optional
       component={Portal}
       active={overlay}
-      $props={{ id: id ? `panel-${id}` : "panel" }}
+      $props={{ id: id ? `panel-${id}` : 'panel' }}
     >
       <div
         ref={ref}

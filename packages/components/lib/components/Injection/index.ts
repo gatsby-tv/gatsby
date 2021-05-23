@@ -1,1 +1,1 @@
-export * from "./Injection";
+export * from './Injection';

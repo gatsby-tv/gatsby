@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import { Button, Menu, Selection, EventListener } from "@gatsby-tv/components";
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { Button, Menu, Selection, EventListener } from '@gatsby-tv/components';
 import {
   Play,
   Pause,
@@ -9,11 +9,11 @@ import {
   VolumeFull,
   VolumeHalf,
   VolumeMute,
-} from "@gatsby-tv/icons";
-import { classNames, Time, useMenu } from "@gatsby-tv/utilities";
+} from '@gatsby-tv/icons';
+import { classNames, Time, useMenu } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from "@src/types";
-import styles from "./Controls.scss";
+import { OverlayProps } from '@src/types';
+import styles from './Controls.scss';
 
 export interface ControlsProps extends OverlayProps {
   className?: string;
@@ -36,7 +36,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
   const volumeRef = useRef<HTMLSpanElement>(null);
   const [slider, setSlider] = useState(false);
   const [dragging, setDragging] = useState(false);
-  const [resolution, setResolution] = useState<string>("auto");
+  const [resolution, setResolution] = useState<string>('auto');
 
   const time = Time(player.time * player.duration);
   const duration = Time(player.duration);
@@ -80,41 +80,41 @@ export function Controls(props: ControlsProps): React.ReactElement {
   const onKeydown = useCallback(
     (event: any) => {
       switch (event.key) {
-        case " ":
+        case ' ':
           event.preventDefault();
           setPlayback((current) => !current);
           return;
 
-        case "f":
-        case "F":
+        case 'f':
+        case 'F':
           setFullscreen((current) => !current);
           return;
 
-        case "k":
-        case "K":
+        case 'k':
+        case 'K':
           setPlayback((current) => !current);
           return;
 
-        case "m":
-        case "M":
+        case 'm':
+        case 'M':
           setMuted((current) => !current);
           return;
 
-        case "ArrowUp":
+        case 'ArrowUp':
           setVolume((current) => Math.min(current + 0.05, 1));
           return;
 
-        case "ArrowDown":
+        case 'ArrowDown':
           setVolume((current) => Math.max(current - 0.05, 0));
           return;
 
-        case "ArrowRight":
-          if (!player.seeking) setSignal("forward");
+        case 'ArrowRight':
+          if (!player.seeking) setSignal('forward');
           setSeek((current) => current + 5);
           return;
 
-        case "ArrowLeft":
-          if (!player.seeking) setSignal("backward");
+        case 'ArrowLeft':
+          if (!player.seeking) setSignal('backward');
           setSeek((current) => current - 5);
           return;
       }

@@ -1,7 +1,7 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import styles from "../../Connected.scss";
+import styles from '../../Connected.scss';
 
 export interface ItemProps extends React.HTMLAttributes<Element> {
   children?: React.ReactNode;

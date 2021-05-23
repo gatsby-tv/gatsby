@@ -1,38 +1,38 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import { usePopper } from "react-popper";
-import { classNames, ifExists } from "@gatsby-tv/utilities";
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { usePopper } from 'react-popper';
+import { classNames, ifExists } from '@gatsby-tv/utilities';
 
-import { Optional } from "@lib/components/Optional";
-import { useForm } from "@lib/utilities/form";
-import { Option } from "@lib/types";
+import { Optional } from '@lib/components/Optional';
+import { useForm } from '@lib/utilities/form';
+import { Option } from '@lib/types';
 
-import styles from "./Slider.scss";
+import styles from './Slider.scss';
 
 export interface SliderProps
   extends Omit<
     React.InputHTMLAttributes<HTMLElement>,
-    | "id"
-    | "accept"
-    | "alt"
-    | "autoComplete"
-    | "capture"
-    | "checked"
-    | "formAction"
-    | "formEncType"
-    | "formMethod"
-    | "formNoValidate"
-    | "formTarget"
-    | "height"
-    | "max"
-    | "min"
-    | "multiple"
-    | "size"
-    | "src"
-    | "step"
-    | "type"
-    | "value"
-    | "width"
-    | "onChange"
+    | 'id'
+    | 'accept'
+    | 'alt'
+    | 'autoComplete'
+    | 'capture'
+    | 'checked'
+    | 'formAction'
+    | 'formEncType'
+    | 'formMethod'
+    | 'formNoValidate'
+    | 'formTarget'
+    | 'height'
+    | 'max'
+    | 'min'
+    | 'multiple'
+    | 'size'
+    | 'src'
+    | 'step'
+    | 'type'
+    | 'value'
+    | 'width'
+    | 'onChange'
   > {
   id: string;
   min: number;
@@ -71,23 +71,23 @@ export function Slider(props: SliderProps): React.ReactElement {
   const { errors, setError, clearError } = useForm();
 
   const { styles: style, attributes, update } = usePopper(reference, popper, {
-    placement: "top",
-    strategy: "absolute",
+    placement: 'top',
+    strategy: 'absolute',
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: [0, 30],
         },
       },
       {
-        name: "preventOverflow",
+        name: 'preventOverflow',
         options: {
           tether: false,
         },
       },
-      { name: "flip" },
-      { name: "arrow" },
+      { name: 'flip' },
+      { name: 'arrow' },
     ],
   });
 
@@ -109,7 +109,7 @@ export function Slider(props: SliderProps): React.ReactElement {
   const setPosition = useCallback(
     (value) =>
       setPositionBase((current) => {
-        const position = typeof value === "function" ? value(current) : value;
+        const position = typeof value === 'function' ? value(current) : value;
         const denormalized = position * (max - min) + min;
         const result = stops
           ? stops

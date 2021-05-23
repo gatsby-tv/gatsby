@@ -5,18 +5,18 @@ import React, {
   useCallback,
   forwardRef,
   Ref,
-} from "react";
-import { classNames } from "@gatsby-tv/utilities";
+} from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Optional } from "@lib/components/Optional";
-import { EventListener } from "@lib/components/EventListener";
-import { Link as LinkComponent } from "@lib/components/Link";
+import { Optional } from '@lib/components/Optional';
+import { EventListener } from '@lib/components/EventListener';
+import { Link as LinkComponent } from '@lib/components/Link';
 
-import { Item, ItemProps } from "../Item";
-import styles from "../../TextMeta.scss";
+import { Item, ItemProps } from '../Item';
+import styles from '../../TextMeta.scss';
 
 export interface LinkProps
-  extends Omit<ItemProps, "element" | "clamp" | "dateTime"> {
+  extends Omit<ItemProps, 'element' | 'clamp' | 'dateTime'> {
   className?: string;
   href?: string;
   external?: boolean;
@@ -61,4 +61,4 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   }
 );
 
-Link.displayName = "Link";
+Link.displayName = 'Link';

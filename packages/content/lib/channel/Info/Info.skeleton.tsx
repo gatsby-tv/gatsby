@@ -1,8 +1,8 @@
-import React from "react";
-import { DiscreteSize, Avatar, TextPlaceholder } from "@gatsby-tv/components";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { DiscreteSize, Avatar, TextPlaceholder } from '@gatsby-tv/components';
+import { classNames } from '@gatsby-tv/utilities';
 
-import styles from "./Info.scss";
+import styles from './Info.scss';
 
 export interface SkeletonProps {
   avatar?: DiscreteSize;

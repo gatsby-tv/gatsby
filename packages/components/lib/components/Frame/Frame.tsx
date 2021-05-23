@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import { FrameContext, useResizeObserver } from "@gatsby-tv/utilities";
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { FrameContext, useResizeObserver } from '@gatsby-tv/utilities';
 
-import { EventListener } from "@lib/components/EventListener";
+import { EventListener } from '@lib/components/EventListener';
 
-import styles from "./Frame.scss";
-import { MainFrame, TopFrame, SideFrame } from "./components";
+import styles from './Frame.scss';
+import { MainFrame, TopFrame, SideFrame } from './components';
 
 export interface FrameProps {
   children?: React.ReactNode;
@@ -13,7 +13,7 @@ export interface FrameProps {
 }
 
 export function Frame(props: FrameProps): React.ReactElement {
-  const{ children, topbar: Topbar, sidebar: Sidebar } = props;
+  const { children, topbar: Topbar, sidebar: Sidebar } = props;
   const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
@@ -34,7 +34,7 @@ export function Frame(props: FrameProps): React.ReactElement {
     (value: boolean | ((current: boolean) => boolean)) =>
       setTopbarBase((current: boolean) => {
         if (!topframe.current) return false;
-        return typeof value === "function" ? value(current) : value;
+        return typeof value === 'function' ? value(current) : value;
       }),
     []
   );
@@ -43,7 +43,7 @@ export function Frame(props: FrameProps): React.ReactElement {
     (value: boolean | ((current: boolean) => boolean)) =>
       setSidebarBase((current: boolean) => {
         if (!sideframe.current) return false;
-        return typeof value === "function" ? value(current) : value;
+        return typeof value === 'function' ? value(current) : value;
       }),
     []
   );

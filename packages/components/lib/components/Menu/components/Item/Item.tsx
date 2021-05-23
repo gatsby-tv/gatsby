@@ -1,16 +1,16 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Connected } from "@lib/components/Connected";
-import { Optional } from "@lib/components/Optional";
-import { Icon } from "@lib/components/Icon";
-import { Button, ButtonProps } from "@lib/components/Button";
-import { IconSource } from "@lib/types";
-import { useItem } from "@lib/utilities/item";
+import { Connected } from '@lib/components/Connected';
+import { Optional } from '@lib/components/Optional';
+import { Icon } from '@lib/components/Icon';
+import { Button, ButtonProps } from '@lib/components/Button';
+import { IconSource } from '@lib/types';
+import { useItem } from '@lib/utilities/item';
 
-import styles from "../../Menu.scss";
+import styles from '../../Menu.scss';
 
-export interface ItemProps extends Omit<ButtonProps, "unstyled"> {
+export interface ItemProps extends Omit<ButtonProps, 'unstyled'> {
   children?: React.ReactNode;
   className?: string;
   icon?: IconSource;

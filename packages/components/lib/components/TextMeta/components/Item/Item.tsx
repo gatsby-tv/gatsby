@@ -1,7 +1,7 @@
-import React, { forwardRef, Ref } from "react";
-import { classNames, ifExists } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from 'react';
+import { classNames, ifExists } from '@gatsby-tv/utilities';
 
-import styles from "../../TextMeta.scss";
+import styles from '../../TextMeta.scss';
 
 export interface ItemProps extends React.HTMLAttributes<Element> {
   children?: React.ReactNode;
@@ -16,17 +16,13 @@ export const Item = forwardRef<HTMLElement, ItemProps>(
   (props: ItemProps, ref: Ref<HTMLElement>) => {
     const {
       children,
-      element: Element = "span",
+      element: Element = 'span',
       className,
       clamp,
       ...rest
     } = props;
 
-    const classes = classNames(
-      className,
-      styles.Item,
-      clamp && styles.Clamp,
-    );
+    const classes = classNames(className, styles.Item, clamp && styles.Clamp);
 
     return (
       <Element
@@ -41,4 +37,4 @@ export const Item = forwardRef<HTMLElement, ItemProps>(
   }
 );
 
-Item.displayName = "Item";
+Item.displayName = 'Item';

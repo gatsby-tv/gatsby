@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useRef, useEffect, useCallback, DependencyList } from "react";
+import { useRef, useEffect, useCallback, DependencyList } from 'react';
 
 export interface AsyncMethod<T> {
   (): Promise<T>;
@@ -23,7 +23,7 @@ export function useAsync<T>(
     mounted.current = true;
     _method().then(
       (data?: T) =>
-        typeof data !== "undefined" && mounted.current && _callback(data as T)
+        typeof data !== 'undefined' && mounted.current && _callback(data as T)
     );
     return () => {
       mounted.current = false;

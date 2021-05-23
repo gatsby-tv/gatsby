@@ -1,12 +1,12 @@
-import React, { useCallback } from "react";
-import { ifExists, classNames, useModalCallback } from "@gatsby-tv/utilities";
+import React, { useCallback } from 'react';
+import { ifExists, classNames, useModalCallback } from '@gatsby-tv/utilities';
 
-import { Optional } from "@lib/components/Optional";
-import { Portal } from "@lib/components/Portal";
-import { EventListener } from "@lib/components/EventListener";
-import { EventHandler } from "@lib/types";
+import { Optional } from '@lib/components/Optional';
+import { Portal } from '@lib/components/Portal';
+import { EventListener } from '@lib/components/EventListener';
+import { EventHandler } from '@lib/types';
 
-import styles from "./Modal.scss";
+import styles from './Modal.scss';
 
 export interface ModalProps {
   children?: React.ReactNode;
@@ -19,21 +19,13 @@ export interface ModalProps {
 }
 
 export function Modal(props: ModalProps): React.ReactElement | null {
-  const {
-    children,
-    id,
-    className,
-    overlay,
-    active,
-    zIndex,
-    onExit,
-  } = props;
+  const { children, id, className, overlay, active, zIndex, onExit } = props;
 
   useModalCallback(onExit, [onExit]);
 
   const onKeyDown = useCallback(
     (event: any) => {
-      if (event.code === "Escape") {
+      if (event.code === 'Escape') {
         onExit?.();
       }
     },
@@ -45,7 +37,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   const classes = classNames(className, styles.Modal);
 
   return active ? (
-    <Portal id={id ? `modal-${id}` : "modal"}>
+    <Portal id={id ? `modal-${id}` : 'modal'}>
       <Optional
         component="div"
         active={overlay}

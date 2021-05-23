@@ -1,9 +1,9 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { FontSize } from "@lib/types";
+import { FontSize } from '@lib/types';
 
-import styles from "./TextPlaceholder.scss";
+import styles from './TextPlaceholder.scss';
 
 export interface TextPlaceholderProps {
   className?: string;
@@ -15,7 +15,7 @@ export interface TextPlaceholderProps {
 export function TextPlaceholder(
   props: TextPlaceholderProps
 ): React.ReactElement {
-  const { className, font = "body", heading, width = 1 } = props;
+  const { className, font = 'body', heading, width = 1 } = props;
 
   const classes = classNames(
     className,

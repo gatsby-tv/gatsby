@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Avatar,
   Button,
@@ -10,14 +10,14 @@ import {
   Rule,
   Tabs,
   TextPlaceholder,
-} from "@gatsby-tv/components";
-import { Cancel } from "@gatsby-tv/icons";
+} from '@gatsby-tv/components';
+import { Cancel } from '@gatsby-tv/icons';
 
-import { Videos } from "@lib/channel/Videos";
-import { Playlists } from "@lib/channel/Playlists";
-import { Shows } from "@lib/channel/Shows";
+import { Videos } from '@lib/channel/Videos';
+import { Playlists } from '@lib/channel/Playlists';
+import { Shows } from '@lib/channel/Shows';
 
-import styles from "./Modal.scss";
+import styles from './Modal.scss';
 
 export interface SkeletonProps {
   mobile: boolean;
@@ -32,7 +32,8 @@ export function Skeleton(props: SkeletonProps): React.ReactElement | null {
   const { mobile, tab, setTab, active, onExit, onScroll } = props;
 
   const Container = mobile ? PanelComponent : ModalComponent;
-  const Listing = tab === "videos" ? Videos : tab === "playlists" ? Playlists : Shows;
+  const Listing =
+    tab === 'videos' ? Videos : tab === 'playlists' ? Playlists : Shows;
 
   const OverlayMarkup = (
     <div className={styles.Overlay}>
@@ -61,10 +62,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement | null {
         onClick={onExit}
       />
       <Scroll smooth hide onScroll={onScroll}>
-        <Image
-          aspectRatio={0.5}
-          overlay={OverlayMarkup}
-        />
+        <Image aspectRatio={0.5} overlay={OverlayMarkup} />
         <div>
           <Tabs
             className={styles.Tabs}

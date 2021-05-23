@@ -1,17 +1,20 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   UniqueIdContext,
   useUniqueIdGenerator,
   ModalContext,
   useModalContext,
-} from "@gatsby-tv/utilities";
+} from '@gatsby-tv/utilities';
 
-import { EventHandler } from "@lib/types";
-import { AppContext } from "@lib/utilities/app";
-import { InjectionContext, useInjectionContext } from "@lib/utilities/injection";
-import { useSupports } from "@lib/utilities/supports";
+import { EventHandler } from '@lib/types';
+import { AppContext } from '@lib/utilities/app';
+import {
+  InjectionContext,
+  useInjectionContext,
+} from '@lib/utilities/injection';
+import { useSupports } from '@lib/utilities/supports';
 
-import "./AppProvider.scss";
+import './AppProvider.scss';
 
 export interface AppProviderProps {
   children?: React.ReactNode;

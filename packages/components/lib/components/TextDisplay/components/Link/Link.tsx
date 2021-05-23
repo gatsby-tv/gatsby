@@ -1,17 +1,17 @@
-import React, { forwardRef, Ref } from "react";
-import { ExtendRight } from "@gatsby-tv/icons";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { forwardRef, Ref } from 'react';
+import { ExtendRight } from '@gatsby-tv/icons';
+import { classNames } from '@gatsby-tv/utilities';
 
 import {
   Link as LinkBase,
   LinkProps as LinkBaseProps,
-} from "@lib/components/Link";
-import { Icon } from "@lib/components/Icon";
-import { DisplaySize, TextElement } from "@lib/types";
+} from '@lib/components/Link';
+import { Icon } from '@lib/components/Icon';
+import { DisplaySize, TextElement } from '@lib/types';
 
-import styles from "../../TextDisplay.scss";
+import styles from '../../TextDisplay.scss';
 
-export interface LinkProps extends Omit<LinkBaseProps, "underline"> {
+export interface LinkProps extends Omit<LinkBaseProps, 'underline'> {
   children?: string | string[];
   id?: string;
   className?: string;
@@ -25,8 +25,8 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const {
       children,
       className,
-      element: Element = "h2",
-      size = "medium",
+      element: Element = 'h2',
+      size = 'medium',
       thin,
       ...linkProps
     } = props;
@@ -45,11 +45,11 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             <Icon
               src={ExtendRight}
               size={
-                size === "large"
-                  ? "large"
-                  : size === "medium"
-                  ? "small"
-                  : "smaller"
+                size === 'large'
+                  ? 'large'
+                  : size === 'medium'
+                  ? 'small'
+                  : 'smaller'
               }
             />
           </div>

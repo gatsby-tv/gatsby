@@ -1,9 +1,9 @@
-import useSWR from "swr";
-import { User } from "@gatsby-tv/types";
+import useSWR from 'swr';
+import { User } from '@gatsby-tv/types';
 
-import { FetchResponse } from "@lib/types";
+import { FetchResponse } from '@lib/types';
 
-export function useUser(unique?: string): FetchResponse<"user", User> {
+export function useUser(unique?: string): FetchResponse<'user', User> {
   const { data, error } = useSWR(unique ? `/user/${unique}` : null);
 
   return {

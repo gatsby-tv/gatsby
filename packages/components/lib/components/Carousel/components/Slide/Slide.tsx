@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { useCarousel } from "@lib/utilities/carousel";
+import { useCarousel } from '@lib/utilities/carousel';
 
-import styles from "../../Carousel.scss";
+import styles from '../../Carousel.scss';
 
 export interface SlideProps {
   children?: React.ReactNode;

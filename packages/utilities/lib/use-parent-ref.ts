@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useRef, RefObject } from "react";
+import { useRef, RefObject } from 'react';
 
-import { useIsomorphicLayoutEffect } from "@lib/use-isomorphic-layout-effect";
+import { useIsomorphicLayoutEffect } from '@lib/use-isomorphic-layout-effect';
 
 export function useParentRef<T extends HTMLElement, P = HTMLElement>(
   ref: RefObject<T>

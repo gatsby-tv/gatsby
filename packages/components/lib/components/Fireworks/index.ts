@@ -1,1 +1,1 @@
-export * from "./Fireworks";
+export * from './Fireworks';

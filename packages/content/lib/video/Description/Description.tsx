@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import DOMPurify from "dompurify";
-import { Button, Injection, TextBox, Icon, Rule } from "@gatsby-tv/components";
-import { ExtendDown, ExtendUp } from "@gatsby-tv/icons";
+import React, { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
+import { Button, Injection, TextBox, Icon, Rule } from '@gatsby-tv/components';
+import { ExtendDown, ExtendUp } from '@gatsby-tv/icons';
 import {
   ifExists,
   useMobileDetector,
   useStabilizedCallback,
-} from "@gatsby-tv/utilities";
-import { Browsable } from "@gatsby-tv/types";
+} from '@gatsby-tv/utilities';
+import { Browsable } from '@gatsby-tv/types';
 
-import { Skeleton } from "./Description.skeleton";
-import styles from "./Description.scss";
+import { Skeleton } from './Description.skeleton';
+import styles from './Description.scss';
 
 export interface DescriptionProps {
   id?: string;
@@ -48,9 +48,9 @@ export function Description(
       {id && !clamp && <Injection.Target id={id} />}
       <Rule>
         <Button className={styles.ShowMoreButton} onClick={toggleClamp}>
-          {clamp ? "Show More" : "Show Less"}
+          {clamp ? 'Show More' : 'Show Less'}
         </Button>
-     </Rule>
+      </Rule>
     </>
   ) : (
     <Button unstyled onClick={toggleClamp}>

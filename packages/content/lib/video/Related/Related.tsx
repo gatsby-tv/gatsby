@@ -1,15 +1,17 @@
-import React, { AriaAttributes } from "react";
-import { Stream } from "@gatsby-tv/components";
-import { Video } from "@gatsby-tv/types";
+import React, { AriaAttributes } from 'react';
+import { Stream } from '@gatsby-tv/components';
+import { Video } from '@gatsby-tv/types';
 
-import { Article } from "@lib/listing/components/Article";
-import { ListingContext, ListingContextType } from "@lib/utilities/listing";
-import { useRelatedFeed } from "@lib/utilities/use-related-feed";
+import { Article } from '@lib/listing/components/Article';
+import { ListingContext, ListingContextType } from '@lib/utilities/listing';
+import { useRelatedFeed } from '@lib/utilities/use-related-feed';
 
-import { Skeleton } from "./Related.skeleton";
-import styles from "./Related.scss";
+import { Skeleton } from './Related.skeleton';
+import styles from './Related.scss';
 
-export interface RelatedProps extends Partial<ListingContextType>, AriaAttributes {
+export interface RelatedProps
+  extends Partial<ListingContextType>,
+    AriaAttributes {
   video?: Video;
 }
 
@@ -17,8 +19,8 @@ export function Related(props: RelatedProps): React.ReactElement {
   const {
     id,
     video,
-    preview = "row",
-    info = "full",
+    preview = 'row',
+    info = 'full',
     avatar,
     link,
     ...aria

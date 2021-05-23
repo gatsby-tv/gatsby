@@ -1,9 +1,9 @@
-import React from "react";
-import { createPortal } from "react-dom";
+import React from 'react';
+import { createPortal } from 'react-dom';
 
-import { useInjection } from "@lib/utilities/injection";
+import { useInjection } from '@lib/utilities/injection';
 
-import { Target, TargetProps } from "./components";
+import { Target, TargetProps } from './components';
 
 export type { TargetProps as InjectionTargetProps };
 

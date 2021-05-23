@@ -1,13 +1,13 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import React from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Image } from "@lib/components/Image";
-import { Frame, FrameProps } from "@lib/components/Frame";
+import { Image } from '@lib/components/Image';
+import { Frame, FrameProps } from '@lib/components/Frame';
 
-import styles from "./Frame.stories.scss";
+import styles from './Frame.stories.scss';
 
 export default {
-  title: "Frame",
+  title: 'Frame',
   component: Frame,
 } as Meta;
 

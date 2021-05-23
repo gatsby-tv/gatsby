@@ -1,22 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Activatable, EventListener, Icon } from "@gatsby-tv/components";
-import { Spinner } from "@gatsby-tv/icons";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Activatable, EventListener, Icon } from '@gatsby-tv/components';
+import { Spinner } from '@gatsby-tv/icons';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Signal } from "@src/components/Signal";
-import { OverlayProps } from "@src/types";
+import { Signal } from '@src/components/Signal';
+import { OverlayProps } from '@src/types';
 
-import { Controls } from "./components/Controls";
-import { Timeline } from "./components/Timeline";
-import styles from "./MobileOverlay.scss";
+import { Controls } from './components/Controls';
+import { Timeline } from './components/Timeline';
+import styles from './MobileOverlay.scss';
 
 export function MobileOverlay(props: OverlayProps): React.ReactElement {
-  const {
-    player,
-    timeline,
-    signal,
-    setActive,
-  } = props;
+  const { player, timeline, signal, setActive } = props;
 
   const [disabled, setDisabled] = useState(false);
   const [controls, setControls] = useState(false);

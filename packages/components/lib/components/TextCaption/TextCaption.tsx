@@ -1,7 +1,7 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import styles from "./TextCaption.scss";
+import styles from './TextCaption.scss';
 
 export interface TextCaptionProps {
   children?: React.ReactNode;

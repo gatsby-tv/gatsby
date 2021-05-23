@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import React, { useState } from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Form, FormFieldProps, FormLabelProps } from "@lib/components/Form";
+import { Form, FormFieldProps, FormLabelProps } from '@lib/components/Form';
 
-import styles from "./Form.stories.scss";
+import styles from './Form.stories.scss';
 
 export default {
-  title: "Form",
+  title: 'Form',
   component: Form,
 } as Meta;
 
@@ -14,11 +14,11 @@ export const Field: Story<Partial<FormFieldProps & FormLabelProps>> = (
   props
 ) => {
   const { help, hidden, ...rest } = props;
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const onChange = (value, id, setError, clearError) => {
     if (value.length > 10) {
-      setError(id, "The provided value is greater than 10 characters.");
+      setError(id, 'The provided value is greater than 10 characters.');
     } else {
       clearError(id);
     }
@@ -30,7 +30,7 @@ export const Field: Story<Partial<FormFieldProps & FormLabelProps>> = (
       <Form.Label
         for="field"
         label="Example Field"
-        help={typeof props.help === "string" ? props.help : undefined}
+        help={typeof props.help === 'string' ? props.help : undefined}
         hidden={props.hidden}
       >
         <Form.Field
@@ -55,11 +55,11 @@ export const Select: Story<Partial<FormSelectProps & FormLabelProps>> = (
   props
 ) => {
   const options = [
-    { value: "red", label: "Red" },
-    { value: "blue", label: "Blue" },
-    { value: "green", label: "Green" },
-    { value: "yellow", label: "Yellow" },
-    { value: "cyan", label: "Cyan" },
+    { value: 'red', label: 'Red' },
+    { value: 'blue', label: 'Blue' },
+    { value: 'green', label: 'Green' },
+    { value: 'yellow', label: 'Yellow' },
+    { value: 'cyan', label: 'Cyan' },
   ];
 
   return (
@@ -67,7 +67,7 @@ export const Select: Story<Partial<FormSelectProps & FormLabelProps>> = (
       <Form.Label
         for="select"
         label="Example Select"
-        help={typeof props.help === "string" ? props.help : undefined}
+        help={typeof props.help === 'string' ? props.help : undefined}
         hidden={props.hidden}
       >
         <Form.Select
@@ -100,7 +100,7 @@ export const Slider: Story<Partial<FormSliderProps & FormLabelProps>> = (
       <Form.Label
         for="slider"
         label="Example Slider"
-        help={typeof props.help === "string" ? props.help : undefined}
+        help={typeof props.help === 'string' ? props.help : undefined}
         hidden={props.hidden}
       >
         <Form.Slider
@@ -121,22 +121,22 @@ Slider.args = {
   hidden: false,
 };
 
-export const SliderWithStops: Story<Partial<
-  FormSliderProps & FormLabelProps
->> = (props) => {
+export const SliderWithStops: Story<
+  Partial<FormSliderProps & FormLabelProps>
+> = (props) => {
   const [value, setValue] = useState(50);
   const stops = [
-    { value: 0, label: "0 units" },
-    { value: 10, label: "1 units" },
-    { value: 20, label: "2 units" },
-    { value: 30, label: "3 units" },
-    { value: 40, label: "4 units" },
-    { value: 50, label: "5 units" },
-    { value: 60, label: "6 units" },
-    { value: 70, label: "7 units" },
-    { value: 80, label: "8 units" },
-    { value: 90, label: "9 units" },
-    { value: 100, label: "10 units" },
+    { value: 0, label: '0 units' },
+    { value: 10, label: '1 units' },
+    { value: 20, label: '2 units' },
+    { value: 30, label: '3 units' },
+    { value: 40, label: '4 units' },
+    { value: 50, label: '5 units' },
+    { value: 60, label: '6 units' },
+    { value: 70, label: '7 units' },
+    { value: 80, label: '8 units' },
+    { value: 90, label: '9 units' },
+    { value: 100, label: '10 units' },
   ];
 
   return (
@@ -144,7 +144,7 @@ export const SliderWithStops: Story<Partial<
       <Form.Label
         for="slider"
         label="Example Slider"
-        help={typeof props.help === "string" ? props.help : undefined}
+        help={typeof props.help === 'string' ? props.help : undefined}
         hidden={props.hidden}
       >
         <Form.Slider

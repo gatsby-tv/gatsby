@@ -1,12 +1,12 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { useToggle } from "@gatsby-tv/utilities";
+import React from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
+import { useToggle } from '@gatsby-tv/utilities';
 
-import { Button } from "@lib/components/Button";
-import { Fireworks, FireworksProps } from "@lib/components/Fireworks";
+import { Button } from '@lib/components/Button';
+import { Fireworks, FireworksProps } from '@lib/components/Fireworks';
 
 export default {
-  title: "Fireworks",
+  title: 'Fireworks',
   component: Fireworks,
 } as Meta;
 

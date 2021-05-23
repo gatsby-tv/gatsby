@@ -1,13 +1,13 @@
 /* eslint-disable */
 
-import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+import NextAuth from 'next-auth';
+import Providers from 'next-auth/providers';
 
-import { CJAYROSS_USER } from "@src/example";
+import { CJAYROSS_USER } from '@src/example';
 
 const providers = [
   Providers.Credentials({
-    name: "credentials",
+    name: 'credentials',
     credentials: {},
     async authorize(credentials) {
       return CJAYROSS_USER;

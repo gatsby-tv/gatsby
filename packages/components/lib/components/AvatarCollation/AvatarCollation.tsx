@@ -1,11 +1,11 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
-import { IPFSContent } from "@gatsby-tv/types";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
+import { IPFSContent } from '@gatsby-tv/types';
 
-import { Spacing, DiscreteSize } from "@lib/types";
-import { Avatar } from "@lib/components/Avatar";
+import { Spacing, DiscreteSize } from '@lib/types';
+import { Avatar } from '@lib/components/Avatar';
 
-import styles from "./AvatarCollation.scss";
+import styles from './AvatarCollation.scss';
 
 export interface AvatarCollationProps {
   avatars: (IPFSContent | string | undefined)[];

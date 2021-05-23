@@ -1,12 +1,12 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { SwitchContext } from "@lib/utilities/switch";
-import { ItemContext } from "@lib/utilities/item";
-import { Connected } from "@lib/components/Connected";
+import { SwitchContext } from '@lib/utilities/switch';
+import { ItemContext } from '@lib/utilities/item';
+import { Connected } from '@lib/components/Connected';
 
-import { Item, ItemProps } from "./components";
-import styles from "./Switch.scss";
+import { Item, ItemProps } from './components';
+import styles from './Switch.scss';
 
 export type { ItemProps as SwitchItemProps };
 
@@ -26,9 +26,7 @@ export function Switch(props: SwitchProps): React.ReactElement {
   return (
     <SwitchContext.Provider value={{ selection, onSelect }}>
       <ItemContext.Provider value={{ itemClass }}>
-        <Connected className={classes}>
-          {children}
-        </Connected>
+        <Connected className={classes}>{children}</Connected>
       </ItemContext.Provider>
     </SwitchContext.Provider>
   );

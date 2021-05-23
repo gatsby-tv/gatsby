@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 import {
   Avatar,
   Icon,
   Optional,
   TextMeta,
   DiscreteSize,
-} from "@gatsby-tv/components";
-import { CheckmarkFill } from "@gatsby-tv/icons";
-import { UserHandle, Value } from "@gatsby-tv/utilities";
-import { User } from "@gatsby-tv/types";
+} from '@gatsby-tv/components';
+import { CheckmarkFill } from '@gatsby-tv/icons';
+import { UserHandle, Value } from '@gatsby-tv/utilities';
+import { User } from '@gatsby-tv/types';
 
-import { LinkProps } from "@lib/types";
+import { LinkProps } from '@lib/types';
 
-import { Skeleton } from "./Info.skeleton";
-import styles from "./Info.scss";
+import { Skeleton } from './Info.skeleton';
+import styles from './Info.scss';
 
 export interface InfoProps {
   user?: User;
@@ -23,18 +23,18 @@ export interface InfoProps {
 }
 
 export function Info(props: InfoProps): React.ReactElement {
-  const { user, avatar = "base", link: Link } = props;
+  const { user, avatar = 'base', link: Link } = props;
 
   if (!user) return <Skeleton />;
 
   const blurb =
-    typeof props.blurb === "function" ? props.blurb(user) : props.blurb;
+    typeof props.blurb === 'function' ? props.blurb(user) : props.blurb;
 
   const VerifiedMarkup = user.verified ? (
     <Icon className={styles.Verified} src={CheckmarkFill} size="smallest" />
   ) : null;
 
-  const BlurbMarkup = !blurb ? null : typeof blurb === "string" ? (
+  const BlurbMarkup = !blurb ? null : typeof blurb === 'string' ? (
     <TextMeta className={styles.InfoText}>{blurb}</TextMeta>
   ) : (
     <TextMeta.List className={styles.InfoText}>

@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from "react";
-import { DownTick } from "@gatsby-tv/icons";
-import { classNames, ifExists, useUniqueId } from "@gatsby-tv/utilities";
+import React, { useRef, useEffect } from 'react';
+import { DownTick } from '@gatsby-tv/icons';
+import { classNames, ifExists, useUniqueId } from '@gatsby-tv/utilities';
 
-import { TextBox } from "@lib/components/TextBox";
-import { Icon } from "@lib/components/Icon";
+import { TextBox } from '@lib/components/TextBox';
+import { Icon } from '@lib/components/Icon';
 
-import styles from "./TextCollapsible.scss";
+import styles from './TextCollapsible.scss';
 
 export interface TextCollapsibleProps {
   children?: React.ReactNode;
@@ -18,7 +18,7 @@ export function TextCollapsible(
   props: TextCollapsibleProps
 ): React.ReactElement {
   const { children, className, active, label: text } = props;
-  const id = useUniqueId("collapsible");
+  const id = useUniqueId('collapsible');
   const label = useRef<HTMLLabelElement>(null);
   const content = useRef<HTMLDivElement>(null);
 
@@ -28,9 +28,9 @@ export function TextCollapsible(
       label.current.getBoundingClientRect().width
     }px`;
 
-    label.current.addEventListener("keydown", (event: Event) => {
+    label.current.addEventListener('keydown', (event: Event) => {
       const code = (event as any).code;
-      if (code === "Enter" || code === "Space") {
+      if (code === 'Enter' || code === 'Space') {
         event.preventDefault();
         event.stopPropagation();
         label.current?.click();

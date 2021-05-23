@@ -10,27 +10,27 @@ import {
   SetStateAction,
   Dispatch,
   RefObject,
-} from "react";
-import { useResizeObserver } from "@gatsby-tv/utilities";
+} from 'react';
+import { useResizeObserver } from '@gatsby-tv/utilities';
 
 export type VideoAction =
-  | { type: "activate" }
-  | { type: "deactivate" }
-  | { type: "idle" }
-  | { type: "pin" }
-  | { type: "unpin" }
-  | { type: "pause" }
-  | { type: "waiting" }
-  | { type: "playing" }
-  | { type: "stalled" }
-  | { type: "seeking" }
-  | { type: "seeked" }
-  | { type: "timeupdate"; time: number }
-  | { type: "progress"; progress: number }
-  | { type: "ended" }
-  | { type: "volumechange"; volume: number }
-  | { type: "mute" }
-  | { type: "unmute" };
+  | { type: 'activate' }
+  | { type: 'deactivate' }
+  | { type: 'idle' }
+  | { type: 'pin' }
+  | { type: 'unpin' }
+  | { type: 'pause' }
+  | { type: 'waiting' }
+  | { type: 'playing' }
+  | { type: 'stalled' }
+  | { type: 'seeking' }
+  | { type: 'seeked' }
+  | { type: 'timeupdate'; time: number }
+  | { type: 'progress'; progress: number }
+  | { type: 'ended' }
+  | { type: 'volumechange'; volume: number }
+  | { type: 'mute' }
+  | { type: 'unmute' };
 
 export type VideoState = {
   active: boolean;
@@ -96,14 +96,14 @@ export function usePlayer(
       const isPinned =
         state.pinned || state.paused || state.seeking || state.ended;
       switch (action.type) {
-        case "activate":
+        case 'activate':
           return {
             ...state,
             active: true,
             idle: isPinned ? -Infinity : 0,
           };
 
-        case "deactivate":
+        case 'deactivate':
           // The player by default remains inactive until explicitly activated.
           return {
             ...state,
@@ -111,7 +111,7 @@ export function usePlayer(
             idle: isNaN(state.idle) ? NaN : isPinned ? -Infinity : Infinity,
           };
 
-        case "pin":
+        case 'pin':
           return {
             ...state,
             active: true,
@@ -119,7 +119,7 @@ export function usePlayer(
             idle: -Infinity,
           };
 
-        case "unpin":
+        case 'unpin':
           return {
             ...state,
             active: true,
@@ -127,14 +127,14 @@ export function usePlayer(
             idle: 0,
           };
 
-        case "idle":
+        case 'idle':
           return {
             ...state,
             active: state.idle < 16,
             idle: state.idle + 1,
           };
 
-        case "pause":
+        case 'pause':
           return {
             ...state,
             active: true,
@@ -143,13 +143,13 @@ export function usePlayer(
             paused: true,
           };
 
-        case "waiting":
+        case 'waiting':
           return {
             ...state,
             waiting: true,
           };
 
-        case "playing":
+        case 'playing':
           // The player by default remains inactive until explicitly
           // activated, so we use NaN here to prevent the player from
           // activating when the video initially begins.
@@ -163,38 +163,38 @@ export function usePlayer(
             ended: false,
           };
 
-        case "stalled":
+        case 'stalled':
           return {
             ...state,
             playing: false,
             stalled: true,
           };
 
-        case "seeking":
+        case 'seeking':
           return {
             ...state,
             seeking: true,
           };
 
-        case "seeked":
+        case 'seeked':
           return {
             ...state,
             seeking: false,
           };
 
-        case "timeupdate":
+        case 'timeupdate':
           return {
             ...state,
             time: action.time,
           };
 
-        case "progress":
+        case 'progress':
           return {
             ...state,
             progress: action.progress,
           };
 
-        case "ended":
+        case 'ended':
           return {
             ...state,
             ended: true,
@@ -202,19 +202,19 @@ export function usePlayer(
             paused: false,
           };
 
-        case "volumechange":
+        case 'volumechange':
           return {
             ...state,
             volume: action.volume,
           };
 
-        case "mute":
+        case 'mute':
           return {
             ...state,
             muted: true,
           };
 
-        case "unmute":
+        case 'unmute':
           return {
             ...state,
             muted: false,
@@ -242,20 +242,20 @@ export function usePlayer(
   );
 
   const setActive: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
-    const update = typeof value === "function" ? value(active.current) : value;
+    const update = typeof value === 'function' ? value(active.current) : value;
     if (update) {
-      dispatch({ type: "activate" });
+      dispatch({ type: 'activate' });
     } else {
-      dispatch({ type: "deactivate" });
+      dispatch({ type: 'deactivate' });
     }
   }, []);
 
   const setPinned: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
-    const update = typeof value === "function" ? value(pinned.current) : value;
+    const update = typeof value === 'function' ? value(pinned.current) : value;
     if (update) {
-      dispatch({ type: "pin" });
+      dispatch({ type: 'pin' });
     } else {
-      dispatch({ type: "unpin" });
+      dispatch({ type: 'unpin' });
     }
   }, []);
 
@@ -263,7 +263,7 @@ export function usePlayer(
     (value) => {
       if (!video.current) return;
       const playback =
-        typeof value === "function" ? value(playing.current) : value;
+        typeof value === 'function' ? value(playing.current) : value;
       if (playback === playing.current) return;
       if (playing.current) {
         video.current.pause();
@@ -278,21 +278,21 @@ export function usePlayer(
     if (!video.current) return;
     const current = video.current.volume;
     const volume =
-      typeof value === "function"
+      typeof value === 'function'
         ? Math.min(Math.max(value(current), 0), 1)
         : Math.min(Math.max(value, 0), 1);
     video.current.volume = volume;
-    dispatch({ type: "volumechange", volume });
+    dispatch({ type: 'volumechange', volume });
     setMuted(!Boolean(volume));
   }, []);
 
   const setMuted: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
     if (!video.current) return;
     const current = video.current.muted;
-    const update = typeof value === "function" ? value(current) : value;
+    const update = typeof value === 'function' ? value(current) : value;
     if (update !== current) {
       video.current.muted = update;
-      dispatch({ type: update ? "mute" : "unmute" });
+      dispatch({ type: update ? 'mute' : 'unmute' });
     }
   }, []);
 
@@ -302,7 +302,7 @@ export function usePlayer(
     const duration = video.current.duration;
     if (!duration) return;
     const time =
-      typeof value === "function"
+      typeof value === 'function'
         ? Math.min(Math.max(value(current), 0), duration)
         : Math.min(Math.max(value * duration, 0), duration);
     video.current.currentTime = time;
@@ -312,8 +312,8 @@ export function usePlayer(
     // needs to be notified as soon as possible; e.g. this allows
     // `setSeek` to refresh the player's activation state (see the
     // handling of the "activate" and "deactivate" actions above).
-    dispatch({ type: "seeking" });
-    dispatch({ type: "timeupdate", time: time / duration });
+    dispatch({ type: 'seeking' });
+    dispatch({ type: 'timeupdate', time: time / duration });
   }, []);
 
   useResizeObserver(ref, (content) =>
@@ -321,7 +321,7 @@ export function usePlayer(
   );
 
   useEffect(() => {
-    const id = setInterval(() => dispatch({ type: "idle" }), 250);
+    const id = setInterval(() => dispatch({ type: 'idle' }), 250);
     return () => clearInterval(id);
   }, []);
 
@@ -353,7 +353,7 @@ export function usePlayer(
 
   useEffect(() => {
     if (!video.current) return;
-    dispatch({ type: video.current.muted ? "mute" : "unmute" });
+    dispatch({ type: video.current.muted ? 'mute' : 'unmute' });
   }, []);
 
   useEffect(() => {
@@ -363,27 +363,27 @@ export function usePlayer(
     };
 
     if (ref.current) {
-      ref.current.addEventListener("contextmenu", onContextMenu);
+      ref.current.addEventListener('contextmenu', onContextMenu);
 
       return () => {
         if (ref.current) {
-          ref.current.removeEventListener("contextmenu", onContextMenu);
+          ref.current.removeEventListener('contextmenu', onContextMenu);
         }
       };
     }
   }, []);
 
-  const onPause = () => dispatch({ type: "pause" });
-  const onPlaying = () => dispatch({ type: "playing" });
-  const onStalled = () => dispatch({ type: "stalled" });
-  const onSeeking = () => dispatch({ type: "seeking" });
-  const onWaiting = () => dispatch({ type: "waiting" });
-  const onEnded = () => dispatch({ type: "ended" });
+  const onPause = () => dispatch({ type: 'pause' });
+  const onPlaying = () => dispatch({ type: 'playing' });
+  const onStalled = () => dispatch({ type: 'stalled' });
+  const onSeeking = () => dispatch({ type: 'seeking' });
+  const onWaiting = () => dispatch({ type: 'waiting' });
+  const onEnded = () => dispatch({ type: 'ended' });
   const onTimeUpdate = (event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
     dispatch({
-      type: "timeupdate",
+      type: 'timeupdate',
       time: target.currentTime / target.duration,
     });
   };
@@ -391,14 +391,14 @@ export function usePlayer(
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
     const progress = bufferProgress(target.currentTime, target.buffered);
-    dispatch({ type: "progress", progress: progress / target.duration });
+    dispatch({ type: 'progress', progress: progress / target.duration });
   };
   const onSeeked = (event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
     const progress = bufferProgress(target.currentTime, target.buffered);
-    dispatch({ type: "seeked" });
-    dispatch({ type: "progress", progress: progress / target.duration });
+    dispatch({ type: 'seeked' });
+    dispatch({ type: 'progress', progress: progress / target.duration });
   };
 
   return {

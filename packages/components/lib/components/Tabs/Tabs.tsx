@@ -1,11 +1,11 @@
-import React from "react";
-import { classNames } from "@gatsby-tv/utilities";
+import React from 'react';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { Selection } from "@lib/components/Selection";
-import { Spacing } from "@lib/types";
+import { Selection } from '@lib/components/Selection';
+import { Spacing } from '@lib/types';
 
-import { Link, LinkProps, Item, ItemProps } from "./components";
-import styles from "./Tabs.scss";
+import { Link, LinkProps, Item, ItemProps } from './components';
+import styles from './Tabs.scss';
 
 export type { ItemProps as TabsItemProps };
 export type { LinkProps as TabsLinkProps };
@@ -24,7 +24,7 @@ export function Tabs(props: TabsProps): React.ReactElement {
     children,
     className,
     itemClass,
-    gap = "base",
+    gap = 'base',
     selection,
     onSelect,
   } = props;

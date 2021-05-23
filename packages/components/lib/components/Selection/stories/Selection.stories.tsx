@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import { classNames } from "@gatsby-tv/utilities";
+import React, { useState } from 'react';
+import { Story, Meta } from '@storybook/react/types-6-0';
+import { classNames } from '@gatsby-tv/utilities';
 
-import { TextBox } from "@lib/components/TextBox";
-import { Selection, SelectionProps } from "@lib/components/Selection";
+import { TextBox } from '@lib/components/TextBox';
+import { Selection, SelectionProps } from '@lib/components/Selection';
 
-import styles from "./Selection.stories.scss";
+import styles from './Selection.stories.scss';
 
 export default {
-  title: "Selection",
+  title: 'Selection',
   component: Selection,
 } as Meta;
 
 export const OneSection: Story<SelectionProps> = () => {
-  const items = ["one", "two", "three"];
-  const [selection, select] = useState("one");
+  const items = ['one', 'two', 'three'];
+  const [selection, select] = useState('one');
 
   return (
     <div className={styles.Selection}>
@@ -41,8 +41,8 @@ export const OneSection: Story<SelectionProps> = () => {
 };
 
 export const MultipleSections: Story<SelectionProps> = () => {
-  const items = ["one", "two", "three", "four", "five"];
-  const [selection, select] = useState("one");
+  const items = ['one', 'two', 'three', 'four', 'five'];
+  const [selection, select] = useState('one');
 
   return (
     <div className={styles.Selection}>
@@ -77,8 +77,8 @@ export const MultipleSections: Story<SelectionProps> = () => {
 };
 
 export const Row: Story<SelectionProps> = () => {
-  const items = ["one", "two", "three"];
-  const [selection, select] = useState("one");
+  const items = ['one', 'two', 'three'];
+  const [selection, select] = useState('one');
 
   return (
     <div className={classNames(styles.Selection, styles.Wide)}>

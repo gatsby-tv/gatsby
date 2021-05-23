@@ -1,6 +1,6 @@
-import React, { createContext, RefObject } from "react";
+import React, { createContext, RefObject } from 'react';
 
-import { EventHandler } from "@lib/types";
+import { EventHandler } from '@lib/types';
 
 export type ScrollContextType = {
   scroll: RefObject<number>;

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 import {
   classNames,
   ifExists,
@@ -6,9 +6,9 @@ import {
   useScrollContext,
   useParentRef,
   useResizeObserver,
-} from "@gatsby-tv/utilities";
+} from '@gatsby-tv/utilities';
 
-import styles from "./Scroll.scss";
+import styles from './Scroll.scss';
 
 export interface ScrollProps {
   children?: React.ReactNode;

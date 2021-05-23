@@ -6,12 +6,12 @@ import {
   useEffect,
   useCallback,
   DependencyList,
-} from "react";
+} from 'react';
 
-import { EventHandler } from "@lib/types";
-import { ContextError } from "@lib/errors";
+import { EventHandler } from '@lib/types';
+import { ContextError } from '@lib/errors';
 
-import { ModalContext, ModalContextType } from "./context";
+import { ModalContext, ModalContextType } from './context';
 
 export interface ModalType {
   active: boolean;
@@ -39,8 +39,8 @@ export function useModalContext(): ModalContextType {
       callbacks.forEach((callback) => callback(event));
     }
 
-    document.addEventListener("pointerdown", handler);
-    return () => document.removeEventListener("pointerdown", handler);
+    document.addEventListener('pointerdown', handler);
+    return () => document.removeEventListener('pointerdown', handler);
   }, [callbacks]);
 
   return {
@@ -56,7 +56,7 @@ export function useModalCallback(
   const context = useContext(ModalContext);
 
   if (!context) {
-    throw new ContextError("Modal");
+    throw new ContextError('Modal');
   }
 
   const { addModalCallback, removeModalCallback } = context;

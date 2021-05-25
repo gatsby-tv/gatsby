@@ -1,7 +1,7 @@
 {
   "name": "@gatsby-tv/player",
   "description": "Gatsby's video player.",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

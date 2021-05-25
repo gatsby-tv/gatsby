@@ -1,7 +1,7 @@
 {
   "name": "@gatsby-tv/utilities",
   "description": "Gatsby shared Typescript utility library.",
-  "version": "0.4.8",
+  "version": "0.5.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "AGPL-3.0",

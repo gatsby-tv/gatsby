@@ -13,6 +13,7 @@
     "start": "next start",
     "build": "node ./scripts/build.js",
     "format": "node ./scripts/format.js",
+    "export": "node ./scripts/export.js",
     "types": "tsc --noEmit"
   },
   "eslintConfig": {

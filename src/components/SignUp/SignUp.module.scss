@@ -1,10 +1,7 @@
 @use 'sass:color';
 @use 'styles' as *;
 
-.BigusDivus {
-}
-
-.CardDiv {
+.Card {
   width: rem(420px);
   background-color: background(dark);
   padding: spacing(3);
@@ -32,25 +29,11 @@
   }
 }
 
-.FormTextBox {
-  @include font-size(body-large);
-  margin-bottom: spacing(2);
+.Form {
+  margin: spacing(2) 0;
 }
 
-.FormPiece {
-  @include font-size(display-small);
-  @include center;
-  gap: spacing(1.5);
-  width: 80%;
-  background-color: background(light);
-  padding: spacing(1);
+.Field {
+  @include font-size(body-large);
   margin-bottom: spacing(2);
-
-  @include hover {
-    background-color: background(lighter);
-  }
-
-  @include active {
-    background-color: color.adjust(background(lighter), $alpha: -0.1);
-  }
 }

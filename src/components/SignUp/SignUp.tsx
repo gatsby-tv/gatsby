@@ -2,7 +2,6 @@ import React from "react";
 import {
   Button,
   Form,
-  FormField,
   Fireworks,
   Icon,
   ModalProps,
@@ -17,7 +16,7 @@ export function SignUp(): React.ReactElement {
     id: "email",
     name: "email",
     label: "Email",
-    labelHidden: true,
+    //labelHidden: true,
     placeholder: "Email",
     //font: theme.font[4],
     spellCheck: false,
@@ -27,7 +26,7 @@ export function SignUp(): React.ReactElement {
     id: "channel",
     name: "channel",
     label: "Channel Name",
-    labelHidden: true,
+    //labelHidden: true,
     placeholder: "Channel Name",
     //font: theme.font[4],
     spellCheck: false,
@@ -37,7 +36,7 @@ export function SignUp(): React.ReactElement {
     id: "display",
     name: "display",
     label: "Display Name",
-    labelHidden: true,
+    //labelHidden: true,
     placeholder: "Display Name",
     //font: theme.font[4],
     spellCheck: false,
@@ -51,22 +50,39 @@ export function SignUp(): React.ReactElement {
     </div>
   );
 
+  const sendSignUp = function(event: React.FormEvent) {
+    const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: 'emailValue' })
+      };
+      try {
+        fetch('http://localhost:3001/v1/auth/signin', requestOptions)
+            .then(response => response.json())
+            .then(data => console.log('fuck it heres the session key ' + JSON.stringify(data)));
+      } catch (err) {
+        console.log(err);
+      }
+
+      // We don't need the page to reload.
+      event.preventDefault();
+   };
+
   const FormMarkup = (
-    <Form method="post" action="/api/auth/signup">
+    <Form onSubmit={sendSignUp}>
       <div className={styles.FormPiece}>
-        <FormField type="text" {...emailProps} className={styles.FormTextBox} />
+        <Form.Field type="text" {...emailProps} className={styles.FormTextBox} />
       </div>
       <div className={styles.FormPiece}>
-        <FormField type="text" {...channelNameProps} className={styles.FormTextBox} />
+        <Form.Field type="text" {...channelNameProps} className={styles.FormTextBox} />
       </div>
       <div className={styles.FormPiece}>
-        <FormField type="text" {...displayNameProps} className={styles.FormTextBox} />
+        <Form.Field type="text" {...displayNameProps} className={styles.FormTextBox} />
       </div>
 
 
       <Button
         type="submit"
-        onClick={() => alert("This has not been set up yet.")}
         className={styles.Submit}
       >
         Submit
@@ -79,7 +95,7 @@ export function SignUp(): React.ReactElement {
       <div className={styles.BigusDivus}>
         <div className={styles.CardDiv}>
           {TitleMarkup}
-          {/*FormMarkup*/}
+          {FormMarkup}
         </div>
       </div>
       <Fireworks infinite zIndex={-1} />

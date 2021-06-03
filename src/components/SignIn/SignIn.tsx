@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/client';
 import {
   Button,
   Form,
-  FormField,
+  FormFieldProps,
   Fireworks,
   Icon,
   Modal,
@@ -16,6 +16,32 @@ import { GatsbyPlain, Google, Email } from '@gatsby-tv/icons';
 import styles from './SignIn.module.scss';
 
 export type SignInProps = Omit<ModalProps, 'overlay' | 'zIndex'>;
+
+let emailValue: string = '';
+
+function emailSignIn(event: React.FormEvent) {
+  const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailValue })
+    };
+    try {
+      fetch('http://localhost:3001/v1/auth/signin', requestOptions)
+          .then(response => response.json())
+          .then(data => console.log('fuck it heres the session key ' + JSON.stringify(data)));
+    } catch (err) {
+      console.log(err);
+    }
+
+    // We don't need the page to reload.
+    event.preventDefault();
+}
+
+
+function fieldChangeHandler(value: string, id?: string, setError?: (id: string, message: string) => void, clearError?: (id: string) => void) {
+  console.log('value: ' + value + ' id: ' + id);
+  emailValue = value;
+}
 
 export function SignIn(props: SignInProps): React.ReactElement {
   return (
@@ -40,22 +66,20 @@ export function SignIn(props: SignInProps): React.ReactElement {
       <Rule className={styles.Rule} spacing="loose">
         Or
       </Rule>
-      <Form method="post" action="/api/auth/signin/email">
-        <FormField
+      <Form onSubmit={emailSignIn}>
+        <Form.Field
           id="email"
           type="text"
           className={styles.Email}
           name="email"
-          label="Email"
-          labelHidden
           placeholder="Email"
           prefix={<Icon src={Email} size="smaller" />}
+	  onChange={fieldChangeHandler}
           autoComplete
         />
         <Button
-          type="submit"
+	  type="submit"
           className={styles.Submit}
-          onClick={() => signIn('credentials')}
         >
           Sign In
         </Button>

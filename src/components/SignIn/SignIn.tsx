@@ -17,33 +17,55 @@ import styles from './SignIn.module.scss';
 
 export type SignInProps = Omit<ModalProps, 'overlay' | 'zIndex'>;
 
-let emailValue: string = '';
+export function sessionReducer(state: any, action: any): any {
+  switch (action.type) {
+    case "SIGNIN":
+      return {
+         ...state,
+	sessionKey: action.sessionKey,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+	sessionKey: null,
+      };
+    default:
+      return state;
+  }
+};
+export let sessionKey: string;// TODO store the sessionKey in a nicer way
 
-function emailSignIn(event: React.FormEvent) {
-  const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: emailValue })
-    };
+export function SignIn(props: SignInProps): React.ReactElement {
+  let emailValue: string = '';
+
+  const [sessionState, sessionDispatch] = React.useReducer(sessionReducer, null);// null for initial state
+
+  const emailSignIn = function(event: React.FormEvent) {
+    const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailValue })
+      };
     try {
       fetch('http://localhost:3001/v1/auth/signin', requestOptions)
           .then(response => response.json())
-          .then(data => console.log('fuck it heres the session key ' + JSON.stringify(data)));
+          .then(data => {
+            sessionKey = data.key;
+            console.log('fuck it heres the session key ' + sessionKey);
+	    sessionDispatch({type: 'SIGNIN', sessionKey});
+	  });
     } catch (err) {
       console.log(err);
     }
-
     // We don't need the page to reload.
     event.preventDefault();
-}
+  }
 
+  const fieldChangeHandler = function(value: string, id?: string, setError?: (id: string, message: string) => void, clearError?: (id: string) => void) {
+    console.log('value: ' + value + ' id: ' + id);
+    emailValue = value;
+  }
 
-function fieldChangeHandler(value: string, id?: string, setError?: (id: string, message: string) => void, clearError?: (id: string) => void) {
-  console.log('value: ' + value + ' id: ' + id);
-  emailValue = value;
-}
-
-export function SignIn(props: SignInProps): React.ReactElement {
   return (
     <Modal
       id="sign-in"

@@ -18,7 +18,6 @@ export function SignUp(): React.ReactElement {
     id: 'email',
     name: 'email',
     label: 'Email',
-    labelHidden: true,
     placeholder: 'Email',
     spellCheck: false,
     autoComplete: true,
@@ -28,7 +27,6 @@ export function SignUp(): React.ReactElement {
     id: 'channel',
     name: 'channel',
     label: 'Channel Name',
-    labelHidden: true,
     placeholder: 'Channel Name',
     spellCheck: false,
     autoComplete: false,
@@ -38,7 +36,6 @@ export function SignUp(): React.ReactElement {
     id: 'display',
     name: 'display',
     label: 'Display Name',
-    labelHidden: true,
     placeholder: 'Display Name',
     spellCheck: false,
     autoComplete: false,
@@ -51,21 +48,22 @@ export function SignUp(): React.ReactElement {
     </div>
   );
 
-  let handleValue: string = '';
-  let nameValue: string = '';
+  // We are mapping "name" to "Channel Name" and "handle" to "Display Name"
+  const [handle, setHandle] = React.useState('');
+  const [name, setName] = React.useState('');
   // localhost:3001/v1/auth/session/:sessionkey
   const sendSignUp = function (event: React.FormEvent) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ handle: handleValue, name: nameValue }),
+      body: JSON.stringify({ handle: handle, name: name }),
     };
     try {
       const requestUrl = 'http://localhost:3001/v1/auth/session/' + sessionKey;
       console.log('requestUrl :', requestUrl);
       fetch(requestUrl, requestOptions)
         .then((response) => response.json())
-        .then(data => console.log('JWT: ' + JSON.stringify(data)));// TODO store JWT
+        .then((data) => console.log('JWT: ' + JSON.stringify(data))); // TODO store JWT
     } catch (err) {
       console.log(err);
     }
@@ -73,23 +71,40 @@ export function SignUp(): React.ReactElement {
     // We don't need the page to reload.
     event.preventDefault();
   };
-  const channelNameChanged = function(value: string, id?: string, setError?: (id: string, message: string) => void, clearError?: (id: string) => void) {
-    nameValue = value;
-  }
-  const displayNameChanged = function(value: string, id?: string, setError?: (id: string, message: string) => void, clearError?: (id: string) => void) {
-    handleValue = value;
-  }
+  const channelNameChanged = function (
+    value: string,
+    id?: string,
+    setError?: (id: string, message: string) => void,
+    clearError?: (id: string) => void
+  ) {
+    setName(value);
+  };
+  const displayNameChanged = function (
+    value: string,
+    id?: string,
+    setError?: (id: string, message: string) => void,
+    clearError?: (id: string) => void
+  ) {
+    setHandle(value);
+  };
 
   const FormMarkup = (
     <Form className={styles.Form} onSubmit={sendSignUp}>
       <Form.Field type="text" {...emailProps} className={styles.Field} />
-      <Form.Field type="text" onChange={channelNameChanged} {...channelNameProps} className={styles.Field} />
-      <Form.Field type="text" onChange={displayNameChanged} {...displayNameProps} className={styles.Field} />
+      <Form.Field
+        type="text"
+        onChange={channelNameChanged}
+        {...channelNameProps}
+        className={styles.Field}
+      />
+      <Form.Field
+        type="text"
+        onChange={displayNameChanged}
+        {...displayNameProps}
+        className={styles.Field}
+      />
 
-      <Button
-        type="submit"
-        className={styles.Submit}
-      >
+      <Button type="submit" className={styles.Submit}>
         Submit
       </Button>
     </Form>

@@ -19,52 +19,56 @@ export type SignInProps = Omit<ModalProps, 'overlay' | 'zIndex'>;
 
 export function sessionReducer(state: any, action: any): any {
   switch (action.type) {
-    case "SIGNIN":
-      return {
-         ...state,
-	sessionKey: action.sessionKey,
-      };
-    case "LOGOUT":
+    case 'SIGNIN':
       return {
         ...state,
-	sessionKey: null,
+        sessionKey: action.sessionKey,
+      };
+    case 'LOGOUT':
+      return {
+        ...state,
+        sessionKey: null,
       };
     default:
       return state;
   }
-};
-export let sessionKey: string;// TODO store the sessionKey in a nicer way
+}
+export let sessionKey: string; // TODO store the sessionKey in a nicer way
 
 export function SignIn(props: SignInProps): React.ReactElement {
-  let emailValue: string = '';
+  const [email, setEmail] = React.useState('');
 
-  const [sessionState, sessionDispatch] = React.useReducer(sessionReducer, null);// null for initial state
+  const [sessionState, sessionDispatch] = React.useReducer(sessionReducer, {});
 
-  const emailSignIn = function(event: React.FormEvent) {
+  const emailSignIn = function (event: React.FormEvent) {
     const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: emailValue })
-      };
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    };
     try {
       fetch('http://localhost:3001/v1/auth/signin', requestOptions)
-          .then(response => response.json())
-          .then(data => {
-            sessionKey = data.key;
-            console.log('fuck it heres the session key ' + sessionKey);
-	    sessionDispatch({type: 'SIGNIN', sessionKey});
-	  });
+        .then((response) => response.json())
+        .then((data) => {
+          sessionKey = data.key;
+          console.log('fuck it heres the session key ' + sessionKey);
+          sessionDispatch({ type: 'SIGNIN', sessionKey });
+        });
     } catch (err) {
       console.log(err);
     }
     // We don't need the page to reload.
     event.preventDefault();
-  }
+  };
 
-  const fieldChangeHandler = function(value: string, id?: string, setError?: (id: string, message: string) => void, clearError?: (id: string) => void) {
-    console.log('value: ' + value + ' id: ' + id);
-    emailValue = value;
-  }
+  const fieldChangeHandler = function (
+    value: string,
+    id?: string,
+    setError?: (id: string, message: string) => void,
+    clearError?: (id: string) => void
+  ) {
+    setEmail(value);
+  };
 
   return (
     <Modal
@@ -96,13 +100,10 @@ export function SignIn(props: SignInProps): React.ReactElement {
           name="email"
           placeholder="Email"
           prefix={<Icon src={Email} size="smaller" />}
-	  onChange={fieldChangeHandler}
+          onChange={fieldChangeHandler}
           autoComplete
         />
-        <Button
-	  type="submit"
-          className={styles.Submit}
-        >
+        <Button type="submit" className={styles.Submit}>
           Sign In
         </Button>
       </Form>

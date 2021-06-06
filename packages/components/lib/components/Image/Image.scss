@@ -1,5 +1,9 @@
 @use 'styles' as *;
 
+.Viewport {
+  width: 100%;
+}
+
 .Image {
   @include expand();
   display: block;

@@ -38,9 +38,11 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
 
   useEffect(() => setLoading(true), [imgProps.src]);
 
+  const classes = classNames(className, styles.Viewport);
+
   return (
     <Viewport
-      className={className}
+      className={classes}
       placeholder
       rounded={rounded}
       overlay={overlay}

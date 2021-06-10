@@ -15,5 +15,5 @@ push:
 run:
 	docker run \
 		-p 3000:3000 \
-		--env-file .env.local \
-		--rm -it $(APP_NAME):latest
+		--env-file default.env.local \
+		--rm -it gatsbytv/$(APP_NAME):latest

@@ -65,7 +65,6 @@ export function SignUp(): React.ReactElement {
       console.log(err);
     }
 
-    // We don't need the page to reload.
     event.preventDefault();
   };
 

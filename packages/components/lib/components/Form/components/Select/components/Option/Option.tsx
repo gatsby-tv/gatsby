@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
-import { ifExists } from '@gatsby-tv/utilities';
+import { ifExists, useFormSelect } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
-import { useFormSelect } from '@lib/utilities/form';
 import { Option as SelectOption } from '@lib/types';
 
 import styles from '../../Select.scss';

@@ -3,7 +3,7 @@ import type { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { classNames } from '@gatsby-tv/utilities';
 
-import { Portal } from '@lib/components/Portal';
+import { Injection } from '@lib/components/Injection';
 
 import styles from './Tooltip.scss';
 
@@ -54,7 +54,7 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
   const classes = classNames(className, styles.Popper);
 
   return active ? (
-    <Portal id="tooltip">
+    <Injection target="$foreground">
       <div
         ref={setPopper}
         style={style.popper}
@@ -63,6 +63,6 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
       >
         {children}
       </div>
-    </Portal>
+    </Injection>
   ) : null;
 }

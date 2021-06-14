@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useCallback, forwardRef } from 'react';
-import { classNames, ifExists, useForwardedRef } from '@gatsby-tv/utilities';
+import {
+  classNames,
+  ifExists,
+  useForwardedRef,
+  useOptionalForm,
+} from '@gatsby-tv/utilities';
 
 import { IconSource, IconSize } from '@lib/types';
 import { Icon } from '@lib/components/Icon';
@@ -35,6 +40,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onDblClick: onDblClickHandler,
       ...rest
     } = props;
+    const form = useOptionalForm();
     const button = useForwardedRef<HTMLButtonElement>(ref);
     const [click, setClick] = useState<MouseEvent>();
     const [dblClick, setDblClick] = useState<MouseEvent>();
@@ -142,6 +148,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className: classes,
       htmlFor: asLabelFor,
       tabIndex: ifExists(asLabelFor, -1),
+      disabled: ifExists(Object.values(form?.errors ?? {}).some(Boolean)),
       'data-animating': ifExists(
         !unstyled && animate && !reset && (active || held)
       ),

@@ -1,7 +1,5 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { ifExists, classNames } from '@gatsby-tv/utilities';
-
-import { useForm } from '@lib/utilities/form';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { ifExists, classNames, useForm, Validator } from '@gatsby-tv/utilities';
 
 import styles from './Field.scss';
 
@@ -29,31 +27,31 @@ export interface FieldProps
     | 'step'
     | 'suffix'
     | 'type'
+    | 'value'
     | 'width'
     | 'onChange'
   > {
   id: string;
+  value: string;
   type?: 'text' | 'email' | 'password' | 'tel' | 'search';
   multiline?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   autoComplete?: boolean;
-  onChange?: (
-    value: string,
-    id?: string,
-    setError?: (id: string, message: string) => void,
-    clearError?: (id: string) => void
-  ) => void;
+  validators?: Validator[];
+  onChange?: (value: string, id?: string) => void;
 }
 
 export function Field(props: FieldProps): React.ReactElement {
   const {
     id,
     className,
+    value,
     multiline,
     prefix,
     suffix,
     autoComplete,
+    validators,
     onChange: onChangeHandler,
     onFocus: onFocusHandler,
     onBlur: onBlurHandler,
@@ -63,14 +61,24 @@ export function Field(props: FieldProps): React.ReactElement {
   } = props;
 
   const input = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
-  const { errors, setError, clearError } = useForm();
+  const { setValue, errors, setError } = useForm();
   const [focus, setFocus] = useState(Boolean(props.autoFocus));
+  const [invalid, setInvalid] = useState(Boolean(errors[id]));
+  const error = invalid && errors[id];
 
   const classes = classNames(className, styles.Input);
 
+  useEffect(() => {
+    setValue(id, value);
+    setError(
+      id,
+      validators?.map((validator) => validator(id, value ?? '')).find(Boolean)
+    );
+  }, [id, validators, value]);
+
   const onChange = useCallback(
     (event: any) => {
-      onChangeHandler?.(event.target.value, id, setError, clearError);
+      onChangeHandler?.(event.target.value, id);
     },
     [id, onChangeHandler]
   );
@@ -85,10 +93,11 @@ export function Field(props: FieldProps): React.ReactElement {
 
   const onBlur = useCallback(
     (event: any) => {
+      setInvalid(Boolean(errors[id]));
       setFocus(false);
       onBlurHandler?.(event);
     },
-    [onBlurHandler]
+    [errors, onBlurHandler]
   );
 
   const onClick = useCallback(
@@ -122,13 +131,14 @@ export function Field(props: FieldProps): React.ReactElement {
     <div
       className={classes}
       data-focus={ifExists(focus)}
-      data-error={ifExists(errors[id])}
+      data-error={ifExists(error)}
       onClick={onClick}
     >
       {PrefixMarkup}
       <InputComponent
         ref={input}
         id={id}
+        value={value}
         autoComplete={autoComplete ? 'on' : 'off'}
         onChange={onChange}
         onFocus={onFocus}

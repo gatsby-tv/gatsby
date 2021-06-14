@@ -6,3 +6,12 @@ export class ContextError extends Error {
     this.context = context;
   }
 }
+
+export class FormError extends Error {
+  target: string;
+
+  constructor(id: string, message: string) {
+    super(message);
+    this.target = id;
+  }
+}

@@ -1,11 +1,11 @@
 import React from 'react';
-import { useSession } from 'next-auth/client';
 import { TextDisplay } from '@gatsby-tv/components';
 import { User } from '@gatsby-tv/content';
 import { useUniqueId } from '@gatsby-tv/utilities';
 import { User as UserType } from '@gatsby-tv/types';
 
 import { PageBody } from '@src/components/PageBody';
+import { useSession } from '@src/utilities/session';
 
 import styles from '@src/styles/Subscriptions.module.scss';
 

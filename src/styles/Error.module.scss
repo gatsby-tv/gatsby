@@ -1,0 +1,8 @@
+@use 'styles' as *;
+
+.Container {
+  @include expand(fixed);
+  @include center;
+  flex-direction: column;
+  gap: spacing(2);
+}

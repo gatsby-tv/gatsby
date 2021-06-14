@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import { Provider } from 'next-auth/client';
 import { SWRConfig } from 'swr';
 import { AppProvider } from '@gatsby-tv/components';
 import { useIPFSNode, IPFSContext } from '@gatsby-tv/utilities';
@@ -15,6 +14,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 import { AppLayout } from '@src/components/AppLayout';
 import { fetcher } from '@src/utilities/fetcher';
+import { useSessionContext, SessionContext } from '@src/utilities/session';
 import { ChannelModalContext } from '@src/utilities/channel-modal';
 
 export default function App({
@@ -22,6 +22,7 @@ export default function App({
   pageProps,
 }: AppProps): React.ReactElement {
   const [channel, setChannel] = useState<Channel | undefined>(undefined);
+  const [session, setSession] = useSessionContext();
   const node = useIPFSNode(
     process.env.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(',').filter(Boolean)
   );
@@ -37,16 +38,16 @@ export default function App({
 
   return (
     <AppProvider>
-      <Provider session={pageProps.session}>
-        <SWRConfig value={{ fetcher }}>
-          <IPFSContext.Provider value={node}>
-            <ChannelModalContext.Provider value={[channel, setChannel]}>
+      <SWRConfig value={{ fetcher }}>
+        <IPFSContext.Provider value={node}>
+          <ChannelModalContext.Provider value={[channel, setChannel]}>
+            <SessionContext.Provider value={[session, setSession]}>
               {HeaderMarkup}
               <AppLayout page={Component} $props={pageProps} />
-            </ChannelModalContext.Provider>
-          </IPFSContext.Provider>
-        </SWRConfig>
-      </Provider>
+            </SessionContext.Provider>
+          </ChannelModalContext.Provider>
+        </IPFSContext.Provider>
+      </SWRConfig>
     </AppProvider>
   );
 }

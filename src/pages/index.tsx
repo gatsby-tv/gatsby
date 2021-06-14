@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import { useSession } from 'next-auth/client';
 import { Rule, TextDisplay } from '@gatsby-tv/components';
 import { Channel, Listing } from '@gatsby-tv/content';
 import { useUniqueId, useFrame } from '@gatsby-tv/utilities';
@@ -9,6 +8,7 @@ import { User } from '@gatsby-tv/types';
 import { PageBody } from '@src/components/PageBody';
 import { Link } from '@src/components/Link';
 import { useChannelModal } from '@src/utilities/channel-modal';
+import { useSession } from '@src/utilities/session';
 import styles from '@src/styles/Home.module.scss';
 
 export default function IndexPage(): React.ReactElement {
@@ -16,7 +16,7 @@ export default function IndexPage(): React.ReactElement {
   const recommendedId = useUniqueId('recommended');
   const recommendedLabel = useUniqueId('heading');
   const [, setChannel] = useChannelModal();
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
   const HeaderMarkup = (
     <Head>

@@ -1,24 +1,24 @@
 import React from 'react';
-import { signOut, useSession } from 'next-auth/client';
 import { Avatar, Icon, Button, Rule, Menu } from '@gatsby-tv/components';
 import { User as UserIcon, Exit } from '@gatsby-tv/icons';
 import { useMenu, useModal } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
 
 import { SignIn } from '@src/components/SignIn';
+import { useSession } from '@src/utilities/session';
 
 import { Skeleton } from './Account.skeleton';
 import styles from './Account.module.scss';
 
 export function Account(): React.ReactElement {
-  const [session, loading] = useSession();
+  const [session, setSession] = useSession();
   const menu = useMenu<HTMLButtonElement>();
   const modal = useModal();
   const user = session?.user as User | undefined;
 
-  if (loading) return <Skeleton />;
+  if (!session.valid && session.loading) return <Skeleton />;
 
-  return user ? (
+  return session.valid && user ? (
     <>
       <Button ref={menu.ref} className={styles.Avatar} onClick={menu.toggle}>
         <Avatar src={user.avatar} size="smaller" />
@@ -36,7 +36,7 @@ export function Account(): React.ReactElement {
           Settings
         </Menu.Link>
         <Rule spacing="none" />
-        <Menu.Item icon={Exit} onClick={signOut}>
+        <Menu.Item icon={Exit} onClick={() => setSession(undefined)}>
           Sign Out
         </Menu.Item>
       </Menu>

@@ -7,6 +7,7 @@ import {
 } from '@gatsby-tv/utilities';
 
 import { EventHandler } from '@lib/types';
+import { Injection } from '@lib/components/Injection';
 import { AppContext } from '@lib/utilities/app';
 import {
   InjectionContext,
@@ -50,7 +51,9 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
       <ModalContext.Provider value={modalContext}>
         <UniqueIdContext.Provider value={uniqueIdGenerator}>
           <InjectionContext.Provider value={injectionContext}>
+            <Injection.Target id="$background" />
             {children}
+            <Injection.Target id="$foreground" />
           </InjectionContext.Provider>
         </UniqueIdContext.Provider>
       </ModalContext.Provider>

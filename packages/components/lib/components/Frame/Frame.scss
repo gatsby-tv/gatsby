@@ -27,9 +27,10 @@
 
 .Bar {
   flex-shrink: 0;
-  transition: transform duration(fast) ease duration(faster);
+  transition: transform duration(base) ease duration(faster);
 }
 
 .Hidden {
+  @include expand();
   position: absolute;
 }

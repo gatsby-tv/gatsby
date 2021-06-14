@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/client';
 import { Button, Icon, Tabs, Menu, Rule } from '@gatsby-tv/components';
 import { GatsbyPlain, Subscribe, Browse, Misc } from '@gatsby-tv/icons';
 import { useFrame, useMenu } from '@gatsby-tv/utilities';
 
 import { Link } from '@src/components/Link';
+import { useSession } from '@src/utilities/session';
 
 import styles from './Navigation.module.scss';
 
@@ -22,7 +22,7 @@ function getCurrentTab(route: string): string | undefined {
 
 export function Navigation(): React.ReactElement {
   const { screen } = useFrame();
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const router = useRouter();
   const defaultTab = getCurrentTab(router.pathname);
   const menu = useMenu<HTMLButtonElement>();
@@ -40,7 +40,7 @@ export function Navigation(): React.ReactElement {
         selection={tab}
         onSelect={setTab}
       >
-        {session && (
+        {session.valid && (
           <Link
             component={Tabs.Link}
             href="/d/subscriptions"

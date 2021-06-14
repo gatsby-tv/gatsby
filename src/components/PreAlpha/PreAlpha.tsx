@@ -1,5 +1,5 @@
 import React from 'react';
-import { Portal, TextMeta } from '@gatsby-tv/components';
+import { Injection, TextMeta } from '@gatsby-tv/components';
 import { classNames, useFrame } from '@gatsby-tv/utilities';
 
 import styles from './PreAlpha.module.scss';
@@ -9,7 +9,7 @@ export function PreAlpha(): React.ReactElement {
   const classes = classNames(styles.PreAlpha, fullscreen && styles.Fullscreen);
 
   return (
-    <Portal id="pre-alpha">
+    <Injection target="$foreground">
       <TextMeta.Link
         className={classes}
         href="https://github.com/gatsby-tv/gatsby/issues"
@@ -17,6 +17,6 @@ export function PreAlpha(): React.ReactElement {
       >
         Pre-Alpha
       </TextMeta.Link>
-    </Portal>
+    </Injection>
   );
 }

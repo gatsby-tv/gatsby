@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { classNames, ifExists } from '@gatsby-tv/utilities';
 
-import { Portal } from '@lib/components/Portal';
+import { Injection } from '@lib/components/Injection';
 import { Optional } from '@lib/components/Optional';
 import { EventListener } from '@lib/components/EventListener';
 
@@ -247,9 +247,9 @@ export function Panel(props: PanelProps): React.ReactElement | null {
 
   return active ? (
     <Optional
-      component={Portal}
+      component={Injection}
       active={overlay}
-      $props={{ id: id ? `panel-${id}` : 'panel' }}
+      $props={{ target: '$foreground' }}
     >
       <div
         ref={ref}

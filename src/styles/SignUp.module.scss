@@ -1,12 +1,56 @@
+@use 'sass:color';
 @use 'styles' as *;
 
-.Heading {
-  margin-bottom: spacing(1.5);
+.Page {
+  padding-top: rem(250px);
+  padding-left: rem(100px);
 }
 
-.SignUpContainer {
-   @include center;
-  align-items: center;
-  gap: spacing(1.5);
-  margin: rem(100px) rem(100px) 0;
+.Heading {
+  margin-bottom: spacing(2);
+}
+
+.Card {
+  @include border-radius(small);
+  max-width: rem(700px);
+  background-color: background(darker);
+  padding: spacing(2);
+}
+
+.Form {
+  display: flex;
+  gap: spacing(3);
+  align-items: flex-end;
+}
+
+.Fields {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+  flex-grow: 1;
+}
+
+.Field {
+  @include font-size(body-large);
+}
+
+.Label {
+  @include font-size(display-small);
+}
+
+.Submit {
+  @include font-size(body-large);
+  flex: 0 1 20%;
+  width: 100%;
+  color: background(darker);
+  background-color: palette("gold");
+  padding: spacing(0.5);
+
+  @include hover {
+    background-color: color.adjust(palette("gold"), $lightness: 5%);
+  }
+
+  @include active {
+    background-color: color.adjust(palette("gold"), $alpha: -0.1);
+  }
 }

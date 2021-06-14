@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { ifExists, classNames, useModalCallback } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
-import { Portal } from '@lib/components/Portal';
+import { Injection } from '@lib/components/Injection';
 import { EventListener } from '@lib/components/EventListener';
 import { EventHandler } from '@lib/types';
 
@@ -10,7 +10,6 @@ import styles from './Modal.scss';
 
 export interface ModalProps {
   children?: React.ReactNode;
-  id?: string;
   className?: string;
   overlay?: boolean;
   active?: boolean;
@@ -19,7 +18,7 @@ export interface ModalProps {
 }
 
 export function Modal(props: ModalProps): React.ReactElement | null {
-  const { children, id, className, overlay, active, zIndex, onExit } = props;
+  const { children, className, overlay, active, zIndex, onExit } = props;
 
   useModalCallback(onExit, [onExit]);
 
@@ -37,7 +36,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
   const classes = classNames(className, styles.Modal);
 
   return active ? (
-    <Portal id={id ? `modal-${id}` : 'modal'}>
+    <Injection target="$foreground">
       <Optional
         component="div"
         active={overlay}
@@ -51,6 +50,6 @@ export function Modal(props: ModalProps): React.ReactElement | null {
         </div>
       </Optional>
       <EventListener event="keydown" handler={onKeyDown} />
-    </Portal>
+    </Injection>
   ) : null;
 }

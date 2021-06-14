@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-import { FormContext, FormError } from '@lib/utilities/form';
+import { useOptionalForm, FormContext, FormError } from '@gatsby-tv/utilities';
 
 import {
   Field,
@@ -23,30 +23,60 @@ export type {
   SliderProps as FormSliderProps,
 };
 
-export type FormProps = React.FormHTMLAttributes<HTMLElement>;
+export type FormProps = Omit<
+  React.FormHTMLAttributes<HTMLElement>,
+  'id' | 'onSubmit'
+> & {
+  id: string;
+  onSubmit?: (values: Record<string, any>, id?: string) => void;
+};
 
 export function Form(props: FormProps): React.ReactElement {
+  const { onSubmit: onSubmitHandler, id, ...rest } = props;
+  const parent = useOptionalForm();
+
+  const [values, setValues] = useState<Record<string, unknown>>({});
   const [errors, setErrors] = useState<Record<string, FormError | undefined>>(
     {}
   );
 
-  const setError = useCallback(
-    (id: string, message: string) =>
-      setErrors((current) => ({
+  useEffect(() => parent?.setValue(id, values), [id, values]);
+  useEffect(() => parent?.setError(id, Object.values(errors).find(Boolean)), [
+    id,
+    errors,
+  ]);
+
+  const setValue = useCallback(
+    (id: string, value: unknown) =>
+      setValues((current) => ({
         ...current,
-        [id]: new FormError(id, message),
+        [id]: value,
       })),
     []
   );
 
-  const clearError = useCallback(
-    (id: string) => setErrors((current) => ({ ...current, [id]: undefined })),
+  const setError = useCallback(
+    (id: string, error: FormError | undefined) =>
+      setErrors((current) => ({
+        ...current,
+        [id]: error,
+      })),
     []
   );
 
+  const onSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!Object.values(errors).some(Boolean)) {
+        onSubmitHandler?.(values, id);
+      }
+    },
+    [id, values, errors]
+  );
+
   return (
-    <FormContext.Provider value={{ errors, setError, clearError }}>
-      <form {...props} />
+    <FormContext.Provider value={{ values, setValue, errors, setError }}>
+      <form id={id} onSubmit={onSubmit} {...rest} />
     </FormContext.Provider>
   );
 }

@@ -69,7 +69,7 @@ export function useInjectionTarget(
 
   useEffect(() => {
     addTarget(id, ref);
-    () => removeTarget(id);
+    return () => removeTarget(id);
   }, [id, ref]);
 
   return injections[id] ? setRef : null;
@@ -86,7 +86,7 @@ export function useInjection(id: string): HTMLElement | null | undefined {
 
   useEffect(() => {
     addInjection(id);
-    () => removeInjection(id);
+    return () => removeInjection(id);
   }, [id]);
 
   return targets[id];

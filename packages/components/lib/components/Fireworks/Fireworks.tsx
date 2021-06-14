@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Color from 'color';
 import { ifExists } from '@gatsby-tv/utilities';
 
-import { Portal } from '@lib/components/Portal';
+import { Injection } from '@lib/components/Injection';
 import { EventListener } from '@lib/components/EventListener';
 
 import styles from './Fireworks.scss';
@@ -14,6 +14,7 @@ export interface FireworksProps {
   toggle?: boolean;
   count?: number;
   interval?: number;
+  background?: boolean;
   zIndex?: number;
 }
 
@@ -151,6 +152,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     interval = 800,
     infinite,
     toggle,
+    background,
     zIndex,
   } = props;
 
@@ -255,12 +257,12 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   return (
     <>
       {activator}
-      <Portal id="fireworks">
+      <Injection target={background ? '$background' : '$foreground'}>
         <div style={ifExists(zIndex, { zIndex })} className={styles.Fireworks}>
           <canvas ref={setCanvas} />
         </div>
         <EventListener event="resize" handler={handleResize} />
-      </Portal>
+      </Injection>
     </>
   );
 }

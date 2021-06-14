@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { usePopper } from 'react-popper';
-import { classNames, ifExists } from '@gatsby-tv/utilities';
+import { classNames, ifExists, useForm } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
-import { useForm } from '@lib/utilities/form';
 import { Option } from '@lib/types';
 
 import styles from './Slider.scss';
@@ -68,7 +67,7 @@ export function Slider(props: SliderProps): React.ReactElement {
     () => (value - min) / (max - min)
   );
   const [dragging, setDragging] = useState(false);
-  const { errors, setError, clearError } = useForm();
+  const { setValue } = useForm();
 
   const { styles: style, attributes, update } = usePopper(reference, popper, {
     placement: 'top',
@@ -98,12 +97,9 @@ export function Slider(props: SliderProps): React.ReactElement {
   );
 
   useEffect(() => {
-    onChange?.(
-      Math.round(position * (max - min) + min),
-      id,
-      setError,
-      clearError
-    );
+    const value = Math.round(position * (max - min) + min);
+    setValue(id, value);
+    onChange?.(value, id);
   }, [position, id, max, min, onChange]);
 
   const setPosition = useCallback(

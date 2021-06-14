@@ -8,13 +8,18 @@ import {
 } from 'react';
 import jwt from 'jsonwebtoken';
 import { ifExists } from '@gatsby-tv/utilities';
-import { User } from '@gatsby-tv/types';
+import { User, GetAuthTokenRefreshResponse } from '@gatsby-tv/types';
 
 import { fetcher } from '@src/utilities/fetcher';
 
 import { SessionContext, SessionContextType } from './context';
 
-export type SessionState = Omit<SessionContextType, 'setSession'>;
+export type SessionState = {
+  user?: User;
+  token?: string;
+  loading: boolean;
+  valid: boolean;
+};
 export type SessionAction =
   | { type: 'submit'; token?: string }
   | { type: 'accept'; token: string }
@@ -25,19 +30,23 @@ export function useSessionContext(): SessionContextType {
     (state: SessionState, action: SessionAction) => {
       switch (action.type) {
         case 'submit':
-          return action.token
-            ? {
-                ...state,
-                token: action.token,
-                user: jwt.decode(action.token) as User,
-                loading: true,
-              }
-            : {
-                ...state,
-                token: undefined,
-                user: undefined,
-                loading: false,
-              };
+          if (action.token) {
+            return {
+              ...state,
+              token: action.token,
+              user: jwt.decode(action.token) as User,
+              loading: true,
+            };
+          } else {
+            window.localStorage.removeItem('session');
+            return {
+              ...state,
+              token: undefined,
+              user: undefined,
+              loading: false,
+              valid: false,
+            };
+          }
 
         case 'accept':
           window.localStorage.setItem('session', action.token);
@@ -46,15 +55,17 @@ export function useSessionContext(): SessionContextType {
             token: action.token,
             user: jwt.decode(action.token) as User,
             loading: false,
+            valid: true,
           };
 
         case 'reject':
-          window.localStorage.clearItem('session');
+          window.localStorage.removeItem('session');
           return {
             ...state,
             token: undefined,
             user: undefined,
             loading: false,
+            valid: false,
           };
       }
     },
@@ -62,6 +73,7 @@ export function useSessionContext(): SessionContextType {
       user: undefined,
       token: undefined,
       loading: true,
+      valid: false,
     }
   );
 
@@ -80,29 +92,21 @@ export function useSessionContext(): SessionContextType {
 
   useEffect(() => {
     if (state.token) {
-      fetcher('/auth/token/refresh', state.token)
+      fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', state.token)
         .then((resp) => dispatch({ type: 'accept', token: resp.token }))
         .catch((err) => dispatch({ type: 'reject' }));
     }
   }, [state.token]);
 
-  return {
-    ...state,
-    setSession,
-  };
+  return [state, setSession];
 }
 
-export function useSession(): [
-  SessionState,
-  Dispatch<SetStateAction<string | undefined>>
-] {
+export function useSession(): SessionContextType {
   const context = useContext(SessionContext);
 
   if (!context) {
     throw new Error('Session context is missing for component.');
   }
 
-  const { setSession, ...session } = context;
-
-  return [session, setSession];
+  return context;
 }

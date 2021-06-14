@@ -63,7 +63,7 @@ export function Menu(props: MenuProps): React.ReactElement {
 
   return (
     <ItemContext.Provider value={{ itemClass }}>
-      <Modal id="menu" active={active} onExit={onExit}>
+      <Modal active={active} onExit={onExit}>
         <div ref={setPopper} style={style.popper} {...attributes.popper}>
           <Connected className={classes} column>
             {children}

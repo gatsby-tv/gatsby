@@ -1,10 +1,12 @@
 import { createContext } from 'react';
-import { FormError } from './errors';
+
+import { FormError } from '@lib/errors';
 
 export interface FormContextType {
+  values: Record<string, unknown>;
+  setValue: (id: string, value: unknown) => void;
   errors: Record<string, FormError | undefined>;
-  setError: (id: string, message: string) => void;
-  clearError: (id: string) => void;
+  setError: (id: string, error: FormError | undefined) => void;
 }
 
 export interface FormSelectContextType {

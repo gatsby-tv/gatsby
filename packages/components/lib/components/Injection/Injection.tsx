@@ -1,6 +1,6 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
 
+import { Portal } from '@lib/components/Portal';
 import { useInjection } from '@lib/utilities/injection';
 
 import { Target, TargetProps } from './components';
@@ -13,12 +13,13 @@ export interface InjectionProps {
   index?: number;
 }
 
-export function Injection(props: InjectionProps): React.ReactPortal | null {
+export function Injection(props: InjectionProps): React.ReactElement {
   const { children, target, index } = props;
   const container = useInjection(
     index !== undefined ? `${target}-${index}` : target
   );
-  return container ? createPortal(children, container) : null;
+
+  return <Portal target={container}>{children}</Portal>;
 }
 
 Injection.Target = Target;

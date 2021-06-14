@@ -17,8 +17,8 @@ export function Frame(props: FrameProps): React.ReactElement {
   const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
-  const [topbar, setTopbarBase] = useState(Boolean(props.topbar));
-  const [sidebar, setSidebarBase] = useState(Boolean(props.sidebar));
+  const [topbar, setTopbarBase] = useState(true);
+  const [sidebar, setSidebarBase] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [screenX, setScreenX] = useState(0);
   const [screenY, setScreenY] = useState(0);

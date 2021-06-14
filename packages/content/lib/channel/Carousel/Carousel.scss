@@ -3,8 +3,4 @@
 .Skeleton {
   display: flex;
   gap: spacing(1);
-
-  & > * {
-    flex: 1 0 auto;
-  }
 }

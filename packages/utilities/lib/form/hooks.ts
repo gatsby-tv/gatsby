@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ContextError } from '@gatsby-tv/utilities';
+import { ContextError } from '@lib/errors';
 
 import {
   FormContext,
@@ -16,6 +16,10 @@ export function useForm(): FormContextType {
   }
 
   return context;
+}
+
+export function useOptionalForm(): FormContextType | undefined {
+  return useContext(FormContext);
 }
 
 export function useFormSelect(): FormSelectContextType {

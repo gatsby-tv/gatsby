@@ -6,11 +6,15 @@ import { InfiniteFetchResponse } from '@lib/types';
 export function useInfinite<T>(
   getKey: (index: number) => string | null
 ): InfiniteFetchResponse<'data', T> {
-  const { data, error, size, setSize } = useSWRInfinite<T>(getKey);
+  const { data, error, size, setSize } = useSWRInfinite<T>(getKey, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
-  const generator = useCallback(() => setSize((current) => current + 1), [
-    setSize,
-  ]);
+  const generator = useCallback(
+    () => setSize((current) => current + 1),
+    [setSize]
+  );
 
   const loading =
     (!data && !error) ||

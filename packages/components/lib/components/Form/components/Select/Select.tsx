@@ -11,15 +11,16 @@ import {
   classNames,
   ifExists,
   ifNotExists,
+  useForm,
   useResizeObserver,
+  Validators,
+  FormSelectContext,
 } from '@gatsby-tv/utilities';
 
 import { Button } from '@lib/components/Button';
 import { Icon } from '@lib/components/Icon';
 import { Scroll } from '@lib/components/Scroll';
-import { useForm } from '@lib/utilities/form';
 import { SelectionContext } from '@lib/utilities/selection';
-import { FormSelectContext } from '@lib/utilities/form';
 import { Option as SelectOption } from '@lib/types';
 
 import { Option, Tag } from './components';
@@ -104,6 +105,7 @@ export function Select(props: SelectProps): React.ReactElement {
     clearable,
     searchable,
     multiple,
+    required,
     onClick,
     onChange: onChangeHandler,
     onFocus: onFocusHandler,
@@ -114,8 +116,9 @@ export function Select(props: SelectProps): React.ReactElement {
 
   const ref = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
-  const { errors, setError, clearError } = useForm();
+  const { setValue, errors, setError } = useForm();
 
+  const [invalid, setInvalid] = useState(Boolean(errors[id]));
   const [width, setWidth] = useState(0);
   const [hover, setHover] = useState<string | undefined>(options[0]?.value);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
@@ -232,6 +235,16 @@ export function Select(props: SelectProps): React.ReactElement {
     if (!state.active) setHover(options[0]?.value);
   }, [state.active, options]);
 
+  useEffect(() => {
+    const validator = required
+      ? Validators.required('Field is required')
+      : undefined;
+
+    setValue(id, state.selection);
+    setError(id, validator?.(id, [state.selection].flat().join('')));
+    onChangeHandler?.(state.selection, id);
+  }, [id, state.selection, onChangeHandler]);
+
   const classes = classNames(
     className,
     styles.Select,
@@ -250,11 +263,9 @@ export function Select(props: SelectProps): React.ReactElement {
   }, []);
 
   const onChange = useCallback(
-    (option: string) => {
-      dispatch({ type: multiple ? 'select-append' : 'select-replace', option });
-      onChangeHandler?.(option, id, setError, clearError);
-    },
-    [id, multiple, onChangeHandler]
+    (option: string) =>
+      dispatch({ type: multiple ? 'select-append' : 'select-replace', option }),
+    [multiple]
   );
 
   const onFocus = useCallback(
@@ -268,9 +279,10 @@ export function Select(props: SelectProps): React.ReactElement {
   const onBlur = useCallback(
     (event: any) => {
       dispatch({ type: 'blur' });
+      setInvalid(Boolean(errors[id]));
       onBlurHandler?.(event);
     },
-    [onBlurHandler]
+    [id, errors, onBlurHandler]
   );
 
   const onMouseDown = useCallback(
@@ -397,7 +409,7 @@ export function Select(props: SelectProps): React.ReactElement {
           ref={ref}
           className={classes}
           data-focus={ifExists(state.focus)}
-          data-error={ifExists(errors[id])}
+          data-error={ifExists(invalid)}
           onClick={onClick}
           onMouseDown={onMouseDown}
         >

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { NoEntry } from '@gatsby-tv/icons';
-import { ifExists, classNames } from '@gatsby-tv/utilities';
+import { ifExists, classNames, useForm } from '@gatsby-tv/utilities';
 
 import { Icon } from '@lib/components/Icon';
 import { Optional } from '@lib/components/Optional';
-import { useForm } from '@lib/utilities/form';
 
 import styles from './Label.scss';
 
@@ -20,6 +19,12 @@ export interface LabelProps {
 export function Label(props: LabelProps): React.ReactElement {
   const { children, for: id, className, label, help, hidden } = props;
   const { errors } = useForm();
+  const [invalid, setInvalid] = useState(Boolean(errors[id]));
+  const error = invalid && errors[id];
+
+  const onBlur = useCallback(() => {
+    setInvalid(Boolean(errors[id]));
+  }, [id, errors]);
 
   const classes = classNames(
     className,
@@ -28,13 +33,13 @@ export function Label(props: LabelProps): React.ReactElement {
   );
 
   const HelpMarkup =
-    help && !errors[id] ? <div className={styles.Help}>{help}</div> : null;
+    help && !error ? <div className={styles.Help}>{help}</div> : null;
 
-  const ErrorMarkup = errors[id] ? (
-    <div className={styles.Error}>{errors[id]?.message}</div>
+  const ErrorMarkup = error ? (
+    <div className={styles.Error}>{error?.message}</div>
   ) : null;
 
-  const ErrorIconMarkup = errors[id] ? (
+  const ErrorIconMarkup = error ? (
     <Icon
       className={styles.ErrorIcon}
       src={NoEntry}
@@ -44,7 +49,7 @@ export function Label(props: LabelProps): React.ReactElement {
   ) : null;
 
   return (
-    <>
+    <div onBlur={onBlur}>
       <Optional
         component="span"
         active={Boolean(ErrorIconMarkup)}
@@ -58,6 +63,6 @@ export function Label(props: LabelProps): React.ReactElement {
       {children}
       {ErrorMarkup}
       {HelpMarkup}
-    </>
+    </div>
   );
 }

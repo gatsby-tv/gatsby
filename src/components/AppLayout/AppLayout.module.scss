@@ -1,5 +1,14 @@
 @use 'styles' as *;
 
+.Loading {
+  @include expand(fixed);
+  @include center;
+}
+
+.Spinner {
+  font-size: rem(70px);
+}
+
 .Topbar {
   width: 100%;
   height: spacing(5);

@@ -1,0 +1,25 @@
+@use 'sass:color';
+@use 'styles' as *;
+
+.Invalid {
+  flex-direction: column;
+  gap: spacing(2);
+}
+
+.HomeLink {
+  @include font-size(body-large);
+  color: palette("blue");
+
+  @include hover {
+    color: color.adjust(palette("blue"), $lightness: 5%);
+  }
+}
+
+.Container {
+  @include expand(fixed);
+  @include center;
+}
+
+.Spinner {
+  font-size: rem(70px);
+}

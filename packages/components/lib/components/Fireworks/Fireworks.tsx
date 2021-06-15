@@ -59,13 +59,13 @@ Particle.exists = ({ alpha, size }: ParticleType) => {
   return alpha >= 0.1 && size >= 1;
 };
 
-Particle.update = (particle: ParticleType) => {
+Particle.update = (particle: ParticleType, dt: number) => {
   const {
     position,
     velocity,
     size,
     alpha,
-    resistance = 1,
+    resistance = 0,
     gravity = 0,
     shrink = 1,
     fade = 0,
@@ -74,19 +74,19 @@ Particle.update = (particle: ParticleType) => {
   return {
     ...particle,
     position: {
-      x: position.x + velocity.dx,
-      y: position.y + velocity.dy,
+      x: position.x + velocity.dx * dt,
+      y: position.y + velocity.dy * dt,
     },
     velocity: {
-      dx: velocity.dx * resistance,
-      dy: velocity.dy * resistance + gravity,
+      dx: velocity.dx * Math.exp(-resistance * dt),
+      dy: velocity.dy * Math.exp(-resistance * dt) + gravity * dt,
     },
     size: size * shrink,
     alpha: alpha - fade,
   };
 };
 
-Particle.explode = (particle: ParticleType) => {
+Particle.explode = (particle: ParticleType, dt: number) => {
   const count = Math.floor(10 * Math.random() + 80);
 
   return [...Array(count)].map(() => {
@@ -98,7 +98,7 @@ Particle.explode = (particle: ParticleType) => {
       velocity: { dx: speed * Math.cos(angle), dy: speed * Math.sin(angle) },
       size: 10,
       gravity: 0.2,
-      resistance: 0.92,
+      resistance: 0.1,
       shrink: 0.05 * Math.random() + 0.93,
       hue: 10 * Math.floor((Math.random() * 360) / 10),
     };
@@ -134,6 +134,8 @@ Particle.render = (
 
 export function Fireworks(props: FireworksProps): React.ReactElement {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+  const [time, setTime] = useState(Date.now());
+  const [frame, setFrame] = useState(0);
   const [, setRockets] = useState<ParticleType[]>([]);
   const [, setParticles] = useState<ParticleType[]>([]);
 
@@ -157,12 +159,18 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   } = props;
 
   const handleResize = useCallback(() => {
-    if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }, [canvas]);
+    setCanvas((current) => {
+      if (!current) return current;
+      current.width = window.innerWidth;
+      current.height = window.innerHeight;
+      return current;
+    });
+  }, []);
 
   const draw = useCallback(() => {
+    setTime(Date.now());
+    const dt = Math.min(60 * (Date.now() - time) / 1000, 1);
+
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
 
@@ -172,13 +180,13 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
 
     setRockets((current) =>
       current.reduce((acc: ParticleType[], rocket: ParticleType) => {
-        const updatedRocket = Particle.update(rocket);
+        const updatedRocket = Particle.update(rocket, dt);
 
         if (
           updatedRocket.position.y < (canvas.height ?? 0) / 5 ||
-          Math.random() <= 0.01
+          Math.random() <= (0.01 * dt)
         ) {
-          newParticles = newParticles.concat(Particle.explode(rocket));
+          newParticles = newParticles.concat(Particle.explode(rocket, dt));
           return acc;
         } else {
           Particle.render(updatedRocket, context);
@@ -191,7 +199,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
       current
         .concat(newParticles)
         .reduce((acc: ParticleType[], particle: ParticleType) => {
-          const updatedParticle = Particle.update(particle);
+          const updatedParticle = Particle.update(particle, dt);
 
           if (!Particle.exists(updatedParticle)) {
             return acc;
@@ -202,24 +210,18 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
         }, [])
     );
 
-    const id = requestAnimationFrame(draw);
+    const id = requestAnimationFrame(() => setFrame((current) => current + 1));
     return () => cancelAnimationFrame(id);
-  }, [canvas]);
+  }, [time, canvas]);
 
-  useEffect(() => handleResize(), [canvas, handleResize]);
-  useEffect(() => draw(), [canvas, draw]);
+  useEffect(() => handleResize(), [canvas]);
+  useEffect(() => draw(), [canvas, frame]);
 
   useEffect(() => {
     if (!infinite && toggle == null) return;
 
     const rocketGenerator = () => {
-      let position;
-      if (typeof origin === 'function') {
-        position = origin();
-      } else {
-        position = origin;
-      }
-
+      const position = typeof origin === 'function' ? origin() : origin;
       return {
         ...Particle(position),
         velocity: { dx: 6 * Math.random() - 3, dy: -3 * Math.random() - 4 },

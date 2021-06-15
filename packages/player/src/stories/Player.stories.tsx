@@ -21,8 +21,7 @@ Blank.args = {
 
 export const DefaultAspectRatio = Template.bind({});
 DefaultAspectRatio.args = {
-  src:
-    'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps_1920x1080_8000k.mp4',
+  src: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps_1920x1080_8000k.mp4',
   loop: true,
   muted: true,
   autoPlay: true,
@@ -30,8 +29,7 @@ DefaultAspectRatio.args = {
 
 export const WideAspectRatio = Template.bind({});
 WideAspectRatio.args = {
-  src:
-    'https://upload.wikimedia.org/wikipedia/commons/a/a5/Spring_-_Blender_Open_Movie.webm',
+  src: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Spring_-_Blender_Open_Movie.webm',
   loop: true,
   muted: true,
   autoPlay: true,

@@ -133,6 +133,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       asLabelFor && styles.FitContent
     );
 
+    const disabled =
+      Object.values(form?.errors ?? {}).some(Boolean) ||
+      !Object.values(form?.values ?? {}).some(Boolean);
+
     const TooltipMarkup =
       tooltip && !held ? (
         <Tooltip for={button} offset={7}>
@@ -148,7 +152,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className: classes,
       htmlFor: asLabelFor,
       tabIndex: ifExists(asLabelFor, -1),
-      disabled: ifExists(Object.values(form?.errors ?? {}).some(Boolean)),
+      disabled: ifExists(form, disabled),
       'data-animating': ifExists(
         !unstyled && animate && !reset && (active || held)
       ),

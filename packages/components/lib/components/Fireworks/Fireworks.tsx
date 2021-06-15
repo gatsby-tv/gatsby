@@ -169,7 +169,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
 
   const draw = useCallback(() => {
     setTime(Date.now());
-    const dt = Math.min(60 * (Date.now() - time) / 1000, 1);
+    const dt = Math.min((60 * (Date.now() - time)) / 1000, 1);
 
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
@@ -184,7 +184,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
 
         if (
           updatedRocket.position.y < (canvas.height ?? 0) / 5 ||
-          Math.random() <= (0.01 * dt)
+          Math.random() <= 0.01 * dt
         ) {
           newParticles = newParticles.concat(Particle.explode(rocket, dt));
           return acc;

@@ -42,10 +42,7 @@ export function SignIn(props: SignInProps): React.ReactElement {
           className={styles.Email}
           placeholder="Email"
           prefix={<Icon src={Email} size="smaller" />}
-          validators={[
-            Validators.required('Email is required'),
-            Validators.isEmail('Invalid email'),
-          ]}
+          validators={[Validators.isEmail('Invalid email')]}
           onChange={setEmail}
           autoComplete
         />

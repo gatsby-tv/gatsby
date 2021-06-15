@@ -32,12 +32,12 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     ) : null;
 
     return (
-      <Connected.Item className={classes}>
-        <Optional
-          component={LinkComponent}
-          active={Boolean(href)}
-          $props={{ ref, href, ...rest }}
-        >
+      <Optional
+        component={LinkComponent}
+        active={Boolean(href)}
+        $props={{ ref, href, ...rest }}
+      >
+        <Connected.Item className={classes}>
           <Optional
             component="div"
             active={Boolean(IconComponent)}
@@ -46,8 +46,8 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             {IconMarkup}
             <div className={styles.Text}>{children}</div>
           </Optional>
-        </Optional>
-      </Connected.Item>
+        </Connected.Item>
+      </Optional>
     );
   }
 );

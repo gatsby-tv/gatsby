@@ -5,5 +5,5 @@ import { FormError } from '@lib/errors';
 
 export function isEmail(message: string): Validator {
   return (id: string, value: string) =>
-    email(value) ? undefined : new FormError(id, message);
+    !value || email(value) ? undefined : new FormError(id, message);
 }

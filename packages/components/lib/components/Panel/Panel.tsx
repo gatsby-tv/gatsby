@@ -56,10 +56,8 @@ getOffset.value = (
   direction: string,
   dimension: string
 ) => {
-  const {
-    [direction]: x,
-    [dimension]: y,
-  } = ref.current?.getBoundingClientRect() as any;
+  const { [direction]: x, [dimension]: y } =
+    ref.current?.getBoundingClientRect() as any;
   return Math.min(Math.max((base - x) / y, 0), 1);
 };
 

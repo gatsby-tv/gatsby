@@ -21,7 +21,11 @@ export function Timeline(props: TimelineProps) {
     100 * (1 - (timeline.scrubbing ? timeline.position : player.time))
   }%`;
 
-  const { styles: style, attributes, update } = usePopper(reference, popper, {
+  const {
+    styles: style,
+    attributes,
+    update,
+  } = usePopper(reference, popper, {
     placement: 'top',
     strategy: 'absolute',
     modifiers: [

@@ -27,8 +27,8 @@ export function Item(props: ItemProps): React.ReactElement {
   ) : null;
 
   return (
-    <Connected.Item className={classes}>
-      <Button unstyled {...rest}>
+    <Button unstyled {...rest}>
+      <Connected.Item className={classes}>
         <Optional
           component="div"
           active={Boolean(IconComponent)}
@@ -37,7 +37,7 @@ export function Item(props: ItemProps): React.ReactElement {
           {IconMarkup}
           <div className={styles.Text}>{children}</div>
         </Optional>
-      </Button>
-    </Connected.Item>
+      </Connected.Item>
+    </Button>
   );
 }

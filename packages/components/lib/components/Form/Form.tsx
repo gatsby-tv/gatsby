@@ -41,10 +41,10 @@ export function Form(props: FormProps): React.ReactElement {
   );
 
   useEffect(() => parent?.setValue(id, values), [id, values]);
-  useEffect(() => parent?.setError(id, Object.values(errors).find(Boolean)), [
-    id,
-    errors,
-  ]);
+  useEffect(
+    () => parent?.setError(id, Object.values(errors).find(Boolean)),
+    [id, errors]
+  );
 
   const setValue = useCallback(
     (id: string, value: unknown) =>

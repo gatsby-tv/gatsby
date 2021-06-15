@@ -13,6 +13,7 @@
 .Card {
   @include border-radius(small);
   max-width: rem(700px);
+  min-height: rem(195px);
   background-color: background(darker);
   padding: spacing(2);
 }
@@ -53,4 +54,13 @@
   @include active {
     background-color: color.adjust(palette("gold"), $alpha: -0.1);
   }
+}
+
+.Loading {
+  @include expand(absolute);
+  @include center;
+}
+
+.Spinner {
+  font-size: rem(70px);
 }

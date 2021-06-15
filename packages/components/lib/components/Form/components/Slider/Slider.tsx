@@ -69,7 +69,11 @@ export function Slider(props: SliderProps): React.ReactElement {
   const [dragging, setDragging] = useState(false);
   const { setValue } = useForm();
 
-  const { styles: style, attributes, update } = usePopper(reference, popper, {
+  const {
+    styles: style,
+    attributes,
+    update,
+  } = usePopper(reference, popper, {
     placement: 'top',
     strategy: 'absolute',
     modifiers: [

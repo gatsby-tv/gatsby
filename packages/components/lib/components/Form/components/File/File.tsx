@@ -14,11 +14,11 @@ export interface FileProps
       | 'name'
       | 'readOnly'
       | 'required'
-      | 'value'
       | Exclude<keyof React.HTMLAttributes<HTMLElement>, 'onChange'>
     >,
     Pick<ButtonProps, 'unstyled' | 'animate' | 'tooltip' | 'icon' | 'size'> {
   id: string;
+  value: string;
   onChange?: (
     value: string,
     id?: string,

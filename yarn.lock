@@ -87,7 +87,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/cli@npm:^7.12.1, @babel/cli@npm:^7.7.5":
+"@babel/cli@npm:^7.7.5":
   version: 7.12.16
   resolution: "@babel/cli@npm:7.12.16"
   dependencies:
@@ -3179,7 +3179,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gatsby-tv/utilities@workspace:packages/utilities"
   dependencies:
-    "@babel/cli": ^7.12.1
     "@babel/core": ^7.11.6
     "@babel/plugin-proposal-class-properties": ^7.12.1
     "@babel/plugin-proposal-private-methods": ^7.12.1
@@ -3189,6 +3188,9 @@ __metadata:
     "@babel/preset-react": ^7.12.5
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/types": ^0.4.30
+    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-commonjs": ^19.0.0
+    "@rollup/plugin-node-resolve": ^13.0.0
     "@types/hls.js": ^0.13.3
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
@@ -3211,6 +3213,8 @@ __metadata:
     react-dom: ^17.0.2
     react-is: ^17.0.1
     regenerator-runtime: ^0.13.7
+    rollup: ^2.51.2
+    tscpaths: ^0.0.9
     typescript: ^4.0.5
     validator: ^13.6.0
     webpack: ^5.21.2
@@ -4074,6 +4078,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/plugin-commonjs@npm:^19.0.0":
+  version: 19.0.0
+  resolution: "@rollup/plugin-commonjs@npm:19.0.0"
+  dependencies:
+    "@rollup/pluginutils": ^3.1.0
+    commondir: ^1.0.1
+    estree-walker: ^2.0.1
+    glob: ^7.1.6
+    is-reference: ^1.2.1
+    magic-string: ^0.25.7
+    resolve: ^1.17.0
+  peerDependencies:
+    rollup: ^2.38.3
+  checksum: e6dd7c68f5256482f97e2aeef4fc7621c990d18c8ddf7f6d1a3de052f88f837507886d345a6d12c35290ed8dd3ce5cb9bf31ac1c5ea74d4a10bada297d53a251
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-node-resolve@npm:^11.2.1":
   version: 11.2.1
   resolution: "@rollup/plugin-node-resolve@npm:11.2.1"
@@ -4087,6 +4108,22 @@ __metadata:
   peerDependencies:
     rollup: ^1.20.0||^2.0.0
   checksum: ae1bed46a949a1d8c077e021751c0140a523f731bea464ed0bfc3d335096493d1638be2a756f72d96f1f3a00fbdad8ba8fad8e86381d3eafce5ea2dffd62f175
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-node-resolve@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "@rollup/plugin-node-resolve@npm:13.0.0"
+  dependencies:
+    "@rollup/pluginutils": ^3.1.0
+    "@types/resolve": 1.17.1
+    builtin-modules: ^3.1.0
+    deepmerge: ^4.2.2
+    is-module: ^1.0.0
+    resolve: ^1.19.0
+  peerDependencies:
+    rollup: ^2.42.0
+  checksum: 4b323e8ad5f1245449cd44b4857ed94a8dd3b998178ce139e74542c216a5abeb5a9e44885f3809ac747296a108f0562f986f9561055e76d1b0b268cf788a5c83
   languageName: node
   linkType: hard
 
@@ -27339,6 +27376,20 @@ resolve@1.1.7:
   bin:
     rollup: dist/bin/rollup
   checksum: b07c6051c35ed30916f529cbfb3731c9ac10355daca167ba8d863bcda6499e39593e078eb8e29b4bf94a1e3d112e1cdfa908fe147a231b6a93b9fd6b732beb98
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^2.51.2":
+  version: 2.51.2
+  resolution: "rollup@npm:2.51.2"
+  dependencies:
+    fsevents: ~2.3.1
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: adad3fa3993c5843cdfdd9d6e370a5780182816175c154a3bfb437f01ca7838b2725c2b3030eb3ba3b1002f0ce77f091be78bbfc4aef4b75ddd83302138a19c6
   languageName: node
   linkType: hard
 

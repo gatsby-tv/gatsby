@@ -6,10 +6,11 @@
     "jsx": "react",
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
     "sourceMap": true,
     "outDir": "dist",
-    "paths": { "@lib/*": ["./lib/*"] },
+    "rootDir": "./lib",
+    "baseUrl": "./lib",
+    "paths": { "@lib/*": ["*"] },
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true

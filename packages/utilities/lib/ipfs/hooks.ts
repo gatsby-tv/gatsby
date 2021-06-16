@@ -9,6 +9,7 @@ import {
   useRef,
   RefObject,
 } from 'react';
+// @ts-ignore
 import IPFS from 'ipfs';
 import HLS from 'hls.js';
 // @ts-ignore

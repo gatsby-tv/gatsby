@@ -14,27 +14,10 @@ $radius-map: (
   full: 100%,
 );
 
-$width-map: (
-  none: 0,
-  smallest: rem(1px),
-  small: rem(2px),
-  base: rem(3px),
-  large: rem(4px),
-  largest: rem(5px),
-);
-
 @mixin radius($radius) {
   border-radius: map.get($radius-map, $radius);
 }
 
 @function radius($radius) {
   @return map.get($radius-map, $radius);
-}
-
-@mixin width($width) {
-  border-width: map.get($width-map, $width);
-}
-
-@function width($width) {
-  @return map.get($width-map, $width);
 }

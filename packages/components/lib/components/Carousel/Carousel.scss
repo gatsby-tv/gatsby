@@ -25,10 +25,10 @@
 }
 
 .Button {
-  @include shadow();
+  @include elevation(5);
   position: absolute;
   top: calc(50% - #{spacing(2)});
-  background-color: background(base);
+  background-color: palette(surface, 6);
 }
 
 .ButtonLeft {
@@ -43,15 +43,13 @@
   display: block;
   cursor: pointer;
   outline: none;
-  z-index: 0;
   margin: 0 rem(2.5px);
   color: inherit;
   background-color: transparent;
-  transition: transform duration(fast) ease;
+  transition: box-shadow duration(fast) ease, transform duration(fast) ease;
 
   @include mouse-hover {
-    @include shadow();
-    z-index: 1;
+    @include elevation(4);
     transform: scale(1.075);
   }
 

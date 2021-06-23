@@ -19,8 +19,8 @@
 .Signal {
   @include border-radius(full);
   opacity: 0;
-  color: palette("white");
-  background-color: palette("black");
+  color: palette(white);
+  background-color: palette(black);
 
   svg:global(#gz-pause) {
     transform: scale(0.9);

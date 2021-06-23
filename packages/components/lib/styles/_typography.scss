@@ -10,7 +10,7 @@ $display-font-size-map: (
 );
 
 @mixin subdued {
-  color: foreground(subdued);
+  color: palette(typography, subdued);
 }
 
 @mixin condensed {
@@ -73,7 +73,7 @@ $display-font-size-map: (
 }
 
 @mixin error {
-  color: palette('red');
+  color: palette(error);
   @include font-weight(semi-bold);
 }
 
@@ -83,7 +83,7 @@ $display-font-size-map: (
 }
 
 @mixin placeholder {
-  color: color.adjust(foreground(body), $alpha: -0.5);
+  color: palette(typography, placeholder);
 }
 
 @mixin caption {
@@ -96,7 +96,7 @@ $display-font-size-map: (
   @include font-weight(normal);
   white-space: pre-line;
   appearance: none;
-  color: color.adjust(foreground(body), $lightness: -10%);
+  color: palette(typography);
 }
 
 @mixin tab {

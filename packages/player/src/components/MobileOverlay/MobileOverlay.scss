@@ -6,7 +6,7 @@
 }
 
 .Tint {
-  background-color: color.adjust(palette("black"), $alpha: -0.5);
+  background-color: hsla(0, 0%, 0%, 0.5);
 }
 
 .Signal {

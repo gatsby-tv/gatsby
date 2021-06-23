@@ -3,7 +3,7 @@
 .Selection {
   width: rem(200px);
   padding: spacing(0.5);
-  background-color: background(dark);
+  background-color: palette(surface, 4);
 
   h3 {
     padding: spacing(0.5) spacing(1.5);
@@ -23,11 +23,12 @@
 }
 
 .Item {
+  @include font-weight(semi-bold);
   padding: spacing(1) spacing(1.5);
   transition: all duration(fastest) ease;
 
   &[aria-selected] {
-    color: palette("blue");
-    background-color: background(base);
+    color: palette(blue, 9);
+    background-color: palette(surface, 6);
   }
 }

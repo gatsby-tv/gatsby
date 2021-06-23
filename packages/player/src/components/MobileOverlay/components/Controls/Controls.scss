@@ -45,7 +45,7 @@
 }
 
 .Disabled {
-  color: foreground(placeholder);
+  color: palette(typography, disabled);
 }
 
 .Fullscreen {

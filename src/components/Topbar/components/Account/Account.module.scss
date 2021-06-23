@@ -8,37 +8,37 @@
 
 .Menu {
   min-width: rem(200px);
-  background-color: background(dark);
+  background-color: palette(surface, 4);
 }
 
 .MenuItem {
   padding: spacing(1) spacing(1.5);
 
-  &:hover {
-    background-color: background(base);
+  @include hover {
+    background-color: palette(surface, 6);
   }
 }
 
 .SignIn {
-  background-color: palette("gold");
-  color: background(darker);
+  background-color: palette(gold);
+  color: palette(surface, 2);
   padding: spacing(0.5) spacing(1);
   flex-shrink: 0;
 
   @include hover {
-    background-color: color.adjust(palette("gold"), $lightness: 5%);
+    background-color: palette(gold, 9);
   }
 
   @include active {
-    background-color: color.adjust(palette("gold"), $alpha: -0.1);
+    background-color: palette(gold, 7);
   }
 }
 
 .Misc {
-  background-color: foreground(placeholder);
+  background-color: palette(icon);
   flex-shrink: 0;
 
   @include hover {
-    background-color: color.adjust(foreground(placeholder), $alpha: 0.1);
+    background-color: palette(icon, hover);
   }
 }

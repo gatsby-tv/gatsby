@@ -3,14 +3,14 @@
 
 .Modal {
   @include border-radius(smallest);
-  background-color: background(dark);
+  background-color: palette(surface, 3);
   width: min(80vw, 90rem);
   max-width: 100%;
   height: calc(100vh - 12rem);
 }
 
 .Panel {
-  background-color: background(dark);
+  background-color: palette(surface, 3);
 }
 
 .Cancel {
@@ -18,16 +18,16 @@
   top: spacing(1.5);
   right: spacing(1.5);
   z-index: 2;
-  background-color: background(lighter);
+  background-color: palette(surface, 5);
 
   @include hover {
-    background-color: background(lightest);
+    background-color: palette(surface, 6);
   }
 }
 
 .Overlay {
   @include expand(absolute);
-  background-image: linear-gradient(to top, background(dark), transparent 50%);
+  background-image: linear-gradient(to top, #{palette(surface, 3)}, transparent 50%);
 }
 
 .Header {
@@ -84,7 +84,7 @@
 }
 
 .Rule {
-  background-color: background(lighter);
+  background-color: palette(surface, 6);
   margin: rem(-2px) 0 spacing(1.5);
   z-index: -1;
 }

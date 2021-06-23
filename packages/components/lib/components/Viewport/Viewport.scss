@@ -6,12 +6,12 @@
 
 .Placeholder {
   position: absolute;
-  background-color: palette('trueblack');
+  background-color: palette(black);
   width: 100%;
 }
 
 .AlphaBackground {
-  background-color: foreground(placeholder);
+  background-color: palette(surface, placeholder);
 }
 
 @each $key, $value in $border-radius-map {

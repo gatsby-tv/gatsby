@@ -4,7 +4,6 @@ import React, {
   useReducer,
   useEffect,
   useCallback,
-  RefObject,
 } from 'react';
 import { classNames, ifExists } from '@gatsby-tv/utilities';
 
@@ -30,7 +29,7 @@ type TouchAction =
   | { type: 'end' };
 
 function getOffset(
-  ref: RefObject<HTMLElement>,
+  ref: HTMLDivElement | null,
   touch: Touch,
   direction: string
 ): number {
@@ -51,13 +50,13 @@ function getOffset(
 }
 
 getOffset.value = (
-  ref: RefObject<HTMLElement>,
+  ref: HTMLElement | null,
   base: number,
   direction: string,
   dimension: string
 ) => {
   const { [direction]: x, [dimension]: y } =
-    ref.current?.getBoundingClientRect() as any;
+    ref?.getBoundingClientRect() as any;
   return Math.min(Math.max((base - x) / y, 0), 1);
 };
 
@@ -85,7 +84,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     zIndex,
     onExit,
   } = props;
-  const ref = useRef<HTMLDivElement>(null);
+  const [ref, setRef] = useState<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -147,10 +146,13 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     /* Our intention is to change the visibility of the panel only once we
      * know that the browser has had the chance to paint the component in
      * its initial state (offscreen).
+     *
+     * This is also why we force reflow by requesting the element offsetHeight.
      */
+    if (!ref?.offsetHeight) return;
     const id = window.requestAnimationFrame(() => setVisible(mounted));
     return () => window.cancelAnimationFrame(id);
-  }, [mounted]);
+  }, [ref, mounted]);
 
   useEffect(() => {
     if (!mounted) {
@@ -177,7 +179,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
 
   const onTouchStart = useCallback(
     (event: any) => {
-      if (!ref.current || !draggable) return;
+      if (!ref || !draggable) return;
       setTouch({
         type: 'start',
         offset: getOffset(ref, event.touches[0] as Touch, direction),
@@ -189,7 +191,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
 
   const onTouchMove = useCallback(
     (event: any) => {
-      if (!ref.current || !draggable) return;
+      if (!ref || !draggable) return;
       setTouch({
         type: 'move',
         position: getOffset(ref, event.touches[0] as Touch, direction),
@@ -250,7 +252,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
       $props={{ target: '$foreground' }}
     >
       <div
-        ref={ref}
+        ref={setRef}
         style={ifExists(zIndex, { zIndex })}
         className={classNames(
           styles.Panel,

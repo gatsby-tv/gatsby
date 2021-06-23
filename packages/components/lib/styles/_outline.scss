@@ -1,0 +1,30 @@
+@use './rem' as *;
+@use './duration' as *;
+@use './colors' as *;
+
+@mixin outline {
+  transition: box-shadow duration(faster) ease;
+  box-shadow: inset 0 0 0 rem(2px) palette(outline);
+
+  &:hover {
+    box-shadow: inset 0 0 0 rem(2px) palette(outline, hover);
+  }
+
+  &:focus,
+  &[data-focus] {
+    box-shadow: inset 0 0 0 rem(2px) palette(outline, focused);
+  }
+
+  &[data-error] {
+    box-shadow: inset 0 0 0 rem(2px) palette(error);
+  }
+
+  &[data-error]:hover {
+    box-shadow: inset 0 0 0 rem(2px) palette(error, hover);
+  }
+
+  &[data-error]:focus,
+  &[data-error][data-focus] {
+    box-shadow: inset 0 0 0 rem(2px) palette(error, focused);
+  }
+}

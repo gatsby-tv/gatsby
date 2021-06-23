@@ -199,11 +199,11 @@ export function Slider(props: SliderProps): React.ReactElement {
       <div
         ref={slider}
         className={classes}
+        draggable="false"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
-        draggable="false"
       >
         {StopsMarkup}
         <span

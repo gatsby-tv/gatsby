@@ -3,13 +3,13 @@
 .Topbar {
   width: 100%;
   height: rem(52px);
-  background-color: background(dark);
+  background-color: palette(surface, 4);
 }
 
 .Sidebar {
   width: rem(52px);
   height: 100%;
-  background-color: background(base);
+  background-color: palette(surface, 6);
 }
 
 .Content {

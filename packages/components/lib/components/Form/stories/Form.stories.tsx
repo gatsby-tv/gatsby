@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
+import { Validators } from '@gatsby-tv/utilities';
 
 import { Form, FormFieldProps, FormLabelProps } from '@lib/components/Form';
 
@@ -10,20 +11,27 @@ export default {
   component: Form,
 } as Meta;
 
-export const Field: Story<Partial<FormFieldProps & FormLabelProps>> = (
-  props
-) => {
-  const { help, hidden, ...rest } = props;
+type ValidatorConfig = {
+  required: boolean;
+  maxLength: number;
+  minLength: number;
+  pattern: RegExp;
+};
+
+type FieldStoryProps = Partial<FormFieldProps & FormLabelProps>;
+
+export const Field: Story<FieldStoryProps> = (props) => {
+  const { help, hidden, required, minLength, maxLength, pattern, ...rest } =
+    props;
+
   const [value, setValue] = useState('');
 
-  const onChange = (value, id, setError, clearError) => {
-    if (value.length > 10) {
-      setError(id, 'The provided value is greater than 10 characters.');
-    } else {
-      clearError(id);
-    }
-    setValue(value);
-  };
+  const validators = [
+    required && Validators.required('Required'),
+    minLength && Validators.minLength(minLength, 'Mininum Length'),
+    maxLength && Validators.maxLength(maxLength, 'Maximum Length'),
+    pattern && Validators.pattern(RegExp(pattern), 'Pattern'),
+  ].filter(Boolean);
 
   return (
     <Form className={styles.Form}>
@@ -38,7 +46,8 @@ export const Field: Story<Partial<FormFieldProps & FormLabelProps>> = (
           placeholder="Text..."
           name="field"
           value={value}
-          onChange={onChange}
+          validators={validators}
+          onChange={setValue}
           {...rest}
         />
       </Form.Label>
@@ -49,6 +58,10 @@ export const Field: Story<Partial<FormFieldProps & FormLabelProps>> = (
 Field.args = {
   help: undefined,
   hidden: false,
+  required: false,
+  minLength: undefined,
+  maxLength: undefined,
+  pattern: undefined,
 };
 
 export const Select: Story<Partial<FormSelectProps & FormLabelProps>> = (

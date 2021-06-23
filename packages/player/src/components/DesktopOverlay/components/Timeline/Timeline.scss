@@ -5,7 +5,7 @@
   cursor: pointer;
   transition: transform 150ms ease;
   height: rem(4px);
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: palette(slider, track);
 
   &:hover {
     transform: scaleY(1.5);
@@ -30,7 +30,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: palette(slider, track);
 }
 
 .Progress {
@@ -40,7 +40,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: palette("gold");
+  background-color: palette(gold);
 
   &:after {
     @include border-radius(full);
@@ -49,7 +49,7 @@
     right: rem(-7px);
     width: rem(14px);
     height: rem(14px);
-    background-color: palette("gold");
+    background-color: palette(gold);
     transform: scale(0);
     transition: transform 150ms ease;
   }

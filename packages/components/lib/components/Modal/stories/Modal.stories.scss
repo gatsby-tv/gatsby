@@ -1,8 +1,8 @@
 @use 'styles' as *;
 
 .Card {
-  color: foreground(inverted);
-  background-color: palette("white");
+  @include elevation(8);
+  background-color: palette(surface, 8);
   width: 60vw;
   height: 70vh;
 }

@@ -1,7 +1,7 @@
 @use 'styles' as *;
 
 .Menu {
-  @include shadow();
+  // @include shadow();
   @include border-radius(smallest);
   align-items: stretch;
 }

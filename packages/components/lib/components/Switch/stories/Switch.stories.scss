@@ -7,11 +7,11 @@
 .Item {
   @include border-radius(small);
   padding: spacing(0.5) spacing(1.5);
-  background-color: background(dark);
+  background-color: palette(surface, 4);
   transition: all duration(fastest) ease;
 
   &[aria-selected] {
-    color: palette("blue");
-    background-color: background(base);
+    color: palette(blue);
+    background-color: palette(surface, 6);
   }
 }

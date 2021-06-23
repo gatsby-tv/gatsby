@@ -12,7 +12,7 @@
 .Topbar {
   width: 100%;
   height: spacing(5);
-  background-color: background(darker);
+  background-color: palette(surface, 1);
   z-index: 5;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.1);
 }
@@ -20,6 +20,6 @@
 .Sidebar {
   width: spacing(5);
   height: 100%;
-  background-color: background(dark);
+  background-color: palette(surface, 2);
   z-index: 4;
 }

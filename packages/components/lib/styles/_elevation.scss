@@ -1,0 +1,57 @@
+@use 'sass:map';
+@use './rem' as *;
+@use './colors' as *;
+@use './duration' as *;
+
+$shadow-map: (
+  1: (
+    0 rem(1px) rem(1px) 0 palette(shadow, 1),
+    0 rem(2px) rem(1px) rem(-1px) palette(shadow, 2),
+    0 rem(1px) rem(3px) 0 palette(shadow, 3),
+  ),
+  2: (
+    0 rem(2px) rem(2px) 0 palette(shadow, 1),
+    0 rem(3px) rem(1px) rem(-2px) palette(shadow, 2),
+    0 rem(1px) rem(5px) 0 palette(shadow, 3),
+  ),
+  3: (
+    0 rem(3px) rem(4px) 0 palette(shadow, 1),
+    0 rem(3px) rem(3px) rem(-2px) palette(shadow, 2),
+    0 rem(1px) rem(8px) 0 palette(shadow, 3),
+  ),
+  4: (
+    0 rem(4px) rem(5px) 0 palette(shadow, 1),
+    0 rem(1px) rem(10px) 0 palette(shadow, 2),
+    0 rem(2px) rem(4px) rem(-1px) palette(shadow, 3),
+  ),
+  5: (
+    0 rem(6px) rem(10px) 0 palette(shadow, 1),
+    0 rem(1px) rem(18px) 0 palette(shadow, 2),
+    0 rem(3px) rem(5px) rem(-1px) palette(shadow, 3),
+  ),
+  6: (
+    0 rem(8px) rem(10px) rem(1px) palette(shadow, 1),
+    0 rem(3px) rem(14px) rem(2px) palette(shadow, 2),
+    0 rem(5px) rem(5px) rem(-3px) palette(shadow, 3),
+  ),
+  7: (
+    0 rem(9px) rem(12px) rem(1px) palette(shadow, 1),
+    0 rem(3px) rem(16px) rem(2px) palette(shadow, 2),
+    0 rem(5px) rem(6px) rem(-3px) palette(shadow, 3),
+  ),
+  8: (
+    0 rem(12px) rem(17px) rem(2px) palette(shadow, 1),
+    0 rem(5px) rem(22px) rem(4px) palette(shadow, 2),
+    0 rem(7px) rem(8px) rem(-4px) palette(shadow, 3),
+  ),
+  9: (
+    0 rem(16px) rem(24px) rem(2px) palette(shadow, 1),
+    0 rem(6px) rem(30px) rem(5px) palette(shadow, 2),
+    0 rem(8px) rem(10px) rem(-5px) palette(shadow, 3),
+  ),
+);
+
+@mixin elevation($level) {
+  z-index: $level;
+  box-shadow: map.get($shadow-map, $level);
+}

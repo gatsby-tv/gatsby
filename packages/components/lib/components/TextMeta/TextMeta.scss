@@ -25,7 +25,7 @@
 .Link {
   @include text-subdued;
   @include mouse-hover {
-    color: foreground(body);
+    color: palette(typography);
   }
 
   cursor: pointer;

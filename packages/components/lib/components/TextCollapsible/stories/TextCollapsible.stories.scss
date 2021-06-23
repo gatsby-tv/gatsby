@@ -5,13 +5,13 @@
   padding: spacing(0.5) spacing(1);
 }
 
-.Label {
+.Collapsible {
   @include card;
   width: rem(420px);
-  background-color: background(base);
+  background-color: palette(surface, 6);
 }
 
 .Content {
   @include card;
-  background-color: background(light);
+  background-color: palette(surface, 8);
 }

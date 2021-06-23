@@ -33,7 +33,7 @@
   transition: width duration(fast) ease;
   will-change: width;
   height: rem(4px);
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: palette(slider, track);
 }
 
 .SliderActive {
@@ -51,7 +51,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: foreground(body);
+  background-color: palette(typography);
 
   &:after {
     @include border-radius(full);
@@ -60,7 +60,7 @@
     right: rem(-5px);
     width: rem(10px);
     height: rem(10px);
-    background-color: foreground(body);
+    background-color: palette(typography);
     transition: transform 150ms ease;
     transform: scale(0);
   }
@@ -85,7 +85,7 @@
 
 .Menu {
   min-width: rem(220px);
-  background-color: color.adjust(background(darkest), $alpha: -0.1);
+  background-color: hsla(0, 0%, 12%, 0.9);
 
   animation: {
     name: reveal;
@@ -110,7 +110,7 @@
   padding: spacing(1) spacing(2);
 
   @include hover {
-    background-color: color.adjust(background(base), $alpha: -0.1);
+    background-color: hsla(0, 0%, 16%, 0.9);
   }
 
   sup {
@@ -118,7 +118,7 @@
     @include font-weight(bold);
     margin-left: rem(4px);
     vertical-align: top;
-    color: color.adjust(palette("red"), $lightness: 5%);
+    color: palette(red);
   }
 
   &:before {
@@ -130,6 +130,6 @@
   }
 
   &[aria-selected]:before {
-    background-color: palette("gold");
+    background-color: palette(gold);
   }
 }

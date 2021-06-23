@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { useToggle } from '@gatsby-tv/utilities';
 
 import { Button } from '@lib/components/Button';
 import { Fireworks, FireworksProps } from '@lib/components/Fireworks';
@@ -15,8 +14,12 @@ export const Infinite: Story<FireworksProps> = () => {
 };
 
 export const WithButton: Story<FireworksProps> = () => {
-  const [toggle, flipToggle] = useToggle();
-  const buttonMarkup = <Button onClick={flipToggle}>Fire</Button>;
+  const [toggle, setToggle] = useState<boolean | undefined>(undefined);
+
+  const ButtonMarkup = (
+    <Button onClick={() => setToggle((current) => !current)}>Fire</Button>
+  );
+
   const origin = {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
@@ -25,7 +28,7 @@ export const WithButton: Story<FireworksProps> = () => {
   return (
     <Fireworks
       origin={origin}
-      activator={buttonMarkup}
+      activator={ButtonMarkup}
       toggle={toggle}
       count={5}
       interval={100}

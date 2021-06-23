@@ -22,13 +22,14 @@
   align-self: center;
 
   @include hover {
-    background-color: background(light);
+    background-color: palette(surface, 6);
   }
 }
 
 .Menu {
+  @include elevation(6);
   min-width: rem(180px);
-  background-color: background(dark);
+  background-color: palette(surface, 4);
 
   & > *:first-child {
     margin-top: spacing(1);
@@ -44,7 +45,7 @@
   padding: spacing(0.5) spacing(1.5);
   
   @include hover {
-    background-color: background(light);
+    background-color: palette(surface, 6);
   }
 }
 
@@ -53,6 +54,6 @@
   @include font-weight(semi-bold);
   @include text-condensed;
   @include text-uppercase;
-  color: foreground(subdued);
+  color: palette(typography, subdued);
   padding: spacing(0.5) spacing(1.5);
 }

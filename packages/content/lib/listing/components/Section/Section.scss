@@ -4,7 +4,8 @@
   display: grid;
   grid-template-columns: 1fr;
   justify-content: stretch;
-  gap: spacing(1.5);
+  column-gap: spacing(1.5);
+  row-gap: spacing(3);
 }
 
 @media screen and (min-width: 650px) {

@@ -52,6 +52,7 @@
 }
 
 .Icon {
+  @include center;
   width: rem(1.2rem);
 }
 

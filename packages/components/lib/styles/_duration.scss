@@ -1,7 +1,7 @@
 @use 'sass:map';
 
 $duration-map: (
-  instant: 0,
+  instant: 0ms,
   fastest: 100ms,
   faster: 200ms,
   fast: 300ms,

@@ -7,7 +7,7 @@
   position: fixed;
   right: spacing(2);
   bottom: spacing(2);
-  background-color: palette("black");
+  background-color: palette(overlay, opaque);
   padding: spacing(0.5) spacing(1);
 }
 

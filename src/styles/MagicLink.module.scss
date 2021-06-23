@@ -8,10 +8,10 @@
 
 .HomeLink {
   @include font-size(body-large);
-  color: palette("blue");
+  color: palette(blue, 8);
 
   @include hover {
-    color: color.adjust(palette("blue"), $lightness: 5%);
+    color: palette(blue, 9);
   }
 }
 

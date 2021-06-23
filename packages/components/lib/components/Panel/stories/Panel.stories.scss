@@ -1,7 +1,7 @@
 @use 'styles' as *;
 
 .Selection {
-  background-color: background(base);
+  background-color: palette(surface, 3);
   width: rem(200px);
   height: rem(200px);
 }
@@ -11,8 +11,8 @@
   transition: all duration(fastest) ease;
 
   &[aria-selected] {
-    color: palette("blue");
-    background-color: background(light);
+    color: palette(blue);
+    background-color: palette(surface, 7);
   }
 }
 
@@ -20,5 +20,5 @@
   @include center;
   @include expand();
   @include text-uppercase;
-  background-color: background(dark);
+  background-color: palette(surface, 5);
 }

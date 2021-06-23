@@ -5,12 +5,12 @@
   @include border-radius(smallest);
   width: rem(420px);
   max-width: 100%;
-  background-color: background(dark);
+  background-color: palette(surface, 4);
   padding: spacing(3);
 }
 
 .Rule {
-  background-color: background(light);
+  background-color: palette(surface, 6);
 }
 
 .Title {
@@ -22,21 +22,22 @@
 .Email {
   @include font-size(body-large);
   margin-bottom: spacing(2);
+  background-color: palette(surface, 2);
 }
 
 .Submit {
   @include font-size(body-large);
   width: 100%;
-  color: background(darker);
-  background-color: palette("gold");
+  color: palette(surface, 4);
+  background-color: palette(gold, 8);
   padding: spacing(0.5);
 
   @include hover {
-    background-color: color.adjust(palette("gold"), $lightness: 5%);
+    background-color: palette(gold, 9);
   }
 
   @include active {
-    background-color: color.adjust(palette("gold"), $alpha: -0.1);
+    background-color: palette(gold, 7);
   }
 }
 
@@ -48,14 +49,14 @@
   @include font-size(display-small);
   @include center;
   gap: spacing(1.5);
-  background-color: background(light);
+  background-color: palette(surface, 7);
   padding: spacing(1);
 
   @include hover {
-    background-color: background(lighter);
+    background-color: palette(surface, 8);
   }
 
   @include active {
-    background-color: color.adjust(background(lighter), $alpha: -0.1);
+    background-color: palette(surface, 6);
   }
 }

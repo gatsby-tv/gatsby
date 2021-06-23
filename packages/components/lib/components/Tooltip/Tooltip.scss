@@ -11,15 +11,13 @@
 }
 
 .Popper {
-  @include shadow();
+  // @include shadow();
   @include font-weight(semi-bold);
   @include font-size(body-large);
   @include border-radius(small);
 
   pointer-events: none;
-  background-color: background(lighter);
   padding: spacing(0.5) spacing(1);
-  z-index: 1000;
   opacity: 0;
 
   animation: {

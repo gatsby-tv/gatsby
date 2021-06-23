@@ -13,10 +13,11 @@ export interface TooltipProps {
   for: React.RefObject<HTMLElement>;
   offset?: number;
   placement?: Placement;
+  elevation?: number;
 }
 
 export function Tooltip(props: TooltipProps): React.ReactElement | null {
-  const { children, className, for: target, offset, placement } = props;
+  const { children, className, for: target, offset, placement, elevation } = props;
   const [active, setActive] = useState(false);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
   const { styles: style, attributes } = usePopper(target.current, popper, {
@@ -59,6 +60,7 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
         ref={setPopper}
         style={style.popper}
         className={classes}
+        data-elevation={elevation}
         {...attributes.popper}
       >
         {children}

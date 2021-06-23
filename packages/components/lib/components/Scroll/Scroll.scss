@@ -7,7 +7,7 @@
   backface-visibility: hidden;
   overflow-x: hidden;
   overflow-y: scroll;
-  scrollbar-color: background(lighter) transparent;
+  scrollbar-color: palette(surface, 8) transparent;
 
   &::-webkit-scrollbar {
     width: spacing(1);
@@ -23,7 +23,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: background(lighter);
+    background-color: palette(surface, 8);
     transition: all duration(fastest) ease;
   }
 }

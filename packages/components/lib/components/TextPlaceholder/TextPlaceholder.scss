@@ -3,7 +3,7 @@
 
 .Placeholder {
   @include border-radius(smallest);
-  background-color: foreground(placeholder);
+  background-color: palette(surface, placeholder);
   margin: spacing(0.5) 0;
 }
 

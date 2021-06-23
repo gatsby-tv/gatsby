@@ -39,7 +39,7 @@
   bottom: spacing(0.5);
   right: spacing(0.5);
   padding: 0 spacing(0.5);
-  background-color: color.adjust(palette("black"), $alpha: -0.3);
+  background-color: palette(overlay, opaque);
 }
 
 .DurationText {
@@ -53,7 +53,7 @@
   right: 0;
   bottom: 0;
   height: rem(3px);
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: palette(slider, track);
   border-bottom-left-radius: border-radius(smallest);
   border-bottom-right-radius: border-radius(smallest);
 }
@@ -63,5 +63,5 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: palette("gold");
+  background-color: palette(gold);
 }

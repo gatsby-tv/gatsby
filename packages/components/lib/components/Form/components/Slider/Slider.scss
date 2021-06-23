@@ -6,7 +6,7 @@
   cursor: pointer;
   margin: rem(10px) 0;
   height: rem(8px);
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: palette(slider, track);
 
   &:before {
     content: "";
@@ -34,7 +34,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: palette("gold");
+  background-color: palette(gold);
 
   &:after {
     @include border-radius(full);
@@ -45,7 +45,7 @@
     right: rem(-8px);
     width: rem(16px);
     height: rem(16px);
-    background-color: color.adjust(palette("white"), $lightness: -15%);
+    background-color: palette(slider, ball);
   }
 }
 
@@ -59,8 +59,8 @@
   top: rem(-10px);
   height: rem(28px);
   width: rem(3px);
-  color: color.adjust(palette("white"), $alpha: -0.85);
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  color: palette(slider, track);
+  background-color: palette(slider, track);
 
   span {
     @include text-no-break;
@@ -68,7 +68,7 @@
   }
 
   span[data-selected] {
-    color: palette("green");
+    color: palette(green);
   }
 }
 
@@ -77,6 +77,7 @@
 }
 
 .Popper {
+  @include elevation(3);
   @include border-radius(base);
   @include font-weight(bold);
   font-stretch: condensed;
@@ -84,12 +85,12 @@
   opacity: 0;
   transition: opacity 150ms ease;
   pointer-events: none;
-  background-color: background(lightest);
   padding: rem(7px);
 
   [data-popper-arrow] {
     position: absolute;
     left: calc(50% - 5px);
+    background-color: inherit;
 
     &:before {
       content: "";
@@ -97,7 +98,7 @@
       width: rem(10px);
       height: rem(10px);
       transform: rotate(45deg);
-      background-color: background(lightest);
+      background-color: inherit;
     }
   }
 

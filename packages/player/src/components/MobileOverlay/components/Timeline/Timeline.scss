@@ -3,7 +3,7 @@
 
 .Timeline {
   height: rem(3px);
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: palette(slider, track);
   touch-action: none;
 
   &:before {
@@ -29,7 +29,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: color.adjust(palette("white"), $alpha: -0.85);
+  background-color: palette(slider, track);
 }
 
 .Progress {
@@ -39,7 +39,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: palette("gold");
+  background-color: palette(gold);
 
   &:after {
     @include border-radius(full);
@@ -48,7 +48,7 @@
     right: rem(-6px);
     width: rem(12px);
     height: rem(12px);
-    background-color: palette("gold");
+    background-color: palette(gold);
     transform: scale(0);
     transition: transform 150ms ease;
   }

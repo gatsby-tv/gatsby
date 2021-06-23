@@ -2,14 +2,13 @@
 @use 'styles' as *;
 
 .Select {
+  @include outline;
   @include text-input;
   @include border-radius(small);
 
   display: flex;
   align-items: center;
-  background-color: background(light);
-  box-shadow: inset 0 0 0 border-width(small) background(light);
-  transition: box-shadow duration(faster) ease;
+  background-color: palette(surface, 4);
   cursor: default;
   padding: rem(2px) 0;
 
@@ -28,28 +27,6 @@
       @include text-placeholder;
     }
   }
-
-  &:hover {
-    box-shadow: inset 0 0 0 border-width(small) background(lightest);
-  }
-
-  &:focus,
-  &[data-focus] {
-    box-shadow: inset 0 0 0 border-width(small)
-      color.adjust(inverted(dark), $alpha: -0.2);
-  }
-
-  &[data-error] {
-    box-shadow: inset 0 0 0 border-width(small)
-      color.adjust(palette("red"), $alpha: -0.4);
-  }
-
-  &[data-error]:hover,
-  &[data-error]:focus,
-  &[data-error][data-focus] {
-    box-shadow: inset 0 0 0 border-width(small)
-      color.adjust(palette("red"), $alpha: -0.2);
-  }
 }
 
 .Input {
@@ -64,7 +41,7 @@
   flex-shrink: 0;
   height: spacing(2);
   width: rem(1px);
-  background-color: color.adjust(background(lightest), $lightness: 10%);
+  background-color: palette(separator);
 }
 
 .Icon {
@@ -72,13 +49,13 @@
   flex-shrink: 0;
   align-items: center;
   align-self: stretch;
-  color: color.adjust(background(lightest), $lightness: 20%);
+  color: palette(icon);
   padding: 0 spacing(1);
   transition: color duration(fastest) ease;
   cursor: default;
 
   @include hover {
-    color: color.adjust(background(lightest), $lightness: 40%);
+    color: palette(icon, hover);
   }
 
   svg:global(#gz-extend-down) {
@@ -98,7 +75,7 @@
   @include font-weight(semi-bold);
   display: flex;
   flex-shrink: 0;
-  background-color: color.adjust(background(lightest), $lightness: 10%);
+  background-color: palette(tag);
   cursor: default;
 
   & > span:first-child {
@@ -115,8 +92,7 @@
   padding: spacing(0.5);
 
   @include hover {
-    background-color: inverted(darkest);
-    color: background(lightest);
+    background-color: palette(tag, hover);
   }
 
   svg {
@@ -131,7 +107,7 @@
 
 .Menu {
   max-height: rem(200px);
-  background-color: background(lightest);
+  background-color: palette(surface, 6);
 }
 
 .Option {
@@ -140,11 +116,11 @@
   cursor: default;
 
   &[aria-selected] {
-    background-color: background(base);
+    background-color: palette(option, selected);
   }
 
   &:not([disabled]):not([aria-selected]):hover,
   &:not([disabled]):not([aria-selected])[data-hover] {
-    background-color: color.adjust(background(lightest), $lightness: 10%);
+    background-color: palette(option, hover);
   }
 }

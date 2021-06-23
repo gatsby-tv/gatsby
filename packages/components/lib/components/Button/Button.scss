@@ -19,12 +19,12 @@
     pointer-events: none;
     opacity: 0;
     z-index: 1;
-    background-color: foreground(body);
+    background-color: palette(overlay, active);
     transition: all duration(faster) ease;
   }
 
   &[data-animating]:before {
-    opacity: 0.2;
+    opacity: 1;
     animation: {
       name: highlight;
       duration: duration(faster);
@@ -41,7 +41,7 @@
   background-color: transparent;
 
   &:disabled {
-    background-color: foreground(placeholder);
+    background-color: palette(surface, disabled);
   }
 }
 

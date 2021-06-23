@@ -50,7 +50,7 @@
 
 .Verified {
   @include line-height(heading);
-  color: foreground(subdued);
+  color: palette(typography, subdued);
 }
 
 .VerifiedContainer {

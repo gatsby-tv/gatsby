@@ -2,13 +2,13 @@
 
 .Menu {
   width: rem(200px);
-  background-color: background(dark);
+  background-color: palette(surface, 4);
 }
 
 .Item {
   padding: spacing(1) spacing(1.5);
 
   &:hover {
-    background-color: background(base);
+    background-color: palette(surface, 6);
   }
 }

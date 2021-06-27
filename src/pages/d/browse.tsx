@@ -3,7 +3,7 @@ import { Rule, Tabs, TextDisplay } from '@gatsby-tv/components';
 import { useUniqueId } from '@gatsby-tv/utilities';
 import { Listing } from '@gatsby-tv/content';
 
-import { PageBody } from '@src/components/PageBody';
+import { Page } from '@src/components/Page';
 import { Link } from '@src/components/Link';
 
 import styles from '@src/styles/Browse.module.scss';
@@ -17,25 +17,27 @@ export default function BrowsePage(): React.ReactElement {
   const panelLabel = tab === 'popular' ? popularId : newId;
 
   return (
-    <PageBody>
-      <TextDisplay className={styles.Heading} size="large">
-        Browse
-      </TextDisplay>
-      <Tabs className={styles.Tabs} selection={tab} onSelect={setTab}>
-        <Tabs.Item id={popularId} option="popular" aria-controls={panelId}>
-          Popular
-        </Tabs.Item>
-        <Tabs.Item id={newId} option="new" aria-controls={panelId}>
-          New
-        </Tabs.Item>
-      </Tabs>
-      <Rule className={styles.Rule} />
-      <Content
-        id={panelId}
-        link={Link.Content}
-        avatar="base"
-        aria-labelledby={panelLabel}
-      />
-    </PageBody>
+    <Page title="Browse">
+      <Page.Body>
+        <TextDisplay className={styles.Heading} size="large">
+          Browse
+        </TextDisplay>
+        <Tabs className={styles.Tabs} selection={tab} onSelect={setTab}>
+          <Tabs.Item id={popularId} option="popular" aria-controls={panelId}>
+            Popular
+          </Tabs.Item>
+          <Tabs.Item id={newId} option="new" aria-controls={panelId}>
+            New
+          </Tabs.Item>
+        </Tabs>
+        <Rule className={styles.Rule} />
+        <Content
+          id={panelId}
+          link={Link.Content}
+          avatar="base"
+          aria-labelledby={panelLabel}
+        />
+      </Page.Body>
+    </Page>
   );
 }

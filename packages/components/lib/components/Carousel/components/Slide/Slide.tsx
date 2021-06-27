@@ -14,12 +14,12 @@ export function Slide(props: SlideProps): React.ReactElement {
   const { groups } = useCarousel();
 
   return (
-    <div
+    <button
       style={{ width: `${100 / groups}%` }}
       className={styles.Slide}
       onClick={onClick}
     >
       {children}
-    </div>
+    </button>
   );
 }

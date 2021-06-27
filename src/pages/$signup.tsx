@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import Head from 'next/head';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import {
   Button,
@@ -10,12 +9,16 @@ import {
   TextDisplay,
 } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
-import { Validators } from '@gatsby-tv/utilities';
-import { PostAuthCompleteSignUpResponse } from '@gatsby-tv/types';
+import {
+  PostAuthPersistSignInKeyResponse,
+  PostAuthCompleteSignUpResponse,
+} from '@gatsby-tv/types';
 
-import { PageBody } from '@src/components/PageBody';
+import { Page } from '@src/components/Page';
 import { useSession } from '@src/utilities/session';
 import { fetcher } from '@src/utilities/fetcher';
+import { isHandle, isDisplayName } from '@src/utilities/validators';
+
 import styles from '@src/styles/SignUp.module.scss';
 
 export default function SignUpPage(): React.ReactElement {
@@ -30,21 +33,27 @@ export default function SignUpPage(): React.ReactElement {
     if (session.valid) router.push('/');
   }, [session.valid]);
 
+  useEffect(() => {
+    fetcher<PostAuthPersistSignInKeyResponse>(
+      `/auth/signin/${key}/persist`,
+      undefined,
+      {
+        method: 'POST',
+      }
+    );
+  }, []);
+
   const onSubmit = useCallback(
     (form) => {
       setLoading(true);
       fetcher<PostAuthCompleteSignUpResponse>(`/user`, undefined, {
         method: 'POST',
         body: { key, ...form },
-      }).then((resp) => setSession(resp.token));
+      })
+        .then((resp) => resp.json())
+        .then((resp) => setSession((resp as { token: string }).token));
     },
     [key]
-  );
-
-  const HeaderMarkup = (
-    <Head>
-      <title>Sign Up to Gatsby</title>
-    </Head>
   );
 
   const FormMarkup = (
@@ -55,46 +64,26 @@ export default function SignUpPage(): React.ReactElement {
             <Form.Field
               id="name"
               type="text"
-              value={name}
               className={styles.Field}
               autoFocus
-              validators={[
-                Validators.required('Display name is required'),
-                Validators.maxLength(
-                  50,
-                  'Display name cannot be longer than 50 characters'
-                ),
-              ]}
+              value={name}
               onChange={setName}
+              validators={isDisplayName({ required: true })}
             />
           </Form.Label>
           <Form.Label className={styles.Label} for="handle" label="Handle">
             <Form.Field
               id="handle"
               type="text"
-              value={handle}
               className={styles.Field}
               prefix="@"
-              validators={[
-                Validators.required('Handle is required'),
-                Validators.pattern(
-                  /^[a-zA-Z0-9_]+$/,
-                  'Handles can only consist of letters, numbers, and underscores'
-                ),
-                Validators.minLength(
-                  4,
-                  'Handle must be at least 4 characters long'
-                ),
-                Validators.maxLength(
-                  20,
-                  'Handle cannot be longer than 20 characters'
-                ),
-              ]}
+              value={handle}
               onChange={setHandle}
+              validators={isHandle({ required: true })}
             />
           </Form.Label>
         </div>
-        <Button type="submit" className={styles.Submit}>
+        <Button className={styles.Submit} type="submit">
           Sign Up
         </Button>
       </div>
@@ -108,9 +97,8 @@ export default function SignUpPage(): React.ReactElement {
   );
 
   return (
-    <>
-      {HeaderMarkup}
-      <PageBody className={styles.Page}>
+    <Page title="Sign Up to Gatsby">
+      <Page.Body className={styles.Page}>
         <TextDisplay className={styles.Heading} size="large">
           Welcome to Gatsby!
         </TextDisplay>
@@ -118,7 +106,7 @@ export default function SignUpPage(): React.ReactElement {
           {loading ? LoadingMarkup : FormMarkup}
         </div>
         <Fireworks infinite background />
-      </PageBody>
-    </>
+      </Page.Body>
+    </Page>
   );
 }

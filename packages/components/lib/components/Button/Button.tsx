@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, forwardRef } from 'react';
+import { Spinner } from '@gatsby-tv/icons';
 import {
   classNames,
   ifExists,
@@ -6,9 +7,10 @@ import {
   useOptionalForm,
 } from '@gatsby-tv/utilities';
 
-import { IconSource, IconSize } from '@lib/types';
 import { Icon } from '@lib/components/Icon';
 import { Tooltip } from '@lib/components/Tooltip';
+import { Optional } from '@lib/components/Optional';
+import { IconSource, IconSize } from '@lib/types';
 
 import styles from './Button.scss';
 
@@ -20,6 +22,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
   tooltip?: string;
   icon?: IconSource;
   size?: IconSize;
+  waiting?: boolean;
   asLabelFor?: string;
   onClick?: (event: any) => void;
   onDblClick?: (event: any) => void;
@@ -35,6 +38,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       tooltip,
       icon,
       size,
+      waiting,
+      disabled,
       asLabelFor,
       onClick: onClickHandler,
       onDblClick: onDblClickHandler,
@@ -47,6 +52,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const [reset, setReset] = useState(false);
     const [active, setActive] = useState(0);
     const [held, setHeld] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
       if (dblClick && onDblClickHandler) {
@@ -72,6 +78,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         return () => clearTimeout(id);
       }
     }, [active]);
+
+    useEffect(() => {
+      if (waiting) {
+        const id = setTimeout(() => setLoading(true), 200);
+        return () => clearTimeout(id);
+      }
+    }, [waiting]);
 
     const onClick = useCallback(
       (event: any) => {
@@ -133,9 +146,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       asLabelFor && styles.FitContent
     );
 
-    const disabled =
-      Object.values(form?.errors ?? {}).some(Boolean) ||
-      !Object.values(form?.values ?? {}).some(Boolean);
+    const invalid =
+      disabled || (form && Object.values(form.errors).some(Boolean));
 
     const TooltipMarkup =
       tooltip && !held ? (
@@ -144,7 +156,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         </Tooltip>
       ) : null;
 
-    const ChildrenMarkup = icon ? <Icon src={icon} size={size} /> : children;
+    const ChildrenMarkup = icon ? (
+      <Icon src={icon} size={size} />
+    ) : loading ? (
+      <div className={styles.LoadingContainer}>
+        <div className={styles.Hidden}>{children}</div>
+        <Icon className={styles.Spinner} src={Spinner} size="small" />
+      </div>
+    ) : (
+      children
+    );
 
     const ButtonMarkup = React.createElement(asLabelFor ? 'label' : 'button', {
       children: ChildrenMarkup,
@@ -152,7 +173,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className: classes,
       htmlFor: asLabelFor,
       tabIndex: ifExists(asLabelFor, -1),
-      disabled: ifExists(form, disabled),
+      disabled: ifExists(invalid),
+      'data-interactive': ifExists(loading, 'false'),
       'data-animating': ifExists(
         !unstyled && animate && !reset && (active || held)
       ),

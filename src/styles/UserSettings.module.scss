@@ -1,0 +1,78 @@
+@use 'styles' as *;
+
+.Avatar {
+  width: rem(100px);
+  height: rem(100px);
+}
+
+.Header {
+  padding: spacing(2) 0;
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+}
+
+.HeaderTitle {
+  @include text-clamp(1);
+}
+
+.HeaderInfo {
+  @include text-subdued;
+  @include font-size(body-large);
+  @include font-weight(bold);
+}
+
+.Form {
+  margin-top: spacing(2);
+}
+
+.NameFields {
+  display: flex;
+  gap: spacing(2);
+  margin-bottom: spacing(2);
+
+  & > * {
+    flex-basis: 100%;
+  }
+}
+
+.Label {
+  @include font-size(body-large);
+}
+
+.Submit {
+  flex: 0 1 20%;
+  color: palette(surface, 2);
+  background-color: palette(gold, 8);
+  padding: spacing(0.5) spacing(1.5);
+  margin: spacing(2) 0 spacing(2) auto;
+
+  @include hover {
+    background-color: palette(gold, 9);
+  }
+
+  @include active {
+    background-color: palette(gold, 7);
+  }
+}
+
+.Description {
+  textarea {
+    transition: color duration(faster) ease;
+
+    &:not(:focus) {
+      @include text-placeholder;
+    }
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .Avatar {
+    width: rem(150px);
+    height: rem(150px);
+  }
+
+  .HeaderInfo {
+    @include font-size(display-small);
+  }
+}

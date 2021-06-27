@@ -32,7 +32,12 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
       key={`Channel.${channel._id}.${index}`}
       onClick={() => onSelect(channel)}
     >
-      <Image src={channel.poster} rounded="smallest" aspectRatio={2} />
+      <Image
+        src={channel.poster}
+        rounded="smallest"
+        aspectRatio={2}
+        draggable="false"
+      />
     </CarouselComponent.Slide>
   ));
 

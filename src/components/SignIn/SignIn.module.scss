@@ -4,6 +4,7 @@
 .Modal {
   @include border-radius(smallest);
   width: rem(420px);
+  height: rem(316px);
   max-width: 100%;
   background-color: palette(surface, 4);
   padding: spacing(3);
@@ -59,4 +60,36 @@
   @include active {
     background-color: palette(surface, 6);
   }
+}
+
+.Confirmation {
+  @include center;
+  flex-direction: column;
+  gap: spacing(1);
+}
+
+.EmailIcon {
+  font-size: rem(60px);
+  color: palette(grey, 12);
+}
+
+.EmailDecorator {
+  @include border-radius(full);
+  @include elevation(2);
+  background-color: palette(surface, 4);
+  position: absolute;
+  bottom: rem(4px);
+  right: rem(-10px);
+}
+
+.Valid {
+  color: palette(green);
+}
+
+.Invalid {
+  color: palette(red);
+}
+
+.SemiBold {
+  @include font-weight(semi-bold);
 }

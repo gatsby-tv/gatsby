@@ -1,8 +1,12 @@
+export type JsonResponse<T> = Omit<Response, 'json'> & {
+  json: () => Promise<T>;
+};
+
 export function fetcher<T = any>(
   endpoint: string,
   token?: string,
   options: RequestInit = {}
-): Promise<T> {
+): Promise<JsonResponse<T>> {
   const westegg = process.env.NEXT_PUBLIC_WESTEGG_API_VERSION
     ? `${process.env.NEXT_PUBLIC_WESTEGG_URL}/${process.env.NEXT_PUBLIC_WESTEGG_API_VERSION}`
     : process.env.NEXT_PUBLIC_WESTEGG_URL;
@@ -24,16 +28,5 @@ export function fetcher<T = any>(
           'Content-Type': 'application/json',
         },
     ...options,
-  })
-    .then((resp) => resp.json())
-    .catch((err) => {
-      if (
-        err.name === 'TypeError' &&
-        /NetworkError|Failed to fetch|Network request failed/.test(err.message)
-      ) {
-        console.warn(`Failed to fetch ${westegg}${endpoint}`);
-      } else {
-        throw err;
-      }
-    });
+  });
 }

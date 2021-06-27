@@ -79,7 +79,7 @@
     "@babel/core": "^7.12.9",
     "@babel/preset-react": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
-    "@gatsby-tv/types": "^0.4.30",
+    "@gatsby-tv/types": "^0.4.35",
     "@testing-library/dom": "^7.26.5",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",

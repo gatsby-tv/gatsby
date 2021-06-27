@@ -4,7 +4,7 @@ import { User } from '@gatsby-tv/content';
 import { useUniqueId } from '@gatsby-tv/utilities';
 import { User as UserType } from '@gatsby-tv/types';
 
-import { PageBody } from '@src/components/PageBody';
+import { Page } from '@src/components/Page';
 import { Link } from '@src/components/Link';
 import { useSession } from '@src/utilities/session';
 
@@ -15,17 +15,19 @@ export default function SubscriptionsPage(): React.ReactElement {
   const label = useUniqueId('heading');
 
   return (
-    <PageBody>
-      <TextDisplay id={label} className={styles.Heading} size="large">
-        Subscriptions
-      </TextDisplay>
-      <User.Subscriptions
-        id="subscriptions"
-        user={session?.user as UserType | undefined}
-        avatar="small"
-        link={Link.Content}
-        aria-labelledby={label}
-      />
-    </PageBody>
+    <Page title="Subscriptions">
+      <Page.Body>
+        <TextDisplay id={label} className={styles.Heading} size="large">
+          Subscriptions
+        </TextDisplay>
+        <User.Subscriptions
+          id="subscriptions"
+          user={session?.user as UserType | undefined}
+          avatar="small"
+          link={Link.Content}
+          aria-labelledby={label}
+        />
+      </Page.Body>
+    </Page>
   );
 }

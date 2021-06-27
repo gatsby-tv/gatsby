@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Injection, Icon, TextDisplay } from '@gatsby-tv/components';
-import { classNames } from '@gatsby-tv/utilities';
+import { Injection, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
 import { GetAuthSignInKeyResponse } from '@gatsby-tv/types';
 
+import { Page } from '@src/components/Page';
 import { Link } from '@src/components/Link';
 import { fetcher } from '@src/utilities/fetcher';
 import { useSession } from '@src/utilities/session';
@@ -21,15 +20,17 @@ export default function MagicLinkPage(): React.ReactElement {
   }, []);
 
   useEffect(() => {
-    if (key && !+exists) {
+    if (!key) return;
+
+    if (+exists) {
+      fetcher<GetAuthSignInKeyResponse>(`/auth/signin/${key}`)
+        .then((resp) => resp.json())
+        .then((resp) => setSession((resp as { token: string }).token));
+    } else {
       router.push({
         pathname: '/$signup',
         query: { key },
       });
-    } else if (key) {
-      fetcher<GetAuthSignInKeyResponse>(`/auth/signin/${key}`).then((resp) =>
-        setSession(resp.token)
-      );
     }
   }, [key, exists]);
 
@@ -37,20 +38,9 @@ export default function MagicLinkPage(): React.ReactElement {
     if (session.valid) router.push('/');
   }, [session.valid]);
 
-  const HeaderMarkup = (
-    <Head>
-      <title>Signing in to Gatsby...</title>
-    </Head>
-  );
-
   return (
-    <>
-      {HeaderMarkup}
-      <Injection target="$foreground">
-        <div className={styles.Container}>
-          <Icon className={styles.Spinner} src={Spinner} />
-        </div>
-      </Injection>
-    </>
+    <Page title="Signing in to Gatsby">
+      <Page.Loading />
+    </Page>
   );
 }

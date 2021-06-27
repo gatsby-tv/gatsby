@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import Head from 'next/head';
 import { Rule, TextDisplay } from '@gatsby-tv/components';
 import { Channel, Listing } from '@gatsby-tv/content';
 import { useUniqueId, useFrame } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
 
-import { PageBody } from '@src/components/PageBody';
+import { Page } from '@src/components/Page';
 import { Link } from '@src/components/Link';
 import { useChannelModal } from '@src/utilities/channel-modal';
 import { useSession } from '@src/utilities/session';
@@ -18,16 +17,9 @@ export default function IndexPage(): React.ReactElement {
   const [, setChannel] = useChannelModal();
   const [session] = useSession();
 
-  const HeaderMarkup = (
-    <Head>
-      <title>Gatsby</title>
-    </Head>
-  );
-
   return (
-    <>
-      {HeaderMarkup}
-      <PageBody>
+    <Page title="Gatsby">
+      <Page.Body>
         <Channel.Carousel onSelect={setChannel} />
         <Rule className={styles.Rule} />
         <TextDisplay id={recommendedLabel} className={styles.Heading}>
@@ -40,7 +32,7 @@ export default function IndexPage(): React.ReactElement {
           avatar={screen.width > 650 ? 'base' : 'smaller'}
           aria-labelledby={recommendedLabel}
         />
-      </PageBody>
-    </>
+      </Page.Body>
+    </Page>
   );
 }

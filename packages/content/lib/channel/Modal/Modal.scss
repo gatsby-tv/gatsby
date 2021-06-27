@@ -27,7 +27,11 @@
 
 .Overlay {
   @include expand(absolute);
-  background-image: linear-gradient(to top, #{palette(surface, 3)}, transparent 50%);
+  background-image: linear-gradient(
+    to top,
+    #{palette(surface, 3)},
+    transparent 50%
+  );
 }
 
 .Header {

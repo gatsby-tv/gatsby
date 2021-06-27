@@ -1,11 +1,13 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ContextError } from '@lib/errors';
 
 import {
   FormContext,
   FormSelectContext,
+  FormLabelContext,
   FormContextType,
   FormSelectContextType,
+  FormLabelContextType,
 } from './context';
 
 export function useForm(): FormContextType {
@@ -30,4 +32,10 @@ export function useFormSelect(): FormSelectContextType {
   }
 
   return context;
+}
+
+export function useFormLabel(initial: boolean): FormLabelContextType {
+  const context = useContext(FormLabelContext);
+  const [invalid, setInvalid] = useState(initial);
+  return context ?? [invalid, setInvalid];
 }

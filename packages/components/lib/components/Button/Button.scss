@@ -55,6 +55,19 @@
   width: fit-content;
 }
 
+.LoadingContainer {
+  @include center;
+  overflow: hidden;
+}
+
+.Hidden {
+  left: -100%;
+}
+
+.Spinner {
+  position: absolute;
+}
+
 .Icon {
   @include border-radius(full);
   width: fit-content;

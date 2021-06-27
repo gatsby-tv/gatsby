@@ -8,6 +8,24 @@
   margin: spacing(1.5) spacing(1);
 }
 
+.Body {
+  max-width: rem(2000px);
+  margin: 0 auto;
+}
+
+.Narrow {
+  max-width: rem(650px);
+}
+
+.Loading {
+  @include expand(fixed);
+  @include center;
+}
+
+.Spinner {
+  font-size: rem(70px);
+}
+
 @media screen and (min-width: 650px) {
   .Page {
     margin: spacing(3);
@@ -16,9 +34,4 @@
   .Tight {
     margin: spacing(1.5) spacing(3);
   }
-}
-
-.Body {
-  max-width: rem(2000px);
-  margin: 0 auto;
 }

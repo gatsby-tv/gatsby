@@ -38,7 +38,11 @@ export default function App({
 
   return (
     <AppProvider>
-      <SWRConfig value={{ fetcher }}>
+      <SWRConfig
+        value={{
+          fetcher: (url, ...args) => fetcher(url, ...args).then((resp) => resp.json()),
+        }}
+      >
         <IPFSContext.Provider value={node}>
           <ChannelModalContext.Provider value={[channel, setChannel]}>
             <SessionContext.Provider value={[session, setSession]}>

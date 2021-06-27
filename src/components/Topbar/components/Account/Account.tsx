@@ -4,6 +4,7 @@ import { User as UserIcon, Exit } from '@gatsby-tv/icons';
 import { useMenu, useModal } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
 
+import { Link } from '@src/components/Link';
 import { SignIn } from '@src/components/SignIn';
 import { useSession } from '@src/utilities/session';
 
@@ -32,9 +33,13 @@ export function Account(): React.ReactElement {
         active={menu.active}
         onExit={menu.deactivate}
       >
-        <Menu.Link icon={UserIcon} href={`/u/${user.handle}/settings`}>
+        <Link
+          component={Menu.Link}
+          href={`/u/${user.handle}/settings`}
+          $props={{ icon: UserIcon, onClick: menu.deactivate }}
+        >
           Settings
-        </Menu.Link>
+        </Link>
         <Rule spacing="none" />
         <Menu.Item icon={Exit} onClick={() => setSession(undefined)}>
           Sign Out

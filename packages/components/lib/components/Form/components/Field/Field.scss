@@ -25,7 +25,7 @@
     background-color: transparent;
     outline: none;
 
-    &::placeholder {
+    ::placeholder {
       @include text-placeholder;
     }
   }
@@ -34,4 +34,15 @@
 .Decorator {
   @include text-placeholder;
   flex-shrink: 0;
+}
+
+.WithDefault {
+  input,
+  textarea {
+    transition: color duration(faster) ease;
+
+    &:not(:focus) {
+      @include text-placeholder;
+    }
+  }
 }

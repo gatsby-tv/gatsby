@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { useOptionalForm, FormContext, FormError } from '@gatsby-tv/utilities';
+import {
+  useOptionalForm,
+  Filter,
+  FormContext,
+  FormError,
+  FormErrorState,
+} from '@gatsby-tv/utilities';
 
 import {
   Field,
@@ -28,23 +34,30 @@ export type FormProps = Omit<
   'id' | 'onSubmit'
 > & {
   id: string;
+  filters?: Filter[];
   onSubmit?: (values: Record<string, any>, id?: string) => void;
 };
 
 export function Form(props: FormProps): React.ReactElement {
-  const { onSubmit: onSubmitHandler, id, ...rest } = props;
+  const { id, filters = [], onSubmit: onSubmitHandler, ...rest } = props;
   const parent = useOptionalForm();
 
   const [values, setValues] = useState<Record<string, unknown>>({});
-  const [errors, setErrors] = useState<Record<string, FormError | undefined>>(
-    {}
-  );
+  const [errors, setErrors] = useState<Record<string, FormErrorState>>({});
 
   useEffect(() => parent?.setValue(id, values), [id, values]);
-  useEffect(
-    () => parent?.setError(id, Object.values(errors).find(Boolean)),
-    [id, errors]
-  );
+  useEffect(() => {
+    if (!parent) return;
+
+    const promises = Object.values(errors).filter(
+      (error) => error instanceof Promise
+    );
+    const other = Object.values(errors).filter(
+      (error) => error instanceof FormError
+    );
+
+    parent.setError(id, other.find(Boolean) ?? promises.find(Boolean));
+  }, [id, errors]);
 
   const setValue = useCallback(
     (id: string, value: unknown) =>
@@ -56,7 +69,7 @@ export function Form(props: FormProps): React.ReactElement {
   );
 
   const setError = useCallback(
-    (id: string, error: FormError | undefined) =>
+    (id: string, error: FormErrorState) =>
       setErrors((current) => ({
         ...current,
         [id]: error,
@@ -68,14 +81,28 @@ export function Form(props: FormProps): React.ReactElement {
     (event) => {
       event.preventDefault();
       if (!Object.values(errors).some(Boolean)) {
-        onSubmitHandler?.(values, id);
+        const update = filters.reduce(
+          (acc, current) =>
+            Object.fromEntries(
+              Object.entries(acc).filter(([key, value]) => current(key, value))
+            ),
+          values
+        );
+        onSubmitHandler?.(update, id);
       }
     },
-    [id, values, errors]
+    [id, values, errors, filters]
   );
 
+  const context = {
+    values,
+    errors,
+    setValue,
+    setError,
+  };
+
   return (
-    <FormContext.Provider value={{ values, setValue, errors, setError }}>
+    <FormContext.Provider value={context}>
       <form id={id} onSubmit={onSubmit} {...rest} />
     </FormContext.Provider>
   );

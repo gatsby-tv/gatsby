@@ -47,6 +47,7 @@ export function Preview(props: PreviewProps): React.ReactElement {
         rounded="smallest"
         aspectRatio={0.5625}
         overlay={<Overlay content={content} bookmark={bookmark} />}
+        draggable="false"
       />
       {InfoMarkup}
       {LinkMarkup}

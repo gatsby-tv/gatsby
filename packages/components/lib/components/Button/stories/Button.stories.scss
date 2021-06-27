@@ -1,0 +1,14 @@
+@use 'styles' as *;
+
+.TextButton {
+  @include font-size(body-large);
+  width: 100%;
+  color: palette(surface, 4);
+  background-color: palette(gold, 8);
+  padding: spacing(0.5);
+  max-width: rem(250px);
+
+  @include hover {
+    background-color: palette(gold, 9);
+  }
+}

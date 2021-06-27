@@ -101,10 +101,12 @@ export function Controls(props: ControlsProps): React.ReactElement {
           return;
 
         case 'ArrowUp':
+          event.preventDefault();
           setVolume((current) => Math.min(current + 0.05, 1));
           return;
 
         case 'ArrowDown':
+          event.preventDefault();
           setVolume((current) => Math.max(current - 0.05, 0));
           return;
 

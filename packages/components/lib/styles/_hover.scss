@@ -1,19 +1,19 @@
 @mixin mouse-hover {
   @media(hover: hover) and (pointer: fine) {
-    &:not([disabled]):hover {
+    &:not([disabled]):not([data-interactive="false"]):hover {
       @content;
     }
   }
 }
 
 @mixin hover {
-  &:not([disabled]):hover {
+  &:not([disabled]):not([data-interactive="false"]):hover {
     @content;
   }
 }
 
 @mixin active {
-  &:not([disabled]):active {
+  &:not([disabled]):not([data-interactive="false"]):active {
     @content;
   }
 }

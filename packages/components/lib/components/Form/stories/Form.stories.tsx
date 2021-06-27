@@ -18,7 +18,7 @@ type ValidatorConfig = {
   pattern: RegExp;
 };
 
-type FieldStoryProps = Partial<FormFieldProps & FormLabelProps>;
+type FieldStoryProps = Partial<FormFieldProps & FormLabelProps & ValidatorConfig>;
 
 export const Field: Story<FieldStoryProps> = (props) => {
   const { help, hidden, required, minLength, maxLength, pattern, ...rest } =
@@ -57,6 +57,7 @@ export const Field: Story<FieldStoryProps> = (props) => {
 
 Field.args = {
   help: undefined,
+  waiting: false,
   hidden: false,
   required: false,
   minLength: undefined,

@@ -8,9 +8,9 @@ export interface OptionalProps {
 }
 
 export function Optional(props: OptionalProps): React.ReactElement {
-  const { children, active, component, $props = {} } = props;
+  const { children, active, component = "div", $props = {} } = props;
 
-  return component && active ? (
+  return active ? (
     React.createElement(component, { children, ...$props })
   ) : (
     <>{children}</>

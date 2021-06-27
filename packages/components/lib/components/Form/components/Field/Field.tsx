@@ -1,5 +1,15 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { ifExists, classNames, useForm, Validator } from '@gatsby-tv/utilities';
+import { Spinner } from '@gatsby-tv/icons';
+import {
+  ifExists,
+  classNames,
+  useForm,
+  useFormLabel,
+  Validator,
+  FormError,
+} from '@gatsby-tv/utilities';
+
+import { Icon } from '@lib/components/Icon';
 
 import styles from './Field.scss';
 
@@ -46,7 +56,7 @@ export function Field(props: FieldProps): React.ReactElement {
   const {
     id,
     className,
-    value,
+    value = '',
     multiline,
     prefix,
     suffix,
@@ -62,19 +72,72 @@ export function Field(props: FieldProps): React.ReactElement {
 
   const input = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
   const { setValue, errors, setError } = useForm();
+  const [cancel, setCancel] = useState<(() => void) | undefined>(undefined);
   const [focus, setFocus] = useState(Boolean(props.autoFocus));
-  const [invalid, setInvalid] = useState(Boolean(errors[id]));
-  const error = invalid && errors[id];
+  const [invalid, setInvalid] = useFormLabel(Boolean(errors[id]));
+  const [loading, setLoading] = useState(false);
 
-  const classes = classNames(className, styles.Input);
+  const promise =
+    errors[id] instanceof Promise &&
+    (errors[id] as Promise<FormError | undefined>);
+
+  const error = errors[id] instanceof FormError && (errors[id] as FormError);
+
+  const classes = classNames(
+    className,
+    styles.Input,
+  );
 
   useEffect(() => {
-    setValue(id, value);
-    setError(
-      id,
-      validators?.map((validator) => validator(id, value ?? '')).find(Boolean)
+    if (!promise) return;
+
+    const cancel = new Promise((_, reject) =>
+      setCancel((current) => {
+        current?.();
+        return reject;
+      })
     );
+
+    Promise.race([promise, cancel])
+      .then((error) => {
+        setInvalid(Boolean(error));
+        setError(id, error as FormError | undefined);
+      })
+      .catch(() => undefined);
+  }, [id, promise]);
+
+  useEffect(() => {
+    if (!error) return;
+
+    setCancel((current) => {
+      current?.();
+      return undefined;
+    });
+  }, [error]);
+
+  useEffect(() => {
+    if (!validators) return;
+    const results = validators.map((validator) => validator(id, value));
+
+    const promises = results.filter((result) => result instanceof Promise);
+    const promise = promises.find(Boolean) && Promise.race(promises);
+
+    const error = results
+      .filter((result) => result instanceof FormError)
+      .find(Boolean);
+
+    setError(id, error ?? promise);
   }, [id, validators, value]);
+
+  useEffect(() => setValue(id, value), [id, value]);
+
+  useEffect(() => {
+    if (promise) {
+      const id = setTimeout(() => setLoading(true), 200);
+      return () => clearTimeout(id);
+    }
+    setLoading(false);
+  }, [Boolean(promise)]);
 
   const onChange = useCallback(
     (event: any) => {
@@ -93,11 +156,11 @@ export function Field(props: FieldProps): React.ReactElement {
 
   const onBlur = useCallback(
     (event: any) => {
-      setInvalid(Boolean(errors[id]));
+      setInvalid(errors[id] instanceof FormError);
       setFocus(false);
       onBlurHandler?.(event);
     },
-    [errors, onBlurHandler]
+    [id, errors, onBlurHandler]
   );
 
   const onClick = useCallback(
@@ -127,11 +190,13 @@ export function Field(props: FieldProps): React.ReactElement {
     <div className={styles.Decorator}>{suffix}</div>
   ) : null;
 
+  const LoadingMarkup = loading ? <Icon src={Spinner} size="small" /> : null;
+
   return (
     <div
       className={classes}
       data-focus={ifExists(focus)}
-      data-error={ifExists(error)}
+      data-error={ifExists(invalid && error)}
       onClick={onClick}
     >
       {PrefixMarkup}
@@ -146,6 +211,7 @@ export function Field(props: FieldProps): React.ReactElement {
         onKeyPress={onKeyPress}
         {...rest}
       />
+      {LoadingMarkup}
       {SuffixMarkup}
     </div>
   );

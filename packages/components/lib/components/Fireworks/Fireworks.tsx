@@ -41,7 +41,6 @@ interface ParticleType {
   resistance?: number;
   gravity?: number;
   shrink?: number;
-  fade?: number;
 }
 
 const Particle = (position: Position) =>
@@ -67,8 +66,7 @@ Particle.update = (particle: ParticleType, dt: number) => {
     alpha,
     resistance = 0,
     gravity = 0,
-    shrink = 1,
-    fade = 0,
+    shrink = 0,
   } = particle;
 
   return {
@@ -81,8 +79,7 @@ Particle.update = (particle: ParticleType, dt: number) => {
       dx: velocity.dx * Math.exp(-resistance * dt),
       dy: velocity.dy * Math.exp(-resistance * dt) + gravity * dt,
     },
-    size: size * shrink,
-    alpha: alpha - fade,
+    size: size * Math.exp(-shrink * dt),
   };
 };
 
@@ -99,7 +96,7 @@ Particle.explode = (particle: ParticleType, dt: number) => {
       size: 10,
       gravity: 0.2,
       resistance: 0.1,
-      shrink: 0.05 * Math.random() + 0.93,
+      shrink: 0.04 * (1 + Math.random()),
       hue: 10 * Math.floor((Math.random() * 360) / 10),
     };
   });

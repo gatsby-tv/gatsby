@@ -1,0 +1,14 @@
+@use 'styles' as *;
+
+.Staging {
+  @include expand;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.Stage {
+  @include expand;
+  position: absolute;
+  will-change: left;
+  transition: left duration(base) ease;
+}

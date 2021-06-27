@@ -1,18 +1,28 @@
-import { createContext } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 
 import { FormError } from '@lib/errors';
+
+export type FormErrorState =
+  | FormError
+  | Promise<FormError | undefined>
+  | undefined;
 
 export interface FormContextType {
   values: Record<string, unknown>;
   setValue: (id: string, value: unknown) => void;
-  errors: Record<string, FormError | undefined>;
-  setError: (id: string, error: FormError | undefined) => void;
+  errors: Record<string, FormErrorState>;
+  setError: (id: string, error: FormErrorState) => void;
 }
 
 export interface FormSelectContextType {
   hover: string | undefined;
   setHover: (id: string | undefined) => void;
 }
+
+export type FormLabelContextType = [
+  invalid: boolean,
+  setInvalid: Dispatch<SetStateAction<boolean>>
+];
 
 export const FormContext = createContext<FormContextType | undefined>(
   undefined
@@ -21,3 +31,7 @@ export const FormContext = createContext<FormContextType | undefined>(
 export const FormSelectContext = createContext<
   FormSelectContextType | undefined
 >(undefined);
+
+export const FormLabelContext = createContext<FormLabelContextType | undefined>(
+  undefined
+);

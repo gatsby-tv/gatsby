@@ -93,8 +93,14 @@ export function useSessionContext(): SessionContextType {
   useEffect(() => {
     if (state.token) {
       fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', state.token)
-        .then((resp) => dispatch({ type: 'accept', token: resp.token }))
-        .catch((err) => dispatch({ type: 'reject' }));
+        .then((resp) => resp.json())
+        .then((resp) =>
+          dispatch({
+            type: 'accept',
+            token: (resp as { token: string }).token,
+          })
+        )
+        .catch(() => dispatch({ type: 'reject' }));
     }
   }, [state.token]);
 

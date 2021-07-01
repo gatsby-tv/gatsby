@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   role="img"
+   focusable="false"
+   aria-hidden="true"
+   sodipodi:docname="plus-fill.svg"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   id="gz-plus-fill"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     inkscape:showpageshadow="false"
+     inkscape:window-maximized="0"
+     inkscape:window-y="24"
+     inkscape:window-x="1928"
+     inkscape:window-height="1408"
+     inkscape:window-width="2544"
+     showborder="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:bbox-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-page="true"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="gz-plus-fill"
+     inkscape:document-units="px"
+     inkscape:cy="484.28571"
+     inkscape:cx="52.857143"
+     inkscape:zoom="0.35"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:pagecheckerboard="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="plus-fill"
+     style="fill:currentcolor"
+     d="M 270 0 A 270 270 0 0 0 0 270 A 270 270 0 0 0 270 540 A 270 270 0 0 0 540 270 A 270 270 0 0 0 270 0 z M 239.32422 62.9375 L 300.67578 62.9375 L 300.67578 239.32422 L 477.0625 239.32422 L 477.0625 300.67578 L 300.67578 300.67578 L 300.67578 477.0625 L 239.32422 477.0625 L 239.32422 300.67578 L 62.9375 300.67578 L 62.9375 239.32422 L 239.32422 239.32422 L 239.32422 62.9375 z " />
+</svg>

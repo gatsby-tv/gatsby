@@ -2,7 +2,7 @@
 @use 'styles' as *;
 
 .Modal {
-  @include border-radius(smallest);
+  @include border-radius(small);
   width: rem(420px);
   height: rem(316px);
   max-width: 100%;

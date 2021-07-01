@@ -1,0 +1,60 @@
+@use 'styles' as *;
+
+.Modal {
+  @include border-radius(small);
+  width: rem(560px);
+  max-width: 100%;
+  background-color: palette(surface, 4);
+  padding: spacing(3);
+}
+
+.Loading {
+  @include expand;
+  @include center;
+  min-height: rem(450px);
+}
+
+.Spinner {
+  font-size: rem(70px);
+}
+
+.Image {
+  @include elevation(4);
+}
+
+.Controls {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: spacing(1);
+  margin-top: spacing(2);
+}
+
+.Button {
+  padding: spacing(0.5) spacing(1.5);
+}
+
+.Submit {
+  color: palette(surface, 2);
+  background-color: palette(gold, 8);
+
+  @include hover {
+    background-color: palette(gold, 9);
+  }
+
+  @include active {
+    background-color: palette(gold, 7);
+  }
+}
+
+.Cancel {
+  background-color: palette(surface, 8);
+
+  @include hover {
+    background-color: palette(surface, 9);
+  }
+
+  @include active {
+    background-color: palette(surface, 7);
+  }
+}

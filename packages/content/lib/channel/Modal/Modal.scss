@@ -2,7 +2,8 @@
 @use 'styles' as *;
 
 .Modal {
-  @include border-radius(smallest);
+  @include border-radius(small);
+  overflow: hidden;
   background-color: palette(surface, 3);
   width: min(80vw, 90rem);
   max-width: 100%;

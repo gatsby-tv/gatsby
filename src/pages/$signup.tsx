@@ -30,18 +30,22 @@ export default function SignUpPage(): React.ReactElement {
   const [session, setSession] = useSession();
 
   useEffect(() => {
+    router.prefetch('/');
+  }, []);
+
+  useEffect(() => {
     if (session.valid) router.push('/');
   }, [session.valid]);
 
   useEffect(() => {
+    if (!key) return;
+
     fetcher<PostAuthPersistSignInKeyResponse>(
       `/auth/signin/${key}/persist`,
       undefined,
-      {
-        method: 'POST',
-      }
+      { method: 'POST' }
     );
-  }, []);
+  }, [key]);
 
   const onSubmit = useCallback(
     (form) => {

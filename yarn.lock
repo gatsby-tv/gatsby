@@ -6535,6 +6535,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-image-crop@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@types/react-image-crop@npm:8.1.2"
+  dependencies:
+    "@types/react": "*"
+  checksum: 68e12aca41c24b56e7d915731c8b9f20d025e9f1f52c4e615d4429ee7cfbddc694855d27928662561c40411a7e1a8c2ea84566395788fd97d746d77de261896e
+  languageName: node
+  linkType: hard
+
 "@types/react-is@npm:^17.0.0":
   version: 17.0.0
   resolution: "@types/react-is@npm:17.0.0"
@@ -15103,6 +15112,7 @@ fsevents@~2.1.1:
     "@types/node": ^14.14.6
     "@types/react": ^16.9.43
     "@types/react-dom": ^16.9.8
+    "@types/react-image-crop": ^8.1.2
     "@types/react-router-dom": ^5.1.5
     "@typescript-eslint/eslint-plugin": ^4.11.1
     "@typescript-eslint/parser": ^4.11.1

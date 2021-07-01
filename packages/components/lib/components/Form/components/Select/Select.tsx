@@ -86,12 +86,7 @@ export interface SelectProps
   placeholder?: string;
   searchable?: boolean;
   clearable?: boolean;
-  onChange?: (
-    value: string,
-    id?: string,
-    setError?: (id: string, message: string) => void,
-    clearError?: (id: string) => void
-  ) => void;
+  onChange?: (value: string, id?: string) => void;
 }
 
 export function Select(props: SelectProps): React.ReactElement {

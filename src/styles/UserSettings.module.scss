@@ -22,6 +22,30 @@
   @include font-weight(bold);
 }
 
+.OverlayTint {
+  @include expand(absolute);
+  @include border-radius(full);
+  background-color: palette(overlay, opaque);
+}
+
+.OverlayImage {
+  @include border-radius(full);
+  @include elevation(3);
+  position: absolute;
+  top: spacing(0.5);
+  right: spacing(0.5);
+  color: palette(grey, 5);
+  background-color: palette(grey, 14);
+  padding: rem(7px);
+}
+
+.OverlayText {
+  @include font-size(body-large);
+  @include expand(absolute);
+  @include center;
+  padding: spacing(2);
+}
+
 .Form {
   margin-top: spacing(2);
 }

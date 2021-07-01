@@ -18,13 +18,8 @@ export interface FileProps
     >,
     Pick<ButtonProps, 'unstyled' | 'animate' | 'tooltip' | 'icon' | 'size'> {
   id: string;
-  value: string;
-  onChange?: (
-    value: string,
-    id?: string,
-    setError?: (id: string, message: string) => void,
-    clearError?: (id: string) => void
-  ) => void;
+  value: File | null;
+  onChange?: (value: File | null, id?: string) => void;
 }
 
 export function File(props: FileProps): React.ReactElement {
@@ -50,12 +45,12 @@ export function File(props: FileProps): React.ReactElement {
       : undefined;
 
     setValue(id, value);
-    setError(id, validator?.(id, value));
+    setError(id, validator?.(id, value ? JSON.stringify(value) : ''));
   }, [id, value, required]);
 
   const onChange = useCallback(
     (event: any) => {
-      onChangeHandler?.(event.target.value, id);
+      onChangeHandler?.(event.target.files?.[0], id);
     },
     [id, onChangeHandler]
   );
@@ -66,7 +61,6 @@ export function File(props: FileProps): React.ReactElement {
         id={id}
         className={styles.VisuallyHidden}
         type="file"
-        value={value}
         required={required}
         onChange={onChange}
         {...rest}

@@ -127,7 +127,7 @@ export function Field(props: FieldProps): React.ReactElement {
       .find(Boolean);
 
     setError(id, error ?? promise);
-  }, [id, validators, value]);
+  }, [id, value, JSON.stringify(validators)]);
 
   useEffect(() => setValue(id, value), [id, value]);
 

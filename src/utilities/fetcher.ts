@@ -11,22 +11,37 @@ export function fetcher<T = any>(
     ? `${process.env.NEXT_PUBLIC_WESTEGG_URL}/${process.env.NEXT_PUBLIC_WESTEGG_API_VERSION}`
     : process.env.NEXT_PUBLIC_WESTEGG_URL;
 
-  if (typeof options.body === 'object')
-    options.body = JSON.stringify(options.body);
+  const { method = 'GET', body, headers = {}, ...rest } = options;
+
+  const content =
+    !body || method.toUpperCase() in ['GET', 'HEAD']
+      ? undefined
+      : body instanceof FormData
+      ? body
+      : JSON.stringify(body);
 
   return fetch(`${westegg}${endpoint}`, {
-    method: 'GET',
+    method: method.toUpperCase(),
     mode: 'cors',
     credentials: 'same-origin',
     redirect: 'follow',
-    headers: token
-      ? {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        }
-      : {
-          'Content-Type': 'application/json',
-        },
-    ...options,
+    body: content,
+    headers:
+      token && body instanceof FormData
+        ? {
+            Authorization: `Bearer ${token}`,
+            ...headers,
+          }
+        : token
+        ? {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            ...headers,
+          }
+        : {
+            'Content-Type': 'application/json',
+            ...headers,
+          },
+    ...rest,
   });
 }

@@ -103,7 +103,12 @@ export function SignIn(props: SignInProps): React.ReactElement {
               onChange={setEmail}
               autoComplete
             />
-            <Button type="submit" className={styles.Submit} waiting={loading}>
+            <Button
+              type="submit"
+              className={styles.Submit}
+              waiting={loading}
+              disabled={!email}
+            >
               Sign In
             </Button>
           </Form>

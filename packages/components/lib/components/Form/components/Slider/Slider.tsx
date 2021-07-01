@@ -39,12 +39,7 @@ export interface SliderProps
   stops?: Option<number>[];
   hideLabels?: boolean;
   value: number;
-  onChange?: (
-    value: number,
-    id?: string,
-    setError?: (id: string, message: string) => void,
-    clearError?: (id: string) => void
-  ) => void;
+  onChange?: (value: number, id?: string) => void;
 }
 
 export function Slider(props: SliderProps): React.ReactElement {

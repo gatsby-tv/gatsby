@@ -167,15 +167,12 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     }
   }, [draggable]);
 
-  const onKeyDown = useCallback(
-    (event: any) => {
-      if (event.code === 'Escape') {
-        setTouch({ type: 'end' });
-        setMounted(false);
-      }
-    },
-    [onExit]
-  );
+  const onKeyDown = useCallback((event: any) => {
+    if (event.code === 'Escape') {
+      setTouch({ type: 'end' });
+      setMounted(false);
+    }
+  }, []);
 
   const onTouchStart = useCallback(
     (event: any) => {
@@ -186,7 +183,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
         time: event.timeStamp,
       });
     },
-    [direction, draggable]
+    [ref, direction, draggable]
   );
 
   const onTouchMove = useCallback(
@@ -198,7 +195,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
         time: event.timeStamp,
       });
     },
-    [direction, draggable]
+    [ref, direction, draggable]
   );
 
   const onTouchEnd = useCallback(

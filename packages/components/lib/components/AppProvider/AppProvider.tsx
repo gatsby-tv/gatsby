@@ -8,7 +8,6 @@ import {
 
 import { EventHandler } from '@lib/types';
 import { Injection } from '@lib/components/Injection';
-import { AppContext } from '@lib/utilities/app';
 import {
   InjectionContext,
   useInjectionContext,
@@ -24,39 +23,19 @@ export interface AppProviderProps {
 export function AppProvider(props: AppProviderProps): React.ReactElement {
   const { children } = props;
   const uniqueIdGenerator = useUniqueIdGenerator();
-  const [loadingSemaphore, setLoadingSemaphore] = useState(0);
   const modalContext = useModalContext();
   const injectionContext = useInjectionContext();
-
   useSupports();
 
-  const startLoading = useCallback(
-    () => setLoadingSemaphore((value) => value + 1),
-    []
-  );
-
-  const stopLoading = useCallback(
-    () => setLoadingSemaphore((value) => Math.max(0, value - 1)),
-    []
-  );
-
-  const context = {
-    startLoading,
-    stopLoading,
-    isLoading: loadingSemaphore !== 0,
-  };
-
   return (
-    <AppContext.Provider value={context}>
-      <ModalContext.Provider value={modalContext}>
-        <UniqueIdContext.Provider value={uniqueIdGenerator}>
-          <InjectionContext.Provider value={injectionContext}>
-            <Injection.Target id="$background" />
-            {children}
-            <Injection.Target id="$foreground" />
-          </InjectionContext.Provider>
-        </UniqueIdContext.Provider>
-      </ModalContext.Provider>
-    </AppContext.Provider>
+    <ModalContext.Provider value={modalContext}>
+      <UniqueIdContext.Provider value={uniqueIdGenerator}>
+        <InjectionContext.Provider value={injectionContext}>
+          <Injection.Target id="$background" />
+          {children}
+          <Injection.Target id="$foreground" />
+        </InjectionContext.Provider>
+      </UniqueIdContext.Provider>
+    </ModalContext.Provider>
   );
 }

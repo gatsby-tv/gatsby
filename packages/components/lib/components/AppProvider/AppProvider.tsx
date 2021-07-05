@@ -4,9 +4,11 @@ import {
   useUniqueIdGenerator,
   ModalContext,
   useModalContext,
+  SnackBarContext,
+  useSnackBarContext,
 } from '@gatsby-tv/utilities';
 
-import { EventHandler } from '@lib/types';
+import { SnackBar } from '@lib/components/SnackBar';
 import { Injection } from '@lib/components/Injection';
 import {
   InjectionContext,
@@ -24,18 +26,22 @@ export function AppProvider(props: AppProviderProps): React.ReactElement {
   const { children } = props;
   const uniqueIdGenerator = useUniqueIdGenerator();
   const modalContext = useModalContext();
+  const snackBarContext = useSnackBarContext();
   const injectionContext = useInjectionContext();
   useSupports();
 
   return (
-    <ModalContext.Provider value={modalContext}>
-      <UniqueIdContext.Provider value={uniqueIdGenerator}>
-        <InjectionContext.Provider value={injectionContext}>
-          <Injection.Target id="$background" />
-          {children}
-          <Injection.Target id="$foreground" />
-        </InjectionContext.Provider>
-      </UniqueIdContext.Provider>
-    </ModalContext.Provider>
+    <SnackBarContext.Provider value={snackBarContext}>
+      <ModalContext.Provider value={modalContext}>
+        <UniqueIdContext.Provider value={uniqueIdGenerator}>
+          <InjectionContext.Provider value={injectionContext}>
+            <SnackBar />
+            <Injection.Target id="$background" />
+            {children}
+            <Injection.Target id="$foreground" />
+          </InjectionContext.Provider>
+        </UniqueIdContext.Provider>
+      </ModalContext.Provider>
+    </SnackBarContext.Provider>
   );
 }

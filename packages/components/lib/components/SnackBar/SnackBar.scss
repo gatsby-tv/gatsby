@@ -1,0 +1,27 @@
+@use 'styles' as *;
+
+.Container {
+  @include center;
+  position: fixed;
+  bottom: 5%;
+  width: 100%;
+}
+
+.SnackBar {
+  @include elevation(4);
+  @include font-size(body-large);
+  @include font-weight(semi-bold);
+  @include border-radius(large);
+  @include center;
+  overflow: hidden;
+  padding: spacing(1) spacing(2);
+  background-color: palette(snackbar);
+  transition: transform duration(fast) ease-out, opacity duration(fast) ease-out;
+  transform: translateY(50%);
+  opacity: 0;
+}
+
+.Mounted {
+  transform: translateY(0%);
+  opacity: 1;
+}

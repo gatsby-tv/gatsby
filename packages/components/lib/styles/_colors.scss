@@ -40,6 +40,8 @@
   --color-overlay-hover: hsla(0, 0%, 100%, 0.12);
   --color-overlay-focused: hsla(0, 0%, 100%, 0.20);
 
+  --color-snackbar: hsla(0, 0%, 22%, 0.9);
+
   --color-error: #f44336;
   --color-error-hover: #{color.adjust(#f44336, $lightness: 4%)};
   --color-error-focused: #{color.adjust(#f44336, $lightness: 12%)};

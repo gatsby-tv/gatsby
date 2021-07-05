@@ -6,6 +6,7 @@ export * from './Scroll';
 export * from './Frame';
 export * from './Connected';
 export * from './Staging';
+export * from './SnackBar';
 export * from './TextBox';
 export * from './TextCaption';
 export * from './TextDisplay';

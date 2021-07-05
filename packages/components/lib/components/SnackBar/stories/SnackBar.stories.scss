@@ -1,0 +1,7 @@
+@use 'styles' as *;
+
+.Snack {
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+}

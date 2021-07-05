@@ -11,18 +11,20 @@ import {
   TextMeta,
   TextBox,
 } from '@gatsby-tv/components';
-import { Image } from '@gatsby-tv/icons';
+import { Image, Checkmark, Cancel } from '@gatsby-tv/icons';
 import {
   UserHandle,
   FullValue,
   Filters,
   useFrame,
   useModal,
+  useSnackBar,
 } from '@gatsby-tv/utilities';
 import { PutUserResponse, PutUserAvatarResponse } from '@gatsby-tv/types';
 
 import { Page } from '@src/components/Page';
 import { AvatarCrop } from '@src/components/AvatarCrop';
+import { ResponseSnack } from '@src/components/ResponseSnack';
 import { useSession } from '@src/utilities/session';
 import { fetcher } from '@src/utilities/fetcher';
 import { isHandle, isDisplayName } from '@src/utilities/validators';
@@ -33,6 +35,7 @@ export default function UserSettings(): React.ReactElement {
   const router = useRouter();
   const { screen } = useFrame();
   const [{ user, ...session }] = useSession();
+  const [, setSnack] = useSnackBar();
   const [hover, setHover] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState('');
@@ -44,16 +47,25 @@ export default function UserSettings(): React.ReactElement {
     setDescription(user.description);
   }, [user]);
 
+  const onAvatarCropExit = useCallback(() => setFile(null), []);
+
   const onAvatarSubmit = useCallback(
     (avatar) => {
       if (!user) return;
       setFile(null);
       const body = new FormData();
       body.append('avatar', avatar);
-      fetcher<PutUserAvatarResponse>(`/user/${user._id}/avatar`, session.token, {
-        method: 'PUT',
-        body
-      });
+
+      const promise = fetcher<PutUserAvatarResponse>(
+        `/user/${user._id}/avatar`,
+        session.token,
+        {
+          method: 'PUT',
+          body,
+        }
+      ).then(ResponseSnack({ success: 'Avatar updated' }));
+
+      setSnack({ content: promise, duration: 2000 });
     },
     [user, session.token]
   );
@@ -63,10 +75,16 @@ export default function UserSettings(): React.ReactElement {
       if (!user) return;
       const { name, handle, description } = user;
 
-      fetcher<PutUserResponse>(`/user/${user._id}`, session.token, {
-        method: 'PUT',
-        body: { user, handle, description, ...form },
-      });
+      const promise = fetcher<PutUserResponse>(
+        `/user/${user._id}`,
+        session.token,
+        {
+          method: 'PUT',
+          body: { user, handle, description, ...form },
+        }
+      ).then(ResponseSnack({ success: 'Profile updated' }));
+
+      setSnack({ content: promise, duration: 2000 });
     },
     [user, session.token]
   );
@@ -114,8 +132,8 @@ export default function UserSettings(): React.ReactElement {
             </Form.File>
             <AvatarCrop
               file={file}
-              onExit={() => setFile(null)}
               onSubmit={onAvatarSubmit}
+              onExit={onAvatarCropExit}
             />
           </Form>
           <div className={styles.Info}>

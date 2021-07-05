@@ -25,3 +25,8 @@
   transform: translateY(0%);
   opacity: 1;
 }
+
+.Snack {
+  @include center;
+  gap: spacing(1);
+}

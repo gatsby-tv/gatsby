@@ -80,6 +80,14 @@
   }
 }
 
+.Success {
+  color: palette(green);
+}
+
+.Failure {
+  color: palette(error);
+}
+
 .Description {
   textarea {
     transition: color duration(faster) ease;

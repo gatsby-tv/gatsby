@@ -5,7 +5,12 @@ import { classNames, useSnackBarState } from '@gatsby-tv/utilities';
 import { Injection } from '@lib/components/Injection';
 import { Icon } from '@lib/components/Icon';
 
+import { Snack, SnackProps } from './components/Snack';
+
 import styles from './SnackBar.scss';
+
+export type { SnackProps };
+export { Snack };
 
 export function SnackBar(): React.ReactElement | null {
   const { content, active } = useSnackBarState();

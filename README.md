@@ -5,21 +5,37 @@ streaming video.
 
 ## Packages
 
-### Components Library
+### Components
 
 `/packages/components` contains a library of React components used to establish
-the core design system of the site itself and other future interfaces.
+the core design system of the site.
 
-### Icons Library
+### Icons
 
 `/packages/icons` contains all of the icons that we use on Gatsby, all of which
-are handmade and are compiled into React SVG components.
+are compiled into React SVG components.
 
-### Utilities Library
+### Utilities
 
-`/packages/utilities` contains javascript that is meant to simplify code in
+`/packages/utilities` contains typescript that is meant to simplify code in
 other parts of the repository. In addition, there are also tools for interacting
-with IPFS within the browser implemented as React hooks.
+with IPFS within the browser implemented using React hooks.
+
+### Preview
+
+`/packages/preview` provides the `Preview` component&mdash;the component
+dedicated to presenting videos in listings.
+
+### Player
+
+`/packages/player` provides the `Player` component&mdash;the component
+that presents videos for playback, providing custom controls for both desktop
+and mobile.
+
+### Content
+
+`/packages/content` contains a library of asynchronous components dependent on
+requests to our backend.
 
 ## Building
 

@@ -7,17 +7,6 @@ import { EventListener } from '@lib/components/EventListener';
 
 import styles from './Fireworks.scss';
 
-export interface FireworksProps {
-  origin?: Origin;
-  activator?: React.ReactNode;
-  infinite?: boolean;
-  toggle?: boolean;
-  count?: number;
-  interval?: number;
-  background?: boolean;
-  zIndex?: number;
-}
-
 type Position = {
   x: number;
   y: number;
@@ -25,34 +14,39 @@ type Position = {
 
 type Origin = Position | (() => Position);
 
-interface Velocity {
+type Velocity = {
   dx: number;
   dy: number;
+};
+
+function Frames(time: number) {
+  return (60 * time) / 1000;
 }
 
-interface ParticleType {
+type ParticleType = {
   position: Position;
   velocity: Velocity;
   size: number;
   alpha: number;
   hue: number;
   saturation: number;
-  value: number;
+  lightness: number;
   resistance?: number;
   gravity?: number;
   shrink?: number;
-}
+};
 
-const Particle = (position: Position) =>
-  ({
+function Particle(position: Position): ParticleType {
+  return {
     position,
     velocity: { dx: 0, dy: 0 },
     size: 2,
     alpha: 1,
     hue: 100,
     saturation: 100,
-    value: 50,
-  } as ParticleType);
+    lightness: 50,
+  };
+}
 
 Particle.exists = ({ alpha, size }: ParticleType) => {
   return alpha >= 0.1 && size >= 1;
@@ -63,7 +57,6 @@ Particle.update = (particle: ParticleType, dt: number) => {
     position,
     velocity,
     size,
-    alpha,
     resistance = 0,
     gravity = 0,
     shrink = 0,
@@ -111,7 +104,7 @@ Particle.render = (
   context.save();
   context.globalCompositeOperation = 'lighter';
   context.fillStyle = String(
-    Color.hsl(particle.hue, particle.saturation, particle.value).fade(
+    Color.hsl(particle.hue, particle.saturation, particle.lightness).fade(
       1 - particle.alpha
     )
   );
@@ -128,6 +121,16 @@ Particle.render = (
   context.fill();
   context.restore();
 };
+
+export interface FireworksProps {
+  origin?: Origin;
+  activator?: React.ReactNode;
+  infinite?: boolean;
+  toggle?: boolean;
+  count?: number;
+  interval?: number;
+  background?: boolean;
+}
 
 export function Fireworks(props: FireworksProps): React.ReactElement {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
@@ -152,10 +155,9 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     infinite,
     toggle,
     background,
-    zIndex,
   } = props;
 
-  const handleResize = useCallback(() => {
+  const onResize = useCallback(() => {
     setCanvas((current) => {
       if (!current) return current;
       current.width = window.innerWidth;
@@ -166,43 +168,43 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
 
   const draw = useCallback(() => {
     setTime(Date.now());
-    const dt = Math.min((60 * (Date.now() - time)) / 1000, 1);
+    const dt = Math.min(Frames(Date.now() - time), 1);
 
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    let newParticles: ParticleType[] = [];
+    const sparks: ParticleType[] = [];
 
     setRockets((current) =>
       current.reduce((acc: ParticleType[], rocket: ParticleType) => {
-        const updatedRocket = Particle.update(rocket, dt);
+        const updated = Particle.update(rocket, dt);
 
         if (
-          updatedRocket.position.y < (canvas.height ?? 0) / 5 ||
+          updated.position.y < (canvas.height ?? 0) / 5 ||
           Math.random() <= 0.01 * dt
         ) {
-          newParticles = newParticles.concat(Particle.explode(rocket, dt));
+          sparks.push(...Particle.explode(rocket, dt));
           return acc;
         } else {
-          Particle.render(updatedRocket, context);
-          return [...acc, updatedRocket];
+          Particle.render(updated, context);
+          return [...acc, updated];
         }
       }, [])
     );
 
     setParticles((current) =>
       current
-        .concat(newParticles)
+        .concat(sparks)
         .reduce((acc: ParticleType[], particle: ParticleType) => {
-          const updatedParticle = Particle.update(particle, dt);
+          const updated = Particle.update(particle, dt);
 
-          if (!Particle.exists(updatedParticle)) {
+          if (!Particle.exists(updated)) {
             return acc;
           } else {
-            Particle.render(updatedParticle, context);
-            return [...acc, updatedParticle];
+            Particle.render(updated, context);
+            return [...acc, updated];
           }
         }, [])
     );
@@ -211,13 +213,13 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     return () => cancelAnimationFrame(id);
   }, [time, canvas]);
 
-  useEffect(() => handleResize(), [canvas]);
-  useEffect(() => draw(), [canvas, frame]);
+  useEffect(onResize, [canvas]);
+  useEffect(draw, [canvas, frame]);
 
   useEffect(() => {
     if (!infinite && toggle == null) return;
 
-    const rocketGenerator = () => {
+    const generator = () => {
       const position = typeof origin === 'function' ? origin() : origin;
       return {
         ...Particle(position),
@@ -225,7 +227,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
         size: 4,
         hue: 0,
         saturation: 0,
-        value: 80,
+        lightness: 80,
       };
     };
 
@@ -240,7 +242,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
            **/
           if (count !== Infinity || current.length < 5) {
             iterations += 1;
-            return [...current, rocketGenerator()];
+            return [...current, generator()];
           } else {
             return current;
           }
@@ -257,10 +259,10 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     <>
       {activator}
       <Injection target={background ? '$background' : '$foreground'}>
-        <div style={ifExists(zIndex, { zIndex })} className={styles.Fireworks}>
+        <div className={styles.Fireworks}>
           <canvas ref={setCanvas} />
         </div>
-        <EventListener event="resize" handler={handleResize} />
+        <EventListener event="resize" handler={onResize} />
       </Injection>
     </>
   );

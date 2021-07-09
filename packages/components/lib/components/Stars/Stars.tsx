@@ -18,18 +18,6 @@ type Position = {
   y: number;
 };
 
-type PointDecomposition = {
-  north: [number, number];
-  east: [number, number];
-  south: [number, number];
-  west: [number, number];
-};
-
-type AstroidDecomposition = {
-  anchors: PointDecomposition;
-  controls: PointDecomposition;
-};
-
 function Frames(time: number) {
   return (60 * time) / 1000;
 }
@@ -75,8 +63,7 @@ type AstroidType = {
   size: number;
   curvature: number;
   twinkle?: TwinkleType;
-  lightness: number;
-  green?: boolean;
+  color: string;
 };
 
 // Not to be confused with `Asteroid`
@@ -87,26 +74,10 @@ function Astroid(position: Position): AstroidType {
   return {
     position,
     size,
-    lightness,
+    color: String(Color.hsl(0, 0, lightness)),
     curvature: 0.38,
   };
 }
-
-Astroid.decompose = ({ position, size, curvature }: AstroidType) =>
-  ({
-    anchors: {
-      north: [position.x, position.y - size],
-      east: [position.x + size, position.y],
-      south: [position.x, position.y + size],
-      west: [position.x - size, position.y],
-    },
-    controls: {
-      north: [position.x, position.y - size * (1 - curvature)],
-      east: [position.x + size * (1 - curvature), position.y],
-      south: [position.x, position.y + size * (1 - curvature)],
-      west: [position.x - size * (1 - curvature), position.y],
-    },
-  } as AstroidDecomposition);
 
 Astroid.twinkle = (astroid: AstroidType, time: number) => {
   return {
@@ -126,19 +97,47 @@ Astroid.update = (astroid: AstroidType, time: number) => {
   };
 };
 
-Astroid.render = (astroid: AstroidType, context: CanvasRenderingContext2D) => {
-  const { anchors, controls } = Astroid.decompose(astroid);
-
+Astroid.render = (
+  { position, size, curvature, color }: AstroidType,
+  context: CanvasRenderingContext2D
+) => {
+  const offset = size * (1 - curvature);
   context.save();
-  context.fillStyle = astroid.green
-    ? String(Color.rgb(76, 175, 80))
-    : String(Color.hsl(0, 0, astroid.lightness));
+  context.fillStyle = color;
   context.beginPath();
-  context.moveTo(...anchors.north);
-  context.bezierCurveTo(...controls.north, ...controls.east, ...anchors.east);
-  context.bezierCurveTo(...controls.east, ...controls.south, ...anchors.south);
-  context.bezierCurveTo(...controls.south, ...controls.west, ...anchors.west);
-  context.bezierCurveTo(...controls.west, ...controls.north, ...anchors.north);
+  context.moveTo(position.x, position.y - size);
+  context.bezierCurveTo(
+    position.x,
+    position.y - offset,
+    position.x + offset,
+    position.y,
+    position.x + size,
+    position.y
+  );
+  context.bezierCurveTo(
+    position.x + offset,
+    position.y,
+    position.x,
+    position.y + offset,
+    position.x,
+    position.y + size
+  );
+  context.bezierCurveTo(
+    position.x,
+    position.y + offset,
+    position.x - offset,
+    position.y,
+    position.x - size,
+    position.y
+  );
+  context.bezierCurveTo(
+    position.x - offset,
+    position.y,
+    position.x,
+    position.y - offset,
+    position.x,
+    position.y - size
+  );
   context.closePath();
   context.fill();
   context.restore();
@@ -167,13 +166,20 @@ export function Stars(props: StarsProps): React.ReactElement {
     });
 
     setAstroids(
-      [...Array(count)].map((_, index) => ({
-        ...Astroid({
-          x: Math.floor(Math.random() * window.innerWidth),
-          y: Math.floor(Math.random() * window.innerHeight),
-        }),
-        green: index === green,
-      }))
+      [...Array(count)].map((_, index) =>
+        index !== green
+          ? Astroid({
+              x: Math.floor(Math.random() * window.innerWidth),
+              y: Math.floor(Math.random() * window.innerHeight),
+            })
+          : {
+              ...Astroid({
+                x: Math.floor(Math.random() * window.innerWidth),
+                y: Math.floor(Math.random() * window.innerHeight),
+              }),
+              color: String(Color.rgb(76, 175, 80)),
+            }
+      )
     );
   }, [density]);
 

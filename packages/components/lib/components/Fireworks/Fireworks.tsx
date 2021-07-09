@@ -27,10 +27,7 @@ type ParticleType = {
   position: Position;
   velocity: Velocity;
   size: number;
-  alpha: number;
-  hue: number;
-  saturation: number;
-  lightness: number;
+  color: string;
   resistance?: number;
   gravity?: number;
   shrink?: number;
@@ -45,16 +42,11 @@ function Particle(origin?: Origin): ParticleType {
     },
     velocity: { dx: 0, dy: 0 },
     size: 2,
-    alpha: 1,
-    hue: 100,
-    saturation: 100,
-    lightness: 50,
+    color: String(Color.hsl(0, 0, 80)),
   };
 }
 
-Particle.exists = ({ alpha, size }: ParticleType) => {
-  return alpha >= 0.1 && size >= 1;
-};
+Particle.exists = ({ size }: ParticleType) => size >= 1;
 
 Particle.update = (particle: ParticleType, dt: number) => {
   const {
@@ -94,7 +86,9 @@ Particle.explode = (particle: ParticleType, dt: number) => {
       gravity: 0.2,
       resistance: 0.1,
       shrink: 0.04 * (1 + Math.random()),
-      hue: 10 * Math.floor((Math.random() * 360) / 10),
+      color: String(
+        Color.hsl(10 * Math.floor((Math.random() * 360) / 10), 100, 50)
+      ),
     };
   });
 };
@@ -107,11 +101,7 @@ Particle.render = (
 
   context.save();
   context.globalCompositeOperation = 'lighter';
-  context.fillStyle = String(
-    Color.hsl(particle.hue, particle.saturation, particle.lightness).fade(
-      1 - particle.alpha
-    )
-  );
+  context.fillStyle = particle.color;
   context.beginPath();
   context.arc(
     Math.floor(particle.position.x),
@@ -184,11 +174,12 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
           Math.random() <= 0.01 * dt
         ) {
           sparks.push(...Particle.explode(rocket, dt));
-          return acc;
         } else {
           Particle.render(updated, context);
-          return [...acc, updated];
+          acc.push(updated);
         }
+
+        return acc;
       }, [])
     );
 
@@ -199,7 +190,8 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
           const updated = Particle.update(particle, dt);
           if (!Particle.exists(updated)) return acc;
           Particle.render(updated, context);
-          return [...acc, updated];
+          acc.push(updated);
+          return acc;
         }, [])
     );
 
@@ -228,9 +220,6 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
             dy: -3 * Math.random() - 4,
           },
           size: 4,
-          hue: 0,
-          saturation: 0,
-          lightness: 80,
         },
       ];
     });

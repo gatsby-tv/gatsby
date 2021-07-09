@@ -1,25 +1,30 @@
-import { useRef, useContext } from 'react';
+import { useRef, useContext, MutableRefObject } from 'react';
 
 import { ContextError } from '@lib/errors';
 
 import {
-  UniqueIdGenerator,
   UniqueIdContext,
   UniqueIdContextType,
+  UniqueIdGeneratorType,
 } from './context';
 
-function newIdGenerator(prefix: string): UniqueIdGenerator {
-  let index = 0;
-  return () => `${prefix}-${index++}`;
+function UniqueIdGenerator(
+  prefix: string,
+  keys: MutableRefObject<Record<string, number>>
+): UniqueIdGeneratorType {
+  return () => `${prefix}-${keys.current[prefix]++}`;
 }
 
 export function useUniqueIdGenerator(): UniqueIdContextType {
-  let generators: Record<string, UniqueIdGenerator> = {};
+  const generators = useRef<Record<string, UniqueIdGeneratorType>>({});
+  const keys = useRef<Record<string, number>>({});
+
   return (prefix: string) => {
-    if (!generators[prefix]) {
-      generators = { ...generators, [prefix]: newIdGenerator(prefix) };
+    if (!generators.current[prefix]) {
+      keys.current[prefix] = 0;
+      generators.current[prefix] = UniqueIdGenerator(prefix, keys);
     }
-    return generators[prefix];
+    return generators.current[prefix];
   };
 }
 
@@ -30,12 +35,12 @@ export function useUniqueId(prefix: string): string {
     throw new ContextError('UniqueId');
   }
 
-  const id = useRef<string | null>(null);
+  const id = useRef<string>();
   const generator = context(prefix);
 
   if (!id.current) {
     id.current = generator();
   }
 
-  return id.current;
+  return id.current as string;
 }

@@ -26,6 +26,7 @@ export * from './Form';
 export * from './Button';
 export * from './Activatable';
 export * from './Fireworks';
+export * from './Stars';
 export * from './Tooltip';
 export * from './Selection';
 export * from './Link';

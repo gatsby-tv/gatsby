@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Color from 'color';
-import { ifExists } from '@gatsby-tv/utilities';
+import { useVolatileState, useComponentDidMount } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 import { EventListener } from '@lib/components/EventListener';
@@ -36,9 +36,13 @@ type ParticleType = {
   shrink?: number;
 };
 
-function Particle(position: Position): ParticleType {
+function Particle(origin?: Origin): ParticleType {
+  const position = typeof origin === 'function' ? origin() : origin;
   return {
-    position,
+    position: position ?? {
+      x: (Math.random() * window.innerWidth * 2) / 3 + window.innerWidth / 6,
+      y: window.innerHeight,
+    },
     velocity: { dx: 0, dy: 0 },
     size: 2,
     alpha: 1,
@@ -125,35 +129,29 @@ Particle.render = (
 export interface FireworksProps {
   origin?: Origin;
   activator?: React.ReactNode;
-  infinite?: boolean;
-  toggle?: boolean;
+  toggle?: number;
   count?: number;
   interval?: number;
   background?: boolean;
 }
 
 export function Fireworks(props: FireworksProps): React.ReactElement {
+  const fires = useRef(0);
+  const mounted = useComponentDidMount();
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [time, setTime] = useState(Date.now());
-  const [frame, setFrame] = useState(0);
-  const [, setRockets] = useState<ParticleType[]>([]);
-  const [, setParticles] = useState<ParticleType[]>([]);
-
-  const getDefaultOrigin = useCallback(
-    () => ({
-      x: (Math.random() * window.innerWidth * 2) / 3 + window.innerWidth / 6,
-      y: window.innerHeight,
-    }),
-    []
-  );
+  const [frame, setFrame] = useVolatileState();
+  const [fire, setFire] = useVolatileState();
+  const [rockets, setRockets] = useState<ParticleType[]>([]);
+  const [particles, setParticles] = useState<ParticleType[]>([]);
+  const inactive = !rockets.length && !particles.length;
 
   const {
     activator,
-    origin = getDefaultOrigin,
+    origin,
     count = Infinity,
     interval = 800,
-    infinite,
-    toggle,
+    toggle = Infinity,
     background,
   } = props;
 
@@ -171,7 +169,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     const dt = Math.min(Frames(Date.now() - time), 1);
 
     const context = canvas?.getContext('2d');
-    if (!canvas || !context) return;
+    if (!canvas || !context || inactive) return;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -199,61 +197,62 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
         .concat(sparks)
         .reduce((acc: ParticleType[], particle: ParticleType) => {
           const updated = Particle.update(particle, dt);
-
-          if (!Particle.exists(updated)) {
-            return acc;
-          } else {
-            Particle.render(updated, context);
-            return [...acc, updated];
-          }
+          if (!Particle.exists(updated)) return acc;
+          Particle.render(updated, context);
+          return [...acc, updated];
         }, [])
     );
 
-    const id = requestAnimationFrame(() => setFrame((current) => current + 1));
+    const id = requestAnimationFrame(() => setFrame());
     return () => cancelAnimationFrame(id);
-  }, [time, canvas]);
+  }, [time, canvas, inactive]);
 
-  useEffect(onResize, [canvas]);
-  useEffect(draw, [canvas, frame]);
+  const fireRocket = useCallback(() => {
+    if (!mounted || fires.current >= count) return;
+
+    setRockets((current) => {
+      /* For infinite fireworks, if rendering is slow then this interval
+       * will fire rockets faster than they can explode. This will cause
+       * rockets to build up on screen which will only perpetuate the poor
+       * rendering performance.
+       **/
+      if (count === Infinity && current.length > 4) return current;
+
+      fires.current++;
+      return [
+        ...current,
+        {
+          ...Particle(origin),
+          velocity: {
+            dx: 6 * Math.random() - 3,
+            dy: -3 * Math.random() - 4,
+          },
+          size: 4,
+          hue: 0,
+          saturation: 0,
+          lightness: 80,
+        },
+      ];
+    });
+  }, [origin, count, mounted]);
 
   useEffect(() => {
-    if (!infinite && toggle == null) return;
+    if (!toggle) return;
 
-    const generator = () => {
-      const position = typeof origin === 'function' ? origin() : origin;
-      return {
-        ...Particle(position),
-        velocity: { dx: 6 * Math.random() - 3, dy: -3 * Math.random() - 4 },
-        size: 4,
-        hue: 0,
-        saturation: 0,
-        lightness: 80,
-      };
-    };
-
-    let iterations = 0;
-    const id = setInterval(() => {
-      if (iterations < count) {
-        setRockets((current) => {
-          /* For infinite fireworks, if rendering is slow then this interval
-           * will fire rockets faster than they can explode. This will cause
-           * rockets to build up on screen which will only perpetuate the poor
-           * rendering performance.
-           **/
-          if (count !== Infinity || current.length < 5) {
-            iterations += 1;
-            return [...current, generator()];
-          } else {
-            return current;
-          }
-        });
-      } else {
-        clearInterval(id);
-      }
-    }, interval ?? 500);
+    fires.current = 0;
+    // Typescript is (understandably) bothered by our use of `id` in its own initializer
+    // so we have to declare it as `any`.
+    const id: any = setInterval(
+      () => (fires.current < count ? setFire() : clearInterval(id)),
+      interval
+    );
 
     return () => clearInterval(id);
-  }, [origin, count, interval, toggle, infinite]);
+  }, [count, toggle, interval]);
+
+  useEffect(onResize, [canvas]);
+  useEffect(draw, [canvas, frame, inactive]);
+  useEffect(fireRocket, [fire]);
 
   return (
     <>

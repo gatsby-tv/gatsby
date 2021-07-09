@@ -109,7 +109,7 @@ export default function SignUpPage(): React.ReactElement {
         <div className={styles.Card}>
           {loading ? LoadingMarkup : FormMarkup}
         </div>
-        <Fireworks infinite background />
+        <Fireworks background />
       </Page.Body>
     </Page>
   );

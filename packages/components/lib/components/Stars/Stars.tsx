@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import Color from 'color';
+import { useVolatileState } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 import { EventListener } from '@lib/components/EventListener';
@@ -150,7 +151,7 @@ export interface StarsProps {
 export function Stars(props: StarsProps): React.ReactElement {
   const { density = 100 } = props;
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
-  const [frame, setFrame] = useState(0);
+  const [frame, setFrame] = useVolatileState();
   const [astroids, setAstroids] = useState<AstroidType[]>([]);
 
   const onResize = useCallback(() => {
@@ -193,7 +194,7 @@ export function Stars(props: StarsProps): React.ReactElement {
       })
     );
 
-    const id = requestAnimationFrame(() => setFrame((current) => current + 1));
+    const id = requestAnimationFrame(() => setFrame());
     return () => cancelAnimationFrame(id);
   }, [canvas, frame]);
 

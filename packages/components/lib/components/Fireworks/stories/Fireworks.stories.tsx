@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
+import { useVolatileState } from '@gatsby-tv/utilities';
 
 import { Button } from '@lib/components/Button';
 import { Fireworks, FireworksProps } from '@lib/components/Fireworks';
@@ -10,14 +11,14 @@ export default {
 } as Meta;
 
 export const Infinite: Story<FireworksProps> = () => {
-  return <Fireworks infinite />;
+  return <Fireworks />;
 };
 
 export const WithButton: Story<FireworksProps> = () => {
-  const [toggle, setToggle] = useState<boolean | undefined>(undefined);
+  const [toggle, setToggle] = useVolatileState();
 
   const ButtonMarkup = (
-    <Button onClick={() => setToggle((current) => !current)}>Fire</Button>
+    <Button onClick={setToggle}>Fire</Button>
   );
 
   const origin = {

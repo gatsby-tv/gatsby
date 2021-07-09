@@ -1,34 +1,4 @@
-import {
-  useRef,
-  useState,
-  useCallback,
-  MutableRefObject,
-  Dispatch,
-  SetStateAction,
-} from 'react';
-
-import { ifExists } from '@lib/if-exists';
-
-function getInitialValue(
-  initial: string | undefined | (() => string),
-  key: MutableRefObject<number>
-): string | undefined | (() => string) {
-  return typeof initial === 'function'
-    ? () => `${initial()}.${key.current++}`
-    : ifExists(initial, `${initial}.${key.current++}`);
-}
-
-function getValue(
-  value: SetStateAction<string | undefined>,
-  key: MutableRefObject<number>
-): SetStateAction<string | undefined> {
-  return typeof value === 'function'
-    ? (current: string | undefined) => {
-        const update = value(current?.split('.').shift());
-        return ifExists(update, `${update}.${key.current++}`);
-      }
-    : ifExists(value, `${value}.${key.current++}`);
-}
+import { useRef, useState, useCallback, Dispatch, SetStateAction } from 'react';
 
 export function useVolatileKey(): [
   string | undefined,
@@ -40,8 +10,32 @@ export function useVolatileKey(
 ): [string, Dispatch<SetStateAction<string>>];
 
 export function useVolatileKey(initial?: any): any {
-  const ref = useRef(0);
-  const [key, setKey] = useState(getInitialValue(initial, ref));
-  const dispatch = useCallback((value) => setKey(getValue(value, ref)), []);
-  return [key, dispatch];
+  const key = useRef(0);
+  const [value, setValue] = useState(() => {
+    const update = typeof initial === 'function' ? initial() : initial;
+    if (update == null) return;
+    return `${update}.${key.current++}`;
+  });
+
+  const dispatch = useCallback(
+    (value) =>
+      setValue((current) => {
+        const update =
+          typeof value === 'function'
+            ? value(current?.split('.').slice(0, -1).join('.'))
+            : value;
+
+        if (update == null) return;
+        return `${update}.${key.current++}`;
+      }),
+    []
+  );
+
+  return [value, dispatch];
+}
+
+export function useVolatileState(): [number, Dispatch<void>] {
+  const [state, setState] = useState(0);
+  const dispatch = useCallback(() => setState((current) => current + 1), []);
+  return [state, dispatch];
 }

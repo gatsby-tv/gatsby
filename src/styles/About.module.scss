@@ -1,0 +1,102 @@
+@use 'styles' as *;
+
+.Page {
+  margin: 0;
+}
+
+.TitlePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: palette(white);
+
+  h2 {
+    @include text-heading;
+    @include font-size(display-small);
+    text-align: center;
+    margin-top: spacing(1);
+  }
+}
+
+.Title {
+  @include text-heading;
+  display: flex;
+  gap: spacing(1);
+  font-size: rem(50px);
+  margin-top: calc(50vh - 120px);
+}
+
+.TitleIcon {
+  flex-shrink: 0;
+  height: 100%;
+  font-size: rem(50px);
+}
+
+@media screen and (min-width: 850px) {
+  .TitlePage {
+    h2 {
+      @include font-size(display-medium);
+      margin-top: spacing(2);
+    }
+  }
+
+  .Title {
+    font-size: rem(100px);
+    margin-top: calc(50vh - 180px);
+  }
+
+  .TitleIcon {
+    font-size: rem(100px);
+  }
+}
+
+@keyframes show-more {
+  from {
+    transform: translateY(-10px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.DownArrow {
+  position: absolute;
+  bottom: spacing(2);
+  animation: {
+    name: show-more;
+    duration: duration(slowest);
+    iteration-count: infinite;
+    direction: alternate;
+  }
+}
+
+.Content {
+  padding: spacing(8) spacing(2) spacing(4);
+  background-color: palette(surface, 1);
+}
+
+.Body {
+  max-width: rem(1200px);
+  margin: 0 auto;
+
+  & > *:not(:first-child):not(h3) {
+    margin-top: spacing(2);
+  }
+
+  h3 {
+    @include text-heading;
+    @include font-size(display-medium);
+  }
+
+  h4 {
+    @include text-subheading;
+    @include font-size(body-large);
+    margin-top: spacing(0.5);
+  }
+
+  p {
+    @include text-paragraph;
+  }
+}

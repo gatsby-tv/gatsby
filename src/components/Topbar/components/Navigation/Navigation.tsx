@@ -77,20 +77,6 @@ export function Navigation(): React.ReactElement {
         <Link href="/p/about">
           <div className={styles.MenuItem}>About</div>
         </Link>
-        <Link href="/p/creators">
-          <div className={styles.MenuItem}>Creators</div>
-        </Link>
-        <Link href="/p/sponsors">
-          <div className={styles.MenuItem}>Sponsors</div>
-        </Link>
-        <Link href="/p/developers">
-          <div className={styles.MenuItem}>Developers</div>
-        </Link>
-        <Rule spacing="extratight" />
-        <div className={styles.MenuSection}>Legal</div>
-        <Link href="/p/terms">
-          <div className={styles.MenuItem}>Terms of Service</div>
-        </Link>
         <Rule spacing="extratight" />
         <div className={styles.MenuSection}>Help</div>
         <Link href="https://github.com/gatsby-tv/gatsby/issues">

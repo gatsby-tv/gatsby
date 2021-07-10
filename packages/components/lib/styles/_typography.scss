@@ -54,6 +54,12 @@ $display-font-size-map: (
   white-space: pre-line;
 }
 
+@mixin paragraph {
+  @include font-size(paragraph);
+  @include font-weight(normal);
+  white-space: pre-line;
+}
+
 @mixin display($size) {
   @include line-height(heading);
   @include font-weight(extra-bold);

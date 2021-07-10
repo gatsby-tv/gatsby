@@ -26,9 +26,10 @@ export function Frame(props: FrameProps): React.ReactElement {
   const [offsetY, setOffsetY] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
 
-  const handleFullscreen = useCallback(() => {
-    setFullscreen(Boolean(document.fullscreenElement));
-  }, [setFullscreen]);
+  const onFullscreenChange = useCallback(
+    () => setFullscreen(Boolean(document.fullscreenElement)),
+    []
+  );
 
   const setTopbar = useCallback(
     (value: boolean | ((current: boolean) => boolean)) =>
@@ -68,7 +69,7 @@ export function Frame(props: FrameProps): React.ReactElement {
   useEffect(() => {
     setMounted(true);
     setFullscreen(Boolean(document.fullscreenElement));
-  }, [setFullscreen]);
+  }, []);
 
   const context = {
     screen: { width: screenX, height: screenY },
@@ -88,7 +89,11 @@ export function Frame(props: FrameProps): React.ReactElement {
           </SideFrame>
         </TopFrame>
       </div>
-      <EventListener doc event="fullscreenchange" handler={handleFullscreen} />
+      <EventListener
+        doc
+        event="fullscreenchange"
+        handler={onFullscreenChange}
+      />
     </FrameContext.Provider>
   );
 }

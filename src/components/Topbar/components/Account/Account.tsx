@@ -36,7 +36,7 @@ export function Account(): React.ReactElement {
         <Link
           component={Menu.Link}
           href={`/u/${user.handle}/settings`}
-          $props={{ icon: UserIcon, onClick: menu.deactivate }}
+          $props={{ icon: UserIcon }}
         >
           Settings
         </Link>

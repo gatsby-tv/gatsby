@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
 import { AppProvider } from '@gatsby-tv/components';
-import { useIPFSNode, IPFSContext } from '@gatsby-tv/utilities';
+import { useModalClear, useIPFSNode, IPFSContext } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
 import '@gatsby-tv/components/dist/styles.css';
 import '@gatsby-tv/components/dist/fonts.css';
@@ -26,8 +26,6 @@ export default function App({
   const node = useIPFSNode(
     process.env.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(',').filter(Boolean)
   );
-
-  useEffect(() => setChannel(undefined), [Component]);
 
   const HeaderMarkup = (
     <Head>

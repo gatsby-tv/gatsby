@@ -20,7 +20,7 @@ export interface ModalProps {
 export function Modal(props: ModalProps): React.ReactElement | null {
   const { children, className, overlay, active, zIndex, onExit } = props;
 
-  useModalCallback(onExit, [onExit]);
+  useModalCallback(onExit, []);
 
   const onKeyDown = useCallback(
     (event: any) => {
@@ -28,7 +28,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
         onExit?.();
       }
     },
-    [onExit]
+    []
   );
 
   const onPointerDown = (event: any) => event.stopPropagation();

@@ -34,6 +34,11 @@ export function useModalContext(): ModalContextType {
     []
   );
 
+  const clearModals = useCallback(
+    () => callbacks.forEach((callback) => callback()),
+    [callbacks]
+  );
+
   useEffect(() => {
     function handler(event: any) {
       callbacks.forEach((callback) => callback(event));
@@ -44,9 +49,21 @@ export function useModalContext(): ModalContextType {
   }, [callbacks]);
 
   return {
+    clearModals,
     addModalCallback,
     removeModalCallback,
   };
+}
+
+export function useModalClear(): () => void {
+  const context = useContext(ModalContext);
+
+  if (!context) {
+    throw new ContextError('Modal');
+  }
+
+  const { clearModals } = context;
+  return clearModals;
 }
 
 export function useModalCallback(

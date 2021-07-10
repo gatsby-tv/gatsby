@@ -22,16 +22,14 @@ export function Modal(props: ModalProps): React.ReactElement | null {
 
   useModalCallback(onExit, []);
 
-  const onKeyDown = useCallback(
-    (event: any) => {
-      if (event.code === 'Escape') {
-        onExit?.();
-      }
-    },
+  const onKeyDown = useCallback((event: any) => {
+    if (event.code === 'Escape') onExit?.();
+  }, []);
+
+  const onPointerDown = useCallback(
+    (event: any) => event.stopPropagation(),
     []
   );
-
-  const onPointerDown = (event: any) => event.stopPropagation();
 
   const classes = classNames(className, styles.Modal);
 

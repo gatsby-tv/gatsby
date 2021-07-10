@@ -77,7 +77,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
     volumeRef.current.releasePointerCapture(event.pointerId);
   }, []);
 
-  const onKeydown = useCallback(
+  const onKeyDown = useCallback(
     (event: any) => {
       switch (event.key) {
         case ' ':
@@ -213,7 +213,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
           </div>
         </Menu>
       </div>
-      <EventListener event="keydown" handler={onKeydown} />
+      <EventListener doc event="keydown" handler={onKeyDown} />
     </div>
   );
 }

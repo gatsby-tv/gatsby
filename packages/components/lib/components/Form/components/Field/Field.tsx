@@ -83,10 +83,7 @@ export function Field(props: FieldProps): React.ReactElement {
 
   const error = errors[id] instanceof FormError && (errors[id] as FormError);
 
-  const classes = classNames(
-    className,
-    styles.Input,
-  );
+  const classes = classNames(className, styles.Input);
 
   useEffect(() => {
     if (!promise) return;
@@ -209,6 +206,7 @@ export function Field(props: FieldProps): React.ReactElement {
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyPress={onKeyPress}
+        onKeyDown={(event: any) => event.stopPropagation()}
         {...rest}
       />
       {LoadingMarkup}

@@ -177,6 +177,7 @@ export function Stars(props: StarsProps): React.ReactElement {
                 x: Math.floor(Math.random() * window.innerWidth),
                 y: Math.floor(Math.random() * window.innerHeight),
               }),
+              size: Math.floor(6 + 2 * Math.random()),
               color: String(Color.rgb(76, 175, 80)),
             }
       )

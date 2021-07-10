@@ -21,7 +21,7 @@ export default function AboutPage(): React.ReactElement {
   return (
     <Page className={styles.Page} title="Gatsby - About">
       <Stars />
-      <Fireworks count={3} background />
+      <Fireworks count={3} delay={750} background />
       <div
         style={{ height: screen.height - offset.y }}
         className={styles.TitlePage}

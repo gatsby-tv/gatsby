@@ -122,6 +122,7 @@ export interface FireworksProps {
   toggle?: number;
   count?: number;
   interval?: number;
+  delay?: number;
   background?: boolean;
 }
 
@@ -132,6 +133,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   const [time, setTime] = useState(Date.now());
   const [frame, setFrame] = useVolatileState();
   const [fire, setFire] = useVolatileState();
+  const [delayed, setDelayed] = useState(Boolean(props.delay));
   const [rockets, setRockets] = useState<ParticleType[]>([]);
   const [particles, setParticles] = useState<ParticleType[]>([]);
   const inactive = !rockets.length && !particles.length;
@@ -142,6 +144,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     count = Infinity,
     interval = 800,
     toggle = Infinity,
+    delay = 0,
     background,
   } = props;
 
@@ -226,7 +229,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   }, [origin, count, mounted]);
 
   useEffect(() => {
-    if (!toggle) return;
+    if (!toggle || delayed) return;
 
     fires.current = 0;
     // Typescript is (understandably) bothered by our use of `id` in its own initializer
@@ -237,7 +240,14 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     );
 
     return () => clearInterval(id);
-  }, [count, toggle, interval]);
+  }, [count, toggle, delayed, interval]);
+
+  useEffect(() => {
+    if (!delayed) return;
+
+    const id = setTimeout(() => setDelayed(false), delay);
+    return () => clearTimeout(id);
+  }, [delay, delayed]);
 
   useEffect(onResize, [canvas]);
   useEffect(draw, [canvas, frame, inactive]);

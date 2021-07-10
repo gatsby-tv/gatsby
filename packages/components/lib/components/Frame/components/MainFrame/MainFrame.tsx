@@ -14,7 +14,10 @@ export function MainFrame(props: MainFrameProps): React.ReactElement {
   const { fullscreen, screen, offset } = useFrame();
 
   return (
-    <main className={styles.MainFrame}>
+    <main
+      style={{ height: `calc(100vh - ${offset.y}px)` }}
+      className={styles.MainFrame}
+    >
       <Scroll hide={fullscreen || screen.width < 650}>{children}</Scroll>
     </main>
   );

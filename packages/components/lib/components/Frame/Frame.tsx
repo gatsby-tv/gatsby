@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { FrameContext, useResizeObserver } from '@gatsby-tv/utilities';
+import {
+  FrameContext,
+  useResizeObserver,
+  useComponentWillMount,
+} from '@gatsby-tv/utilities';
 
 import { EventListener } from '@lib/components/EventListener';
 
@@ -14,12 +18,12 @@ export interface FrameProps {
 
 export function Frame(props: FrameProps): React.ReactElement {
   const { children, topbar: Topbar, sidebar: Sidebar } = props;
+  const mounted = useComponentWillMount();
   const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
   const [topbar, setTopbarBase] = useState(true);
   const [sidebar, setSidebarBase] = useState(true);
-  const [mounted, setMounted] = useState(false);
   const [screenX, setScreenX] = useState(0);
   const [screenY, setScreenY] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
@@ -66,10 +70,7 @@ export function Frame(props: FrameProps): React.ReactElement {
     }
   }, [mounted, fullscreen]);
 
-  useEffect(() => {
-    setMounted(true);
-    setFullscreen(Boolean(document.fullscreenElement));
-  }, []);
+  useEffect(() => setFullscreen(Boolean(document.fullscreenElement)), []);
 
   const context = {
     screen: { width: screenX, height: screenY },

@@ -131,7 +131,6 @@ export interface FireworksProps {
 
 export function Fireworks(props: FireworksProps): React.ReactElement {
   const fires = useRef(0);
-  const mounted = useComponentDidMount();
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [time, setTime] = useState(Date.now());
@@ -207,7 +206,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   }, [time, canvas, inactive]);
 
   const fireRocket = useCallback(() => {
-    if (!mounted || !canvas || fires.current >= count) return;
+    if (!canvas || fires.current >= count) return;
 
     setRockets((current) => {
       /* For infinite fireworks, if rendering is slow then this interval
@@ -235,7 +234,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
         },
       ];
     });
-  }, [origin, canvas, count, mounted]);
+  }, [origin, canvas, count]);
 
   useEffect(() => {
     if (!toggle || delayed) return;

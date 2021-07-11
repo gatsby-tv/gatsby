@@ -8,7 +8,7 @@ import {
   Panel,
 } from '@gatsby-tv/components';
 import { Plus } from '@gatsby-tv/icons';
-import { Value, useMobileDetector } from '@gatsby-tv/utilities';
+import { Value, useComponentWillMount, useMobileDetector } from '@gatsby-tv/utilities';
 import { Video } from '@gatsby-tv/types';
 
 import { User } from '@lib/user';
@@ -26,9 +26,7 @@ export function CompactCredits(
 ): React.ReactElement | null {
   const { content, link } = props;
   const isMobile = useMobileDetector();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useComponentWillMount();
 
   if (
     !mounted ||

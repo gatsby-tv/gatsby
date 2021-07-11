@@ -5,6 +5,7 @@ import { ExtendDown, ExtendUp } from '@gatsby-tv/icons';
 import {
   ifExists,
   useMobileDetector,
+  useComponentWillMount,
   useStabilizedCallback,
 } from '@gatsby-tv/utilities';
 import { Browsable } from '@gatsby-tv/types';
@@ -22,15 +23,13 @@ export function Description(
 ): React.ReactElement | null {
   const { id, content } = props;
   const isMobile = useMobileDetector();
+  const mounted = useComponentWillMount();
   const [clamp, setClamp] = useState(true);
-  const [mounted, setMounted] = useState(false);
 
   const toggleClamp = useStabilizedCallback(
     () => setClamp((current) => !current),
     []
   );
-
-  useEffect(() => setMounted(true), []);
 
   if (!mounted || !content) return <Skeleton />;
 

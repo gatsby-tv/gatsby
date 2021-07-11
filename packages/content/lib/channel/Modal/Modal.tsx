@@ -18,6 +18,7 @@ import {
   ChannelHandle,
   FullValue,
   useFrame,
+  useComponentWillMount,
   useMobileDetector,
 } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
@@ -40,12 +41,10 @@ export interface ModalProps {
 export function Modal(props: ModalProps): React.ReactElement | null {
   const { channel, active, link: Link, onExit } = props;
   const isMobile = useMobileDetector();
+  const mounted = useComponentWillMount();
   const { screen } = useFrame();
-  const [mounted, setMounted] = useState(false);
   const [scrolling, setScrolling] = useState<number | undefined>();
   const [tab, setTab] = useState('videos');
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!active) {

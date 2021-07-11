@@ -11,6 +11,7 @@ import { Video, Viewport } from '@gatsby-tv/components';
 import {
   classNames,
   useForwardedRef,
+  useComponentWillMount,
   useMobileDetector,
 } from '@gatsby-tv/utilities';
 
@@ -47,7 +48,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       setSeek,
     } = usePlayer(video, volume);
     const [signal, setSignal] = useSignal();
-    const [mounted, setMounted] = useState<boolean>(false);
+    const mounted = useComponentWillMount();
 
     const setPlaybackAndSignal: Dispatch<SetStateAction<boolean>> = useCallback(
       (value) =>
@@ -63,7 +64,6 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       []
     );
 
-    useEffect(() => setMounted(true), []);
     useEffect(() => setActive(!Boolean(isMobile)), [isMobile]);
 
     const OverlayMarkup = !mounted ? null : isMobile ? (

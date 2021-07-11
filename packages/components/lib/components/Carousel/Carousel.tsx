@@ -29,8 +29,8 @@ export interface CarouselProps {
 
 export function Carousel(props: CarouselProps): React.ReactElement | null {
   const { children, groups } = props;
-  const mask = useRef<HTMLDivElement>(null);
-  const [width, setWidthBase] = useState<string>('100%');
+  const [mask, setMask] = useState<HTMLDivElement | null>(null);
+  const [width, setWidthBase] = useState('100%');
   const isMobile = useMobileDetector();
 
   const setWidth = useCallback(
@@ -134,7 +134,7 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
     <CarouselContext.Provider value={{ groups }}>
       <div className={styles.Carousel}>
         <div
-          ref={mask}
+          ref={setMask}
           className={classNames(styles.Mask, isMobile && styles.Mobile)}
         >
           {ContentMarkup}

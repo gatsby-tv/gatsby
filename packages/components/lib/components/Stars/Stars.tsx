@@ -1,15 +1,13 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useReducer,
-  useCallback,
-} from 'react';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import Color from 'color';
-import { useVolatileState } from '@gatsby-tv/utilities';
+import {
+  classNames,
+  useVolatileState,
+  useResizeObserver,
+} from '@gatsby-tv/utilities';
 
+import { Optional } from '@lib/components/Optional';
 import { Injection } from '@lib/components/Injection';
-import { EventListener } from '@lib/components/EventListener';
 
 import styles from './Stars.scss';
 
@@ -145,46 +143,52 @@ Astroid.render = (
 
 export interface StarsProps {
   density?: number;
+  background?: boolean;
+  foreground?: boolean;
 }
 
 export function Stars(props: StarsProps): React.ReactElement {
-  const { density = 100 } = props;
+  const { density = 100, background, foreground } = props;
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [frame, setFrame] = useVolatileState();
   const [astroids, setAstroids] = useState<AstroidType[]>([]);
 
-  const onResize = useCallback(() => {
-    const ppm = (window.innerWidth * window.innerHeight) / 1000000;
-    const count = Math.ceil(density * ppm);
-    const green = Math.floor(count * Math.random());
+  const onResize = useCallback(
+    ({ inlineSize: width, blockSize: height }) => {
+      const ppm = (width * height) / 1000000;
+      const count = Math.ceil(density * ppm);
+      const green = Math.floor(count * Math.random());
 
-    setCanvas((current) => {
-      if (!current) return current;
-      current.width = window.innerWidth;
-      current.height = window.innerHeight;
-      return current;
-    });
+      setCanvas((current) => {
+        if (!current) return current;
+        current.width = width;
+        current.height = height;
+        return current;
+      });
 
-    setAstroids(
-      [...Array(count)].map((_, index) =>
-        index !== green
-          ? Astroid({
-              x: Math.floor(Math.random() * window.innerWidth),
-              y: Math.floor(Math.random() * window.innerHeight),
-            })
-          : {
-              ...Astroid({
-                x: Math.floor(Math.random() * window.innerWidth),
-                y: Math.floor(Math.random() * window.innerHeight),
-              }),
-              size: Math.floor(6 + 2 * Math.random()),
-              color: String(Color.rgb(76, 175, 80)),
-            }
-      )
-    );
-  }, [density]);
+      setAstroids(
+        [...Array(count)].map((_, index) =>
+          index !== green
+            ? Astroid({
+                x: Math.floor(Math.random() * width),
+                y: Math.floor(Math.random() * height),
+              })
+            : {
+                ...Astroid({
+                  x: Math.floor(Math.random() * width),
+                  y: Math.floor(Math.random() * height),
+                }),
+                size: Math.floor(6 + 2 * Math.random()),
+                color: String(Color.rgb(76, 175, 80)),
+              }
+        )
+      );
+    },
+    [density]
+  );
 
-  useEffect(onResize, [canvas]);
+  useResizeObserver(container, onResize);
 
   useEffect(() => {
     const time = Date.now();
@@ -220,11 +224,20 @@ export function Stars(props: StarsProps): React.ReactElement {
   }, []);
 
   return (
-    <Injection target="$background">
-      <div className={styles.Stars}>
+    <Optional
+      component={Injection}
+      active={background || foreground}
+      $props={{ target: foreground ? '$foreground' : '$background' }}
+    >
+      <div
+        ref={setContainer}
+        className={classNames(
+          styles.Stars,
+          (foreground || background) && styles.Fixed
+        )}
+      >
         <canvas ref={setCanvas} />
       </div>
-      <EventListener event="resize" handler={onResize} />
-    </Injection>
+    </Optional>
   );
 }

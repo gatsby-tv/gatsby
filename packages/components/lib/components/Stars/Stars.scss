@@ -1,6 +1,10 @@
 @use 'styles' as *;
 
 .Stars {
-  @include expand(fixed);
+  @include expand(absolute);
   pointer-events: none;
+}
+
+.Fixed {
+  @include expand(fixed);
 }

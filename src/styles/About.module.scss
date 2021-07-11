@@ -1,5 +1,9 @@
 @use 'styles' as *;
 
+.Graphics {
+  @include expand(absolute);
+}
+
 .Page {
   margin: 0;
 }
@@ -74,7 +78,6 @@
 
 .Content {
   padding: spacing(8) spacing(2) spacing(4);
-  background-color: palette(surface, 1);
 }
 
 .Body {

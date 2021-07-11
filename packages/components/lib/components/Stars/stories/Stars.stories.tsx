@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 export const Example: Story<StarsProps> = (props) => {
-  return <Stars {...props} />;
+  return <Stars background {...props} />;
 };
 
 Example.args = {

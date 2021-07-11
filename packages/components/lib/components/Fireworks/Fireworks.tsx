@@ -1,7 +1,13 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Color from 'color';
-import { useVolatileState, useComponentDidMount } from '@gatsby-tv/utilities';
+import {
+  classNames,
+  useVolatileState,
+  useResizeObserver,
+  useComponentDidMount,
+} from '@gatsby-tv/utilities';
 
+import { Optional } from '@lib/components/Optional';
 import { Injection } from '@lib/components/Injection';
 import { EventListener } from '@lib/components/EventListener';
 
@@ -33,13 +39,10 @@ type ParticleType = {
   shrink?: number;
 };
 
-function Particle(origin?: Origin): ParticleType {
+function Particle(origin: Origin): ParticleType {
   const position = typeof origin === 'function' ? origin() : origin;
   return {
-    position: position ?? {
-      x: (Math.random() * window.innerWidth * 2) / 3 + window.innerWidth / 6,
-      y: window.innerHeight,
-    },
+    position,
     velocity: { dx: 0, dy: 0 },
     size: 2,
     color: String(Color.hsl(0, 0, 80)),
@@ -118,17 +121,18 @@ Particle.render = (
 
 export interface FireworksProps {
   origin?: Origin;
-  activator?: React.ReactNode;
   toggle?: number;
   count?: number;
   interval?: number;
   delay?: number;
   background?: boolean;
+  foreground?: boolean;
 }
 
 export function Fireworks(props: FireworksProps): React.ReactElement {
   const fires = useRef(0);
   const mounted = useComponentDidMount();
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [time, setTime] = useState(Date.now());
   const [frame, setFrame] = useVolatileState();
@@ -139,20 +143,20 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   const inactive = !rockets.length && !particles.length;
 
   const {
-    activator,
     origin,
     count = Infinity,
     interval = 800,
     toggle = Infinity,
     delay = 0,
     background,
+    foreground,
   } = props;
 
-  const onResize = useCallback(() => {
+  const onResize = useCallback(({ inlineSize: width, blockSize: height }) => {
     setCanvas((current) => {
       if (!current) return current;
-      current.width = window.innerWidth;
-      current.height = window.innerHeight;
+      current.width = width;
+      current.height = height;
       return current;
     });
   }, []);
@@ -203,7 +207,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
   }, [time, canvas, inactive]);
 
   const fireRocket = useCallback(() => {
-    if (!mounted || fires.current >= count) return;
+    if (!mounted || !canvas || fires.current >= count) return;
 
     setRockets((current) => {
       /* For infinite fireworks, if rendering is slow then this interval
@@ -217,7 +221,12 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
       return [
         ...current,
         {
-          ...Particle(origin),
+          ...Particle(
+            origin ?? {
+              x: (Math.random() * canvas.width * 2) / 3 + canvas.width / 6,
+              y: canvas.height,
+            }
+          ),
           velocity: {
             dx: 6 * Math.random() - 3,
             dy: -3 * Math.random() - 4,
@@ -226,7 +235,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
         },
       ];
     });
-  }, [origin, count, mounted]);
+  }, [origin, canvas, count, mounted]);
 
   useEffect(() => {
     if (!toggle || delayed) return;
@@ -249,19 +258,26 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     return () => clearTimeout(id);
   }, [delay, delayed]);
 
-  useEffect(onResize, [canvas]);
+  useResizeObserver(container, onResize);
+
   useEffect(draw, [canvas, frame, inactive]);
   useEffect(fireRocket, [fire]);
 
   return (
-    <>
-      {activator}
-      <Injection target={background ? '$background' : '$foreground'}>
-        <div className={styles.Fireworks}>
-          <canvas ref={setCanvas} />
-        </div>
-        <EventListener event="resize" handler={onResize} />
-      </Injection>
-    </>
+    <Optional
+      component={Injection}
+      active={background || foreground}
+      $props={{ target: background ? '$background' : '$foreground' }}
+    >
+      <div
+        ref={setContainer}
+        className={classNames(
+          styles.Fireworks,
+          (background || foreground) && styles.Fixed
+        )}
+      >
+        <canvas ref={setCanvas} />
+      </div>
+    </Optional>
   );
 }

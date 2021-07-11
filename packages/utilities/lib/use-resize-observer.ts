@@ -9,11 +9,13 @@ export interface ResizeCallback {
 }
 
 export function useResizeObserver<T extends HTMLElement = HTMLElement>(
-  ref: RefObject<T>,
+  ref: RefObject<T> | T | null | undefined,
   callback: ResizeCallback
 ): void {
+  const element = ref instanceof HTMLElement ? ref : ref?.current;
+
   useIsomorphicLayoutEffect(() => {
-    if (!ref.current) return;
+    if (!element) return;
 
     const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       for (const entry of entries) {
@@ -32,8 +34,7 @@ export function useResizeObserver<T extends HTMLElement = HTMLElement>(
       }
     });
 
-    observer.observe(ref.current);
-
+    observer.observe(element);
     return () => observer.disconnect();
-  }, []);
+  }, [element]);
 }

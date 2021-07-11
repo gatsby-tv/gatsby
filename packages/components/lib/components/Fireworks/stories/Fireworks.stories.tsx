@@ -11,15 +11,11 @@ export default {
 } as Meta;
 
 export const Infinite: Story<FireworksProps> = () => {
-  return <Fireworks />;
+  return <Fireworks foreground />;
 };
 
 export const WithButton: Story<FireworksProps> = () => {
   const [toggle, setToggle] = useVolatileState();
-
-  const ButtonMarkup = (
-    <Button onClick={setToggle}>Fire</Button>
-  );
 
   const origin = {
     x: window.innerWidth / 2,
@@ -27,12 +23,15 @@ export const WithButton: Story<FireworksProps> = () => {
   };
 
   return (
-    <Fireworks
-      origin={origin}
-      activator={ButtonMarkup}
-      toggle={toggle}
-      count={5}
-      interval={100}
-    />
+    <>
+      <Button onClick={setToggle}>Fire</Button>
+      <Fireworks
+        origin={origin}
+        toggle={toggle}
+        count={5}
+        interval={100}
+        background
+      />
+    </>
   );
 };

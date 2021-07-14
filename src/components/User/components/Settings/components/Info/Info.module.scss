@@ -1,0 +1,17 @@
+@use 'styles' as *;
+
+.Title {
+  @include text-clamp(1);
+}
+
+.Subtitle {
+  @include text-subdued;
+  @include font-size(body-large);
+  @include font-weight(bold);
+}
+
+@media screen and (min-width: 650px) {
+  .Subtitle {
+    @include font-size(display-small);
+  }
+}

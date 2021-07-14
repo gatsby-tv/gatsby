@@ -12,7 +12,7 @@ function UniqueIdGenerator(
   prefix: string,
   keys: MutableRefObject<Record<string, number>>
 ): UniqueIdGeneratorType {
-  return () => `${prefix}-${keys.current[prefix]++}`;
+  return () => `${prefix}.${keys.current[prefix]++}`;
 }
 
 export function useUniqueIdGenerator(): UniqueIdContextType {

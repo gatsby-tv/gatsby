@@ -1,116 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {
-  Avatar,
-  Activatable,
-  Button,
-  Icon,
-  Optional,
-  Form,
-  TextDisplay,
-  TextMeta,
-  TextBox,
-} from '@gatsby-tv/components';
-import { Image, Checkmark, Cancel } from '@gatsby-tv/icons';
-import {
-  UserHandle,
-  FullValue,
-  Filters,
-  useFrame,
-  useModal,
-  useSnackBar,
-} from '@gatsby-tv/utilities';
-import { PutUserResponse, PutUserAvatarResponse } from '@gatsby-tv/types';
 
 import { Page } from '@src/components/Page';
-import { AvatarCrop } from '@src/components/AvatarCrop';
-import { ResponseSnack } from '@src/components/ResponseSnack';
+import { Settings } from '@src/components/User';
 import { useSession } from '@src/utilities/session';
-import { fetcher } from '@src/utilities/fetcher';
-import { isHandle, isDisplayName } from '@src/utilities/validators';
-
-import styles from '@src/styles/UserSettings.module.scss';
 
 export default function UserSettings(): React.ReactElement {
   const router = useRouter();
-  const { screen } = useFrame();
-  const [{ user, ...session }] = useSession();
-  const [, setSnack] = useSnackBar();
-  const [hover, setHover] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
-  const [name, setName] = useState('');
-  const [handle, setHandle] = useState('');
-  const [description, setDescription] = useState(user?.description ?? '');
+  const [{ user, token, valid }] = useSession();
 
-  useEffect(() => {
-    if (!user) return;
-    setDescription(user.description);
-  }, [user]);
-
-  const onAvatarCropExit = useCallback(() => setFile(null), []);
-
-  const onAvatarSubmit = useCallback(
-    (avatar) => {
-      if (!user) return;
-      setFile(null);
-      const body = new FormData();
-      body.append('avatar', avatar);
-
-      const promise = fetcher<PutUserAvatarResponse>(
-        `/user/${user._id}/avatar`,
-        session.token,
-        {
-          method: 'PUT',
-          body,
-        }
-      ).then(ResponseSnack({ success: 'Avatar updated' }));
-
-      setSnack({ content: promise, duration: 2000 });
-    },
-    [user, session.token]
-  );
-
-  const onSubmit = useCallback(
-    (form) => {
-      if (!user) return;
-      const { name, handle, description } = user;
-
-      const promise = fetcher<PutUserResponse>(
-        `/user/${user._id}`,
-        session.token,
-        {
-          method: 'PUT',
-          body: { user, handle, description, ...form },
-        }
-      ).then(ResponseSnack({ success: 'Profile updated' }));
-
-      setSnack({ content: promise, duration: 2000 });
-    },
-    [user, session.token]
-  );
-
-  if (!session.token) {
+  if (!token) {
     router.push('/');
+    return <Page title="Settings" />;
   }
 
-  const AvatarOverlayMarkup = (
-    <>
-      <Activatable
-        className={styles.OverlayTint}
-        active={hover}
-        duration="fastest"
-        onPointerEnter={() => setHover(true)}
-        onPointerLeave={() => setHover(false)}
-      >
-        <TextDisplay className={styles.OverlayText} size="small">
-          Change Avatar
-        </TextDisplay>
-      </Activatable>
-      <Icon className={styles.OverlayImage} src={Image} size="small" />
-    </>
-  );
-
-  if (!user || !session.valid) {
+  if (!user || !valid) {
     return (
       <Page title="Settings">
         <Page.Loading />
@@ -120,93 +24,13 @@ export default function UserSettings(): React.ReactElement {
 
   return (
     <Page title="Settings">
-      <Page.Body narrow>
-        <div className={styles.Header}>
-          <Form id="update-avatar">
-            <Form.File id="avatar" value={file} onChange={setFile}>
-              <Avatar
-                className={styles.Avatar}
-                src={user.avatar}
-                overlay={AvatarOverlayMarkup}
-              />
-            </Form.File>
-            <AvatarCrop
-              file={file}
-              onSubmit={onAvatarSubmit}
-              onExit={onAvatarCropExit}
-            />
-          </Form>
-          <div className={styles.Info}>
-            <TextDisplay
-              className={styles.HeaderTitle}
-              size={screen.width > 650 ? 'large' : 'medium'}
-            >
-              {user.name}
-            </TextDisplay>
-            <TextMeta.List className={styles.HeaderInfo}>
-              <TextMeta>{UserHandle(user.handle)}</TextMeta>
-              <TextMeta>{FullValue(user.followers, 'follower')}</TextMeta>
-            </TextMeta.List>
-          </div>
-        </div>
-        <Form
-          id="update-user"
-          className={styles.Form}
-          filters={[Filters.empty('name', 'handle')]}
-          onSubmit={onSubmit}
-        >
-          <div className={styles.NameFields}>
-            <Form.Label
-              className={styles.Label}
-              for="name"
-              label="Display Name"
-            >
-              <Form.Field
-                id="name"
-                type="text"
-                className={styles.NameField}
-                placeholder={user.name}
-                value={name}
-                onChange={setName}
-                validators={isDisplayName()}
-              />
-            </Form.Label>
-            <Form.Label className={styles.Label} for="handle" label="Handle">
-              <Form.Field
-                id="handle"
-                type="text"
-                className={styles.NameField}
-                placeholder={user.handle}
-                prefix="@"
-                value={handle}
-                onChange={setHandle}
-                validators={isHandle()}
-              />
-            </Form.Label>
-          </div>
-          <Form.Label
-            className={styles.Label}
-            for="description"
-            label="Description"
-          >
-            <Form.Field
-              id="description"
-              type="text"
-              className={styles.Description}
-              multiline
-              value={description}
-              onChange={setDescription}
-            />
-          </Form.Label>
-          <Button
-            className={styles.Submit}
-            type="submit"
-            disabled={!(name || handle) && description === user.description}
-          >
-            Submit
-          </Button>
-        </Form>
-      </Page.Body>
+      <Settings.Layout>
+        <Settings.Header>
+          <Settings.Avatar user={user} token={token} />
+          <Settings.Info user={user} />
+        </Settings.Header>
+        <Settings.Fields user={user} token={token} />
+      </Settings.Layout>
     </Page>
   );
 }

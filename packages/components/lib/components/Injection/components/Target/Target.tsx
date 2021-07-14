@@ -10,7 +10,7 @@ export interface TargetProps {
 
 export function Target(props: TargetProps): React.ReactElement | null {
   const { id: idProp, className, index } = props;
-  const id = index !== undefined ? `${idProp}-${index}` : idProp;
+  const id = index !== undefined ? `${idProp}.${index}` : idProp;
   const container = useInjectionTarget(id);
 
   return container ? (

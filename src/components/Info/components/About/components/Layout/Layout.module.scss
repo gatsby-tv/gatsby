@@ -1,0 +1,29 @@
+@use 'styles' as *;
+
+.Layout {
+  padding: spacing(10) spacing(2);
+}
+
+.Body {
+  max-width: rem(1200px);
+  margin: 0 auto;
+
+  & > *:not(:first-child):not(h3) {
+    margin-top: spacing(2);
+  }
+
+  h3 {
+    @include text-heading;
+    @include font-size(display-medium);
+  }
+
+  h4 {
+    @include text-subheading;
+    @include font-size(body-large);
+    margin-top: spacing(0.5);
+  }
+
+  p {
+    @include text-paragraph;
+  }
+}

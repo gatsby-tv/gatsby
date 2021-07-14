@@ -1,0 +1,41 @@
+@use 'styles' as *;
+
+.Fields {
+  display: flex;
+  gap: spacing(2);
+  margin-bottom: spacing(2);
+
+  & > * {
+    flex-basis: 100%;
+  }
+}
+
+.TextArea {
+  textarea {
+    transition: color duration(faster) ease;
+
+    &:not(:focus) {
+      @include text-placeholder;
+    }
+  }
+}
+
+.Label {
+  @include font-size(body-large);
+}
+
+.Submit {
+  flex: 0 1 20%;
+  color: palette(surface, 2);
+  background-color: palette(gold, 8);
+  padding: spacing(0.5) spacing(1.5);
+  margin: spacing(2) 0 spacing(2) auto;
+
+  @include hover {
+    background-color: palette(gold, 9);
+  }
+
+  @include active {
+    background-color: palette(gold, 7);
+  }
+}

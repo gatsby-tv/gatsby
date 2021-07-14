@@ -1,0 +1,59 @@
+@use 'styles' as *;
+
+.Card {
+  @include elevation(8);
+  @include border-radius(small);
+  max-width: rem(700px);
+  min-height: rem(195px);
+  background-color: palette(surface, 4);
+  padding: spacing(2);
+}
+
+.Form {
+  display: flex;
+  gap: spacing(3);
+  align-items: flex-end;
+}
+
+.Fields {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+  flex-grow: 1;
+}
+
+.Field {
+  @include font-size(body-large);
+  background-color: palette(surface, 2);
+}
+
+.Label {
+  @include font-size(display-small);
+}
+
+.Loading {
+  @include expand();
+  @include center;
+}
+
+.Spinner {
+  font-size: rem(70px);
+}
+
+.Submit {
+  @include font-size(body-large);
+  flex: 0 1 20%;
+  width: 100%;
+  color: palette(surface, 2);
+  background-color: palette(gold, 8);
+  padding: spacing(0.5);
+
+  @include hover {
+    background-color: palette(gold, 9);
+  }
+
+  @include active {
+    background-color: palette(gold, 7);
+  }
+}
+

@@ -1,0 +1,13 @@
+@use 'styles' as *;
+
+.Tabs {
+  @include font-size(display-small);
+  height: spacing(3);
+  gap: spacing(1.5);
+}
+
+.Rule {
+  background-color: palette(separator);
+  margin: rem(-2px) 0 spacing(3);
+  z-index: -1;
+}

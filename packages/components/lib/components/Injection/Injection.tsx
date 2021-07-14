@@ -16,7 +16,7 @@ export interface InjectionProps {
 export function Injection(props: InjectionProps): React.ReactElement {
   const { children, target, index } = props;
   const container = useInjection(
-    index !== undefined ? `${target}-${index}` : target
+    index !== undefined ? `${target}.${index}` : target
   );
 
   return <Portal target={container}>{children}</Portal>;

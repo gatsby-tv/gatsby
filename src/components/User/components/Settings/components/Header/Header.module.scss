@@ -1,0 +1,9 @@
+@use 'styles' as *;
+
+.Header {
+  padding: spacing(2) 0;
+  margin-bottom: spacing(1);
+  display: flex;
+  align-items: center;
+  gap: spacing(3);
+}

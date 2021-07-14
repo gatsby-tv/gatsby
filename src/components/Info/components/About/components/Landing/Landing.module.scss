@@ -1,0 +1,73 @@
+@use 'styles' as *;
+
+.Landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: palette(white);
+  
+  h1 {
+    @include text-heading;
+    display: flex;
+    gap: spacing(1);
+    font-size: rem(50px);
+    margin-top: calc(50vh - 120px);
+  }
+
+  h2 {
+    @include text-heading;
+    @include font-size(display-small);
+    text-align: center;
+    margin-top: spacing(1);
+  }
+}
+
+.Graphics {
+  @include expand(absolute);
+}
+
+.Icon {
+  flex-shrink: 0;
+  height: 100%;
+  font-size: rem(50px);
+}
+
+@media screen and (min-width: 850px) {
+  .Landing {
+    h1 {
+      font-size: rem(100px);
+      margin-top: calc(50vh - 180px);
+    }
+
+    h2 {
+      @include font-size(display-medium);
+      margin-top: spacing(2);
+    }
+  }
+
+  .Icon {
+    font-size: rem(100px);
+  }
+}
+
+@keyframes show-more {
+  from {
+    transform: translateY(-10px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.DownArrow {
+  position: absolute;
+  bottom: spacing(2);
+  animation: {
+    name: show-more;
+    duration: duration(slowest);
+    iteration-count: infinite;
+    direction: alternate;
+  }
+}

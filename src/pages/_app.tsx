@@ -12,12 +12,12 @@ import '@gatsby-tv/preview/dist/styles.css';
 import '@gatsby-tv/content/dist/styles.css';
 import 'react-image-crop/dist/ReactCrop.css';
 
-import { AppLayout } from '@src/components/AppLayout';
+import { App } from '@src/components/App';
 import { fetcher } from '@src/utilities/fetcher';
 import { useSessionContext, SessionContext } from '@src/utilities/session';
 import { ChannelModalContext } from '@src/utilities/channel-modal';
 
-export default function App({
+export default function AppPage({
   Component,
   pageProps,
 }: AppProps): React.ReactElement {
@@ -45,7 +45,7 @@ export default function App({
           <ChannelModalContext.Provider value={[channel, setChannel]}>
             <SessionContext.Provider value={[session, setSession]}>
               {HeaderMarkup}
-              <AppLayout page={Component} $props={pageProps} />
+              <App page={Component} $props={pageProps} />
             </SessionContext.Provider>
           </ChannelModalContext.Provider>
         </IPFSContext.Provider>

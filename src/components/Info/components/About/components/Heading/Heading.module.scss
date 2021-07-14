@@ -1,0 +1,29 @@
+@use 'styles' as *;
+
+.Heading {
+  @include center;
+  width: 100%;
+
+  h2 {
+    @include text-heading;
+    @include font-size(display-small);
+    text-align: center;
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .Heading {
+    h2 {
+      @include font-size(display-medium);
+    }
+  }
+}
+
+@media screen and (min-width: 710px) {
+  .Heading {
+    h2 {
+      @include font-size(display-large);
+    }
+  }
+}

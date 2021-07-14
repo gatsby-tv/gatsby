@@ -1,0 +1,32 @@
+@use 'styles' as *;
+
+.Container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Description {
+  flex: 1 1 100%;
+}
+
+.Credits {
+  margin: 0 0 spacing(1);
+}
+
+@media screen and (min-width: 1000px) {
+  .Info {
+    flex: 2 2 65%;
+    padding-right: spacing(3);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .Credits {
+    flex: 0 1 rem(350px);
+    margin: 0 0 0 spacing(3);
+
+    & > * {
+      @include expand(absolute);
+    }
+  }
+}

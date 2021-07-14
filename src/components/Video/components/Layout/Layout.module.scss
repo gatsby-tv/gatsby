@@ -1,0 +1,21 @@
+@use 'styles' as *;
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  max-width: rem(2000px);
+  margin: 0 auto;
+  padding: spacing(1.5) spacing(1);
+}
+
+@media screen and (min-width: 650px) {
+  .Layout {
+    padding: spacing(1.5) spacing(3);
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .Layout {
+    flex-direction: row;
+  }
+}

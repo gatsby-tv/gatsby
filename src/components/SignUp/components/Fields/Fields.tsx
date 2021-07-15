@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Button, Form, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
-import { classNames, useUniqueId } from '@gatsby-tv/utilities';
+import { classNames, Validators, useUniqueId } from '@gatsby-tv/utilities';
 import { PostAuthCompleteSignUpResponse } from '@gatsby-tv/types';
 
 import { useSession } from '@src/utilities/session';
@@ -58,7 +58,10 @@ export function Fields(props: FieldsProps): React.ReactElement {
             autoFocus
             value={name}
             onChange={setName}
-            validators={isDisplayName({ required: true })}
+            validators={[
+              Validators.required('Display name is required'),
+              ...isDisplayName(),
+            ]}
           />
         </Form.Label>
         <Form.Label className={styles.Label} for="handle" label="Handle">
@@ -69,7 +72,10 @@ export function Fields(props: FieldsProps): React.ReactElement {
             prefix="@"
             value={handle}
             onChange={setHandle}
-            validators={isHandle({ required: true })}
+            validators={[
+              Validators.required('Handle is required'),
+              ...isHandle(),
+            ]}
           />
         </Form.Label>
       </div>

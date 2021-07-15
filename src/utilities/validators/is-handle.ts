@@ -12,14 +12,8 @@ export function isHandleAvailable(
   );
 }
 
-export type HandleValidationConfig = {
-  required?: boolean;
-};
-
-export function isHandle(config: HandleValidationConfig = {}): Validator[] {
-  const { required = false } = config;
+export function isHandle(): Validator[] {
   return [
-    required && Validators.required('Handle is required'),
     Validators.minLength(4, 'Handle must be at least 4 characters long'),
     Validators.maxLength(20, 'Handle cannot be longer than 20 characters'),
     Validators.pattern(
@@ -27,5 +21,5 @@ export function isHandle(config: HandleValidationConfig = {}): Validator[] {
       'Handles can only consist of letters, numbers, and underscores'
     ),
     isHandleAvailable,
-  ].filter(Boolean) as Validator[];
+  ];
 }

@@ -19,7 +19,7 @@ export default function SubscriptionsPage(): React.ReactElement {
     <Page title="Subscriptions">
       <Subscriptions.Layout>
         <Subscriptions.Heading id={label} />
-        <Subscriptions.Content label={label} />
+        <Subscriptions.Content label={label} user={user} />
       </Subscriptions.Layout>
     </Page>
   );

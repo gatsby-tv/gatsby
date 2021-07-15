@@ -26,11 +26,9 @@ export function Fields(props: FieldsProps): React.ReactElement {
 
   const onSubmit = useCallback(
     (form) => {
-      const { name, handle, description } = user;
-
       const promise = fetcher<PutUserResponse>(`/user/${user._id}`, token, {
         method: 'PUT',
-        body: { user, handle, description, ...form },
+        body: form,
       }).then(ResponseSnack({ success: 'Profile updated' }));
 
       setSnack({ content: promise, duration: 2000 });

@@ -18,7 +18,7 @@ import {
 } from '@gatsby-tv/utilities';
 import { User, PutUserAvatarResponse } from '@gatsby-tv/types';
 
-import { ResponseSnack } from '@src/components/ResponseSnack';
+import { Response } from '@src/components/Response';
 import { fetcher } from '@src/utilities/fetcher';
 
 import styles from './Avatar.module.scss';
@@ -129,7 +129,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
         method: 'PUT',
         body,
       }
-    ).then(ResponseSnack({ success: 'Avatar updated' }));
+    ).then(Response({ success: 'Avatar updated' }));
 
     setSnack({ content: promise, duration: 2000 });
   }, [user, token, avatar]);

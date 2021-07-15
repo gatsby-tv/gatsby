@@ -3,7 +3,7 @@ import { Button, Form } from '@gatsby-tv/components';
 import { Filters, useUniqueId, useSnackBar } from '@gatsby-tv/utilities';
 import { User, PutUserResponse } from '@gatsby-tv/types';
 
-import { ResponseSnack } from '@src/components/ResponseSnack';
+import { Response } from '@src/components/Response';
 import { fetcher } from '@src/utilities/fetcher';
 import { isHandle, isDisplayName } from '@src/utilities/validators';
 
@@ -29,7 +29,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
       const promise = fetcher<PutUserResponse>(`/user/${user._id}`, token, {
         method: 'PUT',
         body: form,
-      }).then(ResponseSnack({ success: 'Profile updated' }));
+      }).then(Response({ success: 'Profile updated' }));
 
       setSnack({ content: promise, duration: 2000 });
     },

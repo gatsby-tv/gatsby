@@ -16,6 +16,12 @@ export function DesktopOverlay(props: OverlayProps): React.ReactElement {
   const active = player.active || timeline.scrubbing;
   const classes = classNames(styles.Overlay, !active && styles.CursorHidden);
 
+  const onClick = useCallback(() => {
+    // Prevents timeline from causing the user to accidentally toggle playback.
+    if (player.seeking) return;
+    setPlayback((current) => !current);
+  }, [player.seeking]);
+
   const LoadingMarkup =
     player.loading && !signal ? (
       <Icon className={styles.Loading} src={Spinner} />
@@ -29,7 +35,7 @@ export function DesktopOverlay(props: OverlayProps): React.ReactElement {
         className={classes}
         active={active}
         duration="faster"
-        onClick={() => setPlayback((current) => !current)}
+        onClick={onClick}
         onPointerDown={() => setActive(true)}
         onPointerMove={() => setActive(true)}
         onPointerLeave={() => setActive(false)}

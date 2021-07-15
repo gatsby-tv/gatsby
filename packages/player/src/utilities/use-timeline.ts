@@ -12,6 +12,11 @@ export function useTimeline(): TimelineState {
   const [scrubbing, setScrubbing] = useState(false);
   const [position, setPosition] = useState(0);
 
+  const onClick = (event: any) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   const onContextMenu = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
@@ -62,6 +67,7 @@ export function useTimeline(): TimelineState {
     scrubbing,
     position,
     events: {
+      onClick,
       onContextMenu,
       onPointerEnter,
       onPointerDown,

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { usePopper } from 'react-popper';
-import { classNames, Time } from '@gatsby-tv/utilities';
+import { classNames, Time, useComponentDidMount } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
 import styles from './Timeline.scss';
@@ -11,6 +11,8 @@ export interface TimelineProps extends OverlayProps {
 
 export function Timeline(props: TimelineProps) {
   const { className, player, timeline, setSeek } = props;
+  const mounted = useComponentDidMount();
+  const position = useRef(timeline.position);
   const [hovering, setHovering] = useState(false);
   const [reference, setReference] = useState<HTMLDivElement | null>(null);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
@@ -49,18 +51,28 @@ export function Timeline(props: TimelineProps) {
     ],
   });
 
+  useEffect(
+    () => void (position.current = timeline.position),
+    [timeline.position]
+  );
+
+  useEffect(() => {
+    if (!mounted.current || timeline.scrubbing) return;
+    setSeek(position.current);
+  }, [timeline.scrubbing]);
+
+  const onPointerMove = useCallback(() => {
+    update?.();
+    setHovering(true);
+  }, [update]);
+
+  const onPointerLeave = useCallback(() => setHovering(false), []);
+
   return (
     <div
       className={className}
-      onClick={(event: any) => {
-        event.stopPropagation();
-        setSeek(timeline.position);
-      }}
-      onPointerMove={() => {
-        update?.();
-        setHovering(true);
-      }}
-      onPointerLeave={() => setHovering(false)}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
     >
       <div ref={timeline.ref} className={styles.Timeline} {...timeline.events}>
         <div style={{ right: buffer }} className={styles.Buffer} />

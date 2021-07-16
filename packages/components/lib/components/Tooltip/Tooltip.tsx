@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 
@@ -52,7 +52,7 @@ export function Tooltip(props: TooltipProps): React.ReactElement | null {
     };
   }, []);
 
-  const classes = classNames(className, styles.Popper);
+  const classes = Class(className, styles.Popper);
 
   return active ? (
     <Injection target="$foreground">

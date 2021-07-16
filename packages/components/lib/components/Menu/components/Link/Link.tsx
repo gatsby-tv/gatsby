@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref } from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
 import { Icon } from '@lib/components/Icon';
@@ -25,7 +25,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const { children, className, icon: IconComponent, href, ...rest } = props;
     const { itemClass } = useItem();
 
-    const classes = classNames(className, itemClass, styles.Item);
+    const classes = Class(className, itemClass, styles.Item);
 
     const IconMarkup = IconComponent ? (
       <Icon src={IconComponent} size="smaller" />

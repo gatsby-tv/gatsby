@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { IconSize, IconSource } from '@lib/types';
 
@@ -14,7 +14,7 @@ export interface IconProps extends React.AriaAttributes {
 export function Icon(props: IconProps): React.ReactElement {
   const { src: SvgComponent, className, size = 'base', ...aria } = props;
 
-  const classes = classNames(className, styles.Icon, styles[`Icon-${size}`]);
+  const classes = Class(className, styles.Icon, styles[`Icon-${size}`]);
 
   return (
     <span className={classes} {...aria}>

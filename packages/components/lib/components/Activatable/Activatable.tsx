@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Duration } from '@lib/types';
 
@@ -16,7 +16,7 @@ export interface ActivatableProps extends React.DOMAttributes<Element> {
 export function Activatable(props: ActivatableProps): React.ReactElement {
   const { children, className, active, duration, delay, ...events } = props;
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Activatable,
     active && styles.Active,

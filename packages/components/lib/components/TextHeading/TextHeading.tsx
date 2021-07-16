@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import styles from './TextHeading.scss';
 
@@ -10,6 +10,6 @@ export interface TextHeadingProps {
 
 export function TextHeading(props: TextHeadingProps): React.ReactElement {
   const { className, ...rest } = props;
-  const classes = classNames(className, styles.Heading);
+  const classes = Class(className, styles.Heading);
   return <h2 className={classes} {...rest} />;
 }

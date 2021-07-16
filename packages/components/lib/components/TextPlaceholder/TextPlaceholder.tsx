@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { FontSize } from '@lib/types';
 
@@ -17,7 +17,7 @@ export function TextPlaceholder(
 ): React.ReactElement {
   const { className, font = 'body', heading, width = 1 } = props;
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Placeholder,
     heading

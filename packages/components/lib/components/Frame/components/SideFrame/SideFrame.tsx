@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref } from 'react';
-import { classNames, useForwardedRef } from '@gatsby-tv/utilities';
+import { Class, useForwardedRef } from '@gatsby-tv/utilities';
 
 import styles from '../../Frame.scss';
 
@@ -14,7 +14,7 @@ export const SideFrame = forwardRef<HTMLDivElement, SideFrameProps>(
     const { children, sidebar: Sidebar, active } = props;
     const frame = useForwardedRef<HTMLDivElement>(ref);
 
-    const classes = classNames(styles.Bar, !active && styles.Hidden);
+    const classes = Class(styles.Bar, !active && styles.Hidden);
     const hidden =
       frame.current && !active
         ? {

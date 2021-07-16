@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { NoEntry } from '@gatsby-tv/icons';
 import {
   ifExists,
-  classNames,
+  Class,
   useForm,
   FormError,
   FormLabelContext,
@@ -33,7 +33,7 @@ export function Label(props: LabelProps): React.ReactElement {
     errors[id] instanceof FormError &&
     (errors[id] as FormError).message;
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Label,
     hidden && styles.VisuallyHidden

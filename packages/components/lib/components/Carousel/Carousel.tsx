@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { ExtendLeft, ExtendRight } from '@gatsby-tv/icons';
 import {
-  classNames,
+  Class,
   useResizeObserver,
   useMobileDetector,
 } from '@gatsby-tv/utilities';
@@ -114,13 +114,13 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
         </div>
       </Slider>
       <Button
-        className={classNames(styles.Button, styles.ButtonLeft)}
+        className={Class(styles.Button, styles.ButtonLeft)}
         icon={ExtendLeft}
         animate
         onClick={prev}
       />
       <Button
-        className={classNames(styles.Button, styles.ButtonRight)}
+        className={Class(styles.Button, styles.ButtonRight)}
         icon={ExtendRight}
         animate
         onClick={next}
@@ -135,7 +135,7 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
       <div className={styles.Carousel}>
         <div
           ref={setMask}
-          className={classNames(styles.Mask, isMobile && styles.Mobile)}
+          className={Class(styles.Mask, isMobile && styles.Mobile)}
         >
           {ContentMarkup}
         </div>

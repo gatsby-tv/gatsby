@@ -10,7 +10,7 @@ import {
   VolumeHalf,
   VolumeMute,
 } from '@gatsby-tv/icons';
-import { classNames, Time, useMenu } from '@gatsby-tv/utilities';
+import { Class, Time, useMenu } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
 import styles from './Controls.scss';
@@ -126,11 +126,11 @@ export function Controls(props: ControlsProps): React.ReactElement {
 
   return (
     <div
-      className={classNames(className, styles.Controls)}
+      className={Class(className, styles.Controls)}
       onClick={(event: any) => event.stopPropagation()}
     >
       <div
-        className={classNames(styles.Section, styles.Playback)}
+        className={Class(styles.Section, styles.Playback)}
         onPointerLeave={() => setSlider(false)}
       >
         <Button
@@ -160,7 +160,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
           draggable="false"
         >
           <span
-            className={classNames(styles.Slider, slider && styles.SliderActive)}
+            className={Class(styles.Slider, slider && styles.SliderActive)}
           >
             <span
               style={{
@@ -172,7 +172,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
         </span>
         <span className={styles.ProgressText}>{`${time} / ${duration}`}</span>
       </div>
-      <div className={classNames(styles.Section, styles.Settings)}>
+      <div className={Class(styles.Section, styles.Settings)}>
         <Button
           ref={settings.ref}
           icon={Gear}

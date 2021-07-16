@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Button, Form, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
-import { classNames, Validators, useUniqueId } from '@gatsby-tv/utilities';
+import { Class, Validators, useUniqueId } from '@gatsby-tv/utilities';
 import { PostAuthCompleteSignUpResponse } from '@gatsby-tv/types';
 
 import { useSession } from '@src/utilities/session';
@@ -37,7 +37,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
 
   if (loading) {
     return (
-      <div className={classNames(styles.Card, styles.Loading)}>
+      <div className={Class(styles.Card, styles.Loading)}>
         <Icon className={styles.Spinner} src={Spinner} />
       </div>
     );
@@ -46,7 +46,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
   return (
     <Form
       id={id}
-      className={classNames(styles.Card, styles.Form)}
+      className={Class(styles.Card, styles.Form)}
       onSubmit={onSubmit}
     >
       <div className={styles.Fields}>

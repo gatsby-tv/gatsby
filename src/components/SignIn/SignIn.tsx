@@ -17,7 +17,7 @@ import {
   CheckmarkFill,
   CancelFill,
 } from '@gatsby-tv/icons';
-import { classNames, Validators } from '@gatsby-tv/utilities';
+import { Class, Validators } from '@gatsby-tv/utilities';
 import { PostAuthSignInResponse } from '@gatsby-tv/types';
 
 import { fetcher } from '@src/utilities/fetcher';
@@ -48,7 +48,7 @@ export function SignIn(props: SignInProps): React.ReactElement {
       <span>
         <Icon src={Email} className={styles.EmailIcon} />
         <Icon
-          className={classNames(styles.EmailDecorator, styles.Valid)}
+          className={Class(styles.EmailDecorator, styles.Valid)}
           src={CheckmarkFill}
         />
       </span>
@@ -62,7 +62,7 @@ export function SignIn(props: SignInProps): React.ReactElement {
       <span>
         <Icon src={Email} className={styles.EmailIcon} />
         <Icon
-          className={classNames(styles.EmailDecorator, styles.Invalid)}
+          className={Class(styles.EmailDecorator, styles.Invalid)}
           src={CancelFill}
         />
       </span>

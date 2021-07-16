@@ -8,7 +8,7 @@ import {
   Expand,
   Compress,
 } from '@gatsby-tv/icons';
-import { classNames, Time } from '@gatsby-tv/utilities';
+import { Class, Time } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
 import styles from './Controls.scss';
@@ -33,7 +33,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
 
   return (
     <>
-      <div className={classNames(className, styles.Controls)}>
+      <div className={Class(className, styles.Controls)}>
         <Button
           className={styles.Backward}
           unstyled
@@ -43,7 +43,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
           }}
         />
         <Button
-          className={classNames(styles.Previous, styles.Disabled)}
+          className={Class(styles.Previous, styles.Disabled)}
           animate
           icon={Previous}
           size="small"
@@ -58,7 +58,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
           />
         )}
         <Button
-          className={classNames(styles.Next, styles.Disabled)}
+          className={Class(styles.Next, styles.Disabled)}
           animate
           icon={Next}
           size="small"

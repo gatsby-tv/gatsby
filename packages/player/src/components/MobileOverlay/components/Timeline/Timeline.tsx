@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { usePopper } from 'react-popper';
 import { Activatable } from '@gatsby-tv/components';
-import { classNames, Time, ifExists } from '@gatsby-tv/utilities';
+import { Class, Time, ifExists } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
 import styles from './Timeline.scss';
@@ -78,7 +78,7 @@ export function Timeline(props: TimelineProps): React.ReactElement {
       <div
         ref={setPopper}
         style={style.popper}
-        className={classNames(
+        className={Class(
           styles.Text,
           timeline.scrubbing && styles.TextActive
         )}

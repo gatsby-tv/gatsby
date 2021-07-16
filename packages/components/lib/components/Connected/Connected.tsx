@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Item, ItemProps } from './components';
 import styles from './Connected.scss';
@@ -17,7 +17,7 @@ export interface ConnectedProps {
 export function Connected(props: ConnectedProps) {
   const { children, className, column, prefix, suffix } = props;
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Connected,
     column ? styles.ConnectedColumn : styles.ConnectedRow

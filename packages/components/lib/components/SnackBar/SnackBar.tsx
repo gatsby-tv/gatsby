@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from '@gatsby-tv/icons';
-import { classNames, useSnackBarState } from '@gatsby-tv/utilities';
+import { Class, useSnackBarState } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 import { Icon } from '@lib/components/Icon';
@@ -35,7 +35,7 @@ export function SnackBar(): React.ReactElement | null {
     <Injection target="$foreground">
       <div ref={setRef} className={styles.Container}>
         <div
-          className={classNames(
+          className={Class(
             styles.SnackBar,
             active && mounted && styles.Mounted
           )}

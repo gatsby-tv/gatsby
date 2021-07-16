@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { ifExists, classNames, useModalCallback } from '@gatsby-tv/utilities';
+import { ifExists, Class, useModalCallback } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
 import { Injection } from '@lib/components/Injection';
@@ -31,7 +31,7 @@ export function Modal(props: ModalProps): React.ReactElement | null {
     []
   );
 
-  const classes = classNames(className, styles.Modal);
+  const classes = Class(className, styles.Modal);
 
   return active ? (
     <Injection target="$foreground">

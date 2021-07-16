@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref } from 'react';
 import { ExtendRight } from '@gatsby-tv/icons';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import {
   Link as LinkBase,
@@ -31,7 +31,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       ...linkProps
     } = props;
 
-    const classes = classNames(
+    const classes = Class(
       className,
       styles[`Display-${size}`],
       thin && styles.Thin

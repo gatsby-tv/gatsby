@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import styles from './TextSubheading.scss';
 
@@ -10,6 +10,6 @@ export interface TextSubheadingProps {
 
 export function TextSubheading(props: TextSubheadingProps): React.ReactElement {
   const { className, ...rest } = props;
-  const classes = classNames(className, styles.Subheading);
+  const classes = Class(className, styles.Subheading);
   return <h3 className={classes} {...rest} />;
 }

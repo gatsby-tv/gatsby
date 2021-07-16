@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { usePopper } from 'react-popper';
-import { classNames, Time, useComponentDidMount } from '@gatsby-tv/utilities';
+import { Class, Time, useComponentDidMount } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
 import styles from './Timeline.scss';
@@ -86,7 +86,7 @@ export function Timeline(props: TimelineProps) {
       <div
         ref={setPopper}
         style={style.popper}
-        className={classNames(styles.Text, hovering && styles.TextActive)}
+        className={Class(styles.Text, hovering && styles.TextActive)}
         {...attributes.popper}
       >
         {Time(timeline.position * player.duration)}

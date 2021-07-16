@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import styles from './TextCaption.scss';
 
@@ -10,6 +10,6 @@ export interface TextCaptionProps {
 
 export function TextCaption(props: TextCaptionProps): React.ReactElement {
   const { className, ...rest } = props;
-  const classes = classNames(className, styles.Caption);
+  const classes = Class(className, styles.Caption);
   return <h4 className={classes} {...rest} />;
 }

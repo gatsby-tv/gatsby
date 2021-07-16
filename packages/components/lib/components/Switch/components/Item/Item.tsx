@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames, ifExists } from '@gatsby-tv/utilities';
+import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
 import { useSwitch } from '@lib/utilities/switch';
@@ -26,7 +26,7 @@ export function Item(props: ItemProps): React.ReactElement {
   const { itemClass } = useItem();
   const onClick = () => onSelect(option);
 
-  const classes = classNames(className, itemClass, styles.Item);
+  const classes = Class(className, itemClass, styles.Item);
 
   return (
     <Connected.Item

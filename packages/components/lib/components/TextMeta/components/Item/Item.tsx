@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref } from 'react';
-import { classNames, ifExists } from '@gatsby-tv/utilities';
+import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import styles from '../../TextMeta.scss';
 
@@ -22,7 +22,7 @@ export const Item = forwardRef<HTMLElement, ItemProps>(
       ...rest
     } = props;
 
-    const classes = classNames(className, styles.Item, clamp && styles.Clamp);
+    const classes = Class(className, styles.Item, clamp && styles.Clamp);
 
     return (
       <Element

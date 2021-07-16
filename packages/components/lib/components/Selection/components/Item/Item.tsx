@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames, ifExists } from '@gatsby-tv/utilities';
+import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
 import { useItem } from '@lib/utilities/item';
@@ -19,7 +19,7 @@ export function Item(props: ItemProps): React.ReactElement {
   const { itemClass } = useItem();
   const onClick = () => setSelection(option);
 
-  const classes = classNames(className, itemClass, styles.Item);
+  const classes = Class(className, itemClass, styles.Item);
 
   return (
     <div

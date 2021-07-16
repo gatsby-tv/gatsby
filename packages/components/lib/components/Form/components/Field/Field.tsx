@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import {
   ifExists,
-  classNames,
+  Class,
   useForm,
   useFormLabel,
   Validator,
@@ -83,7 +83,7 @@ export function Field(props: FieldProps): React.ReactElement {
 
   const error = errors[id] instanceof FormError && (errors[id] as FormError);
 
-  const classes = classNames(className, styles.Input);
+  const classes = Class(className, styles.Input);
 
   useEffect(() => {
     if (!promise) return;

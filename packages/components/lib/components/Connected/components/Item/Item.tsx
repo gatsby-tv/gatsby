@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import styles from '../../Connected.scss';
 
@@ -10,6 +10,6 @@ export interface ItemProps extends React.HTMLAttributes<Element> {
 
 export function Item(props: ItemProps): React.ReactElement {
   const { className, ...rest } = props;
-  const classes = classNames(className, styles.Item);
+  const classes = Class(className, styles.Item);
   return <div className={classes} {...rest} />;
 }

@@ -8,7 +8,7 @@ import React, {
 import { usePopper } from 'react-popper';
 import { ExtendDown, Cancel } from '@gatsby-tv/icons';
 import {
-  classNames,
+  Class,
   ifExists,
   ifNotExists,
   useForm,
@@ -240,7 +240,7 @@ export function Select(props: SelectProps): React.ReactElement {
     onChangeHandler?.(state.selection, id);
   }, [id, state.selection, onChangeHandler]);
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Select,
     searchable && styles.Searchable

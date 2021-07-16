@@ -1,6 +1,6 @@
 import React from 'react';
 import Preview from '@gatsby-tv/preview';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Info } from '@lib/video/Info';
 import { ListingContextType } from '@lib/utilities/listing';
@@ -23,7 +23,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
     />
   ));
 
-  const classes = classNames(
+  const classes = Class(
     styles.Listing,
     preview === 'column' && styles.Column
   );

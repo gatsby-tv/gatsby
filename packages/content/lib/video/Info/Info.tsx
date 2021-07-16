@@ -8,7 +8,7 @@ import {
 } from '@gatsby-tv/components';
 import { CheckmarkFill } from '@gatsby-tv/icons';
 import {
-  classNames,
+  Class,
   Value,
   ReleaseDate,
   useUniqueId,
@@ -97,7 +97,7 @@ export function Info(props: InfoProps): React.ReactElement {
         $props={{ channel, className: styles.AvatarLink }}
       >
         <Avatar
-          className={classNames(!Link && styles.Avatar)}
+          className={Class(!Link && styles.Avatar)}
           src={channel.avatar}
           size={avatar}
         />

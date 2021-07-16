@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { IPFSContent } from '@gatsby-tv/types';
-import { classNames, useIPFSContent } from '@gatsby-tv/utilities';
+import { Class, useIPFSContent } from '@gatsby-tv/utilities';
 
 import { DiscreteSize } from '@lib/types';
 import { Viewport } from '@lib/components/Viewport';
@@ -36,8 +36,8 @@ function AvatarURL(props: AvatarURLProps): React.ReactElement {
 
   useEffect(() => setLoading(true), [imgProps.src]);
 
-  const classes = classNames(className, styles[`Viewport-${size}`]);
-  const imageClasses = classNames(styles.Image, loading && styles.Loading);
+  const classes = Class(className, styles[`Viewport-${size}`]);
+  const imageClasses = Class(styles.Image, loading && styles.Loading);
 
   return (
     <Viewport

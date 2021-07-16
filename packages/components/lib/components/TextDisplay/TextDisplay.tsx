@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { DisplaySize, TextElement } from '@lib/types';
 
@@ -27,7 +27,7 @@ export function TextDisplay(props: TextDisplayProps): React.ReactElement {
     thin,
   } = props;
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles[`Display-${size}`],
     thin && styles.Thin

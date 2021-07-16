@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Item, ItemProps } from '../Item';
 import styles from '../../TextMeta.scss';
@@ -11,6 +11,6 @@ export type ListProps = Omit<
 
 export function List(props: ListProps): React.ReactElement {
   const { children, className } = props;
-  const classes = classNames(className, styles.List);
+  const classes = Class(className, styles.List);
   return <span className={classes}>{children}</span>;
 }

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { DownTick } from '@gatsby-tv/icons';
-import { classNames, ifExists, useUniqueId } from '@gatsby-tv/utilities';
+import { Class, ifExists, useUniqueId } from '@gatsby-tv/utilities';
 
 import { TextBox } from '@lib/components/TextBox';
 import { Icon } from '@lib/components/Icon';
@@ -38,7 +38,7 @@ export function TextCollapsible(
     });
   }, []);
 
-  const classes = classNames(className, styles.Collapsible);
+  const classes = Class(className, styles.Collapsible);
 
   return (
     <div className={classes}>

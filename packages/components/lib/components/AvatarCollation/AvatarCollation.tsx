@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 import { IPFSContent } from '@gatsby-tv/types';
 
 import { Spacing, DiscreteSize } from '@lib/types';
@@ -19,7 +19,7 @@ export function AvatarCollation(
   const { avatars, size, spacing } = props;
   avatars.reverse();
 
-  const classes = classNames(styles.AvatarCollation, styles[`Gap-${spacing}`]);
+  const classes = Class(styles.AvatarCollation, styles[`Gap-${spacing}`]);
 
   const AvatarsMarkup = avatars.map((avatar, index) => (
     <Avatar

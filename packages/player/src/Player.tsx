@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { Video, Viewport } from '@gatsby-tv/components';
 import {
-  classNames,
+  Class,
   useForwardedRef,
   useComponentWillMount,
   useMobileDetector,
@@ -98,7 +98,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       />
     );
 
-    const classes = classNames(
+    const classes = Class(
       styles.Viewport,
       fullscreen && styles.ViewportFullscreen,
       mounted && !isMobile && styles.ViewportMinHeight

@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref } from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { BorderRadius } from '@lib/types';
 
@@ -27,7 +27,7 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps>(
       ...attributes
     } = props;
 
-    const classes = classNames(
+    const classes = Class(
       styles.Placeholder,
       placeholder && styles.AlphaBackground,
       rounded && styles[`Radius-${rounded}`]

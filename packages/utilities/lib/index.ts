@@ -12,7 +12,7 @@ export * from './no-op';
 export * from './errors';
 export * from './types';
 export * from './if-exists';
-export * from './class-names';
+export * from './class';
 export * from './format';
 export * from './unique-id';
 export * from './scroll';

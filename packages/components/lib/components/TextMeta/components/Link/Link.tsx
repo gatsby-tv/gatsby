@@ -6,7 +6,7 @@ import React, {
   forwardRef,
   Ref,
 } from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
 import { EventListener } from '@lib/components/EventListener';
@@ -36,7 +36,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 
     useEffect(() => handleResize(), [handleResize]);
 
-    const classes = classNames(className, styles.Link);
+    const classes = Class(className, styles.Link);
 
     return (
       <>

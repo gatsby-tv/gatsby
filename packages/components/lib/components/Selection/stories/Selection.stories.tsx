@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { TextBox } from '@lib/components/TextBox';
 import { Selection, SelectionProps } from '@lib/components/Selection';
@@ -81,7 +81,7 @@ export const Row: Story<SelectionProps> = () => {
   const [selection, select] = useState('one');
 
   return (
-    <div className={classNames(styles.Selection, styles.Wide)}>
+    <div className={Class(styles.Selection, styles.Wide)}>
       <Selection
         itemClass={styles.Item}
         row

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Activatable, EventListener, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Signal } from '@src/components/Signal';
 import { OverlayProps } from '@src/types';
@@ -68,14 +68,14 @@ export function MobileOverlay(props: OverlayProps): React.ReactElement {
   return (
     <div className={styles.Overlay} onPointerUp={onPointerUp}>
       <Activatable
-        className={classNames(styles.Overlay, styles.Tint)}
+        className={Class(styles.Overlay, styles.Tint)}
         active={active || timeline.scrubbing}
         duration="fast"
       />
       {LoadingMarkup}
       <Signal className={styles.Signal} signal={signal} />
       <Activatable
-        className={classNames(
+        className={Class(
           styles.Controls,
           !controls && styles.ControlsDisabled
         )}

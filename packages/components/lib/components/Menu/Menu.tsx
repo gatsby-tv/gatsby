@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePopper } from 'react-popper';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Modal } from '@lib/components/Modal';
 import { Connected } from '@lib/components/Connected';
@@ -59,7 +59,7 @@ export function Menu(props: MenuProps): React.ReactElement {
     ],
   });
 
-  const classes = classNames(className, styles.Menu);
+  const classes = Class(className, styles.Menu);
 
   return (
     <ItemContext.Provider value={{ itemClass }}>

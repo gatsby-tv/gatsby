@@ -11,7 +11,7 @@ import {
 } from '@gatsby-tv/components';
 import { Image as ImageIcon, Spinner } from '@gatsby-tv/icons';
 import {
-  classNames,
+  Class,
   useUniqueId,
   useModal,
   useSnackBar,
@@ -162,13 +162,13 @@ export function Avatar(props: AvatarProps): React.ReactElement {
       />
       <div className={styles.Controls}>
         <Button
-          className={classNames(styles.Button, styles.Submit)}
+          className={Class(styles.Button, styles.Submit)}
           onClick={onSubmit}
         >
           Submit
         </Button>
         <Button
-          className={classNames(styles.Button, styles.Cancel)}
+          className={Class(styles.Button, styles.Cancel)}
           onClick={onExit}
         >
           Cancel

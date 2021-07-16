@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Color from 'color';
 import {
-  classNames,
+  Class,
   useVolatileState,
   useResizeObserver,
   useComponentDidMount,
@@ -270,7 +270,7 @@ export function Fireworks(props: FireworksProps): React.ReactElement {
     >
       <div
         ref={setContainer}
-        className={classNames(
+        className={Class(
           styles.Fireworks,
           (background || foreground) && styles.Fixed
         )}

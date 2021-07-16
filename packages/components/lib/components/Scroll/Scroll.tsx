@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {
-  classNames,
+  Class,
   ifExists,
   ScrollContext,
   useScrollContext,
@@ -28,7 +28,7 @@ export function Scroll(props: ScrollProps): React.ReactElement {
 
   useResizeObserver(parent, (content) => setHeight(content.blockSize));
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.ScrollBar,
     hide && styles.Hidden,

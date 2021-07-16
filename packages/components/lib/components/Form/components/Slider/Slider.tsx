@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { usePopper } from 'react-popper';
-import { classNames, ifExists, useForm } from '@gatsby-tv/utilities';
+import { Class, ifExists, useForm } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
 import { Option } from '@lib/types';
@@ -89,7 +89,7 @@ export function Slider(props: SliderProps): React.ReactElement {
     ],
   });
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Slider,
     stops && !hideLabels && styles.SliderWithStops
@@ -180,7 +180,7 @@ export function Slider(props: SliderProps): React.ReactElement {
       <div
         ref={setPopper}
         style={style.popper}
-        className={classNames(styles.Popper, dragging && styles.PopperActive)}
+        className={Class(styles.Popper, dragging && styles.PopperActive)}
         {...attributes.popper}
       >
         <span>{`${Math.round(100 * position)}%`}</span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
 import { Optional } from '@lib/components/Optional';
@@ -20,7 +20,7 @@ export function Item(props: ItemProps): React.ReactElement {
   const { children, className, icon: IconComponent, ...rest } = props;
   const { itemClass } = useItem();
 
-  const classes = classNames(className, itemClass, styles.Item);
+  const classes = Class(className, itemClass, styles.Item);
 
   const IconMarkup = IconComponent ? (
     <Icon src={IconComponent} size="smaller" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames, ifExists } from '@gatsby-tv/utilities';
+import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
 import { TextSubheading } from '@lib/components/TextSubheading';
@@ -16,7 +16,7 @@ export interface SectionProps {
 export function Section(props: SectionProps): React.ReactElement {
   const { children, className, title, flush } = props;
 
-  const classes = classNames(className, styles.Section);
+  const classes = Class(className, styles.Section);
 
   const TitleMarkup = title ? <TextSubheading>{title}</TextSubheading> : null;
 

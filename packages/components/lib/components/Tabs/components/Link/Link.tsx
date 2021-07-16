@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref } from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import {
   Link as LinkBase,
@@ -29,7 +29,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       ariaControls,
     };
 
-    const classes = classNames(className, styles.Item);
+    const classes = Class(className, styles.Item);
 
     return (
       <Selection.Item

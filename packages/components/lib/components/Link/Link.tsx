@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref } from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import styles from './Link.scss';
 
@@ -17,7 +17,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const target = external ? '_blank' : undefined;
     const rel = external ? 'noopener noreferrer' : undefined;
 
-    const classes = classNames(
+    const classes = Class(
       className,
       styles.Link,
       underline && styles.Underline

@@ -1,5 +1,5 @@
 import React, { forwardRef, Ref } from 'react';
-import { classNames, ifExists } from '@gatsby-tv/utilities';
+import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { Spacing } from '@lib/types';
 
@@ -16,7 +16,7 @@ export const TextBox = forwardRef<HTMLDivElement, TextBoxProps>(
   (props: TextBoxProps, ref: Ref<HTMLDivElement>) => {
     const { children, className, gap = 'base', clamp, ...attributes } = props;
 
-    const classes = classNames(
+    const classes = Class(
       className,
       styles[`TextBox-spacing-${gap}`],
       clamp && styles.Clamp

@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { SelectionContext } from '@lib/utilities/selection';
 import { ItemContext } from '@lib/utilities/item';
@@ -35,7 +35,7 @@ export function Selection(props: SelectionProps): React.ReactElement {
     'aria-label': ariaLabel,
   } = props;
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Selection,
     row ? styles.SelectionRow : styles.SelectionColumn

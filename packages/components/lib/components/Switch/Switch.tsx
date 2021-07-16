@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { SwitchContext } from '@lib/utilities/switch';
 import { ItemContext } from '@lib/utilities/item';
@@ -21,7 +21,7 @@ export interface SwitchProps {
 export function Switch(props: SwitchProps): React.ReactElement {
   const { children, className, itemClass, selection, onSelect } = props;
 
-  const classes = classNames(className, styles.Switch);
+  const classes = Class(className, styles.Switch);
 
   return (
     <SwitchContext.Provider value={{ selection, onSelect }}>

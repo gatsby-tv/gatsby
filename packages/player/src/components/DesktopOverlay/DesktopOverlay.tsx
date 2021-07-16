@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Activatable, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Signal } from '@src/components/Signal';
 import { OverlayProps } from '@src/types';
@@ -14,7 +14,7 @@ export function DesktopOverlay(props: OverlayProps): React.ReactElement {
   const { player, timeline, signal, setActive, setPlayback } = props;
 
   const active = player.active || timeline.scrubbing;
-  const classes = classNames(styles.Overlay, !active && styles.CursorHidden);
+  const classes = Class(styles.Overlay, !active && styles.CursorHidden);
 
   const onClick = useCallback(() => {
     // Prevents timeline from causing the user to accidentally toggle playback.

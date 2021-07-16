@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { useStaging } from '@lib/utilities';
 
@@ -15,7 +15,7 @@ export function Stage(props: StageProps): React.ReactElement {
   const { children, className, index } = props;
   const { stage } = useStaging();
 
-  const classes = classNames(className, styles.Stage);
+  const classes = Class(className, styles.Stage);
 
   const style: CSSProperties = {
     left: `${100 * (index - stage)}%`,

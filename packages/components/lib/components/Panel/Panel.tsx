@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { classNames, ifExists } from '@gatsby-tv/utilities';
+import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 import { Optional } from '@lib/components/Optional';
@@ -211,7 +211,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
     [touch]
   );
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Container,
     !touch.active && styles.Slider
@@ -251,7 +251,7 @@ export function Panel(props: PanelProps): React.ReactElement | null {
       <div
         ref={setRef}
         style={ifExists(zIndex, { zIndex })}
-        className={classNames(
+        className={Class(
           styles.Panel,
           overlay ? styles.Fixed : styles.Absolute
         )}

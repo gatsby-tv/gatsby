@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { IPFSContent } from '@gatsby-tv/types';
-import { classNames, ifExists, useIPFSContent } from '@gatsby-tv/utilities';
+import { Class, ifExists, useIPFSContent } from '@gatsby-tv/utilities';
 
 import { BorderRadius } from '@lib/types';
 import { Viewport } from '@lib/components/Viewport';
@@ -38,7 +38,7 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
 
   useEffect(() => setLoading(true), [imgProps.src]);
 
-  const classes = classNames(className, styles.Viewport);
+  const classes = Class(className, styles.Viewport);
 
   return (
     <Viewport
@@ -53,7 +53,7 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
         style={ifExists(loading, {
           paddingTop: `${100 * aspectRatio}%`,
         })}
-        className={classNames(
+        className={Class(
           styles.Image,
           rounded && styles[`Radius-${rounded}`],
           loading && styles.Loading

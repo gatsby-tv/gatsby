@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, forwardRef } from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import {
-  classNames,
+  Class,
   ifExists,
   useForwardedRef,
   useOptionalForm,
@@ -137,7 +137,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [animate]
     );
 
-    const classes = classNames(
+    const classes = Class(
       className,
       styles.Button,
       !unstyled && styles.Styled,

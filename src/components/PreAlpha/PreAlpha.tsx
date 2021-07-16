@@ -1,12 +1,12 @@
 import React from 'react';
 import { Injection, TextMeta } from '@gatsby-tv/components';
-import { classNames, useFrame } from '@gatsby-tv/utilities';
+import { Class, useFrame } from '@gatsby-tv/utilities';
 
 import styles from './PreAlpha.module.scss';
 
 export function PreAlpha(): React.ReactElement {
   const { fullscreen } = useFrame();
-  const classes = classNames(styles.PreAlpha, fullscreen && styles.Fullscreen);
+  const classes = Class(styles.PreAlpha, fullscreen && styles.Fullscreen);
 
   return (
     <Injection target="$foreground">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Selection } from '@lib/components/Selection';
 import { Spacing } from '@lib/types';
@@ -29,7 +29,7 @@ export function Tabs(props: TabsProps): React.ReactElement {
     onSelect,
   } = props;
 
-  const classes = classNames(className, styles.Tabs, styles[`Tabs-gap-${gap}`]);
+  const classes = Class(className, styles.Tabs, styles[`Tabs-gap-${gap}`]);
 
   return (
     <Selection

@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Spacing } from '@lib/types';
 
@@ -15,7 +15,7 @@ export interface RuleProps {
 export function Rule(props: RuleProps): React.ReactElement {
   const { children, className, thin, spacing = 'base' } = props;
 
-  const classes = classNames(
+  const classes = Class(
     className,
     styles.Rule,
     thin && styles.Thin,

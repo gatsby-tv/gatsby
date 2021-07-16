@@ -1,6 +1,6 @@
 import React, { AriaAttributes } from 'react';
 import { Stream } from '@gatsby-tv/components';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 import { Browsable } from '@gatsby-tv/types';
 
 import { Article } from '@lib/listing/components/Article';
@@ -27,7 +27,7 @@ export function New(props: NewProps): React.ReactElement {
   if (!content || error)
     return <Skeleton preview={preview} info={info} avatar={avatar} />;
 
-  const classes = classNames(
+  const classes = Class(
     styles.Listing,
     preview === 'column' && styles.Column
   );

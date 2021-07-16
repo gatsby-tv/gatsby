@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, IconSource } from '@gatsby-tv/components';
 import { Play, Pause, SkipForward, SkipBackward } from '@gatsby-tv/icons';
-import { classNames } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import styles from './Signal.scss';
 
@@ -33,7 +33,7 @@ export function Signal(props: SignalProps): React.ReactElement | null {
       break;
   }
 
-  const classes = classNames(className, styles.Signal);
+  const classes = Class(className, styles.Signal);
 
   return signal ? (
     <div key={signal} className={styles.SignalContainer}>

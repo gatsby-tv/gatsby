@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import Color from 'color';
 import {
-  classNames,
+  Class,
   useVolatileState,
   useResizeObserver,
 } from '@gatsby-tv/utilities';
@@ -231,7 +231,7 @@ export function Stars(props: StarsProps): React.ReactElement {
     >
       <div
         ref={setContainer}
-        className={classNames(
+        className={Class(
           styles.Stars,
           (foreground || background) && styles.Fixed
         )}

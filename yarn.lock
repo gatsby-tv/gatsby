@@ -2893,7 +2893,7 @@ __metadata:
     "@babel/preset-react": ^7.12.5
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/icons": "workspace:packages/icons"
-    "@gatsby-tv/types": ^0.4.35
+    "@gatsby-tv/types": ^0.4.39
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@popperjs/core": ^2.5.4
     "@rollup/plugin-babel": ^5.3.0
@@ -2964,7 +2964,7 @@ __metadata:
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
     "@gatsby-tv/preview": "workspace:packages/preview"
-    "@gatsby-tv/types": ^0.4.35
+    "@gatsby-tv/types": ^0.4.39
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
@@ -3047,7 +3047,7 @@ __metadata:
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
-    "@gatsby-tv/types": ^0.4.35
+    "@gatsby-tv/types": ^0.4.39
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@popperjs/core": ^2.5.4
     "@rollup/plugin-babel": ^5.3.0
@@ -3114,7 +3114,7 @@ __metadata:
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
-    "@gatsby-tv/types": ^0.4.35
+    "@gatsby-tv/types": ^0.4.39
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
@@ -3166,12 +3166,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@gatsby-tv/types@npm:^0.4.35":
-  version: 0.4.35
-  resolution: "@gatsby-tv/types@npm:0.4.35"
+"@gatsby-tv/types@npm:^0.4.39":
+  version: 0.4.39
+  resolution: "@gatsby-tv/types@npm:0.4.39"
   peerDependencies:
     core-js: ^3.7.0
-  checksum: 6a57667bd376ef8565affac9555bf4e70373fb891c10d39798bfcaf38a6eacd2173a57cc73649b845a8918e54afdbae96b0acc9e3bf9176380815e2ee6a5630b
+  checksum: c80e8719078e3304cfcb549738c0089057835041aaff5f88ed762333f90ce7c6f753dc94f9d3e777a4da7185187253f2e6d52ab5e416b099b181a1fd4edbffbe
   languageName: node
   linkType: hard
 
@@ -3187,7 +3187,7 @@ __metadata:
     "@babel/preset-env": ^7.12.1
     "@babel/preset-react": ^7.12.5
     "@babel/preset-typescript": ^7.12.1
-    "@gatsby-tv/types": ^0.4.35
+    "@gatsby-tv/types": ^0.4.39
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^19.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
@@ -15100,7 +15100,7 @@ fsevents@~2.1.1:
     "@gatsby-tv/icons": "workspace:packages/icons"
     "@gatsby-tv/player": "workspace:packages/player"
     "@gatsby-tv/preview": "workspace:packages/preview"
-    "@gatsby-tv/types": ^0.4.35
+    "@gatsby-tv/types": ^0.4.39
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@testing-library/dom": ^7.26.5
     "@testing-library/jest-dom": ^5.11.5

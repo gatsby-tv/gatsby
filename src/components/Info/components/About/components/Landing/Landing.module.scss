@@ -33,7 +33,7 @@
   font-size: rem(50px);
 }
 
-@media screen and (min-width: 850px) {
+@include screen(850px) {
   .Landing {
     h1 {
       font-size: rem(100px);

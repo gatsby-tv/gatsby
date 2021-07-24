@@ -8,13 +8,13 @@
   padding: spacing(1.5) spacing(1);
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .Layout {
     padding: spacing(1.5) spacing(3);
   }
 }
 
-@media screen and (min-width: 1000px) {
+@include screen(1000px) {
   .Layout {
     flex-direction: row;
   }

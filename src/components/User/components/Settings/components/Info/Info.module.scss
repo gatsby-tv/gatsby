@@ -10,7 +10,7 @@
   @include font-weight(bold);
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .Subtitle {
     @include font-size(display-small);
   }

@@ -19,7 +19,7 @@
   gap: spacing(1.5);
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .SkeletonSection {
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
@@ -27,19 +27,19 @@
   }
 }
 
-@media screen and (min-width: 900px) {
+@include screen(900px) {
   .SkeletonSection {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media screen and (min-width: 1200px) {
+@include screen(1200px) {
   .SkeletonSection {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media screen and (min-width: 1600px) {
+@include screen(1600px) {
   .SkeletonSection {
     grid-template-columns: repeat(5, 1fr);
   }

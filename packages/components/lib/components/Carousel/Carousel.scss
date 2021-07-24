@@ -58,7 +58,7 @@
   }
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .Slide {
     margin: 0 spacing(0.5);
   }

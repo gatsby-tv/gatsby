@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (min-width: 500px) {
+@include screen(500px) {
   .Heading {
     h2 {
       @include font-size(display-medium);
@@ -20,7 +20,7 @@
   }
 }
 
-@media screen and (min-width: 710px) {
+@include screen(710px) {
   .Heading {
     h2 {
       @include font-size(display-large);

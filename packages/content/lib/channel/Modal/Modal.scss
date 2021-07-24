@@ -67,7 +67,7 @@
   margin: 0 spacing(1);
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .Header {
     bottom: spacing(3);
     left: spacing(3);

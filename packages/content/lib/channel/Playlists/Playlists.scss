@@ -18,7 +18,7 @@
   text-align: center;
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .Listing {
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;

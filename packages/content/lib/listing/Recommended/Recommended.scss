@@ -12,7 +12,7 @@
   row-gap: spacing(2);
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .Listing {
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
@@ -24,13 +24,13 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@include screen(1200px) {
   .Listing {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media screen and (min-width: 1600px) {
+@include screen(1600px) {
   .Listing {
     grid-template-columns: repeat(4, 1fr);
   }

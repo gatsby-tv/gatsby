@@ -5,7 +5,7 @@
   height: rem(100px);
 }
 
-@media screen and (min-width: 650px) {
+@include screen(650px) {
   .Avatar {
     width: rem(150px);
     height: rem(150px);

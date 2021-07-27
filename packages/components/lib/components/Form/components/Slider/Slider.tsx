@@ -36,9 +36,9 @@ export interface SliderProps
   id: string;
   min: number;
   max: number;
+  value: number;
   stops?: Option<number>[];
   hideLabels?: boolean;
-  value: number;
   onChange?: (value: number, id?: string) => void;
 }
 
@@ -90,7 +90,6 @@ export function Slider(props: SliderProps): React.ReactElement {
   });
 
   const classes = Class(
-    className,
     styles.Slider,
     stops && !hideLabels && styles.SliderWithStops
   );
@@ -190,7 +189,7 @@ export function Slider(props: SliderProps): React.ReactElement {
   ) : null;
 
   return (
-    <>
+    <div className={className}>
       <div
         ref={slider}
         className={classes}
@@ -208,6 +207,6 @@ export function Slider(props: SliderProps): React.ReactElement {
       </div>
       {PopperMarkup}
       <input value={value} type="hidden" {...rest} />
-    </>
+    </div>
   );
 }

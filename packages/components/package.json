@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "color": "^3.1.2",
+    "color": "^3.2.0",
     "core-js": "^3.7.0",
     "react-popper": "^2.2.4"
   }

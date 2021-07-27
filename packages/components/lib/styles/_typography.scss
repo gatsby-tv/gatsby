@@ -54,8 +54,8 @@ $display-font-size-map: (
   white-space: pre-line;
 }
 
-@mixin paragraph {
-  @include font-size(paragraph);
+@mixin paragraph($size: paragraph) {
+  @include font-size($size);
   @include font-weight(normal);
   white-space: pre-line;
 }
@@ -66,15 +66,15 @@ $display-font-size-map: (
   font-size: map.get($display-font-size-map, $size);
 }
 
-@mixin heading {
-  @include font-size(display-small);
+@mixin heading($size: display-small) {
+  @include font-size($size);
   @include line-height(heading);
   @include font-weight(bold);
 }
 
-@mixin subheading {
+@mixin subheading($size: body) {
   @include uppercase;
-  @include font-size(body);
+  @include font-size($size);
   @include line-height(heading);
 }
 

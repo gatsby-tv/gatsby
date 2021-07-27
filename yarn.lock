@@ -2916,7 +2916,7 @@ __metadata:
     autoprefixer: ^10.2.5
     babel-loader: ^8.2.2
     babel-plugin-module-resolver: ^4.0.0
-    color: ^3.1.2
+    color: ^3.2.0
     copyfiles: ^2.4.1
     core-js: ^3.7.0
     css-loader: ^5.2.0
@@ -5909,7 +5909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/cli@npm:^5.4.0":
+"@svgr/cli@npm:^5.4.0, @svgr/cli@npm:^5.5.0":
   version: 5.5.0
   resolution: "@svgr/cli@npm:5.5.0"
   dependencies:
@@ -6112,6 +6112,15 @@ __metadata:
   dependencies:
     "@types/color-convert": "*"
   checksum: 8d217c104dd9443aeb44cf1ab0ab2d6c9c68a3a4d7284fbda0fc1f14fa65418ce960c5bfcca588ab00b46971b8090a29de54c04c26c54a9da1a457beb8416519
+  languageName: node
+  linkType: hard
+
+"@types/color@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@types/color@npm:3.0.2"
+  dependencies:
+    "@types/color-convert": "*"
+  checksum: f37ca79723fd355ac23109a99b97f56c786ab84adecd21790602a034b85ce7b5cf2ab34178af6bf4f00fa960b81ff6b53be7024c11df799f92a882665d970fe6
   languageName: node
   linkType: hard
 
@@ -10422,7 +10431,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0, color-convert@npm:^1.9.1":
+"color-convert@npm:^1.9.0, color-convert@npm:^1.9.1, color-convert@npm:^1.9.3":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -10464,13 +10473,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:^3.0.0, color@npm:^3.1.2, color@npm:^3.1.3":
+"color-string@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "color-string@npm:1.6.0"
+  dependencies:
+    color-name: ^1.0.0
+    simple-swizzle: ^0.2.2
+  checksum: d48692037a6d38bd1deb91886a075d8af82e4e8269c5ab33eadf174d8aa5e82753a2f3edfe6749e24e48898ea2eb76df706b603c65a721e10ddc57c5d6a078cf
+  languageName: node
+  linkType: hard
+
+"color@npm:^3.0.0, color@npm:^3.1.3":
   version: 3.1.3
   resolution: "color@npm:3.1.3"
   dependencies:
     color-convert: ^1.9.1
     color-string: ^1.5.4
   checksum: d0f4139e986806aaacaa748d170c9778faed93695fb776cd27d9c5825424263eb9354f69033804d0d2d350d9831a31d14dddff045da00713499f279da97e602f
+  languageName: node
+  linkType: hard
+
+"color@npm:^3.2.0":
+  version: 3.2.1
+  resolution: "color@npm:3.2.1"
+  dependencies:
+    color-convert: ^1.9.3
+    color-string: ^1.6.0
+  checksum: 2cf9436cba4cf0cd2da88d82aa69cbad548a850ec24abc1a64930778aa4bc6ef2839b178d85fa2bc254b2a5b982e7db1040c05764f6161a1266880bb0dd14d4f
   languageName: node
   linkType: hard
 
@@ -15102,10 +15131,12 @@ fsevents@~2.1.1:
     "@gatsby-tv/preview": "workspace:packages/preview"
     "@gatsby-tv/types": ^0.4.39
     "@gatsby-tv/utilities": "workspace:packages/utilities"
+    "@svgr/cli": ^5.5.0
     "@testing-library/dom": ^7.26.5
     "@testing-library/jest-dom": ^5.11.5
     "@testing-library/react": ^11.1.1
     "@testing-library/user-event": ^12.2.0
+    "@types/color": ^3.0.2
     "@types/hls.js": ^0.13.0
     "@types/jest": ^26.0.15
     "@types/jsonwebtoken": ^8.5.0
@@ -15119,6 +15150,7 @@ fsevents@~2.1.1:
     abort-controller: ^3.0.0
     babel-plugin-module-resolver: ^4.0.0
     cids: ^1.1.6
+    color: ^3.2.0
     concurrently: ^6.1.0
     core-js: ^3.7.0
     encoding: ^0.1.13

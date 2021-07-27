@@ -26,10 +26,10 @@
      units="px"
      showgrid="false"
      inkscape:document-rotation="0"
-     inkscape:current-layer="gz-browser"
+     inkscape:current-layer="browser"
      inkscape:document-units="px"
-     inkscape:cy="265.82234"
-     inkscape:cx="306.94816"
+     inkscape:cy="304.70493"
+     inkscape:cx="167.12037"
      inkscape:zoom="1.3373594"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -38,9 +38,9 @@
      pagecolor="#ffffff"
      id="base"
      inkscape:snap-page="true"
-     inkscape:bbox-paths="false"
+     inkscape:bbox-paths="true"
      inkscape:bbox-nodes="false"
-     inkscape:snap-intersection-paths="false"
+     inkscape:snap-intersection-paths="true"
      inkscape:snap-smooth-nodes="true"
      inkscape:window-width="2560"
      inkscape:window-height="1424"
@@ -48,7 +48,8 @@
      inkscape:window-y="16"
      inkscape:window-maximized="1"
      inkscape:object-paths="false"
-     inkscape:pagecheckerboard="0" />
+     inkscape:pagecheckerboard="0"
+     inkscape:snap-midpoints="true" />
   <metadata
      id="metadata12594">
     <rdf:RDF>
@@ -57,7 +58,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -69,7 +69,7 @@
        id="border" />
     <path
        style="fill:currentcolor"
-       d="m 0,124.76367 v 20 h 540 v -20 z"
+       d="m 30,124.76367 v 20 h 480 v -20 z"
        id="divider" />
     <path
        style="fill:currentcolor"

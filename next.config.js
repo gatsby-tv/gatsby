@@ -6,6 +6,13 @@ const withTM = require('next-transpile-modules')([
   '@gatsby-tv/utilities',
 ]);
 
+const pkg = require('./package.json');
+
+const externals = [
+  ...Object.keys(pkg.dependencies),
+  ...Object.keys(pkg.devDependencies),
+];
+
 const config = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'src')],

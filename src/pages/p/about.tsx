@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stars, Fireworks, Icon, Rule } from '@gatsby-tv/components';
+//import { Rule } from '@gatsby-tv/components';
 import { useFrame } from '@gatsby-tv/utilities';
 import { ExtendDown, Gatsby } from '@gatsby-tv/icons';
 
@@ -16,7 +16,8 @@ export default function AboutPage(): React.ReactElement {
       <About.Landing />
       <About.Layout>
         <About.Heading />
-        <Rule spacing="extraloose" />
+        <About.Ipfs />
+        <About.Markup />
       </About.Layout>
     </Page>
   );

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   id="gz-demonetization"
+   version="1.1"
+   viewBox="0 0 540 540"
+   height="540"
+   width="540"
+   aria-hidden="true"
+   focusable="false"
+   role="img"
+   sodipodi:docname="demonetization.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs12591" />
+  <sodipodi:namedview
+     inkscape:object-nodes="false"
+     inkscape:snap-bbox="true"
+     inkscape:showpageshadow="false"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="demonetization"
+     inkscape:document-units="px"
+     inkscape:cy="252.5"
+     inkscape:cx="235.35714"
+     inkscape:zoom="1.4"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:pagecheckerboard="0"
+     inkscape:snap-page="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1424"
+     inkscape:window-x="1920"
+     inkscape:window-y="16"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata12594">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="demonetization">
+    <circle
+       style="fill:#dbab2b"
+       id="circle"
+       cx="270"
+       cy="270"
+       r="270" />
+    <path
+       id="dollar"
+       style="fill:#ffffff"
+       d="m 266.84441,59.04272 v 26.134436 c -20.79085,0.910822 -39.76885,5.137349 -56.9366,12.685208 -19.36762,8.583696 -34.28206,20.546506 -44.74677,35.898106 -10.3086,15.18654 -15.46406,32.52194 -15.46406,52.0003 0,37.47108 19.36842,67.26482 58.10359,89.38431 14.21332,8.08847 33.50288,16.33903 57.86855,24.75767 0.4249,0.14428 0.75522,0.28423 1.17529,0.42778 v 95.96624 c -38.07972,-2.92536 -57.1717,-22.65115 -57.1717,-59.25376 h -70.52015 c 0,23.27501 5.62032,43.74873 16.86607,61.41135 11.40186,17.66256 27.88546,31.60759 49.43967,41.84197 18.69825,8.73511 39.16158,13.6686 61.38611,14.82599 v 26.1177 h 24.30435 v -26.26876 c 31.2922,-1.95589 56.6927,-10.6447 76.19536,-26.06727 22.33518,-17.82768 33.50548,-42.33575 33.50548,-73.5341 0,-28.06205 -9.13628,-51.50067 -27.41056,-70.31874 -17.47038,-17.99028 -44.97747,-33.16131 -82.29028,-45.56943 v -93.66596 c 9.9329,2.07889 18.17762,6.12832 24.65682,12.21515 9.83999,9.07886 14.7589,21.86759 14.7589,38.3747 h 70.28512 c 0,-21.62433 -5.31329,-40.93338 -15.93418,-57.93565 C 374.45063,121.46762 359.69397,108.34013 340.63878,99.09615 325.76792,91.753236 309.25388,87.318157 291.14876,85.705715 V 59.042359 Z m 0,85.4133 v 86.47966 c -12.47255,-4.92649 -22.59013,-10.08036 -30.23126,-15.46406 -11.08951,-7.92342 -16.63105,-17.74739 -16.63105,-29.46738 0,-12.54541 4.76108,-22.61292 14.28871,-30.20616 8.0894,-6.58719 18.96711,-10.34763 32.5736,-11.34206 z m 24.30435,165.15161 c 11.07219,4.8094 19.4865,9.50029 25.12695,14.07048 9.37145,7.42818 14.05367,18.15634 14.05367,32.18744 0,12.87551 -4.68222,22.94303 -14.05367,30.20608 -6.56094,4.96941 -14.96797,8.15592 -25.12695,9.64616 z" />
+  </g>
+</svg>

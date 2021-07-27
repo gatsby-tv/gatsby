@@ -74,3 +74,6 @@ yarn-error.log
 # NextJS files
 .next/
 out/
+
+# Generated files
+src/icons

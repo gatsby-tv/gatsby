@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Injection, Icon } from '@gatsby-tv/components';
-import { Spinner } from '@gatsby-tv/icons';
 import { GetAuthSignInKeyResponse } from '@gatsby-tv/types';
 
 import { Page } from '@src/components/Page';
-import { Link } from '@src/components/Link';
 import { fetcher } from '@src/utilities/fetcher';
 import { useSession } from '@src/utilities/session';
-import styles from '@src/styles/MagicLink.module.scss';
 
 export default function MagicLinkPage(): React.ReactElement {
   const router = useRouter();
@@ -17,7 +13,7 @@ export default function MagicLinkPage(): React.ReactElement {
 
   useEffect(() => {
     router.prefetch('/$signup');
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (!key) return;
@@ -32,11 +28,11 @@ export default function MagicLinkPage(): React.ReactElement {
         query: { key },
       });
     }
-  }, [key, exists]);
+  }, [key, exists, router, setSession]);
 
   useEffect(() => {
     if (session.valid) router.push('/');
-  }, [session.valid]);
+  }, [session.valid, router]);
 
   return (
     <Page title="Signing in to Gatsby">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Class, useFrame } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Navigation } from './components/Navigation';
 import { Search } from './components/Search';
@@ -13,7 +13,6 @@ export interface TopbarProps {
 
 export function Topbar(props: TopbarProps): React.ReactElement {
   const { className } = props;
-  const { screen } = useFrame();
   const classes = Class(className, styles.Topbar);
 
   return (

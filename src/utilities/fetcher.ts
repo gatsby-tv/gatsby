@@ -7,8 +7,8 @@ export function fetcher<T = any>(
   token?: string,
   options: RequestInit = {}
 ): Promise<JsonResponse<T>> {
-  const westegg = process.env.NEXT_PUBLIC_WESTEGG_API_VERSION
-    ? `${process.env.NEXT_PUBLIC_WESTEGG_URL}/${process.env.NEXT_PUBLIC_WESTEGG_API_VERSION}`
+  const westegg = process.env.NEXT_PUBLIC_WESTEGG_VERSION
+    ? `${process.env.NEXT_PUBLIC_WESTEGG_URL}/${process.env.NEXT_PUBLIC_WESTEGG_VERSION}`
     : process.env.NEXT_PUBLIC_WESTEGG_URL;
 
   const { method = 'GET', body, headers = {}, ...rest } = options;

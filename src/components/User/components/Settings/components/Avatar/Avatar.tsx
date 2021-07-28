@@ -7,13 +7,11 @@ import {
   Icon,
   Form,
   Modal,
-  TextDisplay,
 } from '@gatsby-tv/components';
 import { Image as ImageIcon, Spinner } from '@gatsby-tv/icons';
 import {
   Class,
   useUniqueId,
-  useModal,
   useSnackBar,
 } from '@gatsby-tv/utilities';
 import { User, PutUserAvatarResponse } from '@gatsby-tv/types';
@@ -132,7 +130,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
     ).then(Response({ success: 'Avatar updated' }));
 
     setSnack({ content: promise, duration: 2000 });
-  }, [user, token, avatar]);
+  }, [user, token, avatar, setSnack]);
 
   const onExit = useCallback(() => setFile(null), []);
 

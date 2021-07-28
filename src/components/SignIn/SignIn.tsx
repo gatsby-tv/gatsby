@@ -54,7 +54,7 @@ export function SignIn(props: SignInProps): React.ReactElement {
       </span>
       <TextDisplay>Email Sent!</TextDisplay>
       <TextBox className={styles.SemiBold}>
-        (We don't do passwords here)
+        (We don&apos;t do passwords here)
       </TextBox>
     </>
   ) : (

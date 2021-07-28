@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
 import { AppProvider } from '@gatsby-tv/components';
-import { useModalClear, useIPFSNode, IPFSContext } from '@gatsby-tv/utilities';
+import { useIPFSNode, IPFSContext } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
 import '@gatsby-tv/components/dist/styles.css';
 import '@gatsby-tv/components/dist/fonts.css';
@@ -24,7 +24,7 @@ export default function AppPage({
   const [channel, setChannel] = useState<Channel | undefined>(undefined);
   const [session, setSession] = useSessionContext();
   const node = useIPFSNode(
-    process.env.NEXT_PUBLIC_IPFS_BOOTSTRAP_NODES?.split(',').filter(Boolean)
+    process.env.NEXT_PUBLIC_BOOTSTRAP_NODES?.split(',').filter(Boolean)
   );
 
   const HeaderMarkup = (

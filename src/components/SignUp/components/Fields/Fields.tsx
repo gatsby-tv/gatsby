@@ -32,7 +32,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
         .then((resp) => resp.json())
         .then((resp) => setSession((resp as { token: string }).token));
     },
-    [code]
+    [code, setSession]
   );
 
   if (loading) {

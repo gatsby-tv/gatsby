@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 import { Icon, Snack } from '@gatsby-tv/components';
 import { Checkmark, Cancel } from '@gatsby-tv/icons';

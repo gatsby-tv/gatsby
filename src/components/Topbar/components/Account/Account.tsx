@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Icon, Button, Rule, Menu } from '@gatsby-tv/components';
+import { Avatar, Button, Rule, Menu } from '@gatsby-tv/components';
 import { User as UserIcon, Exit } from '@gatsby-tv/icons';
 import { useMenu, useModal } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';

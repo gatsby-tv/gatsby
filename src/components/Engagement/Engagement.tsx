@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon } from '@gatsby-tv/components';
+import { Button } from '@gatsby-tv/components';
 import { IconSource } from '@gatsby-tv/components/dist/types';
 import {
   Subscribe,

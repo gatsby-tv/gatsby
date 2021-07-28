@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button, Form } from '@gatsby-tv/components';
 import { Filters, useUniqueId, useSnackBar } from '@gatsby-tv/utilities';
 import { User, PutUserResponse } from '@gatsby-tv/types';
@@ -33,7 +33,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
 
       setSnack({ content: promise, duration: 2000 });
     },
-    [user, token]
+    [user, token, setSnack]
   );
 
   return (

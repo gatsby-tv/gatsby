@@ -13,7 +13,7 @@ export default function SubscriptionsPage(): React.ReactElement {
   
   useEffect(() => {
     if (!user) router.push('/');
-  }, [user]);
+  }, [user, router]);
 
   return (
     <Page title="Subscriptions">

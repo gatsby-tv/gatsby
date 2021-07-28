@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { Class } from '@gatsby-tv/utilities';
 
-import { Loading, LoadingProps } from './components/Loading';
+import { Loading } from './components/Loading';
 
 import styles from './Page.module.scss';
 
@@ -12,8 +12,6 @@ export interface PageProps {
   title?: string;
   margin?: boolean;
 }
-
-export type { LoadingProps as PageLoadingProps };
 
 export function Page(props: PageProps): React.ReactElement {
   const { children, className, title, margin = true } = props;

@@ -1,12 +1,8 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useVideo } from '@gatsby-tv/content';
 import Player from '@gatsby-tv/player';
-import {
-  useScroll,
-  useFrame,
-  useIPFSVideoStream,
-} from '@gatsby-tv/utilities';
+import { useScroll, useFrame, useIPFSVideoStream } from '@gatsby-tv/utilities';
 
 import { Page } from '@src/components/Page';
 import { Video } from '@src/components/Video';
@@ -21,13 +17,13 @@ export default function VideoPage(): React.ReactElement {
   useEffect(() => {
     setSidebar(false);
     setScroll(0);
-  }, []);
+  }, [setSidebar, setScroll]);
 
   useEffect(() => {
     if (fullscreen) setScroll(0);
-  }, [fullscreen]);
+  }, [fullscreen, setScroll]);
 
-  useEffect(() => setTopbar(!fullscreen), [fullscreen]);
+  useEffect(() => setTopbar(!fullscreen), [fullscreen, setTopbar]);
 
   return (
     <Page margin={false} title={video ? `${video.title} - Gatsby` : undefined}>

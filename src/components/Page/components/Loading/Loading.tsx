@@ -4,9 +4,7 @@ import { Spinner } from '@gatsby-tv/icons';
 
 import styles from '../../Page.module.scss';
 
-export type LoadingProps = {};
-
-export function Loading(props: LoadingProps): React.ReactElement {
+export function Loading(): React.ReactElement {
   return (
     <Injection target="$foreground">
       <div className={styles.Loading}>

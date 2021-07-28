@@ -23,12 +23,12 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
+    "@babel/core": "^7.14.8",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-private-methods": "^7.12.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.12.1",
     "@babel/plugin-transform-object-assign": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.12.1",
     "@gatsby-tv/components": "workspace:packages/components",
@@ -50,7 +50,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
-    "autoprefixer": "^10.2.5",
+    "autoprefixer": "^10.3.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "css-loader": "^5.2.2",
@@ -68,11 +68,11 @@
     "rollup": "^2.45.2",
     "rollup-plugin-postcss": "^4.0.0",
     "sass": "^1.32.8",
-    "sass-loader": "^10.1.0",
+    "sass-loader": "^12.1.0",
     "style-loader": "^2.0.0",
     "tscpaths": "^0.0.9",
-    "typescript": "^4.0.5",
-    "webpack": "^5.21.2"
+    "typescript": "^4.3.5",
+    "webpack": "^5.47.0"
   },
   "dependencies": {
     "core-js": "^3.7.0"

@@ -51,9 +51,11 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files
+# Environment files
 .env*
 !.env
+!.env.development
+!.env.production
 
 # Mac files
 .DS_Store

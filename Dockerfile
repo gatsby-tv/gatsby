@@ -16,24 +16,25 @@ FROM node:alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app .
-RUN yarn export
+RUN yarn build
 
-FROM nginx:alpine
+FROM node:alpine
+WORKDIR /app
+ENV NODE_ENV production
 
-# Remove default site
-RUN rm -rf /usr/share/nginx/html/*
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
 
-# Copy over prod react nextjs build
-COPY --from=builder /app/out /usr/share/nginx/html
+COPY --from=packages /app .
+COPY --from=builder /app/.yarn .yarn
+COPY --from=builder /app/.pnp.cjs .
+COPY --from=builder /app/next.config.js .
+COPY --from=builder /app/public public
+COPY --from=builder /app/server.js .
+COPY --from=builder --chown=nextjs:nodejs /app/.next .next
 
-# Handle NGINX environment variable templating with envsubst
-# The entrypoint script will fill this template and copy the configuration to NGINX
-COPY nginx.conf /etc/nginx/nginx.conf.template
-COPY docker-entrypoint.sh /usr/bin
-
-RUN chmod +x /usr/bin/docker-entrypoint.sh
+USER nextjs
 
 EXPOSE 3000
 
-ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["yarn", "start"]

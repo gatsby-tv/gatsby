@@ -31,7 +31,7 @@ export function Info(props: InfoProps): React.ReactElement {
     <Video.Credits content={video} />
   );
 
-  const CreditsInjectionMarkup = Boolean(CreditsMarkup) ? (
+  const CreditsInjectionMarkup = CreditsMarkup ? (
     <Injection target={compact ? credits.compact : credits.full}>
       {CreditsMarkup}
     </Injection>

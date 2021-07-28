@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import { PostAuthPersistSignInKeyResponse } from '@gatsby-tv/types';
@@ -15,11 +15,11 @@ export default function SignUpPage(): React.ReactElement {
 
   useEffect(() => {
     router.prefetch('/');
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (valid) router.push('/');
-  }, [valid]);
+  }, [valid, router]);
 
   useEffect(() => {
     if (!key) return;

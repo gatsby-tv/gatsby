@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, '..');
 module.exports = {
   root,
   run: (command) => execSync(command, { stdio: 'inherit', cwd: root }),
-  silent: (command) => execSync(`yarn run ${command}`, { cwd: root }),
+  silent: (command) => execSync(command, { cwd: root }),
   parallel: (...commands) =>
     execSync(
       `yarn run concurrently ${commands

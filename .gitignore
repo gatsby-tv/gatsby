@@ -63,7 +63,7 @@ typings/
 # Yarn
 yarn-error.log
 .pnp/
-.pnp.js
+.pnp.cjs
 .yarn/*
 !.yarn/releases
 !.yarn/plugins

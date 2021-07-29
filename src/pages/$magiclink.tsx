@@ -16,7 +16,7 @@ export default function MagicLinkPage(): React.ReactElement {
   }, []);
 
   useEffect(() => {
-    if (!key) return;
+    if (!key || session.valid) return;
 
     if (exists === 'true') {
       fetcher<GetAuthSignInKeyResponse>(`/auth/signin/${key}`)
@@ -28,7 +28,7 @@ export default function MagicLinkPage(): React.ReactElement {
         query: { key },
       });
     }
-  }, [key, exists]);
+  }, [key, exists, session.valid]);
 
   useEffect(() => {
     if (session.valid) router.push('/');

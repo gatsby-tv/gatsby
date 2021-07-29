@@ -18,7 +18,7 @@ export default function MagicLinkPage(): React.ReactElement {
   useEffect(() => {
     if (!key) return;
 
-    if (+exists) {
+    if (exists === 'true') {
       fetcher<GetAuthSignInKeyResponse>(`/auth/signin/${key}`)
         .then((resp) => resp.json())
         .then((resp) => setSession((resp as { token: string }).token));

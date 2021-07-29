@@ -13,7 +13,7 @@ export default function MagicLinkPage(): React.ReactElement {
 
   useEffect(() => {
     router.prefetch('/$signup');
-  }, [router]);
+  }, []);
 
   useEffect(() => {
     if (!key) return;
@@ -28,11 +28,11 @@ export default function MagicLinkPage(): React.ReactElement {
         query: { key },
       });
     }
-  }, [key, exists, router, setSession]);
+  }, [key, exists]);
 
   useEffect(() => {
     if (session.valid) router.push('/');
-  }, [session.valid, router]);
+  }, [session.valid]);
 
   return (
     <Page title="Signing in to Gatsby">

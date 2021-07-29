@@ -33,7 +33,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
 
       setSnack({ content: promise, duration: 2000 });
     },
-    [user, token, setSnack]
+    [user, token]
   );
 
   return (

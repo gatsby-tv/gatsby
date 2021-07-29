@@ -130,7 +130,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
     ).then(Response({ success: 'Avatar updated' }));
 
     setSnack({ content: promise, duration: 2000 });
-  }, [user, token, avatar, setSnack]);
+  }, [user, token, avatar]);
 
   const onExit = useCallback(() => setFile(null), []);
 

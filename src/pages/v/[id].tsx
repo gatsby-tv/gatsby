@@ -17,13 +17,13 @@ export default function VideoPage(): React.ReactElement {
   useEffect(() => {
     setSidebar(false);
     setScroll(0);
-  }, [setSidebar, setScroll]);
+  }, [setSidebar]);
 
   useEffect(() => {
     if (fullscreen) setScroll(0);
-  }, [fullscreen, setScroll]);
+  }, [fullscreen]);
 
-  useEffect(() => setTopbar(!fullscreen), [fullscreen, setTopbar]);
+  useEffect(() => setTopbar(!fullscreen), [fullscreen]);
 
   return (
     <Page margin={false} title={video ? `${video.title} - Gatsby` : undefined}>

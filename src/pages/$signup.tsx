@@ -15,11 +15,11 @@ export default function SignUpPage(): React.ReactElement {
 
   useEffect(() => {
     router.prefetch('/');
-  }, [router]);
+  }, []);
 
   useEffect(() => {
     if (valid) router.push('/');
-  }, [valid, router]);
+  }, [valid]);
 
   useEffect(() => {
     if (!key) return;

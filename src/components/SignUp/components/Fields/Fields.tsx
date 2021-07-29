@@ -27,7 +27,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
       setLoading(true);
       fetcher<PostAuthCompleteSignUpResponse>(`/user`, undefined, {
         method: 'POST',
-        body: { code, ...form },
+        body: { key: code, ...form },
       })
         .then((resp) => resp.json())
         .then((resp) => setSession((resp as { token: string }).token));

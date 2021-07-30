@@ -15,6 +15,7 @@ import {
   useResizeObserver,
   Validators,
   FormSelectContext,
+  FormChangeHandler,
 } from '@gatsby-tv/utilities';
 
 import { Button } from '@lib/components/Button';
@@ -86,7 +87,7 @@ export interface SelectProps
   placeholder?: string;
   searchable?: boolean;
   clearable?: boolean;
-  onChange?: (value: string, id?: string) => void;
+  onChange?: FormChangeHandler;
 }
 
 export function Select(props: SelectProps): React.ReactElement {
@@ -235,8 +236,8 @@ export function Select(props: SelectProps): React.ReactElement {
       ? Validators.required('Field is required')
       : undefined;
 
-    setValue(id, state.selection);
-    setError(id, validator?.(id, [state.selection].flat().join('')));
+    setValue(state.selection, id);
+    setError(validator?.([state.selection].flat().join(''), id), id);
     onChangeHandler?.(state.selection, id);
   }, [id, state.selection, onChangeHandler]);
 

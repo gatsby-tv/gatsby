@@ -1,5 +1,6 @@
 import {
   useContext,
+  useRef,
   useEffect,
   useReducer,
   useCallback,
@@ -26,7 +27,14 @@ export type SessionAction =
   | { type: 'reject' };
 
 export function useSessionContext(): SessionContextType {
-  const [state, dispatch] = useReducer(
+  const state = useRef<SessionState>({
+    user: undefined,
+    token: undefined,
+    loading: true,
+    valid: false,
+  });
+
+  const [session, dispatch] = useReducer(
     (state: SessionState, action: SessionAction) => {
       switch (action.type) {
         case 'submit':
@@ -77,13 +85,7 @@ export function useSessionContext(): SessionContextType {
     }
   );
 
-  const setSession = useCallback(
-    (value) => {
-      const token = typeof value === 'function' ? value(state) : value;
-      dispatch({ type: 'submit', token });
-    },
-    [state]
-  );
+  useEffect(() => void (state.current = session), [session]);
 
   useEffect(() => {
     const token = window.localStorage.getItem('session') ?? undefined;
@@ -91,8 +93,29 @@ export function useSessionContext(): SessionContextType {
   }, []);
 
   useEffect(() => {
-    if (state.token) {
-      fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', state.token)
+    if (!session.token) return
+
+    fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', session.token)
+      .then((resp) => resp.json())
+      .then((resp) =>
+        dispatch({
+          type: 'accept',
+          token: (resp as { token: string }).token,
+        })
+      )
+      .catch(() => dispatch({ type: 'reject' }));
+  }, [session.token]);
+
+  const setSession = useCallback((value) => {
+    const token = typeof value === 'function' ? value(state.current) : value;
+    dispatch({ type: 'submit', token });
+  }, []);
+
+  const mutate = useCallback(
+    (value) => {
+      if (!state.current.token) return value;
+
+      fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', state.current.token)
         .then((resp) => resp.json())
         .then((resp) =>
           dispatch({
@@ -101,10 +124,13 @@ export function useSessionContext(): SessionContextType {
           })
         )
         .catch(() => dispatch({ type: 'reject' }));
-    }
-  }, [state.token]);
 
-  return [state, setSession];
+      return value;
+    },
+    []
+  );
+
+  return { session, setSession, mutate };
 }
 
 export function useSession(): SessionContextType {

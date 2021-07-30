@@ -7,6 +7,7 @@ import {
   useFormLabel,
   Validator,
   FormError,
+  FormChangeHandler,
 } from '@gatsby-tv/utilities';
 
 import { Icon } from '@lib/components/Icon';
@@ -49,7 +50,7 @@ export interface FieldProps
   suffix?: React.ReactNode;
   autoComplete?: boolean;
   validators?: Validator[];
-  onChange?: (value: string, id?: string) => void;
+  onChange?: FormChangeHandler;
 }
 
 export function Field(props: FieldProps): React.ReactElement {
@@ -98,7 +99,7 @@ export function Field(props: FieldProps): React.ReactElement {
     Promise.race([promise, cancel])
       .then((error) => {
         setInvalid(Boolean(error));
-        setError(id, error as FormError | undefined);
+        setError(error as FormError | undefined, id);
       })
       .catch(() => undefined);
   }, [id, promise]);
@@ -114,7 +115,7 @@ export function Field(props: FieldProps): React.ReactElement {
 
   useEffect(() => {
     if (!validators) return;
-    const results = validators.map((validator) => validator(id, value));
+    const results = validators.map((validator) => validator(value, id));
 
     const promises = results.filter((result) => result instanceof Promise);
     const promise = promises.find(Boolean) && Promise.race(promises);
@@ -123,10 +124,10 @@ export function Field(props: FieldProps): React.ReactElement {
       .filter((result) => result instanceof FormError)
       .find(Boolean);
 
-    setError(id, error ?? promise);
+    setError(error ?? promise, id);
   }, [id, value, JSON.stringify(validators)]);
 
-  useEffect(() => setValue(id, value), [id, value]);
+  useEffect(() => setValue(value, id), [id, value]);
 
   useEffect(() => {
     if (promise) {

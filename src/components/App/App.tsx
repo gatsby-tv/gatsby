@@ -23,7 +23,7 @@ export function App<T>(props: AppProps<T>): React.ReactElement {
   const { page: Page, $props } = props;
   const router = useRouter();
   const clear = useModalClear();
-  const [session] = useSession();
+  const { session } = useSession();
   const [channel, setChannel] = useChannelModal();
   const [spinner, setSpinner] = useState(false);
   const loading = !session.valid && session.loading;

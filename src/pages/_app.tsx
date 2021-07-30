@@ -21,8 +21,8 @@ export default function AppPage({
   Component,
   pageProps,
 }: AppProps): React.ReactElement {
-  const [channel, setChannel] = useState<Channel | undefined>(undefined);
-  const [session, setSession] = useSessionContext();
+  const channel = useState<Channel | undefined>(undefined);
+  const session = useSessionContext();
   const node = useIPFSNode(
     process.env.NEXT_PUBLIC_BOOTSTRAP_NODES?.split(',').filter(Boolean)
   );
@@ -42,8 +42,8 @@ export default function AppPage({
         }}
       >
         <IPFSContext.Provider value={node}>
-          <ChannelModalContext.Provider value={[channel, setChannel]}>
-            <SessionContext.Provider value={[session, setSession]}>
+          <ChannelModalContext.Provider value={channel}>
+            <SessionContext.Provider value={session}>
               {HeaderMarkup}
               <App page={Component} $props={pageProps} />
             </SessionContext.Provider>

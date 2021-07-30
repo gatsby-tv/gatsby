@@ -6,9 +6,5 @@ export interface EventHandler {
 }
 
 export interface Validator {
-  (id: string, value: string): FormErrorState;
-}
-
-export interface Filter {
-  (key: string, value: unknown): boolean;
+  (value: string, id: string): FormErrorState;
 }

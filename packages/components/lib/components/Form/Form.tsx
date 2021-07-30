@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import {
   useOptionalForm,
-  Filter,
   FormContext,
   FormError,
   FormErrorState,
@@ -31,36 +30,41 @@ export type {
 
 export type FormProps = Omit<
   React.FormHTMLAttributes<HTMLElement>,
-  'id' | 'onSubmit'
+  'id' | 'onSubmit' | 'onError'
 > & {
   id: string;
-  filters?: Filter[];
   onSubmit?: (values: Record<string, any>, id?: string) => void;
+  onError?: (error: FormError | undefined, id?: string) => void;
 };
 
 export function Form(props: FormProps): React.ReactElement {
-  const { id, filters = [], onSubmit: onSubmitHandler, ...rest } = props;
+  const {
+    id,
+    onSubmit: onSubmitHandler,
+    onError: onErrorHandler,
+    ...rest
+  } = props;
   const parent = useOptionalForm();
 
   const [values, setValues] = useState<Record<string, unknown>>({});
   const [errors, setErrors] = useState<Record<string, FormErrorState>>({});
 
-  useEffect(() => parent?.setValue(id, values), [id, values]);
+  useEffect(() => parent?.setValue(values, id), [id, values]);
   useEffect(() => {
-    if (!parent) return;
+    const promise = Object.values(errors)
+      .filter((error) => error instanceof Promise)
+      .find(Boolean) as Promise<FormError | undefined>;
 
-    const promises = Object.values(errors).filter(
-      (error) => error instanceof Promise
-    );
-    const other = Object.values(errors).filter(
-      (error) => error instanceof FormError
-    );
+    const error = Object.values(errors)
+      .filter((error) => error instanceof FormError)
+      .find(Boolean) as FormError;
 
-    parent.setError(id, other.find(Boolean) ?? promises.find(Boolean));
+    parent?.setError(error ?? promise, id);
+    onErrorHandler?.(error, id);
   }, [id, errors]);
 
   const setValue = useCallback(
-    (id: string, value: unknown) =>
+    (value: unknown, id: string) =>
       setValues((current) => ({
         ...current,
         [id]: value,
@@ -69,7 +73,7 @@ export function Form(props: FormProps): React.ReactElement {
   );
 
   const setError = useCallback(
-    (id: string, error: FormErrorState) =>
+    (error: FormErrorState, id: string) =>
       setErrors((current) => ({
         ...current,
         [id]: error,
@@ -80,18 +84,10 @@ export function Form(props: FormProps): React.ReactElement {
   const onSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      if (!Object.values(errors).some(Boolean)) {
-        const update = filters.reduce(
-          (acc, current) =>
-            Object.fromEntries(
-              Object.entries(acc).filter(([key, value]) => current(key, value))
-            ),
-          values
-        );
-        onSubmitHandler?.(update, id);
-      }
+      if (Object.values(errors).some(Boolean)) return;
+      onSubmitHandler?.(values, id);
     },
-    [id, values, errors, filters]
+    [id, values, errors]
   );
 
   const context = {

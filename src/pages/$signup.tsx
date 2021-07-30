@@ -11,15 +11,15 @@ import { fetcher } from '@src/utilities/fetcher';
 export default function SignUpPage(): React.ReactElement {
   const router = useRouter();
   const { key } = router.query as Record<string, string | undefined>;
-  const [{ valid }] = useSession();
+  const { session } = useSession();
 
   useEffect(() => {
     router.prefetch('/');
   }, []);
 
   useEffect(() => {
-    if (valid) router.push('/');
-  }, [valid]);
+    if (session.valid) router.push('/');
+  }, [session.valid]);
 
   useEffect(() => {
     if (!key) return;

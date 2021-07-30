@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { usePopper } from 'react-popper';
-import { Class, ifExists, useForm } from '@gatsby-tv/utilities';
+import { Class, ifExists, useForm, FormChangeHandler } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
 import { Option } from '@lib/types';
@@ -39,7 +39,7 @@ export interface SliderProps
   value: number;
   stops?: Option<number>[];
   hideLabels?: boolean;
-  onChange?: (value: number, id?: string) => void;
+  onChange?: FormChangeHandler<number>;
 }
 
 export function Slider(props: SliderProps): React.ReactElement {
@@ -96,7 +96,7 @@ export function Slider(props: SliderProps): React.ReactElement {
 
   useEffect(() => {
     const value = Math.round(position * (max - min) + min);
-    setValue(id, value);
+    setValue(value, id);
     onChange?.(value, id);
   }, [position, id, max, min, onChange]);
 

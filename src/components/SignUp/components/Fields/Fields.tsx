@@ -17,7 +17,7 @@ export interface FieldsProps {
 export function Fields(props: FieldsProps): React.ReactElement {
   const { code } = props;
   const id = useUniqueId('signup');
-  const [, setSession] = useSession();
+  const { setSession } = useSession();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
   const [handle, setHandle] = useState('');
@@ -60,7 +60,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
             onChange={setName}
             validators={[
               Validators.required('Display name is required'),
-              ...isDisplayName(),
+              ...isDisplayName,
             ]}
           />
         </Form.Label>
@@ -74,7 +74,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
             onChange={setHandle}
             validators={[
               Validators.required('Handle is required'),
-              ...isHandle(),
+              ...isHandle,
             ]}
           />
         </Form.Label>

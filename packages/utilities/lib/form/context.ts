@@ -7,11 +7,15 @@ export type FormErrorState =
   | Promise<FormError | undefined>
   | undefined;
 
+export type FormChangeHandler<T = string> =
+  | ((value: T, id: string) => void)
+  | ((value: T) => void);
+
 export interface FormContextType {
   values: Record<string, unknown>;
-  setValue: (id: string, value: unknown) => void;
+  setValue: (value: unknown, id: string) => void;
   errors: Record<string, FormErrorState>;
-  setError: (id: string, error: FormErrorState) => void;
+  setError: (error: FormErrorState, id: string) => void;
 }
 
 export interface FormSelectContextType {

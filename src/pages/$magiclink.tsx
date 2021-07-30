@@ -9,7 +9,7 @@ import { useSession } from '@src/utilities/session';
 export default function MagicLinkPage(): React.ReactElement {
   const router = useRouter();
   const { key = '', exists = '' } = router.query;
-  const [session, setSession] = useSession();
+  const { session, setSession } = useSession();
 
   useEffect(() => {
     router.prefetch('/$signup');

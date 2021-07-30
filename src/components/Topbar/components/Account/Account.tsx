@@ -12,7 +12,7 @@ import { Skeleton } from './Account.skeleton';
 import styles from './Account.module.scss';
 
 export function Account(): React.ReactElement {
-  const [session, setSession] = useSession();
+  const { session, setSession } = useSession();
   const menu = useMenu<HTMLButtonElement>();
   const modal = useModal();
   const user = session?.user as User | undefined;

@@ -2,10 +2,14 @@ export type JsonResponse<T> = Omit<Response, 'json'> & {
   json: () => Promise<T>;
 };
 
+export type RequestOptions = Omit<RequestInit, 'body'> & {
+  body?: Record<string, unknown> | FormData;
+};
+
 export function fetcher<T = any>(
   endpoint: string,
   token?: string,
-  options: RequestInit = {}
+  options: RequestOptions = {}
 ): Promise<JsonResponse<T>> {
   const westegg = process.env.NEXT_PUBLIC_WESTEGG_VERSION
     ? `${process.env.NEXT_PUBLIC_WESTEGG_URL}/${process.env.NEXT_PUBLIC_WESTEGG_VERSION}`

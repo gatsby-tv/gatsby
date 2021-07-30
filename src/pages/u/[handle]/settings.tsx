@@ -7,14 +7,14 @@ import { useSession } from '@src/utilities/session';
 
 export default function UserSettings(): React.ReactElement {
   const router = useRouter();
-  const [{ user, token, valid }] = useSession();
+  const { session } = useSession();
 
-  if (!token) {
+  if (!session.token) {
     router.push('/');
     return <Page title="Settings" />;
   }
 
-  if (!user || !valid) {
+  if (!session.user || !session.valid) {
     return (
       <Page title="Settings">
         <Page.Loading />
@@ -26,10 +26,10 @@ export default function UserSettings(): React.ReactElement {
     <Page title="Settings">
       <Settings.Layout>
         <Settings.Header>
-          <Settings.Avatar user={user} token={token} />
-          <Settings.Info user={user} />
+          <Settings.Avatar user={session.user} token={session.token} />
+          <Settings.Info user={session.user} />
         </Settings.Header>
-        <Settings.Fields user={user} token={token} />
+        <Settings.Fields user={session.user} token={session.token} />
       </Settings.Layout>
     </Page>
   );

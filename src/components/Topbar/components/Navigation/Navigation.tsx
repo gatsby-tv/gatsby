@@ -22,7 +22,7 @@ function getCurrentTab(route: string): string | undefined {
 
 export function Navigation(): React.ReactElement {
   const { screen } = useFrame();
-  const [session] = useSession();
+  const { session } = useSession();
   const router = useRouter();
   const defaultTab = getCurrentTab(router.pathname);
   const menu = useMenu<HTMLButtonElement>();

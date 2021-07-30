@@ -1,5 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
-import { ifExists, useForm, Validators } from '@gatsby-tv/utilities';
+import React, { useMemo, useCallback, useEffect } from 'react';
+import {
+  ifExists,
+  useForm,
+  Validators,
+  Validator,
+  FormChangeHandler,
+} from '@gatsby-tv/utilities';
 
 import { Button, ButtonProps } from '@lib/components/Button';
 
@@ -12,6 +18,7 @@ export interface FileProps
       | 'disabled'
       | 'form'
       | 'name'
+      | 'accept'
       | 'readOnly'
       | 'required'
       | Exclude<keyof React.HTMLAttributes<HTMLElement>, 'onChange'>
@@ -19,7 +26,7 @@ export interface FileProps
     Pick<ButtonProps, 'unstyled' | 'animate' | 'tooltip' | 'icon' | 'size'> {
   id: string;
   value: File | null;
-  onChange?: (value: File | null, id?: string) => void;
+  onChange?: FormChangeHandler<File | null>;
 }
 
 export function File(props: FileProps): React.ReactElement {
@@ -35,18 +42,34 @@ export function File(props: FileProps): React.ReactElement {
     size,
     required,
     value,
+    accept,
     ...rest
   } = props;
   const { errors, setValue, setError } = useForm();
 
-  useEffect(() => {
-    const validator = required
-      ? Validators.required('File is required')
-      : undefined;
+  const validators = useMemo(
+    () =>
+      [
+        required && Validators.required('File is required'),
+        accept &&
+          Validators.matches(
+            accept.split(',').map((value) => value.trim()),
+            'Unsupported file type'
+          ),
+      ].filter(Boolean) as Validator[],
+    [required, accept]
+  );
 
-    setValue(id, value);
-    setError(id, validator?.(id, value ? JSON.stringify(value) : ''));
-  }, [id, value, required]);
+  useEffect(() => {
+    const filetype = value ? value.type || 'application/octet-stream' : '';
+    const error = validators
+      .map((validator) => validator(filetype, id))
+      .find(Boolean);
+
+    setError(error, id);
+  }, [id, value, validators]);
+
+  useEffect(() => setValue(value, id), [id, value]);
 
   const onChange = useCallback(
     (event: any) => {
@@ -62,6 +85,7 @@ export function File(props: FileProps): React.ReactElement {
         className={styles.VisuallyHidden}
         type="file"
         required={required}
+        accept={accept}
         onChange={onChange}
         {...rest}
       />

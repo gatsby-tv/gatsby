@@ -7,19 +7,19 @@ import { Subscriptions } from '@src/components/Directory';
 import { useSession } from '@src/utilities/session';
 
 export default function SubscriptionsPage(): React.ReactElement {
-  const [{ user }] = useSession();
+  const { session } = useSession();
   const router = useRouter();
   const label = useUniqueId('heading');
   
   useEffect(() => {
-    if (!user) router.push('/');
-  }, [user]);
+    if (!session.user) router.push('/');
+  }, [session.user]);
 
   return (
     <Page title="Subscriptions">
       <Subscriptions.Layout>
         <Subscriptions.Heading id={label} />
-        <Subscriptions.Content label={label} user={user} />
+        <Subscriptions.Content label={label} user={session.user} />
       </Subscriptions.Layout>
     </Page>
   );

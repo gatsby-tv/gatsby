@@ -13,10 +13,12 @@ import {
   Class,
   useUniqueId,
   useSnackBar,
+  FormError,
 } from '@gatsby-tv/utilities';
 import { User, PutUserAvatarResponse } from '@gatsby-tv/types';
 
 import { Response } from '@src/components/Response';
+import { Snack } from '@src/components/Snack';
 import { fetcher } from '@src/utilities/fetcher';
 
 import styles from './Avatar.module.scss';
@@ -59,6 +61,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
   const id = useUniqueId('avatar');
   const element = useRef<HTMLImageElement>();
   const [, setSnack] = useSnackBar();
+  const [error, setError] = useState<FormError | undefined>(undefined);
   const [file, setFile] = useState<File | null>(null);
   const [image, setImage] = useState('');
   const [avatar, setAvatar] = useState<Blob | null>(null);
@@ -87,6 +90,14 @@ export function Avatar(props: AvatarProps): React.ReactElement {
       file.type
     ).then(setAvatar);
   }, [completed, file]);
+
+  useEffect(() => {
+    if (!error) return;
+    setSnack({
+      content: <Snack.Reject message={error.message} />,
+      duration: 2000,
+    });
+  }, [error]);
 
   const onLoad = useCallback(
     (image: HTMLImageElement) => {
@@ -143,13 +154,14 @@ export function Avatar(props: AvatarProps): React.ReactElement {
   const CropMarkup = (
     <Modal
       className={styles.Modal}
-      active={Boolean(file)}
+      active={!error && Boolean(file)}
       overlay
       onExit={onExit}
     >
       {LoadingMarkup}
       <ReactCrop
         className={styles.Image}
+        imageStyle={{ maxHeight: '50vh' }}
         src={image}
         crop={crop}
         circularCrop
@@ -161,6 +173,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
       <div className={styles.Controls}>
         <Button
           className={Class(styles.Button, styles.Submit)}
+          type="submit"
           onClick={onSubmit}
         >
           Submit
@@ -192,8 +205,13 @@ export function Avatar(props: AvatarProps): React.ReactElement {
 
   return (
     <>
-      <Form id={id}>
-        <Form.File id="avatar" value={file} onChange={setFile}>
+      <Form id={id} onError={setError}>
+        <Form.File
+          id="avatar"
+          value={file}
+          accept="image/png,image/jpeg,image/webp,image/gif"
+          onChange={setFile}
+        >
           <Image
             className={styles.Avatar}
             src={user.avatar}

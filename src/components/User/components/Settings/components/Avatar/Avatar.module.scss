@@ -49,8 +49,8 @@
 
 .Modal {
   @include border-radius(small);
-  width: rem(560px);
   max-width: 100%;
+  max-height: 70vh;
   background-color: palette(surface, 4);
   padding: spacing(3);
 }

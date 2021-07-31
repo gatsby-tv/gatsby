@@ -50,8 +50,8 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const [signal, setSignal] = useSignal();
     const mounted = useComponentWillMount();
 
-    const setPlaybackAndSignal: Dispatch<SetStateAction<boolean>> = useCallback(
-      (value) =>
+    const setPlaybackAndSignal = useCallback(
+      (value: SetStateAction<boolean>) =>
         setPlayback((current) => {
           const playback = typeof value === 'function' ? value(current) : value;
           if (playback) {

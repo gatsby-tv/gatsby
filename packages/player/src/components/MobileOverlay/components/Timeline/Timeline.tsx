@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { usePopper } from 'react-popper';
 import { Activatable } from '@gatsby-tv/components';
 import { Class, Time, ifExists } from '@gatsby-tv/utilities';

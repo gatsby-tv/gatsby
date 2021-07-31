@@ -82,7 +82,7 @@ export function Form(props: FormProps): React.ReactElement {
   );
 
   const onSubmit = useCallback(
-    (event) => {
+    (event: any) => {
       event.preventDefault();
       if (Object.values(errors).some(Boolean)) return;
       onSubmitHandler?.(values, id);

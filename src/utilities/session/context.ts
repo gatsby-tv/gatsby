@@ -9,7 +9,7 @@ export type SessionContextType = {
     valid: boolean;
   },
   setSession: Dispatch<SetStateAction<string | undefined>>,
-  mutate: (value?: any) => any,
+  mutate: <T> (value?: T) => T,
 };
 
 export const SessionContext = createContext<SessionContextType | undefined>(

@@ -18,7 +18,7 @@ export function useVolatileKey(initial?: any): any {
   });
 
   const dispatch = useCallback(
-    (value) =>
+    (value: SetStateAction<string | undefined>) =>
       setValue((current) => {
         const update =
           typeof value === 'function'

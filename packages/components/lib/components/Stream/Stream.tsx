@@ -20,7 +20,7 @@ export function Stream<T>(props: StreamProps<T>): React.ReactElement {
   const [waiting, setWaiting] = useState(false);
 
   const onScroll = useCallback(
-    (event) => {
+    (event: any) => {
       const target = event.currentTarget;
       if (
         !loading &&

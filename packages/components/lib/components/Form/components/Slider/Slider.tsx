@@ -1,6 +1,17 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  SetStateAction,
+} from 'react';
 import { usePopper } from 'react-popper';
-import { Class, ifExists, useForm, FormChangeHandler } from '@gatsby-tv/utilities';
+import {
+  Class,
+  ifExists,
+  useForm,
+  FormChangeHandler,
+} from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
 import { Option } from '@lib/types';
@@ -101,7 +112,7 @@ export function Slider(props: SliderProps): React.ReactElement {
   }, [position, id, max, min, onChange]);
 
   const setPosition = useCallback(
-    (value) =>
+    (value: SetStateAction<number>) =>
       setPositionBase((current) => {
         const position = typeof value === 'function' ? value(current) : value;
         const denormalized = position * (max - min) + min;

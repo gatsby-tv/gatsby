@@ -1,4 +1,10 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  SetStateAction,
+} from 'react';
 import {
   FrameContext,
   useResizeObserver,
@@ -36,7 +42,7 @@ export function Frame(props: FrameProps): React.ReactElement {
   );
 
   const setTopbar = useCallback(
-    (value: boolean | ((current: boolean) => boolean)) =>
+    (value: SetStateAction<boolean>) =>
       setTopbarBase((current: boolean) => {
         if (!topframe.current) return false;
         return typeof value === 'function' ? value(current) : value;
@@ -45,7 +51,7 @@ export function Frame(props: FrameProps): React.ReactElement {
   );
 
   const setSidebar = useCallback(
-    (value: boolean | ((current: boolean) => boolean)) =>
+    (value: SetStateAction<boolean>) =>
       setSidebarBase((current: boolean) => {
         if (!sideframe.current) return false;
         return typeof value === 'function' ? value(current) : value;

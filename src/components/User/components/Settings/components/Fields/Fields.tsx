@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Button, Form } from '@gatsby-tv/components';
 import {
   useUniqueId,

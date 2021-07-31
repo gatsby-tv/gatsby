@@ -18,17 +18,18 @@ export function useInjectionContext(): InjectionContextType {
   );
 
   const addTarget = useCallback(
-    (id, ref) => setTargets((current) => ({ ...current, [id]: ref })),
+    (id: string, ref: HTMLElement | null) =>
+      setTargets((current) => ({ ...current, [id]: ref })),
     []
   );
 
   const removeTarget = useCallback(
-    (id) => setTargets((current) => ({ ...current, [id]: undefined })),
+    (id: string) => setTargets((current) => ({ ...current, [id]: null })),
     []
   );
 
   const addInjection = useCallback(
-    (id) =>
+    (id: string) =>
       setInjections((current) => ({
         ...current,
         [id]: (current[id] ?? 0) + 1,
@@ -37,7 +38,7 @@ export function useInjectionContext(): InjectionContextType {
   );
 
   const removeInjection = useCallback(
-    (id) =>
+    (id: string) =>
       setInjections((current) => ({
         ...current,
         [id]: Math.max((current[id] ?? 0) - 1, 0),

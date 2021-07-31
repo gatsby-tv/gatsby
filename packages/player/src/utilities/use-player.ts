@@ -241,7 +241,7 @@ export function usePlayer(
     }
   );
 
-  const setActive: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
+  const setActive = useCallback((value: SetStateAction<boolean>) => {
     const update = typeof value === 'function' ? value(active.current) : value;
     if (update) {
       dispatch({ type: 'activate' });
@@ -250,7 +250,7 @@ export function usePlayer(
     }
   }, []);
 
-  const setPinned: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
+  const setPinned = useCallback((value: SetStateAction<boolean>) => {
     const update = typeof value === 'function' ? value(pinned.current) : value;
     if (update) {
       dispatch({ type: 'pin' });
@@ -259,22 +259,19 @@ export function usePlayer(
     }
   }, []);
 
-  const setPlayback: Dispatch<SetStateAction<boolean>> = useCallback(
-    (value) => {
-      if (!video.current) return;
-      const playback =
-        typeof value === 'function' ? value(playing.current) : value;
-      if (playback === playing.current) return;
-      if (playing.current) {
-        video.current.pause();
-      } else {
-        video.current.play();
-      }
-    },
-    []
-  );
+  const setPlayback = useCallback((value: SetStateAction<boolean>) => {
+    if (!video.current) return;
+    const playback =
+      typeof value === 'function' ? value(playing.current) : value;
+    if (playback === playing.current) return;
+    if (playing.current) {
+      video.current.pause();
+    } else {
+      video.current.play();
+    }
+  }, []);
 
-  const setVolume: Dispatch<SetStateAction<number>> = useCallback((value) => {
+  const setVolume = useCallback((value: SetStateAction<number>) => {
     if (!video.current) return;
     const current = video.current.volume;
     const volume =
@@ -286,7 +283,7 @@ export function usePlayer(
     setMuted(!Boolean(volume));
   }, []);
 
-  const setMuted: Dispatch<SetStateAction<boolean>> = useCallback((value) => {
+  const setMuted = useCallback((value: SetStateAction<boolean>) => {
     if (!video.current) return;
     const current = video.current.muted;
     const update = typeof value === 'function' ? value(current) : value;
@@ -296,7 +293,7 @@ export function usePlayer(
     }
   }, []);
 
-  const setSeek: Dispatch<SetStateAction<number>> = useCallback((value) => {
+  const setSeek = useCallback((value: SetStateAction<number>) => {
     if (!video.current) return;
     const current = video.current.currentTime;
     const duration = video.current.duration;

@@ -41,7 +41,7 @@ export function useIPFSNode(bootstrap: string[] = []): IPFSContextType {
         const info = await ipfs.id();
         console.log(`IPFS node ready at /p2p/${info.id}`);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         ipfs = undefined;
         setError(error);
       }

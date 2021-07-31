@@ -17,7 +17,7 @@ export interface FieldsProps {
 export function Fields(props: FieldsProps): React.ReactElement {
   const { code } = props;
   const id = useUniqueId('signup');
-  const { setSession } = useSession();
+  const { session, setSession } = useSession();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
   const [handle, setHandle] = useState('');
@@ -35,7 +35,7 @@ export function Fields(props: FieldsProps): React.ReactElement {
     [code]
   );
 
-  if (loading) {
+  if (loading || session.valid) {
     return (
       <div className={Class(styles.Card, styles.Loading)}>
         <Icon className={styles.Spinner} src={Spinner} />

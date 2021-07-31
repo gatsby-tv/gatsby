@@ -22,14 +22,14 @@ export default function SignUpPage(): React.ReactElement {
   }, [session.valid]);
 
   useEffect(() => {
-    if (!key) return;
+    if (!key || session.valid) return;
 
     fetcher<PostAuthPersistSignInKeyResponse>(
       `/auth/signin/${key}/persist`,
       undefined,
       { method: 'POST' }
     );
-  }, [key]);
+  }, [key, session.valid]);
 
   if (!key) {
     return <ErrorPage statusCode={404} />;

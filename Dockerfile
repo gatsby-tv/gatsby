@@ -23,7 +23,7 @@ WORKDIR /app
 ENV NODE_ENV production
 
 RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+RUN adduser -S gatsby -u 1001
 
 COPY --from=packages /app .
 COPY --from=builder /app/.yarn .yarn
@@ -31,10 +31,9 @@ COPY --from=builder /app/.pnp.cjs .
 COPY --from=builder /app/next.config.js .
 COPY --from=builder /app/public public
 COPY --from=builder /app/server.js .
-COPY --from=builder --chown=nextjs:nodejs /app/.next .next
+COPY --from=builder --chown=gatsby:nodejs /app/.next .next
 
-USER nextjs
-
+USER gatsby
 EXPOSE 3000
 
 CMD ["yarn", "start"]

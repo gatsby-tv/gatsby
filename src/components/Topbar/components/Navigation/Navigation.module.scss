@@ -12,6 +12,7 @@
 
 .Tabs {
   @include font-size(display-small);
+  flex-shrink: 0;
 }
 
 .Tab {
@@ -19,6 +20,7 @@
 }
 
 .Misc {
+  flex-shrink: 0;
   align-self: center;
 
   @include hover {

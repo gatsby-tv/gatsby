@@ -124,9 +124,12 @@ export function Controls(props: ControlsProps): React.ReactElement {
     [player.seeking]
   );
 
+  const onKeyUp = useCallback((event: any) => void event.preventDefault(), []);
+
   return (
     <div
       className={Class(className, styles.Controls)}
+      onKeyUp={onKeyUp}
       onClick={(event: any) => event.stopPropagation()}
     >
       <div
@@ -159,9 +162,7 @@ export function Controls(props: ControlsProps): React.ReactElement {
           onPointerLeave={onDragEnd}
           draggable="false"
         >
-          <span
-            className={Class(styles.Slider, slider && styles.SliderActive)}
-          >
+          <span className={Class(styles.Slider, slider && styles.SliderActive)}>
             <span
               style={{
                 right: `${100 * (1 - (player.muted ? 0 : player.volume))}%`,

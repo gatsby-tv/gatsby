@@ -1,11 +1,11 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref, ReactNode, ReactElement } from 'react';
 import { Class, useForwardedRef } from '@gatsby-tv/utilities';
 
 import styles from '../../Frame.scss';
 
 export interface TopFrameProps {
-  children?: React.ReactNode;
-  topbar?: React.ReactElement;
+  children?: ReactNode;
+  topbar?: ReactElement;
   active?: boolean;
 }
 

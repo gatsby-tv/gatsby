@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, ReactElement } from 'react';
 import {
   Avatar,
   Button,
@@ -28,7 +28,7 @@ export interface SkeletonProps {
   onScroll: (event: any) => void;
 }
 
-export function Skeleton(props: SkeletonProps): React.ReactElement | null {
+export function Skeleton(props: SkeletonProps): ReactElement | null {
   const { mobile, tab, setTab, active, onExit, onScroll } = props;
 
   const Container = mobile ? PanelComponent : ModalComponent;

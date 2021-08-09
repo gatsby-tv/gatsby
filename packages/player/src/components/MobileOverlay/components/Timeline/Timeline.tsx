@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ReactElement } from 'react';
 import { usePopper } from 'react-popper';
 import { Activatable } from '@gatsby-tv/components';
 import { Class, Time, ifExists } from '@gatsby-tv/utilities';
@@ -11,7 +11,7 @@ export interface TimelineProps extends OverlayProps {
   disabled?: boolean;
 }
 
-export function Timeline(props: TimelineProps): React.ReactElement {
+export function Timeline(props: TimelineProps): ReactElement {
   const { className, disabled, player, timeline, setSeek } = props;
   const [reference, setReference] = useState<HTMLDivElement | null>(null);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
@@ -78,10 +78,7 @@ export function Timeline(props: TimelineProps): React.ReactElement {
       <div
         ref={setPopper}
         style={style.popper}
-        className={Class(
-          styles.Text,
-          timeline.scrubbing && styles.TextActive
-        )}
+        className={Class(styles.Text, timeline.scrubbing && styles.TextActive)}
         {...attributes.popper}
       >
         {Time(timeline.position * player.duration)}

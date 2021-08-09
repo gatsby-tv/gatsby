@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, ReactElement } from 'react';
 import { Scroll, TextSubheading } from '@gatsby-tv/components';
 import { Value } from '@gatsby-tv/utilities';
 import { Video } from '@gatsby-tv/types';
@@ -10,10 +10,10 @@ import styles from './Credits.scss';
 
 export interface CreditsProps {
   content?: Video;
-  link?: React.FC<LinkProps>;
+  link?: FC<LinkProps>;
 }
 
-export function Credits(props: CreditsProps): React.ReactElement | null {
+export function Credits(props: CreditsProps): ReactElement | null {
   const { content, link } = props;
 
   if (

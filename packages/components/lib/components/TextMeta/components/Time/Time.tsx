@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
 import { Item, ItemProps } from '../Item';
 
@@ -7,7 +7,7 @@ export interface TimeProps
   date: Date;
 }
 
-export function Time(props: TimeProps): React.ReactElement {
+export function Time(props: TimeProps): ReactElement {
   const { date, ...rest } = props;
 
   return <Item element="time" dateTime={date.toISOString()} {...rest} />;

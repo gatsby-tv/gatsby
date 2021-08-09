@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 import { useFrame } from '@gatsby-tv/utilities';
 
 import { Scroll } from '@lib/components/Scroll';
@@ -6,10 +6,10 @@ import { Scroll } from '@lib/components/Scroll';
 import styles from '../../Frame.scss';
 
 export interface MainFrameProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
-export function MainFrame(props: MainFrameProps): React.ReactElement {
+export function MainFrame(props: MainFrameProps): ReactElement {
   const { children } = props;
   const { fullscreen, screen, offset } = useFrame();
 

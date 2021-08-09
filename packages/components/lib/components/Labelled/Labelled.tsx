@@ -1,12 +1,20 @@
-import React, { useRef, useState, useEffect } from 'react';
+import {
+  useRef,
+  useState,
+  useEffect,
+  createElement,
+  FC,
+  ReactNode,
+  ReactElement,
+} from 'react';
 
 export interface LabelledProps {
-  children?: React.ReactNode;
-  component: React.FC<any> | string;
+  children?: ReactNode;
+  component: FC<any> | string;
   $props?: any;
 }
 
-export function Labelled(props: LabelledProps): React.ReactElement {
+export function Labelled(props: LabelledProps): ReactElement {
   const { children, component, $props = {} } = props;
   const ref = useRef<HTMLElement>(null);
   const [label, setLabel] = useState<string | undefined>(undefined);
@@ -28,7 +36,7 @@ export function Labelled(props: LabelledProps): React.ReactElement {
     );
   }, []);
 
-  return React.createElement(component, {
+  return createElement(component, {
     ref,
     children,
     'aria-labelledby': label,

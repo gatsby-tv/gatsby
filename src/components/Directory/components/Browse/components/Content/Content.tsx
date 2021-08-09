@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ReactElement } from 'react';
 import { Tabs, Rule } from '@gatsby-tv/components';
 import { Listing } from '@gatsby-tv/content';
 import { useUniqueId } from '@gatsby-tv/utilities';
@@ -7,7 +7,7 @@ import { Link } from '@src/components/Link';
 
 import styles from './Content.module.scss';
 
-export function Content(): React.ReactElement {
+export function Content(): ReactElement {
   const [tab, setTab] = useState('popular');
   const ids = {
     popular: useUniqueId('tab'),

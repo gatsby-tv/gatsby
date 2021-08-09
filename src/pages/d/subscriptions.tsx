@@ -10,7 +10,7 @@ export default function SubscriptionsPage(): React.ReactElement {
   const { session } = useSession();
   const router = useRouter();
   const label = useUniqueId('heading');
-  
+
   useEffect(() => {
     if (!session.user) router.push('/');
   }, [session.user]);

@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, ReactElement } from 'react';
 import {
   Avatar,
   Icon,
@@ -19,10 +19,10 @@ export interface InfoProps {
   user?: User;
   blurb?: string | string[] | ((user: User) => string | string[]);
   avatar?: DiscreteSize;
-  link?: React.FC<LinkProps>;
+  link?: FC<LinkProps>;
 }
 
-export function Info(props: InfoProps): React.ReactElement {
+export function Info(props: InfoProps): ReactElement {
   const { user, avatar = 'base', link: Link } = props;
 
   if (!user) return <Skeleton />;

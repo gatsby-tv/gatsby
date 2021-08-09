@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 
 import { Portal } from '@lib/components/Portal';
 import { useInjection } from '@lib/utilities/injection';
@@ -8,12 +8,12 @@ import { Target, TargetProps } from './components';
 export type { TargetProps as InjectionTargetProps };
 
 export interface InjectionProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   target: string;
   index?: number;
 }
 
-export function Injection(props: InjectionProps): React.ReactElement {
+export function Injection(props: InjectionProps): ReactElement {
   const { children, target, index } = props;
   const container = useInjection(
     index !== undefined ? `${target}.${index}` : target

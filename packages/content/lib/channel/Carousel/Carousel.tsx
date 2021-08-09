@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Carousel as CarouselComponent, Image } from '@gatsby-tv/components';
 import { useBreakpoints } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
@@ -12,7 +12,7 @@ export interface CarouselProps {
   onSelect: (channel: Channel) => void;
 }
 
-export function Carousel(props: CarouselProps): React.ReactElement | null {
+export function Carousel(props: CarouselProps): ReactElement | null {
   const { onSelect } = props;
   const { channels } = useFeaturedChannels();
 

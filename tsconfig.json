@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "jsx": "preserve",
     "declaration": true,
     "declarationMap": true,
@@ -13,9 +10,7 @@
     "rootDir": "./src",
     "baseUrl": "./src",
     "paths": {
-      "@src/*": [
-        "*"
-      ]
+      "@src/*": ["*"]
     },
     "strict": true,
     "esModuleInterop": true,
@@ -27,10 +22,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

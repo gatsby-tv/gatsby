@@ -1,9 +1,11 @@
-import React, {
+import {
   useRef,
   useState,
   useReducer,
   useEffect,
   useCallback,
+  ReactNode,
+  ReactElement,
 } from 'react';
 import { Class, ifExists } from '@gatsby-tv/utilities';
 
@@ -61,7 +63,7 @@ getOffset.value = (
 };
 
 export interface PanelProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   id?: string;
   className?: string;
   direction?: 'top' | 'right' | 'bottom' | 'left';
@@ -72,7 +74,7 @@ export interface PanelProps {
   onExit?: () => void;
 }
 
-export function Panel(props: PanelProps): React.ReactElement | null {
+export function Panel(props: PanelProps): ReactElement | null {
   const {
     children,
     id,

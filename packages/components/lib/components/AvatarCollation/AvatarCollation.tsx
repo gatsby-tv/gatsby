@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 import { IPFSContent } from '@gatsby-tv/types';
 
@@ -13,9 +13,7 @@ export interface AvatarCollationProps {
   spacing?: Spacing;
 }
 
-export function AvatarCollation(
-  props: AvatarCollationProps
-): React.ReactElement {
+export function AvatarCollation(props: AvatarCollationProps): ReactElement {
   const { avatars, size, spacing } = props;
   avatars.reverse();
 

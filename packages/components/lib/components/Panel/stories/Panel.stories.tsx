@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { useModal } from '@gatsby-tv/utilities';
 

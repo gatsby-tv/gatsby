@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { FontSize } from '@lib/types';
@@ -12,9 +12,7 @@ export interface TextPlaceholderProps {
   width?: number;
 }
 
-export function TextPlaceholder(
-  props: TextPlaceholderProps
-): React.ReactElement {
+export function TextPlaceholder(props: TextPlaceholderProps): ReactElement {
   const { className, font = 'body', heading, width = 1 } = props;
 
   const classes = Class(

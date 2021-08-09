@@ -1,9 +1,9 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Avatar, TextPlaceholder } from '@gatsby-tv/components';
 
 import styles from './Info.scss';
 
-export function Skeleton(): React.ReactElement {
+export function Skeleton(): ReactElement {
   return (
     <div className={styles.Info}>
       <Avatar className={styles.Avatar} size="larger" />

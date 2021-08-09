@@ -1,10 +1,6 @@
-import React, { useCallback } from 'react';
+import { useCallback, ReactElement } from 'react';
 import { Button, Form } from '@gatsby-tv/components';
-import {
-  useUniqueId,
-  useSnackBar,
-  useChangeSet,
-} from '@gatsby-tv/utilities';
+import { useUniqueId, useSnackBar, useChangeSet } from '@gatsby-tv/utilities';
 import { User, PutUserResponse } from '@gatsby-tv/types';
 
 import { Response } from '@src/components/Response';
@@ -19,7 +15,7 @@ export interface FieldsProps {
   token: string;
 }
 
-export function Fields(props: FieldsProps): React.ReactElement {
+export function Fields(props: FieldsProps): ReactElement {
   const { user, token } = props;
   const id = useUniqueId('user');
   const { mutate } = useSession();
@@ -34,19 +30,16 @@ export function Fields(props: FieldsProps): React.ReactElement {
     [user.description, token]
   );
 
-  const onSubmit = useCallback(
-    () => {
-      const promise = fetcher<PutUserResponse>(`/user/${user._id}`, token, {
-        method: 'PUT',
-        body: updates,
-      })
-        .then(mutate)
-        .then(Response({ success: 'Profile updated' }));
+  const onSubmit = useCallback(() => {
+    const promise = fetcher<PutUserResponse>(`/user/${user._id}`, token, {
+      method: 'PUT',
+      body: updates,
+    })
+      .then(mutate)
+      .then(Response({ success: 'Profile updated' }));
 
-      setSnack({ content: promise, duration: 2000 });
-    },
-    [updates, user, token]
-  );
+    setSnack({ content: promise, duration: 2000 });
+  }, [updates, user, token]);
 
   return (
     <Form id={id} onSubmit={onSubmit}>

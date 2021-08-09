@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import {
   Avatar,
   Optional,
@@ -15,7 +15,7 @@ export interface SkeletonProps {
   avatar?: DiscreteSize;
 }
 
-export function Skeleton(props: SkeletonProps): React.ReactElement {
+export function Skeleton(props: SkeletonProps): ReactElement {
   const { format = 'full', avatar } = props;
 
   return (

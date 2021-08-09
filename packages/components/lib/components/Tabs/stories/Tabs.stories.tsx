@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { Tabs, TabsProps } from '@lib/components/Tabs';

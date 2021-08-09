@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import Color from 'color';
 import {
   Class,
@@ -129,7 +129,7 @@ export interface FireworksProps {
   foreground?: boolean;
 }
 
-export function Fireworks(props: FireworksProps): React.ReactElement {
+export function Fireworks(props: FireworksProps): ReactElement {
   const fires = useRef(0);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);

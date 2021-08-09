@@ -1,4 +1,4 @@
-import React, { AriaAttributes } from 'react';
+import { AriaAttributes, ReactElement } from 'react';
 import { Stream } from '@gatsby-tv/components';
 import { PreviewFormat } from '@gatsby-tv/preview';
 import { User } from '@gatsby-tv/types';
@@ -17,7 +17,7 @@ export interface SubscriptionsProps
   user?: User;
 }
 
-export function Subscriptions(props: SubscriptionsProps): React.ReactElement {
+export function Subscriptions(props: SubscriptionsProps): ReactElement {
   const {
     id,
     user,

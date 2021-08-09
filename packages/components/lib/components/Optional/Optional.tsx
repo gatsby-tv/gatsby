@@ -1,17 +1,17 @@
-import React from 'react';
+import { createElement, FC, ReactNode, ReactElement } from 'react';
 
 export interface OptionalProps {
-  children?: React.ReactNode;
-  component?: React.FC<any> | string;
+  children?: ReactNode;
+  component?: FC<any> | string;
   active?: boolean;
   $props?: any;
 }
 
-export function Optional(props: OptionalProps): React.ReactElement {
-  const { children, active, component = "div", $props = {} } = props;
+export function Optional(props: OptionalProps): ReactElement {
+  const { children, active, component = 'div', $props = {} } = props;
 
   return active ? (
-    React.createElement(component, { children, ...$props })
+    createElement(component, { children, ...$props })
   ) : (
     <>{children}</>
   );

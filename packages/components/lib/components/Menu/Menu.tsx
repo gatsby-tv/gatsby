@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, RefObject, ReactNode, ReactElement } from 'react';
 import { usePopper } from 'react-popper';
 import { Class } from '@gatsby-tv/utilities';
 
@@ -15,17 +15,17 @@ export type { ItemProps as MenuItemProps };
 export type { LinkProps as MenuLinkProps };
 
 export interface MenuProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   itemClass?: string;
-  for: React.RefObject<HTMLElement>;
+  for: RefObject<HTMLElement>;
   active?: boolean;
   placement?: Placement;
   offset?: number[];
   onExit?: () => void;
 }
 
-export function Menu(props: MenuProps): React.ReactElement {
+export function Menu(props: MenuProps): ReactElement {
   const {
     children,
     className,

@@ -1,16 +1,16 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 
 import { Optional } from '@lib/components/Optional';
 
 import styles from '../../SnackBar.scss';
 
 export interface SnackProps {
-  children?: React.ReactNode;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+  children?: ReactNode;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
 }
 
-export function Snack(props: SnackProps): React.ReactElement {
+export function Snack(props: SnackProps): ReactElement {
   const { children, prefix, suffix } = props;
 
   return (

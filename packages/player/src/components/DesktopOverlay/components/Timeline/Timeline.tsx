@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import { usePopper } from 'react-popper';
 import { Class, Time, useComponentDidMount } from '@gatsby-tv/utilities';
 
@@ -9,7 +9,7 @@ export interface TimelineProps extends OverlayProps {
   className?: string;
 }
 
-export function Timeline(props: TimelineProps) {
+export function Timeline(props: TimelineProps): ReactElement {
   const { className, player, timeline, setSeek } = props;
   const mounted = useComponentDidMount();
   const position = useRef(timeline.position);

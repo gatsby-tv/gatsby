@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { NextComponentType, NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 import { Frame, Icon } from '@gatsby-tv/components';
@@ -19,7 +19,7 @@ export interface AppProps<T> {
   $props: T;
 }
 
-export function App<T>(props: AppProps<T>): React.ReactElement {
+export function App<T>(props: AppProps<T>): ReactElement {
   const { page: Page, $props } = props;
   const router = useRouter();
   const clear = useModalClear();

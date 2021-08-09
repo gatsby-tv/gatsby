@@ -1,4 +1,4 @@
-import React from 'react';
+import { AriaAttributes, ReactNode, ReactElement } from 'react';
 import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
@@ -7,14 +7,14 @@ import { useItem } from '@lib/utilities/item';
 
 import styles from '../../Switch.scss';
 
-export interface ItemProps extends React.AriaAttributes {
-  children?: React.ReactNode;
+export interface ItemProps extends AriaAttributes {
+  children?: ReactNode;
   id?: string;
   className?: string;
   option: string;
 }
 
-export function Item(props: ItemProps): React.ReactElement {
+export function Item(props: ItemProps): ReactElement {
   const {
     children,
     id,

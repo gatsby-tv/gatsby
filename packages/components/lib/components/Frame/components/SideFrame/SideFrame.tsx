@@ -1,11 +1,11 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref, ReactNode, ReactElement } from 'react';
 import { Class, useForwardedRef } from '@gatsby-tv/utilities';
 
 import styles from '../../Frame.scss';
 
 export interface SideFrameProps {
-  children?: React.ReactNode;
-  sidebar?: React.ReactElement;
+  children?: ReactNode;
+  sidebar?: ReactElement;
   active?: boolean;
 }
 

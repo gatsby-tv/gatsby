@@ -1,4 +1,4 @@
-import React from 'react';
+import { AriaAttributes, ReactNode, ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { SelectionContext } from '@lib/utilities/selection';
@@ -13,8 +13,8 @@ import styles from './Selection.scss';
 export type { SectionProps as SelectionSectionProps };
 export type { ItemProps as SelectionItemProps };
 
-export interface SelectionProps extends React.AriaAttributes {
-  children?: React.ReactNode;
+export interface SelectionProps extends AriaAttributes {
+  children?: ReactNode;
   className?: string;
   itemClass?: string;
   selection?: string;
@@ -23,7 +23,7 @@ export interface SelectionProps extends React.AriaAttributes {
   onSelect: (option: string) => void;
 }
 
-export function Selection(props: SelectionProps): React.ReactElement {
+export function Selection(props: SelectionProps): ReactElement {
   const {
     children,
     className,

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
@@ -7,13 +7,13 @@ import { TextSubheading } from '@lib/components/TextSubheading';
 import styles from '../../Selection.scss';
 
 export interface SectionProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
-  title?: React.ReactNode;
+  title?: ReactNode;
   flush?: boolean;
 }
 
-export function Section(props: SectionProps): React.ReactElement {
+export function Section(props: SectionProps): ReactElement {
   const { children, className, title, flush } = props;
 
   const classes = Class(className, styles.Section);

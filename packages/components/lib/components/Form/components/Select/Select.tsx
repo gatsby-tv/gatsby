@@ -1,9 +1,11 @@
-import React, {
+import {
   useRef,
   useState,
   useReducer,
   useEffect,
   useCallback,
+  SelectHTMLAttributes,
+  ReactElement,
 } from 'react';
 import { usePopper } from 'react-popper';
 import { ExtendDown, Cancel } from '@gatsby-tv/icons';
@@ -78,7 +80,7 @@ const OptionsFilter = {
 
 export interface SelectProps
   extends Omit<
-    React.SelectHTMLAttributes<HTMLElement>,
+    SelectHTMLAttributes<HTMLElement>,
     'id' | 'autoComplete' | 'onChange'
   > {
   id: string;
@@ -90,7 +92,7 @@ export interface SelectProps
   onChange?: FormChangeHandler;
 }
 
-export function Select(props: SelectProps): React.ReactElement {
+export function Select(props: SelectProps): ReactElement {
   const {
     id,
     className,

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { TextDisplay } from '@gatsby-tv/components';
 import { Listing } from '@gatsby-tv/content';
 import { useUniqueId, useFrame } from '@gatsby-tv/utilities';
@@ -12,7 +12,7 @@ export interface RecommendedProps {
   user?: User;
 }
 
-export function Recommended(props: RecommendedProps): React.ReactElement {
+export function Recommended(props: RecommendedProps): ReactElement {
   const { user } = props;
   const id = useUniqueId('recommended');
   const label = useUniqueId('heading');

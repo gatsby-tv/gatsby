@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { User } from '@gatsby-tv/content';
 import { User as UserType } from '@gatsby-tv/types';
 
@@ -9,7 +9,7 @@ export interface ContentProps {
   label: string;
 }
 
-export function Content(props: ContentProps): React.ReactElement {
+export function Content(props: ContentProps): ReactElement {
   const { user, label } = props;
 
   return (

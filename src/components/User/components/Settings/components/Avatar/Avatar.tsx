@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import {
   Activatable,
@@ -56,7 +56,7 @@ export interface AvatarProps {
   token: string;
 }
 
-export function Avatar(props: AvatarProps): React.ReactElement {
+export function Avatar(props: AvatarProps): ReactElement {
   const { user, token } = props;
   const id = useUniqueId('avatar');
   const element = useRef<HTMLImageElement>();

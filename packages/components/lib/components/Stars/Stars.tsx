@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
+import {
+  useState,
+  useEffect,
+  useReducer,
+  useCallback,
+  ReactElement,
+} from 'react';
 import Color from 'color';
 import {
   Class,
@@ -147,7 +153,7 @@ export interface StarsProps {
   foreground?: boolean;
 }
 
-export function Stars(props: StarsProps): React.ReactElement {
+export function Stars(props: StarsProps): ReactElement {
   const { density = 100, background, foreground } = props;
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);

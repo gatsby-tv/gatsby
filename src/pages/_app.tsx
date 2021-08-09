@@ -38,7 +38,8 @@ export default function AppPage({
     <AppProvider>
       <SWRConfig
         value={{
-          fetcher: (url, ...args) => fetcher(url, ...args).then((resp) => resp.json()),
+          fetcher: (url, ...args) =>
+            fetcher(url, ...args).then((resp) => resp.json()),
         }}
       >
         <IPFSContext.Provider value={node}>

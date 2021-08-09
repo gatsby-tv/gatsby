@@ -23,13 +23,13 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
+    "@babel/core": "^7.15.0",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-private-methods": "^7.12.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.12.1",
     "@babel/plugin-transform-object-assign": "^7.12.1",
     "@babel/preset-env": "^7.14.8",
-    "@babel/preset-react": "^7.12.5",
+    "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.12.1",
     "@gatsby-tv/components": "workspace:packages/components",
     "@gatsby-tv/icons": "workspace:packages/icons",
@@ -43,7 +43,7 @@
     "@storybook/addon-links": "^6.0.28",
     "@storybook/addons": "^6.0.28",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.0.28",
+    "@storybook/react": "^6.3.7",
     "@storybook/theming": "^6.0.28",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -54,7 +54,7 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "css-loader": "^5.2.2",
-    "eslint": "^7.16.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "^8.2.10",
@@ -67,11 +67,11 @@
     "rollup": "^2.45.2",
     "rollup-plugin-postcss": "^4.0.0",
     "sass": "^1.32.8",
-    "sass-loader": "^12.1.0",
+    "sass-loader": "^10.0.0",
     "style-loader": "^2.0.0",
     "tscpaths": "^0.0.9",
     "typescript": "^4.3.5",
-    "webpack": "^5.47.0"
+    "webpack": "^5.49.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",

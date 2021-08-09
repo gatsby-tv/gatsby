@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Icon, Snack } from '@gatsby-tv/components';
 import { Checkmark } from '@gatsby-tv/icons';
 
@@ -8,7 +8,7 @@ export interface AcceptProps {
   message: string;
 }
 
-export function Accept(props: AcceptProps): React.ReactElement {
+export function Accept(props: AcceptProps): ReactElement {
   const { message } = props;
 
   const SuffixMarkup = (

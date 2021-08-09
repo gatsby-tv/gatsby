@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Item, ItemProps } from './components';
@@ -7,14 +7,14 @@ import styles from './Connected.scss';
 export type { ItemProps as ConnectedItemProps };
 
 export interface ConnectedProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   column?: boolean;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
 }
 
-export function Connected(props: ConnectedProps) {
+export function Connected(props: ConnectedProps): ReactElement {
   const { children, className, column, prefix, suffix } = props;
 
   const classes = Class(

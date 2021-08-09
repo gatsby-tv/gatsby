@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Validators } from '@gatsby-tv/utilities';
 
@@ -18,7 +18,9 @@ type ValidatorConfig = {
   pattern: RegExp;
 };
 
-type FieldStoryProps = Partial<FormFieldProps & FormLabelProps & ValidatorConfig>;
+type FieldStoryProps = Partial<
+  FormFieldProps & FormLabelProps & ValidatorConfig
+>;
 
 export const Field: Story<FieldStoryProps> = (props) => {
   const { help, hidden, required, minLength, maxLength, pattern, ...rest } =

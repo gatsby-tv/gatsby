@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Rule, TextDisplay, Injection } from '@gatsby-tv/components';
 import Preview from '@gatsby-tv/preview';
 import { Browsable } from '@gatsby-tv/types';
@@ -15,7 +15,7 @@ export interface SectionProps {
   content: Browsable[];
 }
 
-export function Section(props: SectionProps): React.ReactElement | null {
+export function Section(props: SectionProps): ReactElement | null {
   const { index, title, content } = props;
   const sectionId = useUniqueId('subscriptions-section');
   const { id, preview, info, avatar, link: Link } = useListing();

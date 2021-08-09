@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref, ReactNode } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
@@ -14,7 +14,7 @@ import { IconSource } from '@lib/types';
 import styles from '../../Menu.scss';
 
 export interface LinkProps extends Omit<LinkComponentProps, 'href'> {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   href?: string;
   icon?: IconSource;

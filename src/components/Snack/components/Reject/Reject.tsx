@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Icon, Snack } from '@gatsby-tv/components';
 import { Cancel } from '@gatsby-tv/icons';
 
@@ -8,7 +8,7 @@ export interface RejectProps {
   message: string;
 }
 
-export function Reject(props: RejectProps): React.ReactElement {
+export function Reject(props: RejectProps): ReactElement {
   const { message } = props;
 
   const SuffixMarkup = (

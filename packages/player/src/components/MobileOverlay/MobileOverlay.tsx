@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, ReactElement } from 'react';
 import { Activatable, EventListener, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
@@ -10,7 +10,7 @@ import { Controls } from './components/Controls';
 import { Timeline } from './components/Timeline';
 import styles from './MobileOverlay.scss';
 
-export function MobileOverlay(props: OverlayProps): React.ReactElement {
+export function MobileOverlay(props: OverlayProps): ReactElement {
   const { player, timeline, signal, setActive } = props;
 
   const [disabled, setDisabled] = useState(false);
@@ -75,10 +75,7 @@ export function MobileOverlay(props: OverlayProps): React.ReactElement {
       {LoadingMarkup}
       <Signal className={styles.Signal} signal={signal} />
       <Activatable
-        className={Class(
-          styles.Controls,
-          !controls && styles.ControlsDisabled
-        )}
+        className={Class(styles.Controls, !controls && styles.ControlsDisabled)}
         active={active && !timeline.scrubbing && !signal}
         duration="fastest"
       >

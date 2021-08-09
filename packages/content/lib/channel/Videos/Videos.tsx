@@ -1,4 +1,4 @@
-import React, { AriaAttributes } from 'react';
+import { AriaAttributes, ReactElement } from 'react';
 import { Stream } from '@gatsby-tv/components';
 import { Class } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
@@ -16,17 +16,14 @@ export interface VideosProps
   channel?: Channel;
 }
 
-export function Videos(props: VideosProps): React.ReactElement {
+export function Videos(props: VideosProps): ReactElement {
   const { id, channel, preview = 'column', link, ...aria } = props;
 
   const { videos, loading, error, generator } = useChannelVideos(channel?._id);
 
   if (!videos || error) return <Skeleton preview={preview} />;
 
-  const classes = Class(
-    styles.Listing,
-    preview === 'column' && styles.Column
-  );
+  const classes = Class(styles.Listing, preview === 'column' && styles.Column);
 
   const StreamMarkup = videos.length ? (
     <Stream

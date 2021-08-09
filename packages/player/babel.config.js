@@ -14,8 +14,8 @@ module.exports = {
         loose: true,
       },
     ],
+    ['@babel/preset-react', { runtime: 'automatic' }],
     '@babel/preset-typescript',
-    '@babel/preset-react',
   ],
   plugins: [
     '@babel/plugin-transform-object-assign',

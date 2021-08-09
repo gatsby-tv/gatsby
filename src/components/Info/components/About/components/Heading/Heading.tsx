@@ -1,8 +1,8 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
 import styles from './Heading.module.scss';
 
-export function Heading(): React.ReactElement {
+export function Heading(): ReactElement {
   return (
     <div className={styles.Heading}>
       <h2>

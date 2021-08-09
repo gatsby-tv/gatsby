@@ -1,4 +1,4 @@
-import React, { AriaAttributes } from 'react';
+import { AriaAttributes, ReactElement } from 'react';
 import { Stream } from '@gatsby-tv/components';
 import { Video } from '@gatsby-tv/types';
 
@@ -15,7 +15,7 @@ export interface RelatedProps
   video?: Video;
 }
 
-export function Related(props: RelatedProps): React.ReactElement {
+export function Related(props: RelatedProps): ReactElement {
   const {
     id,
     video,

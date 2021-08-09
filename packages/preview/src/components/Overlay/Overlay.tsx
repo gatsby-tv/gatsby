@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Browsable, VideoBookmark } from '@gatsby-tv/types';
 
 import { Duration } from '@src/components/Duration';
@@ -10,7 +10,7 @@ export interface OverlayProps {
   bookmark?: VideoBookmark;
 }
 
-export function Overlay(props: OverlayProps): React.ReactElement {
+export function Overlay(props: OverlayProps): ReactElement {
   const { content, bookmark } = props;
 
   const TimelineMarkup = bookmark ? (

@@ -1,4 +1,11 @@
-import React, { useMemo, useCallback, useEffect } from 'react';
+import {
+  useMemo,
+  useCallback,
+  useEffect,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  ReactElement,
+} from 'react';
 import {
   ifExists,
   useForm,
@@ -13,7 +20,7 @@ import styles from './File.scss';
 
 export interface FileProps
   extends Pick<
-      React.InputHTMLAttributes<HTMLElement>,
+      InputHTMLAttributes<HTMLElement>,
       | 'capture'
       | 'disabled'
       | 'form'
@@ -21,7 +28,7 @@ export interface FileProps
       | 'accept'
       | 'readOnly'
       | 'required'
-      | Exclude<keyof React.HTMLAttributes<HTMLElement>, 'onChange'>
+      | Exclude<keyof HTMLAttributes<HTMLElement>, 'onChange'>
     >,
     Pick<ButtonProps, 'unstyled' | 'animate' | 'tooltip' | 'icon' | 'size'> {
   id: string;
@@ -29,7 +36,7 @@ export interface FileProps
   onChange?: FormChangeHandler<File | null>;
 }
 
-export function File(props: FileProps): React.ReactElement {
+export function File(props: FileProps): ReactElement {
   const {
     id,
     className,

@@ -1,10 +1,10 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref, HTMLAttributes, ReactNode } from 'react';
 import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import styles from '../../TextMeta.scss';
 
-export interface ItemProps extends React.HTMLAttributes<Element> {
-  children?: React.ReactNode;
+export interface ItemProps extends HTMLAttributes<Element> {
+  children?: ReactNode;
   element?: string;
   className?: string;
   clamp?: number;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback, ReactElement } from 'react';
 import { Button, Form, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
 import { Class, Validators, useUniqueId } from '@gatsby-tv/utilities';
@@ -14,7 +14,7 @@ export interface FieldsProps {
   code: string;
 }
 
-export function Fields(props: FieldsProps): React.ReactElement {
+export function Fields(props: FieldsProps): ReactElement {
   const { code } = props;
   const id = useUniqueId('signup');
   const { session, setSession } = useSession();

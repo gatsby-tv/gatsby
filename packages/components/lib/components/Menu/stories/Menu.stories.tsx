@@ -1,4 +1,3 @@
-import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { useMenu } from '@gatsby-tv/utilities';
 import { Gear } from '@gatsby-tv/icons';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import NextLink from 'next/link';
 import { Button, Link } from '@gatsby-tv/components';
 import {
@@ -12,7 +12,7 @@ import { useChannelModal } from '@src/utilities/channel-modal';
 
 export type ContentProps = LinkProps;
 
-export function Content(props: ContentProps): React.ReactElement {
+export function Content(props: ContentProps): ReactElement {
   const [, setChannel] = useChannelModal();
 
   if (isContentLink(props)) {

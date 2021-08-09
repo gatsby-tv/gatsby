@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC, ReactElement } from 'react';
 import {
   AvatarCollation,
   Button,
@@ -8,7 +8,11 @@ import {
   Panel,
 } from '@gatsby-tv/components';
 import { Plus } from '@gatsby-tv/icons';
-import { Value, useComponentWillMount, useMobileDetector } from '@gatsby-tv/utilities';
+import {
+  Value,
+  useComponentWillMount,
+  useMobileDetector,
+} from '@gatsby-tv/utilities';
 import { Video } from '@gatsby-tv/types';
 
 import { User } from '@lib/user';
@@ -18,12 +22,12 @@ import styles from './CompactCredits.scss';
 
 export interface CompactCreditsProps {
   content?: Video;
-  link?: React.FC<LinkProps>;
+  link?: FC<LinkProps>;
 }
 
 export function CompactCredits(
   props: CompactCreditsProps
-): React.ReactElement | null {
+): ReactElement | null {
   const { content, link } = props;
   const isMobile = useMobileDetector();
   const mounted = useComponentWillMount();

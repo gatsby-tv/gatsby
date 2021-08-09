@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import Preview from '@gatsby-tv/preview';
 import { Class } from '@gatsby-tv/utilities';
 
@@ -12,7 +12,7 @@ export type SkeletonProps = Omit<
   'id' | 'info' | 'avatar' | 'link'
 >;
 
-export function Skeleton(props: SkeletonProps): React.ReactElement {
+export function Skeleton(props: SkeletonProps): ReactElement {
   const { preview = 'column' } = props;
 
   const PreviewsMarkup = [...Array(24)].map((_, index) => (
@@ -23,10 +23,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
     />
   ));
 
-  const classes = Class(
-    styles.Listing,
-    preview === 'column' && styles.Column
-  );
+  const classes = Class(styles.Listing, preview === 'column' && styles.Column);
 
   return <div className={classes}>{PreviewsMarkup}</div>;
 }

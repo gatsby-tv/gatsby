@@ -1,9 +1,9 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { TextBox, TextPlaceholder, Rule } from '@gatsby-tv/components';
 
 import styles from './Description.scss';
 
-export function Skeleton(): React.ReactElement {
+export function Skeleton(): ReactElement {
   return (
     <>
       <TextBox gap="tight">

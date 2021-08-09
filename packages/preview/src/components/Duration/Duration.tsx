@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { TextMeta } from '@gatsby-tv/components';
 import {
   Browsable,
@@ -15,7 +15,7 @@ export interface DurationProps {
   content: Browsable;
 }
 
-export function Duration(props: DurationProps): React.ReactElement {
+export function Duration(props: DurationProps): ReactElement {
   const { content } = props;
 
   if (isVideo(content)) {

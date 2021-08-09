@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback, ReactElement } from 'react';
 import { Activatable, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
@@ -10,7 +10,7 @@ import { Controls } from './components/Controls';
 import { Timeline } from './components/Timeline';
 import styles from './DesktopOverlay.scss';
 
-export function DesktopOverlay(props: OverlayProps): React.ReactElement {
+export function DesktopOverlay(props: OverlayProps): ReactElement {
   const { player, timeline, signal, setActive, setPlayback } = props;
 
   const active = player.active || timeline.scrubbing;

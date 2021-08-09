@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode, ReactElement } from 'react';
 import { NoEntry } from '@gatsby-tv/icons';
 import {
   ifExists,
@@ -14,7 +14,7 @@ import { Optional } from '@lib/components/Optional';
 import styles from './Label.scss';
 
 export interface LabelProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   for: string;
   className?: string;
   label: string;
@@ -22,7 +22,7 @@ export interface LabelProps {
   hidden?: boolean;
 }
 
-export function Label(props: LabelProps): React.ReactElement {
+export function Label(props: LabelProps): ReactElement {
   const { children, for: id, className, label, help, hidden } = props;
   const { errors } = useForm();
   const [invalid, setInvalid] = useState(Boolean(errors[id]));

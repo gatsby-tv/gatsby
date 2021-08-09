@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Icon, IconSource } from '@gatsby-tv/components';
 import { Play, Pause, SkipForward, SkipBackward } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
@@ -11,7 +11,7 @@ export interface SignalProps {
   zIndex?: number;
 }
 
-export function Signal(props: SignalProps): React.ReactElement | null {
+export function Signal(props: SignalProps): ReactElement | null {
   const { signal, className, zIndex } = props;
 
   let icon;

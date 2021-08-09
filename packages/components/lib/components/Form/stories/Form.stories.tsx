@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Validators } from '@gatsby-tv/utilities';
 
@@ -18,11 +18,20 @@ type ValidatorConfig = {
   pattern: RegExp;
 };
 
-type FieldStoryProps = Partial<FormFieldProps & FormLabelProps & ValidatorConfig>;
+type FieldStoryProps = Partial<
+  FormFieldProps & FormLabelProps & ValidatorConfig
+>;
 
 export const Field: Story<FieldStoryProps> = (props) => {
-  const { help, hidden, required, minLength, maxLength, pattern, ...rest } =
-    props;
+  const {
+    help,
+    hidden,
+    required,
+    minLength,
+    maxLength,
+    pattern,
+    ...rest
+  } = props;
 
   const [value, setValue] = useState('');
 
@@ -135,45 +144,46 @@ Slider.args = {
   hidden: false,
 };
 
-export const SliderWithStops: Story<Partial<FormSliderProps & FormLabelProps>> =
-  (props) => {
-    const [value, setValue] = useState(50);
-    const stops = [
-      { value: 0, label: '0 units' },
-      { value: 10, label: '1 units' },
-      { value: 20, label: '2 units' },
-      { value: 30, label: '3 units' },
-      { value: 40, label: '4 units' },
-      { value: 50, label: '5 units' },
-      { value: 60, label: '6 units' },
-      { value: 70, label: '7 units' },
-      { value: 80, label: '8 units' },
-      { value: 90, label: '9 units' },
-      { value: 100, label: '10 units' },
-    ];
+export const SliderWithStops: Story<
+  Partial<FormSliderProps & FormLabelProps>
+> = (props) => {
+  const [value, setValue] = useState(50);
+  const stops = [
+    { value: 0, label: '0 units' },
+    { value: 10, label: '1 units' },
+    { value: 20, label: '2 units' },
+    { value: 30, label: '3 units' },
+    { value: 40, label: '4 units' },
+    { value: 50, label: '5 units' },
+    { value: 60, label: '6 units' },
+    { value: 70, label: '7 units' },
+    { value: 80, label: '8 units' },
+    { value: 90, label: '9 units' },
+    { value: 100, label: '10 units' },
+  ];
 
-    return (
-      <Form className={styles.Form}>
-        <Form.Label
-          for="slider"
-          label="Example Slider"
-          help={typeof props.help === 'string' ? props.help : undefined}
-          hidden={props.hidden}
-        >
-          <Form.Slider
-            id="slider"
-            name="slider"
-            min={-5}
-            max={105}
-            stops={stops}
-            hideLabels={props.hideLabels}
-            value={value}
-            onChange={setValue}
-          />
-        </Form.Label>
-      </Form>
-    );
-  };
+  return (
+    <Form className={styles.Form}>
+      <Form.Label
+        for="slider"
+        label="Example Slider"
+        help={typeof props.help === 'string' ? props.help : undefined}
+        hidden={props.hidden}
+      >
+        <Form.Slider
+          id="slider"
+          name="slider"
+          min={-5}
+          max={105}
+          stops={stops}
+          hideLabels={props.hideLabels}
+          value={value}
+          onChange={setValue}
+        />
+      </Form.Label>
+    </Form>
+  );
+};
 
 SliderWithStops.args = {
   help: undefined,

@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React from 'react';
+import { ReactElement } from 'react';
 
 import { Snack } from '@src/components/Snack';
 
@@ -10,7 +10,7 @@ export interface ResponseProps {
 
 export function Response(
   props: ResponseProps
-): (resp: Response) => React.ReactElement {
+): (resp: Response) => ReactElement {
   const { success, failure } = props;
 
   return (resp: Response) =>

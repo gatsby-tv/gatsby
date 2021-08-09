@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { Scroll } from '@lib/components/Scroll';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { SwitchContext } from '@lib/utilities/switch';
@@ -11,14 +11,14 @@ import styles from './Switch.scss';
 export type { ItemProps as SwitchItemProps };
 
 export interface SwitchProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   itemClass?: string;
   selection: string;
   onSelect: (id: string) => void;
 }
 
-export function Switch(props: SwitchProps): React.ReactElement {
+export function Switch(props: SwitchProps): ReactElement {
   const { children, className, itemClass, selection, onSelect } = props;
 
   const classes = Class(className, styles.Switch);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import { Class, useSnackBarState } from '@gatsby-tv/utilities';
 
@@ -12,7 +12,7 @@ import styles from './SnackBar.scss';
 export type { SnackProps };
 export { Snack };
 
-export function SnackBar(): React.ReactElement | null {
+export function SnackBar(): ReactElement | null {
   const { content, active } = useSnackBarState();
   const [mounted, setMounted] = useState(false);
   const [ref, setRef] = useState<HTMLDivElement | null>(null);

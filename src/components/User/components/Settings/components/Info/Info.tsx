@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { TextDisplay, TextMeta } from '@gatsby-tv/components';
 import { UserHandle, FullValue, useFrame } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
@@ -9,7 +9,7 @@ export interface InfoProps {
   user: User;
 }
 
-export function Info(props: InfoProps): React.ReactElement {
+export function Info(props: InfoProps): ReactElement {
   const { user } = props;
   const { screen } = useFrame();
 

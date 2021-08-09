@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { TextMeta, Icon } from '@gatsby-tv/components';
 import { Transfer } from '@gatsby-tv/icons';
 import { FullValue, FullReleaseDate, useIPFSPeers } from '@gatsby-tv/utilities';
@@ -11,7 +11,7 @@ export interface TitleProps {
   content?: Video;
 }
 
-export function Title(props: TitleProps): React.ReactElement {
+export function Title(props: TitleProps): ReactElement {
   const { content } = props;
   const { peers } = useIPFSPeers();
 

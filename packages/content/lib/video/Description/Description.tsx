@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import DOMPurify from 'dompurify';
 import { Button, Injection, TextBox, Icon, Rule } from '@gatsby-tv/components';
 import { ExtendDown, ExtendUp } from '@gatsby-tv/icons';
@@ -18,9 +18,7 @@ export interface DescriptionProps {
   content?: Browsable;
 }
 
-export function Description(
-  props: DescriptionProps
-): React.ReactElement | null {
+export function Description(props: DescriptionProps): ReactElement | null {
   const { id, content } = props;
   const isMobile = useMobileDetector();
   const mounted = useComponentWillMount();

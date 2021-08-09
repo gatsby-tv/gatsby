@@ -1,4 +1,3 @@
-import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Class } from '@gatsby-tv/utilities';
 
@@ -97,13 +96,12 @@ export const ColumnWithBothConnection: Story<ConnectedProps> = () => (
   </Connected>
 );
 
-export const ColumnWithBothConnectionsMultipleItems: Story<ConnectedProps> =
-  () => (
-    <Connected
-      column
-      prefix={<AppendageColumnMarkup />}
-      suffix={<AppendageColumnMarkup />}
-    >
-      <ContentListMarkup />
-    </Connected>
-  );
+export const ColumnWithBothConnectionsMultipleItems: Story<ConnectedProps> = () => (
+  <Connected
+    column
+    prefix={<AppendageColumnMarkup />}
+    suffix={<AppendageColumnMarkup />}
+  >
+    <ContentListMarkup />
+  </Connected>
+);

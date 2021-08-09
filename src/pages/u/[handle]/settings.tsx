@@ -1,11 +1,11 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { useRouter } from 'next/router';
 
 import { Page } from '@src/components/Page';
 import { Settings } from '@src/components/User';
 import { useSession } from '@src/utilities/session';
 
-export default function UserSettings(): React.ReactElement {
+export default function UserSettings(): ReactElement {
   const router = useRouter();
   const { session } = useSession();
 

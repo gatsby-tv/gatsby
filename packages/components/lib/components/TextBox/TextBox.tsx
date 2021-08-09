@@ -1,12 +1,12 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref, HTMLAttributes, ReactNode } from 'react';
 import { Class, ifExists } from '@gatsby-tv/utilities';
 
 import { Spacing } from '@lib/types';
 
 import styles from './TextBox.scss';
 
-export interface TextBoxProps extends React.HTMLAttributes<Element> {
-  children?: React.ReactNode;
+export interface TextBoxProps extends HTMLAttributes<Element> {
+  children?: ReactNode;
   className?: string;
   gap?: Spacing;
   clamp?: number;

@@ -1,4 +1,12 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  InputHTMLAttributes,
+  ReactNode,
+  ReactElement,
+} from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import {
   ifExists,
@@ -16,7 +24,7 @@ import styles from './Field.scss';
 
 export interface FieldProps
   extends Omit<
-    React.InputHTMLAttributes<HTMLElement>,
+    InputHTMLAttributes<HTMLElement>,
     | 'id'
     | 'accept'
     | 'alt'
@@ -46,14 +54,14 @@ export interface FieldProps
   value: string;
   type?: 'text' | 'email' | 'password' | 'tel' | 'search';
   multiline?: boolean;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
   autoComplete?: boolean;
   validators?: Validator[];
   onChange?: FormChangeHandler;
 }
 
-export function Field(props: FieldProps): React.ReactElement {
+export function Field(props: FieldProps): ReactElement {
   const {
     id,
     className,

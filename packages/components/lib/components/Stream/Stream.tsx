@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  FC,
+  ReactElement,
+} from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import { useScroll } from '@gatsby-tv/utilities';
 
@@ -7,13 +14,13 @@ import { Icon } from '@lib/components/Icon';
 import styles from './Stream.scss';
 
 export interface StreamProps<T> {
-  component: React.FC<T>;
+  component: FC<T>;
   generator?: () => void;
   data?: T[];
   loading?: boolean;
 }
 
-export function Stream<T>(props: StreamProps<T>): React.ReactElement {
+export function Stream<T>(props: StreamProps<T>): ReactElement {
   const { component: SourceComponent, generator, loading, data = [] } = props;
 
   const { addScrollListener, removeScrollListener } = useScroll();

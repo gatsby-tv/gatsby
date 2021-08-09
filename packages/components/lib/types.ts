@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC, SVGProps, SyntheticEvent } from 'react';
 import Color from 'color';
 export type { Placement } from '@popperjs/core';
 
 export interface EventHandler {
-  (event: React.SyntheticEvent): void;
+  (event: SyntheticEvent): void;
 }
 
 export type Option<T = string> = {
@@ -110,7 +110,7 @@ export type Palette =
   | 'black'
   | 'trueblack';
 
-export type IconSource = React.FC<React.SVGProps<SVGSVGElement>>;
+export type IconSource = FC<SVGProps<SVGSVGElement>>;
 
 export type IconSize =
   | 'smallest'

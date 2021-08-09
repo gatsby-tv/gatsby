@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ReactElement } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
@@ -20,7 +20,7 @@ import { ChannelModalContext } from '@src/utilities/channel-modal';
 export default function AppPage({
   Component,
   pageProps,
-}: AppProps): React.ReactElement {
+}: AppProps): ReactElement {
   const channel = useState<Channel | undefined>(undefined);
   const session = useSessionContext();
   const node = useIPFSNode(
@@ -38,7 +38,8 @@ export default function AppPage({
     <AppProvider>
       <SWRConfig
         value={{
-          fetcher: (url, ...args) => fetcher(url, ...args).then((resp) => resp.json()),
+          fetcher: (url, ...args) =>
+            fetcher(url, ...args).then((resp) => resp.json()),
         }}
       >
         <IPFSContext.Provider value={node}>

@@ -1,9 +1,9 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
 import { Page } from '@src/components/Page';
 import { About } from '@src/components/Info';
 
-export default function AboutPage(): React.ReactElement {
+export default function AboutPage(): ReactElement {
   return (
     <Page title="Gatsby - About" margin={false}>
       <About.Landing />

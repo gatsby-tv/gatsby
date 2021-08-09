@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Injection } from '@gatsby-tv/components';
 import { Browsable } from '@gatsby-tv/types';
 import Preview from '@gatsby-tv/preview';
@@ -13,7 +13,7 @@ export interface ArticleProps {
   index: number;
 }
 
-export function Article(props: ArticleProps): React.ReactElement {
+export function Article(props: ArticleProps): ReactElement {
   const { content, index } = props;
   const { id, preview, info, avatar, link: Link } = useListing();
 

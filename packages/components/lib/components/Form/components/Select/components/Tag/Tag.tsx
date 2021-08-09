@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Cancel } from '@gatsby-tv/icons';
 
 import { Button } from '@lib/components/Button';
@@ -11,7 +11,7 @@ export interface TagProps {
   option: SelectOption;
 }
 
-export function Tag(props: TagProps): React.ReactElement {
+export function Tag(props: TagProps): ReactElement {
   const { option } = props;
   const { selection, clearSelection } = useSelection();
 

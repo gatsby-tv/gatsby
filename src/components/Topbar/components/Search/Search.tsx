@@ -1,5 +1,5 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
-export function Search(): React.ReactElement | null {
+export function Search(): ReactElement | null {
   return null;
 }

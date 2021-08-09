@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref } from 'react';
 import { ExtendRight } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
 

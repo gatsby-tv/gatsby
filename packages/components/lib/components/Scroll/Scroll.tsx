@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState, ReactNode, ReactElement } from 'react';
 import {
   Class,
   ifExists,
@@ -11,7 +11,7 @@ import {
 import styles from './Scroll.scss';
 
 export interface ScrollProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   smooth?: boolean;
   hide?: boolean;
@@ -19,7 +19,7 @@ export interface ScrollProps {
   onScroll?: (event: any) => void;
 }
 
-export function Scroll(props: ScrollProps): React.ReactElement {
+export function Scroll(props: ScrollProps): ReactElement {
   const { children, className, smooth, hide, floating, onScroll } = props;
   const [height, setHeight] = useState<number | undefined>(undefined);
   const scroll = useRef<HTMLDivElement>(null);

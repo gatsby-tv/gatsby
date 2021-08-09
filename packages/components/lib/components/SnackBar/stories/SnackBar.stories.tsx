@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { useSnackBar } from '@gatsby-tv/utilities';
 

@@ -1,10 +1,10 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Injection, Icon } from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
 
 import styles from '../../Page.module.scss';
 
-export function Loading(): React.ReactElement {
+export function Loading(): ReactElement {
   return (
     <Injection target="$foreground">
       <div className={styles.Loading}>

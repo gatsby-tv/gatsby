@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback, ReactNode, ReactElement } from 'react';
 import { ifExists, Class, useModalCallback } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
@@ -9,7 +9,7 @@ import { EventHandler } from '@lib/types';
 import styles from './Modal.scss';
 
 export interface ModalProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   overlay?: boolean;
   active?: boolean;
@@ -17,7 +17,7 @@ export interface ModalProps {
   onExit?: () => void;
 }
 
-export function Modal(props: ModalProps): React.ReactElement | null {
+export function Modal(props: ModalProps): ReactElement | null {
   const { children, className, overlay, active, zIndex, onExit } = props;
 
   useModalCallback(onExit, []);

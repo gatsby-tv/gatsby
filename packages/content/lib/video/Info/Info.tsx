@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, ReactElement } from 'react';
 import {
   Avatar,
   Optional,
@@ -7,12 +7,7 @@ import {
   DiscreteSize,
 } from '@gatsby-tv/components';
 import { CheckmarkFill } from '@gatsby-tv/icons';
-import {
-  Class,
-  Value,
-  ReleaseDate,
-  useUniqueId,
-} from '@gatsby-tv/utilities';
+import { Class, Value, ReleaseDate, useUniqueId } from '@gatsby-tv/utilities';
 import {
   Browsable,
   Collection,
@@ -27,7 +22,7 @@ import { VideoInfoFormat, LinkProps } from '@lib/types';
 import { Skeleton } from './Info.skeleton';
 import styles from './Info.scss';
 
-function getShowInfo(
+function ShowInfo(
   content: Browsable
 ): [number | undefined, number | undefined] {
   if (!isEpisodicVideo(content)) return [undefined, undefined];
@@ -49,10 +44,10 @@ export interface InfoProps {
   content?: Browsable;
   format?: VideoInfoFormat;
   avatar?: DiscreteSize;
-  link?: React.FC<LinkProps>;
+  link?: FC<LinkProps>;
 }
 
-export function Info(props: InfoProps): React.ReactElement {
+export function Info(props: InfoProps): ReactElement {
   const { content, format = 'full', avatar, link: Link } = props;
   const seasonId = useUniqueId('content-season');
   const episodeId = useUniqueId('content-episode');
@@ -64,7 +59,7 @@ export function Info(props: InfoProps): React.ReactElement {
   if (!content) return <Skeleton format={format} avatar={avatar} />;
 
   const channel = format !== 'nochannel' ? content.channel : undefined;
-  const [season, episode] = getShowInfo(content);
+  const [season, episode] = ShowInfo(content);
   const date = new Date(
     isVideo(content)
       ? content.releaseDate

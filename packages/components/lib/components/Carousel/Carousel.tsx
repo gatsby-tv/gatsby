@@ -1,9 +1,12 @@
-import React, {
+import {
   useRef,
   useState,
   useEffect,
   useReducer,
   useCallback,
+  Children,
+  ReactNode,
+  ReactElement,
 } from 'react';
 import { ExtendLeft, ExtendRight } from '@gatsby-tv/icons';
 import {
@@ -23,11 +26,11 @@ import styles from './Carousel.scss';
 export type { SlideProps as CarouselSlideProps };
 
 export interface CarouselProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   groups: number;
 }
 
-export function Carousel(props: CarouselProps): React.ReactElement | null {
+export function Carousel(props: CarouselProps): ReactElement | null {
   const { children, groups } = props;
   const [mask, setMask] = useState<HTMLDivElement | null>(null);
   const [width, setWidthBase] = useState('100%');
@@ -43,12 +46,9 @@ export function Carousel(props: CarouselProps): React.ReactElement | null {
    * number of items evenly. Thus, perhaps controversially, we will remove
    * any remainders. */
 
-  const items = React.Children.count(children);
+  const items = Children.count(children);
 
-  const slides = React.Children.toArray(children).slice(
-    0,
-    items - (items % groups)
-  );
+  const slides = Children.toArray(children).slice(0, items - (items % groups));
 
   const chunks = Array.from(
     { length: Math.ceil(slides.length / groups) },

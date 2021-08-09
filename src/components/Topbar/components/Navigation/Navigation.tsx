@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Icon, Tabs, Menu, Rule } from '@gatsby-tv/components';
 import { GatsbyPlain, Subscribe, Browse, Misc } from '@gatsby-tv/icons';
@@ -20,7 +20,7 @@ function getCurrentTab(route: string): string | undefined {
   }
 }
 
-export function Navigation(): React.ReactElement {
+export function Navigation(): ReactElement {
   const { screen } = useFrame();
   const { session } = useSession();
   const router = useRouter();

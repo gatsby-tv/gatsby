@@ -1,4 +1,4 @@
-import React, { AriaAttributes } from 'react';
+import { AriaAttributes, ReactElement } from 'react';
 import { Stream } from '@gatsby-tv/components';
 import { Class } from '@gatsby-tv/utilities';
 import { Browsable } from '@gatsby-tv/types';
@@ -12,7 +12,7 @@ import styles from './New.scss';
 
 export type NewProps = Partial<ListingContextType> & AriaAttributes;
 
-export function New(props: NewProps): React.ReactElement {
+export function New(props: NewProps): ReactElement {
   const {
     id,
     preview = 'column',
@@ -27,10 +27,7 @@ export function New(props: NewProps): React.ReactElement {
   if (!content || error)
     return <Skeleton preview={preview} info={info} avatar={avatar} />;
 
-  const classes = Class(
-    styles.Listing,
-    preview === 'column' && styles.Column
-  );
+  const classes = Class(styles.Listing, preview === 'column' && styles.Column);
 
   return (
     <ListingContext.Provider value={{ id, preview, info, avatar, link }}>

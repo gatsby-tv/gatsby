@@ -1,9 +1,11 @@
-import React, {
+import {
   useRef,
   useState,
   useEffect,
   useCallback,
   SetStateAction,
+  ReactNode,
+  ReactElement,
 } from 'react';
 import {
   FrameContext,
@@ -17,12 +19,12 @@ import styles from './Frame.scss';
 import { MainFrame, TopFrame, SideFrame } from './components';
 
 export interface FrameProps {
-  children?: React.ReactNode;
-  topbar?: React.ReactElement;
-  sidebar?: React.ReactElement;
+  children?: ReactNode;
+  topbar?: ReactElement;
+  sidebar?: ReactElement;
 }
 
-export function Frame(props: FrameProps): React.ReactElement {
+export function Frame(props: FrameProps): ReactElement {
   const { children, topbar: Topbar, sidebar: Sidebar } = props;
   const mounted = useComponentWillMount();
   const screen = useRef<HTMLDivElement>(null);

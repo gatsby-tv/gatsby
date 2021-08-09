@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect, ReactNode, ReactElement } from 'react';
 import { DownTick } from '@gatsby-tv/icons';
 import { Class, ifExists, useUniqueId } from '@gatsby-tv/utilities';
 
@@ -8,15 +8,13 @@ import { Icon } from '@lib/components/Icon';
 import styles from './TextCollapsible.scss';
 
 export interface TextCollapsibleProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   label?: string;
   active?: boolean;
 }
 
-export function TextCollapsible(
-  props: TextCollapsibleProps
-): React.ReactElement {
+export function TextCollapsible(props: TextCollapsibleProps): ReactElement {
   const { children, className, active, label: text } = props;
   const id = useUniqueId('collapsible');
   const label = useRef<HTMLLabelElement>(null);

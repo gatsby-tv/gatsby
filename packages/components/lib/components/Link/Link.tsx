@@ -1,10 +1,10 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref, AnchorHTMLAttributes, ReactNode } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import styles from './Link.scss';
 
-export interface LinkProps extends React.AnchorHTMLAttributes<Element> {
-  children?: React.ReactNode;
+export interface LinkProps extends AnchorHTMLAttributes<Element> {
+  children?: ReactNode;
   className?: string;
   href?: string;
   underline?: boolean;

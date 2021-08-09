@@ -1,4 +1,14 @@
-import React, { useState, useEffect, useCallback, forwardRef } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  forwardRef,
+  createElement,
+  ButtonHTMLAttributes,
+  Ref,
+  ReactNode,
+  ReactElement,
+} from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import {
   Class,
@@ -14,8 +24,8 @@ import { IconSource, IconSize } from '@lib/types';
 
 import styles from './Button.scss';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
-  children?: React.ReactNode;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
+  children?: ReactNode;
   className?: string;
   unstyled?: boolean;
   animate?: boolean;
@@ -29,7 +39,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
+  (props: ButtonProps, ref: Ref<HTMLButtonElement>) => {
     const {
       children,
       className,
@@ -167,7 +177,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children
     );
 
-    const ButtonMarkup = React.createElement(asLabelFor ? 'label' : 'button', {
+    const ButtonMarkup = createElement(asLabelFor ? 'label' : 'button', {
       children: ChildrenMarkup,
       ref: button,
       className: classes,

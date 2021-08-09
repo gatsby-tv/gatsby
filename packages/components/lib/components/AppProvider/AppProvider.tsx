@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  ReactNode,
+  ReactElement,
+} from 'react';
 import {
   UniqueIdContext,
   useUniqueIdGenerator,
@@ -19,10 +25,10 @@ import { useSupports } from '@lib/utilities/supports';
 import './AppProvider.scss';
 
 export interface AppProviderProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
-export function AppProvider(props: AppProviderProps): React.ReactElement {
+export function AppProvider(props: AppProviderProps): ReactElement {
   const { children } = props;
   const uniqueIdGenerator = useUniqueIdGenerator();
   const modalContext = useModalContext();

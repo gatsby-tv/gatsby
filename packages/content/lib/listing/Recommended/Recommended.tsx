@@ -1,4 +1,4 @@
-import React, { AriaAttributes } from 'react';
+import { AriaAttributes, ReactElement } from 'react';
 import { Stream } from '@gatsby-tv/components';
 import { Class } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
@@ -16,7 +16,7 @@ export interface RecommendedProps
   user?: User;
 }
 
-export function Recommended(props: RecommendedProps): React.ReactElement {
+export function Recommended(props: RecommendedProps): ReactElement {
   const {
     id,
     user,
@@ -32,10 +32,7 @@ export function Recommended(props: RecommendedProps): React.ReactElement {
   if (!content || error)
     return <Skeleton preview={preview} info={info} avatar={avatar} />;
 
-  const classes = Class(
-    styles.Listing,
-    preview === 'column' && styles.Column
-  );
+  const classes = Class(styles.Listing, preview === 'column' && styles.Column);
 
   return (
     <ListingContext.Provider value={{ id, preview, info, avatar, link }}>

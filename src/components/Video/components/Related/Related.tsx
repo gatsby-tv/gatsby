@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Video } from '@gatsby-tv/content';
 import { useFrame } from '@gatsby-tv/utilities';
 import { Video as VideoType } from '@gatsby-tv/types';
@@ -11,7 +11,7 @@ export interface RelatedProps {
   video?: VideoType;
 }
 
-export function Related(props: RelatedProps): React.ReactElement {
+export function Related(props: RelatedProps): ReactElement {
   const { video } = props;
   const { screen } = useFrame();
 

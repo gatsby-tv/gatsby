@@ -1,15 +1,18 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Stars, Fireworks, Icon } from '@gatsby-tv/components';
 import { useFrame } from '@gatsby-tv/utilities';
 import { ExtendDown, Gatsby } from '@gatsby-tv/icons';
 
 import styles from './Landing.module.scss';
 
-export function Landing(): React.ReactElement {
+export function Landing(): ReactElement {
   const { screen, offset } = useFrame();
 
   return (
-    <div style={{ height: screen.height - offset.y }} className={styles.Landing}>
+    <div
+      style={{ height: screen.height - offset.y }}
+      className={styles.Landing}
+    >
       <div className={styles.Graphics}>
         <Stars />
         <Fireworks count={3} />

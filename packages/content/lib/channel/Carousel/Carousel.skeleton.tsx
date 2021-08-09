@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Image } from '@gatsby-tv/components';
 
 import styles from './Carousel.scss';
@@ -7,7 +7,7 @@ export interface SkeletonProps {
   groups: number;
 }
 
-export function Skeleton(props: SkeletonProps): React.ReactElement {
+export function Skeleton(props: SkeletonProps): ReactElement {
   const { groups } = props;
 
   const SlidesMarkup = [...Array(groups)].map((_, index) => (

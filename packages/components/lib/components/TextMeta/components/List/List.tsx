@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Item, ItemProps } from '../Item';
@@ -9,7 +9,7 @@ export type ListProps = Omit<
   'element' | 'clamp' | 'dateTime' | 'value'
 >;
 
-export function List(props: ListProps): React.ReactElement {
+export function List(props: ListProps): ReactElement {
   const { children, className } = props;
   const classes = Class(className, styles.List);
   return <span className={classes}>{children}</span>;

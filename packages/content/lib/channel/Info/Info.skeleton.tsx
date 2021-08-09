@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { DiscreteSize, Avatar, TextPlaceholder } from '@gatsby-tv/components';
 import { Class } from '@gatsby-tv/utilities';
 
@@ -8,7 +8,7 @@ export interface SkeletonProps {
   avatar?: DiscreteSize;
 }
 
-export function Skeleton(props: SkeletonProps): React.ReactElement {
+export function Skeleton(props: SkeletonProps): ReactElement {
   const { avatar } = props;
   const classes = Class(styles.TextArea, styles.SkeletonTextArea);
 

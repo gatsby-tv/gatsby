@@ -1,15 +1,15 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 
 import { useCarousel } from '@lib/utilities/carousel';
 
 import styles from '../../Carousel.scss';
 
 export interface SlideProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   onClick?: () => void;
 }
 
-export function Slide(props: SlideProps): React.ReactElement {
+export function Slide(props: SlideProps): ReactElement {
   const { children, onClick } = props;
   const { groups } = useCarousel();
 

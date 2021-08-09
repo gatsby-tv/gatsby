@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react';
+import { forwardRef, VideoHTMLAttributes } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import styles from './Video.scss';
 
-export type VideoProps = React.VideoHTMLAttributes<HTMLElement>;
+export type VideoProps = VideoHTMLAttributes<HTMLElement>;
 
 export const Video = forwardRef<HTMLVideoElement, VideoProps>((props, ref) => {
   const { className, ...rest } = props;

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Injection, Rule, Optional } from '@gatsby-tv/components';
 import { Channel, Video } from '@gatsby-tv/content';
 import { Value, useFrame, useUniqueId } from '@gatsby-tv/utilities';
@@ -12,7 +12,7 @@ export interface InfoProps {
   video?: VideoType;
 }
 
-export function Info(props: InfoProps): React.ReactElement {
+export function Info(props: InfoProps): ReactElement {
   const { video } = props;
   const { screen } = useFrame();
 

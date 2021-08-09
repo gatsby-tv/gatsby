@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, FC, ReactElement } from 'react';
 import {
   Avatar,
   Button,
@@ -34,11 +34,11 @@ import styles from './Modal.scss';
 export interface ModalProps {
   channel?: Channel;
   active?: boolean;
-  link?: React.FC<LinkProps>;
+  link?: FC<LinkProps>;
   onExit?: () => void;
 }
 
-export function Modal(props: ModalProps): React.ReactElement | null {
+export function Modal(props: ModalProps): ReactElement | null {
   const { channel, active, link: Link, onExit } = props;
   const isMobile = useMobileDetector();
   const mounted = useComponentWillMount();

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { useVideo } from '@gatsby-tv/content';
 import Player from '@gatsby-tv/player';
@@ -7,7 +7,7 @@ import { useScroll, useFrame, useIPFSVideoStream } from '@gatsby-tv/utilities';
 import { Page } from '@src/components/Page';
 import { Video } from '@src/components/Video';
 
-export default function VideoPage(): React.ReactElement {
+export default function VideoPage(): ReactElement {
   const router = useRouter();
   const { fullscreen, setFullscreen, setTopbar, setSidebar } = useFrame();
   const { setScroll } = useScroll();

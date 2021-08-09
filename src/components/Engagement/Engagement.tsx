@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Button } from '@gatsby-tv/components';
 import { IconSource } from '@gatsby-tv/components/dist/types';
 import {
@@ -16,7 +16,7 @@ export type EngagementProps = {
   type: 'subscribe' | 'follow' | 'promote' | 'donate' | 'tip' | 'misc';
 };
 
-export function Engagement(props: EngagementProps): React.ReactElement {
+export function Engagement(props: EngagementProps): ReactElement {
   let icon: IconSource;
   let tooltip: string;
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, ReactElement } from 'react';
 import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import { PostAuthPersistSignInKeyResponse } from '@gatsby-tv/types';
@@ -8,7 +8,7 @@ import { SignUp } from '@src/components/SignUp';
 import { useSession } from '@src/utilities/session';
 import { fetcher } from '@src/utilities/fetcher';
 
-export default function SignUpPage(): React.ReactElement {
+export default function SignUpPage(): ReactElement {
   const router = useRouter();
   const { key } = router.query as Record<string, string | undefined>;
   const { session } = useSession();

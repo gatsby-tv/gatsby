@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 import Head from 'next/head';
 import { Class } from '@gatsby-tv/utilities';
 
@@ -7,19 +7,15 @@ import { Loading } from './components/Loading';
 import styles from './Page.module.scss';
 
 export interface PageProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   title?: string;
   margin?: boolean;
 }
 
-export function Page(props: PageProps): React.ReactElement {
+export function Page(props: PageProps): ReactElement {
   const { children, className, title, margin = true } = props;
-  const classes = Class(
-    className,
-    styles.Page,
-    !margin && styles.NoMargin
-  );
+  const classes = Class(className, styles.Page, !margin && styles.NoMargin);
 
   const HeaderMarkup = title ? (
     <Head>

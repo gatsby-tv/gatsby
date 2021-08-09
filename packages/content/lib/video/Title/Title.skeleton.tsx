@@ -1,9 +1,9 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { TextPlaceholder } from '@gatsby-tv/components';
 
 import styles from './Title.scss';
 
-export function Skeleton(): React.ReactElement {
+export function Skeleton(): ReactElement {
   return (
     <div className={styles.TitleSkeleton}>
       <TextPlaceholder font="display-small" heading width={0.6} />

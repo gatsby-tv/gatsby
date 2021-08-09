@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref } from 'react';
+import { forwardRef, Ref, HTMLAttributes, ReactNode } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { BorderRadius } from '@lib/types';
@@ -6,10 +6,10 @@ import { BorderRadius } from '@lib/types';
 import styles from './Viewport.scss';
 
 export interface ViewportProps
-  extends Omit<React.HTMLAttributes<Element>, 'placeholder'> {
-  children?: React.ReactNode;
+  extends Omit<HTMLAttributes<Element>, 'placeholder'> {
+  children?: ReactNode;
   className?: string;
-  overlay?: React.ReactNode;
+  overlay?: ReactNode;
   placeholder?: boolean;
   aspectRatio?: number;
   rounded?: BorderRadius;

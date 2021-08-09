@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, RefObject, ReactNode, ReactElement } from 'react';
 import type { Placement } from '@popperjs/core';
 import { usePopper } from 'react-popper';
 import { Class } from '@gatsby-tv/utilities';
@@ -8,16 +8,23 @@ import { Injection } from '@lib/components/Injection';
 import styles from './Tooltip.scss';
 
 export interface TooltipProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
-  for: React.RefObject<HTMLElement>;
+  for: RefObject<HTMLElement>;
   offset?: number;
   placement?: Placement;
   elevation?: number;
 }
 
-export function Tooltip(props: TooltipProps): React.ReactElement | null {
-  const { children, className, for: target, offset, placement, elevation } = props;
+export function Tooltip(props: TooltipProps): ReactElement | null {
+  const {
+    children,
+    className,
+    for: target,
+    offset,
+    placement,
+    elevation,
+  } = props;
   const [active, setActive] = useState(false);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
   const { styles: style, attributes } = usePopper(target.current, popper, {

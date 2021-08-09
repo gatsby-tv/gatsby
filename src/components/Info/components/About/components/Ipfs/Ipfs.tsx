@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, ReactElement } from 'react';
 import Color from 'color';
 import { Icon } from '@gatsby-tv/components';
 import { useResizeObserver } from '@gatsby-tv/utilities';
@@ -42,7 +42,7 @@ Star.render = (
   context.restore();
 };
 
-export function Ipfs(): React.ReactElement {
+export function Ipfs(): ReactElement {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [stars, setStars] = useState<StarType[]>([]);

@@ -1,9 +1,11 @@
-import React, {
+import {
   useRef,
   useState,
   useEffect,
   useCallback,
   SetStateAction,
+  InputHTMLAttributes,
+  ReactElement,
 } from 'react';
 import { usePopper } from 'react-popper';
 import {
@@ -20,7 +22,7 @@ import styles from './Slider.scss';
 
 export interface SliderProps
   extends Omit<
-    React.InputHTMLAttributes<HTMLElement>,
+    InputHTMLAttributes<HTMLElement>,
     | 'id'
     | 'accept'
     | 'alt'
@@ -53,7 +55,7 @@ export interface SliderProps
   onChange?: FormChangeHandler<number>;
 }
 
-export function Slider(props: SliderProps): React.ReactElement {
+export function Slider(props: SliderProps): ReactElement {
   const {
     id,
     className,
@@ -75,11 +77,7 @@ export function Slider(props: SliderProps): React.ReactElement {
   const [dragging, setDragging] = useState(false);
   const { setValue } = useForm();
 
-  const {
-    styles: style,
-    attributes,
-    update,
-  } = usePopper(reference, popper, {
+  const { styles: style, attributes, update } = usePopper(reference, popper, {
     placement: 'top',
     strategy: 'absolute',
     modifiers: [

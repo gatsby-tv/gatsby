@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
@@ -11,12 +11,12 @@ import { useItem } from '@lib/utilities/item';
 import styles from '../../Menu.scss';
 
 export interface ItemProps extends Omit<ButtonProps, 'unstyled'> {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   icon?: IconSource;
 }
 
-export function Item(props: ItemProps): React.ReactElement {
+export function Item(props: ItemProps): ReactElement {
   const { children, className, icon: IconComponent, ...rest } = props;
   const { itemClass } = useItem();
 

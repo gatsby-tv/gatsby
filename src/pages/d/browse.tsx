@@ -1,9 +1,9 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
 import { Page } from '@src/components/Page';
 import { Browse } from '@src/components/Directory';
 
-export default function BrowsePage(): React.ReactElement {
+export default function BrowsePage(): ReactElement {
   return (
     <Page title="Browse">
       <Browse.Layout>

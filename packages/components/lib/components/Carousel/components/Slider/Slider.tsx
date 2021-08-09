@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties, ReactNode, ReactElement } from 'react';
 
 import styles from '../../Carousel.scss';
 
@@ -10,12 +10,12 @@ export type SliderState = {
 export type SliderAction = { type: 'jump'; desired: number } | { type: 'sync' };
 
 export interface SliderProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   state: SliderState;
   groups: number;
 }
 
-export function Slider(props: SliderProps): React.ReactElement {
+export function Slider(props: SliderProps): ReactElement {
   const { children, state, groups } = props;
   const distance = state.slide - state.desired;
 

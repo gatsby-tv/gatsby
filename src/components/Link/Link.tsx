@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, ReactNode, ReactElement } from 'react';
 import NextLink from 'next/link';
 import { Link as LinkComponent } from '@gatsby-tv/components';
 
@@ -6,13 +6,13 @@ import { Content } from './variants/Content';
 import { Channel } from './variants/Channel';
 
 export interface LinkProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   href: string;
-  component?: React.FC<any>;
+  component?: FC<any>;
   $props?: any;
 }
 
-export function Link(props: LinkProps): React.ReactElement {
+export function Link(props: LinkProps): ReactElement {
   const {
     children,
     component: Component = LinkComponent,

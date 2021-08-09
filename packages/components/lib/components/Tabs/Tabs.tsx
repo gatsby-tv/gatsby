@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Selection } from '@lib/components/Selection';
@@ -11,7 +11,7 @@ export type { ItemProps as TabsItemProps };
 export type { LinkProps as TabsLinkProps };
 
 export interface TabsProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   itemClass?: string;
   gap?: Spacing;
@@ -19,7 +19,7 @@ export interface TabsProps {
   onSelect: (id: string) => void;
 }
 
-export function Tabs(props: TabsProps): React.ReactElement {
+export function Tabs(props: TabsProps): ReactElement {
   const {
     children,
     className,

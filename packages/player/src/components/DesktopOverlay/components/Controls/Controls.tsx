@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import { Button, Menu, Selection, EventListener } from '@gatsby-tv/components';
 import {
   Play,
@@ -19,7 +19,7 @@ export interface ControlsProps extends OverlayProps {
   className?: string;
 }
 
-export function Controls(props: ControlsProps): React.ReactElement {
+export function Controls(props: ControlsProps): ReactElement {
   const {
     className,
     player,

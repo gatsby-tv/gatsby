@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { Button } from '@lib/components/Button';

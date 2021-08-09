@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback, ReactElement } from 'react';
 import { ifExists, useFormSelect } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
@@ -10,7 +10,7 @@ export interface OptionProps {
   option: SelectOption;
 }
 
-export function Option(props: OptionProps): React.ReactElement {
+export function Option(props: OptionProps): ReactElement {
   const { option } = props;
   const { selection, setSelection } = useSelection();
   const { hover, setHover } = useFormSelect();

@@ -1,4 +1,4 @@
-import { ReactNode, ReactElement, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, ReactNode, ReactElement } from 'react';
 import { VideoProps } from '@gatsby-tv/components';
 
 import { PlayerState } from '@src/utilities/use-player';

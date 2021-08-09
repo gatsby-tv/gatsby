@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { GetAuthSignInKeyResponse } from '@gatsby-tv/types';
 
@@ -6,7 +6,7 @@ import { Page } from '@src/components/Page';
 import { fetcher } from '@src/utilities/fetcher';
 import { useSession } from '@src/utilities/session';
 
-export default function MagicLinkPage(): React.ReactElement {
+export default function MagicLinkPage(): ReactElement {
   const router = useRouter();
   const { key = '', exists = '' } = router.query;
   const { session, setSession } = useSession();

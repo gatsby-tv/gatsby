@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode, ReactElement } from 'react';
 import { Optional, Image } from '@gatsby-tv/components';
 import { Class } from '@gatsby-tv/utilities';
 
@@ -10,7 +10,7 @@ export interface SkeletonProps {
   info?: ReactNode;
 }
 
-export function Skeleton(props: SkeletonProps): React.ReactElement {
+export function Skeleton(props: SkeletonProps): ReactElement {
   const { format = 'column', info: Info } = props;
 
   const classes = Class(styles.Skeleton, styles[`Preview-${format}`]);

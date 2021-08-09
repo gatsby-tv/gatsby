@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback, ReactElement } from 'react';
 import {
   Button,
   Form,
@@ -26,7 +26,7 @@ import styles from './SignIn.module.scss';
 
 export type SignInProps = Omit<ModalProps, 'overlay' | 'zIndex'>;
 
-export function SignIn(props: SignInProps): React.ReactElement {
+export function SignIn(props: SignInProps): ReactElement {
   const [email, setEmail] = useState('');
   const [stage, setStage] = useState(0);
   const [valid, setValid] = useState(false);

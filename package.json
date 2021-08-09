@@ -90,8 +90,8 @@
     "util": "^0.12.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/preset-react": "^7.12.7",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.12.7",
     "@gatsby-tv/types": "^0.4.39",
     "@svgr/cli": "^5.5.0",
@@ -112,12 +112,12 @@
     "@typescript-eslint/parser": "^4.11.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "concurrently": "^6.1.0",
-    "eslint": "^7.16.0",
+    "eslint": "^7.32.0",
     "eslint-config-next": "^11.0.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "next-transpile-modules": "^8.0.0",
     "prettier": "^2.2.1",
-    "webpack": "^5.47.0"
+    "webpack": "^5.49.0"
   }
 }

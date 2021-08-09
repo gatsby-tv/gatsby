@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  FormHTMLAttributes,
+  ReactElement,
+} from 'react';
 
 import {
   useOptionalForm,
@@ -29,7 +35,7 @@ export type {
 };
 
 export type FormProps = Omit<
-  React.FormHTMLAttributes<HTMLElement>,
+  FormHTMLAttributes<HTMLElement>,
   'id' | 'onSubmit' | 'onError'
 > & {
   id: string;
@@ -37,7 +43,7 @@ export type FormProps = Omit<
   onError?: (error: FormError | undefined, id?: string) => void;
 };
 
-export function Form(props: FormProps): React.ReactElement {
+export function Form(props: FormProps): ReactElement {
   const {
     id,
     onSubmit: onSubmitHandler,

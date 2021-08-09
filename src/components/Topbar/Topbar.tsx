@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Navigation } from './components/Navigation';
@@ -11,7 +11,7 @@ export interface TopbarProps {
   className?: string;
 }
 
-export function Topbar(props: TopbarProps): React.ReactElement {
+export function Topbar(props: TopbarProps): ReactElement {
   const { className } = props;
   const classes = Class(className, styles.Topbar);
 

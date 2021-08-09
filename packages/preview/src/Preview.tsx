@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import { Image, Optional, Labelled } from '@gatsby-tv/components';
 import { useUniqueId } from '@gatsby-tv/utilities';
 
@@ -7,7 +7,7 @@ import { Skeleton } from '@src/Preview.skeleton';
 import { PreviewProps } from '@src/types';
 import styles from '@src/Preview.scss';
 
-export function Preview(props: PreviewProps): React.ReactElement {
+export function Preview(props: PreviewProps): ReactElement {
   const {
     content,
     bookmark,

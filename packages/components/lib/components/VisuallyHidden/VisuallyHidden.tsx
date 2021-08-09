@@ -1,4 +1,4 @@
-import React from 'react';
+import { createElement, ReactElement } from 'react';
 
 import styles from './VisuallyHidden.scss';
 
@@ -7,9 +7,9 @@ export interface VisuallyHiddenProps {
   $props?: any;
 }
 
-export function VisuallyHidden(props: VisuallyHiddenProps): React.ReactElement {
+export function VisuallyHidden(props: VisuallyHiddenProps): ReactElement {
   const { as: element, $props = {} } = props;
-  return React.createElement(element, {
+  return createElement(element, {
     className: styles.VisuallyHidden,
     ...$props,
   });

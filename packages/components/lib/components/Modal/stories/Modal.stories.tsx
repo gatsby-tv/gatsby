@@ -1,4 +1,3 @@
-import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { LoremIpsum } from 'react-lorem-ipsum';
 import { useModal } from '@gatsby-tv/utilities';

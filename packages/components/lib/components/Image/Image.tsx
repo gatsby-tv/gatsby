@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  ImgHTMLAttributes,
+  ReactNode,
+  ReactElement,
+} from 'react';
 import { IPFSContent } from '@gatsby-tv/types';
 import { Class, ifExists, useIPFSContent } from '@gatsby-tv/utilities';
 
@@ -7,12 +14,11 @@ import { Viewport } from '@lib/components/Viewport';
 
 import styles from './Image.scss';
 
-export interface ImageProps
-  extends Omit<React.ImgHTMLAttributes<Element>, 'src'> {
+export interface ImageProps extends Omit<ImgHTMLAttributes<Element>, 'src'> {
   src?: IPFSContent | string;
   rounded?: BorderRadius;
   aspectRatio?: number;
-  overlay?: React.ReactNode;
+  overlay?: ReactNode;
 }
 
 type ImageURLProps = ImageProps & { src?: string };
@@ -23,7 +29,7 @@ function isImageURLProps(props: ImageProps): props is ImageURLProps {
   return typeof (props as ImageURLProps).src !== 'object';
 }
 
-function ImageURL(props: ImageURLProps): React.ReactElement {
+function ImageURL(props: ImageURLProps): ReactElement {
   const {
     className,
     rounded,
@@ -65,14 +71,14 @@ function ImageURL(props: ImageURLProps): React.ReactElement {
   );
 }
 
-function ImageIPFS(props: ImageIPFSProps): React.ReactElement {
+function ImageIPFS(props: ImageIPFSProps): ReactElement {
   const { src, ...rest } = props;
   const { url } = useIPFSContent(src);
 
   return <ImageURL src={url} {...rest} />;
 }
 
-export function Image(props: ImageProps): React.ReactElement {
+export function Image(props: ImageProps): ReactElement {
   if (isImageURLProps(props)) {
     return <ImageURL {...props} />;
   } else {

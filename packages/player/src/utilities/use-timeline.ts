@@ -12,37 +12,37 @@ export function useTimeline(): TimelineState {
   const [scrubbing, setScrubbing] = useState(false);
   const [position, setPosition] = useState(0);
 
-  const onClick = (event: any) => {
+  const onClick = useCallback((event: any) => {
     event.preventDefault();
     event.stopPropagation();
-  };
+  }, []);
 
-  const onContextMenu = (event: any) => {
+  const onContextMenu = useCallback((event: any) => {
     event.preventDefault();
     event.stopPropagation();
-  };
+  }, []);
 
-  const onPointerEnter = (event: any) => {
+  const onPointerEnter = useCallback((event: any) => {
     if (!ref.current || !event.isPrimary) return;
     const { left, width } = ref.current.getBoundingClientRect();
     const value = Math.min(Math.max((event.clientX - left) / width, 0), 1);
     setPosition(value);
-  };
+  }, []);
 
-  const onPointerDown = (event: any) => {
+  const onPointerDown = useCallback((event: any) => {
     // Ignore auxillary buttons (such as right/middle clicks).
     if (!ref.current || event.button !== 0 || !event.isPrimary) return;
     event.preventDefault();
     ref.current.setPointerCapture(event.pointerId);
     setScrubbing(true);
-  };
+  }, []);
 
-  const onPointerMove = (event: any) => {
+  const onPointerMove = useCallback((event: any) => {
     if (!ref.current || !event.isPrimary) return;
     const { left, width } = ref.current.getBoundingClientRect();
     const value = Math.min(Math.max((event.clientX - left) / width, 0), 1);
     setPosition(value);
-  };
+  }, []);
 
   const onPointerUp = useCallback(
     (event: any) => {

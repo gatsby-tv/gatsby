@@ -370,33 +370,36 @@ export function usePlayer(
     }
   }, []);
 
-  const onPause = () => dispatch({ type: 'pause' });
-  const onPlaying = () => dispatch({ type: 'playing' });
-  const onStalled = () => dispatch({ type: 'stalled' });
-  const onSeeking = () => dispatch({ type: 'seeking' });
-  const onWaiting = () => dispatch({ type: 'waiting' });
-  const onEnded = () => dispatch({ type: 'ended' });
-  const onTimeUpdate = (event: any) => {
+  const onPause = useCallback(() => dispatch({ type: 'pause' }), []);
+  const onPlaying = useCallback(() => dispatch({ type: 'playing' }), []);
+  const onStalled = useCallback(() => dispatch({ type: 'stalled' }), []);
+  const onSeeking = useCallback(() => dispatch({ type: 'seeking' }), []);
+  const onWaiting = useCallback(() => dispatch({ type: 'waiting' }), []);
+  const onEnded = useCallback(() => dispatch({ type: 'ended' }), []);
+
+  const onTimeUpdate = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
     dispatch({
       type: 'timeupdate',
       time: target.currentTime / target.duration,
     });
-  };
-  const onProgress = (event: any) => {
+  }, []);
+
+  const onProgress = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
     const progress = bufferProgress(target.currentTime, target.buffered);
     dispatch({ type: 'progress', progress: progress / target.duration });
-  };
-  const onSeeked = (event: any) => {
+  }, []);
+
+  const onSeeked = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
     const progress = bufferProgress(target.currentTime, target.buffered);
     dispatch({ type: 'seeked' });
     dispatch({ type: 'progress', progress: progress / target.duration });
-  };
+  }, []);
 
   return {
     player: {

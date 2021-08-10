@@ -25,7 +25,7 @@ export function Fields(props: FieldsProps): ReactElement {
   const onSubmit = useCallback(
     (form) => {
       setLoading(true);
-      fetcher<PostAuthCompleteSignUpResponse>(`/user`, undefined, {
+      fetcher<PostAuthCompleteSignUpResponse>(`/user`, {
         method: 'POST',
         body: { key: code, ...form },
       })

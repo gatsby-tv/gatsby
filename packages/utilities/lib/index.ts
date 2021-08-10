@@ -24,3 +24,4 @@ export * from './frame';
 export * from './global';
 export * from './form';
 export * from './validators';
+export * from './fetcher';

@@ -24,11 +24,9 @@ export default function SignUpPage(): ReactElement {
   useEffect(() => {
     if (!key || session.valid) return;
 
-    fetcher<PostAuthPersistSignInKeyResponse>(
-      `/auth/signin/${key}/persist`,
-      undefined,
-      { method: 'POST' }
-    );
+    fetcher<PostAuthPersistSignInKeyResponse>(`/auth/signin/${key}/persist`, {
+      method: 'POST',
+    });
   }, [key, session.valid]);
 
   if (!key) {

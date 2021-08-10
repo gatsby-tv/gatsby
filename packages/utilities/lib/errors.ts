@@ -15,3 +15,9 @@ export class FormError extends Error {
     this.target = id;
   }
 }
+
+export class NotImplementedError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}

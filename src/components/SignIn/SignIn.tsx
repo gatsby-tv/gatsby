@@ -34,7 +34,7 @@ export function SignIn(props: SignInProps): ReactElement {
 
   const onSubmit = useCallback((form: Record<string, unknown>) => {
     setLoading(true);
-    fetcher<PostAuthSignInResponse>('/auth/signin', undefined, {
+    fetcher<PostAuthSignInResponse>('/auth/signin', {
       method: 'POST',
       body: form,
     }).then((resp) => {

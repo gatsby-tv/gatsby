@@ -1,7 +1,7 @@
 {
   "name": "@gatsby-tv/content",
   "description": "Gatsby shared components for web clients",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

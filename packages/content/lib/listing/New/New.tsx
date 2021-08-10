@@ -4,8 +4,8 @@ import { Class } from '@gatsby-tv/utilities';
 import { Browsable } from '@gatsby-tv/types';
 
 import { Article } from '@lib/listing/components/Article';
+import { useNewFeed } from '@lib/services/use-new-feed';
 import { ListingContext, ListingContextType } from '@lib/utilities/listing';
-import { useNewFeed } from '@lib/utilities/use-new-feed';
 
 import { Skeleton } from './New.skeleton';
 import styles from './New.scss';

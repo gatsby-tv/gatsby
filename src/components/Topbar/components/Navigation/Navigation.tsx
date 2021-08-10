@@ -5,7 +5,7 @@ import { GatsbyPlain, Subscribe, Browse, Misc } from '@gatsby-tv/icons';
 import { useFrame, useMenu } from '@gatsby-tv/utilities';
 
 import { Link } from '@src/components/Link';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 
 import styles from './Navigation.module.scss';
 

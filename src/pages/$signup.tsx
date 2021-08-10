@@ -5,7 +5,7 @@ import { PostAuthPersistSignInKeyResponse } from '@gatsby-tv/types';
 
 import { Page } from '@src/components/Page';
 import { SignUp } from '@src/components/SignUp';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 import { fetcher } from '@src/utilities/fetcher';
 
 export default function SignUpPage(): ReactElement {

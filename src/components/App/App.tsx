@@ -9,7 +9,7 @@ import { Spinner } from '@gatsby-tv/icons';
 import { PreAlpha } from '@src/components/PreAlpha';
 import { Topbar } from '@src/components/Topbar';
 import { Link } from '@src/components/Link';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 import { useChannelModal } from '@src/utilities/channel-modal';
 
 import styles from './App.module.scss';

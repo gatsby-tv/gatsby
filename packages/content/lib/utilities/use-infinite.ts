@@ -11,9 +11,10 @@ export function useInfinite<T>(
     revalidateOnReconnect: false,
   });
 
-  const generator = useCallback(() => setSize((current) => current + 1), [
-    setSize,
-  ]);
+  const generator = useCallback(
+    () => setSize((current) => current + 1),
+    [setSize]
+  );
 
   const loading =
     (!data && !error) ||

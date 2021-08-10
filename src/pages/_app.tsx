@@ -14,7 +14,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 import { App } from '@src/components/App';
 import { fetcher } from '@src/utilities/fetcher';
-import { useSessionContext, SessionContext } from '@src/utilities/session';
+import { useSessionContext, SessionContext } from '@src/services/session';
 import { ChannelModalContext } from '@src/utilities/channel-modal';
 
 export default function AppPage({

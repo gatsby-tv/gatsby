@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { Page } from '@src/components/Page';
 import { Settings } from '@src/components/User';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 
 export default function UserSettings(): ReactElement {
   const router = useRouter();

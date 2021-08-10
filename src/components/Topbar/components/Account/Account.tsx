@@ -6,7 +6,7 @@ import { User } from '@gatsby-tv/types';
 
 import { Link } from '@src/components/Link';
 import { SignIn } from '@src/components/SignIn';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 
 import { Skeleton } from './Account.skeleton';
 import styles from './Account.module.scss';

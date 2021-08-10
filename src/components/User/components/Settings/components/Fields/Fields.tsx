@@ -4,8 +4,8 @@ import { useUniqueId, useSnackBar, useChangeSet } from '@gatsby-tv/utilities';
 import { User, PutUserResponse } from '@gatsby-tv/types';
 
 import { Response } from '@src/components/Response';
+import { useSession } from '@src/services/session';
 import { fetcher } from '@src/utilities/fetcher';
-import { useSession } from '@src/utilities/session';
 import { isHandle, isDisplayName } from '@src/utilities/validators';
 
 import styles from './Fields.module.scss';

@@ -4,8 +4,8 @@ import { Class } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
 
 import { Article } from '@lib/listing/components/Article';
+import { useRecommendedFeed } from '@lib/services/use-recommended-feed';
 import { ListingContext, ListingContextType } from '@lib/utilities/listing';
-import { useRecommendedFeed } from '@lib/utilities/use-recommended-feed';
 
 import { Skeleton } from './Recommended.skeleton';
 import styles from './Recommended.scss';

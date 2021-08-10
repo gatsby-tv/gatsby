@@ -3,8 +3,8 @@ import { Stream } from '@gatsby-tv/components';
 import { Video } from '@gatsby-tv/types';
 
 import { Article } from '@lib/listing/components/Article';
+import { useRelatedFeed } from '@lib/services/use-related-feed';
 import { ListingContext, ListingContextType } from '@lib/utilities/listing';
-import { useRelatedFeed } from '@lib/utilities/use-related-feed';
 
 import { Skeleton } from './Related.skeleton';
 import styles from './Related.scss';

@@ -4,8 +4,8 @@ import { Class } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
 
 import { Article } from '@lib/listing/components/Article';
+import { useChannelShows } from '@lib/services/use-channel-shows';
 import { ListingContext, ListingContextType } from '@lib/utilities/listing';
-import { useChannelShows } from '@lib/utilities/use-channel-shows';
 
 import { Skeleton } from './Shows.skeleton';
 import styles from './Shows.scss';

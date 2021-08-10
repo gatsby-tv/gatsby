@@ -4,7 +4,7 @@ import { Spinner } from '@gatsby-tv/icons';
 import { Class, Validators, useUniqueId } from '@gatsby-tv/utilities';
 import { PostAuthCompleteSignUpResponse } from '@gatsby-tv/types';
 
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 import { fetcher } from '@src/utilities/fetcher';
 import { isHandle, isDisplayName } from '@src/utilities/validators';
 

@@ -3,7 +3,7 @@ import { Carousel as CarouselComponent, Image } from '@gatsby-tv/components';
 import { useBreakpoints } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
 
-import { useFeaturedChannels } from '@lib/utilities/use-featured-channels';
+import { useFeaturedChannels } from '@lib/services/use-featured-channels';
 
 import { Skeleton } from './Carousel.skeleton';
 import styles from './Carousel.scss';

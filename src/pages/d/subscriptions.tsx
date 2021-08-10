@@ -4,7 +4,7 @@ import { useUniqueId } from '@gatsby-tv/utilities';
 
 import { Page } from '@src/components/Page';
 import { Subscriptions } from '@src/components/Directory';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 
 export default function SubscriptionsPage(): ReactElement {
   const { session } = useSession();

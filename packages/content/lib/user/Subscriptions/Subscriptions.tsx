@@ -5,8 +5,8 @@ import { User } from '@gatsby-tv/types';
 
 import { Video } from '@lib/video';
 import { Section } from '@lib/listing/components/Section';
+import { useSubscriptionsFeed } from '@lib/services/use-subscriptions-feed';
 import { ListingContext, ListingContextType } from '@lib/utilities/listing';
-import { useSubscriptionsFeed } from '@lib/utilities/use-subscriptions-feed';
 
 import { Skeleton } from './Subscriptions.skeleton';
 import styles from './Subscriptions.scss';

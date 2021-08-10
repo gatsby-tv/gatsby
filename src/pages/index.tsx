@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 import { Page } from '@src/components/Page';
 import { Home } from '@src/components/Home';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 
 export default function IndexPage(): ReactElement {
   const { session } = useSession();

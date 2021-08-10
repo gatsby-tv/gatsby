@@ -4,7 +4,7 @@ import { GetAuthSignInKeyResponse } from '@gatsby-tv/types';
 
 import { Page } from '@src/components/Page';
 import { fetcher } from '@src/utilities/fetcher';
-import { useSession } from '@src/utilities/session';
+import { useSession } from '@src/services/session';
 
 export default function MagicLinkPage(): ReactElement {
   const router = useRouter();

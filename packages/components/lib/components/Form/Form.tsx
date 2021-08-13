@@ -50,8 +50,8 @@ export function Form(props: FormProps): ReactElement {
     onError: onErrorHandler,
     ...rest
   } = props;
-  const parent = useOptionalForm();
 
+  const parent = useOptionalForm();
   const [values, setValues] = useState<Record<string, unknown>>({});
   const [errors, setErrors] = useState<Record<string, FormErrorState>>({});
 

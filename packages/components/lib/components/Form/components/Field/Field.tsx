@@ -87,10 +87,13 @@ export function Field(props: FieldProps): ReactElement {
   const [loading, setLoading] = useState(false);
 
   const promise =
-    errors[id] instanceof Promise &&
-    (errors[id] as Promise<FormError | undefined>);
+    (errors[id] instanceof Promise &&
+      (errors[id] as Promise<FormError | undefined>)) ||
+    undefined;
 
-  const error = errors[id] instanceof FormError && (errors[id] as FormError);
+  const waiting = Boolean(promise);
+  const error =
+    (errors[id] instanceof FormError && (errors[id] as FormError)) || undefined;
 
   const classes = Class(className, styles.Input);
 
@@ -114,11 +117,7 @@ export function Field(props: FieldProps): ReactElement {
 
   useEffect(() => {
     if (!error) return;
-
-    setCancel((current) => {
-      current?.();
-      return undefined;
-    });
+    setCancel((current) => void current?.());
   }, [error]);
 
   useEffect(() => {
@@ -133,17 +132,15 @@ export function Field(props: FieldProps): ReactElement {
       .find(Boolean);
 
     setError(error ?? promise, id);
-  }, [id, value, JSON.stringify(validators)]);
+  }, [id, value]);
 
   useEffect(() => setValue(value, id), [id, value]);
 
   useEffect(() => {
-    if (promise) {
-      const id = setTimeout(() => setLoading(true), 200);
-      return () => clearTimeout(id);
-    }
-    setLoading(false);
-  }, [Boolean(promise)]);
+    if (!waiting) return void setLoading(false);
+    const id = setTimeout(() => setLoading(true), 200);
+    return () => clearTimeout(id);
+  }, [waiting]);
 
   const onChange = useCallback(
     (event: any) => {

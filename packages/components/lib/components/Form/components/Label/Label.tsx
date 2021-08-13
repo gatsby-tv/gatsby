@@ -28,10 +28,12 @@ export function Label(props: LabelProps): ReactElement {
   const [invalid, setInvalid] = useState(Boolean(errors[id]));
 
   const waiting = errors[id] instanceof Promise;
+
   const error =
-    invalid &&
-    errors[id] instanceof FormError &&
-    (errors[id] as FormError).message;
+    (invalid &&
+      errors[id] instanceof FormError &&
+      (errors[id] as FormError).message) ||
+    undefined;
 
   const classes = Class(
     className,

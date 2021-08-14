@@ -8,20 +8,14 @@ import {
   SetStateAction,
 } from 'react';
 import jwt from 'jsonwebtoken';
-import { ifExists } from '@gatsby-tv/utilities';
+import { ContextError } from '@gatsby-tv/utilities';
 import { User, GetAuthTokenRefreshResponse } from '@gatsby-tv/types';
 
 import { fetcher } from '@src/utilities/fetcher';
 
-import { SessionContext, SessionContextType } from './context';
+import { SessionContext, SessionContextType, SessionState } from './context';
 
-export type SessionState = {
-  user?: User;
-  token?: string;
-  loading: boolean;
-  valid: boolean;
-};
-export type SessionAction =
+type SessionAction =
   | { type: 'submit'; token?: string }
   | { type: 'accept'; token: string }
   | { type: 'reject' };
@@ -41,16 +35,16 @@ export function useSessionContext(): SessionContextType {
           if (action.token) {
             return {
               ...state,
-              token: action.token,
               user: jwt.decode(action.token) as User,
+              token: action.token,
               loading: true,
             };
           } else {
             window.localStorage.removeItem('session');
             return {
               ...state,
-              token: undefined,
               user: undefined,
+              token: undefined,
               loading: false,
               valid: false,
             };
@@ -60,8 +54,8 @@ export function useSessionContext(): SessionContextType {
           window.localStorage.setItem('session', action.token);
           return {
             ...state,
-            token: action.token,
             user: jwt.decode(action.token) as User,
+            token: action.token,
             loading: false,
             valid: true,
           };
@@ -70,8 +64,8 @@ export function useSessionContext(): SessionContextType {
           window.localStorage.removeItem('session');
           return {
             ...state,
-            token: undefined,
             user: undefined,
+            token: undefined,
             loading: false,
             valid: false,
           };
@@ -145,7 +139,7 @@ export function useSession(): SessionContextType {
   const context = useContext(SessionContext);
 
   if (!context) {
-    throw new Error('Session context is missing for component.');
+    throw new ContextError('Session');
   }
 
   return context;

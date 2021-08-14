@@ -119,5 +119,8 @@
     "next-transpile-modules": "^8.0.0",
     "prettier": "^2.2.1",
     "webpack": "^5.49.0"
+  },
+  "resolutions": {
+    "ipfs-utils": "ssh://git@github.com/gatsby-tv/js-ipfs-utils#fix/defer-to-native-fetch"
   }
 }

@@ -6,11 +6,12 @@ import { useModalClear } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/content';
 import { Spinner } from '@gatsby-tv/icons';
 
-import { PreAlpha } from '@src/components/PreAlpha';
-import { Topbar } from '@src/components/Topbar';
 import { Link } from '@src/components/Link';
 import { useSession } from '@src/services/session';
 import { useChannelModal } from '@src/utilities/channel-modal';
+
+import { PreAlpha } from './components/PreAlpha';
+import { Topbar } from './components/Topbar';
 
 import styles from './App.module.scss';
 
@@ -38,14 +39,18 @@ export function App<T>(props: AppProps<T>): ReactElement {
     }
   }, [loading]);
 
-  return loading ? (
-    <div className={styles.Loading}>
-      {spinner && <Icon className={styles.Spinner} src={Spinner} />}
-    </div>
-  ) : (
-    <Frame
-      topbar={!isTransient ? <Topbar className={styles.Topbar} /> : undefined}
-    >
+  const SpinnerMarkup = spinner ? (
+    <Icon className={styles.Spinner} src={Spinner} />
+  ) : null;
+
+  const LoadingMarkup = <div className={styles.Loading}>{SpinnerMarkup}</div>;
+
+  const TopbarMarkup = !isTransient ? (
+    <Topbar className={styles.Topbar} />
+  ) : undefined;
+
+  const ContentMarkup = !loading ? (
+    <Frame topbar={TopbarMarkup}>
       <PreAlpha />
       <Channel.Modal
         channel={channel}
@@ -55,5 +60,7 @@ export function App<T>(props: AppProps<T>): ReactElement {
       />
       <Page {...$props} />
     </Frame>
-  );
+  ) : null;
+
+  return ContentMarkup ?? LoadingMarkup;
 }

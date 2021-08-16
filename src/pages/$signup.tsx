@@ -3,8 +3,8 @@ import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import { PostAuthPersistSignInKeyResponse } from '@gatsby-tv/types';
 
-import { Page } from '@src/components/Page';
-import { SignUp } from '@src/components/SignUp';
+import { Page } from '@src/layout/Page';
+import { SignUp } from '@src/layout/SignUp';
 import { useSession } from '@src/services/session';
 import { fetcher } from '@src/utilities/fetcher';
 

@@ -2,8 +2,8 @@ import { useEffect, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { useUniqueId } from '@gatsby-tv/utilities';
 
-import { Page } from '@src/components/Page';
-import { Subscriptions } from '@src/components/Directory';
+import { Page } from '@src/layout/Page';
+import { Subscriptions } from '@src/layout/Directory';
 import { useSession } from '@src/services/session';
 
 export default function SubscriptionsPage(): ReactElement {

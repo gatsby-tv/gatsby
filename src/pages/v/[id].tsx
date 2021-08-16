@@ -4,8 +4,8 @@ import { useVideo } from '@gatsby-tv/content';
 import Player from '@gatsby-tv/player';
 import { useScroll, useFrame, useIPFSVideoStream } from '@gatsby-tv/utilities';
 
-import { Page } from '@src/components/Page';
-import { Video } from '@src/components/Video';
+import { Page } from '@src/layout/Page';
+import { Video } from '@src/layout/Video';
 
 export default function VideoPage(): ReactElement {
   const router = useRouter();

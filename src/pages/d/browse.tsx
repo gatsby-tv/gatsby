@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
-import { Page } from '@src/components/Page';
-import { Browse } from '@src/components/Directory';
+import { Page } from '@src/layout/Page';
+import { Browse } from '@src/layout/Directory';
 
 export default function BrowsePage(): ReactElement {
   return (

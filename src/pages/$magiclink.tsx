@@ -2,7 +2,7 @@ import { useEffect, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { GetAuthSignInKeyResponse } from '@gatsby-tv/types';
 
-import { Page } from '@src/components/Page';
+import { Page } from '@src/layout/Page';
 import { fetcher } from '@src/utilities/fetcher';
 import { useSession } from '@src/services/session';
 

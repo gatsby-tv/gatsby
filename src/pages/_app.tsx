@@ -12,7 +12,7 @@ import '@gatsby-tv/preview/dist/styles.css';
 import '@gatsby-tv/content/dist/styles.css';
 import 'react-image-crop/dist/ReactCrop.css';
 
-import { App } from '@src/components/App';
+import { App } from '@src/layout/App';
 import { fetcher } from '@src/utilities/fetcher';
 import { useSessionContext, SessionContext } from '@src/services/session';
 import { ChannelModalContext } from '@src/utilities/channel-modal';

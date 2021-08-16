@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
-import { Page } from '@src/components/Page';
-import { Home } from '@src/components/Home';
+import { Page } from '@src/layout/Page';
+import { Home } from '@src/layout/Home';
 import { useSession } from '@src/services/session';
 
 export default function IndexPage(): ReactElement {

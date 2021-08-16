@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { useRouter } from 'next/router';
 
-import { Page } from '@src/components/Page';
-import { Settings } from '@src/components/User';
+import { Page } from '@src/layout/Page';
+import { Settings } from '@src/layout/User';
 import { useSession } from '@src/services/session';
 
 export default function UserSettings(): ReactElement {

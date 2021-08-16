@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
-import { Page } from '@src/components/Page';
-import { About } from '@src/components/Info';
+import { Page } from '@src/layout/Page';
+import { About } from '@src/layout/Info';
 
 export default function AboutPage(): ReactElement {
   return (

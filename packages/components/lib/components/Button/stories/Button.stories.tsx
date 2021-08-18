@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Pause } from '@gatsby-tv/icons';
-import { ifExists } from '@gatsby-tv/utilities';
+import { Exists } from '@gatsby-tv/utilities';
 
 import { Icon } from '@lib/components/Icon';
 import { Button, ButtonProps } from '@lib/components/Button';
@@ -17,7 +17,7 @@ type TextButtonProps = ButtonProps & {
 };
 
 const Template: Story<TextButtonProps> = ({ solid, ...props }) => (
-  <Button className={ifExists(solid, styles.TextButton)} {...props} />
+  <Button className={Exists(solid, styles.TextButton)} {...props} />
 );
 
 export const TextButton = Template.bind({});

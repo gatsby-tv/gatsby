@@ -7,7 +7,7 @@ import {
   ReactElement,
 } from 'react';
 import {
-  ifExists,
+  Exists,
   useForm,
   Validators,
   Validator,
@@ -104,7 +104,7 @@ export function File(props: FileProps): ReactElement {
         tooltip={tooltip}
         icon={icon}
         size={size}
-        data-error={ifExists(errors[id])}
+        data-error={Exists(errors[id])}
       >
         {children}
       </Button>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 
-export const ifExists = (prop: any, value?: any) =>
+export const Exists = (prop: any, value?: any) =>
   (Boolean(prop) || undefined) && (value ?? true);
 
-export const ifNotExists = (prop: any, value?: any) =>
+export const NotExists = (prop: any, value?: any) =>
   (!Boolean(prop) || undefined) && (value ?? true);

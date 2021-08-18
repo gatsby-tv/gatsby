@@ -1,5 +1,5 @@
 import { AriaAttributes, ReactNode, ReactElement } from 'react';
-import { Class, ifExists } from '@gatsby-tv/utilities';
+import { Class, Exists } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
 import { useItem } from '@lib/utilities/item';
@@ -28,7 +28,7 @@ export function Item(props: ItemProps): ReactElement {
       role="tab"
       tabIndex={selection === option ? 0 : -1}
       onClick={onClick}
-      aria-selected={ifExists(selection === option)}
+      aria-selected={Exists(selection === option)}
       {...aria}
     >
       {children}

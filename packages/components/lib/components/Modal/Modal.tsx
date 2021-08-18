@@ -1,5 +1,5 @@
 import { useCallback, ReactNode, ReactElement } from 'react';
-import { ifExists, Class, useModalCallback } from '@gatsby-tv/utilities';
+import { Exists, Class, useModalCallback } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
 import { Injection } from '@lib/components/Injection';
@@ -40,7 +40,7 @@ export function Modal(props: ModalProps): ReactElement | null {
         active={overlay}
         $props={{
           className: styles.Overlay,
-          style: ifExists(zIndex, { zIndex }),
+          style: Exists(zIndex, { zIndex }),
         }}
       >
         <div className={classes} onPointerDown={onPointerDown}>

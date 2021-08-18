@@ -10,7 +10,7 @@ import {
 import { usePopper } from 'react-popper';
 import {
   Class,
-  ifExists,
+  Exists,
   useForm,
   FormChangeHandler,
 } from '@gatsby-tv/utilities';
@@ -170,7 +170,7 @@ export function Slider(props: SliderProps): ReactElement {
           className={styles.Stop}
         >
           {!hideLabels && (
-            <span data-selected={ifExists(stop.value === value)}>
+            <span data-selected={Exists(stop.value === value)}>
               {stop.label}
             </span>
           )}

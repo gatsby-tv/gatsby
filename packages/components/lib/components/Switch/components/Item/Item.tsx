@@ -1,5 +1,5 @@
 import { AriaAttributes, ReactNode, ReactElement } from 'react';
-import { Class, ifExists } from '@gatsby-tv/utilities';
+import { Class, Exists } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
 import { useSwitch } from '@lib/utilities/switch';
@@ -34,7 +34,7 @@ export function Item(props: ItemProps): ReactElement {
       className={classes}
       role="tab"
       tabIndex={selection === option ? 0 : -1}
-      aria-selected={ifExists(selection === option)}
+      aria-selected={Exists(selection === option)}
       aria-controls={ariaControls}
       onClick={onClick}
     >

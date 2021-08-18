@@ -12,7 +12,7 @@ import {
 import { Spinner } from '@gatsby-tv/icons';
 import {
   Class,
-  ifExists,
+  Exists,
   useForwardedRef,
   useOptionalForm,
 } from '@gatsby-tv/utilities';
@@ -182,10 +182,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ref: button,
       className: classes,
       htmlFor: asLabelFor,
-      tabIndex: ifExists(asLabelFor, -1),
-      disabled: ifExists(invalid),
-      'data-interactive': ifExists(loading, 'false'),
-      'data-animating': ifExists(
+      tabIndex: Exists(asLabelFor, -1),
+      disabled: Exists(invalid),
+      'data-interactive': Exists(loading, 'false'),
+      'data-animating': Exists(
         !unstyled && animate && !reset && (active || held)
       ),
       onClick,

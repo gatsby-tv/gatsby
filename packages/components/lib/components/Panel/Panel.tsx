@@ -7,7 +7,7 @@ import {
   ReactNode,
   ReactElement,
 } from 'react';
-import { Class, ifExists, useRepaint } from '@gatsby-tv/utilities';
+import { Class, Exists, useRepaint } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 import { Optional } from '@lib/components/Optional';
@@ -248,7 +248,7 @@ export function Panel(props: PanelProps): ReactElement | null {
     >
       <div
         ref={setRef}
-        style={ifExists(zIndex, { zIndex })}
+        style={Exists(zIndex, { zIndex })}
         className={Class(
           styles.Panel,
           overlay ? styles.Fixed : styles.Absolute

@@ -3,7 +3,7 @@ import DOMPurify from 'dompurify';
 import { Button, Injection, TextBox, Icon, Rule } from '@gatsby-tv/components';
 import { ExtendDown, ExtendUp } from '@gatsby-tv/icons';
 import {
-  ifExists,
+  Exists,
   useMobileDetector,
   useComponentWillMount,
   useStabilizedCallback,
@@ -39,7 +39,7 @@ export function Description(props: DescriptionProps): ReactElement | null {
     <>
       <TextBox
         className={styles.Description}
-        clamp={ifExists(clamp, 3)}
+        clamp={Exists(clamp, 3)}
         dangerouslySetInnerHTML={{ __html: TextMarkup }}
       />
       {id && !clamp && <Injection.Target id={id} />}
@@ -53,7 +53,7 @@ export function Description(props: DescriptionProps): ReactElement | null {
     <Button unstyled onClick={toggleClamp}>
       <TextBox
         className={styles.Description}
-        clamp={ifExists(clamp, 3)}
+        clamp={Exists(clamp, 3)}
         dangerouslySetInnerHTML={{ __html: TextMarkup }}
       />
       {id && !clamp && <Injection.Target id={id} />}

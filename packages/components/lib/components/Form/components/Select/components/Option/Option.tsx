@@ -1,5 +1,5 @@
 import { useCallback, ReactElement } from 'react';
-import { ifExists, useFormSelect } from '@gatsby-tv/utilities';
+import { Exists, useFormSelect } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
 import { Option as SelectOption } from '@lib/types';
@@ -18,8 +18,8 @@ export function Option(props: OptionProps): ReactElement {
   return (
     <div
       className={styles.Option}
-      data-hover={ifExists(hover === option.value)}
-      aria-selected={ifExists(selection === option.value)}
+      data-hover={Exists(hover === option.value)}
+      aria-selected={Exists(selection === option.value)}
       onClick={() => setSelection(option.value)}
       onMouseDown={(event: any) => event.preventDefault()}
       onPointerEnter={() => setHover(option.value)}

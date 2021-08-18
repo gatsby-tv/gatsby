@@ -1,6 +1,6 @@
 import { useRef, useEffect, ReactNode, ReactElement } from 'react';
 import { DownTick } from '@gatsby-tv/icons';
-import { Class, ifExists, useUniqueId } from '@gatsby-tv/utilities';
+import { Class, Exists, useUniqueId } from '@gatsby-tv/utilities';
 
 import { TextBox } from '@lib/components/TextBox';
 import { Icon } from '@lib/components/Icon';
@@ -44,7 +44,7 @@ export function TextCollapsible(props: TextCollapsibleProps): ReactElement {
         id={id}
         className={styles.VisuallyHidden}
         type="checkbox"
-        checked={ifExists(active)}
+        checked={Exists(active)}
       />
       <label ref={label} htmlFor={id} className={styles.Label} tabIndex={-1}>
         {text}

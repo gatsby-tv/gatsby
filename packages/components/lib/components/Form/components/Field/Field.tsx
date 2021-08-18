@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import {
-  ifExists,
+  Exists,
   Class,
   useForm,
   useFormLabel,
@@ -198,8 +198,8 @@ export function Field(props: FieldProps): ReactElement {
   return (
     <div
       className={classes}
-      data-focus={ifExists(focus)}
-      data-error={ifExists(invalid && error)}
+      data-focus={Exists(focus)}
+      data-error={Exists(invalid && error)}
       onClick={onClick}
     >
       {PrefixMarkup}

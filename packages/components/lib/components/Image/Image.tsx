@@ -7,7 +7,7 @@ import {
   ReactElement,
 } from 'react';
 import { IPFSContent } from '@gatsby-tv/types';
-import { Class, ifExists, useIPFSContent } from '@gatsby-tv/utilities';
+import { Class, Exists, useIPFSContent } from '@gatsby-tv/utilities';
 
 import { BorderRadius } from '@lib/types';
 import { Viewport } from '@lib/components/Viewport';
@@ -56,7 +56,7 @@ function ImageURL(props: ImageURLProps): ReactElement {
       aria-label={ariaLabel}
     >
       <img
-        style={ifExists(loading, {
+        style={Exists(loading, {
           paddingTop: `${100 * aspectRatio}%`,
         })}
         className={Class(

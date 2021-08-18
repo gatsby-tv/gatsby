@@ -1,7 +1,7 @@
 import { useRef, useState, ReactNode, ReactElement } from 'react';
 import {
   Class,
-  ifExists,
+  Exists,
   ScrollContext,
   useScrollContext,
   useParentRef,
@@ -39,7 +39,7 @@ export function Scroll(props: ScrollProps): ReactElement {
     <ScrollContext.Provider value={context}>
       <div
         ref={scroll}
-        style={ifExists(height && !floating, { maxHeight: `${height}px` })}
+        style={Exists(height && !floating, { maxHeight: `${height}px` })}
         className={classes}
         onScroll={onScroll}
       >

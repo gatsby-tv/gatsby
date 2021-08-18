@@ -1,5 +1,5 @@
 import { ReactNode, ReactElement } from 'react';
-import { Class, ifExists } from '@gatsby-tv/utilities';
+import { Class, Exists } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
 import { TextSubheading } from '@lib/components/TextSubheading';
@@ -21,7 +21,7 @@ export function Section(props: SectionProps): ReactElement {
   const TitleMarkup = title ? <TextSubheading>{title}</TextSubheading> : null;
 
   return (
-    <div className={classes} data-flush={ifExists(flush)}>
+    <div className={classes} data-flush={Exists(flush)}>
       {TitleMarkup}
       {children}
     </div>

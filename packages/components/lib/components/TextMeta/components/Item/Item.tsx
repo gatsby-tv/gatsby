@@ -1,5 +1,5 @@
 import { forwardRef, Ref, HTMLAttributes, ReactNode } from 'react';
-import { Class, ifExists } from '@gatsby-tv/utilities';
+import { Class, Exists } from '@gatsby-tv/utilities';
 
 import styles from '../../TextMeta.scss';
 
@@ -27,7 +27,7 @@ export const Item = forwardRef<HTMLElement, ItemProps>(
     return (
       <Element
         ref={ref}
-        style={ifExists(clamp, { WebkitLineClamp: clamp })}
+        style={Exists(clamp, { WebkitLineClamp: clamp })}
         className={classes}
         {...(rest as any)}
       >

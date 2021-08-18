@@ -14,7 +14,7 @@ import {
 } from '@gatsby-tv/components';
 import { Cancel } from '@gatsby-tv/icons';
 import {
-  ifExists,
+  Exists,
   ChannelHandle,
   FullValue,
   useFrame,
@@ -120,7 +120,7 @@ export function Modal(props: ModalProps): ReactElement | null {
       id="channel"
       className={isMobile ? styles.Panel : styles.Modal}
       overlay
-      draggable={ifExists(isMobile, !scrolling)}
+      draggable={Exists(isMobile, !scrolling)}
       active={active}
       onExit={onExit}
     >

@@ -15,7 +15,7 @@ export * from './use-repaint';
 export * from './no-op';
 export * from './errors';
 export * from './types';
-export * from './if-exists';
+export * from './exists';
 export * from './class';
 export * from './format';
 export * from './unique-id';

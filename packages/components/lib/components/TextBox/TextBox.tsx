@@ -1,5 +1,5 @@
 import { forwardRef, Ref, HTMLAttributes, ReactNode } from 'react';
-import { Class, ifExists } from '@gatsby-tv/utilities';
+import { Class, Exists } from '@gatsby-tv/utilities';
 
 import { Spacing } from '@lib/types';
 
@@ -25,7 +25,7 @@ export const TextBox = forwardRef<HTMLDivElement, TextBoxProps>(
     return (
       <div
         ref={ref}
-        style={ifExists(clamp, { WebkitLineClamp: clamp })}
+        style={Exists(clamp, { WebkitLineClamp: clamp })}
         className={classes}
         {...attributes}
       >

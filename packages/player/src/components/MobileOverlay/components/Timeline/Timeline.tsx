@@ -1,7 +1,7 @@
 import { useState, ReactElement } from 'react';
 import { usePopper } from 'react-popper';
 import { Activatable } from '@gatsby-tv/components';
-import { Class, Time, ifExists } from '@gatsby-tv/utilities';
+import { Class, Time, Exists } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
 import styles from './Timeline.scss';
@@ -63,8 +63,8 @@ export function Timeline(props: TimelineProps): ReactElement {
       <div
         ref={timeline.ref}
         className={styles.Timeline}
-        data-active={ifExists(player.active && !disabled)}
-        data-scrubbing={ifExists(timeline.scrubbing)}
+        data-active={Exists(player.active && !disabled)}
+        data-scrubbing={Exists(timeline.scrubbing)}
         {...timeline.events}
       >
         <div style={{ right: buffer }} className={styles.Buffer} />

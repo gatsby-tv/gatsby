@@ -11,8 +11,8 @@ import { usePopper } from 'react-popper';
 import { ExtendDown, Cancel } from '@gatsby-tv/icons';
 import {
   Class,
-  ifExists,
-  ifNotExists,
+  Exists,
+  NotExists,
   useForm,
   useResizeObserver,
   Validators,
@@ -406,8 +406,8 @@ export function Select(props: SelectProps): ReactElement {
         <div
           ref={ref}
           className={classes}
-          data-focus={ifExists(state.focus)}
-          data-error={ifExists(invalid)}
+          data-focus={Exists(state.focus)}
+          data-error={Exists(invalid)}
           onClick={onClick}
           onMouseDown={onMouseDown}
         >
@@ -417,14 +417,14 @@ export function Select(props: SelectProps): ReactElement {
               id={id}
               ref={input}
               value={state.query}
-              placeholder={ifNotExists(state.selection, placeholder)}
+              placeholder={NotExists(state.selection, placeholder)}
               autoCapitalize="none"
               autoComplete="off"
               autoCorrect="off"
               spellCheck={false}
               tabIndex={0}
               type="text"
-              readOnly={ifNotExists(searchable)}
+              readOnly={NotExists(searchable)}
               onMouseDown={(event: any) => event.preventDefault()}
               onChange={(event: any) =>
                 dispatch({ type: 'input', query: event.target.value })

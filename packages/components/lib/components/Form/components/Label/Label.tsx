@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactNode, ReactElement } from 'react';
 import { NoEntry } from '@gatsby-tv/icons';
 import {
-  ifExists,
+  Exists,
   Class,
   useForm,
   FormError,

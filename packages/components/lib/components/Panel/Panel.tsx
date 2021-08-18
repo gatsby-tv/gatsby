@@ -7,7 +7,7 @@ import {
   ReactNode,
   ReactElement,
 } from 'react';
-import { Class, ifExists } from '@gatsby-tv/utilities';
+import { Class, ifExists, useRepaint } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 import { Optional } from '@lib/components/Optional';
@@ -88,9 +88,11 @@ export function Panel(props: PanelProps): ReactElement | null {
     zIndex,
     onExit,
   } = props;
+
   const [ref, setRef] = useState<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const repaint = useRepaint();
 
   const [touch, setTouch] = useReducer(
     (state: TouchState, action: TouchAction) => {
@@ -147,35 +149,27 @@ export function Panel(props: PanelProps): ReactElement | null {
   useEffect(() => setMounted(Boolean(active)), [active]);
 
   useEffect(() => {
-    /* Our intention is to change the visibility of the panel only once we
-     * know that the browser has had the chance to paint the component in
-     * its initial state (offscreen).
-     *
-     * This is also why we force reflow by requesting the element offsetHeight.
-     */
-    if (!ref?.offsetHeight) return;
-    const id = window.requestAnimationFrame(() => setVisible(mounted));
-    return () => window.cancelAnimationFrame(id);
+    if (!ref) return;
+    repaint();
+    const id = requestAnimationFrame(() => setVisible(mounted));
+    return () => cancelAnimationFrame(id);
   }, [ref, mounted]);
 
   useEffect(() => {
-    if (!mounted) {
-      const id = setTimeout(() => onExit?.(), 300);
-      return () => clearTimeout(id);
-    }
+    if (mounted) return;
+    const id = setTimeout(() => onExit?.(), 300);
+    return () => clearTimeout(id);
   }, [mounted]);
 
   useEffect(() => {
-    if (!draggable) {
-      setTouch({ type: 'end' });
-    }
+    if (draggable) return;
+    setTouch({ type: 'end' });
   }, [draggable]);
 
   const onKeyDown = useCallback((event: any) => {
-    if (event.code === 'Escape') {
-      setTouch({ type: 'end' });
-      setMounted(false);
-    }
+    if (event.code !== 'Escape') return;
+    setTouch({ type: 'end' });
+    setMounted(false);
   }, []);
 
   const onTouchStart = useCallback(

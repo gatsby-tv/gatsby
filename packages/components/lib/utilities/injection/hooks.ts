@@ -76,7 +76,7 @@ export function useInjectionTarget(
   return injections[id] ? setRef : null;
 }
 
-export function useInjection(id: string): HTMLElement | null | undefined {
+export function useInjection(id?: string): HTMLElement | null | undefined {
   const context = useContext(InjectionContext);
 
   if (!context) {
@@ -86,9 +86,10 @@ export function useInjection(id: string): HTMLElement | null | undefined {
   const { targets, addInjection, removeInjection } = context;
 
   useEffect(() => {
+    if (!id) return;
     addInjection(id);
     return () => removeInjection(id);
   }, [id]);
 
-  return targets[id];
+  return id ? targets[id] : undefined;
 }

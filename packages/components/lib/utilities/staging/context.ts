@@ -1,7 +1,9 @@
 import { createContext } from 'react';
 
 export type StagingContextType = {
-  stage: number;
+  current: number;
+  previous: number;
+  onTransitionEnd: () => void;
 };
 
 export const StagingContext = createContext<StagingContextType | undefined>(

@@ -33,9 +33,3 @@ export function useVolatileKey(initial?: any): any {
 
   return [value, dispatch];
 }
-
-export function useVolatileState(): [number, Dispatch<void>] {
-  const [state, setState] = useState(0);
-  const dispatch = useCallback(() => setState((current) => current + 1), []);
-  return [state, dispatch];
-}

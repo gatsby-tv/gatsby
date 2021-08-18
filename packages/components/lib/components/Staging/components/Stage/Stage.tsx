@@ -13,16 +13,18 @@ export interface StageProps {
 
 export function Stage(props: StageProps): ReactElement {
   const { children, className, index } = props;
-  const { stage } = useStaging();
+  const { current, previous, onTransitionEnd } = useStaging();
+  const active = [current, previous].includes(index);
 
-  const classes = Class(className, styles.Stage);
+  const classes = Class(className, styles.Stage, active && styles.Active);
+  const direction = Math.min(Math.max(index - current, -1), 1);
 
   const style: CSSProperties = {
-    left: `${100 * (index - stage)}%`,
+    left: `${100 * direction}%`,
   };
 
   return (
-    <div style={style} className={classes}>
+    <div style={style} className={classes} onTransitionEnd={onTransitionEnd}>
       {children}
     </div>
   );

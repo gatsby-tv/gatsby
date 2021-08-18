@@ -9,14 +9,14 @@ export type { TargetProps as InjectionTargetProps };
 
 export interface InjectionProps {
   children?: ReactNode;
-  target: string;
+  target?: string;
   index?: number;
 }
 
 export function Injection(props: InjectionProps): ReactElement {
   const { children, target, index } = props;
   const container = useInjection(
-    index !== undefined ? `${target}.${index}` : target
+    target !== undefined && index !== undefined ? `${target}.${index}` : target
   );
 
   return <Portal target={container}>{children}</Portal>;

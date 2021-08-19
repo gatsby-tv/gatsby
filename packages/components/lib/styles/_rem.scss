@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $base-font-size: 10px;
 
 @function rem($value) {
@@ -8,7 +10,7 @@ $base-font-size: 10px;
   } @else if $unit == 'rem' {
     @return $value;
   } @else if $unit == 'px' {
-    @return $value / $base-font-size * 1rem;
+    @return math.div($value, $base-font-size) * 1rem;
   } @else {
     @error 'Value must in either rem or px.';
   }

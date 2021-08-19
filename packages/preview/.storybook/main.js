@@ -1,7 +1,11 @@
 const path = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  core: {
+    builder: 'webpack5',
+  },
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -26,5 +30,9 @@ module.exports = {
     checkOptions: {},
     reactDocgen: false,
     reactDocgenTypescriptOptions: {},
+  },
+  webpackFinal: (config) => {
+    config.plugins.push(new NodePolyfillPlugin());
+    return config;
   },
 };

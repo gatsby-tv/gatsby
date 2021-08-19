@@ -1,8 +1,12 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
   stories: ['../lib/components/**/*.stories.@(js|jsx|ts|tsx)'],
+  core: {
+    builder: 'webpack5',
+  },
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -28,4 +32,8 @@ module.exports = {
     reactDocgen: false,
     reactDocgenTypescriptOptions: {},
   },
+  webpackFinal: (config) => {
+    config.plugins.push(new NodePolyfillPlugin());
+    return config;
+  }
 };

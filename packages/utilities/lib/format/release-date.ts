@@ -1,7 +1,6 @@
 function ReleaseDateFormatter(date: Date) {
-  const now = Date.now() - new Date().getTimezoneOffset() * 60 * 1000;
-  const then = +date;
-  const elapsed = new Date(now - then);
+  const now = Date.now();
+  const elapsed = new Date(now - Number(date));
   const epoch = new Date(0);
   const entries = Object.entries({
     year: elapsed.getUTCFullYear() - epoch.getUTCFullYear(),

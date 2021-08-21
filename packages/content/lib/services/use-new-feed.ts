@@ -1,11 +1,14 @@
 import { Browsable } from '@gatsby-tv/types';
 
 import { useInfinite } from '@lib/utilities/use-infinite';
+import { Cursor } from '@lib/utilities/cursor';
 import { InfiniteFetchResponse } from '@lib/types';
 
-export function useNewFeed(): InfiniteFetchResponse<'content', Browsable> {
+export function useNewFeed(
+  limit?: number
+): InfiniteFetchResponse<'content', Browsable> {
   const { data, ...props } = useInfinite<Browsable>(
-    (index) => `/listing/videos/new?page=${index}`
+    Cursor('listing/videos/new', limit)
   );
 
   return {

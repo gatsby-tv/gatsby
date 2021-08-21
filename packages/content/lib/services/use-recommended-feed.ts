@@ -1,15 +1,17 @@
 import { Browsable } from '@gatsby-tv/types';
 
 import { useInfinite } from '@lib/utilities/use-infinite';
+import { Cursor } from '@lib/utilities/cursor';
 import { InfiniteFetchResponse } from '@lib/types';
 
 export function useRecommendedFeed(
-  id?: string
+  id?: string,
+  limit?: number
 ): InfiniteFetchResponse<'content', Browsable> {
-  const { data, ...props } = useInfinite<Browsable>((index) =>
+  const { data, ...props } = useInfinite<Browsable>(
     id
-      ? `/user/${id}/listing/recommended?page=${index}`
-      : `/listing/videos/popular?page=${index}`
+      ? Cursor(`/user/${id}/listing/recommended`, limit)
+      : Cursor('/listing/videos/popular', limit)
   );
 
   return {

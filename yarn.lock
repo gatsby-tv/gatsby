@@ -3966,7 +3966,7 @@ __metadata:
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/icons": "workspace:packages/icons"
-    "@gatsby-tv/types": ^0.4.39
+    "@gatsby-tv/types": ^0.5.3
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@popperjs/core": ^2.5.4
     "@rollup/plugin-babel": ^5.3.0
@@ -4040,7 +4040,7 @@ __metadata:
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
     "@gatsby-tv/preview": "workspace:packages/preview"
-    "@gatsby-tv/types": ^0.4.39
+    "@gatsby-tv/types": ^0.5.3
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
@@ -4080,7 +4080,7 @@ __metadata:
     sass: ^1.38.0
     sass-loader: ^12.1.0
     style-loader: ^2.0.0
-    swr: ^0.5.3
+    swr: ^0.5.6
     tscpaths: ^0.0.9
     typescript: ^4.3.5
     webpack: ^5.49.0
@@ -4123,7 +4123,7 @@ __metadata:
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
-    "@gatsby-tv/types": ^0.4.39
+    "@gatsby-tv/types": ^0.5.3
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@popperjs/core": ^2.5.4
     "@rollup/plugin-babel": ^5.3.0
@@ -4193,7 +4193,7 @@ __metadata:
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
-    "@gatsby-tv/types": ^0.4.39
+    "@gatsby-tv/types": ^0.5.3
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
@@ -4248,12 +4248,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@gatsby-tv/types@npm:^0.4.39":
-  version: 0.4.39
-  resolution: "@gatsby-tv/types@npm:0.4.39"
+"@gatsby-tv/types@npm:^0.5.3":
+  version: 0.5.3
+  resolution: "@gatsby-tv/types@npm:0.5.3"
   peerDependencies:
     core-js: ^3.7.0
-  checksum: ce9085e2ccc3462fcca608b1e5a05792e2c4b68650d7e121be177afabf6fb048cc73c2ff414ea56b24da6e68852a6e8f27fb36628b36baa7b4f000d7166c2d7a
+  checksum: f0a76ad50503cfbd48d1c76ec9946b831c60194cb677b748bd67be15adee1ceb1dbf8a64de481c7252bec7f4f7e7637585e68a18338b1da581f057291a2cbcb0
   languageName: node
   linkType: hard
 
@@ -4269,7 +4269,7 @@ __metadata:
     "@babel/preset-env": ^7.14.8
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.12.1
-    "@gatsby-tv/types": ^0.4.39
+    "@gatsby-tv/types": ^0.5.3
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^19.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
@@ -14253,6 +14253,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dequal@npm:2.0.2":
+  version: 2.0.2
+  resolution: "dequal@npm:2.0.2"
+  checksum: 86c7a2c59f7b0797ed397c74b5fcdb744e48fc19440b70ad6ac59f57550a96b0faef3f1cfd5760ec5e6d3f7cb101f634f1f80db4e727b1dc8389bf62d977c0a0
+  languageName: node
+  linkType: hard
+
 "des.js@npm:^1.0.0":
   version: 1.0.1
   resolution: "des.js@npm:1.0.1"
@@ -17363,7 +17370,7 @@ fsevents@~2.1.1:
     "@gatsby-tv/icons": "workspace:packages/icons"
     "@gatsby-tv/player": "workspace:packages/player"
     "@gatsby-tv/preview": "workspace:packages/preview"
-    "@gatsby-tv/types": ^0.4.39
+    "@gatsby-tv/types": ^0.5.3
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@svgr/cli": ^5.5.0
     "@testing-library/dom": ^7.26.5
@@ -17423,7 +17430,7 @@ fsevents@~2.1.1:
     source-map-support: ^0.5.19
     string_decoder: ^1.3.0
     supports-color: ^9.0.0
-    swr: ^0.5.3
+    swr: ^0.5.6
     typescript: ^4.3.5
     uint8arrays: ^2.1.5
     url: ^0.11.0
@@ -31997,12 +32004,14 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"swr@npm:^0.5.3":
-  version: 0.5.3
-  resolution: "swr@npm:0.5.3"
+"swr@npm:^0.5.6":
+  version: 0.5.7
+  resolution: "swr@npm:0.5.7"
+  dependencies:
+    dequal: 2.0.2
   peerDependencies:
     react: ^16.11.0 || ^17.0.0
-  checksum: 63f005e19969ae8041b0365bc5cce480bf24815b4fe44d424dd1c0790366a2e9268f06fb26267551899600b59e3ac9fc59075831f9b1e5d8ba1606b065ec8c98
+  checksum: 1bbc7fb107565cdfa2d15d5e14cd51cac9e4087ba08d4557aedf69552186ec4eb57aeb9dc6e3021e23b2ad3638b56e392b86f95518a000842797d10e89f2405e
   languageName: node
   linkType: hard
 

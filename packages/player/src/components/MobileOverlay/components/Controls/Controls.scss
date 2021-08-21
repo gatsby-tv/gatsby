@@ -26,6 +26,11 @@
   }
 }
 
+.Hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .Backward {
   @include expand();
   grid-column: skip-backward;

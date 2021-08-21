@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { useCallback, ReactElement } from 'react';
 import { Button } from '@gatsby-tv/components';
 import {
   Play,
@@ -31,16 +31,33 @@ export function Controls(props: ControlsProps): ReactElement {
   const time = Time(player.time * player.duration);
   const duration = Time(player.duration);
 
+  const onBackwardDblClick = useCallback(() => {
+    setSeek((current) => current - 5);
+    setSignal('backward');
+  }, []);
+
+  const onPlaybackClick = useCallback(
+    () => setPlayback((current) => (player.loading ? current : !current)),
+    [player.loading]
+  );
+
+  const onForwardDblClick = useCallback(() => {
+    setSeek((current) => current + 5);
+    setSignal('forward');
+  }, []);
+
+  const onFullscreenClick = useCallback(
+    () => setFullscreen((current) => !current),
+    []
+  );
+
   return (
     <>
       <div className={Class(className, styles.Controls)}>
         <Button
           className={styles.Backward}
           unstyled
-          onDblClick={() => {
-            setSeek((current) => current - 5);
-            setSignal('backward');
-          }}
+          onDblClick={onBackwardDblClick}
         />
         <Button
           className={Class(styles.Previous, styles.Disabled)}
@@ -48,15 +65,13 @@ export function Controls(props: ControlsProps): ReactElement {
           icon={Previous}
           size="small"
         />
-        {!player.loading && (
-          <Button
-            className={styles.Playback}
-            animate
-            icon={player.paused ? Play : Pause}
-            size="larger"
-            onClick={() => setPlayback((current) => !current)}
-          />
-        )}
+        <Button
+          className={Class(styles.Playback, player.loading && styles.Hidden)}
+          animate
+          icon={player.paused ? Play : Pause}
+          size="larger"
+          onClick={onPlaybackClick}
+        />
         <Button
           className={Class(styles.Next, styles.Disabled)}
           animate
@@ -66,10 +81,7 @@ export function Controls(props: ControlsProps): ReactElement {
         <Button
           className={styles.Forward}
           unstyled
-          onDblClick={() => {
-            setSeek((current) => current + 5);
-            setSignal('forward');
-          }}
+          onDblClick={onForwardDblClick}
         />
       </div>
       <div className={styles.BottomRow}>
@@ -78,7 +90,7 @@ export function Controls(props: ControlsProps): ReactElement {
           className={styles.Fullscreen}
           icon={fullscreen ? Compress : Expand}
           size="smallest"
-          onClick={() => setFullscreen((current) => !current)}
+          onClick={onFullscreenClick}
         />
       </div>
     </>

@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, ReactElement } from 'react';
+import { useRef, useCallback, CSSProperties, ReactNode, ReactElement } from 'react';
 
 import styles from '../../Carousel.scss';
 
@@ -13,10 +13,18 @@ export interface SliderProps {
   children?: ReactNode;
   state: SliderState;
   groups: number;
+  onTransitionEnd: (event: any) => void;
 }
 
 export function Slider(props: SliderProps): ReactElement {
-  const { children, state, groups } = props;
+  const {
+    children,
+    state,
+    groups,
+    onTransitionEnd: onTransitionEndHandler,
+  } = props;
+
+  const ref = useRef<HTMLDivElement>(null);
   const distance = state.slide - state.desired;
 
   const style: CSSProperties = {
@@ -35,8 +43,18 @@ export function Slider(props: SliderProps): ReactElement {
     style.transition = `transform 500ms ease`;
   }
 
+  const onTransitionEnd = useCallback((event: any) => {
+    if (event.target !== ref.current) return;
+    onTransitionEndHandler(event);
+  }, []);
+
   return (
-    <div style={style} className={styles.Slider}>
+    <div
+      ref={ref}
+      style={style}
+      className={styles.Slider}
+      onTransitionEnd={onTransitionEnd}
+    >
       {children}
     </div>
   );

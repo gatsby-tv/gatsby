@@ -15,49 +15,38 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
 
   const [disabled, setDisabled] = useState(false);
   const [controls, setControls] = useState(false);
-  const [activatable, setActivatable] = useState(true);
+  const [pinned, setPinned] = useState(false);
   const active = player.active && !disabled;
 
   const onPointerUp = useCallback(
     () =>
       setActive((current) => {
-        if (!activatable) return current;
-        setActivatable(false);
-        if (player.paused || player.loading) {
-          setDisabled((current) => !current);
-          return current;
-        } else {
-          return !current;
-        }
+        if (pinned) return current;
+        setPinned(true);
+        if (!player.paused && !player.loading) return !current;
+        setDisabled((current) => !current);
+        return current;
       }),
-    [activatable, disabled, player.paused, player.loading]
+    [pinned, disabled, player.paused, player.loading]
   );
 
+  const onTransitionEnd = useCallback(() => setControls(active), [active]);
+  const onOrientationChange = useCallback(() => setActive(false), []);
+
   useEffect(() => {
-    const id = setTimeout(() => setActivatable(true), 300);
+    const id = setTimeout(() => setPinned(false), 300);
     return () => clearTimeout(id);
-  }, [activatable]);
+  }, [pinned]);
 
   useEffect(() => {
-    if (active) {
-      const id = setTimeout(() => setControls(true), 100);
-      return () => clearTimeout(id);
-    } else {
-      setControls(false);
-    }
-  }, [active]);
-
-  useEffect(() => {
-    if (!player.paused && !player.loading) {
-      setDisabled(false);
-    }
+    if (player.paused || player.loading) return;
+    setDisabled(false);
   }, [player.paused, player.loading]);
 
   useEffect(() => {
-    if (timeline.scrubbing) {
-      setDisabled(false);
-      setActive(true);
-    }
+    if (!timeline.scrubbing) return;
+    setDisabled(false);
+    setActive(true);
   }, [timeline.scrubbing]);
 
   const LoadingMarkup =
@@ -71,6 +60,7 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
         className={Class(styles.Overlay, styles.Tint)}
         active={active || timeline.scrubbing}
         duration="fast"
+        onTransitionEnd={onTransitionEnd}
       />
       {LoadingMarkup}
       <Signal className={styles.Signal} signal={signal} />
@@ -82,10 +72,7 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
         <Controls {...props} />
       </Activatable>
       <Timeline className={styles.Timeline} disabled={disabled} {...props} />
-      <EventListener
-        event="orientationchange"
-        handler={() => setActive(false)}
-      />
+      <EventListener event="orientationchange" handler={onOrientationChange} />
     </div>
   );
 }

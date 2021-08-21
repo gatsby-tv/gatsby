@@ -54,17 +54,13 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       (value: SetStateAction<boolean>) =>
         setPlayback((current) => {
           const playback = typeof value === 'function' ? value(current) : value;
-          if (playback) {
-            setSignal('play');
-          } else {
-            setSignal('pause');
-          }
+          setSignal(playback ? 'play' : 'pause');
           return playback;
         }),
       []
     );
 
-    useEffect(() => setActive(!Boolean(isMobile)), [isMobile]);
+    useEffect(() => setActive(!isMobile), [isMobile]);
 
     const OverlayMarkup = !mounted ? null : isMobile ? (
       <MobileOverlay

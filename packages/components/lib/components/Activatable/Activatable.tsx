@@ -1,4 +1,10 @@
-import { DOMAttributes, ReactNode, ReactElement } from 'react';
+import {
+  useRef,
+  useCallback,
+  DOMAttributes,
+  ReactNode,
+  ReactElement,
+} from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Duration } from '@lib/types';
@@ -14,7 +20,17 @@ export interface ActivatableProps extends DOMAttributes<Element> {
 }
 
 export function Activatable(props: ActivatableProps): ReactElement {
-  const { children, className, active, duration, delay, ...events } = props;
+  const {
+    children,
+    className,
+    active,
+    duration,
+    delay,
+    onTransitionEnd: onTransitionEndHandler,
+    ...events
+  } = props;
+
+  const ref = useRef<HTMLDivElement>(null);
 
   const classes = Class(
     className,
@@ -24,8 +40,21 @@ export function Activatable(props: ActivatableProps): ReactElement {
     active && delay && styles[`Delay-${delay}`]
   );
 
+  const onTransitionEnd = useCallback(
+    (event: any) => {
+      if (event.target !== ref.current) return;
+      return onTransitionEndHandler?.(event);
+    },
+    [onTransitionEndHandler]
+  );
+
   return (
-    <div className={classes} {...events}>
+    <div
+      ref={ref}
+      className={classes}
+      onTransitionEnd={onTransitionEnd}
+      {...events}
+    >
       {children}
     </div>
   );

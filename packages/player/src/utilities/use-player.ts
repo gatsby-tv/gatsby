@@ -57,7 +57,7 @@ export type PlayerState = VideoState & {
   aspectRatio: number;
 };
 
-function bufferProgress(time: number, ranges: TimeRanges): number {
+function Progress(time: number, ranges: TimeRanges): number {
   let index;
   let delta = Infinity;
   for (let i = 0; i < ranges.length; i++) {
@@ -243,54 +243,45 @@ export function usePlayer(
 
   const setActive = useCallback((value: SetStateAction<boolean>) => {
     const update = typeof value === 'function' ? value(active.current) : value;
-    if (update) {
-      dispatch({ type: 'activate' });
-    } else {
-      dispatch({ type: 'deactivate' });
-    }
+    dispatch({ type: update ? 'activate' : 'deactivate' });
   }, []);
 
   const setPinned = useCallback((value: SetStateAction<boolean>) => {
     const update = typeof value === 'function' ? value(pinned.current) : value;
-    if (update) {
-      dispatch({ type: 'pin' });
-    } else {
-      dispatch({ type: 'unpin' });
-    }
+    dispatch({ type: update ? 'pin' : 'unpin' });
   }, []);
 
   const setPlayback = useCallback((value: SetStateAction<boolean>) => {
     if (!video.current) return;
+
     const playback =
       typeof value === 'function' ? value(playing.current) : value;
+
     if (playback === playing.current) return;
-    if (playing.current) {
-      video.current.pause();
-    } else {
-      video.current.play();
-    }
+    playing.current ? video.current.pause() : video.current.play();
   }, []);
 
   const setVolume = useCallback((value: SetStateAction<number>) => {
     if (!video.current) return;
     const current = video.current.volume;
+
     const volume =
       typeof value === 'function'
         ? Math.min(Math.max(value(current), 0), 1)
         : Math.min(Math.max(value, 0), 1);
+
     video.current.volume = volume;
     dispatch({ type: 'volumechange', volume });
-    setMuted(!Boolean(volume));
+    setMuted(!volume);
   }, []);
 
   const setMuted = useCallback((value: SetStateAction<boolean>) => {
     if (!video.current) return;
     const current = video.current.muted;
     const update = typeof value === 'function' ? value(current) : value;
-    if (update !== current) {
-      video.current.muted = update;
-      dispatch({ type: update ? 'mute' : 'unmute' });
-    }
+    if (update === current) return;
+    video.current.muted = update;
+    dispatch({ type: update ? 'mute' : 'unmute' });
   }, []);
 
   const setSeek = useCallback((value: SetStateAction<number>) => {
@@ -298,10 +289,12 @@ export function usePlayer(
     const current = video.current.currentTime;
     const duration = video.current.duration;
     if (!duration) return;
+
     const time =
       typeof value === 'function'
         ? Math.min(Math.max(value(current), 0), duration)
         : Math.min(Math.max(value * duration, 0), duration);
+
     video.current.currentTime = time;
 
     // Although the video element will emit this event soon, we
@@ -322,25 +315,14 @@ export function usePlayer(
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    active.current = state.active;
-  }, [state.active]);
+  useEffect(() => void (active.current = state.active), [state.active]);
+  useEffect(() => void (pinned.current = state.pinned), [state.pinned]);
+  useEffect(() => void (playing.current = state.playing), [state.playing]);
 
   useEffect(() => {
-    pinned.current = state.pinned;
-  }, [state.pinned]);
-
-  useEffect(() => {
-    playing.current = state.playing;
-  }, [state.playing]);
-
-  useEffect(() => {
-    if (state.waiting) {
-      const id = setTimeout(() => setLoading(true), 200);
-      return () => clearTimeout(id);
-    } else {
-      setLoading(false);
-    }
+    if (!state.waiting) return void setLoading(false);
+    const id = setTimeout(() => setLoading(true), 200);
+    return () => clearTimeout(id);
   }, [state.waiting]);
 
   useEffect(() => {
@@ -354,20 +336,15 @@ export function usePlayer(
   }, []);
 
   useEffect(() => {
+    if (!ref.current) return;
+
     const onContextMenu = (event: any) => {
       event.preventDefault();
       event.stopPropagation();
     };
 
-    if (ref.current) {
-      ref.current.addEventListener('contextmenu', onContextMenu);
-
-      return () => {
-        if (ref.current) {
-          ref.current.removeEventListener('contextmenu', onContextMenu);
-        }
-      };
-    }
+    ref.current.addEventListener('contextmenu', onContextMenu);
+    return () => ref.current?.removeEventListener('contextmenu', onContextMenu);
   }, []);
 
   const onPause = useCallback(() => dispatch({ type: 'pause' }), []);
@@ -380,6 +357,7 @@ export function usePlayer(
   const onTimeUpdate = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
+
     dispatch({
       type: 'timeupdate',
       time: target.currentTime / target.duration,
@@ -389,14 +367,14 @@ export function usePlayer(
   const onProgress = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
-    const progress = bufferProgress(target.currentTime, target.buffered);
+    const progress = Progress(target.currentTime, target.buffered);
     dispatch({ type: 'progress', progress: progress / target.duration });
   }, []);
 
   const onSeeked = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
-    const progress = bufferProgress(target.currentTime, target.buffered);
+    const progress = Progress(target.currentTime, target.buffered);
     dispatch({ type: 'seeked' });
     dispatch({ type: 'progress', progress: progress / target.duration });
   }, []);

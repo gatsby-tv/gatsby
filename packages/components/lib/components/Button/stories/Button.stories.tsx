@@ -1,5 +1,6 @@
+import { useState, useCallback } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Pause } from '@gatsby-tv/icons';
+import { Play, Pause } from '@gatsby-tv/icons';
 import { Exists } from '@gatsby-tv/utilities';
 
 import { Icon } from '@lib/components/Icon';

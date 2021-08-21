@@ -13,6 +13,7 @@ import { Spinner } from '@gatsby-tv/icons';
 import {
   Class,
   Exists,
+  useRepaint,
   useForwardedRef,
   useOptionalForm,
 } from '@gatsby-tv/utilities';
@@ -55,97 +56,89 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onDblClick: onDblClickHandler,
       ...rest
     } = props;
+
     const form = useOptionalForm();
     const button = useForwardedRef<HTMLButtonElement>(ref);
+    const repaint = useRepaint();
     const [click, setClick] = useState<MouseEvent>();
     const [dblClick, setDblClick] = useState<MouseEvent>();
     const [reset, setReset] = useState(false);
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(false);
     const [held, setHeld] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      if (dblClick && onDblClickHandler) {
-        onDblClickHandler(dblClick);
-      }
+      if (!dblClick) return;
+      onDblClickHandler?.(dblClick);
     }, [dblClick]);
 
     useEffect(() => {
-      if (click) {
-        const id = setTimeout(() => {
-          if (onClickHandler) {
-            onClickHandler(click);
-          }
-          setClick(undefined);
-        }, 300);
-        return () => clearTimeout(id);
-      }
+      if (!click) return;
+
+      const id = setTimeout(
+        () => setClick(() => void onClickHandler?.(click)),
+        300
+      );
+      return () => clearTimeout(id);
     }, [click]);
 
     useEffect(() => {
-      if (active) {
-        const id = setTimeout(() => setActive(0), 200);
-        return () => clearTimeout(id);
-      }
-    }, [active]);
+      if (!reset) return;
+      repaint();
+    }, [reset]);
 
     useEffect(() => {
-      if (waiting) {
-        const id = setTimeout(() => setLoading(true), 200);
-        return () => clearTimeout(id);
-      }
+      if (!waiting) return;
+      const id = setTimeout(() => setLoading(true), 200);
+      return () => clearTimeout(id);
     }, [waiting]);
 
     const onClick = useCallback(
       (event: any) => {
         if (onDblClickHandler) {
-          setClick((current) => {
-            if (current) {
-              setDblClick(event);
-            } else {
-              return event;
-            }
-          });
-        } else if (onClickHandler) {
-          onClickHandler(event);
+          return void setClick((current) =>
+            current ? void setDblClick(event) : event
+          );
         }
+
+        onClickHandler?.(event);
       },
       [onClickHandler, onDblClickHandler]
     );
 
     const onPointerDown = useCallback(
-      (event) => {
+      (event: any) => {
         event.stopPropagation();
-        if (animate) {
-          setReset(true);
-          setHeld(true);
-          setActive((current) => current + 1);
+        if (!animate) return;
 
-          const id = window.requestAnimationFrame(() => setReset(false));
-          return () => window.cancelAnimationFrame(id);
-        }
+        setReset(true);
+        setHeld(true);
+        setActive(true);
+
+        const id = requestAnimationFrame(() => setReset(false));
+        return () => cancelAnimationFrame(id);
       },
       [animate]
     );
 
     const onPointerUp = useCallback(
-      (event) => {
+      (event: any) => {
         event.stopPropagation();
-        if (animate) {
-          setHeld(false);
-        }
+        if (!animate) return;
+        setHeld(false);
       },
       [animate]
     );
 
     const onPointerLeave = useCallback(
-      (event) => {
-        if (animate) {
-          setHeld(false);
-        }
+      (event: any) => {
+        if (!animate) return;
+        setHeld(false);
       },
       [animate]
     );
+
+    const onAnimationEnd = useCallback(() => setActive(false), []);
 
     const classes = Class(
       className,
@@ -193,6 +186,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onPointerUp,
       onPointerLeave,
       onPointerCancel: onPointerLeave,
+      onAnimationEnd,
       ...rest,
     });
 

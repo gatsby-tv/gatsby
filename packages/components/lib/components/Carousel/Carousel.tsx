@@ -1,7 +1,6 @@
 import {
   useRef,
   useState,
-  useEffect,
   useReducer,
   useCallback,
   Children,
@@ -70,11 +69,6 @@ export function Carousel(props: CarouselProps): ReactElement | null {
 
   useResizeObserver(mask, (content) => setWidth(`${content.inlineSize}px`));
 
-  useEffect(() => {
-    const id = setTimeout(() => dispatch({ type: 'sync' }), 500);
-    return () => clearTimeout(id);
-  }, [state.desired]);
-
   const next = useCallback(
     () =>
       dispatch({ type: 'jump', desired: (state.slide + 1) % chunks.length }),
@@ -90,6 +84,8 @@ export function Carousel(props: CarouselProps): ReactElement | null {
     [state.slide, chunks.length]
   );
 
+  const onTransitionEnd = useCallback(() => dispatch({ type: 'sync' }), []);
+
   if (isMobile === undefined) return null;
 
   const GroupsMarkup = chunks.map((chunk, index) => (
@@ -104,7 +100,11 @@ export function Carousel(props: CarouselProps): ReactElement | null {
 
   const ContentMarkup = !isMobile ? (
     <>
-      <Slider state={state} groups={chunks.length}>
+      <Slider
+        state={state}
+        groups={chunks.length}
+        onTransitionEnd={onTransitionEnd}
+      >
         <div style={{ width }} className={styles.Group}>
           {chunks[chunks.length - 1]}
         </div>

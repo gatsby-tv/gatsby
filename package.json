@@ -121,6 +121,6 @@
     "webpack": "^5.49.0"
   },
   "resolutions": {
-    "ipfs-utils": "ssh://git@github.com/gatsby-tv/js-ipfs-utils#fix/defer-to-native-fetch"
+    "ipfs-utils": "https://github.com/gatsby-tv/js-ipfs-utils#fix/defer-to-native-fetch"
   }
 }

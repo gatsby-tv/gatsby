@@ -20026,9 +20026,9 @@ fsevents@~2.1.1:
   languageName: node
   linkType: hard
 
-"ipfs-utils@ssh://git@github.com/gatsby-tv/js-ipfs-utils#fix/defer-to-native-fetch":
+"ipfs-utils@https://github.com/gatsby-tv/js-ipfs-utils#fix/defer-to-native-fetch":
   version: 6.0.8
-  resolution: "ipfs-utils@ssh://git@github.com/gatsby-tv/js-ipfs-utils#commit=f360857914e15b8f1949c6a8144e8fdfa528ef16"
+  resolution: "ipfs-utils@https://github.com/gatsby-tv/js-ipfs-utils.git#commit=f360857914e15b8f1949c6a8144e8fdfa528ef16"
   dependencies:
     abort-controller: ^3.0.0
     any-signal: ^2.1.0

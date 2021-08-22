@@ -12,9 +12,8 @@ RUN apk add --no-cache alpine-sdk libc6-compat python3
 COPY --from=packages /app .
 RUN yarn install --immutable
 
-FROM node:alpine AS builder
+FROM deps AS builder
 WORKDIR /app
-COPY --from=deps /app .
 COPY . .
 RUN yarn build
 
@@ -26,13 +25,12 @@ RUN addgroup -g 1001 -S nodejs
 RUN adduser -S gatsby -u 1001
 
 COPY --from=deps /app .
-COPY --from=builder /app/.yarn .yarn
 COPY --from=builder /app/next.config.js .
 COPY --from=builder /app/public public
-COPY --from=builder /app/server.js .
+COPY --from=builder --chown=gatsby:nodejs /app/dist dist
 COPY --from=builder --chown=gatsby:nodejs /app/.next .next
 
 USER gatsby
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["node", "."]

@@ -13,3 +13,4 @@ parallel(
 );
 run('yarn workspace @gatsby-tv/content run build');
 run('yarn run next build');
+run('yarn run cross-env NODE_ENV=production webpack');

@@ -14,8 +14,8 @@ RUN yarn install --immutable
 
 FROM node:alpine AS builder
 WORKDIR /app
-COPY . .
 COPY --from=deps /app .
+COPY . .
 RUN yarn build
 
 FROM node:alpine
@@ -25,9 +25,8 @@ ENV NODE_ENV production
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S gatsby -u 1001
 
-COPY --from=packages /app .
+COPY --from=deps /app .
 COPY --from=builder /app/.yarn .yarn
-COPY --from=builder /app/.pnp.cjs .
 COPY --from=builder /app/next.config.js .
 COPY --from=builder /app/public public
 COPY --from=builder /app/server.js .

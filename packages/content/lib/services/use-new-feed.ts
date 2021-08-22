@@ -8,7 +8,7 @@ export function useNewFeed(
   limit?: number
 ): InfiniteFetchResponse<'content', Browsable> {
   const { data, ...props } = useInfinite<Browsable>(
-    Cursor('listing/videos/new', limit)
+    Cursor('/listing/videos/new', limit)
   );
 
   return {

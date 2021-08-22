@@ -1,6 +1,6 @@
 import { useCallback, ReactElement } from 'react';
 import { Activatable, Icon } from '@gatsby-tv/components';
-import { Spinner } from '@gatsby-tv/icons';
+import { Restart, Spinner } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Signal } from '@src/components/Signal';
@@ -24,11 +24,16 @@ export function DesktopOverlay(props: OverlayProps): ReactElement {
 
   const LoadingMarkup =
     player.loading && !signal ? (
-      <Icon className={styles.Loading} src={Spinner} />
+      <Icon className={Class(styles.Icon, styles.Loading)} src={Spinner} />
     ) : null;
+
+  const EndscreenMarkup = player.ended ? (
+    <Icon className={styles.Icon} src={Restart} />
+  ) : null;
 
   return (
     <>
+      {EndscreenMarkup}
       {LoadingMarkup}
       <Signal className={styles.Signal} signal={signal} />
       <Activatable

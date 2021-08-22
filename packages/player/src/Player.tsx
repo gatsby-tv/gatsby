@@ -42,6 +42,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       events,
       setActive,
       setPinned,
+      setSuspend,
       setPlayback,
       setVolume,
       setMuted,
@@ -71,6 +72,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
         setFullscreen={setFullscreen}
         setActive={setActive}
         setPinned={setPinned}
+        setSuspend={setSuspend}
         setPlayback={setPlayback}
         setVolume={setVolume}
         setMuted={setMuted}
@@ -86,6 +88,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
         setFullscreen={setFullscreen}
         setActive={setActive}
         setPinned={setPinned}
+        setSuspend={setSuspend}
         setPlayback={setPlaybackAndSignal}
         setVolume={setVolume}
         setMuted={setMuted}

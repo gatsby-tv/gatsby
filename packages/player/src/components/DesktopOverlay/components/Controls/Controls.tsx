@@ -3,6 +3,7 @@ import { Button, Menu, Selection, EventListener } from '@gatsby-tv/components';
 import {
   Play,
   Pause,
+  Restart,
   Expand,
   Compress,
   Gear,
@@ -137,7 +138,7 @@ export function Controls(props: ControlsProps): ReactElement {
         onPointerLeave={() => setSlider(false)}
       >
         <Button
-          icon={player.paused ? Play : Pause}
+          icon={player.ended ? Restart : player.paused ? Play : Pause}
           size="small"
           onClick={() => setPlayback((current) => !current)}
         />

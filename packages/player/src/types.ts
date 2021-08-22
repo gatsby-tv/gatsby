@@ -19,6 +19,7 @@ export interface OverlayProps {
   setFullscreen: Dispatch<SetStateAction<boolean>>;
   setActive: Dispatch<SetStateAction<boolean>>;
   setPinned: Dispatch<SetStateAction<boolean>>;
+  setSuspend: Dispatch<SetStateAction<boolean>>;
   setPlayback: Dispatch<SetStateAction<boolean>>;
   setVolume: Dispatch<SetStateAction<number>>;
   setMuted: Dispatch<SetStateAction<boolean>>;

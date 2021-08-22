@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, ReactElement } from 'react';
+import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import { Activatable, EventListener, Icon } from '@gatsby-tv/components';
-import { Spinner } from '@gatsby-tv/icons';
-import { Class } from '@gatsby-tv/utilities';
+import { Restart, Spinner } from '@gatsby-tv/icons';
+import { Class, useComponentDidMount } from '@gatsby-tv/utilities';
 
 import { Signal } from '@src/components/Signal';
 import { OverlayProps } from '@src/types';
@@ -11,32 +11,65 @@ import { Timeline } from './components/Timeline';
 import styles from './MobileOverlay.scss';
 
 export function MobileOverlay(props: OverlayProps): ReactElement {
-  const { player, timeline, signal, setActive } = props;
+  const { player, timeline, signal, setActive, setSuspend } = props;
 
+  const mounted = useComponentDidMount();
+  const paused = useRef(player.paused);
+  const loading = useRef(player.loading);
+  const started = useRef(false);
   const [disabled, setDisabled] = useState(false);
   const [controls, setControls] = useState(false);
   const [pinned, setPinned] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const active = player.active && !disabled;
 
   const onPointerUp = useCallback(
-    () =>
-      setActive((current) => {
-        if (pinned) return current;
-        setPinned(true);
-        if (!player.paused && !player.loading) return !current;
-        setDisabled((current) => !current);
-        return current;
-      }),
-    [pinned, disabled, player.paused, player.loading]
+    () => setToggle((current) => (pinned ? current : !current)),
+    [pinned]
   );
+
+  const onClick = useCallback(() => {
+    setToggle((current) => (pinned || player.suspended ? current : !current));
+  }, [pinned, player.suspended]);
 
   const onTransitionEnd = useCallback(() => setControls(active), [active]);
   const onOrientationChange = useCallback(() => setActive(false), []);
 
+  useEffect(() => void (paused.current = player.paused), [player.paused]);
+  useEffect(() => void (loading.current = player.loading), [player.loading]);
+  useEffect(() => setPinned(true), [player.active]);
+
   useEffect(() => {
+    if (!pinned) return;
     const id = setTimeout(() => setPinned(false), 300);
     return () => clearTimeout(id);
   }, [pinned]);
+
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    const id = setTimeout(() => setSuspend(false), 300);
+
+    return () => {
+      clearTimeout(id);
+      setSuspend(false);
+    };
+  }, [player.playing])
+
+  useEffect(
+    () =>
+      setActive((current) =>
+        !mounted.current || paused.current || loading.current
+          ? current
+          : !current
+      ),
+    [toggle]
+  );
+
+  useEffect(() => {
+    if (!paused.current && !loading.current) return;
+    setDisabled((current) => !current);
+  }, [toggle]);
 
   useEffect(() => {
     if (player.paused || player.loading) return;
@@ -51,7 +84,11 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
 
   const LoadingMarkup =
     player.loading && !signal ? (
-      <Icon className={styles.Loading} src={Spinner} size="largest" />
+      <Icon
+        className={Class(styles.Icon, styles.Loading)}
+        src={Spinner}
+        size="largest"
+      />
     ) : null;
 
   return (
@@ -65,11 +102,11 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
       {LoadingMarkup}
       <Signal className={styles.Signal} signal={signal} />
       <Activatable
-        className={Class(styles.Controls, !controls && styles.ControlsDisabled)}
+        className={styles.Controls}
         active={active && !timeline.scrubbing && !signal}
         duration="fastest"
       >
-        <Controls {...props} />
+        <Controls active={controls} onClick={onClick} {...props} />
       </Activatable>
       <Timeline className={styles.Timeline} disabled={disabled} {...props} />
       <EventListener event="orientationchange" handler={onOrientationChange} />

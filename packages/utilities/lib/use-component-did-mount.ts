@@ -1,7 +1,10 @@
 import { useRef, useEffect, RefObject } from 'react';
 
+import { useComponentWillMount } from '@lib/use-component-will-mount';
+
 export function useComponentDidMount(): RefObject<boolean> {
-  const mounted = useRef(false);
-  useEffect(() => void (mounted.current = true), []);
-  return mounted;
+  const ref = useRef(false);
+  const mounted = useComponentWillMount();
+  useEffect(() => void (ref.current = mounted), [mounted]);
+  return ref;
 }

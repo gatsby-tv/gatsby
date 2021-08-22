@@ -22,17 +22,16 @@
   bottom: 0;
 }
 
-.Loading {
+.Icon {
   @include expand(absolute);
   @include center;
   pointer-events: none;
+}
+
+.Loading {
   transform: rotate(-65deg);
 }
 
 .Controls {
   @include expand(absolute);
-}
-
-.ControlsDisabled {
-  pointer-events: none;
 }

@@ -19,6 +19,8 @@ export type VideoAction =
   | { type: 'idle' }
   | { type: 'pin' }
   | { type: 'unpin' }
+  | { type: 'suspend' }
+  | { type: 'unsuspend' }
   | { type: 'pause' }
   | { type: 'waiting' }
   | { type: 'playing' }
@@ -35,6 +37,7 @@ export type VideoAction =
 export type VideoState = {
   active: boolean;
   pinned: boolean;
+  suspended: boolean;
   idle: number;
   playing: boolean;
   paused: boolean;
@@ -78,6 +81,7 @@ export function usePlayer(
   player: PlayerState;
   setActive: Dispatch<SetStateAction<boolean>>;
   setPinned: Dispatch<SetStateAction<boolean>>;
+  setSuspend: Dispatch<SetStateAction<boolean>>;
   setPlayback: Dispatch<SetStateAction<boolean>>;
   setVolume: Dispatch<SetStateAction<number>>;
   setMuted: Dispatch<SetStateAction<boolean>>;
@@ -87,28 +91,39 @@ export function usePlayer(
   const ref = useRef<HTMLElement>(null);
   const active = useRef(false);
   const pinned = useRef(false);
+  const suspended = useRef(true);
   const playing = useRef(false);
+  const ended = useRef(false);
   const [loading, setLoading] = useState(false);
   const [duration, setDuration] = useState(0);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   const [state, dispatch] = useReducer(
     (state: VideoState, action: VideoAction) => {
       const isPinned =
         state.pinned || state.paused || state.seeking || state.ended;
+
       switch (action.type) {
+        case 'idle':
+          return {
+            ...state,
+            active: state.suspended ? state.active : state.idle < 16,
+            idle: state.idle + 1,
+          };
+
         case 'activate':
           return {
             ...state,
             active: true,
+            suspended: false,
             idle: isPinned ? -Infinity : 0,
           };
 
         case 'deactivate':
-          // The player by default remains inactive until explicitly activated.
           return {
             ...state,
             active: isPinned,
-            idle: isNaN(state.idle) ? NaN : isPinned ? -Infinity : Infinity,
+            idle: isPinned ? -Infinity : Infinity,
           };
 
         case 'pin':
@@ -116,6 +131,7 @@ export function usePlayer(
             ...state,
             active: true,
             pinned: true,
+            suspended: false,
             idle: -Infinity,
           };
 
@@ -124,20 +140,28 @@ export function usePlayer(
             ...state,
             active: true,
             pinned: false,
+            suspended: false,
             idle: 0,
           };
 
-        case 'idle':
+        case 'suspend':
           return {
             ...state,
-            active: state.idle < 16,
-            idle: state.idle + 1,
+            suspended: true,
+          };
+
+        case 'unsuspend':
+          return {
+            ...state,
+            suspended: false,
+            idle: isPinned ? -Infinity : state.active ? 0 : Infinity,
           };
 
         case 'pause':
           return {
             ...state,
             active: true,
+            suspended: false,
             idle: -Infinity,
             playing: false,
             paused: true,
@@ -150,12 +174,9 @@ export function usePlayer(
           };
 
         case 'playing':
-          // The player by default remains inactive until explicitly
-          // activated, so we use NaN here to prevent the player from
-          // activating when the video initially begins.
           return {
             ...state,
-            idle: isNaN(state.idle) ? NaN : 0,
+            idle: 0,
             playing: true,
             paused: false,
             stalled: false,
@@ -225,9 +246,10 @@ export function usePlayer(
       }
     },
     {
+      idle: 0,
       active: false,
       pinned: false,
-      idle: NaN,
+      suspended: true,
       time: 0,
       progress: 0,
       playing: false,
@@ -249,6 +271,12 @@ export function usePlayer(
   const setPinned = useCallback((value: SetStateAction<boolean>) => {
     const update = typeof value === 'function' ? value(pinned.current) : value;
     dispatch({ type: update ? 'pin' : 'unpin' });
+  }, []);
+
+  const setSuspend = useCallback((value: SetStateAction<boolean>) => {
+    const update =
+      typeof value === 'function' ? value(suspended.current) : value;
+    dispatch({ type: update ? 'suspend' : 'unsuspend' });
   }, []);
 
   const setPlayback = useCallback((value: SetStateAction<boolean>) => {
@@ -296,6 +324,7 @@ export function usePlayer(
         : Math.min(Math.max(value * duration, 0), duration);
 
     video.current.currentTime = time;
+    if (ended.current) video.current.play();
 
     // Although the video element will emit this event soon, we
     // programmatically dispatch this update to support logic that
@@ -317,7 +346,11 @@ export function usePlayer(
 
   useEffect(() => void (active.current = state.active), [state.active]);
   useEffect(() => void (pinned.current = state.pinned), [state.pinned]);
+  useEffect(() => void (suspended.current = state.suspended), [
+    state.suspended,
+  ]);
   useEffect(() => void (playing.current = state.playing), [state.playing]);
+  useEffect(() => void (ended.current = state.ended), [state.ended]);
 
   useEffect(() => {
     if (!state.waiting) return void setLoading(false);
@@ -389,6 +422,7 @@ export function usePlayer(
     },
     setActive,
     setPinned,
+    setSuspend,
     setPlayback,
     setVolume,
     setMuted,

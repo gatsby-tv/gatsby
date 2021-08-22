@@ -24,11 +24,14 @@
   padding: rem(32px);
 }
 
-.Loading {
+.Icon {
   @include expand(absolute);
   @include center;
   pointer-events: none;
   font-size: rem(116px);
+}
+
+.Loading {
   transform: rotate(-65deg);
 }
 

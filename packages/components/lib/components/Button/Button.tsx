@@ -60,6 +60,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const form = useOptionalForm();
     const button = useForwardedRef<HTMLButtonElement>(ref);
     const repaint = useRepaint();
+    const [emit, setEmit] = useState<MouseEvent>();
     const [click, setClick] = useState<MouseEvent>();
     const [dblClick, setDblClick] = useState<MouseEvent>();
     const [reset, setReset] = useState(false);
@@ -68,19 +69,25 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      if (!dblClick) return;
-      onDblClickHandler?.(dblClick);
-    }, [dblClick]);
-
-    useEffect(() => {
       if (!click) return;
 
       const id = setTimeout(
-        () => setClick(() => void onClickHandler?.(click)),
+        () =>
+          setClick((current) => (current ? void setEmit(current) : current)),
         300
       );
       return () => clearTimeout(id);
     }, [click]);
+
+    useEffect(() => {
+      if (!emit) return;
+      onClickHandler?.(emit);
+    }, [emit]);
+
+    useEffect(() => {
+      if (!dblClick) return;
+      onDblClickHandler?.(dblClick);
+    }, [dblClick]);
 
     useEffect(() => {
       if (!reset) return;

@@ -26,6 +26,12 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  will-change: margin;
+  transition: margin duration(fast) ease;
+}
+
+.VolumeActive {
+  margin: 0 rem(6px);
 }
 
 .Slider {
@@ -60,7 +66,7 @@
     right: rem(-5px);
     width: rem(10px);
     height: rem(10px);
-    background-color: palette(typography);
+    background-color: palette(slider, ball);
     transition: transform 150ms ease;
     transform: scale(0);
   }

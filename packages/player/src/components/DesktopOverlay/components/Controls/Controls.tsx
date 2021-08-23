@@ -33,6 +33,7 @@ export function Controls(props: ControlsProps): ReactElement {
     setSeek,
     setSignal,
   } = props;
+
   const settings = useMenu<HTMLButtonElement>();
   const volumeRef = useRef<HTMLSpanElement>(null);
   const [slider, setSlider] = useState(false);
@@ -43,9 +44,8 @@ export function Controls(props: ControlsProps): ReactElement {
   const duration = Time(player.duration);
 
   useEffect(() => {
-    if (!player.active) {
-      settings.deactivate();
-    }
+    if (player.active) return;
+    settings.deactivate();
   }, [player.active]);
 
   useEffect(() => {
@@ -74,8 +74,8 @@ export function Controls(props: ControlsProps): ReactElement {
 
   const onDragEnd = useCallback((event: any) => {
     if (!volumeRef.current) return;
-    setDragging(false);
     volumeRef.current.releasePointerCapture(event.pointerId);
+    setDragging(false);
   }, []);
 
   const onKeyDown = useCallback(
@@ -156,7 +156,7 @@ export function Controls(props: ControlsProps): ReactElement {
         />
         <span
           ref={volumeRef}
-          className={styles.Volume}
+          className={Class(styles.Volume, slider && styles.VolumeActive)}
           onPointerDown={onDragStart}
           onPointerMove={onDrag}
           onPointerUp={onDragEnd}
@@ -206,7 +206,11 @@ export function Controls(props: ControlsProps): ReactElement {
                   1080p<sup>HD</sup>
                 </span>
               </Selection.Item>
-              <Selection.Item option="720p">720p</Selection.Item>
+              <Selection.Item option="720p">
+                <span>
+                  720p<sup>HD</sup>
+                </span>
+              </Selection.Item>
               <Selection.Item option="480p">480p</Selection.Item>
               <Selection.Item option="360p">360p</Selection.Item>
               <Selection.Item option="240p">240p</Selection.Item>

@@ -9,8 +9,9 @@ import {
 import { IPFSContent } from '@gatsby-tv/types';
 import { Class, Exists, useIPFSContent } from '@gatsby-tv/utilities';
 
-import { BorderRadius } from '@lib/types';
 import { Viewport } from '@lib/components/Viewport';
+import { Optional } from '@lib/components/Optional';
+import { BorderRadius } from '@lib/types';
 
 import styles from './Image.scss';
 
@@ -47,27 +48,22 @@ function ImageURL(props: ImageURLProps): ReactElement {
   const classes = Class(className, styles.Viewport);
 
   return (
-    <Viewport
-      className={classes}
-      placeholder
-      rounded={rounded}
-      overlay={overlay}
-      aspectRatio={aspectRatio}
-      aria-label={ariaLabel}
-    >
-      <img
-        style={Exists(loading, {
-          paddingTop: `${100 * aspectRatio}%`,
-        })}
-        className={Class(
-          styles.Image,
-          rounded && styles[`Radius-${rounded}`],
-          loading && styles.Loading
-        )}
-        onLoad={onLoad}
-        {...imgProps}
-      />
-    </Viewport>
+    <Optional active={Boolean(className)} $props={{ className }}>
+      <Viewport
+        className={styles.Viewport}
+        placeholder
+        rounded={rounded}
+        overlay={overlay}
+        aspectRatio={aspectRatio}
+        aria-label={ariaLabel}
+      >
+        <img
+          className={Class(styles.Image, loading && styles.Loading)}
+          onLoad={onLoad}
+          {...imgProps}
+        />
+      </Viewport>
+    </Optional>
   );
 }
 

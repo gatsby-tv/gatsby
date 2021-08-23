@@ -11,7 +11,6 @@ import {
   Dispatch,
   RefObject,
 } from 'react';
-import { useResizeObserver } from '@gatsby-tv/utilities';
 
 export type VideoAction =
   | { type: 'activate' }
@@ -57,7 +56,6 @@ export type PlayerState = VideoState & {
   ref: RefObject<HTMLElement>;
   loading: boolean;
   duration: number;
-  aspectRatio: number;
 };
 
 function Progress(time: number, ranges: TimeRanges): number {
@@ -96,7 +94,6 @@ export function usePlayer(
   const ended = useRef(false);
   const [loading, setLoading] = useState(false);
   const [duration, setDuration] = useState(0);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   const [state, dispatch] = useReducer(
     (state: VideoState, action: VideoAction) => {
@@ -335,10 +332,6 @@ export function usePlayer(
     dispatch({ type: 'timeupdate', time: time / duration });
   }, []);
 
-  useResizeObserver(ref, (content) =>
-    setDimensions({ width: content.inlineSize, height: content.blockSize })
-  );
-
   useEffect(() => {
     const id = setInterval(() => dispatch({ type: 'idle' }), 250);
     return () => clearInterval(id);
@@ -417,7 +410,6 @@ export function usePlayer(
       ref,
       loading,
       duration,
-      aspectRatio: dimensions.height / dimensions.width,
       ...state,
     },
     setActive,

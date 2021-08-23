@@ -37,6 +37,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const isMobile = useMobileDetector();
     const video = useForwardedRef<HTMLVideoElement>(ref);
     const timeline = useTimeline();
+
     const {
       player,
       events,
@@ -48,6 +49,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       setMuted,
       setSeek,
     } = usePlayer(video, volume);
+
     const [signal, setSignal] = useSignal();
     const mounted = useComponentWillMount();
 
@@ -104,12 +106,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     );
 
     return (
-      <Viewport
-        ref={player.ref}
-        className={classes}
-        aspectRatio={player.aspectRatio}
-        overlay={OverlayMarkup}
-      >
+      <Viewport ref={player.ref} className={classes} overlay={OverlayMarkup}>
         <Video ref={video} {...videoProps} {...events}>
           {children}
         </Video>

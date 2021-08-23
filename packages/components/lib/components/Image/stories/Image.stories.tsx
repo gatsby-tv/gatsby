@@ -46,3 +46,9 @@ TallAspectRatioSkeleton.args = {
   src: '',
   aspectRatio: 16 / 9,
 };
+
+export const IncorrectAspectRatio = Template.bind({});
+IncorrectAspectRatio.args = {
+  src: 'https://loremflickr.com/405/720',
+  aspectRatio: 9 / 16,
+};

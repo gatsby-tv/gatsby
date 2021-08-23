@@ -36,6 +36,7 @@ function AvatarURL(props: AvatarURLProps): ReactElement {
     'aria-label': ariaLabel,
     ...imgProps
   } = props;
+
   const [loading, setLoading] = useState(true);
 
   const onLoad = useCallback(() => setLoading(false), []);
@@ -49,7 +50,6 @@ function AvatarURL(props: AvatarURLProps): ReactElement {
     <Viewport
       className={classes}
       placeholder
-      aspectRatio={1}
       rounded="full"
       overlay={overlay}
       aria-label={ariaLabel}

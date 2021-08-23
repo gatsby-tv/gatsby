@@ -23,11 +23,12 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps>(
       overlay,
       placeholder,
       rounded,
-      aspectRatio = 0.5625,
+      aspectRatio,
       ...attributes
     } = props;
 
     const classes = Class(
+      className,
       styles.Placeholder,
       placeholder && styles.AlphaBackground,
       rounded && styles[`Radius-${rounded}`]
@@ -38,11 +39,14 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps>(
     ) : null;
 
     return (
-      <figure ref={ref} className={className} {...attributes}>
-        <div
-          style={{ paddingTop: `${100 * aspectRatio}%` }}
-          className={classes}
-        />
+      <figure
+        ref={ref}
+        style={
+          aspectRatio ? { paddingTop: `${100 * aspectRatio}%` } : undefined
+        }
+        className={classes}
+        {...attributes}
+      >
         {children}
         {OverlayMarkup}
       </figure>

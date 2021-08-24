@@ -12,7 +12,7 @@ export default function VideoPage(): ReactElement {
   const { fullscreen, setFullscreen, setTopbar, setSidebar } = useFrame();
   const { setScroll } = useScroll();
   const { video } = useVideo([router.query.id].flat()[0]);
-  const player = useIPFSVideoStream(video?.content);
+  const { stream, setQuality } = useIPFSVideoStream(video?.content);
 
   useEffect(() => {
     setSidebar(false);
@@ -28,10 +28,12 @@ export default function VideoPage(): ReactElement {
   return (
     <Page margin={false} title={video ? `${video.title} - Gatsby` : undefined}>
       <Player
-        ref={player}
+        ref={stream.ref}
         muted
         fullscreen={fullscreen}
+        quality={stream.quality}
         setFullscreen={setFullscreen}
+        setQuality={setQuality}
       />
       <Video.Layout>
         <Video.Info video={video} />

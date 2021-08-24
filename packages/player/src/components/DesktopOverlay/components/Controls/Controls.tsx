@@ -25,7 +25,9 @@ export function Controls(props: ControlsProps): ReactElement {
     className,
     player,
     fullscreen,
+    quality,
     setFullscreen,
+    setQuality,
     setPlayback,
     setVolume,
     setMuted,
@@ -38,7 +40,7 @@ export function Controls(props: ControlsProps): ReactElement {
   const volumeRef = useRef<HTMLSpanElement>(null);
   const [slider, setSlider] = useState(false);
   const [dragging, setDragging] = useState(false);
-  const [resolution, setResolution] = useState<string>('auto');
+  const [resolution, setResolution] = useState<string>(String(quality));
 
   const time = Time(player.time * player.duration);
   const duration = Time(player.duration);
@@ -48,9 +50,9 @@ export function Controls(props: ControlsProps): ReactElement {
     settings.deactivate();
   }, [player.active]);
 
-  useEffect(() => {
-    setPinned(settings.active);
-  }, [settings.active]);
+  useEffect(() => void setPinned(settings.active), [settings.active]);
+  useEffect(() => void setQuality(Number(resolution)), [resolution]);
+  useEffect(settings.deactivate, [resolution]);
 
   const onDragStart = useCallback((event: any) => {
     if (!volumeRef.current) return;
@@ -201,20 +203,20 @@ export function Controls(props: ControlsProps): ReactElement {
               selection={resolution}
               onSelect={setResolution}
             >
-              <Selection.Item option="1080p">
+              <Selection.Item option="4">
                 <span>
                   1080p<sup>HD</sup>
                 </span>
               </Selection.Item>
-              <Selection.Item option="720p">
+              <Selection.Item option="3">
                 <span>
                   720p<sup>HD</sup>
                 </span>
               </Selection.Item>
-              <Selection.Item option="480p">480p</Selection.Item>
-              <Selection.Item option="360p">360p</Selection.Item>
-              <Selection.Item option="240p">240p</Selection.Item>
-              <Selection.Item option="auto">Auto</Selection.Item>
+              <Selection.Item option="2">480p</Selection.Item>
+              <Selection.Item option="1">360p</Selection.Item>
+              <Selection.Item option="0">240p</Selection.Item>
+              <Selection.Item option="-1">Auto</Selection.Item>
             </Selection>
           </div>
         </Menu>

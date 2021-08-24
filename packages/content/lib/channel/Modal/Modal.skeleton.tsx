@@ -62,7 +62,7 @@ export function Skeleton(props: SkeletonProps): ReactElement | null {
         onClick={onExit}
       />
       <Scroll smooth hide onScroll={onScroll}>
-        <Image aspectRatio={0.5} overlay={OverlayMarkup} />
+        <Image aspectRatio="2 / 1" overlay={OverlayMarkup} />
         <div>
           <Tabs
             className={styles.Tabs}

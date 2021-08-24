@@ -7,16 +7,20 @@ import { TimelineState } from '@src/utilities/use-timeline';
 export interface PlayerProps extends VideoProps {
   children?: ReactNode;
   fullscreen?: boolean;
+  quality?: number;
   volume?: number;
   setFullscreen?: Dispatch<SetStateAction<boolean>>;
+  setQuality?: Dispatch<SetStateAction<number>>;
 }
 
 export interface OverlayProps {
   player: PlayerState;
   timeline: TimelineState;
   signal?: string;
-  fullscreen?: boolean;
+  quality: number;
+  fullscreen: boolean;
   setFullscreen: Dispatch<SetStateAction<boolean>>;
+  setQuality: Dispatch<SetStateAction<number>>;
   setActive: Dispatch<SetStateAction<boolean>>;
   setPinned: Dispatch<SetStateAction<boolean>>;
   setSuspend: Dispatch<SetStateAction<boolean>>;

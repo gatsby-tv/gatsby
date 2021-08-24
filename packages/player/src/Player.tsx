@@ -29,8 +29,10 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const {
       children,
       volume = 1,
-      fullscreen,
+      fullscreen = false,
+      quality = -1,
       setFullscreen = () => undefined,
+      setQuality = () => undefined,
       ...videoProps
     } = props;
 
@@ -71,7 +73,9 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
         timeline={timeline}
         signal={signal}
         fullscreen={fullscreen}
+        quality={quality}
         setFullscreen={setFullscreen}
+        setQuality={setQuality}
         setActive={setActive}
         setPinned={setPinned}
         setSuspend={setSuspend}
@@ -87,7 +91,9 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
         timeline={timeline}
         signal={signal}
         fullscreen={fullscreen}
+        quality={quality}
         setFullscreen={setFullscreen}
+        setQuality={setQuality}
         setActive={setActive}
         setPinned={setPinned}
         setSuspend={setSuspend}

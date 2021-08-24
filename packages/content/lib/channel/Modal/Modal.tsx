@@ -132,7 +132,7 @@ export function Modal(props: ModalProps): ReactElement | null {
         onClick={onExit}
       />
       <Scroll smooth hide onScroll={onScroll}>
-        <Image src={channel.banner} aspectRatio={0.5} overlay={OverlayMarkup} />
+        <Image src={channel.banner} aspectRatio="2 / 1" overlay={OverlayMarkup} />
         <div className={styles.Content}>
           <Tabs
             className={styles.Tabs}

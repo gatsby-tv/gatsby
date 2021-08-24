@@ -2,12 +2,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import {
+  useRef,
   useState,
   useEffect,
+  useCallback,
   useContext,
   useReducer,
-  useRef,
   RefObject,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 // @ts-ignore
 import IPFS from 'ipfs';
@@ -22,42 +25,45 @@ import { ContextError } from '@lib/errors';
 
 import { IPFSContext, IPFSContextType } from './context';
 
-let ipfs: any = undefined;
-
 const IPFS_DEFAULT_CONFIG = {
-  repo: `/ipfs/gatsby/testing`,
+  repo: `/ipfs/gatsby`,
 };
 
 export function useIPFSNode(bootstrap: string[] = []): IPFSContextType {
-  const [, setReady] = useState(false);
+  const context = useContext(IPFSContext);
+
+  if (context) {
+    throw new Error('IPFS context is not unique');
+  }
+
+  const ipfsRef = useRef<any>(null);
+  const [ipfs, setIPFS] = useState<any>(null);
   const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => void (ipfsRef.current = ipfs), [ipfs]);
 
   useEffect(() => {
     async function loadIPFS() {
       try {
-        if (ipfs) return;
-        ipfs = await IPFS.create(IPFS_DEFAULT_CONFIG);
+        const ipfs = await IPFS.create(IPFS_DEFAULT_CONFIG);
         bootstrap.forEach(async (addr) => await ipfs.bootstrap.add(addr));
         const info = await ipfs.id();
         console.log(`IPFS node ready at /p2p/${info.id}`);
+        setIPFS(ipfs);
       } catch (error) {
         console.error(error);
-        ipfs = undefined;
+        setIPFS(null);
         setError(error);
       }
-
-      setReady(Boolean(ipfs));
     }
 
     loadIPFS();
     HLS.DefaultConfig.loader = HLSIPFSLoader;
 
     return () => {
-      if (ipfs && ipfs.stop) {
-        ipfs.stop();
-        ipfs = undefined;
-        setReady(false);
-      }
+      if (!ipfsRef.current || !ipfsRef.current.stop) return;
+      ipfsRef.current.stop();
+      setIPFS(null);
     };
   }, []);
 
@@ -120,9 +126,11 @@ export function useIPFSCommand(
   useAsync(
     async () => {
       if (!state.loading) return;
+
       const method = [JSON.parse(commandKey)]
         .flat()
         .reduce((acc: any, key: string) => (acc ? acc[key] : undefined), ipfs);
+
       return method ? await method(args) : undefined;
     },
     (result) => dispatch({ type: 'sync', result }),
@@ -226,26 +234,50 @@ export function useIPFSPeers(): IPFSPeersState {
   return state;
 }
 
-export function useIPFSVideoStream(hash?: string): RefObject<HTMLVideoElement> {
+export type StreamState = {
+  ref: RefObject<HTMLVideoElement>;
+  quality: number;
+};
+
+export function useIPFSVideoStream(hash?: string): {
+  stream: StreamState;
+  setQuality: Dispatch<SetStateAction<number>>;
+} {
   const ref = useRef<HTMLVideoElement>(null);
+  const hls = useRef<HLS | null>(null);
   const { ipfs } = useIPFS();
 
-  useEffect(() => {
-    if (!ipfs || !ref.current || !hash) return;
+  const setQuality = useCallback((value: SetStateAction<number>) => {
+    if (!hls.current) return;
 
-    if (HLS.isSupported()) {
-      const hls = new HLS();
-      // @ts-ignore
-      hls.config.ipfs = ipfs;
-      // @ts-ignore
-      hls.config.ipfsHash = hash;
-      hls.loadSource('master.m3u8');
-      hls.attachMedia(ref.current as HTMLVideoElement);
-      hls.on(HLS.Events.MANIFEST_PARSED, () => ref.current?.play());
-    } else {
-      throw new Error('HLS is not supported.');
-    }
+    const update =
+      typeof value === 'function' ? value(hls.current.currentLevel) : value;
+
+    if (update !== -1 && !(update in hls.current.levels)) return;
+    hls.current.currentLevel = update;
+  }, []);
+
+  useEffect(() => {
+    if (!ref.current || !ipfs || !hash) return;
+    if (!HLS.isSupported()) throw new Error('HLS is not supported');
+
+    hls.current = new HLS();
+    // @ts-ignore
+    hls.current.config.ipfs = ipfs;
+    // @ts-ignore
+    hls.current.config.ipfsHash = hash;
+    hls.current.loadSource('master.m3u8');
+    hls.current.attachMedia(ref.current as HTMLVideoElement);
+    hls.current.on(HLS.Events.MANIFEST_PARSED, () => ref.current?.play());
+
+    return () => hls.current?.destroy();
   }, [ipfs, hash]);
 
-  return ref;
+  return {
+    stream: {
+      ref,
+      quality: hls.current?.currentLevel ?? -1,
+    },
+    setQuality,
+  };
 }

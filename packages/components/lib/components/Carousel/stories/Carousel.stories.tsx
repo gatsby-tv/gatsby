@@ -12,7 +12,7 @@ export const Example: Story<CarouselProps> = () => (
   <Carousel groups={6}>
     {[...Array(24)].map((_, index) => (
       <Carousel.Slide key={index}>
-        <Image src="" aspectRatio={2} />
+        <Image src="" aspectRatio="1 / 2" />
       </Carousel.Slide>
     ))}
   </Carousel>

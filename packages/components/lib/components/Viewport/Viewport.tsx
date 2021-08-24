@@ -11,7 +11,7 @@ export interface ViewportProps
   className?: string;
   overlay?: ReactNode;
   placeholder?: boolean;
-  aspectRatio?: number;
+  aspectRatio?: string | number;
   rounded?: BorderRadius;
 }
 
@@ -41,9 +41,7 @@ export const Viewport = forwardRef<HTMLElement, ViewportProps>(
     return (
       <figure
         ref={ref}
-        style={
-          aspectRatio ? { paddingTop: `${100 * aspectRatio}%` } : undefined
-        }
+        style={aspectRatio ? { aspectRatio: String(aspectRatio) } : undefined}
         className={classes}
         {...attributes}
       >

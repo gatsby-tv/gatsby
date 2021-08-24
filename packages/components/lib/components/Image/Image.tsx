@@ -18,7 +18,7 @@ import styles from './Image.scss';
 export interface ImageProps extends Omit<ImgHTMLAttributes<Element>, 'src'> {
   src?: IPFSContent | string;
   rounded?: BorderRadius;
-  aspectRatio?: number;
+  aspectRatio?: string | number;
   overlay?: ReactNode;
 }
 

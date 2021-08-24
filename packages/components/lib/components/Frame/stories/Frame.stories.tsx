@@ -17,7 +17,7 @@ export const Example: Story<FrameProps> = () => (
   >
     <div className={styles.Content}>
       {[...Array(24)].map((_, index) => (
-        <Image key={index} aspectRatio={0.5625} />
+        <Image key={index} aspectRatio="16 / 9" />
       ))}
     </div>
   </Frame>

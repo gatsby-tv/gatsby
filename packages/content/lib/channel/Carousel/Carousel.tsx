@@ -35,7 +35,7 @@ export function Carousel(props: CarouselProps): ReactElement | null {
       <Image
         src={channel.poster}
         rounded="smallest"
-        aspectRatio={2}
+        aspectRatio="1 / 2"
         draggable="false"
       />
     </CarouselComponent.Slide>

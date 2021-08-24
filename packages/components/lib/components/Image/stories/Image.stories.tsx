@@ -26,29 +26,29 @@ DefaultAspectRatioSkeleton.args = {
 export const WideAspectRatio = Template.bind({});
 WideAspectRatio.args = {
   src: 'https://loremflickr.com/720/405',
-  aspectRatio: 9 / 16,
+  aspectRatio: '16 / 9',
 };
 
 export const WideAspectRatioSkeleton = Template.bind({});
 WideAspectRatioSkeleton.args = {
   src: '',
-  aspectRatio: 9 / 16,
+  aspectRatio: '16 / 9',
 };
 
 export const TallAspectRatio = Template.bind({});
 TallAspectRatio.args = {
   src: 'https://loremflickr.com/405/720',
-  aspectRatio: 16 / 9,
+  aspectRatio: '9 / 16',
 };
 
 export const TallAspectRatioSkeleton = Template.bind({});
 TallAspectRatioSkeleton.args = {
   src: '',
-  aspectRatio: 16 / 9,
+  aspectRatio: '9 / 16',
 };
 
 export const IncorrectAspectRatio = Template.bind({});
 IncorrectAspectRatio.args = {
   src: 'https://loremflickr.com/405/720',
-  aspectRatio: 9 / 16,
+  aspectRatio: '16 / 9',
 };

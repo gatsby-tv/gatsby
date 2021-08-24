@@ -16,6 +16,7 @@ export function Preview(props: PreviewProps): ReactElement {
     link: Link,
     ...aria
   } = props;
+
   const id = useUniqueId('preview');
 
   if (!content) {
@@ -45,7 +46,7 @@ export function Preview(props: PreviewProps): ReactElement {
       <Image
         src={content.thumbnail}
         rounded="smallest"
-        aspectRatio={0.5625}
+        aspectRatio="16 / 9"
         overlay={<Overlay content={content} bookmark={bookmark} />}
         draggable="false"
       />

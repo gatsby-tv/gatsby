@@ -11221,7 +11221,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-webpack@npm:^7.0.0, dotenv-webpack@npm:^7.0.3":
+"dotenv-webpack@npm:^7.0.0":
   version: 7.0.3
   resolution: "dotenv-webpack@npm:7.0.3"
   dependencies:
@@ -13661,7 +13661,6 @@ fsevents@~2.1.1:
     concurrently: ^6.1.0
     core-js: ^3.7.0
     cross-env: ^7.0.3
-    dotenv-webpack: ^7.0.3
     encoding: ^0.1.13
     eslint: ^7.32.0
     eslint-config-next: ^11.0.1

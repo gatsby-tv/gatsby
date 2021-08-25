@@ -113,7 +113,6 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "concurrently": "^6.1.0",
     "cross-env": "^7.0.3",
-    "dotenv-webpack": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.0.1",
     "eslint-plugin-react": "^7.21.5",

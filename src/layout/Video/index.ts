@@ -1,6 +1,6 @@
-import { Layout, LayoutProps } from './components/Layout';
-import { Related, RelatedProps } from './components/Related';
-import { Info, InfoProps } from './components/Info';
+import { Layout, LayoutProps } from './Layout';
+import { Related, RelatedProps } from './Related';
+import { Info, InfoProps } from './Info';
 
 export type {
   LayoutProps as VideoLayoutProps,

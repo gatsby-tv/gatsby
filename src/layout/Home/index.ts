@@ -1,6 +1,6 @@
-import { Layout, LayoutProps } from './components/Layout';
-import { Carousel } from './components/Carousel';
-import { Recommended, RecommendedProps } from './components/Recommended';
+import { Layout, LayoutProps } from './Layout';
+import { Carousel } from './Carousel';
+import { Recommended, RecommendedProps } from './Recommended';
 
 export type {
   RecommendedProps as HomeRecommendedProps,

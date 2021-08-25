@@ -1,2 +1,2 @@
-export * from './components/Browse';
-export * from './components/Subscriptions';
+export * from './Browse';
+export * from './Subscriptions';

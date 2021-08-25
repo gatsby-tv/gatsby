@@ -1,6 +1,6 @@
-import { Layout, LayoutProps } from './components/Layout';
-import { Fields, FieldsProps } from './components/Fields';
-import { Heading } from './components/Heading';
+import { Layout, LayoutProps } from './Layout';
+import { Fields, FieldsProps } from './Fields';
+import { Heading } from './Heading';
 
 export type {
   LayoutProps as SignUpLayoutProps,

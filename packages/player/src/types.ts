@@ -7,6 +7,7 @@ import { TimelineState } from '@src/utilities/use-timeline';
 export interface PlayerProps extends VideoProps {
   children?: ReactNode;
   fullscreen?: boolean;
+  levels?: Record<number, number>;
   quality?: number;
   volume?: number;
   setFullscreen?: Dispatch<SetStateAction<boolean>>;
@@ -17,6 +18,7 @@ export interface OverlayProps {
   player: PlayerState;
   timeline: TimelineState;
   signal?: string;
+  levels: Record<number, number>;
   quality: number;
   fullscreen: boolean;
   setFullscreen: Dispatch<SetStateAction<boolean>>;

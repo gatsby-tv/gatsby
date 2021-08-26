@@ -31,6 +31,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       volume = 1,
       fullscreen = false,
       quality = -1,
+      levels = {},
       setFullscreen = () => undefined,
       setQuality = () => undefined,
       ...videoProps
@@ -74,6 +75,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
         signal={signal}
         fullscreen={fullscreen}
         quality={quality}
+        levels={levels}
         setFullscreen={setFullscreen}
         setQuality={setQuality}
         setActive={setActive}
@@ -92,6 +94,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
         signal={signal}
         fullscreen={fullscreen}
         quality={quality}
+        levels={levels}
         setFullscreen={setFullscreen}
         setQuality={setQuality}
         setActive={setActive}

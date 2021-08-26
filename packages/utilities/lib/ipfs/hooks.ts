@@ -237,6 +237,7 @@ export function useIPFSPeers(): IPFSPeersState {
 export type StreamState = {
   ref: RefObject<HTMLVideoElement>;
   quality: number;
+  levels: Record<number, number>;
 };
 
 export function useIPFSVideoStream(hash?: string): {
@@ -245,10 +246,11 @@ export function useIPFSVideoStream(hash?: string): {
 } {
   const ref = useRef<HTMLVideoElement>(null);
   const hls = useRef<HLS | null>(null);
+  const [levels, setLevels] = useState<Record<number, number>>({});
   const { ipfs } = useIPFS();
 
   const setQuality = useCallback((value: SetStateAction<number>) => {
-    if (!hls.current) return;
+    if (!hls.current?.levels) return;
 
     const update =
       typeof value === 'function' ? value(hls.current.currentLevel) : value;
@@ -268,7 +270,20 @@ export function useIPFSVideoStream(hash?: string): {
     hls.current.config.ipfsHash = hash;
     hls.current.loadSource('master.m3u8');
     hls.current.attachMedia(ref.current as HTMLVideoElement);
-    hls.current.on(HLS.Events.MANIFEST_PARSED, () => ref.current?.play());
+
+    hls.current.on(HLS.Events.MANIFEST_PARSED, () =>
+      setLevels(
+        hls.current
+          ? Object.fromEntries(
+              hls.current.levels.map((level, index) => [index, level.height])
+            )
+          : {}
+      )
+    );
+
+    hls.current.on(HLS.Events.MANIFEST_PARSED, () =>
+      ref.current?.play().catch(console.error)
+    );
 
     return () => hls.current?.destroy();
   }, [ipfs, hash]);
@@ -277,6 +292,7 @@ export function useIPFSVideoStream(hash?: string): {
     stream: {
       ref,
       quality: hls.current?.currentLevel ?? -1,
+      levels,
     },
     setQuality,
   };

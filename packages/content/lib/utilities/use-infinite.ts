@@ -7,13 +7,17 @@ import { InfiniteFetchResponse } from '@lib/types';
 export function useInfinite<T>(
   getKey: KeyLoader<CursorResponse<T[]>>
 ): InfiniteFetchResponse<'data', T> {
-  const { data, error, size, setSize } = useSWRInfinite<CursorResponse<T[]>>(
+  // Refer to https://github.com/vercel/swr/issues/1345
+  const { data: potentiallyErronousData, error, size, setSize } = useSWRInfinite<CursorResponse<T[]>>(
     getKey,
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
     }
   );
+
+  // @ts-ignore
+  const data = potentiallyErronousData === 1 ? undefined : potentiallyErronousData;
 
   const generator = useCallback(() => setSize((current) => current + 1), [
     setSize,

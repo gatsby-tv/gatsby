@@ -17,11 +17,15 @@ export default function VideoPage(): ReactElement {
   useEffect(() => {
     setSidebar(false);
     setScroll(0);
-  }, [setSidebar]);
+  }, []);
 
   useEffect(() => {
     if (fullscreen) setScroll(0);
   }, [fullscreen]);
+
+  useEffect(() => {
+    if (video?.content) setScroll(0);
+  }, [video?.content])
 
   useEffect(() => setTopbar(!fullscreen), [fullscreen]);
 
@@ -29,9 +33,11 @@ export default function VideoPage(): ReactElement {
     <Page margin={false} title={video ? `${video.title} - Gatsby` : undefined}>
       <Player
         ref={stream.ref}
+        key={video?.content}
         muted
         fullscreen={fullscreen}
         quality={stream.quality}
+        levels={stream.levels}
         setFullscreen={setFullscreen}
         setQuality={setQuality}
       />

@@ -26,6 +26,7 @@ export function Controls(props: ControlsProps): ReactElement {
     player,
     fullscreen,
     quality,
+    levels,
     setFullscreen,
     setQuality,
     setPlayback,
@@ -129,6 +130,19 @@ export function Controls(props: ControlsProps): ReactElement {
 
   const onKeyUp = useCallback((event: any) => void event.preventDefault(), []);
 
+  const LevelsMarkup = Object.entries(levels).map(([key, value]) => (
+    <Selection.Item key={`${value}.${key}`} option={key}>
+      {value >= 720 ? (
+        <span>
+          {`${value}p`}
+          <sup>HD</sup>
+        </span>
+      ) : (
+        `${value}p`
+      )}
+    </Selection.Item>
+  ));
+
   return (
     <div
       className={Class(className, styles.Controls)}
@@ -203,19 +217,7 @@ export function Controls(props: ControlsProps): ReactElement {
               selection={resolution}
               onSelect={setResolution}
             >
-              <Selection.Item option="4">
-                <span>
-                  1080p<sup>HD</sup>
-                </span>
-              </Selection.Item>
-              <Selection.Item option="3">
-                <span>
-                  720p<sup>HD</sup>
-                </span>
-              </Selection.Item>
-              <Selection.Item option="2">480p</Selection.Item>
-              <Selection.Item option="1">360p</Selection.Item>
-              <Selection.Item option="0">240p</Selection.Item>
+              {LevelsMarkup}
               <Selection.Item option="-1">Auto</Selection.Item>
             </Selection>
           </div>

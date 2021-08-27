@@ -283,7 +283,10 @@ export function usePlayer(
       typeof value === 'function' ? value(playing.current) : value;
 
     if (playback === playing.current) return;
-    playing.current ? video.current.pause() : video.current.play();
+
+    playing.current
+      ? video.current.pause()
+      : video.current.play().catch(console.error);
   }, []);
 
   const setVolume = useCallback((value: SetStateAction<number>) => {
@@ -321,7 +324,7 @@ export function usePlayer(
         : Math.min(Math.max(value * duration, 0), duration);
 
     video.current.currentTime = time;
-    if (ended.current) video.current.play();
+    if (ended.current) video.current.play().catch(console.error);
 
     // Although the video element will emit this event soon, we
     // programmatically dispatch this update to support logic that
@@ -339,9 +342,10 @@ export function usePlayer(
 
   useEffect(() => void (active.current = state.active), [state.active]);
   useEffect(() => void (pinned.current = state.pinned), [state.pinned]);
-  useEffect(() => void (suspended.current = state.suspended), [
-    state.suspended,
-  ]);
+  useEffect(
+    () => void (suspended.current = state.suspended),
+    [state.suspended]
+  );
   useEffect(() => void (playing.current = state.playing), [state.playing]);
   useEffect(() => void (ended.current = state.ended), [state.ended]);
 

@@ -130,18 +130,20 @@ export function Controls(props: ControlsProps): ReactElement {
 
   const onKeyUp = useCallback((event: any) => void event.preventDefault(), []);
 
-  const LevelsMarkup = Object.entries(levels).map(([key, value]) => (
-    <Selection.Item key={`${value}.${key}`} option={key}>
-      {value >= 720 ? (
-        <span>
-          {`${value}p`}
-          <sup>HD</sup>
-        </span>
-      ) : (
-        `${value}p`
-      )}
-    </Selection.Item>
-  ));
+  const LevelsMarkup = Object.entries(levels)
+    .sort(([, left], [, right]) => left < right ? 1 : -1)
+    .map(([key, value]) => (
+      <Selection.Item key={`${value}.${key}`} option={key}>
+        {value >= 720 ? (
+          <span>
+            {`${value}p`}
+            <sup>HD</sup>
+          </span>
+        ) : (
+          `${value}p`
+        )}
+      </Selection.Item>
+    ));
 
   return (
     <div

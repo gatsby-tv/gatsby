@@ -285,7 +285,10 @@ export function useIPFSVideoStream(hash?: string): {
       ref.current?.play().catch(console.error)
     );
 
-    return () => hls.current?.destroy();
+    return () => {
+      hls.current?.destroy();
+      setLevels({});
+    };
   }, [ipfs, hash]);
 
   return {

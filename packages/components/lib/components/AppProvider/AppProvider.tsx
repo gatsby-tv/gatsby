@@ -20,7 +20,7 @@ import {
   InjectionContext,
   useInjectionContext,
 } from '@lib/utilities/injection';
-import { useSupports } from '@lib/utilities/supports';
+import { SupportsContext, useSupportsContext } from '@lib/utilities/supports';
 
 import './AppProvider.scss';
 
@@ -30,24 +30,26 @@ export interface AppProviderProps {
 
 export function AppProvider(props: AppProviderProps): ReactElement {
   const { children } = props;
+  const supportsContext = useSupportsContext();
   const uniqueIdGenerator = useUniqueIdGenerator();
   const modalContext = useModalContext();
   const snackBarContext = useSnackBarContext();
   const injectionContext = useInjectionContext();
-  useSupports();
 
   return (
-    <SnackBarContext.Provider value={snackBarContext}>
-      <ModalContext.Provider value={modalContext}>
-        <UniqueIdContext.Provider value={uniqueIdGenerator}>
-          <InjectionContext.Provider value={injectionContext}>
-            <SnackBar />
-            <Injection.Target id="$background" />
-            {children}
-            <Injection.Target id="$foreground" />
-          </InjectionContext.Provider>
-        </UniqueIdContext.Provider>
-      </ModalContext.Provider>
-    </SnackBarContext.Provider>
+    <SupportsContext.Provider value={supportsContext}>
+      <SnackBarContext.Provider value={snackBarContext}>
+        <ModalContext.Provider value={modalContext}>
+          <UniqueIdContext.Provider value={uniqueIdGenerator}>
+            <InjectionContext.Provider value={injectionContext}>
+              <SnackBar />
+              <Injection.Target id="$background" />
+              {children}
+              <Injection.Target id="$foreground" />
+            </InjectionContext.Provider>
+          </UniqueIdContext.Provider>
+        </ModalContext.Provider>
+      </SnackBarContext.Provider>
+    </SupportsContext.Provider>
   );
 }

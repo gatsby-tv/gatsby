@@ -1,7 +1,12 @@
 @use 'styles' as *;
 
+.Mobile {
+  width: 100%;
+}
+
 .Description {
   @include font-size(body-large);
+  width: 100%;
 }
 
 .ShowMoreButton {

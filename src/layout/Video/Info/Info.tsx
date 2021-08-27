@@ -16,24 +16,29 @@ export function Info(props: InfoProps): ReactElement {
   const { video } = props;
   const { screen } = useFrame();
 
-  const id = useUniqueId('credits');
+  const id = useUniqueId('video');
+
   const credits = {
-    compact: `compact.${id}`,
-    full: id,
+    compact: `compact.credits.${id}`,
+    full: `full.credits.${id}`,
   };
 
   const compact = screen.width < 1200;
   const tight = screen.width < 650;
 
-  const CreditsMarkup = compact ? (
-    <Video.CompactCredits content={video} />
-  ) : (
-    <Video.Credits content={video} />
-  );
+  const hasCredits =
+    video &&
+    (video.collaborators.length ||
+      video.contributors.length ||
+      video.sponsors.length);
 
-  const CreditsInjectionMarkup = CreditsMarkup ? (
+  const CreditsInjectionMarkup = hasCredits ? (
     <Injection target={compact ? credits.compact : credits.full}>
-      {CreditsMarkup}
+      {compact ? (
+        <Video.CompactCredits content={video} />
+      ) : (
+        <Video.Credits content={video} />
+      )}
     </Injection>
   ) : null;
 
@@ -51,7 +56,7 @@ export function Info(props: InfoProps): ReactElement {
           />
           <Rule spacing={tight ? 'tight' : 'base'} />
           <Injection.Target id={credits.compact} className={styles.Credits} />
-          <Video.Description id="description" content={video} />
+          <Video.Description content={video} />
         </Optional>
         <Injection.Target id={credits.full} className={styles.Credits} />
       </Optional>

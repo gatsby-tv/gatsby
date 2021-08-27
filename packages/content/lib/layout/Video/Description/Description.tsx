@@ -1,9 +1,17 @@
 import { useState, useEffect, ReactElement } from 'react';
 import DOMPurify from 'dompurify';
-import { Button, Injection, TextBox, Icon, Rule } from '@gatsby-tv/components';
+import {
+  Button,
+  Optional,
+  Injection,
+  TextBox,
+  Icon,
+  Rule,
+} from '@gatsby-tv/components';
 import { ExtendDown, ExtendUp } from '@gatsby-tv/icons';
 import {
   Exists,
+  NotExists,
   useMobileDetector,
   useComponentWillMount,
   useStabilizedCallback,
@@ -14,17 +22,17 @@ import { Skeleton } from './Description.skeleton';
 import styles from './Description.scss';
 
 export interface DescriptionProps {
-  id?: string;
+  target?: string;
   content?: Browsable;
 }
 
 export function Description(props: DescriptionProps): ReactElement | null {
-  const { id, content } = props;
+  const { target, content } = props;
   const isMobile = useMobileDetector();
   const mounted = useComponentWillMount();
   const [clamp, setClamp] = useState(true);
 
-  const toggleClamp = useStabilizedCallback(
+  const onClick = useStabilizedCallback(
     () => setClamp((current) => !current),
     []
   );
@@ -35,34 +43,27 @@ export function Description(props: DescriptionProps): ReactElement | null {
     USE_PROFILES: { html: true },
   });
 
-  return !isMobile ? (
-    <>
-      <TextBox
-        className={styles.Description}
-        clamp={Exists(clamp, 3)}
-        dangerouslySetInnerHTML={{ __html: TextMarkup }}
-      />
-      {id && !clamp && <Injection.Target id={id} />}
-      <Rule>
-        <Button className={styles.ShowMoreButton} onClick={toggleClamp}>
-          {clamp ? 'Show More' : 'Show Less'}
-        </Button>
-      </Rule>
-    </>
+  const ShowMoreMarkup = isMobile ? (
+    <Icon className={styles.ShowMoreIcon} src={clamp ? ExtendDown : ExtendUp} />
   ) : (
-    <Button unstyled onClick={toggleClamp}>
+    <Button className={styles.ShowMoreButton} onClick={onClick}>
+      {clamp ? 'Show More' : 'Show Less'}
+    </Button>
+  );
+
+  return (
+    <Optional
+      component={Button}
+      active={isMobile}
+      $props={{ className: styles.Mobile, unstyled: true, onClick }}
+    >
       <TextBox
         className={styles.Description}
         clamp={Exists(clamp, 3)}
         dangerouslySetInnerHTML={{ __html: TextMarkup }}
       />
-      {id && !clamp && <Injection.Target id={id} />}
-      <Rule>
-        <Icon
-          className={styles.ShowMoreIcon}
-          src={clamp ? ExtendDown : ExtendUp}
-        />
-      </Rule>
-    </Button>
+      <Injection.Target id={NotExists(clamp, target)} />
+      <Rule>{ShowMoreMarkup}</Rule>
+    </Optional>
   );
 }

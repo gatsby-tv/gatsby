@@ -17,10 +17,6 @@ export function Article(props: ArticleProps): ReactElement {
   const { content, index } = props;
   const { id, preview, info, avatar, link: Link } = useListing();
 
-  const TargetMarkup = id ? (
-    <Injection.Target id={id} className={styles.Target} index={index} />
-  ) : null;
-
   const LinkMarkup = Link ? <Link content={content} /> : null;
   const InfoMarkup = (
     <Info content={content} format={info} avatar={avatar} link={Link} />
@@ -28,7 +24,7 @@ export function Article(props: ArticleProps): ReactElement {
 
   return (
     <>
-      {TargetMarkup}
+      <Injection.Target id={id} className={styles.Target} index={index} />
       <Preview
         content={content}
         format={preview}

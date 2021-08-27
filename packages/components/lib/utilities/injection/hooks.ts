@@ -57,7 +57,7 @@ export function useInjectionContext(): InjectionContextType {
 }
 
 export function useInjectionTarget(
-  id: string
+  id?: string
 ): Dispatch<SetStateAction<HTMLElement | null>> | null {
   const context = useContext(InjectionContext);
 
@@ -69,11 +69,12 @@ export function useInjectionTarget(
   const [ref, setRef] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
+    if (!id) return;
     addTarget(id, ref);
     return () => removeTarget(id);
   }, [id, ref]);
 
-  return injections[id] ? setRef : null;
+  return id && injections[id] ? setRef : null;
 }
 
 export function useInjection(id?: string): HTMLElement | null | undefined {

@@ -45,6 +45,7 @@ export function useIPFSNode(bootstrap: string[] = []): IPFSContextType {
   useEffect(() => {
     async function loadIPFS() {
       try {
+        if (ipfsRef.current) return;
         const ipfs = await IPFS.create(IPFS_DEFAULT_CONFIG);
         bootstrap.forEach(async (addr) => await ipfs.bootstrap.add(addr));
         const info = await ipfs.id();

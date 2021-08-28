@@ -25,7 +25,7 @@ export default function VideoPage(): ReactElement {
 
   useEffect(() => {
     if (video?.content) setScroll(0);
-  }, [video?.content])
+  }, [video?.content]);
 
   useEffect(() => setTopbar(!fullscreen), [fullscreen]);
 

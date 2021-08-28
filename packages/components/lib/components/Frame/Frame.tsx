@@ -10,7 +10,7 @@ import {
 import {
   FrameContext,
   useResizeObserver,
-  useComponentWillMount,
+  useComponentDidMount,
 } from '@gatsby-tv/utilities';
 
 import { EventListener } from '@lib/components/EventListener';
@@ -26,7 +26,7 @@ export interface FrameProps {
 
 export function Frame(props: FrameProps): ReactElement {
   const { children, topbar: Topbar, sidebar: Sidebar } = props;
-  const mounted = useComponentWillMount();
+  const mounted = useComponentDidMount();
   const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
@@ -65,18 +65,19 @@ export function Frame(props: FrameProps): ReactElement {
     setScreenX(content.inlineSize);
     setScreenY(content.blockSize);
   });
+
   useResizeObserver(sideframe, (content) => setOffsetX(content.inlineSize));
   useResizeObserver(topframe, (content) => setOffsetY(content.blockSize));
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted.current || !fullscreen || document.fullscreenElement) return;
+    document.body.requestFullscreen();
+  }, [fullscreen]);
 
-    if (fullscreen && !document.fullscreenElement) {
-      document.body.requestFullscreen();
-    } else if (document.fullscreenElement) {
-      document.exitFullscreen();
-    }
-  }, [mounted, fullscreen]);
+  useEffect(() => {
+    if (!mounted.current || fullscreen || !document.fullscreenElement) return;
+    document.exitFullscreen();
+  }, [fullscreen]);
 
   useEffect(() => setFullscreen(Boolean(document.fullscreenElement)), []);
 

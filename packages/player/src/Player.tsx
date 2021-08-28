@@ -1,4 +1,5 @@
 import {
+  useRef,
   useEffect,
   useState,
   useCallback,
@@ -37,6 +38,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       ...videoProps
     } = props;
 
+    const fullscreenRef = useRef(fullscreen);
     const isMobile = useMobileDetector();
     const video = useForwardedRef<HTMLVideoElement>(ref);
     const timeline = useTimeline();
@@ -66,7 +68,21 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       []
     );
 
+    const setViewportFullscreen = useCallback(
+      (value: SetStateAction<boolean>) => {
+        const update =
+          typeof value === 'function' ? value(fullscreenRef.current) : value;
+
+        return update
+          ? void player.ref.current?.requestFullscreen()
+          : void document.exitFullscreen();
+      },
+      []
+    );
+
     useEffect(() => setActive(!isMobile), [isMobile]);
+
+    useEffect(() => void (fullscreenRef.current = fullscreen), [fullscreen]);
 
     const OverlayMarkup = !mounted ? null : isMobile ? (
       <MobileOverlay
@@ -76,7 +92,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
         fullscreen={fullscreen}
         quality={quality}
         levels={levels}
-        setFullscreen={setFullscreen}
+        setFullscreen={setViewportFullscreen}
         setQuality={setQuality}
         setActive={setActive}
         setPinned={setPinned}

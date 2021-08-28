@@ -11,8 +11,9 @@
     position: absolute;
     top: rem(-12px);
     right: 0;
-    bottom: rem(-12px);
+    bottom: rem(-16px);
     left: 0;
+    z-index: 10;
   }
 
   &[data-active] .Progress:after {

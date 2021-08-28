@@ -15,13 +15,6 @@
   z-index: 2;
 }
 
-.Timeline {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
 .Icon {
   @include expand(absolute);
   @include center;
@@ -34,4 +27,23 @@
 
 .Controls {
   @include expand(absolute);
+}
+
+.Timeline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.Fullscreen {
+  .Controls {
+    bottom: rem(20px);
+  }
+
+  .Timeline {
+    left: rem(20px);
+    right: rem(20px);
+    bottom: rem(20px);
+  }
 }

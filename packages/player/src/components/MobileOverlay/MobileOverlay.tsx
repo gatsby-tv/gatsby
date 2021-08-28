@@ -11,7 +11,7 @@ import { Timeline } from './components/Timeline';
 import styles from './MobileOverlay.scss';
 
 export function MobileOverlay(props: OverlayProps): ReactElement {
-  const { player, timeline, signal, setActive, setSuspend } = props;
+  const { player, timeline, signal, fullscreen, setActive, setSuspend } = props;
 
   const mounted = useComponentDidMount();
   const paused = useRef(player.paused);
@@ -54,7 +54,7 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
       clearTimeout(id);
       setSuspend(false);
     };
-  }, [player.playing])
+  }, [player.playing]);
 
   useEffect(
     () =>
@@ -82,6 +82,8 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
     setActive(true);
   }, [timeline.scrubbing]);
 
+  const classes = Class(styles.Overlay, fullscreen && styles.Fullscreen);
+
   const LoadingMarkup =
     player.loading && !signal ? (
       <Icon
@@ -92,7 +94,7 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
     ) : null;
 
   return (
-    <div className={styles.Overlay} onPointerUp={onPointerUp}>
+    <div className={classes} onPointerUp={onPointerUp}>
       <Activatable
         className={Class(styles.Overlay, styles.Tint)}
         active={active || timeline.scrubbing}
@@ -108,7 +110,13 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
       >
         <Controls active={controls} onClick={onClick} {...props} />
       </Activatable>
-      <Timeline className={styles.Timeline} disabled={disabled} {...props} />
+      <Activatable
+        className={styles.Timeline}
+        active={!fullscreen || active}
+        duration="fastest"
+      >
+        <Timeline disabled={disabled} {...props} />
+      </Activatable>
       <EventListener event="orientationchange" handler={onOrientationChange} />
     </div>
   );

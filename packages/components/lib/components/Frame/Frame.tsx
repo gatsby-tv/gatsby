@@ -7,13 +7,7 @@ import {
   ReactNode,
   ReactElement,
 } from 'react';
-import {
-  FrameContext,
-  useResizeObserver,
-  useComponentDidMount,
-} from '@gatsby-tv/utilities';
-
-import { EventListener } from '@lib/components/EventListener';
+import { FrameContext, useResizeObserver } from '@gatsby-tv/utilities';
 
 import styles from './Frame.scss';
 import { MainFrame, TopFrame, SideFrame } from './components';
@@ -26,7 +20,6 @@ export interface FrameProps {
 
 export function Frame(props: FrameProps): ReactElement {
   const { children, topbar: Topbar, sidebar: Sidebar } = props;
-  const mounted = useComponentDidMount();
   const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
@@ -36,12 +29,6 @@ export function Frame(props: FrameProps): ReactElement {
   const [screenY, setScreenY] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
-  const [fullscreen, setFullscreen] = useState(false);
-
-  const onFullscreenChange = useCallback(
-    () => setFullscreen(Boolean(document.fullscreenElement)),
-    []
-  );
 
   const setTopbar = useCallback(
     (value: SetStateAction<boolean>) =>
@@ -69,23 +56,9 @@ export function Frame(props: FrameProps): ReactElement {
   useResizeObserver(sideframe, (content) => setOffsetX(content.inlineSize));
   useResizeObserver(topframe, (content) => setOffsetY(content.blockSize));
 
-  useEffect(() => {
-    if (!mounted.current || !fullscreen || document.fullscreenElement) return;
-    document.body.requestFullscreen();
-  }, [fullscreen]);
-
-  useEffect(() => {
-    if (!mounted.current || fullscreen || !document.fullscreenElement) return;
-    document.exitFullscreen();
-  }, [fullscreen]);
-
-  useEffect(() => setFullscreen(Boolean(document.fullscreenElement)), []);
-
   const context = {
     screen: { width: screenX, height: screenY },
     offset: { x: sidebar ? offsetX : 0, y: topbar ? offsetY : 0 },
-    fullscreen,
-    setFullscreen,
     setTopbar,
     setSidebar,
   };
@@ -99,11 +72,6 @@ export function Frame(props: FrameProps): ReactElement {
           </SideFrame>
         </TopFrame>
       </div>
-      <EventListener
-        doc
-        event="fullscreenchange"
-        handler={onFullscreenChange}
-      />
     </FrameContext.Provider>
   );
 }

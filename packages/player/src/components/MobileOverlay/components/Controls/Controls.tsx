@@ -8,10 +8,14 @@ import {
   Restart,
   Expand,
   Compress,
+  Misc,
 } from '@gatsby-tv/icons';
-import { Class, Time } from '@gatsby-tv/utilities';
+import { Class, Time, useController } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
+
+import { Settings } from './components/Settings';
+
 import styles from './Controls.scss';
 
 export interface ControlsProps extends OverlayProps {
@@ -33,6 +37,8 @@ export function Controls(props: ControlsProps): ReactElement {
     setSignal,
     onClick,
   } = props;
+
+  const settings = useController();
 
   const [skip, setSkip] = useState<ReturnType<typeof setTimeout> | undefined>(
     undefined
@@ -72,6 +78,15 @@ export function Controls(props: ControlsProps): ReactElement {
 
   return (
     <>
+      <div className={styles.TopRow}>
+        <Button
+          className={Class(styles.Icon, !active && styles.Inactive)}
+          animate
+          icon={Misc}
+          size="smaller"
+          onClick={settings.toggle}
+        />
+      </div>
       <div className={Class(className, styles.Controls)}>
         <Button
           className={styles.Backward}
@@ -120,12 +135,14 @@ export function Controls(props: ControlsProps): ReactElement {
       <div className={styles.BottomRow}>
         <span className={styles.ProgressText}>{`${time} / ${duration}`}</span>
         <Button
-          className={Class(styles.Fullscreen, !active && styles.Inactive)}
+          className={Class(styles.Icon, !active && styles.Inactive)}
+          animate
           icon={fullscreen ? Compress : Expand}
           size="smallest"
           onClick={onFullscreenClick}
         />
       </div>
+      <Settings {...props} active={settings.active} onExit={settings.deactivate} />
     </>
   );
 }

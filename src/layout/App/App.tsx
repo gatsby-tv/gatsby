@@ -2,7 +2,6 @@ import { useState, useEffect, ReactElement } from 'react';
 import { NextComponentType, NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 import { Frame, Icon } from '@gatsby-tv/components';
-import { useModalClear } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/content';
 import { Spinner } from '@gatsby-tv/icons';
 
@@ -23,14 +22,11 @@ export interface AppProps<T> {
 export function App<T>(props: AppProps<T>): ReactElement {
   const { page: Page, $props } = props;
   const router = useRouter();
-  const clear = useModalClear();
   const { session } = useSession();
   const [channel, setChannel] = useChannelModal();
   const [spinner, setSpinner] = useState(false);
   const loading = !session.valid && session.loading;
   const isTransient = /^\/\$/.test(router.pathname);
-
-  useEffect(clear, [Page]);
 
   useEffect(() => {
     if (loading) {

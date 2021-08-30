@@ -2,14 +2,15 @@ import { useEffect, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { useVideo } from '@gatsby-tv/content';
 import Player from '@gatsby-tv/player';
-import { useScroll, useFrame, useIPFSVideoStream } from '@gatsby-tv/utilities';
+import { useScroll, useFrame, useFullscreen, useIPFSVideoStream } from '@gatsby-tv/utilities';
 
 import { Page } from '@src/layout/Page';
 import { Video } from '@src/layout/Video';
 
 export default function VideoPage(): ReactElement {
   const router = useRouter();
-  const { fullscreen, setFullscreen, setTopbar, setSidebar } = useFrame();
+  const [fullscreen, setFullscreen] = useFullscreen();
+  const { setTopbar, setSidebar } = useFrame();
   const { setScroll } = useScroll();
   const { video } = useVideo([router.query.id].flat()[0]);
   const { stream, setQuality } = useIPFSVideoStream(video?.content);

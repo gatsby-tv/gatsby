@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { useModal } from '@gatsby-tv/utilities';
+import { useController } from '@gatsby-tv/utilities';
 
 import { Button } from '@lib/components/Button';
 import { TextBox } from '@lib/components/TextBox';
@@ -61,7 +61,7 @@ export const InsideContainer: Story<PanelProps> = () => {
 };
 
 export const AsModal: Story<PanelProps> = () => {
-  const { active, activate, deactivate } = useModal();
+  const { active, activate, deactivate } = useController();
 
   return (
     <>

@@ -1,9 +1,10 @@
 import { useCallback, ReactNode, ReactElement } from 'react';
-import { Exists, Class, useModalCallback } from '@gatsby-tv/utilities';
+import { Exists, Class } from '@gatsby-tv/utilities';
 
 import { Optional } from '@lib/components/Optional';
 import { Injection } from '@lib/components/Injection';
 import { EventListener } from '@lib/components/EventListener';
+import { useModalCallback } from '@lib/utilities/modal';
 import { EventHandler } from '@lib/types';
 
 import styles from './Modal.scss';

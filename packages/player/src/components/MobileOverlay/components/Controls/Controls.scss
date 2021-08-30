@@ -8,6 +8,16 @@
   grid-template-columns: [skip-backward] 1fr [previous] spacing(7) [playback] spacing(9) [next] spacing(7) [skip-forward] 1fr;
 }
 
+.TopRow {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  top: rem(16px);
+  z-index: 10;
+}
+
 .BottomRow {
   position: absolute;
   display: flex;
@@ -56,7 +66,7 @@
   color: palette(typography, disabled);
 }
 
-.Fullscreen {
+.Icon {
   padding: spacing(1) spacing(2);
 }
 

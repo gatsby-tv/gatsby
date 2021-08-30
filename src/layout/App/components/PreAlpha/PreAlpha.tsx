@@ -1,11 +1,11 @@
 import { ReactElement } from 'react';
 import { Injection, TextMeta } from '@gatsby-tv/components';
-import { Class, useFrame } from '@gatsby-tv/utilities';
+import { Class, useFullscreen } from '@gatsby-tv/utilities';
 
 import styles from './PreAlpha.module.scss';
 
 export function PreAlpha(): ReactElement {
-  const { fullscreen } = useFrame();
+  const [fullscreen] = useFullscreen();
   const classes = Class(styles.PreAlpha, fullscreen && styles.Fullscreen);
 
   return (

@@ -14,6 +14,10 @@ import {
 import { Class, Time, useMenu } from '@gatsby-tv/utilities';
 
 import { OverlayProps } from '@src/types';
+
+import { Volume } from './components/Volume';
+import { Settings } from './components/Settings';
+
 import styles from './Controls.scss';
 
 export interface ControlsProps extends OverlayProps {
@@ -25,61 +29,19 @@ export function Controls(props: ControlsProps): ReactElement {
     className,
     player,
     fullscreen,
-    quality,
-    levels,
     setFullscreen,
-    setQuality,
     setPlayback,
     setVolume,
     setMuted,
-    setPinned,
     setSeek,
     setSignal,
   } = props;
 
   const settings = useMenu<HTMLButtonElement>();
-  const volumeRef = useRef<HTMLSpanElement>(null);
   const [slider, setSlider] = useState(false);
-  const [dragging, setDragging] = useState(false);
-  const [resolution, setResolution] = useState<string>(String(quality));
 
   const time = Time(player.time * player.duration);
   const duration = Time(player.duration);
-
-  useEffect(() => {
-    if (player.active) return;
-    settings.deactivate();
-  }, [player.active]);
-
-  useEffect(() => void setPinned(settings.active), [settings.active]);
-  useEffect(() => void setQuality(Number(resolution)), [resolution]);
-  useEffect(settings.deactivate, [resolution]);
-
-  const onDragStart = useCallback((event: any) => {
-    if (!volumeRef.current) return;
-    event.preventDefault();
-    volumeRef.current.setPointerCapture(event.pointerId);
-    setDragging(true);
-    const { left, width } = volumeRef.current.getBoundingClientRect();
-    const value = Math.min(Math.max((event.clientX - left) / width, 0), 1);
-    setVolume(value);
-  }, []);
-
-  const onDrag = useCallback(
-    (event: any) => {
-      if (!dragging || !volumeRef.current) return;
-      const { left, width } = volumeRef.current.getBoundingClientRect();
-      const value = Math.min(Math.max((event.clientX - left) / width, 0), 1);
-      setVolume(value);
-    },
-    [dragging]
-  );
-
-  const onDragEnd = useCallback((event: any) => {
-    if (!volumeRef.current) return;
-    volumeRef.current.releasePointerCapture(event.pointerId);
-    setDragging(false);
-  }, []);
 
   const onKeyDown = useCallback(
     (event: any) => {
@@ -129,68 +91,36 @@ export function Controls(props: ControlsProps): ReactElement {
   );
 
   const onKeyUp = useCallback((event: any) => void event.preventDefault(), []);
+  const onClick = useCallback((event: any) => void event.stopPropagation(), []);
+  const onPlaybackPointerLeave = useCallback(() => void setSlider(false), []);
 
-  const LevelsMarkup = Object.entries(levels)
-    .sort(([, left], [, right]) => left < right ? 1 : -1)
-    .map(([key, value]) => (
-      <Selection.Item key={`${value}.${key}`} option={key}>
-        {value >= 720 ? (
-          <span>
-            {`${value}p`}
-            <sup>HD</sup>
-          </span>
-        ) : (
-          `${value}p`
-        )}
-      </Selection.Item>
-    ));
+  const onPlaybackClick = useCallback(
+    () => setPlayback((current) => !current),
+    []
+  );
+
+  const onFullscreenClick = useCallback(
+    () => setFullscreen((current) => !current),
+    []
+  );
 
   return (
     <div
       className={Class(className, styles.Controls)}
       onKeyUp={onKeyUp}
-      onClick={(event: any) => event.stopPropagation()}
+      onClick={onClick}
     >
       <div
         className={Class(styles.Section, styles.Playback)}
-        onPointerLeave={() => setSlider(false)}
+        onPointerLeave={onPlaybackPointerLeave}
       >
         <Button
           icon={player.ended ? Restart : player.paused ? Play : Pause}
           size="small"
-          onClick={() => setPlayback((current) => !current)}
+          onClick={onPlaybackClick}
         />
-        <Button
-          icon={
-            player.volume === 0 || player.muted
-              ? VolumeMute
-              : player.volume < 0.7
-              ? VolumeHalf
-              : VolumeFull
-          }
-          size="small"
-          onPointerEnter={() => setSlider(true)}
-          onClick={() => setMuted((current) => !current)}
-        />
-        <span
-          ref={volumeRef}
-          className={Class(styles.Volume, slider && styles.VolumeActive)}
-          onPointerDown={onDragStart}
-          onPointerMove={onDrag}
-          onPointerUp={onDragEnd}
-          onPointerLeave={onDragEnd}
-          draggable="false"
-        >
-          <span className={Class(styles.Slider, slider && styles.SliderActive)}>
-            <span
-              style={{
-                right: `${100 * (1 - (player.muted ? 0 : player.volume))}%`,
-              }}
-              className={styles.SliderProgress}
-            />
-          </span>
-        </span>
-        <span className={styles.ProgressText}>{`${time} / ${duration}`}</span>
+        <Volume slider={slider} setSlider={setSlider} {...props} />
+        <span className={styles.Progress}>{`${time} / ${duration}`}</span>
       </div>
       <div className={Class(styles.Section, styles.Settings)}>
         <Button
@@ -202,28 +132,14 @@ export function Controls(props: ControlsProps): ReactElement {
         <Button
           icon={fullscreen ? Compress : Expand}
           size="small"
-          onClick={() => setFullscreen((current) => !current)}
+          onClick={onFullscreenClick}
         />
-        <Menu
+        <Settings
           for={settings.ref}
-          className={styles.Menu}
-          placement="top"
-          offset={[-50, 14]}
           active={settings.active}
           onExit={settings.deactivate}
-        >
-          <div>
-            <Selection
-              itemClass={styles.MenuItem}
-              scrollHidden
-              selection={resolution}
-              onSelect={setResolution}
-            >
-              {LevelsMarkup}
-              <Selection.Item option="-1">Auto</Selection.Item>
-            </Selection>
-          </div>
-        </Menu>
+          {...props}
+        />
       </div>
       <EventListener doc event="keydown" handler={onKeyDown} />
     </div>

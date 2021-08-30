@@ -7,6 +7,15 @@ export class ContextError extends Error {
   }
 }
 
+export class UniqueContextError extends Error {
+  context: string;
+
+  constructor(context: string) {
+    super(`Context ${context} is not unique.`);
+    this.context = context;
+  }
+}
+
 export class FormError extends Error {
   target: string;
 

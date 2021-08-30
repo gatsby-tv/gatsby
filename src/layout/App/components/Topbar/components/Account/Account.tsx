@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Avatar, Button, Rule, Menu } from '@gatsby-tv/components';
 import { User as UserIcon, Exit } from '@gatsby-tv/icons';
-import { useMenu, useModal } from '@gatsby-tv/utilities';
+import { useMenu, useController } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
 
 import { Link } from '@src/components/Link';
@@ -14,7 +14,7 @@ import styles from './Account.module.scss';
 export function Account(): ReactElement {
   const { session, setSession } = useSession();
   const menu = useMenu<HTMLButtonElement>();
-  const modal = useModal();
+  const modal = useController();
   const user = session?.user as User | undefined;
 
   if (!session.valid && session.loading) return <Skeleton />;

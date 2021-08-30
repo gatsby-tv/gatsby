@@ -9,7 +9,6 @@ import {
 
 import { Optional } from '@lib/components/Optional';
 import { Injection } from '@lib/components/Injection';
-import { EventListener } from '@lib/components/EventListener';
 
 import styles from './Fireworks.scss';
 

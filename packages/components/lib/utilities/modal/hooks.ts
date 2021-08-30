@@ -7,19 +7,11 @@ import {
   useCallback,
   DependencyList,
 } from 'react';
-
-import { EventHandler } from '@lib/types';
-import { ContextError } from '@lib/errors';
+import { ContextError, EventHandler } from '@gatsby-tv/utilities';
 
 import { ModalContext, ModalContextType } from './context';
 
-export interface ModalType {
-  active: boolean;
-  activate: () => void;
-  deactivate: () => void;
-}
-
-export function useModalContext(): ModalContextType {
+export function useModalContext(deps: DependencyList): ModalContextType {
   const [callbacks, setCallbacks] = useState<EventHandler[]>([]);
 
   const addModalCallback = useCallback(
@@ -34,10 +26,7 @@ export function useModalContext(): ModalContextType {
     []
   );
 
-  const clearModals = useCallback(
-    () => callbacks.forEach((callback) => callback()),
-    [callbacks]
-  );
+  useEffect(() => void callbacks.forEach((callback) => callback()), deps);
 
   useEffect(() => {
     function handler(event: any) {
@@ -49,21 +38,9 @@ export function useModalContext(): ModalContextType {
   }, [callbacks]);
 
   return {
-    clearModals,
     addModalCallback,
     removeModalCallback,
   };
-}
-
-export function useModalClear(): () => void {
-  const context = useContext(ModalContext);
-
-  if (!context) {
-    throw new ContextError('Modal');
-  }
-
-  const { clearModals } = context;
-  return clearModals;
 }
 
 export function useModalCallback(
@@ -84,12 +61,4 @@ export function useModalCallback(
     addModalCallback(_callback);
     return () => removeModalCallback(_callback);
   }, [_callback]);
-}
-
-export function useModal(): ModalType {
-  const [active, setActive] = useState(false);
-  const activate = useCallback(() => setActive(true), []);
-  const deactivate = useCallback(() => setActive(false), []);
-
-  return { active, activate, deactivate };
 }

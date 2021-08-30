@@ -1,5 +1,5 @@
 import { ReactNode, ReactElement } from 'react';
-import { useFrame } from '@gatsby-tv/utilities';
+import { useFrame, useFullscreen } from '@gatsby-tv/utilities';
 
 import { Scroll } from '@lib/components/Scroll';
 
@@ -11,7 +11,8 @@ export interface MainFrameProps {
 
 export function MainFrame(props: MainFrameProps): ReactElement {
   const { children } = props;
-  const { fullscreen, screen, offset } = useFrame();
+  const { screen, offset } = useFrame();
+  const [fullscreen] = useFullscreen();
 
   return (
     <main

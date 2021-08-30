@@ -1,0 +1,51 @@
+@use 'styles' as *;
+
+.Volume {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  will-change: margin;
+  transition: margin duration(fast) ease;
+}
+
+.Slider {
+  width: 0;
+  transition: width duration(fast) ease;
+  will-change: width;
+  height: rem(4px);
+  background-color: palette(slider, track);
+}
+
+.Progress {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: palette(typography);
+
+  &:after {
+    @include border-radius(full);
+    content: "";
+    position: absolute;
+    right: rem(-5px);
+    width: rem(10px);
+    height: rem(10px);
+    background-color: palette(slider, ball);
+    transition: transform 150ms ease;
+    transform: scale(0);
+  }
+}
+
+.Active {
+  margin: 0 rem(6px);
+
+  .Slider {
+    width: rem(60px);
+  }
+
+  .Progress:after {
+    transform: scale(1);
+  }
+}

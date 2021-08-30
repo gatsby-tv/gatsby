@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { LoremIpsum } from 'react-lorem-ipsum';
-import { useModal } from '@gatsby-tv/utilities';
+import { useController } from '@gatsby-tv/utilities';
 
 import { Card } from '@lib/components/Card';
 import { TextHeading } from '@lib/components/TextHeading';
@@ -17,7 +17,7 @@ export default {
 } as Meta;
 
 export const Example: Story<ModalProps> = () => {
-  const modal = useModal();
+  const modal = useController();
 
   return (
     <>

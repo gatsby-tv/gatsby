@@ -1,0 +1,56 @@
+@use 'styles' as *;
+
+.Settings {
+  width: 100%;
+  margin-top: 80%;
+  padding: spacing(1) spacing(3);
+  background-color: hsla(0, 0%, 12%);
+  z-index: 20;
+
+  .Item:first-of-type {
+    margin-top: spacing(1);
+  }
+
+  .Item:last-of-type {
+    margin-bottom: spacing(1);
+  }
+  
+  &:before {
+    @include border-radius(small);
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: rem(4px);
+    background-color: hsla(0, 0%, 10%);
+  }
+}
+
+.Item {
+  @include font-size(body-large);
+  @include font-weight(semi-bold);
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+  padding: spacing(1) spacing(2);
+
+  sup {
+    @include font-size(caption);
+    @include font-weight(bold);
+    margin-left: rem(4px);
+    vertical-align: top;
+    color: palette(red);
+  }
+
+  &:before {
+    @include border-radius(full);
+    content: "";
+    display: block;
+    width: rem(8px);
+    height: rem(8px);
+  }
+
+  &[aria-selected]:before {
+    background-color: palette(gold);
+  }
+}

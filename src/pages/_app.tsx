@@ -35,7 +35,7 @@ export default function AppPage({
   );
 
   return (
-    <AppProvider>
+    <AppProvider deps={[Component]}>
       <SWRConfig
         value={{
           fetcher: (url, ...args) =>

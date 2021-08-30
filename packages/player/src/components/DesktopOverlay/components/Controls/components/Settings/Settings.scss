@@ -1,0 +1,62 @@
+@use 'styles' as *;
+
+@keyframes reveal {
+  from {
+    clip-path: polygon(-5% 105%, -5% 105%, 105% 105%, 105% 105%);
+  }
+
+  to {
+    clip-path: polygon(-5% -5%, -5% 105%, 105% 105%, 105% -5%);
+  }
+}
+
+.Settings {
+  min-width: rem(220px);
+  background-color: hsl(0, 0%, 12%, 0.9);
+
+  animation: {
+    name: reveal;
+    duration: duration(faster);
+  }
+
+  & > *:first-child {
+    margin-top: spacing(1);
+  }
+
+  & > *:last-child {
+    margin-bottom: spacing(1);
+  }
+}
+
+.Item {
+  @include font-size(body-large);
+  @include font-weight(semi-bold);
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+  padding: spacing(1) spacing(2);
+
+  @include hover {
+    background-color: hsla(0, 0%, 16%, 0.9);
+  }
+
+  sup {
+    @include font-size(caption);
+    @include font-weight(bold);
+    margin-left: rem(4px);
+    vertical-align: top;
+    color: palette(red);
+  }
+
+  &:before {
+    @include border-radius(full);
+    content: "";
+    display: block;
+    width: rem(8px);
+    height: rem(8px);
+  }
+
+  &[aria-selected]:before {
+    background-color: palette(gold);
+  }
+}

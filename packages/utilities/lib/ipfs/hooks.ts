@@ -21,7 +21,7 @@ import all from 'it-all';
 import { IPFSContent } from '@gatsby-tv/types';
 
 import { useAsync } from '@lib/use-async';
-import { ContextError } from '@lib/errors';
+import { ContextError, UniqueContextError } from '@lib/errors';
 
 import { IPFSContext, IPFSContextType } from './context';
 
@@ -33,7 +33,7 @@ export function useIPFSNode(bootstrap: string[] = []): IPFSContextType {
   const context = useContext(IPFSContext);
 
   if (context) {
-    throw new Error('IPFS context is not unique');
+    throw new UniqueContextError('IPFS');
   }
 
   const ipfsRef = useRef<any>(null);

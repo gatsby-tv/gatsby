@@ -2,6 +2,7 @@
 
 .Panel {
   overflow: hidden;
+  transition: background-color duration(fast) ease-out;
 }
 
 .Absolute {
@@ -12,10 +13,15 @@
   @include expand(fixed);
 }
 
+.Tinted {
+  background-color: palette(overlay, tint);
+}
+
 .Container {
   @include expand();
 }
 
 .Slider {
+  @include elevation(2);
   transition: transform duration(fast) ease-out;
 }

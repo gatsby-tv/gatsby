@@ -4,7 +4,6 @@ import { useController } from '@gatsby-tv/utilities';
 
 import { Button } from '@lib/components/Button';
 import { TextBox } from '@lib/components/TextBox';
-import { Selection } from '@lib/components/Selection';
 import { Panel, PanelProps } from '@lib/components/Panel';
 
 import styles from './Panel.stories.scss';
@@ -14,45 +13,19 @@ export default {
   component: Panel,
 } as Meta;
 
-export const InsideContainer: Story<PanelProps> = () => {
-  const [selection, setSelection] = useState<string | undefined>(undefined);
-  const [direction, setDirection] = useState<string | undefined>();
+export const InsideContainer: Story<PanelProps> = (props) => {
+  const { direction } = props;
 
-  useEffect(() => {
-    if (selection) {
-      setDirection(selection);
-    } else {
-      const id = setTimeout(() => setDirection(undefined), 300);
-      return () => clearTimeout(id);
-    }
-  }, [selection]);
+  const { active, activate, deactivate } = useController();
 
   return (
-    <div className={styles.Selection}>
-      <Selection
-        itemClass={styles.Item}
-        scrollHidden
-        selection={selection}
-        onSelect={setSelection}
-      >
-        <Selection.Item option="top">
-          <TextBox>Top</TextBox>
-        </Selection.Item>
-        <Selection.Item option="right">
-          <TextBox>Right</TextBox>
-        </Selection.Item>
-        <Selection.Item option="bottom">
-          <TextBox>Bottom</TextBox>
-        </Selection.Item>
-        <Selection.Item option="left">
-          <TextBox>Left</TextBox>
-        </Selection.Item>
-      </Selection>
+    <div className={styles.Container}>
+      <Button onClick={activate}>Activate</Button>
       <Panel
         className={styles.Panel}
-        active={Boolean(direction)}
+        active={active}
         direction={direction}
-        onExit={setSelection}
+        onExit={deactivate}
       >
         {direction}
       </Panel>
@@ -60,7 +33,12 @@ export const InsideContainer: Story<PanelProps> = () => {
   );
 };
 
-export const AsModal: Story<PanelProps> = () => {
+InsideContainer.args = {
+  direction: 'right',
+};
+
+export const AsModal: Story<PanelProps> = (props) => {
+  const { direction } = props;
   const { active, activate, deactivate } = useController();
 
   return (
@@ -76,4 +54,8 @@ export const AsModal: Story<PanelProps> = () => {
       </Panel>
     </>
   );
+};
+
+AsModal.args = {
+  direction: 'right',
 };

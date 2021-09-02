@@ -1,19 +1,10 @@
 @use 'styles' as *;
 
-.Selection {
+.Container {
   background-color: palette(surface, 3);
   width: rem(200px);
   height: rem(200px);
-}
-
-.Item {
-  padding: spacing(1) spacing(1.5);
-  transition: all duration(fastest) ease;
-
-  &[aria-selected] {
-    color: palette(blue);
-    background-color: palette(surface, 7);
-  }
+  padding: spacing(1);
 }
 
 .Panel {

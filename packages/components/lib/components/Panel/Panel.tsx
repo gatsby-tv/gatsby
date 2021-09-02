@@ -57,10 +57,8 @@ getOffset.value = (
   direction: string,
   dimension: string
 ) => {
-  const {
-    [direction]: x,
-    [dimension]: y,
-  } = ref?.getBoundingClientRect() as any;
+  const { [direction]: x, [dimension]: y } =
+    ref?.getBoundingClientRect() as any;
   return Math.min(Math.max((base - x) / y, 0), 1);
 };
 
@@ -89,6 +87,7 @@ export function Panel(props: PanelProps): ReactElement | null {
     onExit,
   } = props;
 
+  const slider = useRef<HTMLDivElement>(null);
   const [ref, setRef] = useState<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -146,30 +145,42 @@ export function Panel(props: PanelProps): ReactElement | null {
     }
   );
 
-  useEffect(() => setMounted(Boolean(active)), [active]);
+  useEffect(() => {
+    if (!active) return;
+    setMounted(true);
+  }, [active]);
+
+  useEffect(() => {
+    if (active) return;
+    repaint();
+    const id = requestAnimationFrame(() => setVisible(false));
+    return () => cancelAnimationFrame(id);
+  }, [active]);
 
   useEffect(() => {
     if (!ref) return;
     repaint();
-    const id = requestAnimationFrame(() => setVisible(mounted));
+    const id = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(id);
-  }, [ref, mounted]);
-
-  useEffect(() => {
-    if (mounted) return;
-    const id = setTimeout(() => onExit?.(), 300);
-    return () => clearTimeout(id);
-  }, [mounted]);
+  }, [ref]);
 
   useEffect(() => {
     if (draggable) return;
     setTouch({ type: 'end' });
   }, [draggable]);
 
+  const onTransitionEnd = useCallback(
+    (event: any) => {
+      if (event.target !== slider.current || visible) return;
+      setMounted(false);
+    },
+    [visible]
+  );
+
   const onKeyDown = useCallback((event: any) => {
     if (event.code !== 'Escape') return;
     setTouch({ type: 'end' });
-    setMounted(false);
+    onExit?.();
   }, []);
 
   const onTouchStart = useCallback(
@@ -203,7 +214,7 @@ export function Panel(props: PanelProps): ReactElement | null {
         touch.position > 0.5 ||
         (touch.position > 0.15 && touch.velocity > 0.015)
       ) {
-        setMounted(false);
+        onExit?.();
       }
     },
     [touch]
@@ -217,30 +228,14 @@ export function Panel(props: PanelProps): ReactElement | null {
 
   const transform =
     direction === 'right'
-      ? {
-          transform: `translateX(${
-            100 * (visible && mounted ? touch.position : 1)
-          }%)`,
-        }
+      ? { transform: `translateX(${100 * (visible ? touch.position : 1)}%)` }
       : direction === 'left'
-      ? {
-          transform: `translateX(${
-            -100 * (visible && mounted ? touch.position : 1)
-          }%)`,
-        }
+      ? { transform: `translateX(${-100 * (visible ? touch.position : 1)}%)` }
       : direction === 'bottom'
-      ? {
-          transform: `translateY(${
-            100 * (visible && mounted ? touch.position : 1)
-          }%)`,
-        }
-      : {
-          transform: `translateY(${
-            -100 * (visible && mounted ? touch.position : 1)
-          }%)`,
-        };
+      ? { transform: `translateY(${100 * (visible ? touch.position : 1)}%)` }
+      : { transform: `translateY(${-100 * (visible ? touch.position : 1)}%)` };
 
-  return active ? (
+  return mounted ? (
     <Optional
       component={Injection}
       active={overlay}
@@ -251,15 +246,18 @@ export function Panel(props: PanelProps): ReactElement | null {
         style={Exists(zIndex, { zIndex })}
         className={Class(
           styles.Panel,
-          overlay ? styles.Fixed : styles.Absolute
+          overlay ? styles.Fixed : styles.Absolute,
+          visible && styles.Tinted,
         )}
       >
         <div
+          ref={slider}
           style={transform}
           className={classes}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          onTransitionEnd={onTransitionEnd}
         >
           {children}
         </div>

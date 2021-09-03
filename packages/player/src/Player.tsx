@@ -4,11 +4,12 @@ import {
   useState,
   useCallback,
   forwardRef,
+  ReactNode,
   Ref,
   Dispatch,
   SetStateAction,
 } from 'react';
-import { Video, Viewport } from '@gatsby-tv/components';
+import { Video, VideoProps, Viewport } from '@gatsby-tv/components';
 import {
   Class,
   useForwardedRef,
@@ -18,10 +19,21 @@ import {
 
 import { DesktopOverlay } from '@src/components/DesktopOverlay';
 import { MobileOverlay } from '@src/components/MobileOverlay';
-import { useTimeline } from '@src/utilities/use-timeline';
-import { usePlayer } from '@src/utilities/use-player';
-import { useSignal } from '@src/utilities/use-signal';
-import { PlayerProps } from '@src/types';
+import { TimelineContext, useTimelineContext } from '@src/utilities/timeline';
+import { PlayerContext, usePlayerContext } from '@src/utilities/player';
+import { SignalContext, useSignalContext } from '@src/utilities/signal';
+import { FullscreenContext } from '@src/utilities/fullscreen';
+import { QualityContext } from '@src/utilities/quality';
+
+export interface PlayerProps extends VideoProps {
+  children?: ReactNode;
+  fullscreen?: boolean;
+  levels?: Record<number, number>;
+  quality?: number;
+  volume?: number;
+  setFullscreen?: Dispatch<SetStateAction<boolean>>;
+  setQuality?: Dispatch<SetStateAction<number>>;
+}
 
 import styles from './Player.scss';
 
@@ -41,22 +53,12 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const fullscreenRef = useRef(fullscreen);
     const isMobile = useMobileDetector();
     const video = useForwardedRef<HTMLVideoElement>(ref);
-    const timeline = useTimeline();
-
-    const {
-      player,
-      events,
-      setActive,
-      setPinned,
-      setSuspend,
-      setPlayback,
-      setVolume,
-      setMuted,
-      setSeek,
-    } = usePlayer(video, volume);
-
-    const [signal, setSignal] = useSignal();
+    const timeline = useTimelineContext();
+    const context = usePlayerContext(video, volume);
+    const [signal, setSignal] = useSignalContext();
     const mounted = useComponentWillMount();
+
+    const { player, events, setActive, setPlayback } = context;
 
     const setPlaybackAndSignal = useCallback(
       (value: SetStateAction<boolean>) =>
@@ -81,61 +83,50 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     );
 
     useEffect(() => setActive(!isMobile), [isMobile]);
-
     useEffect(() => void (fullscreenRef.current = fullscreen), [fullscreen]);
 
     const OverlayMarkup = !mounted ? null : isMobile ? (
-      <MobileOverlay
-        player={player}
-        timeline={timeline}
-        signal={signal}
-        fullscreen={fullscreen}
-        quality={quality}
-        levels={levels}
-        setFullscreen={setViewportFullscreen}
-        setQuality={setQuality}
-        setActive={setActive}
-        setPinned={setPinned}
-        setSuspend={setSuspend}
-        setPlayback={setPlayback}
-        setVolume={setVolume}
-        setMuted={setMuted}
-        setSeek={setSeek}
-        setSignal={setSignal}
-      />
+      <MobileOverlay />
     ) : (
-      <DesktopOverlay
-        player={player}
-        timeline={timeline}
-        signal={signal}
-        fullscreen={fullscreen}
-        quality={quality}
-        levels={levels}
-        setFullscreen={setFullscreen}
-        setQuality={setQuality}
-        setActive={setActive}
-        setPinned={setPinned}
-        setSuspend={setSuspend}
-        setPlayback={setPlaybackAndSignal}
-        setVolume={setVolume}
-        setMuted={setMuted}
-        setSeek={setSeek}
-        setSignal={setSignal}
-      />
+      <DesktopOverlay />
     );
 
     const classes = Class(
       styles.Viewport,
-      fullscreen && styles.ViewportFullscreen,
-      mounted && !isMobile && styles.ViewportMinHeight
+      fullscreen && styles.Fullscreen,
+      mounted && !isMobile && styles.MinHeight
     );
 
     return (
-      <Viewport ref={player.ref} className={classes} overlay={OverlayMarkup}>
-        <Video ref={video} {...videoProps} {...events}>
-          {children}
-        </Video>
-      </Viewport>
+      <PlayerContext.Provider
+        value={{
+          ...context,
+          setPlayback: isMobile ? setPlayback : setPlaybackAndSignal,
+        }}
+      >
+        <TimelineContext.Provider value={timeline}>
+          <SignalContext.Provider value={[signal, setSignal]}>
+            <QualityContext.Provider value={{ levels, quality, setQuality }}>
+              <FullscreenContext.Provider
+                value={[
+                  fullscreen,
+                  isMobile ? setViewportFullscreen : setFullscreen,
+                ]}
+              >
+                <Viewport
+                  ref={player.ref}
+                  className={classes}
+                  overlay={OverlayMarkup}
+                >
+                  <Video ref={video} {...videoProps} {...events}>
+                    {children}
+                  </Video>
+                </Viewport>
+              </FullscreenContext.Provider>
+            </QualityContext.Provider>
+          </SignalContext.Provider>
+        </TimelineContext.Provider>
+      </PlayerContext.Provider>
     );
   }
 );

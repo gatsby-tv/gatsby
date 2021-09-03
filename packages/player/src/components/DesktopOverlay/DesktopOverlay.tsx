@@ -4,14 +4,19 @@ import { Restart, Spinner } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
 
 import { Signal } from '@src/components/Signal';
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useTimeline } from '@src/utilities/timeline';
+import { useSignal } from '@src/utilities/signal';
 
 import { Controls } from './components/Controls';
 import { Timeline } from './components/Timeline';
+
 import styles from './DesktopOverlay.scss';
 
-export function DesktopOverlay(props: OverlayProps): ReactElement {
-  const { player, timeline, signal, setActive, setPlayback } = props;
+export function DesktopOverlay(): ReactElement {
+  const { player, setActive, setPlayback } = usePlayer();
+  const timeline = useTimeline();
+  const [signal] = useSignal();
 
   const active = player.active || timeline.scrubbing;
   const classes = Class(styles.Overlay, !active && styles.CursorHidden);
@@ -21,6 +26,10 @@ export function DesktopOverlay(props: OverlayProps): ReactElement {
     if (player.seeking) return;
     setPlayback((current) => !current);
   }, [player.seeking]);
+
+  const onPointerDown = useCallback(() => setActive(true), []);
+  const onPointerMove = useCallback(() => setActive(true), []);
+  const onPointerLeave = useCallback(() => setActive(false), []);
 
   const LoadingMarkup =
     player.loading && !signal ? (
@@ -35,18 +44,18 @@ export function DesktopOverlay(props: OverlayProps): ReactElement {
     <>
       {EndscreenMarkup}
       {LoadingMarkup}
-      <Signal className={styles.Signal} signal={signal} />
+      <Signal className={styles.Signal} />
       <Activatable
         className={classes}
         active={active}
         duration="faster"
         onClick={onClick}
-        onPointerDown={() => setActive(true)}
-        onPointerMove={() => setActive(true)}
-        onPointerLeave={() => setActive(false)}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
       >
-        <Controls className={styles.Controls} {...props} />
-        <Timeline className={styles.Timeline} {...props} />
+        <Controls className={styles.Controls} />
+        <Timeline className={styles.Timeline} />
       </Activatable>
     </>
   );

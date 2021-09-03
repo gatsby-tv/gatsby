@@ -7,17 +7,19 @@ import {
 } from 'react';
 import { Menu, MenuProps, Selection } from '@gatsby-tv/components';
 
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useQuality } from '@src/utilities/quality';
 
 import styles from './Settings.scss';
 
 export interface SettingsProps
-  extends OverlayProps,
-    Pick<MenuProps, 'for' | 'active' | 'onExit'> {}
+  extends Required<Pick<MenuProps, 'for' | 'active' | 'onExit'>> {}
 
 export function Settings(props: SettingsProps): ReactElement {
-  const { active, player, levels, quality, setQuality, setPinned, onExit } =
-    props;
+  const { active, onExit } = props;
+
+  const { player, setPinned } = usePlayer();
+  const { levels, quality, setQuality } = useQuality();
 
   const [resolution, setResolution] = useState(String(quality));
 

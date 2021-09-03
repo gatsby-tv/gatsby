@@ -1,18 +1,26 @@
 import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
-import { Activatable, EventListener, Icon } from '@gatsby-tv/components';
-import { Restart, Spinner } from '@gatsby-tv/icons';
-import { Class, useComponentDidMount } from '@gatsby-tv/utilities';
+import { Activatable, EventListener, Icon, Injection } from '@gatsby-tv/components';
+import { Spinner } from '@gatsby-tv/icons';
+import { Class, useComponentDidMount, useUniqueId } from '@gatsby-tv/utilities';
 
 import { Signal } from '@src/components/Signal';
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useSignal } from '@src/utilities/signal';
+import { useTimeline } from '@src/utilities/timeline';
+import { useFullscreen } from '@src/utilities/fullscreen';
 
 import { Controls } from './components/Controls';
 import { Timeline } from './components/Timeline';
+
 import styles from './MobileOverlay.scss';
 
-export function MobileOverlay(props: OverlayProps): ReactElement {
-  const { player, timeline, signal, fullscreen, setActive, setSuspend } = props;
+export function MobileOverlay(): ReactElement {
+  const { player, setActive, setSuspend } = usePlayer();
+  const timeline = useTimeline();
+  const [signal] = useSignal();
+  const [fullscreen] = useFullscreen();
 
+  const overlay = useUniqueId('overlay');
   const mounted = useComponentDidMount();
   const paused = useRef(player.paused);
   const loading = useRef(player.loading);
@@ -102,21 +110,22 @@ export function MobileOverlay(props: OverlayProps): ReactElement {
         onTransitionEnd={onTransitionEnd}
       />
       {LoadingMarkup}
-      <Signal className={styles.Signal} signal={signal} />
+      <Signal className={styles.Signal} />
       <Activatable
         className={styles.Controls}
         active={active && !timeline.scrubbing && !signal}
         duration="fastest"
       >
-        <Controls active={controls} onClick={onClick} {...props} />
+        <Controls overlay={overlay} active={controls} onClick={onClick} />
       </Activatable>
       <Activatable
         className={styles.Timeline}
         active={!fullscreen || active}
         duration="fastest"
       >
-        <Timeline disabled={disabled} {...props} />
+        <Timeline disabled={disabled} />
       </Activatable>
+      <Injection.Target id={overlay} className={styles.Target} />
       <EventListener event="orientationchange" handler={onOrientationChange} />
     </div>
   );

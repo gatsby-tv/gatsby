@@ -2,15 +2,21 @@ import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import { usePopper } from 'react-popper';
 import { Class, Time, useComponentDidMount } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useTimeline } from '@src/utilities/timeline';
+
 import styles from './Timeline.scss';
 
-export interface TimelineProps extends OverlayProps {
+export interface TimelineProps {
   className?: string;
 }
 
 export function Timeline(props: TimelineProps): ReactElement {
-  const { className, player, timeline, setSeek } = props;
+  const { className } = props;
+
+  const { player, setSeek } = usePlayer();
+  const timeline = useTimeline();
+
   const mounted = useComponentDidMount();
   const position = useRef(timeline.position);
   const [hovering, setHovering] = useState(false);

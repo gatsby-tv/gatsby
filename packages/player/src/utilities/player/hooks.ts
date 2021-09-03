@@ -1,16 +1,22 @@
 import {
+  useContext,
   useReducer,
   useRef,
   useState,
   useEffect,
   useCallback,
   Reducer,
-  ReducerState,
-  ReducerAction,
   SetStateAction,
-  Dispatch,
   RefObject,
 } from 'react';
+import { ContextError } from '@gatsby-tv/utilities';
+
+import {
+  PlayerContext,
+  PlayerContextType,
+  VideoState,
+  PlayerState,
+} from './context';
 
 export type VideoAction =
   | { type: 'activate' }
@@ -33,30 +39,7 @@ export type VideoAction =
   | { type: 'mute' }
   | { type: 'unmute' };
 
-export type VideoState = {
-  active: boolean;
-  pinned: boolean;
-  suspended: boolean;
-  idle: number;
-  playing: boolean;
-  paused: boolean;
-  stalled: boolean;
-  seeking: boolean;
-  waiting: boolean;
-  time: number;
-  progress: number;
-  ended: boolean;
-  volume: number;
-  muted: boolean;
-};
-
 export type VideoReducer = Reducer<VideoState, VideoAction>;
-
-export type PlayerState = VideoState & {
-  ref: RefObject<HTMLElement>;
-  loading: boolean;
-  duration: number;
-};
 
 function Progress(time: number, ranges: TimeRanges): number {
   let index;
@@ -72,20 +55,10 @@ function Progress(time: number, ranges: TimeRanges): number {
   return (index !== undefined && ranges.end(index)) || 0;
 }
 
-export function usePlayer(
+export function usePlayerContext(
   video: RefObject<HTMLVideoElement | null>,
   volume: number
-): {
-  player: PlayerState;
-  setActive: Dispatch<SetStateAction<boolean>>;
-  setPinned: Dispatch<SetStateAction<boolean>>;
-  setSuspend: Dispatch<SetStateAction<boolean>>;
-  setPlayback: Dispatch<SetStateAction<boolean>>;
-  setVolume: Dispatch<SetStateAction<number>>;
-  setMuted: Dispatch<SetStateAction<boolean>>;
-  setSeek: Dispatch<SetStateAction<number>>;
-  events: Record<string, (event: any) => void>;
-} {
+): PlayerContextType {
   const ref = useRef<HTMLElement>(null);
   const active = useRef(false);
   const pinned = useRef(false);
@@ -435,4 +408,14 @@ export function usePlayer(
       onSeeked,
     },
   };
+}
+
+export function usePlayer(): PlayerContextType {
+  const context = useContext(PlayerContext);
+
+  if (!context) {
+    throw new ContextError('Player');
+  }
+
+  return context;
 }

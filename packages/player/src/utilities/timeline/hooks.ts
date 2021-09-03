@@ -1,13 +1,9 @@
-import { useRef, useState, useEffect, useCallback, RefObject } from 'react';
+import { useContext, useRef, useState, useEffect, useCallback } from 'react';
+import { ContextError } from '@gatsby-tv/utilities';
 
-export type TimelineState = {
-  ref: RefObject<HTMLDivElement>;
-  scrubbing: boolean;
-  position: number;
-  events: Record<string, (event: any) => void>;
-};
+import { TimelineContext, TimelineContextType } from './context';
 
-export function useTimeline(): TimelineState {
+export function useTimelineContext(): TimelineContextType {
   const ref = useRef<HTMLDivElement>(null);
   const [scrubbing, setScrubbing] = useState(false);
   const [position, setPosition] = useState(0);
@@ -76,4 +72,14 @@ export function useTimeline(): TimelineState {
       onPointerCancel,
     },
   };
+}
+
+export function useTimeline(): TimelineContextType {
+  const context = useContext(TimelineContext);
+
+  if (!context) {
+    throw new ContextError('Timeline');
+  }
+
+  return context;
 }

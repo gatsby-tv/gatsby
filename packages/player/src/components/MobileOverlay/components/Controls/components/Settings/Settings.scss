@@ -1,9 +1,13 @@
 @use 'styles' as *;
 
+.Container {
+  @include expand(absolute);
+}
+
 .Settings {
   width: 100%;
-  margin-top: 80%;
-  padding: spacing(1) spacing(3);
+  margin-top: 40vh;
+  padding: spacing(1) 0;
   background-color: hsla(0, 0%, 12%);
   z-index: 20;
 
@@ -26,13 +30,25 @@
   }
 }
 
+@media (orientation: landscape) {
+  .Settings {
+    margin-top: 20vh;
+  }
+}
+
 .Item {
   @include font-size(body-large);
   @include font-weight(semi-bold);
   display: flex;
   align-items: center;
   gap: spacing(1);
-  padding: spacing(1) spacing(2);
+  padding: spacing(1) spacing(3);
+  user-select: none;
+  transition: background-color duration(fastest) ease;
+
+  @include active {
+    background-color: hsla(0, 0%, 14%);
+  }
 
   sup {
     @include font-size(caption);

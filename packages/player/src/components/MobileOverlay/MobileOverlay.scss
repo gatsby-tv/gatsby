@@ -29,6 +29,10 @@
   @include expand(absolute);
 }
 
+.Target {
+  @include expand(absolute);
+}
+
 .Timeline {
   position: absolute;
   left: 0;

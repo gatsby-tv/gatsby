@@ -12,32 +12,26 @@ import {
 } from '@gatsby-tv/icons';
 import { Class, Time, useController } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useSignal } from '@src/utilities/signal';
+import { useFullscreen } from '@src/utilities/fullscreen';
 
 import { Settings } from './components/Settings';
 
 import styles from './Controls.scss';
 
-export interface ControlsProps extends OverlayProps {
-  className?: string;
-  active?: boolean;
-  onClick?: (event: any) => void;
+export interface ControlsProps {
+  overlay: string;
+  active: boolean;
+  onClick: (event: any) => void;
 }
 
 export function Controls(props: ControlsProps): ReactElement {
-  const {
-    className,
-    active,
-    player,
-    fullscreen,
-    setFullscreen,
-    setPlayback,
-    setSuspend,
-    setSeek,
-    setSignal,
-    onClick,
-  } = props;
+  const { overlay, active, onClick } = props;
 
+  const { player, setPlayback, setSuspend, setSeek } = usePlayer();
+  const [, setSignal] = useSignal();
+  const [fullscreen, setFullscreen] = useFullscreen();
   const settings = useController();
 
   const [skip, setSkip] = useState<ReturnType<typeof setTimeout> | undefined>(
@@ -87,7 +81,7 @@ export function Controls(props: ControlsProps): ReactElement {
           onClick={settings.toggle}
         />
       </div>
-      <div className={Class(className, styles.Controls)}>
+      <div className={styles.Controls}>
         <Button
           className={styles.Backward}
           unstyled
@@ -142,7 +136,7 @@ export function Controls(props: ControlsProps): ReactElement {
           onClick={onFullscreenClick}
         />
       </div>
-      <Settings {...props} active={settings.active} onExit={settings.deactivate} />
+      <Settings overlay={overlay} active={settings.active} onExit={settings.deactivate} />
     </>
   );
 }

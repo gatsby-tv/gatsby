@@ -1,25 +1,39 @@
 import { useState, useEffect, useCallback, ReactElement } from 'react';
-import { Panel, PanelProps, Selection } from '@gatsby-tv/components';
+import { Panel, PanelProps, Selection, Injection } from '@gatsby-tv/components';
+import { Class, Exists } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useQuality } from '@src/utilities/quality';
+import { useFullscreen } from '@src/utilities/fullscreen';
 
 import styles from './Settings.scss';
 
 export interface SettingsProps
-  extends OverlayProps,
-    Pick<PanelProps, 'active' | 'onExit'> {}
+  extends Required<Pick<PanelProps, 'active' | 'onExit'>> {
+  overlay: string;
+}
 
 export function Settings(props: SettingsProps): ReactElement {
-  const { active, player, levels, quality, setQuality, setPinned, onExit } =
-    props;
+  const { overlay, active, onExit } = props;
 
+  const { player, setPinned } = usePlayer();
+  const { levels, quality, setQuality } = useQuality();
+  const [fullscreen] = useFullscreen();
+
+  const [injection, setInjection] = useState(false);
   const [resolution, setResolution] = useState(String(quality));
 
   const onPointerUp = useCallback((event: any) => event.stopPropagation(), []);
+  const onTransitionEnd = useCallback(() => setInjection(false), []);
 
   useEffect(() => void setPinned(active), [active]);
   useEffect(() => void setQuality(Number(resolution)), [resolution]);
-  useEffect(onExit, [resolution]);
+  useEffect(() => void onExit(), [resolution]);
+
+  useEffect(() => {
+    if (!active) return;
+    setInjection(true);
+  }, [active]);
 
   const LevelsMarkup = Object.entries(levels)
     .sort(([, left], [, right]) => (left < right ? 1 : -1))
@@ -37,15 +51,16 @@ export function Settings(props: SettingsProps): ReactElement {
     ));
 
   return (
-    <div onPointerUp={onPointerUp}>
-      <Panel
-        className={styles.Settings}
-        overlay
-        direction="bottom"
-        active={active}
-        onExit={onExit}
-      >
-        <div>
+    <Injection target={Exists(injection, overlay)}>
+      <div className={styles.Container} onPointerUp={onPointerUp}>
+        <Panel
+          className={Class(styles.Settings, fullscreen && styles.Fullscreen)}
+          overlay={!fullscreen}
+          direction="bottom"
+          active={active}
+          onExit={onExit}
+          onTransitionEnd={onTransitionEnd}
+        >
           <Selection
             itemClass={styles.Item}
             scrollHidden
@@ -55,8 +70,8 @@ export function Settings(props: SettingsProps): ReactElement {
             {LevelsMarkup}
             <Selection.Item option="-1">Auto</Selection.Item>
           </Selection>
-        </div>
-      </Panel>
-    </div>
+        </Panel>
+      </div>
+    </Injection>
   );
 }

@@ -10,17 +10,19 @@ import { Button } from '@gatsby-tv/components';
 import { VolumeMute, VolumeHalf, VolumeFull } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
 
 import styles from './Volume.scss';
 
-export interface VolumeProps extends OverlayProps {
-  slider: boolean;
-  setSlider: Dispatch<SetStateAction<boolean>>;
+export interface VolumeProps {
+  active: boolean;
+  setActive: Dispatch<SetStateAction<boolean>>;
 }
 
 export function Volume(props: VolumeProps): ReactElement {
-  const { player, slider, setSlider, setMuted, setVolume } = props;
+  const { active, setActive } = props;
+
+  const { player, setMuted, setVolume } = usePlayer();
 
   const ref = useRef<HTMLSpanElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -35,7 +37,7 @@ export function Volume(props: VolumeProps): ReactElement {
   const offset = 100 * (1 - (player.muted ? 0 : player.volume));
 
   const onClick = useCallback(() => setMuted((current) => !current), []);
-  const onPointerEnter = useCallback(() => setSlider(true), []);
+  const onPointerEnter = useCallback(() => setActive(true), []);
 
   const onPointerDown = useCallback((event: any) => {
     if (!ref.current) return;
@@ -73,7 +75,7 @@ export function Volume(props: VolumeProps): ReactElement {
       />
       <span
         ref={ref}
-        className={Class(styles.Volume, slider && styles.Active)}
+        className={Class(styles.Volume, active && styles.Active)}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}

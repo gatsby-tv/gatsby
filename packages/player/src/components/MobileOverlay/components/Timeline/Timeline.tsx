@@ -3,16 +3,21 @@ import { usePopper } from 'react-popper';
 import { Activatable } from '@gatsby-tv/components';
 import { Class, Time, Exists } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useTimeline } from '@src/utilities/timeline';
+
 import styles from './Timeline.scss';
 
-export interface TimelineProps extends OverlayProps {
-  className?: string;
-  disabled?: boolean;
+export interface TimelineProps {
+  disabled: boolean;
 }
 
 export function Timeline(props: TimelineProps): ReactElement {
-  const { className, disabled, player, timeline, setSeek } = props;
+  const { disabled } = props;
+  
+  const { player, setSeek } = usePlayer();
+  const timeline = useTimeline();
+
   const [reference, setReference] = useState<HTMLDivElement | null>(null);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
 
@@ -52,7 +57,6 @@ export function Timeline(props: TimelineProps): ReactElement {
 
   return (
     <div
-      className={className}
       onPointerUp={(event: any) => {
         event.stopPropagation();
         setSeek(timeline.position);

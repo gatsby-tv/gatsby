@@ -6,11 +6,11 @@
   max-height: calc(100vh - #{rem(140px)});
 }
 
-.ViewportFullscreen {
+.Fullscreen {
   height: 100vh;
   max-height: none;
 }
 
-.ViewportMinHeight {
+.MinHeight {
   min-height: rem(480px);
 }

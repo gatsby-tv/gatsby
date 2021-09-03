@@ -13,29 +13,25 @@ import {
 } from '@gatsby-tv/icons';
 import { Class, Time, useMenu } from '@gatsby-tv/utilities';
 
-import { OverlayProps } from '@src/types';
+import { usePlayer } from '@src/utilities/player';
+import { useFullscreen } from '@src/utilities/fullscreen';
+import { useSignal } from '@src/utilities/signal';
 
 import { Volume } from './components/Volume';
 import { Settings } from './components/Settings';
 
 import styles from './Controls.scss';
 
-export interface ControlsProps extends OverlayProps {
+export interface ControlsProps {
   className?: string;
 }
 
 export function Controls(props: ControlsProps): ReactElement {
-  const {
-    className,
-    player,
-    fullscreen,
-    setFullscreen,
-    setPlayback,
-    setVolume,
-    setMuted,
-    setSeek,
-    setSignal,
-  } = props;
+  const { className } = props;
+
+  const { player, setPlayback, setVolume, setMuted, setSeek } = usePlayer();
+  const [fullscreen, setFullscreen] = useFullscreen();
+  const [, setSignal] = useSignal();
 
   const settings = useMenu<HTMLButtonElement>();
   const [slider, setSlider] = useState(false);
@@ -119,7 +115,7 @@ export function Controls(props: ControlsProps): ReactElement {
           size="small"
           onClick={onPlaybackClick}
         />
-        <Volume slider={slider} setSlider={setSlider} {...props} />
+        <Volume active={slider} setActive={setSlider} />
         <span className={styles.Progress}>{`${time} / ${duration}`}</span>
       </div>
       <div className={Class(styles.Section, styles.Settings)}>
@@ -138,7 +134,6 @@ export function Controls(props: ControlsProps): ReactElement {
           for={settings.ref}
           active={settings.active}
           onExit={settings.deactivate}
-          {...props}
         />
       </div>
       <EventListener doc event="keydown" handler={onKeyDown} />

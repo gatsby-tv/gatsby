@@ -3,16 +3,17 @@ import { Icon, IconSource } from '@gatsby-tv/components';
 import { Play, Pause, SkipForward, SkipBackward } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
 
+import { useSignal } from '@src/utilities/signal';
+
 import styles from './Signal.scss';
 
 export interface SignalProps {
-  signal?: string;
   className?: string;
-  zIndex?: number;
 }
 
 export function Signal(props: SignalProps): ReactElement | null {
-  const { signal, className, zIndex } = props;
+  const { className } = props;
+  const [signal] = useSignal();
 
   let icon;
   switch (signal?.split('.')[0]) {

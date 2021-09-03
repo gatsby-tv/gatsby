@@ -72,6 +72,7 @@ export interface PanelProps {
   active?: boolean;
   zIndex?: number;
   onExit?: () => void;
+  onTransitionEnd?: (event: any) => void;
 }
 
 export function Panel(props: PanelProps): ReactElement | null {
@@ -85,6 +86,7 @@ export function Panel(props: PanelProps): ReactElement | null {
     active,
     zIndex,
     onExit,
+    onTransitionEnd: onTransitionEndHandler,
   } = props;
 
   const slider = useRef<HTMLDivElement>(null);
@@ -173,6 +175,7 @@ export function Panel(props: PanelProps): ReactElement | null {
     (event: any) => {
       if (event.target !== slider.current || visible) return;
       setMounted(false);
+      onTransitionEndHandler?.(event);
     },
     [visible]
   );

@@ -31,6 +31,7 @@ export default function AppPage({
     <Head>
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="preconnect" href={process.env.NEXT_PUBLIC_WESTEGG_URL} />
+      <meta name="theme-color" content="#1f1f1f" />
     </Head>
   );
 

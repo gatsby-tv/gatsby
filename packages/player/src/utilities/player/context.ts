@@ -3,7 +3,6 @@ import { createContext, RefObject, Dispatch, SetStateAction } from 'react';
 export type VideoState = {
   active: boolean;
   pinned: boolean;
-  suspended: boolean;
   idle: number;
   playing: boolean;
   paused: boolean;
@@ -27,7 +26,6 @@ export type PlayerContextType = {
   player: PlayerState;
   setActive: Dispatch<SetStateAction<boolean>>;
   setPinned: Dispatch<SetStateAction<boolean>>;
-  setSuspend: Dispatch<SetStateAction<boolean>>;
   setPlayback: Dispatch<SetStateAction<boolean>>;
   setVolume: Dispatch<SetStateAction<number>>;
   setMuted: Dispatch<SetStateAction<boolean>>;

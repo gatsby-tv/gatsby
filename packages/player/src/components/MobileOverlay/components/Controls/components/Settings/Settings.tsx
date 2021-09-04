@@ -26,9 +26,9 @@ export function Settings(props: SettingsProps): ReactElement {
   const onPointerUp = useCallback((event: any) => event.stopPropagation(), []);
   const onTransitionEnd = useCallback(() => setInjection(false), []);
 
-  useEffect(() => void setPinned(active), [active]);
-  useEffect(() => void setQuality(Number(resolution)), [resolution]);
-  useEffect(() => void onExit(), [resolution]);
+  useEffect(() => setPinned(active), [active]);
+  useEffect(() => setQuality(Number(resolution)), [resolution]);
+  useEffect(() => onExit(), [resolution]);
 
   useEffect(() => {
     if (!active) return;

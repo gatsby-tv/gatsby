@@ -1,5 +1,10 @@
 import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
-import { Activatable, EventListener, Icon, Injection } from '@gatsby-tv/components';
+import {
+  Activatable,
+  EventListener,
+  Icon,
+  Injection,
+} from '@gatsby-tv/components';
 import { Spinner } from '@gatsby-tv/icons';
 import { Class, useComponentDidMount, useUniqueId } from '@gatsby-tv/utilities';
 
@@ -15,7 +20,7 @@ import { Timeline } from './components/Timeline';
 import styles from './MobileOverlay.scss';
 
 export function MobileOverlay(): ReactElement {
-  const { player, setActive, setSuspend } = usePlayer();
+  const { player, setActive } = usePlayer();
   const timeline = useTimeline();
   const [signal] = useSignal();
   const [fullscreen] = useFullscreen();
@@ -36,10 +41,6 @@ export function MobileOverlay(): ReactElement {
     [pinned]
   );
 
-  const onClick = useCallback(() => {
-    setToggle((current) => (pinned || player.suspended ? current : !current));
-  }, [pinned, player.suspended]);
-
   const onTransitionEnd = useCallback(() => setControls(active), [active]);
   const onOrientationChange = useCallback(() => setActive(false), []);
 
@@ -52,17 +53,6 @@ export function MobileOverlay(): ReactElement {
     const id = setTimeout(() => setPinned(false), 300);
     return () => clearTimeout(id);
   }, [pinned]);
-
-  useEffect(() => {
-    if (started.current) return;
-    started.current = true;
-    const id = setTimeout(() => setSuspend(false), 300);
-
-    return () => {
-      clearTimeout(id);
-      setSuspend(false);
-    };
-  }, [player.playing]);
 
   useEffect(
     () =>
@@ -87,7 +77,6 @@ export function MobileOverlay(): ReactElement {
   useEffect(() => {
     if (!timeline.scrubbing) return;
     setDisabled(false);
-    setActive(true);
   }, [timeline.scrubbing]);
 
   const classes = Class(styles.Overlay, fullscreen && styles.Fullscreen);
@@ -116,7 +105,7 @@ export function MobileOverlay(): ReactElement {
         active={active && !timeline.scrubbing && !signal}
         duration="fastest"
       >
-        <Controls overlay={overlay} active={controls} onClick={onClick} />
+        <Controls overlay={overlay} active={controls} onClick={onPointerUp} />
       </Activatable>
       <Activatable
         className={styles.Timeline}

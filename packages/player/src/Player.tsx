@@ -58,7 +58,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const [signal, setSignal] = useSignalContext();
     const mounted = useComponentWillMount();
 
-    const { player, events, setActive, setPlayback } = context;
+    const { player, events, setPlayback } = context;
 
     const setPlaybackAndSignal = useCallback(
       (value: SetStateAction<boolean>) =>
@@ -82,7 +82,6 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       []
     );
 
-    useEffect(() => setActive(!isMobile), [isMobile]);
     useEffect(() => void (fullscreenRef.current = fullscreen), [fullscreen]);
 
     const OverlayMarkup = !mounted ? null : isMobile ? (

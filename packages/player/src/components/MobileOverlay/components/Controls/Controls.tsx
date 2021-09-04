@@ -27,25 +27,33 @@ export interface ControlsProps {
 }
 
 export function Controls(props: ControlsProps): ReactElement {
-  const { overlay, active, onClick } = props;
+  const { overlay, active, onClick: onClickHandler } = props;
 
-  const { player, setPlayback, setSuspend, setSeek } = usePlayer();
+  const { player, setPlayback, setSeek } = usePlayer();
   const [, setSignal] = useSignal();
   const [fullscreen, setFullscreen] = useFullscreen();
   const settings = useController();
 
-  const [skip, setSkip] = useState<ReturnType<typeof setTimeout> | undefined>(
-    undefined
-  );
+  const [skipping, setSkipping] = useState(0);
 
   const time = Time(player.time * player.duration);
   const duration = Time(player.duration);
 
+  const onClick = useCallback((event: any) => {
+    if (skipping) return;
+    onClickHandler(event);
+  }, [skipping]);
+
   const onBackwardDblClick = useCallback(() => {
-    setSuspend(true);
-    setSkip(setTimeout(() => setSuspend(false), 700));
+    setSkipping((current) => current + 1);
     setSeek((current) => current - 5);
     setSignal('backward');
+  }, []);
+
+  const onForwardDblClick = useCallback(() => {
+    setSkipping((current) => current + 1);
+    setSeek((current) => current + 5);
+    setSignal('forward');
   }, []);
 
   const onPlaybackClick = useCallback(
@@ -53,22 +61,16 @@ export function Controls(props: ControlsProps): ReactElement {
     [player.loading]
   );
 
-  const onForwardDblClick = useCallback(() => {
-    setSuspend(true);
-    setSkip(setTimeout(() => setSuspend(false), 700));
-    setSeek((current) => current + 5);
-    setSignal('forward');
-  }, []);
-
   const onFullscreenClick = useCallback(
     () => setFullscreen((current) => !current),
     []
   );
 
   useEffect(() => {
-    if (!skip) return;
-    return () => clearTimeout(skip);
-  }, [skip]);
+    if (!skipping) return;
+    const id = setTimeout(() => setSkipping(0), 700);
+    return () => clearTimeout(id);
+  }, [skipping]);
 
   return (
     <>

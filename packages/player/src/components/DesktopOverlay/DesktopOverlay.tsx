@@ -1,4 +1,4 @@
-import { useCallback, ReactElement } from 'react';
+import { useEffect, useCallback, ReactElement } from 'react';
 import { Activatable, Icon } from '@gatsby-tv/components';
 import { Restart, Spinner } from '@gatsby-tv/icons';
 import { Class } from '@gatsby-tv/utilities';
@@ -30,6 +30,11 @@ export function DesktopOverlay(): ReactElement {
   const onPointerDown = useCallback(() => setActive(true), []);
   const onPointerMove = useCallback(() => setActive(true), []);
   const onPointerLeave = useCallback(() => setActive(false), []);
+
+  useEffect(() => {
+    if (!player.playing) return;
+    setActive(true);
+  }, [player.playing]);
 
   const LoadingMarkup =
     player.loading && !signal ? (

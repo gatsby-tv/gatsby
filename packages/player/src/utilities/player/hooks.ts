@@ -24,8 +24,6 @@ export type VideoAction =
   | { type: 'idle' }
   | { type: 'pin' }
   | { type: 'unpin' }
-  | { type: 'suspend' }
-  | { type: 'unsuspend' }
   | { type: 'pause' }
   | { type: 'waiting' }
   | { type: 'playing' }
@@ -77,7 +75,7 @@ export function usePlayerContext(
         case 'idle':
           return {
             ...state,
-            active: state.suspended ? state.active : state.idle < 16,
+            active: state.idle < 16,
             idle: state.idle + 1,
           };
 
@@ -85,7 +83,6 @@ export function usePlayerContext(
           return {
             ...state,
             active: true,
-            suspended: false,
             idle: isPinned ? -Infinity : 0,
           };
 
@@ -101,37 +98,21 @@ export function usePlayerContext(
             ...state,
             active: true,
             pinned: true,
-            suspended: false,
             idle: -Infinity,
           };
 
         case 'unpin':
           return {
             ...state,
+            idle: 0,
             active: true,
             pinned: false,
-            suspended: false,
-            idle: 0,
-          };
-
-        case 'suspend':
-          return {
-            ...state,
-            suspended: true,
-          };
-
-        case 'unsuspend':
-          return {
-            ...state,
-            suspended: false,
-            idle: isPinned ? -Infinity : state.active ? 0 : Infinity,
           };
 
         case 'pause':
           return {
             ...state,
             active: true,
-            suspended: false,
             idle: -Infinity,
             playing: false,
             paused: true,
@@ -146,7 +127,6 @@ export function usePlayerContext(
         case 'playing':
           return {
             ...state,
-            idle: 0,
             playing: true,
             paused: false,
             stalled: false,
@@ -216,10 +196,9 @@ export function usePlayerContext(
       }
     },
     {
-      idle: 0,
+      idle: NaN,
       active: false,
       pinned: false,
-      suspended: true,
       time: 0,
       progress: 0,
       playing: false,
@@ -241,12 +220,6 @@ export function usePlayerContext(
   const setPinned = useCallback((value: SetStateAction<boolean>) => {
     const update = typeof value === 'function' ? value(pinned.current) : value;
     dispatch({ type: update ? 'pin' : 'unpin' });
-  }, []);
-
-  const setSuspend = useCallback((value: SetStateAction<boolean>) => {
-    const update =
-      typeof value === 'function' ? value(suspended.current) : value;
-    dispatch({ type: update ? 'suspend' : 'unsuspend' });
   }, []);
 
   const setPlayback = useCallback((value: SetStateAction<boolean>) => {
@@ -315,10 +288,6 @@ export function usePlayerContext(
 
   useEffect(() => void (active.current = state.active), [state.active]);
   useEffect(() => void (pinned.current = state.pinned), [state.pinned]);
-  useEffect(
-    () => void (suspended.current = state.suspended),
-    [state.suspended]
-  );
   useEffect(() => void (playing.current = state.playing), [state.playing]);
   useEffect(() => void (ended.current = state.ended), [state.ended]);
 
@@ -391,7 +360,6 @@ export function usePlayerContext(
     },
     setActive,
     setPinned,
-    setSuspend,
     setPlayback,
     setVolume,
     setMuted,

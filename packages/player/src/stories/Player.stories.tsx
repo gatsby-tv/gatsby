@@ -13,7 +13,12 @@ const Template: Story<PlayerProps> = (props) => {
   const [fullscreen, setFullscreen] = useFullscreen();
 
   return (
-    <Player fullscreen={fullscreen} setFullscreen={setFullscreen} {...props} />
+    <Player
+      fullscreen={fullscreen}
+      setFullscreen={setFullscreen}
+      onTimeUpdate={console.log}
+      {...props}
+    />
   );
 };
 

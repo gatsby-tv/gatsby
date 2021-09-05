@@ -11,6 +11,8 @@ import {
 } from 'react';
 import { ContextError } from '@gatsby-tv/utilities';
 
+import { TimeState } from '@src/types';
+
 import {
   PlayerContext,
   PlayerContextType,
@@ -42,6 +44,7 @@ export type VideoReducer = Reducer<VideoState, VideoAction>;
 function Progress(time: number, ranges: TimeRanges): number {
   let index;
   let delta = Infinity;
+
   for (let i = 0; i < ranges.length; i++) {
     const x = ranges.end(i) - time;
     if (x > 0 && x < delta) {
@@ -53,9 +56,20 @@ function Progress(time: number, ranges: TimeRanges): number {
   return (index !== undefined && ranges.end(index)) || 0;
 }
 
+function Watched(ranges: TimeRanges): [number, number][] {
+  const watched: [number, number][] = [];
+
+  for (let i = 0; i < ranges.length; i++) {
+    watched.push([ranges.start(i), ranges.end(i)]);
+  }
+
+  return watched;
+}
+
 export function usePlayerContext(
   video: RefObject<HTMLVideoElement | null>,
-  volume: number
+  volume: number,
+  onTimeUpdateHandler: (state: TimeState) => void
 ): PlayerContextType {
   const ref = useRef<HTMLElement>(null);
   const active = useRef(false);
@@ -329,6 +343,12 @@ export function usePlayerContext(
   const onTimeUpdate = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
+
+    onTimeUpdateHandler({
+      current: target.currentTime,
+      duration: target.duration,
+      watched: Watched(target.played),
+    });
 
     dispatch({
       type: 'timeupdate',

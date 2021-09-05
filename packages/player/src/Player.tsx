@@ -24,8 +24,9 @@ import { PlayerContext, usePlayerContext } from '@src/utilities/player';
 import { SignalContext, useSignalContext } from '@src/utilities/signal';
 import { FullscreenContext } from '@src/utilities/fullscreen';
 import { QualityContext } from '@src/utilities/quality';
+import { TimeState } from '@src/types';
 
-export interface PlayerProps extends VideoProps {
+export interface PlayerProps extends Omit<VideoProps, 'onTimeUpdate'> {
   children?: ReactNode;
   fullscreen?: boolean;
   levels?: Record<number, number>;
@@ -33,6 +34,7 @@ export interface PlayerProps extends VideoProps {
   volume?: number;
   setFullscreen?: Dispatch<SetStateAction<boolean>>;
   setQuality?: Dispatch<SetStateAction<number>>;
+  onTimeUpdate?: (state: TimeState) => void;
 }
 
 import styles from './Player.scss';
@@ -47,6 +49,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       levels = {},
       setFullscreen = () => undefined,
       setQuality = () => undefined,
+      onTimeUpdate = () => undefined,
       ...videoProps
     } = props;
 
@@ -54,7 +57,7 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     const isMobile = useMobileDetector();
     const video = useForwardedRef<HTMLVideoElement>(ref);
     const timeline = useTimelineContext();
-    const context = usePlayerContext(video, volume);
+    const context = usePlayerContext(video, volume, onTimeUpdate);
     const [signal, setSignal] = useSignalContext();
     const mounted = useComponentWillMount();
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, ReactElement } from 'react';
 import { Panel, PanelProps, Selection, Injection } from '@gatsby-tv/components';
-import { Class, Exists } from '@gatsby-tv/utilities';
+import { Class, Exists, useComponentDidMount } from '@gatsby-tv/utilities';
 
 import { usePlayer } from '@src/utilities/player';
 import { useQuality } from '@src/utilities/quality';
@@ -16,6 +16,8 @@ export interface SettingsProps
 export function Settings(props: SettingsProps): ReactElement {
   const { overlay, active, onExit } = props;
 
+  const mounted = useComponentDidMount();
+
   const { player, setPinned } = usePlayer();
   const { levels, quality, setQuality } = useQuality();
   const [fullscreen] = useFullscreen();
@@ -26,7 +28,11 @@ export function Settings(props: SettingsProps): ReactElement {
   const onPointerUp = useCallback((event: any) => event.stopPropagation(), []);
   const onTransitionEnd = useCallback(() => setInjection(false), []);
 
-  useEffect(() => setPinned(active), [active]);
+  useEffect(() => {
+    if (!mounted.current) return;
+    setPinned(active);
+  }, [active]);
+
   useEffect(() => setQuality(Number(resolution)), [resolution]);
   useEffect(() => onExit(), [resolution]);
 

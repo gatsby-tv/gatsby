@@ -32,6 +32,8 @@ export type VideoAction =
   | { type: 'stalled' }
   | { type: 'seeking' }
   | { type: 'seeked' }
+  | { type: 'canplay' }
+  | { type: 'blocked' }
   | { type: 'timeupdate'; time: number }
   | { type: 'progress'; progress: number }
   | { type: 'ended' }
@@ -69,7 +71,9 @@ function Watched(ranges: TimeRanges): [number, number][] {
 export function usePlayerContext(
   video: RefObject<HTMLVideoElement | null>,
   volume: number,
-  onTimeUpdateHandler: (state: TimeState) => void
+  onTimeUpdateHandler: (state: TimeState) => void,
+  onVolumeUpdateHandler: (state: number) => void,
+  onMutedUpdateHandler: (state: boolean) => void
 ): PlayerContextType {
   const ref = useRef<HTMLElement>(null);
   const active = useRef(false);
@@ -111,15 +115,15 @@ export function usePlayerContext(
           return {
             ...state,
             active: true,
-            pinned: true,
             idle: -Infinity,
+            pinned: true,
           };
 
         case 'unpin':
           return {
             ...state,
-            idle: 0,
             active: true,
+            idle: 0,
             pinned: false,
           };
 
@@ -146,6 +150,7 @@ export function usePlayerContext(
             stalled: false,
             waiting: false,
             ended: false,
+            blocked: false,
           };
 
         case 'stalled':
@@ -165,6 +170,18 @@ export function usePlayerContext(
           return {
             ...state,
             seeking: false,
+          };
+
+        case 'canplay':
+          return {
+            ...state,
+            canplay: true,
+          };
+
+        case 'blocked':
+          return {
+            ...state,
+            blocked: true,
           };
 
         case 'timeupdate':
@@ -221,6 +238,8 @@ export function usePlayerContext(
       seeking: false,
       waiting: false,
       ended: false,
+      canplay: false,
+      blocked: false,
       volume,
       muted: true,
     }
@@ -261,6 +280,7 @@ export function usePlayerContext(
     video.current.volume = volume;
     dispatch({ type: 'volumechange', volume });
     setMuted(!volume);
+    onVolumeUpdateHandler(volume);
   }, []);
 
   const setMuted = useCallback((value: SetStateAction<boolean>) => {
@@ -270,6 +290,7 @@ export function usePlayerContext(
     if (update === current) return;
     video.current.muted = update;
     dispatch({ type: update ? 'mute' : 'unmute' });
+    onMutedUpdateHandler(update);
   }, []);
 
   const setSeek = useCallback((value: SetStateAction<number>) => {
@@ -340,6 +361,13 @@ export function usePlayerContext(
   const onWaiting = useCallback(() => dispatch({ type: 'waiting' }), []);
   const onEnded = useCallback(() => dispatch({ type: 'ended' }), []);
 
+  const onCanPlay = useCallback((event: any) => {
+    if (state.canplay) return;
+    const target = event.target as HTMLMediaElement;
+    dispatch({ type: 'canplay' });
+    target.play().catch(() => dispatch({ type: 'blocked' }));
+  }, [state.canplay]);
+
   const onTimeUpdate = useCallback((event: any) => {
     const target = event.target as HTMLMediaElement;
     if (!target.duration) return;
@@ -391,6 +419,7 @@ export function usePlayerContext(
       onSeeking,
       onWaiting,
       onEnded,
+      onCanPlay,
       onTimeUpdate,
       onProgress,
       onSeeked,

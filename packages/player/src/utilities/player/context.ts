@@ -12,6 +12,8 @@ export type VideoState = {
   time: number;
   progress: number;
   ended: boolean;
+  blocked: boolean;
+  canplay: boolean;
   volume: number;
   muted: boolean;
 };

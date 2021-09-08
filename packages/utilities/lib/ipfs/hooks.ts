@@ -7,7 +7,6 @@ import {
   useEffect,
   useCallback,
   useContext,
-  useReducer,
   RefObject,
   Dispatch,
   SetStateAction,
@@ -20,7 +19,7 @@ import HLSIPFSLoader from 'hlsjs-ipfs-loader';
 import all from 'it-all';
 import { IPFSContent } from '@gatsby-tv/types';
 
-import { useAsync } from '@lib/use-async';
+import { useVolatileState } from '@lib/use-volatile-state';
 import { ContextError, UniqueContextError } from '@lib/errors';
 
 import { IPFSContext, IPFSContextType } from './context';
@@ -81,168 +80,100 @@ export function useIPFS(): IPFSContextType {
   return context;
 }
 
-interface FetchAction {
-  type: 'fetch';
-}
-
-interface SyncAction {
-  type: 'sync';
-  result: any;
-}
-
-type IPFSAction = FetchAction | SyncAction;
-
-type IPFSCommandState = {
+export type IPFSContentState = {
+  url?: string;
   loading: boolean;
-  result?: any;
 };
 
-export function useIPFSCommand(
-  command: string | [string],
-  args?: Record<string, unknown> | string
-): IPFSCommandState {
+export function useIPFSContent(content?: IPFSContent): IPFSContentState {
   const { ipfs } = useIPFS();
-  const commandKey = JSON.stringify(command);
 
-  const [state, dispatch] = useReducer(
-    (state: IPFSCommandState, action: IPFSAction) => {
-      switch (action.type) {
-        case 'fetch':
-          return state.loading ? state : { ...state, loading: true };
+  const [result, setResult] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+  const [cancel, setCancel] = useState<(() => void) | undefined>(undefined);
 
-        case 'sync':
-          return {
-            ...state,
-            result: action.result,
-            loading: false,
-          };
+  useEffect(() => {
+    if (!ipfs || !content) return;
 
-        default:
-          return state;
-      }
-    },
-    { result: undefined, loading: false }
-  );
-
-  useAsync(
-    async () => {
-      if (!state.loading) return;
-
-      const method = [JSON.parse(commandKey)]
-        .flat()
-        .reduce((acc: any, key: string) => (acc ? acc[key] : undefined), ipfs);
-
-      return method ? await method(args) : undefined;
-    },
-    (result) => dispatch({ type: 'sync', result }),
-    [state.loading, ipfs, commandKey, args]
-  );
-
-  useEffect(() => dispatch({ type: 'fetch' }), [ipfs]);
-
-  return state;
-}
-
-interface IPFSContentState {
-  loading: boolean;
-  url?: string;
-}
-
-export function useIPFSContent(content: IPFSContent): IPFSContentState {
-  const { result: generator } = useIPFSCommand('cat', `/ipfs/${content.hash}`);
-
-  const [state, dispatch] = useReducer(
-    (state: IPFSContentState, action: IPFSAction) => {
-      switch (action.type) {
-        case 'fetch':
-          return state.loading ? state : { ...state, loading: true };
-
-        case 'sync':
-          return {
-            ...state,
-            url: action.result,
-            loading: false,
-          };
-
-        default:
-          return state;
-      }
-    },
-    { url: undefined, loading: false }
-  );
-
-  useAsync(
-    async () => {
-      if (!generator) return;
+    async function fetcher() {
+      if (!content) return;
+      const generator = await ipfs.cat(`/ipfs/${content.hash}`);
       const data: BlobPart[] = await all(generator);
       const blob = new Blob([...data], { type: content.mimeType });
       return window.URL.createObjectURL(blob);
-    },
-    (url) => dispatch({ type: 'sync', result: url }),
-    [generator, content.mimeType]
-  );
+    }
+
+    const cancel = new Promise((_, reject) =>
+      setCancel((current) => {
+        current?.();
+        return reject;
+      })
+    );
+
+    Promise.race([fetcher(), cancel])
+      .then((url: any) => {
+        setResult(url);
+        setLoading(false);
+      })
+      .catch(() => undefined);
+  }, [ipfs, content]);
 
   useEffect(() => {
-    return () => window.URL.revokeObjectURL(state.url as string);
-  }, [state.url]);
+    if (!result) return;
+    return () => window.URL.revokeObjectURL(result);
+  }, [result]);
 
-  return state;
+  return { url: result, loading };
 }
 
-interface IPFSPeersState {
-  loading: boolean;
+export interface IPFSPeersState {
   peers: Array<any>;
+  loading: boolean;
 }
 
 export function useIPFSPeers(): IPFSPeersState {
   const { ipfs } = useIPFS();
 
-  const [state, dispatch] = useReducer(
-    (state: IPFSPeersState, action: IPFSAction) => {
-      switch (action.type) {
-        case 'fetch':
-          return state.loading ? state : { ...state, loading: true };
-
-        case 'sync':
-          return {
-            ...state,
-            peers: action.result,
-            loading: false,
-          };
-
-        default:
-          return state;
-      }
-    },
-    { peers: [], loading: false }
-  );
-
-  useAsync(
-    async () => {
-      if (!state.loading || !ipfs) return;
-      return await ipfs?.swarm?.peers();
-    },
-    (result) => dispatch({ type: 'sync', result }),
-    [state.loading, ipfs]
-  );
+  const [peers, setPeers] = useState<Array<any>>([]);
+  const [loading, setLoading] = useState(true);
+  const [cancel, setCancel] = useState<(() => void) | undefined>(undefined);
+  const [refresh, setRefresh] = useVolatileState();
 
   useEffect(() => {
-    dispatch({ type: 'fetch' });
-    const id = setInterval(() => dispatch({ type: 'fetch' }), 3000);
+    if (!ipfs) return;
+
+    const cancel = new Promise((_, reject) =>
+      setCancel((current) => {
+        current?.();
+        return reject;
+      })
+    );
+
+    Promise.race([ipfs.swarm.peers(), cancel])
+      .then((peers) => {
+        setPeers(peers);
+        setLoading(false);
+      })
+      .catch(() => undefined);
+  }, [ipfs, refresh]);
+
+  useEffect(() => {
+    if (!ipfs) return;
+    const id = setInterval(() => setRefresh(), 3000);
     return () => clearInterval(id);
   }, [ipfs]);
 
-  return state;
+  return { peers, loading };
 }
 
-export type StreamState = {
+export type IPFSStreamState = {
   ref: RefObject<HTMLVideoElement>;
   quality: number;
   levels: Record<number, number>;
 };
 
 export function useIPFSVideoStream(hash?: string): {
-  stream: StreamState;
+  stream: IPFSStreamState;
   setQuality: Dispatch<SetStateAction<number>>;
 } {
   const ref = useRef<HTMLVideoElement>(null);
@@ -280,10 +211,6 @@ export function useIPFSVideoStream(hash?: string): {
             )
           : {}
       )
-    );
-
-    hls.current.on(HLS.Events.MANIFEST_PARSED, () =>
-      ref.current?.play().catch(console.error)
     );
 
     return () => {

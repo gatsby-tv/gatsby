@@ -16,7 +16,6 @@ const Template: Story<PlayerProps> = (props) => {
     <Player
       fullscreen={fullscreen}
       setFullscreen={setFullscreen}
-      onTimeUpdate={console.log}
       {...props}
     />
   );
@@ -32,6 +31,7 @@ Blank.args = {
 export const DefaultAspectRatio = Template.bind({});
 DefaultAspectRatio.args = {
   src: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps_1920x1080_8000k.mp4',
+  poster: 'https://ipfs.io/ipfs/QmeHbkyKQdGXyz4U8FNHu1SvSDQnpZxWkcFPBRfNWVVSnA',
   muted: true,
   autoPlay: true,
 };
@@ -39,6 +39,7 @@ DefaultAspectRatio.args = {
 export const WideAspectRatio = Template.bind({});
 WideAspectRatio.args = {
   src: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Spring_-_Blender_Open_Movie.webm',
-  muted: true,
+  poster: 'https://ipfs.io/ipfs/QmRm8aSK3ScRet1BwjLmNm8eEA4crGNhYUmpqZXkiRhbZY',
+  muted: false,
   autoPlay: true,
 };

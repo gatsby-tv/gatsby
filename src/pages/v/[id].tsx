@@ -21,10 +21,23 @@ export default function VideoPage(): ReactElement {
   const { setScroll } = useScroll();
   const { video } = useVideo([router.query.id].flat()[0]);
   const { stream, setQuality } = useIPFSVideoStream(video?.content);
-  const [time, setTime] = useState<TimeState | undefined>(undefined);
+
   const viewed = useRef(false);
+  const [time, setTime] = useState<TimeState | undefined>(undefined);
+
+  const [volume, setVolume] = useState<number | undefined>(() => {
+    const volume = window.localStorage.getItem('player-volume');
+    return volume ? Number(volume) : undefined;
+  });
+
+  const [muted, setMuted] = useState<boolean | undefined>(() => {
+    const muted = window.localStorage.getItem('player-muted');
+    return muted === 'true';
+  });
 
   const onTimeUpdate = useCallback((state: TimeState) => setTime(state), []);
+  const onVolumeUpdate = useCallback((state: number) => setVolume(state), []);
+  const onMutedUpdate = useCallback((state: boolean) => setMuted(state), []);
 
   useEffect(() => {
     if (!time || viewed.current) return;
@@ -41,6 +54,16 @@ export default function VideoPage(): ReactElement {
       method: 'PUT',
     });
   }, [time]);
+
+  useEffect(
+    () => window.localStorage.setItem('player-volume', String(volume)),
+    [volume]
+  );
+
+  useEffect(
+    () => window.localStorage.setItem('player-muted', String(muted)),
+    [muted]
+  );
 
   useEffect(() => {
     setSidebar(false);
@@ -62,13 +85,16 @@ export default function VideoPage(): ReactElement {
       <Player
         ref={stream.ref}
         key={video?.content}
-        muted
+        muted={muted}
+        volume={volume}
         fullscreen={fullscreen}
         quality={stream.quality}
         levels={stream.levels}
         setFullscreen={setFullscreen}
         setQuality={setQuality}
         onTimeUpdate={onTimeUpdate}
+        onVolumeUpdate={onVolumeUpdate}
+        onMutedUpdate={onMutedUpdate}
       />
       <Video.Layout>
         <Video.Info video={video} />

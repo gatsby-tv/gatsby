@@ -5,7 +5,7 @@ import {
   Icon,
   Injection,
 } from '@gatsby-tv/components';
-import { Spinner } from '@gatsby-tv/icons';
+import { Play, Spinner } from '@gatsby-tv/icons';
 import { Class, useComponentDidMount, useUniqueId } from '@gatsby-tv/utilities';
 
 import { Signal } from '@src/components/Signal';
@@ -20,7 +20,7 @@ import { Timeline } from './components/Timeline';
 import styles from './MobileOverlay.scss';
 
 export function MobileOverlay(): ReactElement {
-  const { player, setActive } = usePlayer();
+  const { player, setActive, setPlayback } = usePlayer();
   const timeline = useTimeline();
   const [signal] = useSignal();
   const [fullscreen] = useFullscreen();
@@ -29,6 +29,7 @@ export function MobileOverlay(): ReactElement {
   const mounted = useComponentDidMount();
   const paused = useRef(player.paused);
   const loading = useRef(player.loading);
+  const blocked = useRef(player.blocked);
   const started = useRef(false);
   const [disabled, setDisabled] = useState(false);
   const [controls, setControls] = useState(false);
@@ -46,6 +47,7 @@ export function MobileOverlay(): ReactElement {
 
   useEffect(() => void (paused.current = player.paused), [player.paused]);
   useEffect(() => void (loading.current = player.loading), [player.loading]);
+  useEffect(() => void (blocked.current = player.blocked), [player.blocked]);
   useEffect(() => setPinned(true), [player.active]);
 
   useEffect(() => {
@@ -54,19 +56,26 @@ export function MobileOverlay(): ReactElement {
     return () => clearTimeout(id);
   }, [pinned]);
 
-  useEffect(
-    () =>
-      setActive((current) =>
-        !mounted.current || paused.current || loading.current
-          ? current
-          : !current
-      ),
-    [toggle]
-  );
+  useEffect(() => {
+    if (
+      !mounted.current ||
+      paused.current ||
+      blocked.current ||
+      loading.current
+    )
+      return;
+
+    setActive((current) => !current);
+  }, [toggle]);
 
   useEffect(() => {
-    if (!paused.current && !loading.current) return;
+    if (!mounted.current || (!paused.current && !loading.current)) return;
     setDisabled((current) => !current);
+  }, [toggle]);
+
+  useEffect(() => {
+    if (!blocked.current) return;
+    setPlayback(true);
   }, [toggle]);
 
   useEffect(() => {
@@ -90,19 +99,25 @@ export function MobileOverlay(): ReactElement {
       />
     ) : null;
 
+  const BlockedMarkup =
+    player.blocked && !player.loading && !signal ? (
+      <Icon className={styles.Icon} src={Play} size="larger" />
+    ) : null;
+
   return (
     <div className={classes} onPointerUp={onPointerUp}>
       <Activatable
         className={Class(styles.Overlay, styles.Tint)}
-        active={active || timeline.scrubbing}
+        active={active || timeline.scrubbing || player.blocked}
         duration="fast"
         onTransitionEnd={onTransitionEnd}
       />
       {LoadingMarkup}
+      {BlockedMarkup}
       <Signal className={styles.Signal} />
       <Activatable
         className={styles.Controls}
-        active={active && !timeline.scrubbing && !signal}
+        active={active && !timeline.scrubbing && !player.blocked && !signal}
         duration="fastest"
       >
         <Controls overlay={overlay} active={controls} onClick={onPointerUp} />

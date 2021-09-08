@@ -111,7 +111,13 @@ export function Controls(props: ControlsProps): ReactElement {
         onPointerLeave={onPlaybackPointerLeave}
       >
         <Button
-          icon={player.ended ? Restart : player.paused ? Play : Pause}
+          icon={
+            player.ended
+              ? Restart
+              : player.paused || player.blocked
+              ? Play
+              : Pause
+          }
           size="small"
           onClick={onPlaybackClick}
         />

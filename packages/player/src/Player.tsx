@@ -1,7 +1,6 @@
 import {
   useRef,
   useEffect,
-  useState,
   useCallback,
   forwardRef,
   ReactNode,
@@ -35,6 +34,8 @@ export interface PlayerProps extends Omit<VideoProps, 'onTimeUpdate'> {
   setFullscreen?: Dispatch<SetStateAction<boolean>>;
   setQuality?: Dispatch<SetStateAction<number>>;
   onTimeUpdate?: (state: TimeState) => void;
+  onVolumeUpdate?: (state: number) => void;
+  onMutedUpdate?: (state: boolean) => void;
 }
 
 import styles from './Player.scss';
@@ -50,16 +51,25 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
       setFullscreen = () => undefined,
       setQuality = () => undefined,
       onTimeUpdate = () => undefined,
+      onVolumeUpdate = () => undefined,
+      onMutedUpdate = () => undefined,
       ...videoProps
     } = props;
 
-    const fullscreenRef = useRef(fullscreen);
-    const isMobile = useMobileDetector();
     const video = useForwardedRef<HTMLVideoElement>(ref);
+    const fullscreenRef = useRef(fullscreen);
     const timeline = useTimelineContext();
-    const context = usePlayerContext(video, volume, onTimeUpdate);
     const [signal, setSignal] = useSignalContext();
+    const isMobile = useMobileDetector();
     const mounted = useComponentWillMount();
+
+    const context = usePlayerContext(
+      video,
+      volume,
+      onTimeUpdate,
+      onVolumeUpdate,
+      onMutedUpdate
+    );
 
     const { player, events, setPlayback } = context;
 
@@ -87,16 +97,16 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
 
     useEffect(() => void (fullscreenRef.current = fullscreen), [fullscreen]);
 
-    const OverlayMarkup = !mounted ? null : isMobile ? (
-      <MobileOverlay />
-    ) : (
-      <DesktopOverlay />
-    );
-
     const classes = Class(
       styles.Viewport,
       fullscreen && styles.Fullscreen,
       mounted && !isMobile && styles.MinHeight
+    );
+
+    const OverlayMarkup = !mounted ? null : isMobile ? (
+      <MobileOverlay />
+    ) : (
+      <DesktopOverlay />
     );
 
     return (

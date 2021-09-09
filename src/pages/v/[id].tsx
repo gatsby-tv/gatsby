@@ -27,7 +27,9 @@ export default function VideoPage(): ReactElement {
 
   const [volume, setVolume] = useState<number | undefined>(() => {
     const volume = window.localStorage.getItem('player-volume');
-    return volume ? Number(volume) : undefined;
+    if (!volume) return;
+    const value = Number(volume);
+    return isFinite(value) ? value : undefined;
   });
 
   const [muted, setMuted] = useState<boolean | undefined>(() => {

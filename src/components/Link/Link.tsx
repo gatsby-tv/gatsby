@@ -2,8 +2,8 @@ import { FC, ReactNode, ReactElement } from 'react';
 import NextLink from 'next/link';
 import { Link as LinkComponent } from '@gatsby-tv/components';
 
-import { Content } from './variants/Content';
-import { Channel } from './variants/Channel';
+import { Content } from './components/Content';
+import { Channel } from './components/Channel';
 
 export interface LinkProps {
   children?: ReactNode;

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useUniqueId } from '@gatsby-tv/utilities';
 
 import { Page } from '@src/layout/Page';
-import { Subscriptions } from '@src/layout/Directory';
+import { Subscriptions } from '@src/layout/Subscriptions';
 import { useSession } from '@src/services/session';
 
 export default function SubscriptionsPage(): ReactElement {

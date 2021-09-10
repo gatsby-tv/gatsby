@@ -1,5 +1,5 @@
-import { Accept, AcceptProps } from './components/Accept';
-import { Reject, RejectProps } from './components/Reject';
+import { Accept, AcceptProps } from './Accept';
+import { Reject, RejectProps } from './Reject';
 
 export type {
   AcceptProps as SnackAcceptProps,

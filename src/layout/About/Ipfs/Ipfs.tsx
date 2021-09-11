@@ -85,11 +85,9 @@ export function Ipfs(): ReactElement {
       <h3>Built on IPFS</h3>
       <div className={styles.Text}>
         <p>
-          By leveraging the peer-to-peer file distribution provided by{' '}
-          <a href="https://ipfs.io">IPFS</a>, Gatsby is able to completely
-          eliminate the barriers to entry surrounding the video sharing
-          industry. IPFS allows users who stream videos in their browsers to
-          simultaneously redistribute those videos to other viewers.
+          <a href="https://ipfs.io">IPFS</a> is a peer-to-peer file distribution
+          protocol that makes sharing and streaming files seamless between
+          users of the web.
         </p>
       </div>
     </div>

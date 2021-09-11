@@ -8,8 +8,6 @@ export default function AboutPage(): ReactElement {
     <Page title="Gatsby - About" margin={false}>
       <About.Landing />
       <About.Layout>
-        <About.Heading />
-        <About.Ipfs />
         <About.Markup />
       </About.Layout>
     </Page>

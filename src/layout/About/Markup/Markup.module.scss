@@ -1,14 +1,21 @@
 @use 'styles' as *;
 
 .Markup {
-  margin: 0 auto;
-  max-width: rem(800px);
-
   h3 {
-    margin-bottom: spacing(1.5);
+    margin-top: spacing(5);
+    margin-bottom: spacing(2);
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   p {
-    margin: spacing(1.5) 0;
+    @include font-size(paragraph-large);
+    margin-bottom: spacing(2);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }

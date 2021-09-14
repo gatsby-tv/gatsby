@@ -9,7 +9,7 @@ import '@gatsby-tv/components/dist/styles.css';
 import '@gatsby-tv/components/dist/fonts.css';
 import '@gatsby-tv/player/dist/styles.css';
 import '@gatsby-tv/preview/dist/styles.css';
-import '@gatsby-tv/content/dist/styles.css';
+import '@gatsby-tv/layout/dist/styles.css';
 import 'react-image-crop/dist/ReactCrop.css';
 
 import { App } from '@src/layout/App';

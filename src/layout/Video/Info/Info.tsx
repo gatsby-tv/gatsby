@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Injection, Rule, Optional } from '@gatsby-tv/components';
-import { Channel, Video } from '@gatsby-tv/content';
+import { Channel, Video } from '@gatsby-tv/layout';
 import { Value, useFrame, useUniqueId } from '@gatsby-tv/utilities';
 import { Video as VideoType } from '@gatsby-tv/types';
 

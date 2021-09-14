@@ -6,7 +6,7 @@ import {
   isContentLink,
   isUserLink,
   isChannelLink,
-} from '@gatsby-tv/content';
+} from '@gatsby-tv/layout';
 
 import { useChannelModal } from '@src/utilities/channel-modal';
 

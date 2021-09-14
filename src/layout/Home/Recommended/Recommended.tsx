@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { TextDisplay } from '@gatsby-tv/components';
-import { Listing } from '@gatsby-tv/content';
+import { Listing } from '@gatsby-tv/layout';
 import { useUniqueId, useFrame } from '@gatsby-tv/utilities';
 import { User } from '@gatsby-tv/types';
 

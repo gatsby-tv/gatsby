@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { User } from '@gatsby-tv/content';
+import { User } from '@gatsby-tv/layout';
 import { User as UserType } from '@gatsby-tv/types';
 
 import { Link } from '@src/components/Link';

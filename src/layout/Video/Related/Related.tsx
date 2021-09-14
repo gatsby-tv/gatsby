@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Video } from '@gatsby-tv/content';
+import { Video } from '@gatsby-tv/layout';
 import { useFrame } from '@gatsby-tv/utilities';
 import { Video as VideoType } from '@gatsby-tv/types';
 

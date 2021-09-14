@@ -2,7 +2,7 @@ import { useState, useEffect, ReactElement } from 'react';
 import { NextComponentType, NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 import { Frame, Icon } from '@gatsby-tv/components';
-import { Channel } from '@gatsby-tv/content';
+import { Channel } from '@gatsby-tv/layout';
 import { Spinner } from '@gatsby-tv/icons';
 
 import { Link } from '@src/components/Link';

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import NextLink from 'next/link';
-import { LinkProps, isChannelLink } from '@gatsby-tv/content';
+import { LinkProps, isChannelLink } from '@gatsby-tv/layout';
 
 import { Content } from '../Content';
 

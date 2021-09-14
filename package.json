@@ -45,10 +45,11 @@
   },
   "dependencies": {
     "@gatsby-tv/components": "workspace:packages/components",
-    "@gatsby-tv/content": "workspace:packages/content",
     "@gatsby-tv/icons": "workspace:packages/icons",
+    "@gatsby-tv/layout": "workspace:packages/layout",
     "@gatsby-tv/player": "workspace:packages/player",
     "@gatsby-tv/preview": "workspace:packages/preview",
+    "@gatsby-tv/services": "workspace:packages/services",
     "@gatsby-tv/utilities": "workspace:packages/utilities",
     "abort-controller": "^3.0.0",
     "assert": "^2.0.0",

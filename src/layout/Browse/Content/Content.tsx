@@ -1,6 +1,6 @@
 import { useState, ReactElement } from 'react';
 import { Tabs, Rule } from '@gatsby-tv/components';
-import { Listing } from '@gatsby-tv/content';
+import { Listing } from '@gatsby-tv/layout';
 import { useUniqueId } from '@gatsby-tv/utilities';
 
 import { Link } from '@src/components/Link';

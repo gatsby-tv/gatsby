@@ -2165,9 +2165,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@gatsby-tv/content@workspace:packages/content":
+"@gatsby-tv/icons@workspace:packages/icons":
   version: 0.0.0-use.local
-  resolution: "@gatsby-tv/content@workspace:packages/content"
+  resolution: "@gatsby-tv/icons@workspace:packages/icons"
+  dependencies:
+    "@svgr/cli": ^5.4.0
+    "@types/react": ^16.9.56
+    core-js: ^3.8.3
+    typescript: ^4.3.5
+  peerDependencies:
+    react: ^17.0.1
+  languageName: unknown
+  linkType: soft
+
+"@gatsby-tv/layout@workspace:packages/layout":
+  version: 0.0.0-use.local
+  resolution: "@gatsby-tv/layout@workspace:packages/layout"
   dependencies:
     "@babel/core": ^7.15.0
     "@babel/plugin-proposal-class-properties": ^7.12.1
@@ -2180,6 +2193,7 @@ __metadata:
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
     "@gatsby-tv/preview": "workspace:packages/preview"
+    "@gatsby-tv/services": "workspace:packages/services"
     "@gatsby-tv/types": ^0.5.3
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@rollup/plugin-babel": ^5.3.0
@@ -2228,24 +2242,11 @@ __metadata:
     "@gatsby-tv/components": "*"
     "@gatsby-tv/icons": "*"
     "@gatsby-tv/preview": "*"
+    "@gatsby-tv/services": "*"
     "@gatsby-tv/types": ^0.4.6
     "@gatsby-tv/utilities": "*"
     react: ^17.0.1
     react-dom: ^17.0.1
-    swr: ^0.5.3
-  languageName: unknown
-  linkType: soft
-
-"@gatsby-tv/icons@workspace:packages/icons":
-  version: 0.0.0-use.local
-  resolution: "@gatsby-tv/icons@workspace:packages/icons"
-  dependencies:
-    "@svgr/cli": ^5.4.0
-    "@types/react": ^16.9.56
-    core-js: ^3.8.3
-    typescript: ^4.3.5
-  peerDependencies:
-    react: ^17.0.1
   languageName: unknown
   linkType: soft
 
@@ -2385,6 +2386,55 @@ __metadata:
     react-dom: ^17.0.1
     react-is: ^17.0.1
     react-router-dom: ^5.2.0
+  languageName: unknown
+  linkType: soft
+
+"@gatsby-tv/services@workspace:packages/services":
+  version: 0.0.0-use.local
+  resolution: "@gatsby-tv/services@workspace:packages/services"
+  dependencies:
+    "@babel/core": ^7.15.0
+    "@babel/plugin-proposal-class-properties": ^7.12.1
+    "@babel/plugin-proposal-private-methods": ^7.12.1
+    "@babel/plugin-proposal-private-property-in-object": ^7.12.1
+    "@babel/plugin-transform-object-assign": ^7.12.1
+    "@babel/preset-env": ^7.14.8
+    "@babel/preset-react": ^7.14.5
+    "@babel/preset-typescript": ^7.12.7
+    "@gatsby-tv/types": ^0.5.3
+    "@gatsby-tv/utilities": "workspace:packages/utilities"
+    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-node-resolve": ^11.2.1
+    "@types/react": ^16.9.43
+    "@types/react-dom": ^17.0.3
+    "@typescript-eslint/eslint-plugin": ^4.11.1
+    "@typescript-eslint/parser": ^4.11.1
+    babel-loader: ^8.2.2
+    babel-plugin-module-resolver: ^4.0.0
+    core-js: ^3.7.0
+    dompurify: ^2.2.7
+    eslint: ^7.32.0
+    eslint-plugin-react: ^7.21.5
+    eslint-plugin-react-hooks: ^4.2.0
+    prettier: ^2.2.1
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-is: ^17.0.2
+    react-router-dom: ^5.2.0
+    regenerator-runtime: ^0.13.7
+    rollup: ^2.45.2
+    rollup-plugin-postcss: ^4.0.0
+    swr: ^0.5.6
+    tscpaths: ^0.0.9
+    typescript: ^4.3.5
+    webpack: ^5.49.0
+  peerDependencies:
+    "@gatsby-tv/types": ^0.4.6
+    "@gatsby-tv/utilities": "*"
+    react: ^17.0.1
+    react-dom: ^17.0.1
+    swr: ^0.5.3
   languageName: unknown
   linkType: soft
 
@@ -13628,10 +13678,11 @@ fsevents@~2.1.1:
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.12.7
     "@gatsby-tv/components": "workspace:packages/components"
-    "@gatsby-tv/content": "workspace:packages/content"
     "@gatsby-tv/icons": "workspace:packages/icons"
+    "@gatsby-tv/layout": "workspace:packages/layout"
     "@gatsby-tv/player": "workspace:packages/player"
     "@gatsby-tv/preview": "workspace:packages/preview"
+    "@gatsby-tv/services": "workspace:packages/services"
     "@gatsby-tv/types": ^0.5.3
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@svgr/cli": ^5.5.0

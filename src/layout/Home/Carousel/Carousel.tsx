@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Rule } from '@gatsby-tv/components';
-import { Channel } from '@gatsby-tv/content';
+import { Channel } from '@gatsby-tv/layout';
 
 import { useChannelModal } from '@src/utilities/channel-modal';
 

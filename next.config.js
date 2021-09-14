@@ -2,7 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const withTM = require('next-transpile-modules')([
   '@gatsby-tv/components',
-  '@gatsby-tv/content',
+  '@gatsby-tv/layout',
+  '@gatsby-tv/services',
   '@gatsby-tv/utilities',
 ]);
 

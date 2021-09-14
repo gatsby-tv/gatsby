@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback, ReactElement } from 'react';
 import { useRouter } from 'next/router';
-import { useVideo } from '@gatsby-tv/content';
+import { useVideo } from '@gatsby-tv/services';
 import Player, { TimeState } from '@gatsby-tv/player';
 import {
   useScroll,

@@ -20,7 +20,7 @@ export function Related(props: RelatedProps): ReactElement {
   return (
     <div className={styles.Related}>
       <Video.Related
-        video={video}
+        content={video}
         preview={tight ? 'column' : 'row'}
         avatar={tight ? 'small' : undefined}
         link={Link.Content}

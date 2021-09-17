@@ -1,11 +1,11 @@
 import { ReactElement } from 'react';
-import { User } from '@gatsby-tv/layout';
-import { User as UserType } from '@gatsby-tv/types';
+import { Listing } from '@gatsby-tv/layout';
+import { User } from '@gatsby-tv/types';
 
 import { Link } from '@src/components/Link';
 
 export interface ContentProps {
-  user?: UserType;
+  user?: User;
   label: string;
 }
 
@@ -13,7 +13,7 @@ export function Content(props: ContentProps): ReactElement {
   const { user, label } = props;
 
   return (
-    <User.Subscriptions
+    <Listing.Subscriptions
       id="subscriptions"
       user={user}
       avatar="small"

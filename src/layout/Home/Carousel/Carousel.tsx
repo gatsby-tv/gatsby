@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Rule } from '@gatsby-tv/components';
-import { Channel } from '@gatsby-tv/layout';
+import { Decoration } from '@gatsby-tv/layout';
 
 import { useChannelModal } from '@src/utilities/channel-modal';
 
@@ -11,7 +11,7 @@ export function Carousel(): ReactElement {
 
   return (
     <>
-      <Channel.Carousel onSelect={setChannel} />
+      <Decoration.FeaturedChannels onSelect={setChannel} />
       <Rule className={styles.Rule} />
     </>
   );

@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { Image } from '@gatsby-tv/components';
 
-import styles from './Carousel.scss';
+import styles from './FeaturedChannels.scss';
 
 export interface SkeletonProps {
   groups: number;

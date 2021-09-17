@@ -12,13 +12,13 @@ import styles from './Related.scss';
 export interface RelatedProps
   extends Partial<ListingContextType>,
     AriaAttributes {
-  video?: Video;
+  content?: Video;
 }
 
 export function Related(props: RelatedProps): ReactElement {
   const {
     id,
-    video,
+    content,
     preview = 'row',
     info = 'full',
     avatar,
@@ -26,9 +26,9 @@ export function Related(props: RelatedProps): ReactElement {
     ...aria
   } = props;
 
-  const { content, loading, error, generator } = useRelatedFeed(video?._id);
+  const { content: related, loading, error, generator } = useRelatedFeed(content?._id);
 
-  if (!content || error)
+  if (!related || error)
     return <Skeleton preview={preview} info={info} avatar={avatar} />;
 
   return (
@@ -44,7 +44,7 @@ export function Related(props: RelatedProps): ReactElement {
           component={Article}
           generator={generator}
           loading={loading}
-          data={content.map((item, index) => ({ index, content: item }))}
+          data={related.map((item, index) => ({ index, content: item }))}
         />
       </section>
     </ListingContext.Provider>

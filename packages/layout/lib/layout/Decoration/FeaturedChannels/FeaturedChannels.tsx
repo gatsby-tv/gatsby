@@ -1,17 +1,18 @@
 import { ReactElement } from 'react';
-import { Carousel as CarouselComponent, Image } from '@gatsby-tv/components';
+import { Carousel, Image } from '@gatsby-tv/components';
 import { useFeaturedChannels } from '@gatsby-tv/services';
 import { useBreakpoints } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
 
-import { Skeleton } from './Carousel.skeleton';
-import styles from './Carousel.scss';
+import { Skeleton } from './FeaturedChannels.skeleton';
 
-export interface CarouselProps {
+export interface FeaturedChannelsProps {
   onSelect: (channel: Channel) => void;
 }
 
-export function Carousel(props: CarouselProps): ReactElement | null {
+export function FeaturedChannels(
+  props: FeaturedChannelsProps
+): ReactElement | null {
   const { onSelect } = props;
   const { channels } = useFeaturedChannels();
 
@@ -27,7 +28,7 @@ export function Carousel(props: CarouselProps): ReactElement | null {
   if (!channels) return <Skeleton groups={groups} />;
 
   const ChannelsMarkup = channels.map((channel, index) => (
-    <CarouselComponent.Slide
+    <Carousel.Slide
       key={`Channel.${channel._id}.${index}`}
       onClick={() => onSelect(channel)}
     >
@@ -37,10 +38,8 @@ export function Carousel(props: CarouselProps): ReactElement | null {
         aspectRatio="1 / 2"
         draggable="false"
       />
-    </CarouselComponent.Slide>
+    </Carousel.Slide>
   ));
 
-  return (
-    <CarouselComponent groups={groups}>{ChannelsMarkup}</CarouselComponent>
-  );
+  return <Carousel groups={groups}>{ChannelsMarkup}</Carousel>;
 }

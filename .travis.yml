@@ -1,6 +1,7 @@
 language: node_js
 node_js: 12.18.3
 services: docker
+python: 3.9
 before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -20,7 +21,6 @@ jobs:
     # Check prettier linting and build typescript
     - stage: build
       script:
-        - yarn install
         - yarn run build
     # Build and publish docker tags
     - stage: publish

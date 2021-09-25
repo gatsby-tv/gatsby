@@ -20,7 +20,7 @@ jobs:
     # Check prettier linting and build typescript
     - stage: build
       script:
-        # - yarn run format:check
+        - yarn install
         - yarn run build
     # Build and publish docker tags
     - stage: publish

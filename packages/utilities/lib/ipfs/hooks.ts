@@ -46,7 +46,11 @@ export function useIPFSNode(bootstrap: string[] = []): IPFSContextType {
       try {
         if (ipfsRef.current) return;
         const ipfs = await IPFS.create(IPFS_DEFAULT_CONFIG);
-        bootstrap.forEach(async (addr) => await ipfs.bootstrap.add(addr));
+
+        for (const addr of bootstrap) {
+          await ipfs.bootstrap.add(addr);
+        }
+
         const info = await ipfs.id();
         console.log(`IPFS node ready at /p2p/${info.id}`);
         setIPFS(ipfs);
@@ -90,7 +94,7 @@ export function useIPFSContent(content?: IPFSContent): IPFSContentState {
 
   const [result, setResult] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(true);
-  const [cancel, setCancel] = useState<(() => void) | undefined>(undefined);
+  const [, setCancel] = useState<(() => void) | undefined>(undefined);
 
   useEffect(() => {
     if (!ipfs || !content) return;
@@ -136,7 +140,7 @@ export function useIPFSPeers(): IPFSPeersState {
 
   const [peers, setPeers] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(true);
-  const [cancel, setCancel] = useState<(() => void) | undefined>(undefined);
+  const [, setCancel] = useState<(() => void) | undefined>(undefined);
   const [refresh, setRefresh] = useVolatileState();
 
   useEffect(() => {

@@ -101,7 +101,12 @@ export function useSessionContext(): SessionContextType {
           token: (resp as { token: string }).token,
         })
       )
-      .catch(() => dispatch({ type: 'reject' }));
+      .catch(
+        (resp) => {
+          if (resp.status !== 401) throw resp;
+          dispatch({ type: 'reject' });
+        }
+      );
   }, [session.token]);
 
   const setSession = useCallback((value) => {
@@ -127,7 +132,12 @@ export function useSessionContext(): SessionContextType {
           token: (resp as { token: string }).token,
         })
       )
-      .catch(() => dispatch({ type: 'reject' }));
+      .catch(
+        (resp) => {
+          if (resp.status !== 401) throw resp;
+          dispatch({ type: 'reject' });
+        }
+      );
 
     return value;
   }, []);

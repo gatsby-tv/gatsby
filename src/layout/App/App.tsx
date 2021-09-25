@@ -29,10 +29,10 @@ export function App<T>(props: AppProps<T>): ReactElement {
   const isTransient = /^\/\$/.test(router.pathname);
 
   useEffect(() => {
-    if (loading) {
-      const id = setTimeout(() => setSpinner(true), 500);
-      return () => clearTimeout(id);
-    }
+    if (!loading) return void setSpinner(false);
+
+    const id = setTimeout(() => setSpinner(true), 500);
+    return () => clearTimeout(id);
   }, [loading]);
 
   const SpinnerMarkup = spinner ? (

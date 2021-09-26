@@ -15,7 +15,6 @@ import {
   FormChangeHandler,
 } from '@gatsby-tv/utilities';
 
-import { Optional } from '@lib/components/Optional';
 import { Option } from '@lib/types';
 
 import styles from './Slider.scss';
@@ -161,7 +160,7 @@ export function Slider(props: SliderProps): ReactElement {
   }, []);
 
   const StopsMarkup = stops
-    ? stops.map((stop, index) => (
+    ? stops.map((stop) => (
         <div
           key={`Slider.Stop.${stop.value}`}
           style={{

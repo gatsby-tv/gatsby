@@ -17,7 +17,10 @@ export function AvatarCollation(props: AvatarCollationProps): ReactElement {
   const { avatars, size, spacing } = props;
   avatars.reverse();
 
-  const classes = Class(styles.AvatarCollation, styles[`Gap-${spacing}`]);
+  const classes = Class(
+    styles.AvatarCollation,
+    spacing && styles[`Gap-${spacing}`]
+  );
 
   const AvatarsMarkup = avatars.map((avatar, index) => (
     <Avatar

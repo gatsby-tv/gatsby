@@ -64,7 +64,6 @@ getOffset.value = (
 
 export interface PanelProps {
   children?: ReactNode;
-  id?: string;
   className?: string;
   direction?: 'top' | 'right' | 'bottom' | 'left';
   draggable?: boolean;
@@ -78,7 +77,6 @@ export interface PanelProps {
 export function Panel(props: PanelProps): ReactElement | null {
   const {
     children,
-    id,
     className,
     direction = 'right',
     draggable = true,
@@ -211,7 +209,7 @@ export function Panel(props: PanelProps): ReactElement | null {
   );
 
   const onTouchEnd = useCallback(
-    (event: any) => {
+    () => {
       setTouch({ type: 'end' });
       if (
         touch.position > 0.5 ||

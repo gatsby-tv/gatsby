@@ -1,5 +1,9 @@
 @use 'styles' as *;
 
+.TextMeta {
+  width: rem(150px);
+}
+
 .TextMeta-small {
   @include font-size(caption);
 }

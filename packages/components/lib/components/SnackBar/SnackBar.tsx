@@ -1,6 +1,6 @@
 import { useState, useEffect, ReactElement } from 'react';
 import { Spinner } from '@gatsby-tv/icons';
-import { Class, useSnackBarState } from '@gatsby-tv/utilities';
+import { Class, useSnackBarState, useRepaint } from '@gatsby-tv/utilities';
 
 import { Injection } from '@lib/components/Injection';
 import { Icon } from '@lib/components/Icon';
@@ -14,18 +14,20 @@ export { Snack };
 
 export function SnackBar(): ReactElement | null {
   const { content, active } = useSnackBarState();
+  const repaint = useRepaint();
   const [mounted, setMounted] = useState(false);
   const [ref, setRef] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (ref?.offsetHeight) {
-      const id = requestAnimationFrame(() => setMounted(true));
-      return () => cancelAnimationFrame(id);
-    }
+    if (!ref) return;
+    repaint();
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
   }, [ref]);
 
   useEffect(() => {
-    if (!content) setMounted(false);
+    if (content) return;
+    setMounted(false);
   }, [content]);
 
   const ContentMarkup =

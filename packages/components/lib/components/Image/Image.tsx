@@ -7,7 +7,7 @@ import {
   ReactElement,
 } from 'react';
 import { IPFSContent } from '@gatsby-tv/types';
-import { Class, Exists, useIPFSContent } from '@gatsby-tv/utilities';
+import { Class, useIPFSContent } from '@gatsby-tv/utilities';
 
 import { Viewport } from '@lib/components/Viewport';
 import { Optional } from '@lib/components/Optional';
@@ -44,8 +44,6 @@ function ImageURL(props: ImageURLProps): ReactElement {
   const onLoad = useCallback(() => setLoading(false), []);
 
   useEffect(() => setLoading(true), [imgProps.src]);
-
-  const classes = Class(className, styles.Viewport);
 
   return (
     <Optional active={Boolean(className)} $props={{ className }}>

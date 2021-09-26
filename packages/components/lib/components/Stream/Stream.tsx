@@ -29,23 +29,17 @@ export function Stream<T>(props: StreamProps<T>): ReactElement {
   const onScroll = useCallback(
     (event: any) => {
       const target = event.currentTarget;
-      if (
-        !loading &&
-        target.scrollHeight - target.scrollTop === target.clientHeight
-      ) {
-        generator?.();
-      }
+      const offset = target.scrollHeight - target.scrollTop;
+      if (loading || offset !== target.clientHeight) return;
+      generator?.();
     },
     [loading, generator]
   );
 
   useEffect(() => {
-    if (loading) {
-      const id = setTimeout(() => setWaiting(true), 100);
-      return () => clearTimeout(id);
-    } else {
-      setWaiting(false);
-    }
+    if (!loading) return void setWaiting(false);
+    const id = setTimeout(() => setWaiting(true), 100);
+    return () => clearTimeout(id);
   }, [loading]);
 
   useEffect(() => {

@@ -1,29 +1,146 @@
-# Gatsby shared components for React clients
+# Gatsby Utility Library
 
-This repo is a collection of common React components written in TypeScript/TSX to be used with React clients for Gatsby.
+## Contexts
 
-## Usage in other projects
+- [`Form`](./lib/form/README.md)
 
-1. Install to the project `npm install --save @gatsby-tv/components`
-2. Import the components `import { Sidebar, Navbar } from "@gatsby-tv/components";`
+- [`Frame`](./lib/frame/README.md)
 
-## Publish to npm
+- [`Fullscreen`](./lib/fullscreen/README.md)
 
-1. `npm install`
-2. `npm run build`
-3. `npm login`
-4. `npm publish`
+- [`IPFS`](./lib/ipfs/README.md)
 
-## Test and install on projects locally without needing to publish
+- [`Scroll`](./lib/scroll/README.md)
 
-1. `cd ~/components`
-2. `npm link`
-3. `cd ~/my-react-project`
-4. `npm link @gatsby-tv/components`
-5. Every time you make a change to this repo, make sure to run `npm run build` to update the link.
+- [`SnackBar`](./lib/snack-bar/README.md)
 
-## Run storybook examples and docs
+- [`UniqueId`](./lib/unique-id/README.md)
 
-Storybook shows examples on usage and documentation of the components in this library.
+## Hooks
 
-1. `npm run storybook`
+### `useChangeSet`
+> `(initial, deps) => ChangeState`
+
+Create a set of values that have default values, tracking which values have been
+changed.
+
+##### `initial`
+> `Record<string, unknown>`
+
+The data to be managed by the change set.
+
+##### `deps`
+> `React.DependencyList`
+
+A dependency list for the change set, the default values are assumed to depend
+on the values provided. Whenever a value in the dependency list is modified, the
+change set will be reset to whatever the current value of the `initial` argument
+is at the time.
+
+#### `ChangeState`
+
+##### `pristine`
+> `boolean`
+
+Boolean value indicating whether or not the values in the set have been
+modified.
+
+##### `updates`
+> `Record<string, unknown>`
+
+Record containing only the keys passed in as the initial argument that have been
+modified.
+
+##### `values`
+> `Record<string, unknown>`
+
+Record containing all the keys and their associated values.
+
+##### `setValue`
+> `(value: unknown, id: string) => void`
+
+Dispatch method for setting the value of a key in the current object.
+
+### `useComponentDidMount`
+> `() => React.RefObject<boolean>`
+
+Use a boolean value to determine whether the component invoking the hook has
+already mounted.
+
+### `useComponentWillMount`
+> `() => boolean`
+
+Use a stateful boolean value for logic that is dependent on the component
+invoking the hook as mounted.
+
+### `useController`
+> `() => Controller`
+
+A utility hook for creating callbacks for controlling a component that supports
+it (such as the `Modal` and `Menu` components).
+
+#### `Controller`
+
+##### `active`
+> `boolean`
+
+The current state of the controller.
+
+##### `toggle`
+> `() => void`
+
+Flip the current state.
+
+##### `activate`
+> `() => void`
+
+Set the current state to `true`.
+
+##### `deactivate`
+> `() => void`
+
+Set the current state to `false`.
+
+### `useForwardedRef`
+> `(ref: React.Ref<T>) => React.RefObject<T>`
+
+Convert a React reference to an immutable `RefObject`.
+
+### `useMobileDetector`
+> `() => boolean | undefined`
+
+Determines whether the current user agent indicates that the operating system is
+on a mobile device. Since the `window` object cannot be accessed until the page
+mounts, this hook will by default return `undefined`.
+
+### `useParentRef`
+> `(ref: React.RefObject<T>) => React.RefObject<P>`
+
+Return a reference to the parent element of the passed reference.
+
+### `useRepaint`
+> `() => React.Dispatch<void>`
+
+Return a method that repaints the screen.
+
+### `useResizeObserver`
+> `(ref: React.RefObject<T> | T | null | undefined, callback: ((content:
+> ResizeObResizeObserverSize) => void))`
+
+Register a callback that is executed whenever the element referenced by `ref`
+changes in size.
+
+### `useVolatileKey`
+> `(initial: string | (() => string)) => [string,
+> React.Dispatch<React.SetStateAction<string>>]`
+
+Return a stateful string that will always change whenever its `setState`
+dispatch method is called.
+
+To retrieve the current string (without the extra stuff), you will need to split
+the string as `current.split('.')[0]`.
+
+### `useVolatileState`
+> `() => [number, React.Dispatch<void>]`
+
+Similar to `useVolatileState`, but without the use of a string.

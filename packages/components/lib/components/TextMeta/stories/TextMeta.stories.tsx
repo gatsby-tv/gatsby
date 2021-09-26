@@ -1,4 +1,5 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
+import { Class } from '@gatsby-tv/utilities';
 
 import {
   TextMeta,
@@ -17,7 +18,12 @@ export default {
 const Template: Story<TextMetaProps & { font: string }> = ({
   font,
   ...props
-}) => <TextMeta className={styles[`TextMeta-${font}`]} {...props} />;
+}) => (
+  <TextMeta
+    className={Class(styles.TextMeta, styles[`TextMeta-${font}`])}
+    {...props}
+  />
+);
 
 export const Small = Template.bind({});
 Small.args = {

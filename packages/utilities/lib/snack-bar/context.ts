@@ -11,7 +11,7 @@ export type SnackBarConfig =
 export type SnackBarContextType = {
   active: boolean;
   config: SnackBarConfig;
-  setConfig: Dispatch<SetStateAction<SnackBarConfig>>;
+  setConfig: Dispatch<SetStateAction<SnackBarConfig | undefined>>;
 };
 
 export const SnackBarContext = createContext<SnackBarContextType | undefined>(

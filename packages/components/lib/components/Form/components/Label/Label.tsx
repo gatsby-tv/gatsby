@@ -1,7 +1,6 @@
-import { useState, useEffect, ReactNode, ReactElement } from 'react';
+import { useState, ReactNode, ReactElement } from 'react';
 import { NoEntry } from '@gatsby-tv/icons';
 import {
-  Exists,
   Class,
   useForm,
   FormError,
@@ -26,8 +25,6 @@ export function Label(props: LabelProps): ReactElement {
   const { children, for: id, className, label, help, hidden } = props;
   const { errors } = useForm();
   const [invalid, setInvalid] = useState(Boolean(errors[id]));
-
-  const waiting = errors[id] instanceof Promise;
 
   const error =
     (invalid &&

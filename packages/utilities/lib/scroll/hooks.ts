@@ -7,9 +7,11 @@ import {
   useCallback,
   useContext,
   RefObject,
+  SetStateAction,
   DependencyList,
 } from 'react';
 
+import { useRepaint } from '@lib/use-repaint';
 import { EventHandler } from '@lib/types';
 import { ContextError } from '@lib/errors';
 
@@ -33,27 +35,23 @@ export function useScrollContext<T extends HTMLElement>(
     []
   );
 
-  const setScroll = useCallback((value: number) => {
-    (scroll as any).current = value;
-    if (ref.current) {
-      ref.current.scrollTop = value;
-    }
+  const setScroll = useCallback((value: SetStateAction<number>) => {
+    const update = typeof value === 'function' ? value(scroll.current) : value;
+    scroll.current = update;
+    if (!ref.current) return;
+    ref.current.scrollTop = update;
   }, []);
 
   useEffect(() => {
+    if (!ref.current) return;
+
     function handler(event: any) {
       callbacks.forEach((callback) => callback(event));
-      (scroll as any).current = event.target.scrollTop;
+      scroll.current = event.target.scrollTop;
     }
 
-    if (ref.current) {
-      ref.current.addEventListener('scroll', handler);
-      return () => {
-        if (ref.current) {
-          ref.current.removeEventListener('scroll', handler);
-        }
-      };
-    }
+    ref.current.addEventListener('scroll', handler);
+    return () => ref.current?.removeEventListener('scroll', handler);
   }, [callbacks]);
 
   return {
@@ -79,17 +77,13 @@ export function useStabilizedCallback(
   deps: DependencyList
 ): (...args: any[]) => any {
   const { scroll, setScroll } = useScroll();
-  const last = useRef<number | undefined>(undefined);
+  const repaint = useRepaint();
 
   const _callback = useCallback((...args: any[]) => {
-    last.current = scroll.current as number;
+    const last = scroll.current as number;
     callback(...args);
-  }, deps);
-
-  useEffect(() => {
-    if (last.current !== undefined) {
-      setScroll(last.current);
-    }
+    repaint();
+    setScroll(last);
   }, deps);
 
   return _callback;

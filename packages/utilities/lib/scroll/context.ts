@@ -1,10 +1,10 @@
-import React, { createContext, RefObject } from 'react';
+import { createContext, RefObject, Dispatch, SetStateAction } from 'react';
 
 import { EventHandler } from '@lib/types';
 
 export type ScrollContextType = {
   scroll: RefObject<number>;
-  setScroll: (position: number) => void;
+  setScroll: Dispatch<SetStateAction<number>>;
   addScrollListener: (handler: EventHandler) => void;
   removeScrollListener: (handler: EventHandler) => void;
 };

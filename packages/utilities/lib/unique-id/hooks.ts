@@ -15,7 +15,7 @@ function UniqueIdGenerator(
   return () => `${prefix}.${keys.current[prefix]++}`;
 }
 
-export function useUniqueIdGenerator(): UniqueIdContextType {
+export function useUniqueIdContext(): UniqueIdContextType {
   const generators = useRef<Record<string, UniqueIdGeneratorType>>({});
   const keys = useRef<Record<string, number>>({});
 
@@ -24,6 +24,7 @@ export function useUniqueIdGenerator(): UniqueIdContextType {
       keys.current[prefix] = 0;
       generators.current[prefix] = UniqueIdGenerator(prefix, keys);
     }
+
     return generators.current[prefix];
   };
 }

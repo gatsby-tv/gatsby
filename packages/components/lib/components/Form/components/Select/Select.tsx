@@ -297,7 +297,6 @@ export function Select(props: SelectProps): ReactElement {
     (event: any) => {
       event.stopPropagation();
       onKeyDownHandler?.(event);
-      let index: number;
 
       switch (event.code) {
         case 'Enter':

@@ -1,5 +1,4 @@
 import { FC, SVGProps, SyntheticEvent } from 'react';
-import Color from 'color';
 export type { Placement } from '@popperjs/core';
 
 export interface EventHandler {

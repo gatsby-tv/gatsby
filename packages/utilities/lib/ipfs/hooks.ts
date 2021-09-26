@@ -176,10 +176,12 @@ export type IPFSStreamState = {
   levels: Record<number, number>;
 };
 
-export function useIPFSVideoStream(hash?: string): {
+export type IPFSStreamController = {
   stream: IPFSStreamState;
   setQuality: Dispatch<SetStateAction<number>>;
-} {
+};
+
+export function useIPFSVideoStream(hash?: string): IPFSStreamController {
   const ref = useRef<HTMLVideoElement>(null);
   const hls = useRef<HLS | null>(null);
   const [levels, setLevels] = useState<Record<number, number>>({});

@@ -76,6 +76,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           setClick((current) => (current ? void setEmit(current) : current)),
         300
       );
+
       return () => clearTimeout(id);
     }, [click]);
 

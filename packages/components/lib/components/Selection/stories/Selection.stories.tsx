@@ -13,7 +13,6 @@ export default {
 } as Meta;
 
 export const OneSection: Story<SelectionProps> = () => {
-  const items = ['one', 'two', 'three'];
   const [selection, select] = useState('one');
 
   return (
@@ -41,7 +40,6 @@ export const OneSection: Story<SelectionProps> = () => {
 };
 
 export const MultipleSections: Story<SelectionProps> = () => {
-  const items = ['one', 'two', 'three', 'four', 'five'];
   const [selection, select] = useState('one');
 
   return (
@@ -77,7 +75,6 @@ export const MultipleSections: Story<SelectionProps> = () => {
 };
 
 export const Row: Story<SelectionProps> = () => {
-  const items = ['one', 'two', 'three'];
   const [selection, select] = useState('one');
 
   return (

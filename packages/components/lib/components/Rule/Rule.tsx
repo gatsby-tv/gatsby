@@ -22,15 +22,13 @@ export function Rule(props: RuleProps): ReactElement {
     styles[`Spacing-${spacing}`]
   );
 
-  if (children) {
-    return (
-      <div className={styles.Split}>
-        <hr className={classes} />
-        <span>{children}</span>
-        <hr className={classes} />
-      </div>
-    );
-  } else {
-    return <hr className={classes} />;
-  }
+  return children ? (
+    <div className={styles.Split}>
+      <hr className={classes} />
+      <span>{children}</span>
+      <hr className={classes} />
+    </div>
+  ) : (
+    <hr className={classes} />
+  );
 }

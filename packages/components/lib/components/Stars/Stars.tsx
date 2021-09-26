@@ -1,7 +1,6 @@
 import {
   useState,
   useEffect,
-  useReducer,
   useCallback,
   ReactElement,
 } from 'react';
@@ -150,15 +149,14 @@ Astroid.render = (
 export interface StarsProps {
   density?: number;
   background?: boolean;
-  foreground?: boolean;
 }
 
 export function Stars(props: StarsProps): ReactElement {
-  const { density = 100, background, foreground } = props;
+  const { density = 100, background } = props;
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [frame, setFrame] = useVolatileState();
-  const [astroids, setAstroids] = useState<AstroidType[]>([]);
+  const [, setAstroids] = useState<AstroidType[]>([]);
 
   const onResize = useCallback(
     ({ inlineSize: width, blockSize: height }) => {
@@ -232,14 +230,14 @@ export function Stars(props: StarsProps): ReactElement {
   return (
     <Optional
       component={Injection}
-      active={background || foreground}
-      $props={{ target: foreground ? '$foreground' : '$background' }}
+      active={background}
+      $props={{ target: '$background' }}
     >
       <div
         ref={setContainer}
         className={Class(
           styles.Stars,
-          (foreground || background) && styles.Fixed
+          background && styles.Fixed
         )}
       >
         <canvas ref={setCanvas} />

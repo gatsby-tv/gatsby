@@ -32,6 +32,7 @@ export function Labelled(props: LabelledProps): ReactElement {
     setDescriptions(
       Array.from(descNodes)
         .map((element) => element.id)
+        .filter(Boolean)
         .join(' ') || undefined
     );
   }, []);

@@ -70,14 +70,14 @@ export function useSnackBarContext(): SnackBarContextType {
   }, [config]);
 
   useEffect(() => {
-    if (!active) {
-      const id = setTimeout(() => dispatch({ type: 'clear' }), 300);
-      return () => clearTimeout(id);
-    }
+    if (active) return;
+    const id = setTimeout(() => dispatch({ type: 'clear' }), 300);
+    return () => clearTimeout(id);
   }, [active]);
 
   useEffect(() => {
     if (!config) return;
+
     const current = (config as SnackBarRawConfig).content
       ? (config as SnackBarRawConfig)
       : { content: config };
@@ -98,6 +98,7 @@ export function useSnackBarContext(): SnackBarContextType {
 
   useEffect(() => {
     if (!config) return;
+
     const { content, duration } = (config as SnackBarRawConfig).content
       ? (config as SnackBarRawConfig)
       : { content: config, duration: undefined };

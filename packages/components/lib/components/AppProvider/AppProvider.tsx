@@ -1,7 +1,7 @@
 import { DependencyList, ReactNode, ReactElement } from 'react';
 import {
   UniqueIdContext,
-  useUniqueIdGenerator,
+  useUniqueIdContext,
   FullscreenContext,
   useFullscreenContext,
   SnackBarContext,
@@ -27,7 +27,7 @@ export interface AppProviderProps {
 export function AppProvider(props: AppProviderProps): ReactElement {
   const { children, deps = [] } = props;
   const supportsContext = useSupportsContext();
-  const uniqueIdGenerator = useUniqueIdGenerator();
+  const uniqueIdContext = useUniqueIdContext();
   const fullscreenContext = useFullscreenContext();
   const snackBarContext = useSnackBarContext();
   const injectionContext = useInjectionContext();
@@ -38,7 +38,7 @@ export function AppProvider(props: AppProviderProps): ReactElement {
       <SnackBarContext.Provider value={snackBarContext}>
         <FullscreenContext.Provider value={fullscreenContext}>
           <ModalContext.Provider value={modalContext}>
-            <UniqueIdContext.Provider value={uniqueIdGenerator}>
+            <UniqueIdContext.Provider value={uniqueIdContext}>
               <InjectionContext.Provider value={injectionContext}>
                 <SnackBar />
                 <Injection.Target id="$background" />

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { useSnackBar } from '@gatsby-tv/utilities';
 
@@ -12,8 +12,8 @@ export default {
   component: SnackBar,
 } as Meta;
 
-export const Message: Story = (props) => {
-  const [snack, setSnack] = useSnackBar();
+export const Message: Story = () => {
+  const [, setSnack] = useSnackBar();
   const [clicks, setClicks] = useState(1);
 
   return (
@@ -24,7 +24,7 @@ export const Message: Story = (props) => {
         setSnack(
           <div className={styles.Snack}>
             {`${clicks} Clicks!`}
-            <Button animate onClick={() => setSnack()}>
+            <Button animate onClick={() => setSnack(undefined)}>
               Dismiss
             </Button>
           </div>
@@ -36,8 +36,8 @@ export const Message: Story = (props) => {
   );
 };
 
-export const Toast: Story = (props) => {
-  const [snack, setSnack] = useSnackBar();
+export const Toast: Story = () => {
+  const [, setSnack] = useSnackBar();
   const [clicks, setClicks] = useState(1);
 
   return (

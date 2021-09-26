@@ -81,7 +81,7 @@ export function Field(props: FieldProps): ReactElement {
 
   const input = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
   const { setValue, errors, setError } = useForm();
-  const [cancel, setCancel] = useState<(() => void) | undefined>(undefined);
+  const [, setCancel] = useState<(() => void) | undefined>(undefined);
   const [focus, setFocus] = useState(Boolean(props.autoFocus));
   const [invalid, setInvalid] = useFormLabel(Boolean(errors[id]));
   const [loading, setLoading] = useState(false);

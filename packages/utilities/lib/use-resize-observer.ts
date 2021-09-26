@@ -3,6 +3,7 @@
 import { RefObject } from 'react';
 
 import { useIsomorphicLayoutEffect } from '@lib/use-isomorphic-layout-effect';
+import { useRepaint } from '@lib/use-repaint';
 
 export interface ResizeCallback {
   (content: ResizeObserverSize): void;
@@ -13,6 +14,9 @@ export function useResizeObserver<T extends HTMLElement = HTMLElement>(
   callback: ResizeCallback
 ): void {
   const element = ref instanceof HTMLElement ? ref : ref?.current;
+  const repaint = useRepaint();
+
+  useIsomorphicLayoutEffect(repaint, [element]);
 
   useIsomorphicLayoutEffect(() => {
     if (!element) return;

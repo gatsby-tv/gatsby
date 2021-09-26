@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactElement } from 'react';
+import { useState, ReactElement } from 'react';
 import DOMPurify from 'dompurify';
 import {
   Button,
@@ -26,7 +26,7 @@ export interface DescriptionProps {
   content?: Browsable;
 }
 
-export function Description(props: DescriptionProps): ReactElement | null {
+export function Description(props: DescriptionProps): ReactElement {
   const { target, content } = props;
   const isMobile = useMobileDetector();
   const mounted = useComponentWillMount();

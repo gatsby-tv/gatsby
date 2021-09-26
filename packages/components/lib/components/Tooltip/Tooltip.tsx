@@ -25,8 +25,10 @@ export function Tooltip(props: TooltipProps): ReactElement | null {
     placement,
     elevation,
   } = props;
+
   const [active, setActive] = useState(false);
   const [popper, setPopper] = useState<HTMLDivElement | null>(null);
+
   const { styles: style, attributes } = usePopper(target.current, popper, {
     placement: placement ?? 'bottom',
     modifiers: [
@@ -53,6 +55,7 @@ export function Tooltip(props: TooltipProps): ReactElement | null {
     const onPointerLeave = () => setActive(false);
     target.current?.addEventListener('pointerenter', onPointerEnter);
     target.current?.addEventListener('pointerleave', onPointerLeave);
+
     return () => {
       target.current?.removeEventListener('pointerenter', onPointerEnter);
       target.current?.removeEventListener('pointerleave', onPointerLeave);

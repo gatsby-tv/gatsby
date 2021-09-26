@@ -12,7 +12,7 @@ import { StagingContext } from '@lib/utilities';
 import { Stage, StageProps } from './components/Stage';
 import styles from './Staging.scss';
 
-export type { Stage as StagingStageProps };
+export type { StageProps as StagingStageProps };
 
 export interface StagingProps {
   children?: ReactNode;

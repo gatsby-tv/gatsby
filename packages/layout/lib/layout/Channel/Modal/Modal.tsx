@@ -47,16 +47,16 @@ export function Modal(props: ModalProps): ReactElement | null {
   const [tab, setTab] = useState('videos');
 
   useEffect(() => {
-    if (!active) {
-      setTab('videos');
-    }
+    if (active) return;
+    setTab('videos');
   }, [active]);
 
   const onScroll = useCallback(
-    (event: any) => {
+    () => {
       if (scrolling !== undefined) {
         clearTimeout(scrolling);
       }
+
       const id = setTimeout(setScrolling, 150);
       setScrolling(id);
     },
@@ -117,7 +117,6 @@ export function Modal(props: ModalProps): ReactElement | null {
 
   return (
     <Container
-      id="channel"
       className={isMobile ? styles.Panel : styles.Modal}
       overlay
       draggable={Exists(isMobile, !scrolling)}

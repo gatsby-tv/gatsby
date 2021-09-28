@@ -37,7 +37,7 @@ The list of validators for the input field.
 
 A validator is a function with type `(value: string, id: string) =>
 FormErrorState` where `FormErrorState` is either a `FormError`, `undefined`, or a
-promise that results in either a `FormError` or `undefined`.
+promise that resolves to either a `FormError` or `undefined`.
 
 If a validator returns an instance of `FormError`, the form will be invalidated
 and will prevent the user from submitting the form's current values. In
@@ -47,11 +47,11 @@ stored in the `FormError` instance will be displayed to the user.
 If a validator returns a promise, it is considered an *asynchronous* form
 validator where validation requires some potentially lengthy network request. If
 there is currently an error from a synchronous validator, the synchronous error
-will take precedent. Otherwise, the form will be in an "invalid" state and
-prevent submissions (though, `Label` will not display an error until it the
-error is concrete). In addition, while the promise waits to be resolved, a
-loading icon will be shown in the input area to indicate that work is being done
-to validate the input.
+will take precedent; otherwise, the form will be in an "invalid" state and
+prevent submissions (though, `Label` will not display an error until the error
+is concrete). In addition, while the promise waits to be resolved, a loading
+icon will be shown in the input area to indicate that work is being done to
+validate the input.
 
 ### `onChange`
 > `FormChangeHandler` (optional)

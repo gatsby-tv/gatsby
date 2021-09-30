@@ -77,8 +77,11 @@
 .Icon.Animation {
   &:before {
     @include border-radius(full);
+    content: "";
+    display: block;
     aspect-ratio: 1 / 1;
     height: 100%;
+    width: fit-content;
     margin: 0 auto;
   }
 }

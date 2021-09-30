@@ -20,8 +20,12 @@ import { ScrollContext, ScrollContextType } from './context';
 export function useScrollContext<T extends HTMLElement>(
   ref: RefObject<T>
 ): ScrollContextType {
-  const scroll = useRef<number>(0);
+  const scroll = useRef(0);
   const [callbacks, setCallbacks] = useState<EventHandler[]>([]);
+
+  const [active, setActive] = useState<
+    ReturnType<typeof setTimeout> | undefined
+  >(undefined);
 
   const addScrollListener = useCallback(
     (callback: EventHandler) =>
@@ -48,6 +52,11 @@ export function useScrollContext<T extends HTMLElement>(
     function handler(event: any) {
       callbacks.forEach((callback) => callback(event));
       scroll.current = event.target.scrollTop;
+
+      setActive((current) => {
+        if (current !== undefined) clearTimeout(current);
+        return setTimeout(() => setActive(undefined), 150);
+      });
     }
 
     ref.current.addEventListener('scroll', handler);
@@ -55,6 +64,7 @@ export function useScrollContext<T extends HTMLElement>(
   }, [callbacks]);
 
   return {
+    active: active !== undefined,
     scroll,
     setScroll,
     addScrollListener,
@@ -70,6 +80,10 @@ export function useScroll(): ScrollContextType {
   }
 
   return context;
+}
+
+export function useOptionalScroll(): ScrollContextType | undefined {
+  return useContext(ScrollContext);
 }
 
 export function useStabilizedCallback(

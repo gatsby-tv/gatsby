@@ -1,4 +1,3 @@
-@use 'sass:color';
 @use 'styles' as *;
 
 .Modal {
@@ -22,74 +21,6 @@
   background-color: palette(surface, 5);
 
   @include hover {
-    background-color: palette(surface, 6);
+    background-color: palette(surface, 7);
   }
-}
-
-.Overlay {
-  @include expand(absolute);
-  background-image: linear-gradient(
-    to top,
-    #{palette(surface, 3)},
-    transparent 50%
-  );
-}
-
-.Header {
-  position: absolute;
-  bottom: spacing(1.5);
-  left: spacing(1);
-  display: flex;
-  align-items: center;
-  gap: spacing(1.5);
-}
-
-.Avatar {
-  flex-shrink: 0;
-}
-
-.HeaderTextArea {
-  display: flex;
-  flex-direction: column;
-}
-
-.HeaderTitle {
-  @include text-clamp(1);
-}
-
-.HeaderInfo {
-  @include text-subdued;
-  @include font-size(body-large);
-  @include font-weight(bold);
-}
-
-.Content {
-  margin: 0 spacing(1);
-}
-
-@include screen(650px) {
-  .Header {
-    bottom: spacing(3);
-    left: spacing(3);
-  }
-
-  .HeaderInfo {
-    @include font-size(display-small);
-  }
-
-  .Content {
-    margin: 0 spacing(3);
-  }
-}
-
-.Tabs {
-  @include font-size(display-small);
-  position: sticky;
-  height: spacing(3);
-}
-
-.Rule {
-  background-color: palette(surface, 6);
-  margin: rem(-2px) 0 spacing(1.5);
-  z-index: -1;
 }

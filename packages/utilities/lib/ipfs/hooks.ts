@@ -28,7 +28,7 @@ const IPFS_DEFAULT_CONFIG = {
   repo: `/ipfs/gatsby`,
 };
 
-export function useIPFSNode(bootstrap: string[] = []): IPFSContextType {
+export function useIPFSContext(bootstrap: string[] = []): IPFSContextType {
   const context = useContext(IPFSContext);
 
   if (context) {

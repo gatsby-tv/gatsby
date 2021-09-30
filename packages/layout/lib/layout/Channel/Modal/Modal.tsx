@@ -1,34 +1,17 @@
-import { useState, useEffect, useCallback, FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import {
-  Avatar,
   Button,
-  Scroll,
-  Image,
   Modal as ModalComponent,
   Panel as PanelComponent,
-  Optional,
-  Rule,
-  Tabs,
-  TextDisplay,
-  TextMeta,
 } from '@gatsby-tv/components';
 import { Cancel } from '@gatsby-tv/icons';
-import {
-  Exists,
-  ChannelHandle,
-  FullValue,
-  useFrame,
-  useComponentWillMount,
-  useMobileDetector,
-} from '@gatsby-tv/utilities';
+import { useMobileDetector } from '@gatsby-tv/utilities';
 import { Channel } from '@gatsby-tv/types';
 
-import { Videos } from '@lib/layout/Channel/Videos';
-import { Playlists } from '@lib/layout/Channel/Playlists';
-import { Shows } from '@lib/layout/Channel/Shows';
 import { LinkProps } from '@lib/types';
 
-import { Skeleton } from './Modal.skeleton';
+import { Content } from './components/Content';
+
 import styles from './Modal.scss';
 
 export interface ModalProps {
@@ -38,88 +21,17 @@ export interface ModalProps {
   onExit?: () => void;
 }
 
-export function Modal(props: ModalProps): ReactElement | null {
-  const { channel, active, link: Link, onExit } = props;
+export function Modal(props: ModalProps): ReactElement {
+  const { channel, active, link, onExit } = props;
+
   const isMobile = useMobileDetector();
-  const mounted = useComponentWillMount();
-  const { screen } = useFrame();
-  const [scrolling, setScrolling] = useState<number | undefined>();
-  const [tab, setTab] = useState('videos');
-
-  useEffect(() => {
-    if (active) return;
-    setTab('videos');
-  }, [active]);
-
-  const onScroll = useCallback(
-    () => {
-      if (scrolling !== undefined) {
-        clearTimeout(scrolling);
-      }
-
-      const id = setTimeout(setScrolling, 150);
-      setScrolling(id);
-    },
-    [scrolling]
-  );
-
-  if (!mounted || !channel)
-    return (
-      <Skeleton
-        mobile={Boolean(isMobile)}
-        tab={tab}
-        setTab={setTab}
-        active={active}
-        onExit={onExit}
-        onScroll={onScroll}
-      />
-    );
 
   const Container = isMobile ? PanelComponent : ModalComponent;
-  const Listing =
-    tab === 'videos' ? Videos : tab === 'playlists' ? Playlists : Shows;
-
-  const OverlayMarkup = (
-    <div className={styles.Overlay}>
-      <div className={styles.Header}>
-        <Avatar
-          className={styles.Avatar}
-          src={channel.avatar}
-          size={
-            screen.width > 650
-              ? 'largest'
-              : screen.width > 400
-              ? 'larger'
-              : 'base'
-          }
-        />
-        <div className={styles.HeaderTextArea}>
-          <Optional
-            component={Link}
-            active={Boolean(Link)}
-            $props={{ channel }}
-          >
-            <TextDisplay.Link
-              className={styles.HeaderTitle}
-              size={screen.width > 650 ? 'medium' : 'small'}
-            >
-              {channel.name}
-            </TextDisplay.Link>
-          </Optional>
-          <TextMeta.List className={styles.HeaderInfo}>
-            <TextMeta>{ChannelHandle(channel.handle)}</TextMeta>
-            <TextMeta>{FullValue(channel.subscribers, 'subscriber')}</TextMeta>
-          </TextMeta.List>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <Container
       className={isMobile ? styles.Panel : styles.Modal}
       overlay
-      draggable={Exists(isMobile, !scrolling)}
       active={active}
       onExit={onExit}
     >
@@ -130,23 +42,7 @@ export function Modal(props: ModalProps): ReactElement | null {
         size="smaller"
         onClick={onExit}
       />
-      <Scroll smooth hide onScroll={onScroll}>
-        <Image src={channel.banner} aspectRatio="2 / 1" overlay={OverlayMarkup} />
-        <div className={styles.Content}>
-          <Tabs
-            className={styles.Tabs}
-            gap="loose"
-            selection={tab}
-            onSelect={setTab}
-          >
-            <Tabs.Item option="videos">Videos</Tabs.Item>
-            <Tabs.Item option="playlists">Playlists</Tabs.Item>
-            <Tabs.Item option="shows">Shows</Tabs.Item>
-          </Tabs>
-          <Rule className={styles.Rule} spacing="none" />
-          <Listing channel={channel} link={Link} />
-        </div>
-      </Scroll>
+      <Content active={active} channel={channel} link={link} />
     </Container>
   );
 }

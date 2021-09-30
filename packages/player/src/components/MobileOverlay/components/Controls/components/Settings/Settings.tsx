@@ -63,6 +63,7 @@ export function Settings(props: SettingsProps): ReactElement {
           className={Class(styles.Settings, fullscreen && styles.Fullscreen)}
           overlay={!fullscreen}
           direction="bottom"
+          draggable
           active={active}
           onExit={onExit}
           onTransitionEnd={onTransitionEnd}

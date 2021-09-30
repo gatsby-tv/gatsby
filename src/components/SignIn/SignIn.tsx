@@ -4,6 +4,7 @@ import {
   Form,
   Icon,
   Staging,
+  Panel,
   Modal,
   ModalProps,
   Rule,
@@ -12,12 +13,13 @@ import {
 } from '@gatsby-tv/components';
 import {
   GatsbyPlain,
-  Google,
+  // Google,
+  Cancel,
   Email,
   CheckmarkFill,
   CancelFill,
 } from '@gatsby-tv/icons';
-import { Class, Validators } from '@gatsby-tv/utilities';
+import { Class, Validators, useMobileDetector } from '@gatsby-tv/utilities';
 import { PostAuthSignInResponse } from '@gatsby-tv/types';
 
 import { fetcher } from '@src/utilities/fetcher';
@@ -31,6 +33,9 @@ export function SignIn(props: SignInProps): ReactElement {
   const [stage, setStage] = useState(0);
   const [valid, setValid] = useState(false);
   const [loading, setLoading] = useState(false);
+  const isMobile = useMobileDetector();
+
+  const Container = isMobile ? Panel : Modal;
 
   const onSubmit = useCallback((form: Record<string, unknown>) => {
     setLoading(true);
@@ -74,49 +79,60 @@ export function SignIn(props: SignInProps): ReactElement {
   );
 
   return (
-    <Modal className={styles.Modal} overlay {...props}>
+    <Container
+      className={isMobile ? styles.Panel : styles.Modal}
+      overlay
+      {...props}
+    >
+      <Button
+        className={styles.Cancel}
+        animate
+        icon={Cancel}
+        size="smaller"
+        onClick={props.onExit}
+      />
       <Staging stage={stage}>
-        <Staging.Stage index={0}>
-          <div className={styles.Title}>
-            <Icon src={GatsbyPlain} size="largest" />
-            <TextDisplay size="small">Sign In to Gatsby</TextDisplay>
-          </div>
-          <Rule className={styles.Rule} spacing="loose" />
-          <div className={styles.Options}>
-            <Button className={styles.Option}>
-              <Icon src={Google} />
-              Sign In with Google
-            </Button>
-          </div>
-          <Rule className={styles.Rule} spacing="loose">
-            Or
-          </Rule>
-          <Form id="sign-in" onSubmit={onSubmit}>
-            <Form.Field
-              id="email"
-              type="email"
-              value={email}
-              className={styles.Email}
-              placeholder="Email"
-              prefix={<Icon src={Email} size="smaller" />}
-              validators={[Validators.isEmail('Invalid email')]}
-              onChange={setEmail}
-              autoComplete
-            />
-            <Button
-              type="submit"
-              className={styles.Submit}
-              waiting={loading}
-              disabled={!email}
-            >
-              Sign In
-            </Button>
-          </Form>
+        <Staging.Stage className={styles.Center} index={0}>
+            <div className={styles.Title}>
+              <Icon src={GatsbyPlain} size="largest" />
+              <TextDisplay size="small">Sign In to Gatsby</TextDisplay>
+            </div>
+            <Rule className={styles.Rule} spacing="loose" />
+            {/* <div className={styles.Options}> */}
+            {/*   <Button className={styles.Option}> */}
+            {/*     <Icon src={Google} /> */}
+            {/*     Sign In with Google */}
+            {/*   </Button> */}
+            {/* </div> */}
+            {/* <Rule className={styles.Rule} spacing="loose"> */}
+            {/*   Or */}
+            {/* </Rule> */}
+            <Form id="sign-in" onSubmit={onSubmit}>
+              <Form.Field
+                id="email"
+                type="email"
+                value={email}
+                className={styles.Email}
+                placeholder="Email"
+                prefix={<Icon src={Email} size="smaller" />}
+                validators={[Validators.isEmail('Invalid email')]}
+                onChange={setEmail}
+                autoComplete
+              />
+              <Button
+                type="submit"
+                className={styles.Submit}
+                waiting={loading}
+                disabled={!email}
+              >
+                Sign In
+              </Button>
+            </Form>
         </Staging.Stage>
         <Staging.Stage className={styles.Confirmation} index={1}>
           {ConfirmationMarkup}
         </Staging.Stage>
       </Staging>
-    </Modal>
+    </Container>
   );
 }

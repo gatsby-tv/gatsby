@@ -1,4 +1,4 @@
-import { useRef, useState, ReactNode, ReactElement } from 'react';
+import { useRef, useState, useCallback, ReactNode, ReactElement } from 'react';
 import {
   Class,
   Exists,
@@ -21,6 +21,7 @@ export interface ScrollProps {
 
 export function Scroll(props: ScrollProps): ReactElement {
   const { children, className, smooth, hide, floating, onScroll } = props;
+
   const [height, setHeight] = useState<number | undefined>(undefined);
   const scroll = useRef<HTMLDivElement>(null);
   const parent = useParentRef<HTMLDivElement>(scroll);

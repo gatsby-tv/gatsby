@@ -1,10 +1,9 @@
-import { useState, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
 import { AppProvider } from '@gatsby-tv/components';
-import { useIPFSNode, IPFSContext } from '@gatsby-tv/utilities';
-import { Channel } from '@gatsby-tv/types';
+import { useIPFSContext, IPFSContext } from '@gatsby-tv/utilities';
 import '@gatsby-tv/components/dist/styles.css';
 import '@gatsby-tv/components/dist/fonts.css';
 import '@gatsby-tv/player/dist/styles.css';
@@ -15,15 +14,18 @@ import 'react-image-crop/dist/ReactCrop.css';
 import { App } from '@src/layout/App';
 import { fetcher } from '@src/utilities/fetcher';
 import { useSessionContext, SessionContext } from '@src/services/session';
-import { ChannelModalContext } from '@src/utilities/channel-modal';
+import {
+  useChannelModalContext,
+  ChannelModalContext,
+} from '@src/utilities/channel-modal';
 
 export default function AppPage({
   Component,
   pageProps,
 }: AppProps): ReactElement {
-  const channel = useState<Channel | undefined>(undefined);
-  const session = useSessionContext();
-  const node = useIPFSNode(
+  const channelContext = useChannelModalContext();
+  const sessionContext = useSessionContext();
+  const nodeContext = useIPFSContext(
     process.env.NEXT_PUBLIC_BOOTSTRAP_NODES?.split(',').filter(Boolean)
   );
 
@@ -43,9 +45,9 @@ export default function AppPage({
             fetcher(url, ...args).then((resp) => resp.json()),
         }}
       >
-        <IPFSContext.Provider value={node}>
-          <ChannelModalContext.Provider value={channel}>
-            <SessionContext.Provider value={session}>
+        <IPFSContext.Provider value={nodeContext}>
+          <ChannelModalContext.Provider value={channelContext}>
+            <SessionContext.Provider value={sessionContext}>
               {HeaderMarkup}
               <App page={Component} $props={pageProps} />
             </SessionContext.Provider>

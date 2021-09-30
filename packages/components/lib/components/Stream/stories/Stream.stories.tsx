@@ -19,15 +19,15 @@ export const Example: Story<StreamProps> = () => {
   const generator = useCallback(() => setLoading(true), []);
 
   useEffect(() => {
-    const load = async () => {
+    if (!loading) return;
+
+    async function load() {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       setData((data) => [...data, { src: 'https://loremflickr.com/405/405' }]);
       setLoading(false);
     };
 
-    if (loading) {
-      load();
-    }
+    load();
   }, [loading]);
 
   return (

@@ -15,8 +15,6 @@ import { EventListener } from '@lib/components/EventListener';
 
 import styles from './Panel.scss';
 
-type Touch = { clientX: number; clientY: number };
-
 interface TouchState {
   active: boolean;
   position: number;
@@ -32,7 +30,7 @@ type TouchAction =
 
 function getOffset(
   ref: HTMLDivElement | null,
-  touch: Touch,
+  touch: PointerEvent,
   direction: string
 ): number {
   switch (direction) {
@@ -59,6 +57,7 @@ getOffset.value = (
 ) => {
   const { [direction]: x, [dimension]: y } =
     ref?.getBoundingClientRect() as any;
+
   return Math.min(Math.max((base - x) / y, 0), 1);
 };
 
@@ -79,7 +78,7 @@ export function Panel(props: PanelProps): ReactElement | null {
     children,
     className,
     direction = 'right',
-    draggable = true,
+    draggable,
     overlay,
     active,
     zIndex,
@@ -184,42 +183,42 @@ export function Panel(props: PanelProps): ReactElement | null {
     onExit?.();
   }, []);
 
-  const onTouchStart = useCallback(
+  const onPointerDown = useCallback(
     (event: any) => {
       if (!ref || !draggable) return;
+
       setTouch({
         type: 'start',
-        offset: getOffset(ref, event.touches[0] as Touch, direction),
+        offset: getOffset(ref, event, direction),
         time: event.timeStamp,
       });
     },
     [ref, direction, draggable]
   );
 
-  const onTouchMove = useCallback(
+  const onPointerMove = useCallback(
     (event: any) => {
       if (!ref || !draggable) return;
+
       setTouch({
         type: 'move',
-        position: getOffset(ref, event.touches[0] as Touch, direction),
+        position: getOffset(ref, event, direction),
         time: event.timeStamp,
       });
     },
     [ref, direction, draggable]
   );
 
-  const onTouchEnd = useCallback(
-    () => {
-      setTouch({ type: 'end' });
-      if (
-        touch.position > 0.5 ||
-        (touch.position > 0.15 && touch.velocity > 0.015)
-      ) {
-        onExit?.();
-      }
-    },
-    [touch]
-  );
+  const onPointerUp = useCallback(() => {
+    setTouch({ type: 'end' });
+
+    if (
+      touch.position > 0.5 ||
+      (touch.position > 0.15 && touch.velocity > 0.015)
+    ) {
+      onExit?.();
+    }
+  }, [touch]);
 
   const classes = Class(
     className,
@@ -248,16 +247,17 @@ export function Panel(props: PanelProps): ReactElement | null {
         className={Class(
           styles.Panel,
           overlay ? styles.Fixed : styles.Absolute,
-          visible && styles.Tinted,
+          visible && styles.Tinted
         )}
       >
         <div
           ref={slider}
           style={transform}
           className={classes}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
           onTransitionEnd={onTransitionEnd}
         >
           {children}

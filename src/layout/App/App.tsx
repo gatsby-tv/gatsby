@@ -7,7 +7,7 @@ import { Spinner } from '@gatsby-tv/icons';
 
 import { Link } from '@src/components/Link';
 import { useSession } from '@src/services/session';
-import { useChannelModal } from '@src/utilities/channel-modal';
+import { useChannelModalState } from '@src/utilities/channel-modal';
 
 import { PreAlpha } from './components/PreAlpha';
 import { Topbar } from './components/Topbar';
@@ -23,10 +23,12 @@ export function App<T>(props: AppProps<T>): ReactElement {
   const { page: Page, $props } = props;
   const router = useRouter();
   const { session } = useSession();
-  const [channel, setChannel] = useChannelModal();
+  const { active, channel, setChannel } = useChannelModalState();
   const [spinner, setSpinner] = useState(false);
   const loading = !session.valid && session.loading;
   const isTransient = /^\/\$/.test(router.pathname);
+
+  useEffect(() => void setChannel(undefined), [Page]);
 
   useEffect(() => {
     if (!loading) return void setSpinner(false);
@@ -49,8 +51,8 @@ export function App<T>(props: AppProps<T>): ReactElement {
     <Frame topbar={TopbarMarkup}>
       <PreAlpha />
       <Channel.Modal
+        active={active}
         channel={channel}
-        active={Boolean(channel)}
         link={Link.Channel}
         onExit={() => setChannel(undefined)}
       />

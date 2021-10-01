@@ -31,11 +31,11 @@ If you are creating a branch on the main repository, then we require that the
 branch follow the naming convention: `type/#issue/description-in-kebab-case`.
 
 Commits should be squashed in PRs before merging, using the commit message
-format: `type: description (#issue)`.
+format: `type: description (#pr)`.
 
 Where, in both cases, `type` can be one of `bugfix`, `cleanup`, `feature`,
 `refactor`, and `chore`. Likewise, the `#issue` refers to the issue number the
-commit/branch refers to.
+commit/branch refers to and `#pr` is the pull request number.
 
 Make sure to also provide multiline commit messages describing any changes
 auxiliary to the issue being addressed, as well as notes on any nontrivial

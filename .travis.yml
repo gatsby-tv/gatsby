@@ -1,0 +1,36 @@
+language: node_js
+node_js: 12.18.3
+services: docker
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - echo | sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - sudo apt-get install python3.9
+  - sudo ln -sf /usr/bin/python3.9 /usr/bin/python3
+
+stages:
+  - build
+  - publish
+
+branches:
+  only:
+    - main
+
+jobs:
+  include:
+    # Check prettier linting and build typescript
+    - stage: build
+      script:
+        - yarn run build
+    # Build and publish docker tags
+    - stage: publish
+      if: branch == main AND (NOT (type IN (pull_request)))
+      before_script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+      script:
+        # Build dockerfile
+        - make build
+        # Push tags
+        - make push

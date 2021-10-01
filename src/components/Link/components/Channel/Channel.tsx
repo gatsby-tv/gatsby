@@ -7,13 +7,13 @@ import { Content } from '../Content';
 export type ChannelProps = LinkProps;
 
 export function Channel(props: ChannelProps): ReactElement {
-  if (isChannelLink(props)) {
-    return (
-      <NextLink href={`/${props.channel.handle}`} passHref>
-        {props.children}
-      </NextLink>
-    );
-  } else {
-    return <Content {...props} />;
-  }
+  return <Content {...props} />
+
+  // return isChannelLink(props) ? (
+  //   <NextLink href={`/${props.channel.handle}`} passHref>
+  //     {props.children}
+  //   </NextLink>
+  // ) : (
+  //   <Content {...props} />
+  // );
 }

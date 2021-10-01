@@ -17,7 +17,6 @@ import {
   PlayerContext,
   PlayerContextType,
   VideoState,
-  PlayerState,
 } from './context';
 
 export type VideoAction =
@@ -78,7 +77,6 @@ export function usePlayerContext(
   const ref = useRef<HTMLElement>(null);
   const active = useRef(false);
   const pinned = useRef(false);
-  const suspended = useRef(true);
   const playing = useRef(false);
   const ended = useRef(false);
   const [loading, setLoading] = useState(false);

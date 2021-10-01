@@ -16,8 +16,8 @@ import {
   useMobileDetector,
 } from '@gatsby-tv/utilities';
 
-import { DesktopOverlay } from '@src/components/DesktopOverlay';
-import { MobileOverlay } from '@src/components/MobileOverlay';
+import { Desktop } from '@src/components/Desktop';
+import { Mobile } from '@src/components/Mobile';
 import { TimelineContext, useTimelineContext } from '@src/utilities/timeline';
 import { PlayerContext, usePlayerContext } from '@src/utilities/player';
 import { SignalContext, useSignalContext } from '@src/utilities/signal';
@@ -104,9 +104,9 @@ export const Player = forwardRef<HTMLVideoElement, PlayerProps>(
     );
 
     const OverlayMarkup = !mounted ? null : isMobile ? (
-      <MobileOverlay />
+      <Mobile />
     ) : (
-      <DesktopOverlay />
+      <Desktop />
     );
 
     return (

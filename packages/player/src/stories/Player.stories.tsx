@@ -40,6 +40,6 @@ export const WideAspectRatio = Template.bind({});
 WideAspectRatio.args = {
   src: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Spring_-_Blender_Open_Movie.webm',
   poster: 'https://ipfs.io/ipfs/QmRm8aSK3ScRet1BwjLmNm8eEA4crGNhYUmpqZXkiRhbZY',
-  muted: false,
+  muted: true,
   autoPlay: true,
 };

@@ -17,9 +17,9 @@ import { useFullscreen } from '@src/utilities/fullscreen';
 import { Controls } from './components/Controls';
 import { Timeline } from './components/Timeline';
 
-import styles from './MobileOverlay.scss';
+import styles from './Mobile.scss';
 
-export function MobileOverlay(): ReactElement {
+export function Mobile(): ReactElement {
   const { player, setActive, setPlayback } = usePlayer();
   const timeline = useTimeline();
   const [signal] = useSignal();
@@ -30,7 +30,6 @@ export function MobileOverlay(): ReactElement {
   const paused = useRef(player.paused);
   const loading = useRef(player.loading);
   const blocked = useRef(player.blocked);
-  const started = useRef(false);
   const [disabled, setDisabled] = useState(false);
   const [controls, setControls] = useState(false);
   const [pinned, setPinned] = useState(false);
@@ -123,7 +122,10 @@ export function MobileOverlay(): ReactElement {
         <Controls overlay={overlay} active={controls} onClick={onPointerUp} />
       </Activatable>
       <Activatable
-        className={styles.Timeline}
+        className={Class(
+          styles.Timeline,
+          fullscreen && !active && styles.Inactive
+        )}
         active={!fullscreen || active}
         duration="fastest"
       >

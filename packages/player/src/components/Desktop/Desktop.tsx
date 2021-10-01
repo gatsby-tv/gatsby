@@ -11,9 +11,9 @@ import { useSignal } from '@src/utilities/signal';
 import { Controls } from './components/Controls';
 import { Timeline } from './components/Timeline';
 
-import styles from './DesktopOverlay.scss';
+import styles from './Desktop.scss';
 
-export function DesktopOverlay(): ReactElement {
+export function Desktop(): ReactElement {
   const { player, setActive, setPlayback } = usePlayer();
   const timeline = useTimeline();
   const [signal] = useSignal();

@@ -1,6 +1,11 @@
 @use 'styles' as *;
 
 .Markup {
+  h2 {
+    text-align: center;
+    margin-bottom: spacing(5);
+  }
+
   h3 {
     margin-top: spacing(5);
     margin-bottom: spacing(2);
@@ -10,12 +15,36 @@
     }
   }
 
-  p {
-    @include font-size(paragraph-large);
+  ul {
+    padding-left: spacing(2);
+  }
+
+  p, ul {
+    @include font-size(paragraph);
     margin-bottom: spacing(2);
 
     &:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  li {
+    margin-bottom: spacing(2);
+  }
+}
+
+@include screen(1100px) {
+  .Markup {
+    ul {
+      padding-left: spacing(5);
+    }
+
+    p, ul {
+      @include font-size(paragraph-large);
+    }
+
+    li {
+      margin-bottom: spacing(1);
     }
   }
 }

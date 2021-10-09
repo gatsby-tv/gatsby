@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="540"
+   height="540"
+   fill="currentColor"
+   class="bi bi-discord"
+   viewBox="0 0 540 540"
+   version="1.1"
+   id="gz-discord"
+   sodipodi:docname="discord.svg"
+   role="img"
+   focusable="false"
+   aria-hidden="true"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs889" />
+  <sodipodi:namedview
+     id="namedview887"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     width="540px"
+     inkscape:snap-page="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:bbox-nodes="true"
+     inkscape:zoom="1.0980167"
+     inkscape:cx="323.76557"
+     inkscape:cy="275.49673"
+     inkscape:window-width="1920"
+     inkscape:window-height="1064"
+     inkscape:window-x="0"
+     inkscape:window-y="16"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="gz-discord" />
+  <path
+     d="m 220.72499,226.53 c -15.38998,0 -27.53998,13.50001 -27.53998,29.97 0,16.47 12.41999,29.97001 27.53998,29.97001 15.39002,0 27.54001,-13.50001 27.54001,-29.97001 0.27002,-16.46999 -12.15,-29.97 -27.54001,-29.97 z m 98.55,0 c -15.38998,0 -27.54,13.50001 -27.54,29.97 0,16.47 12.42001,29.97001 27.54,29.97001 15.39,0 27.54,-13.50001 27.54,-29.97001 0,-16.46999 -12.14999,-29.97 -27.54,-29.97 z"
+     id="eyes"
+     style="fill: currentcolor" />
+  <path
+     d="M 450.90001,0 H 89.099995 c -30.51,0 -55.35,24.84 -55.35,55.62 v 365.04 c 0,30.78001 24.84,55.62001 55.35,55.62001 H 395.28001 l -14.31,-49.95001 34.55998,32.13 32.67002,30.24001 L 506.25,540 V 55.62 C 506.25,24.84 481.41,0 450.90001,0 Z M 346.68,352.62 c 0,0 -9.72001,-11.61001 -17.82,-21.87 35.37,-9.98999 48.87,-32.12999 48.87,-32.12999 -11.07,7.28998 -21.60001,12.41999 -31.05,15.92999 -13.5,5.66999 -26.45999,9.45 -39.15002,11.61 a 189.135,189.135 0 0 1 -69.92999,-0.27 226.66501,226.66501 0 0 1 -39.69,-11.61001 158.22,158.22 0 0 1 -19.71,-9.17999 c -0.81,-0.53999 -1.62,-0.81 -2.43,-1.35 -0.54,-0.26999 -0.81,-0.54 -1.08,-0.81 -4.85999,-2.7 -7.56,-4.59 -7.56,-4.59 0,0 12.96,21.60002 47.25,31.86001 -8.1,10.26 -18.09,22.40999 -18.09,22.40999 -59.67,-1.89 -82.35,-41.04 -82.35,-41.04 0,-86.94 38.88,-157.41 38.88,-157.41 38.88,-29.16 75.86999,-28.35 75.86999,-28.35 l 2.70002,3.24001 C 182.78999,143.1 160.37999,164.43 160.37999,164.43 c 0,0 5.94,-3.24 15.93001,-7.83 28.88999,-12.69 51.84,-16.2 61.28999,-17.01 1.62,-0.27 2.97,-0.54 4.58999,-0.54 A 220.08375,220.08375 0 0 1 378,164.43 c 0,0 -21.33002,-20.25 -67.22999,-34.29 l 3.77999,-4.32 c 0,0 36.99,-0.81 75.87,28.35 0,0 38.88,70.47 38.88,157.41 0,0 -22.95001,39.15 -82.62,41.04 z"
+     id="bubble"
+     style="fill:currentcolor" />
+</svg>

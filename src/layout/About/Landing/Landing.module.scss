@@ -1,4 +1,5 @@
 @use 'styles' as *;
+@use 'sass:color';
 
 .Landing {
   display: flex;
@@ -33,6 +34,39 @@
   font-size: rem(50px);
 }
 
+.CallsToAction {
+  display: flex;
+  flex-direction: row;
+  gap: spacing(1.5);
+  margin-top: spacing(4);
+}
+
+.Link {
+  @include text-heading;
+  @include font-size(paragraph);
+  @include border-radius(small);
+  display: flex;
+  flex-direction: row;
+  gap: spacing(1);
+  padding: spacing(1) spacing(1.5);
+}
+
+.GitHub {
+  background-color: palette(surface, 5);
+
+  @include hover {
+    background-color: palette(surface, 6);
+  }
+}
+
+.Discord {
+  background-color: #7289da;
+
+  @include hover {
+    background-color: color.adjust(#7289da, $lightness: 5%);
+  }
+}
+
 @include screen(850px) {
   .Landing {
     h1 {
@@ -44,6 +78,15 @@
       @include font-size(display-medium);
       margin-top: spacing(2);
     }
+  }
+
+  .CallsToAction {
+    gap: spacing(3);
+  }
+
+  .Link {
+    @include font-size(paragraph-large);
+    padding: spacing(1.5) spacing(2);
   }
 
   .Icon {

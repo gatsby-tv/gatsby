@@ -46,13 +46,9 @@ export function useIPFSContext(bootstrap: string[] = []): IPFSContextType {
       try {
         if (ipfsRef.current) return;
         const ipfs = await IPFS.create(IPFS_DEFAULT_CONFIG);
-
-        for (const addr of bootstrap) {
-          await ipfs.bootstrap.add(addr);
-        }
-
-        const info = await ipfs.id();
-        console.log(`IPFS node ready at /p2p/${info.id}`);
+        bootstrap.forEach((addr) => ipfs.swarm.connect(addr));
+        const { id } = await ipfs.id();
+        console.log(`IPFS node ready at /p2p/${id}`);
         setIPFS(ipfs);
       } catch (error) {
         console.error(error);

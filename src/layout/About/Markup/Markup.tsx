@@ -48,7 +48,7 @@ export function Markup(): ReactElement {
         </li>
         <li>
           First-class support for sponsorships. We someday hope to make
-          fulfilling sponsorships trivial for creators of all sizes.
+          fulfilling sponsorships trivial for channels of all sizes.
         </li>
       </ul>
 
@@ -62,9 +62,9 @@ export function Markup(): ReactElement {
         Peer-to-peer file distribution is a method for storing and sharing files
         in a way that doesn't depend on any centralized source. Files are
         instead broken up into small pieces and traded amongst all of the
-        computers using the same protocol. IPFS is one such protocol and enables
-        us as a platform to eliminate the convential barriers to entry to video
-        sharing.
+        computers using the same protocol. IPFS is one such protocol and it
+        enables us as a platform to eliminate the convential barriers to entry
+        to video sharing.
       </p>
 
       <h3>Current state of the project</h3>
@@ -76,7 +76,7 @@ export function Markup(): ReactElement {
       </p>
 
       <p>
-        Our primary goal from here is to work on the creator studio, the studio
+        Our primary goal from here is to work on the creator studio. The studio
         is planned to not only be a tool for hosting videos on Gatsby, but to
         also be a hub for sharing footage and assets with collaborators using
         IPFS.

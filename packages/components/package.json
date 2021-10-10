@@ -1,7 +1,7 @@
 {
   "name": "@gatsby-tv/components",
   "description": "Gatsby shared React components for web/mobile/desktop clients.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "files": [
     "dist"
   ],

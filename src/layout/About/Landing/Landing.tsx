@@ -28,11 +28,14 @@ export function Landing(): ReactElement {
           className={Class(styles.Link, styles.GitHub)}
           href="https://github.com/gatsby-tv"
         >
-          <Icon src={Github} size={tight ? "small" : "base"} />
+          <Icon src={Github} size={tight ? 'small' : 'base'} />
           See our GitHub
         </Link>
-        <Link className={Class(styles.Link, styles.Discord)}>
-          <Icon src={Discord} size={tight ? "small" : "base"} />
+        <Link
+          className={Class(styles.Link, styles.Discord)}
+          href="https://discord.gg/zVuDSgjHFD"
+        >
+          <Icon src={Discord} size={tight ? 'small' : 'base'} />
           Join our Discord
         </Link>
       </div>

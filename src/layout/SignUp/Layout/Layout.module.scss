@@ -3,7 +3,18 @@
 .Layout {
   max-width: rem(2000px);
   margin: 0 auto;
-  padding-top: rem(250px);
-  padding-left: rem(100px);
+  padding-top: rem(200px);
 }
 
+@include screen(500px) {
+  .Layout {
+    padding-left: rem(25px);
+    padding-top: rem(250px);
+  }
+}
+
+@include screen(1000px) {
+  .Layout {
+    padding-left: rem(100px);
+  }
+}

@@ -12,7 +12,8 @@
 .Form {
   display: flex;
   gap: spacing(3);
-  align-items: flex-end;
+  align-items: stretch;
+  flex-direction: column;
 }
 
 .Fields {
@@ -57,3 +58,10 @@
   }
 }
 
+
+@include screen(500px) {
+  .Form {
+    align-items: flex-end;
+    flex-direction: row;
+  }
+}

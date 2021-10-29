@@ -1,12 +1,4 @@
-import {
-  useContext,
-  useRef,
-  useEffect,
-  useReducer,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import { useContext, useRef, useEffect, useReducer, useCallback } from 'react';
 import jwt from 'jsonwebtoken';
 import { ContextError } from '@gatsby-tv/utilities';
 import { User, GetAuthTokenRefreshResponse } from '@gatsby-tv/types';
@@ -89,11 +81,9 @@ export function useSessionContext(): SessionContextType {
   useEffect(() => {
     if (!session.token) return;
 
-    fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', session.token)
-      .then((resp) => {
-        if (resp.ok) return resp;
-        throw resp;
-      })
+    fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', {
+      token: session.token,
+    })
       .then((resp) => resp.json())
       .then((resp) =>
         dispatch({
@@ -101,12 +91,10 @@ export function useSessionContext(): SessionContextType {
           token: (resp as { token: string }).token,
         })
       )
-      .catch(
-        (resp) => {
-          if (resp.status !== 401) throw resp;
-          dispatch({ type: 'reject' });
-        }
-      );
+      .catch((resp) => {
+        if (resp.status !== 401) throw resp;
+        dispatch({ type: 'reject' });
+      });
   }, [session.token]);
 
   const setSession = useCallback((value) => {
@@ -117,14 +105,9 @@ export function useSessionContext(): SessionContextType {
   const mutate = useCallback((value) => {
     if (!state.current.token) return value;
 
-    fetcher<GetAuthTokenRefreshResponse>(
-      '/auth/token/refresh',
-      state.current.token
-    )
-      .then((resp) => {
-        if (resp.ok) return resp;
-        throw resp;
-      })
+    fetcher<GetAuthTokenRefreshResponse>('/auth/token/refresh', {
+      token: state.current.token,
+    })
       .then((resp) => resp.json())
       .then((resp) =>
         dispatch({
@@ -132,12 +115,10 @@ export function useSessionContext(): SessionContextType {
           token: (resp as { token: string }).token,
         })
       )
-      .catch(
-        (resp) => {
-          if (resp.status !== 401) throw resp;
-          dispatch({ type: 'reject' });
-        }
-      );
+      .catch((resp) => {
+        if (resp.status !== 401) throw resp;
+        dispatch({ type: 'reject' });
+      });
 
     return value;
   }, []);

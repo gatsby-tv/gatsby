@@ -42,10 +42,12 @@ export function SignIn(props: SignInProps): ReactElement {
     fetcher<PostAuthSignInResponse>('/auth/signin', {
       method: 'POST',
       body: form,
-    }).then((resp) => {
-      setValid(resp.ok);
-      setStage(1);
-    });
+    })
+      .catch((resp) => resp)
+      .then((resp) => {
+        setValid(resp.ok);
+        setStage(1);
+      });
   }, []);
 
   const ConfirmationMarkup = valid ? (
@@ -93,41 +95,41 @@ export function SignIn(props: SignInProps): ReactElement {
       />
       <Staging stage={stage}>
         <Staging.Stage className={styles.Center} index={0}>
-            <div className={styles.Title}>
-              <Icon src={GatsbyPlain} size="largest" />
-              <TextDisplay size="small">Sign In to Gatsby</TextDisplay>
-            </div>
-            <Rule className={styles.Rule} spacing="loose" />
-            {/* <div className={styles.Options}> */}
-            {/*   <Button className={styles.Option}> */}
-            {/*     <Icon src={Google} /> */}
-            {/*     Sign In with Google */}
-            {/*   </Button> */}
-            {/* </div> */}
-            {/* <Rule className={styles.Rule} spacing="loose"> */}
-            {/*   Or */}
-            {/* </Rule> */}
-            <Form id="sign-in" onSubmit={onSubmit}>
-              <Form.Field
-                id="email"
-                type="email"
-                value={email}
-                className={styles.Email}
-                placeholder="Email"
-                prefix={<Icon src={Email} size="smaller" />}
-                validators={[Validators.isEmail('Invalid email')]}
-                onChange={setEmail}
-                autoComplete
-              />
-              <Button
-                type="submit"
-                className={styles.Submit}
-                waiting={loading}
-                disabled={!email}
-              >
-                Sign In
-              </Button>
-            </Form>
+          <div className={styles.Title}>
+            <Icon src={GatsbyPlain} size="largest" />
+            <TextDisplay size="small">Sign In to Gatsby</TextDisplay>
+          </div>
+          <Rule className={styles.Rule} spacing="loose" />
+          {/* <div className={styles.Options}> */}
+          {/*   <Button className={styles.Option}> */}
+          {/*     <Icon src={Google} /> */}
+          {/*     Sign In with Google */}
+          {/*   </Button> */}
+          {/* </div> */}
+          {/* <Rule className={styles.Rule} spacing="loose"> */}
+          {/*   Or */}
+          {/* </Rule> */}
+          <Form id="sign-in" onSubmit={onSubmit}>
+            <Form.Field
+              id="email"
+              type="email"
+              value={email}
+              className={styles.Email}
+              placeholder="Email"
+              prefix={<Icon src={Email} size="smaller" />}
+              validators={[Validators.isEmail('Invalid email')]}
+              onChange={setEmail}
+              autoComplete
+            />
+            <Button
+              type="submit"
+              className={styles.Submit}
+              waiting={loading}
+              disabled={!email}
+            >
+              Sign In
+            </Button>
+          </Form>
         </Staging.Stage>
         <Staging.Stage className={styles.Confirmation} index={1}>
           {ConfirmationMarkup}

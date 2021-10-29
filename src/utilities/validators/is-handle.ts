@@ -1,4 +1,4 @@
-import { Validators, Validator, FormError } from '@gatsby-tv/utilities';
+import { Validators, FormError } from '@gatsby-tv/utilities';
 import { GetUserHandleExistsResponse } from '@gatsby-tv/types';
 
 import { fetcher } from '@src/utilities/fetcher';
@@ -8,9 +8,9 @@ export function isHandleAvailable(
   id: string
 ): Promise<FormError | undefined> | undefined {
   return value && value.length > 3
-    ? fetcher<GetUserHandleExistsResponse>(`/user/${value}`).then((resp) =>
-        resp.ok ? new FormError(id, 'Handle not available') : undefined
-      )
+    ? fetcher<GetUserHandleExistsResponse>(`/user/${value}`)
+        .then(() => new FormError(id, 'Handle not available'))
+        .catch(() => undefined)
     : undefined;
 }
 

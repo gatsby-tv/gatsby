@@ -1,80 +1,72 @@
-import { Fetch, RequestOptions } from '@lib/types';
+import { Exists, NotExists } from '@lib/exists';
+import { Fetch, Key, RequestOptions } from '@lib/types';
 import { NotImplementedError } from '@lib/errors';
 
-type RequestConfigurationType = {
-  token?: string;
-  options: RequestOptions;
-};
-
-function RequestConfiguration(
-  tokenOrOptions: string | RequestOptions | null | undefined,
-  optionsWithToken: RequestOptions
-): RequestConfigurationType {
-  return typeof tokenOrOptions === 'object'
-    ? {
-        options: tokenOrOptions as RequestOptions,
-      }
-    : {
-        token: tokenOrOptions,
-        options: optionsWithToken,
-      };
-}
-
 export function Fetcher(
-  api: string | undefined,
+  base: string | undefined,
   version: string | undefined
 ): Fetch {
-  if (!api) {
-    return (...args: any) =>
+  if (!base) {
+    return (..._args: any) =>
       Promise.reject(
         new NotImplementedError('Api provided to fetcher is undefined.')
       );
   }
 
-  const url = version ? `${api}/${version}` : api;
+  const api = version ? `${base}/${version}` : base;
 
-  return (
-    endpoint: string,
-    tokenOrOptions?: string | RequestOptions,
-    optionsWithToken: RequestOptions = {}
-  ) => {
-    const { token, options } = RequestConfiguration(
-      tokenOrOptions,
-      optionsWithToken
-    );
+  return (endpoint: string, ...keys: (RequestOptions | Key)[]) => {
+    const [optionsOrKey] = keys.slice(-1);
 
-    const { method = 'GET', body, headers = {}, ...rest } = options;
+    const options =
+      typeof optionsOrKey === 'object' && !Array.isArray(optionsOrKey)
+        ? (optionsOrKey as RequestOptions)
+        : {};
+
+    const {
+      method: methodOption = 'GET',
+      token,
+      body,
+      query = {},
+      headers = {},
+      ...rest
+    } = options;
+
+    const method = methodOption.toUpperCase();
+    const url = new URL(`${api}${endpoint}`, window?.location?.href);
+
+    if (method === 'GET') {
+      Object.entries(query)
+        .filter(([_key, value]) => Boolean(value))
+        .forEach(([key, value]) => url.searchParams.set(key, String(value)));
+    }
+
+    if (token) {
+      (headers as any)['Authorization'] = `Bearer ${token}`;
+    }
+
+    if (!(body instanceof FormData)) {
+      (headers as any)['Content-Type'] = 'application/json';
+    }
 
     const content =
-      !body || ['GET', 'HEAD'].includes(method.toUpperCase())
+      !body || ['GET', 'HEAD'].includes(method)
         ? undefined
         : body instanceof FormData
         ? body
         : JSON.stringify(body);
 
-    return fetch(`${url}${endpoint}`, {
-      method: method.toUpperCase(),
+    return fetch(url.toString(), {
+      method,
+      headers,
       mode: 'cors',
       credentials: 'same-origin',
       redirect: 'follow',
       body: content,
-      headers:
-        token && body instanceof FormData
-          ? {
-              Authorization: `Bearer ${token}`,
-              ...headers,
-            }
-          : token
-          ? {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-              ...headers,
-            }
-          : {
-              'Content-Type': 'application/json',
-              ...headers,
-            },
       ...rest,
+    }).then((resp) => {
+      if (resp.ok) return resp;
+      throw resp;
     });
   };
 }

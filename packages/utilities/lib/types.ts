@@ -1,4 +1,3 @@
-import { FormError } from '@lib/errors';
 import { FormErrorState } from '@lib/form';
 
 export interface EventHandler {
@@ -14,6 +13,8 @@ export type JsonResponse<T> = Omit<Response, 'json'> & {
 };
 
 export type RequestOptions = Omit<RequestInit, 'body'> & {
+  token?: string;
+  query?: Record<string, string | number>;
   body?: Record<string, unknown> | FormData;
 };
 
@@ -24,3 +25,13 @@ export interface Fetch {
     options?: RequestOptions
   ): Promise<JsonResponse<T>>;
 }
+
+type ArgumentTuple = [any, ...unknown[]] | readonly [any, ...unknown[]];
+export type Arguments =
+  | string
+  | ArgumentTuple
+  | null
+  | undefined
+  | false
+
+export type Key = Arguments | (() => Arguments);

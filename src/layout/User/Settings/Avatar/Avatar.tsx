@@ -25,7 +25,7 @@ import styles from './Avatar.module.scss';
 
 function GenerateAvatar(
   image: HTMLImageElement,
-  crop: Record<string, number>,
+  crop: Record<string, any>,
   type: string
 ): Promise<Blob | null> {
   const canvas = document.createElement('canvas');
@@ -84,11 +84,7 @@ export function Avatar(props: AvatarProps): ReactElement {
 
   useEffect(() => {
     if (!file || !completed || !element.current) return;
-    GenerateAvatar(
-      element.current,
-      completed as Record<string, number>,
-      file.type
-    ).then(setAvatar);
+    GenerateAvatar(element.current, completed, file.type).then(setAvatar);
   }, [completed, file]);
 
   useEffect(() => {
@@ -104,16 +100,21 @@ export function Avatar(props: AvatarProps): ReactElement {
       element.current = image;
 
       const width =
-        image.width < image.height ? 100 : (image.height / image.width) * 100;
+        image.width < image.height
+          ? image.width
+          : (image.height / image.width) * image.width;
 
       const height =
-        image.width > image.height ? 100 : (image.width / image.height) * 100;
+        image.width > image.height
+          ? image.height
+          : (image.width / image.height) * image.height;
 
-      const crop = {
+      const crop: Crop = {
+        unit: 'px',
         width,
         height,
-        x: (100 - width) / 2,
-        y: (100 - height) / 2,
+        x: (image.width - width) / 2,
+        y: (image.height - height) / 2,
       };
 
       setCrop((current) => ({ ...current, ...crop }));
@@ -131,14 +132,13 @@ export function Avatar(props: AvatarProps): ReactElement {
     const body = new FormData();
     body.append('avatar', avatar);
 
-    const promise = fetcher<PutUserAvatarResponse>(
-      `/user/${user._id}/avatar`,
+    const promise = fetcher<PutUserAvatarResponse>(`/user/${user._id}/avatar`, {
+      method: 'PUT',
       token,
-      {
-        method: 'PUT',
-        body,
-      }
-    ).then(Response({ success: 'Avatar updated' }));
+      body,
+    })
+      .catch((resp) => resp)
+      .then(Response({ success: 'Avatar updated' }));
 
     setSnack({ content: promise, duration: 2000 });
   }, [user, token, avatar]);

@@ -31,11 +31,13 @@ export function Fields(props: FieldsProps): ReactElement {
   );
 
   const onSubmit = useCallback(() => {
-    const promise = fetcher<PutUserResponse>(`/user/${user._id}`, token, {
+    const promise = fetcher<PutUserResponse>(`/user/${user._id}`, {
       method: 'PUT',
+      token,
       body: updates,
     })
       .then(mutate)
+      .catch((resp) => resp)
       .then(Response({ success: 'Profile updated' }));
 
     setSnack({ content: promise, duration: 2000 });

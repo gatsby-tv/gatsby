@@ -1,7 +1,7 @@
 {
   "name": "@gatsby-tv/components",
   "description": "Gatsby shared React components for web/mobile/desktop clients.",
-  "version": "0.6.0",
+  "version": "0.7.1-0",
   "files": [
     "dist"
   ],
@@ -91,5 +91,6 @@
     "color": "^3.2.0",
     "core-js": "^3.7.0",
     "react-popper": "^2.2.4"
-  }
+  },
+  "stableVersion": "0.7.0"
 }

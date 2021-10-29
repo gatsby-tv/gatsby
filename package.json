@@ -1,7 +1,7 @@
 {
   "name": "gatsby",
   "description": "The transparent, distributed video sharing platform.",
-  "version": "0.6.1",
+  "version": "0.7.1-0",
   "license": "AGPL-3.0",
   "private": true,
   "main": "./dist/server.prod.js",
@@ -125,5 +125,6 @@
   },
   "resolutions": {
     "ipfs-utils": "https://github.com/gatsby-tv/js-ipfs-utils#fix/defer-to-native-fetch"
-  }
+  },
+  "stableVersion": "0.7.0"
 }

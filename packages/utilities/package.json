@@ -1,7 +1,7 @@
 {
   "name": "@gatsby-tv/utilities",
   "description": "Gatsby utilities library.",
-  "version": "0.6.0",
+  "version": "0.7.1-0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "AGPL-3.0",
@@ -66,5 +66,6 @@
     "tscpaths": "^0.0.9",
     "utf-8-validate": "^5.0.5",
     "validator": "^13.6.0"
-  }
+  },
+  "stableVersion": "0.7.0"
 }

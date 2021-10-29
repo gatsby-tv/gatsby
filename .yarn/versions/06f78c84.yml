@@ -1,0 +1,8 @@
+undecided:
+  - gatsby
+  - "@gatsby-tv/components"
+  - "@gatsby-tv/icons"
+  - "@gatsby-tv/layout"
+  - "@gatsby-tv/player"
+  - "@gatsby-tv/preview"
+  - "@gatsby-tv/services"

@@ -1,5 +1,6 @@
-import { Exists, NotExists } from '@lib/exists';
-import { Fetch, Key, RequestOptions } from '@lib/types';
+import { WestEggError } from '@gatsby-tv/types';
+
+import { Fetch, Key, RequestOptions, JsonResponse } from '@lib/types';
 import { NotImplementedError } from '@lib/errors';
 
 export function Fetcher(
@@ -66,7 +67,7 @@ export function Fetcher(
       ...rest,
     }).then((resp) => {
       if (resp.ok) return resp;
-      throw resp;
+      throw resp as JsonResponse<WestEggError>;
     });
   };
 }

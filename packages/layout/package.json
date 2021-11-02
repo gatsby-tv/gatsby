@@ -47,7 +47,7 @@
     "@gatsby-tv/icons": "workspace:packages/icons",
     "@gatsby-tv/preview": "workspace:packages/preview",
     "@gatsby-tv/services": "workspace:packages/services",
-    "@gatsby-tv/types": "^0.5.3",
+    "@gatsby-tv/types": "^0.5.5",
     "@gatsby-tv/utilities": "workspace:packages/utilities",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.0.0",

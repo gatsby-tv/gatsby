@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { useSWRInfinite, KeyLoader } from 'swr';
-import { isCursor, CursorResponse } from '@gatsby-tv/types';
+import { Cursor } from '@gatsby-tv/types';
 
 import { InfiniteFetchResponse } from '@lib/types';
 
 export function useInfinite<T>(
-  getKey: KeyLoader<CursorResponse<T[]>>
+  getKey: KeyLoader<Cursor<T>>
 ): InfiniteFetchResponse<'data', T> {
   // Refer to https://github.com/vercel/swr/issues/1345
   const {
@@ -13,7 +13,7 @@ export function useInfinite<T>(
     error,
     size,
     setSize,
-  } = useSWRInfinite<CursorResponse<T[]>>(getKey, {
+  } = useSWRInfinite<Cursor<T>>(getKey, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
@@ -33,7 +33,7 @@ export function useInfinite<T>(
 
   return {
     data: data
-      ?.filter(isCursor)
+      ?.filter((page) => Boolean(page.content))
       .map((page) => page.content)
       .flat() as T[] | undefined,
     loading,

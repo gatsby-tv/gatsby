@@ -88,7 +88,7 @@ export function useSessionContext(): SessionContextType {
       .then((resp) =>
         dispatch({
           type: 'accept',
-          token: (resp as { token: string }).token,
+          token: resp.token,
         })
       )
       .catch((resp) => {
@@ -112,7 +112,7 @@ export function useSessionContext(): SessionContextType {
       .then((resp) =>
         dispatch({
           type: 'accept',
-          token: (resp as { token: string }).token,
+          token: resp.token,
         })
       )
       .catch((resp) => {

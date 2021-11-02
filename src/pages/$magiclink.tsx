@@ -21,7 +21,7 @@ export default function MagicLinkPage(): ReactElement {
     if (exists === 'true') {
       fetcher<GetAuthSignInKeyResponse>(`/auth/signin/${key}`)
         .then((resp) => resp.json())
-        .then((resp) => setSession((resp as { token: string }).token));
+        .then((resp) => setSession(resp.token));
     } else {
       router.push({
         pathname: '/$signup',

@@ -30,7 +30,7 @@ export function Fields(props: FieldsProps): ReactElement {
         body: { key: code, ...form },
       })
         .then((resp) => resp.json())
-        .then((resp) => setSession((resp as { token: string }).token));
+        .then((resp) => setSession(resp.token));
     },
     [code]
   );

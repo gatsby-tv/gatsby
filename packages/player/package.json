@@ -33,7 +33,7 @@
     "@babel/preset-typescript": "^7.12.1",
     "@gatsby-tv/components": "workspace:packages/components",
     "@gatsby-tv/icons": "workspace:packages/icons",
-    "@gatsby-tv/types": "^0.5.3",
+    "@gatsby-tv/types": "^0.5.5",
     "@gatsby-tv/utilities": "workspace:packages/utilities",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.0.0",

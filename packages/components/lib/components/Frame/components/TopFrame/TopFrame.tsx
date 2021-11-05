@@ -5,13 +5,13 @@ import styles from '../../Frame.scss';
 
 export interface TopFrameProps {
   children?: ReactNode;
-  topbar?: ReactElement;
+  content?: ReactElement;
   active?: boolean;
 }
 
 export const TopFrame = forwardRef<HTMLDivElement, TopFrameProps>(
   (props: TopFrameProps, ref: Ref<HTMLDivElement>) => {
-    const { children, topbar: Topbar, active } = props;
+    const { children, content: Topbar, active } = props;
     const frame = useForwardedRef<HTMLDivElement>(ref);
 
     const classes = Class(styles.Bar, !active && styles.Hidden);

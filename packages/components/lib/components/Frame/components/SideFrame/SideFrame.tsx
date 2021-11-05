@@ -5,13 +5,13 @@ import styles from '../../Frame.scss';
 
 export interface SideFrameProps {
   children?: ReactNode;
-  sidebar?: ReactElement;
+  content?: ReactElement;
   active?: boolean;
 }
 
 export const SideFrame = forwardRef<HTMLDivElement, SideFrameProps>(
   (props: SideFrameProps, ref: Ref<HTMLDivElement>) => {
-    const { children, sidebar: Sidebar, active } = props;
+    const { children, content: Sidebar, active } = props;
     const frame = useForwardedRef<HTMLDivElement>(ref);
 
     const classes = Class(styles.Bar, !active && styles.Hidden);
@@ -26,9 +26,9 @@ export const SideFrame = forwardRef<HTMLDivElement, SideFrameProps>(
 
     return Sidebar ? (
       <div className={styles.SideFrame}>
-        <div ref={frame} style={hidden} className={classes}>
+        <nav ref={frame} style={hidden} className={classes}>
           {Sidebar}
-        </div>
+        </nav>
         {children}
       </div>
     ) : (

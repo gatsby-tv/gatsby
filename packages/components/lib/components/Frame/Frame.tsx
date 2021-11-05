@@ -15,10 +15,11 @@ export interface FrameProps {
   children?: ReactNode;
   topbar?: ReactElement;
   sidebar?: ReactElement;
+  flipped?: boolean;
 }
 
 export function Frame(props: FrameProps): ReactElement {
-  const { children, topbar: Topbar, sidebar: Sidebar } = props;
+  const { children, topbar: Topbar, sidebar: Sidebar, flipped } = props;
   const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
@@ -62,14 +63,24 @@ export function Frame(props: FrameProps): ReactElement {
     setSidebar,
   };
 
+  const ContentMarkup = flipped ? (
+    <SideFrame ref={sideframe} content={Sidebar} active={sidebar}>
+      <TopFrame ref={topframe} content={Topbar} active={topbar}>
+        <MainFrame>{children}</MainFrame>
+      </TopFrame>
+    </SideFrame>
+  ) : (
+    <TopFrame ref={topframe} content={Topbar} active={topbar}>
+      <SideFrame ref={sideframe} content={Sidebar} active={sidebar}>
+        <MainFrame>{children}</MainFrame>
+      </SideFrame>
+    </TopFrame>
+  );
+
   return (
     <FrameContext.Provider value={context}>
       <div ref={screen} className={styles.Frame}>
-        <TopFrame ref={topframe} topbar={Topbar} active={topbar}>
-          <SideFrame ref={sideframe} sidebar={Sidebar} active={sidebar}>
-            <MainFrame>{children}</MainFrame>
-          </SideFrame>
-        </TopFrame>
+        {ContentMarkup}
       </div>
     </FrameContext.Provider>
   );

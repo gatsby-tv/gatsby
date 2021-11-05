@@ -10,10 +10,11 @@ export default {
   component: Frame,
 } as Meta;
 
-export const Example: Story<FrameProps> = () => (
+export const Example: Story<FrameProps> = (props) => (
   <Frame
     topbar={<div className={styles.Topbar} />}
     sidebar={<div className={styles.Sidebar} />}
+    {...props}
   >
     <div className={styles.Content}>
       {[...Array(24)].map((_, index) => (
@@ -22,3 +23,7 @@ export const Example: Story<FrameProps> = () => (
     </div>
   </Frame>
 );
+
+Example.args = {
+  flipped: false,
+};

@@ -1,0 +1,26 @@
+@use 'styles' as *;
+
+.Slide {
+  display: block;
+  cursor: pointer;
+  outline: none;
+  margin: 0 rem(2.5px);
+  color: inherit;
+  background-color: transparent;
+  transition: box-shadow duration(fast) ease, transform duration(fast) ease;
+
+  @include mouse-hover {
+    @include elevation(4);
+    transform: scale(1.075);
+  }
+
+  & > * {
+    width: 100%;
+  }
+}
+
+@include screen(650px) {
+  .Slide {
+    margin: 0 spacing(0.5);
+  }
+}

@@ -3,7 +3,7 @@ import { Class } from '@gatsby-tv/utilities';
 
 import { useStaging } from '@lib/utilities';
 
-import styles from '../../Staging.scss';
+import styles from './Stage.scss';
 
 export interface StageProps {
   children?: ReactNode;
@@ -13,6 +13,7 @@ export interface StageProps {
 
 export function Stage(props: StageProps): ReactElement {
   const { children, className, index } = props;
+
   const { current, previous, onTransitionEnd } = useStaging();
   const active = [current, previous].includes(index);
 

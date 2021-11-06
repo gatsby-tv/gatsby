@@ -1,4 +1,3 @@
-@use 'sass:color';
 @use 'styles' as *;
 
 .Select {
@@ -70,36 +69,6 @@
   margin: 0 rem(2px);
 }
 
-.Tag {
-  @include border-radius(base);
-  @include font-weight(semi-bold);
-  display: flex;
-  flex-shrink: 0;
-  background-color: palette(tag);
-  cursor: default;
-
-  & > span:first-child {
-    align-self: center;
-    margin: 0 spacing(0.5);
-  }
-}
-
-.TagClear {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: border-radius(base);
-  border-bottom-right-radius: border-radius(base);
-  padding: spacing(0.5);
-
-  @include hover {
-    background-color: palette(tag, hover);
-  }
-
-  svg {
-    font-size: rem(9px);
-  }
-}
-
 .Mask {
   @include border-radius(small);
   overflow: hidden;
@@ -108,19 +77,4 @@
 .Menu {
   max-height: rem(200px);
   background-color: palette(surface, 6);
-}
-
-.Option {
-  width: 100%;
-  padding: spacing(0.5) spacing(1);
-  cursor: default;
-
-  &[aria-selected] {
-    background-color: palette(option, selected);
-  }
-
-  &:not([disabled]):not([aria-selected]):hover,
-  &:not([disabled]):not([aria-selected])[data-hover] {
-    background-color: palette(option, hover);
-  }
 }

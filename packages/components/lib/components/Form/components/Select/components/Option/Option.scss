@@ -1,0 +1,16 @@
+@use 'styles' as *;
+
+.Option {
+  width: 100%;
+  padding: spacing(0.5) spacing(1);
+  cursor: default;
+
+  &[aria-selected] {
+    background-color: palette(option, selected);
+  }
+
+  &:not([disabled]):not([aria-selected]):hover,
+  &:not([disabled]):not([aria-selected])[data-hover] {
+    background-color: palette(option, hover);
+  }
+}

@@ -5,7 +5,7 @@ import { Button } from '@lib/components/Button';
 import { useSelection } from '@lib/utilities/selection';
 import { Option as SelectOption } from '@lib/types';
 
-import styles from '../../Select.scss';
+import styles from './Tag.scss';
 
 export interface TagProps {
   option: SelectOption;
@@ -13,7 +13,7 @@ export interface TagProps {
 
 export function Tag(props: TagProps): ReactElement {
   const { option } = props;
-  const { selection, clearSelection } = useSelection();
+  const { clearSelection } = useSelection();
 
   return (
     <div

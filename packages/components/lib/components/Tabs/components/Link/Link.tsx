@@ -7,7 +7,7 @@ import {
 } from '@lib/components/Link';
 import { Selection, SelectionItemProps } from '@lib/components/Selection';
 
-import styles from '../../Tabs.scss';
+import styles from './Link.scss';
 
 export type LinkProps = SelectionItemProps & LinkBaseProps;
 
@@ -21,13 +21,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       'aria-controls': ariaControls,
       ...linkProps
     } = props;
-
-    const itemProps = {
-      id,
-      className,
-      option,
-      ariaControls,
-    };
 
     const classes = Class(className, styles.Item);
 

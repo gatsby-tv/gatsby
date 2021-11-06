@@ -2,7 +2,7 @@ import { ReactNode, ReactElement } from 'react';
 
 import { useCarousel } from '@lib/utilities/carousel';
 
-import styles from '../../Carousel.scss';
+import styles from './Slide.scss';
 
 export interface SlideProps {
   children?: ReactNode;

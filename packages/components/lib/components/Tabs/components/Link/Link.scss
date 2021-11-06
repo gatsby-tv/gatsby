@@ -1,0 +1,6 @@
+@use 'styles' as *;
+
+.Link {
+  @include center;
+  @include expand();
+}

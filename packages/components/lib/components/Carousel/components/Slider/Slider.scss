@@ -1,0 +1,7 @@
+@use 'styles' as *;
+
+.Slider {
+  display: flex;
+  align-items: center;
+  will-change: left, transform;
+}

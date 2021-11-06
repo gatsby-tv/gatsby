@@ -5,7 +5,7 @@ import { Connected } from '@lib/components/Connected';
 import { useSwitch } from '@lib/utilities/switch';
 import { useItem } from '@lib/utilities/item';
 
-import styles from '../../Switch.scss';
+import styles from './Item.scss';
 
 export interface ItemProps extends AriaAttributes {
   children?: ReactNode;
@@ -22,6 +22,7 @@ export function Item(props: ItemProps): ReactElement {
     option,
     'aria-controls': ariaControls,
   } = props;
+
   const { selection, onSelect } = useSwitch();
   const { itemClass } = useItem();
   const onClick = () => onSelect(option);

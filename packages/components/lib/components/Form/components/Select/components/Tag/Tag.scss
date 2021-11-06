@@ -1,0 +1,31 @@
+@use 'styles' as *;
+
+.Tag {
+  @include border-radius(base);
+  @include font-weight(semi-bold);
+  display: flex;
+  flex-shrink: 0;
+  background-color: palette(tag);
+  cursor: default;
+
+  & > span:first-child {
+    align-self: center;
+    margin: 0 spacing(0.5);
+  }
+}
+
+.TagClear {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: border-radius(base);
+  border-bottom-right-radius: border-radius(base);
+  padding: spacing(0.5);
+
+  @include hover {
+    background-color: palette(tag, hover);
+  }
+
+  svg {
+    font-size: rem(9px);
+  }
+}

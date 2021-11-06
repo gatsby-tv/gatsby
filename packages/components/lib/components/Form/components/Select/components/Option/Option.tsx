@@ -1,10 +1,10 @@
-import { useCallback, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { Exists, useFormSelect } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
 import { Option as SelectOption } from '@lib/types';
 
-import styles from '../../Select.scss';
+import styles from './Option.scss';
 
 export interface OptionProps {
   option: SelectOption;

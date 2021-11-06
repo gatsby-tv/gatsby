@@ -1,6 +1,6 @@
 import { useRef, useCallback, CSSProperties, ReactNode, ReactElement } from 'react';
 
-import styles from '../../Carousel.scss';
+import styles from './Slider.scss';
 
 export type SliderState = {
   slide: number;

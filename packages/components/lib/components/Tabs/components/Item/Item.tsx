@@ -3,7 +3,7 @@ import { Class } from '@gatsby-tv/utilities';
 
 import { Selection, SelectionItemProps } from '@lib/components/Selection';
 
-import styles from '../../Tabs.scss';
+import styles from './Item.scss';
 
 export type ItemProps = SelectionItemProps;
 

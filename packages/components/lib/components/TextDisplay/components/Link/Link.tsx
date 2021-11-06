@@ -9,7 +9,7 @@ import {
 import { Icon } from '@lib/components/Icon';
 import { DisplaySize, TextElement } from '@lib/types';
 
-import styles from '../../TextDisplay.scss';
+import styles from './Link.scss';
 
 export interface LinkProps extends Omit<LinkBaseProps, 'underline'> {
   children?: string | string[];

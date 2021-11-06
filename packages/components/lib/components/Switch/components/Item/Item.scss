@@ -1,0 +1,8 @@
+@use 'styles' as *;
+
+.Item {
+  @include center;
+  cursor: pointer;
+  flex-grow: 1;
+  outline: none;
+}

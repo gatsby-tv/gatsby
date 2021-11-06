@@ -1,5 +1,5 @@
 import { ReactNode, ReactElement } from 'react';
-import { Class } from '@gatsby-tv/utilities';
+import { Class, StylesContext } from '@gatsby-tv/utilities';
 
 import { Item, ItemProps } from './components';
 import styles from './Connected.scss';
@@ -32,11 +32,13 @@ export function Connected(props: ConnectedProps): ReactElement {
   ) : null;
 
   return (
-    <div className={classes}>
-      {PrefixMarkup}
-      {children}
-      {SuffixMarkup}
-    </div>
+    <StylesContext.Provider value={styles}>
+      <div className={classes}>
+        {PrefixMarkup}
+        {children}
+        {SuffixMarkup}
+      </div>
+    </StylesContext.Provider>
   );
 }
 

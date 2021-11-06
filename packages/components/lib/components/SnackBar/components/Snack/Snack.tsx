@@ -2,7 +2,7 @@ import { ReactNode, ReactElement } from 'react';
 
 import { Optional } from '@lib/components/Optional';
 
-import styles from '../../SnackBar.scss';
+import styles from './Snack.scss';
 
 export interface SnackProps {
   children?: ReactNode;

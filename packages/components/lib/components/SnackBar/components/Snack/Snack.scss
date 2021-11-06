@@ -1,0 +1,6 @@
+@use 'styles' as *;
+
+.Snack {
+  @include center;
+  gap: spacing(1);
+}

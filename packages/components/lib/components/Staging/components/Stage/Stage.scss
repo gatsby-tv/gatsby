@@ -1,0 +1,11 @@
+@use 'styles' as *;
+
+.Stage {
+  @include expand;
+  position: absolute;
+  will-change: left;
+}
+
+.Active {
+  transition: left duration(base) ease;
+}

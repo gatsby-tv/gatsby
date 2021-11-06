@@ -21,7 +21,9 @@ export interface StagingProps {
 
 export function Staging(props: StagingProps): ReactElement {
   const { children, stage } = props;
+
   const disabled = useRef(false);
+
   const [{ current, previous }, setState] = useState({
     current: stage,
     previous: stage,

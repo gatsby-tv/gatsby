@@ -1,0 +1,23 @@
+@use 'styles' as *;
+
+@each $key, $value in $text-display-font-size-map {
+  .Display-#{$key} {
+    @include text-display($key);
+    text-decoration: none;
+  }
+}
+
+.Thin {
+  @include font-weight(semi-bold);
+}
+
+.FitContent {
+  width: fit-content;
+}
+
+.Link {
+  display: flex;
+  align-items: center;
+  gap: spacing(1);
+  padding-bottom: rem(2px);
+}

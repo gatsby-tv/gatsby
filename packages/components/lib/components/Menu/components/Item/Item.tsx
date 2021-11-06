@@ -1,5 +1,5 @@
 import { ReactNode, ReactElement } from 'react';
-import { Class } from '@gatsby-tv/utilities';
+import { Class, useStyles } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
 import { Optional } from '@lib/components/Optional';
@@ -7,8 +7,6 @@ import { Icon } from '@lib/components/Icon';
 import { Button, ButtonProps } from '@lib/components/Button';
 import { IconSource } from '@lib/types';
 import { useItem } from '@lib/utilities/item';
-
-import styles from '../../Menu.scss';
 
 export interface ItemProps extends Omit<ButtonProps, 'unstyled'> {
   children?: ReactNode;
@@ -18,6 +16,7 @@ export interface ItemProps extends Omit<ButtonProps, 'unstyled'> {
 
 export function Item(props: ItemProps): ReactElement {
   const { children, className, icon: IconComponent, ...rest } = props;
+  const styles = useStyles();
   const { itemClass } = useItem();
 
   const classes = Class(className, itemClass, styles.Item);

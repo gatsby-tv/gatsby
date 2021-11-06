@@ -15,6 +15,7 @@ export * from './TextHeading';
 export * from './TextSubheading';
 export * from './TextCollapsible';
 export * from './TextPlaceholder';
+export * from './Breadcrumbs';
 export * from './Viewport';
 export * from './Video';
 export * from './Image';

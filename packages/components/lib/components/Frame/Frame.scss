@@ -7,6 +7,11 @@
   overflow: hidden;
 }
 
+.MainFrame {
+  @include expand();
+  flex: 1 1 auto;
+}
+
 .TopFrame {
   @include expand();
   display: flex;
@@ -17,11 +22,6 @@
 .SideFrame {
   @include expand();
   display: flex;
-  flex: 1 1 auto;
-}
-
-.MainFrame {
-  @include expand();
   flex: 1 1 auto;
 }
 

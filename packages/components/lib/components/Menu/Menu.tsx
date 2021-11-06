@@ -1,6 +1,6 @@
 import { useState, RefObject, ReactNode, ReactElement } from 'react';
 import { usePopper } from 'react-popper';
-import { Class } from '@gatsby-tv/utilities';
+import { Class, StylesContext } from '@gatsby-tv/utilities';
 
 import { Modal } from '@lib/components/Modal';
 import { Connected } from '@lib/components/Connected';
@@ -62,15 +62,17 @@ export function Menu(props: MenuProps): ReactElement {
   const classes = Class(className, styles.Menu);
 
   return (
-    <ItemContext.Provider value={{ itemClass }}>
-      <Modal active={active} onExit={onExit}>
-        <div ref={setPopper} style={style.popper} {...attributes.popper}>
-          <Connected className={classes} column>
-            {children}
-          </Connected>
-        </div>
-      </Modal>
-    </ItemContext.Provider>
+    <StylesContext.Provider value={styles}>
+      <ItemContext.Provider value={{ itemClass }}>
+        <Modal active={active} onExit={onExit}>
+          <div ref={setPopper} style={style.popper} {...attributes.popper}>
+            <Connected className={classes} column>
+              {children}
+            </Connected>
+          </div>
+        </Modal>
+      </ItemContext.Provider>
+    </StylesContext.Provider>
   );
 }
 

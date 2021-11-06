@@ -5,13 +5,3 @@
   overflow: hidden;
   border-radius: inherit;
 }
-
-.Stage {
-  @include expand;
-  position: absolute;
-  will-change: left;
-}
-
-.Active {
-  transition: left duration(base) ease;
-}

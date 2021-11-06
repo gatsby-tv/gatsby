@@ -1,5 +1,5 @@
 import { AriaAttributes, ReactNode, ReactElement } from 'react';
-import { Class } from '@gatsby-tv/utilities';
+import { Class, StylesContext } from '@gatsby-tv/utilities';
 
 import { SelectionContext } from '@lib/utilities/selection';
 import { ItemContext } from '@lib/utilities/item';
@@ -42,19 +42,21 @@ export function Selection(props: SelectionProps): ReactElement {
   );
 
   return (
-    <SelectionContext.Provider value={{ selection, setSelection: onSelect }}>
-      <ItemContext.Provider value={{ itemClass }}>
-        <Optional
-          component={Scroll}
-          active={!row}
-          $props={{ hide: scrollHidden }}
-        >
-          <div className={classes} role="tablist" aria-label={ariaLabel}>
-            {children}
-          </div>
-        </Optional>
-      </ItemContext.Provider>
-    </SelectionContext.Provider>
+    <StylesContext.Provider value={styles}>
+      <SelectionContext.Provider value={{ selection, setSelection: onSelect }}>
+        <ItemContext.Provider value={{ itemClass }}>
+          <Optional
+            component={Scroll}
+            active={!row}
+            $props={{ hide: scrollHidden }}
+          >
+            <div className={classes} role="tablist" aria-label={ariaLabel}>
+              {children}
+            </div>
+          </Optional>
+        </ItemContext.Provider>
+      </SelectionContext.Provider>
+    </StylesContext.Provider>
   );
 }
 

@@ -7,7 +7,6 @@ import {
   ButtonHTMLAttributes,
   Ref,
   ReactNode,
-  ReactElement,
 } from 'react';
 import { Spinner } from '@gatsby-tv/icons';
 import {
@@ -20,7 +19,6 @@ import {
 
 import { Icon } from '@lib/components/Icon';
 import { Tooltip } from '@lib/components/Tooltip';
-import { Optional } from '@lib/components/Optional';
 import { IconSource, IconSize } from '@lib/types';
 
 import styles from './Button.scss';

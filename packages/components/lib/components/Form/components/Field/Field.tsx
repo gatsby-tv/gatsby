@@ -51,7 +51,7 @@ export interface FieldProps
     | 'onChange'
   > {
   id: string;
-  value: string;
+  value?: string;
   type?: 'text' | 'email' | 'password' | 'tel' | 'search';
   multiline?: boolean;
   prefix?: ReactNode;

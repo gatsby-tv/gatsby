@@ -24,6 +24,7 @@ export * from './unique-id';
 export * from './scroll';
 export * from './ipfs';
 export * from './snack-bar';
+export * from './breadcrumbs';
 export * from './frame';
 export * from './global';
 export * from './form';

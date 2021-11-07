@@ -17,13 +17,21 @@ import { MainFrame, TopFrame, SideFrame } from './components';
 
 export interface FrameProps {
   children?: ReactNode;
+  className?: string;
   topbar?: ReactElement;
   sidebar?: ReactElement;
   flipped?: boolean;
 }
 
 export function Frame(props: FrameProps): ReactElement {
-  const { children, topbar: Topbar, sidebar: Sidebar, flipped } = props;
+  const {
+    children,
+    className,
+    topbar: Topbar,
+    sidebar: Sidebar,
+    flipped,
+  } = props;
+
   const screen = useRef<HTMLDivElement>(null);
   const topframe = useRef<HTMLDivElement>(null);
   const sideframe = useRef<HTMLDivElement>(null);
@@ -70,13 +78,13 @@ export function Frame(props: FrameProps): ReactElement {
   const ContentMarkup = flipped ? (
     <SideFrame ref={sideframe} content={Sidebar} active={sidebar}>
       <TopFrame ref={topframe} content={Topbar} active={topbar}>
-        <MainFrame>{children}</MainFrame>
+        <MainFrame className={className}>{children}</MainFrame>
       </TopFrame>
     </SideFrame>
   ) : (
     <TopFrame ref={topframe} content={Topbar} active={topbar}>
       <SideFrame ref={sideframe} content={Sidebar} active={sidebar}>
-        <MainFrame>{children}</MainFrame>
+        <MainFrame className={className}>{children}</MainFrame>
       </SideFrame>
     </TopFrame>
   );

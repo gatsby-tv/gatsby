@@ -19,7 +19,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 
     const classes = Class(
       className,
-      styles.Link,
       underline && styles.Underline
     );
 

@@ -12,9 +12,9 @@ export interface IconProps extends AriaAttributes {
 }
 
 export function Icon(props: IconProps): ReactElement {
-  const { src: SvgComponent, className, size = 'base', ...aria } = props;
+  const { src: SvgComponent, className, size, ...aria } = props;
 
-  const classes = Class(className, styles.Icon, styles[`Icon-${size}`]);
+  const classes = Class(className, styles.Icon, size && styles[`Icon-${size}`]);
 
   return (
     <span className={classes} {...aria}>

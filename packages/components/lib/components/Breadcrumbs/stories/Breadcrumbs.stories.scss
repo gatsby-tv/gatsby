@@ -1,0 +1,13 @@
+@use 'styles' as *;
+
+.Breadcrumbs {
+  @include font-size(display-small);
+  min-height: spacing(3);
+  margin-left: spacing(1);
+}
+
+.Controls {
+  display: flex;
+  margin: spacing(1) 0;
+  gap: spacing(1);
+}

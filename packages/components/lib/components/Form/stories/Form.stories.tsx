@@ -66,7 +66,6 @@ export const Field: Story<FieldStoryProps> = (props) => {
 
 Field.args = {
   help: undefined,
-  waiting: false,
   hidden: false,
   required: false,
   minLength: undefined,

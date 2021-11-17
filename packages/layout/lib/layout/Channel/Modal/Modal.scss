@@ -1,9 +1,10 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
 
 .Modal {
-  @include border-radius(small);
   overflow: hidden;
   background-color: palette(surface, 3);
+  border-radius: border.$small;
   width: min(80vw, 90rem);
   max-width: 100%;
   height: calc(100vh - 12rem);

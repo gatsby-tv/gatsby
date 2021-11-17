@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/screen';
 
 .Listing {
   display: grid;
@@ -7,8 +9,8 @@
 }
 
 .NoContentText {
-  @include expand();
-  @include font-size(body-large);
+  @include expand;
+  font-size: text.$body-large;
   text-align: center;
 }
 
@@ -17,30 +19,22 @@
   grid-template-columns: 1fr;
   justify-content: stretch;
   gap: spacing(1.5);
-}
 
-@include screen(650px) {
-  .SkeletonSection {
+  @include screen.min(650px) {
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
   }
-}
 
-@include screen(900px) {
-  .SkeletonSection {
+  @include screen.min(900px) {
     grid-template-columns: repeat(3, 1fr);
   }
-}
 
-@include screen(1200px) {
-  .SkeletonSection {
+  @include screen.min(1200px) {
     grid-template-columns: repeat(4, 1fr);
   }
-}
 
-@include screen(1600px) {
-  .SkeletonSection {
+  @include screen.min(1600px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }

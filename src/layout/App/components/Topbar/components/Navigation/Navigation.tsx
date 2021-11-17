@@ -35,7 +35,6 @@ export function Navigation(): ReactElement {
       </Link>
       <Tabs
         className={styles.Tabs}
-        itemClass={styles.Tab}
         gap="loose"
         selection={tab}
         onSelect={setTab}

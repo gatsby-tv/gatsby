@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import { Image, Optional, Labelled } from '@gatsby-tv/components';
-import { useUniqueId } from '@gatsby-tv/utilities';
 
 import { Overlay } from '@src/components/Overlay';
 import { Skeleton } from '@src/Preview.skeleton';
@@ -17,8 +16,6 @@ export function Preview(props: PreviewProps): ReactElement {
     ...aria
   } = props;
 
-  const id = useUniqueId('preview');
-
   if (!content) {
     return <Skeleton format={format} info={Info} />;
   }
@@ -27,7 +24,7 @@ export function Preview(props: PreviewProps): ReactElement {
     <Optional
       component="div"
       active={format !== 'column'}
-      $props={{ className: styles[`Item-${format}`] }}
+      $props={{ className: styles[`Info-${format}`] }}
     >
       {Info}
     </Optional>

@@ -48,7 +48,7 @@ function ImageURL(props: ImageURLProps): ReactElement {
   return (
     <Optional active={Boolean(className)} $props={{ className }}>
       <Viewport
-        className={styles.Viewport}
+        className={Class("Image", styles.Viewport)}
         placeholder
         rounded={rounded}
         overlay={overlay}

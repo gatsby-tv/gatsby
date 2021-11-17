@@ -18,7 +18,7 @@ export function Settings(props: SettingsProps): ReactElement {
 
   const mounted = useComponentDidMount();
 
-  const { player, setPinned } = usePlayer();
+  const { setPinned } = usePlayer();
   const { levels, quality, setQuality } = useQuality();
   const [fullscreen] = useFullscreen();
 
@@ -69,7 +69,6 @@ export function Settings(props: SettingsProps): ReactElement {
           onTransitionEnd={onTransitionEnd}
         >
           <Selection
-            itemClass={styles.Item}
             scrollHidden
             selection={resolution}
             onSelect={setResolution}

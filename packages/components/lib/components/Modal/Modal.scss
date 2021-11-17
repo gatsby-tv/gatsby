@@ -1,5 +1,5 @@
-@use 'sass:color';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
 
 @keyframes fade {
   from {
@@ -30,7 +30,7 @@
 
   animation: {
     name: fade;
-    duration: duration(fast);
+    duration: duration.$fast;
     fill-mode: forwards;
     timing-function: ease;
   }
@@ -40,7 +40,7 @@
 
     animation: {
       name: slide;
-      duration: duration(fast);
+      duration: duration.$fast;
       fill-mode: forwards;
       timing-function: ease;
     }

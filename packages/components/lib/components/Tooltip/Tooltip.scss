@@ -1,4 +1,7 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
+@use 'gatsby/duration';
 
 @keyframes appear {
   from {
@@ -12,18 +15,16 @@
 
 .Popper {
   // @include shadow();
-  @include font-weight(semi-bold);
-  @include font-size(body-large);
-  @include border-radius(small);
-
+  @include text.tooltip;
+  border-radius: border.$small;
   pointer-events: none;
   padding: spacing(0.5) spacing(1);
   opacity: 0;
 
   animation: {
     name: appear;
-    duration: duration(fast);
+    duration: duration.$fast;
     fill-mode: forwards;
-    delay: duration(base);
+    delay: duration.$base;
   }
 }

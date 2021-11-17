@@ -1,4 +1,7 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/duration';
+@use 'gatsby/border';
 
 @keyframes reveal {
   from {
@@ -16,7 +19,7 @@
 
   animation: {
     name: reveal;
-    duration: duration(faster);
+    duration: duration.$faster;
   }
 
   & > *:first-child {
@@ -26,37 +29,37 @@
   & > *:last-child {
     margin-bottom: spacing(1);
   }
-}
 
-.Item {
-  @include font-size(body-large);
-  @include font-weight(semi-bold);
-  display: flex;
-  align-items: center;
-  gap: spacing(1);
-  padding: spacing(1) spacing(2);
+  :global(.Item) {
+    display: flex;
+    font-size: text.$body-large;
+    font-weight: 500;
+    align-items: center;
+    gap: spacing(1);
+    padding: spacing(1) spacing(2);
 
-  @include hover {
-    background-color: hsla(0, 0%, 16%, 0.9);
-  }
+    @include hover {
+      background-color: hsla(0, 0%, 16%, 0.9);
+    }
 
-  sup {
-    @include font-size(caption);
-    @include font-weight(bold);
-    margin-left: rem(4px);
-    vertical-align: top;
-    color: palette(red);
-  }
+    sup {
+      font-size: text.$caption;
+      font-weight: 600;
+      margin-left: rem(4px);
+      vertical-align: top;
+      color: palette(red);
+    }
 
-  &:before {
-    @include border-radius(full);
-    content: "";
-    display: block;
-    width: rem(8px);
-    height: rem(8px);
-  }
+    &:before {
+      content: "";
+      display: block;
+      border-radius: border.$full;
+      width: rem(8px);
+      height: rem(8px);
+    }
 
-  &[aria-selected]:before {
-    background-color: palette(gold);
+    &[aria-selected]:before {
+      background-color: palette(gold);
+    }
   }
 }

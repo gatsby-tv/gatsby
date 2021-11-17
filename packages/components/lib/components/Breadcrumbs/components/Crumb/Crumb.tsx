@@ -1,8 +1,10 @@
 import { FC, ReactElement } from 'react';
 import { ExtendRight } from '@gatsby-tv/icons';
-import { Class, useStyles } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Icon } from '@lib/components/Icon';
+
+import styles from './Crumb.scss';
 
 export type Breadcrumb = {
   label: string;
@@ -10,7 +12,6 @@ export type Breadcrumb = {
 };
 
 export interface CrumbProps {
-  className?: string;
   animate?: boolean;
   zombie?: boolean;
   link: FC<any>;
@@ -21,7 +22,6 @@ export interface CrumbProps {
 
 export function Crumb(props: CrumbProps): ReactElement {
   const {
-    className,
     animate,
     zombie,
     link: Link,
@@ -31,7 +31,6 @@ export function Crumb(props: CrumbProps): ReactElement {
   } = props;
 
   const { label, $link = {} } = path;
-  const styles = useStyles();
 
   return (
     <>
@@ -45,7 +44,7 @@ export function Crumb(props: CrumbProps): ReactElement {
       />
       <div
         className={Class(
-          className,
+          "Crumb",
           animate && styles.Appear,
           zombie && styles.Disappear
         )}

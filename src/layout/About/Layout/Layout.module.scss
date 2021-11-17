@@ -1,7 +1,13 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/screen';
 
 .Layout {
   padding: spacing(10) spacing(5);
+
+  @include screen.min(1100px) {
+    padding: spacing(10);
+  }
 }
 
 .Body {
@@ -9,35 +15,30 @@
   margin: 0 auto;
 
   h2 {
-    @include text-heading(display-medium);
+    @include text.heading;
+    font-size: text.$display-medium;
   }
 
   h3 {
-    @include text-heading(display-small);
+    @include text.heading;
   }
 
   h4 {
-    @include text-subheading;
+    @include text.subheading;
     margin-top: spacing(0.5);
   }
 
   p {
-    @include text-paragraph;
-  }
-}
-
-@include screen(1100px) {
-  .Layout {
-    padding: spacing(10);
+    @include text.paragraph;
   }
 
-  .Body {
+  @include screen.min(1100px) {
     h2 {
-      @include font-size(display-large);
+      font-size: text.$display-large;
     }
 
     h3 {
-      @include font-size(display-medium);
+      font-size: text.$display-medium;
     }
   }
 }

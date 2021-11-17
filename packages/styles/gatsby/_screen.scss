@@ -1,0 +1,19 @@
+@use 'sass:map';
+
+@mixin min($width) {
+  @media screen and (min-width: $width) {
+    @content
+  }
+}
+
+@mixin max($width) {
+  @media screen and (max-width: $width) {
+    @content
+  }
+}
+
+@mixin between($min, $max) {
+  @media screen and (min-width: $min) and (max-width: $max) {
+    @content
+  }
+}

@@ -1,0 +1,172 @@
+@use 'gatsby/rem' as *;
+@use 'gatsby/palette' as *;
+@use 'gatsby/line-height';
+
+$caption: rem(12px);
+$body: rem(13px);
+$body-large: rem(14px);
+$paragraph: rem(16px);
+$paragraph-large: rem(20px);
+$display-small: rem(18px);
+$display-medium: rem(24px);
+$display-large: rem(36px);
+
+$map: (
+  caption: $caption,
+  body: $body,
+  body-large: $body-large,
+  paragraph: $paragraph,
+  paragraph-large: $paragraph-large,
+  display-small: $display-small,
+  display-medium: $display-medium,
+  display-large: $display-large,
+);
+
+@mixin subdued {
+  color: palette(typography, subdued);
+}
+
+@mixin condensed {
+  font-stretch: condensed;
+}
+
+@mixin semi-condensed {
+  font-stretch: semi-condensed;
+}
+
+@mixin break-word {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+@mixin no-break {
+  white-space: nowrap;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin clamp($lines: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
+@mixin uppercase {
+  font-weight: 600;
+  appearance: none;
+  text-transform: uppercase;
+}
+
+@mixin body {
+  font-size: $body;
+  font-weight: 400;
+  line-height: line-height.$body;
+  white-space: pre-line;
+}
+
+@mixin paragraph($size: normal) {
+  @if $size == large {
+    font-size: $paragraph-large;
+  } @else {
+    font-size: $paragraph;
+  }
+
+  line-height: line-height.$body;
+  white-space: pre-line;
+}
+
+@mixin display($size: medium) {
+  @if $size == small {
+    font-size: $display-small;
+  } @else if $size == large {
+    font-size: $display-large;
+  } @else {
+    font-size: $display-medium;
+  }
+
+  line-height: line-height.$heading;
+  font-weight: 700;
+}
+
+@mixin heading {
+  font-size: $display-small;
+  font-weight: 600;
+  line-height: line-height.$heading;
+}
+
+@mixin subheading {
+  @include uppercase;
+  font-size: $body;
+  line-height: line-height.$heading;
+}
+
+@mixin error {
+  color: palette(error);
+  font-weight: 500;
+}
+
+@mixin label {
+  @include condensed;
+  font-weight: 500;
+}
+
+@mixin placeholder {
+  color: palette(typography, placeholder);
+}
+
+@mixin menu {
+  font-size: $body-large;
+  font-weight: 600;
+}
+
+@mixin snack {
+  font-size: $body-large;
+  font-weight: 500;
+}
+
+@mixin caption {
+  @include semi-condensed;
+  font-size: $caption;
+  font-weight: 400;
+}
+
+@mixin input {
+  font-weight: 400;
+  white-space: pre-line;
+  appearance: none;
+  color: palette(typography);
+}
+
+@mixin tag {
+  font-weight: 500;
+}
+
+@mixin tooltip {
+  font-size: $body-large;
+  font-weight: 500;
+}
+
+@mixin tab {
+  @include condensed;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+}
+
+@mixin button {
+  @include uppercase;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+}
+
+@mixin tabular-nums {
+  font-weight: 500;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}

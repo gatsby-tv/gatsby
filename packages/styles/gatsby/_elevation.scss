@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use 'gatsby/shadow' as *;
+
+$shadow-map: (
+  1: $level-1,
+  2: $level-2,
+  3: $level-3,
+  4: $level-4,
+  5: $level-1,
+  6: $level-6,
+  7: $level-7,
+  8: $level-8,
+  9: $level-9,
+);
+
+@mixin elevation($level) {
+  z-index: $level;
+  box-shadow: map.get($shadow-map, $level);
+}

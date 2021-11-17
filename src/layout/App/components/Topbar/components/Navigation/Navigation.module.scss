@@ -1,5 +1,5 @@
-@use 'sass:color';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .HomeLink {
   flex-shrink: 0;
@@ -11,12 +11,12 @@
 }
 
 .Tabs {
-  @include font-size(display-small);
+  font-size: text.$display-small;
   flex-shrink: 0;
-}
 
-.Tab {
-  flex-shrink: 0;
+  :global(.Item) {
+    flex-shrink: 0;
+  }
 }
 
 .Misc {
@@ -43,7 +43,7 @@
 }
 
 .MenuItem {
-  @include font-size(body-large);
+  font-size: text.$body-large;
   padding: spacing(0.5) spacing(1.5);
   
   @include hover {
@@ -52,10 +52,10 @@
 }
 
 .MenuSection {
-  @include font-size(body);
-  @include font-weight(semi-bold);
-  @include text-condensed;
-  @include text-uppercase;
+  @include text.condensed;
+  @include text.uppercase;
+  font-size: text.$body;
+  font-weight: 500;
   color: palette(typography, subdued);
   padding: spacing(0.5) spacing(1.5);
 }

@@ -18,7 +18,6 @@ export const TwoStages: Story<StagingProps> = (props) => {
     <>
       <Switch
         className={styles.Switch}
-        itemClass={styles.Option}
         selection={stage}
         onSelect={setStage}
       >
@@ -45,7 +44,6 @@ export const FiveStages: Story<StagingProps> = (props) => {
     <>
       <Switch
         className={styles.Switch}
-        itemClass={styles.Option}
         selection={stage}
         onSelect={setStage}
       >

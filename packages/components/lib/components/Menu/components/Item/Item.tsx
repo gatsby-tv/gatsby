@@ -6,9 +6,8 @@ import { Optional } from '@lib/components/Optional';
 import { Icon } from '@lib/components/Icon';
 import { Button, ButtonProps } from '@lib/components/Button';
 import { IconSource } from '@lib/types';
-import { useItem } from '@lib/utilities/item';
 
-export interface ItemProps extends Omit<ButtonProps, 'unstyled'> {
+export interface ItemProps extends Omit<ButtonProps, 'action'> {
   children?: ReactNode;
   className?: string;
   icon?: IconSource;
@@ -17,9 +16,8 @@ export interface ItemProps extends Omit<ButtonProps, 'unstyled'> {
 export function Item(props: ItemProps): ReactElement {
   const { children, className, icon: IconComponent, ...rest } = props;
   const styles = useStyles();
-  const { itemClass } = useItem();
 
-  const classes = Class(className, itemClass, styles.Item);
+  const classes = Class("Item", className, styles.Item);
 
   const IconMarkup = IconComponent ? (
     <Icon src={IconComponent} size="smaller" />

@@ -1,0 +1,7 @@
+@mixin mouse-hover {
+  @media(hover: hover) and (pointer: fine) {
+    &:not([disabled]):not([data-interactive="false"]):hover {
+      @content
+    }
+  }
+}

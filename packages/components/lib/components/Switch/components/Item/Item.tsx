@@ -3,7 +3,6 @@ import { Class, Exists } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
 import { useSwitch } from '@lib/utilities/switch';
-import { useItem } from '@lib/utilities/item';
 
 import styles from './Item.scss';
 
@@ -24,10 +23,9 @@ export function Item(props: ItemProps): ReactElement {
   } = props;
 
   const { selection, onSelect } = useSwitch();
-  const { itemClass } = useItem();
   const onClick = () => onSelect(option);
 
-  const classes = Class(className, itemClass, styles.Item);
+  const classes = Class("Item", className, styles.Item);
 
   return (
     <Connected.Item

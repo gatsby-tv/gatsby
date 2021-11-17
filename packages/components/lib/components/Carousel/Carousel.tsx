@@ -89,7 +89,7 @@ export function Carousel(props: CarouselProps): ReactElement | null {
 
   const GroupsMarkup = chunks.map((chunk, index) => (
     <div
-      key={`CarouselGroup-${index}`}
+      key={`carousel.group.${index}`}
       style={{ width }}
       className={styles.Group}
     >

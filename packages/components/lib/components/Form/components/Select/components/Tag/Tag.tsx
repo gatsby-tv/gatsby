@@ -22,7 +22,7 @@ export function Tag(props: TagProps): ReactElement {
     >
       <span>{option.label}</span>
       <Button
-        className={styles.TagClear}
+        className={styles.Clear}
         icon={Cancel}
         size="smallest"
         onClick={() => clearSelection?.(option.value)}

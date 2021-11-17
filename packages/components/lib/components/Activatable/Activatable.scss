@@ -1,10 +1,11 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
 
 .Activatable {
   opacity: 0;
   transition: {
     property: opacity;
-    duration: duration(base);
+    duration: duration.$base;
     timing-function: ease;
   }
 }
@@ -13,7 +14,7 @@
   opacity: 1;
 }
 
-@each $key, $value in $duration-map {
+@each $key, $value in duration.$map {
   .Duration-#{$key} {
     transition-duration: $value;
   }

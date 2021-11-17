@@ -2106,6 +2106,7 @@ __metadata:
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/icons": "workspace:packages/icons"
+    "@gatsby-tv/styles": "workspace:packages/styles"
     "@gatsby-tv/types": ^0.5.5
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@popperjs/core": ^2.5.4
@@ -2157,6 +2158,7 @@ __metadata:
     typescript: ^4.3.5
     webpack: ^5.49.0
   peerDependencies:
+    "@gatsby-tv/styles": "*"
     "@gatsby-tv/utilities": "*"
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -2194,6 +2196,7 @@ __metadata:
     "@gatsby-tv/icons": "workspace:packages/icons"
     "@gatsby-tv/preview": "workspace:packages/preview"
     "@gatsby-tv/services": "workspace:packages/services"
+    "@gatsby-tv/styles": "workspace:packages/styles"
     "@gatsby-tv/types": ^0.5.5
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@rollup/plugin-babel": ^5.3.0
@@ -2243,6 +2246,7 @@ __metadata:
     "@gatsby-tv/icons": "*"
     "@gatsby-tv/preview": "*"
     "@gatsby-tv/services": "*"
+    "@gatsby-tv/styles": "*"
     "@gatsby-tv/types": ^0.4.6
     "@gatsby-tv/utilities": "*"
     react: ^17.0.1
@@ -2264,6 +2268,7 @@ __metadata:
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
+    "@gatsby-tv/styles": "workspace:packages/styles"
     "@gatsby-tv/types": ^0.5.5
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@popperjs/core": ^2.5.4
@@ -2312,6 +2317,7 @@ __metadata:
   peerDependencies:
     "@gatsby-tv/components": "*"
     "@gatsby-tv/icons": "*"
+    "@gatsby-tv/styles": "*"
     "@gatsby-tv/utilities": "*"
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -2334,6 +2340,7 @@ __metadata:
     "@babel/preset-typescript": ^7.12.1
     "@gatsby-tv/components": "workspace:packages/components"
     "@gatsby-tv/icons": "workspace:packages/icons"
+    "@gatsby-tv/styles": "workspace:packages/styles"
     "@gatsby-tv/types": ^0.5.5
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@rollup/plugin-babel": ^5.3.0
@@ -2381,6 +2388,7 @@ __metadata:
   peerDependencies:
     "@gatsby-tv/components": "*"
     "@gatsby-tv/icons": "*"
+    "@gatsby-tv/styles": "*"
     "@gatsby-tv/utilities": "*"
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -2435,6 +2443,14 @@ __metadata:
     react: ^17.0.1
     react-dom: ^17.0.1
     swr: ^0.5.3
+  languageName: unknown
+  linkType: soft
+
+"@gatsby-tv/styles@workspace:packages/styles":
+  version: 0.0.0-use.local
+  resolution: "@gatsby-tv/styles@workspace:packages/styles"
+  peerDependencies:
+    sass: ^1.38.0
   languageName: unknown
   linkType: soft
 
@@ -13683,6 +13699,7 @@ fsevents@~2.1.1:
     "@gatsby-tv/player": "workspace:packages/player"
     "@gatsby-tv/preview": "workspace:packages/preview"
     "@gatsby-tv/services": "workspace:packages/services"
+    "@gatsby-tv/styles": "workspace:packages/styles"
     "@gatsby-tv/types": ^0.5.5
     "@gatsby-tv/utilities": "workspace:packages/utilities"
     "@svgr/cli": ^5.5.0

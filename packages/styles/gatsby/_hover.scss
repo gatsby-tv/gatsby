@@ -1,0 +1,5 @@
+@mixin hover {
+  &:not([disabled]):not([data-interactive="false"]):hover {
+    @content
+  }
+}

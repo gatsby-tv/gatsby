@@ -1,11 +1,13 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
 
 .Modal {
-  @include border-radius(small);
   width: rem(420px);
   height: rem(316px);
   max-width: 100%;
   background-color: palette(surface, 4);
+  border-radius: border.$small;
   padding: spacing(3);
 }
 
@@ -44,13 +46,13 @@
 }
 
 .Email {
-  @include font-size(body-large);
+  font-size: text.$body-large;
   margin-bottom: spacing(2);
   background-color: palette(surface, 2);
 }
 
 .Submit {
-  @include font-size(body-large);
+  font-size: text.$body-large;
   width: 100%;
   color: palette(surface, 4);
   background-color: palette(gold, 8);
@@ -70,8 +72,8 @@
 }
 
 .Option {
-  @include font-size(display-small);
   @include center;
+  font-size: text.$display-small;
   gap: spacing(1.5);
   background-color: palette(surface, 7);
   padding: spacing(1);
@@ -97,8 +99,8 @@
 }
 
 .EmailDecorator {
-  @include border-radius(full);
   @include elevation(2);
+  border-radius: border.$full;
   background-color: palette(surface, 4);
   position: absolute;
   bottom: rem(4px);
@@ -114,5 +116,5 @@
 }
 
 .SemiBold {
-  @include font-weight(semi-bold);
+  font-weight: 500;
 }

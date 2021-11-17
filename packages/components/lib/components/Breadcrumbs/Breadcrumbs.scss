@@ -1,51 +1,7 @@
-@use 'styles' as *;
-
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translate(-#{spacing(2)});
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes disappear {
-  from {
-    opacity: 1;
-    transform: translate(0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translate(#{spacing(2)});
-  }
-}
-
-.Appear {
-  animation-name: appear;
-  animation-duration: duration(fast);
-  animation-fill-mode: forwards;
-}
-
-.Disappear {
-  animation-name: disappear;
-  animation-duration: duration(fast);
-  animation-fill-mode: forwards;
-}
+@use 'gatsby' as *;
 
 .Breadcrumbs {
   display: flex;
-  gap: spacing(1);
+  gap: spacing(tight);
   align-items: center;
-}
-
-.Chevron {
-  font-size: 80%;
-
-  &:first-child {
-    display: none;
-  }
 }

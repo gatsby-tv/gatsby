@@ -1,61 +1,7 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/button';
 
-@keyframes highlight {
-  from {
-    transform: scale(0);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-.Animation {
-  &:before {
-    @include border-radius(small);
-    @include expand(absolute);
-
-    content: "";
-    pointer-events: none;
-    opacity: 0;
-    z-index: 1;
-    background-color: palette(overlay, active);
-    transition: all duration(faster) ease;
-  }
-
-  &[data-animating]:before {
-    opacity: 1;
-    animation: {
-      name: highlight;
-      duration: duration(faster);
-      timing-function: cubic-bezier(0.2, 1, 0.6, 1);
-    }
-  }
-}
-
-.Button {
-  display: block;
-  cursor: pointer;
-  outline: none;
-  text-align: inherit;
-  background-color: transparent;
-
-  &:disabled {
-    background-color: palette(surface, disabled);
-  }
-}
-
-.Styled {
-  @include text-button;
-  @include border-radius(small);
-  padding: spacing(0.5) spacing(1);
-}
-
-.FitContent {
-  width: fit-content;
-}
-
-.LoadingContainer {
+.Loading {
   @include center;
   overflow: hidden;
 }
@@ -68,20 +14,22 @@
   position: absolute;
 }
 
-.Icon {
-  @include border-radius(full);
-  width: fit-content;
-  padding: spacing(1);
+.Animate {
+  @include button.animate;
 }
 
-.Icon.Animation {
-  &:before {
-    @include border-radius(full);
-    content: "";
-    display: block;
-    aspect-ratio: 1 / 1;
-    height: 100%;
-    width: fit-content;
-    margin: 0 auto;
-  }
+.Action {
+  @include button.action;
+}
+
+.Submit {
+  @include button.submit;
+}
+
+.Label {
+  @include button.label;
+}
+
+.Icon {
+  @include button.icon;
 }

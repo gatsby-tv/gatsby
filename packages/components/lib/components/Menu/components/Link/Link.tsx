@@ -8,23 +8,20 @@ import {
   Link as LinkComponent,
   LinkProps as LinkComponentProps,
 } from '@lib/components/Link';
-import { useItem } from '@lib/utilities/item';
 import { IconSource } from '@lib/types';
 
 export interface LinkProps extends Omit<LinkComponentProps, 'href'> {
   children?: ReactNode;
   className?: string;
-  href?: string;
   icon?: IconSource;
 }
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   (props: LinkProps, ref: Ref<HTMLAnchorElement>) => {
-    const { children, className, icon: IconComponent, href, ...rest } = props;
+    const { children, className, icon: IconComponent, ...rest } = props;
     const styles = useStyles();
-    const { itemClass } = useItem();
 
-    const classes = Class(className, itemClass, styles.Item);
+    const classes = Class("Item", "Link", className, styles.Item);
 
     const IconMarkup = IconComponent ? (
       <Icon src={IconComponent} size="smaller" />
@@ -33,8 +30,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     return (
       <Optional
         component={LinkComponent}
-        active={Boolean(href)}
-        $props={{ ref, href, ...rest }}
+        $props={{ ref, ...rest }}
       >
         <Connected.Item className={classes}>
           <Optional

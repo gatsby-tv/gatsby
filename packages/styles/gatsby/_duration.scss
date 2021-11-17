@@ -1,0 +1,21 @@
+@use 'sass:map';
+
+$instant: 0ms;
+$fastest: 100ms;
+$faster: 200ms;
+$fast: 300ms;
+$base: 500ms;
+$slow: 700ms;
+$slower: 1s;
+$slowest: 2s;
+
+$map: (
+  instant: $instant,
+  fastest: $fastest,
+  faster: $faster,
+  fast: $fast,
+  base: $base,
+  slow: $slow,
+  slower: $slower,
+  slowest: $slowest,
+);

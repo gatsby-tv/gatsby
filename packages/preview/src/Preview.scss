@@ -1,5 +1,5 @@
-@use 'sass:color';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
 
 .Preview-column {
   display: flex;
@@ -21,25 +21,25 @@
   }
 }
 
-.Item-row {
+.Info-row {
   min-width: rem(250px);
 }
 
-.Item-compact {
+.Info-compact {
   min-width: rem(500px);
 }
 
 .Duration {
-  @include border-radius(smallest);
   position: absolute;
   bottom: spacing(0.5);
   right: spacing(0.5);
   padding: 0 spacing(0.5);
+  border-radius: border.$smallest;
   background-color: palette(overlay, opaque);
 }
 
 .DurationText {
-  @include font-weight(bold);
+  font-weight: 600;
 }
 
 .Timeline {
@@ -50,8 +50,8 @@
   bottom: 0;
   height: rem(3px);
   background-color: palette(slider, track);
-  border-bottom-left-radius: border-radius(smallest);
-  border-bottom-right-radius: border-radius(smallest);
+  border-bottom-left-radius: border.$smallest;
+  border-bottom-right-radius: border.$smallest;
 }
 
 .TimelineProgress {

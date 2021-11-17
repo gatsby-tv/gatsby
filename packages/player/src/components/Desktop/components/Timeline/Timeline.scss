@@ -1,5 +1,6 @@
 @use 'sass:color';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
 
 .Timeline {
   cursor: pointer;
@@ -43,13 +44,13 @@
   background-color: palette(gold);
 
   &:after {
-    @include border-radius(full);
     content: "";
     position: absolute;
     right: rem(-7px);
     width: rem(14px);
     height: rem(14px);
     background-color: palette(gold);
+    border-radius: border.$full;
     transform: scale(0);
     transition: transform 150ms ease;
   }
@@ -60,7 +61,7 @@
 }
 
 .Text {
-  @include font-weight(bold);
+  font-weight: 600;
   font-stretch: condensed;
   user-select: none;
   opacity: 0;

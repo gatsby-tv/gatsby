@@ -1,0 +1,160 @@
+@use 'gatsby/colors' as *;
+
+@mixin root {
+  --color-surface: #{$surface};
+  --color-surface-1: #{$surface-1};
+  --color-surface-2: #{$surface-2};
+  --color-surface-3: #{$surface-3};
+  --color-surface-4: #{$surface-4};
+  --color-surface-5: #{$surface-5};
+  --color-surface-6: #{$surface-6};
+  --color-surface-7: #{$surface-7};
+  --color-surface-8: #{$surface-8};
+  --color-surface-9: #{$surface-9};
+
+  --color-surface-disabled: #{$surface-disabled};
+  --color-surface-placeholder: #{$surface-placeholder};
+
+  --color-white: #{$white};
+  --color-black: #{$black};
+
+  --color-typography: #{$typography};
+  --color-typography-inverted: #{$typography-inverted};
+  --color-typography-placeholder: #{$typography-placeholder};
+  --color-typography-subdued: #{$typography-subdued};
+  --color-typography-disabled: #{$typography-disabled};
+
+  --color-icon: #{$icon};
+  --color-icon-hover: #{$icon-hover};
+  --color-icon-focused: #{$icon-focused};
+
+  --color-tag: #{$tag};
+  --color-tag-hover: #{$tag-hover};
+
+  --color-option-selected: #{$option-selected};
+  --color-option-hover: #{$option-hover};
+
+  --color-overlay-tint: #{$overlay-tint};
+  --color-overlay-opaque: #{$overlay-opaque};
+  --color-overlay-active: #{$overlay-active};
+  --color-overlay-hover: #{$overlay-hover};
+  --color-overlay-focused: #{$overlay-focused};
+
+  --color-snackbar: #{$snackbar};
+
+  --color-error: #{$error};
+  --color-error-hover: #{$error-hover};
+  --color-error-focused: #{$error-focused};
+
+  --color-link: #{$link};
+  --color-link-hover: #{$link-hover};
+  --color-link-focused: #{$link-focused};
+
+  --color-outline: #{$outline};
+  --color-outline-hover: #{$outline-hover};
+  --color-outline-focused: #{$outline-focused};
+
+  --color-separator: #{$separator};
+
+  --color-shadow-1: #{$shadow-1};
+  --color-shadow-2: #{$shadow-2};
+  --color-shadow-3: #{$shadow-3};
+
+  --color-slider-track: #{$slider-track};
+  --color-slider-ball: #{$slider-ball};
+
+  --color-gold: #{$gold};
+  --color-gold-1: #{$gold-1};
+  --color-gold-2: #{$gold-2};
+  --color-gold-3: #{$gold-3};
+  --color-gold-4: #{$gold-4};
+  --color-gold-5: #{$gold-5};
+  --color-gold-6: #{$gold-6};
+  --color-gold-7: #{$gold-7};
+  --color-gold-8: #{$gold-8};
+  --color-gold-9: #{$gold-9};
+  --color-gold-10: #{$gold-10};
+  --color-gold-11: #{$gold-11};
+  --color-gold-12: #{$gold-12};
+  --color-gold-13: #{$gold-13};
+  --color-gold-14: #{$gold-14};
+  --color-gold-15: #{$gold-15};
+
+  --color-grey: #{$grey};
+  --color-grey-1: #{$grey-1};
+  --color-grey-2: #{$grey-2};
+  --color-grey-3: #{$grey-3};
+  --color-grey-4: #{$grey-4};
+  --color-grey-5: #{$grey-5};
+  --color-grey-6: #{$grey-6};
+  --color-grey-7: #{$grey-7};
+  --color-grey-8: #{$grey-8};
+  --color-grey-9: #{$grey-9};
+  --color-grey-10: #{$grey-10};
+  --color-grey-11: #{$grey-11};
+  --color-grey-12: #{$grey-12};
+  --color-grey-13: #{$grey-13};
+  --color-grey-14: #{$grey-14};
+  --color-grey-15: #{$grey-15};
+
+  --color-blue: #{$blue};
+  --color-blue-1: #{$blue-1};
+  --color-blue-2: #{$blue-2};
+  --color-blue-3: #{$blue-3};
+  --color-blue-4: #{$blue-4};
+  --color-blue-5: #{$blue-5};
+  --color-blue-6: #{$blue-6};
+  --color-blue-7: #{$blue-7};
+  --color-blue-8: #{$blue-8};
+  --color-blue-9: #{$blue-9};
+  --color-blue-10: #{$blue-10};
+  --color-blue-11: #{$blue-11};
+  --color-blue-12: #{$blue-12};
+  --color-blue-13: #{$blue-13};
+  --color-blue-14: #{$blue-14};
+  --color-blue-15: #{$blue-15};
+
+  --color-green: #{$green};
+  --color-green-1: #{$green-1};
+  --color-green-2: #{$green-2};
+  --color-green-3: #{$green-3};
+  --color-green-4: #{$green-4};
+  --color-green-5: #{$green-5};
+  --color-green-6: #{$green-6};
+  --color-green-7: #{$green-7};
+  --color-green-8: #{$green-8};
+  --color-green-9: #{$green-9};
+  --color-green-10: #{$green-10};
+  --color-green-11: #{$green-11};
+  --color-green-12: #{$green-12};
+  --color-green-13: #{$green-13};
+  --color-green-14: #{$green-14};
+  --color-green-15: #{$green-15};
+
+  --color-red: #{$red};
+  --color-red-1: #{$red-1};
+  --color-red-2: #{$red-2};
+  --color-red-3: #{$red-3};
+  --color-red-4: #{$red-4};
+  --color-red-5: #{$red-5};
+  --color-red-6: #{$red-6};
+  --color-red-7: #{$red-7};
+  --color-red-8: #{$red-8};
+  --color-red-9: #{$red-9};
+  --color-red-10: #{$red-10};
+  --color-red-11: #{$red-11};
+  --color-red-12: #{$red-12};
+  --color-red-13: #{$red-13};
+  --color-red-14: #{$red-14};
+  --color-red-15: #{$red-15};
+}
+
+@function palette($name, $args...) {
+  $spec: $name;
+
+  @each $arg in $args {
+    $spec: #{$spec}-#{$arg};
+  }
+
+  @return var(--color-#{$spec});
+}

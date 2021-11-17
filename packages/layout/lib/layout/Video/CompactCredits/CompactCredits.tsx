@@ -1,11 +1,9 @@
-import { useState, useEffect, FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import {
   AvatarCollation,
   Button,
   Icon,
   TextSubheading,
-  Modal,
-  Panel,
 } from '@gatsby-tv/components';
 import { Plus } from '@gatsby-tv/icons';
 import {
@@ -29,7 +27,6 @@ export function CompactCredits(
   props: CompactCreditsProps
 ): ReactElement | null {
   const { content, link } = props;
-  const isMobile = useMobileDetector();
   const mounted = useComponentWillMount();
 
   if (
@@ -42,7 +39,7 @@ export function CompactCredits(
     return null;
 
   const CollaboratorsMarkup = content.collaborators.length
-    ? content.collaborators.map((user, index) => (
+    ? content.collaborators.map((user) => (
         <User.Info
           key={`Collaborator.${user._id}`}
           user={user}
@@ -53,7 +50,7 @@ export function CompactCredits(
     : null;
 
   const ContributorsMarkup = content.contributors.length
-    ? content.contributors.map((user, index) => (
+    ? content.contributors.map((user) => (
         <User.Info
           key={`Contributor.${user._id}`}
           user={user}
@@ -64,7 +61,7 @@ export function CompactCredits(
     : null;
 
   const SponsorsMarkup = content.sponsors.length
-    ? content.sponsors.map((user, index) => (
+    ? content.sponsors.map((user) => (
         <User.Info
           key={`Sponsor.${user._id}`}
           user={user}

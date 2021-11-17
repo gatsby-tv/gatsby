@@ -1,17 +1,18 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .TextMeta {
   width: rem(150px);
 }
 
 .TextMeta-small {
-  @include font-size(caption);
+  font-size: text.$caption;
 }
 
 .TextMeta-medium {
-  @include font-size(body);
+  font-size: text.$body;
 }
 
 .TextMeta-large {
-  @include font-size(body-large);
+  font-size: text.$body-large;
 }

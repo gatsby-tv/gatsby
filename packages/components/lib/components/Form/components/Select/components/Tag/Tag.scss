@@ -1,9 +1,11 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
 
 .Tag {
-  @include border-radius(base);
-  @include font-weight(semi-bold);
+  @include text.tag;
   display: flex;
+  border-radius: border.$base;
   flex-shrink: 0;
   background-color: palette(tag);
   cursor: default;
@@ -14,11 +16,11 @@
   }
 }
 
-.TagClear {
+.Clear {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-top-right-radius: border-radius(base);
-  border-bottom-right-radius: border-radius(base);
+  border-top-right-radius: border.$base;
+  border-bottom-right-radius: border.$base;
   padding: spacing(0.5);
 
   @include hover {

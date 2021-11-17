@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/screen';
 
 .Layout {
   display: flex;
@@ -6,16 +7,12 @@
   max-width: rem(2000px);
   margin: 0 auto;
   padding: spacing(1.5) spacing(1);
-}
 
-@include screen(650px) {
-  .Layout {
+  @include screen.min(650px) {
     padding: spacing(1.5) spacing(3);
   }
-}
 
-@include screen(1000px) {
-  .Layout {
+  @include screen.min(1000px) {
     flex-direction: row;
   }
 }

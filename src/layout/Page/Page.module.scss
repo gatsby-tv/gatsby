@@ -1,7 +1,12 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/screen';
 
 .Page {
   margin: spacing(2) spacing(1);
+
+  @include screen.min(650px) {
+    margin: spacing(3);
+  }
 }
 
 .Loading {
@@ -11,12 +16,6 @@
 
 .Spinner {
   font-size: rem(70px);
-}
-
-@include screen(650px) {
-  .Page {
-    margin: spacing(3);
-  }
 }
 
 .NoMargin {

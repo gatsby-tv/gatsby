@@ -1,5 +1,5 @@
-@use 'sass:color';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Controls {
   display: flex;
@@ -8,7 +8,7 @@
 }
 
 .Section {
-  @include expand();
+  @include expand;
   display: flex;
   flex-grow: 1;
   align-items: stretch;
@@ -24,7 +24,7 @@
 
 .Progress {
   @include center;
-  @include text-tabular-nums;
-  @include font-size(body);
+  @include text.tabular-nums;
+  font-size: text.$body;
   padding: 0 spacing(1);
 }

@@ -1,26 +1,26 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
+@use 'gatsby/screen';
 
 .Slide {
   display: block;
   cursor: pointer;
   outline: none;
-  margin: 0 rem(2.5px);
+  margin: 0 spacing(extratight);
   color: inherit;
   background-color: transparent;
-  transition: box-shadow duration(fast) ease, transform duration(fast) ease;
+  transition: box-shadow duration.$fast ease, transform duration.$fast ease;
+
+  & > * {
+    width: 100%;
+  }
 
   @include mouse-hover {
     @include elevation(4);
     transform: scale(1.075);
   }
 
-  & > * {
-    width: 100%;
-  }
-}
-
-@include screen(650px) {
-  .Slide {
-    margin: 0 spacing(0.5);
+  @include screen.max(650px) {
+    margin: 0 rem(2.5px);
   }
 }

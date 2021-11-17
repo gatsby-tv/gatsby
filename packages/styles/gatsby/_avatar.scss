@@ -1,0 +1,19 @@
+@use 'gatsby/rem' as *;
+
+$smallest: rem(32px);
+$smaller: rem(36px);
+$small: rem(40px);
+$base: rem(44px);
+$large: rem(48px);
+$larger: rem(52px);
+$largest: rem(72px);
+
+$map: (
+  smallest: $smallest,
+  smaller: $smaller,
+  small: $small,
+  base: $base,
+  large: $large,
+  larger: $larger,
+  largest: $largest,
+);

@@ -1,4 +1,5 @@
 import { ReactNode, ReactElement } from 'react';
+import { Class } from '@gatsby-tv/utilities';
 
 import { useCarousel } from '@lib/utilities/carousel';
 
@@ -16,7 +17,7 @@ export function Slide(props: SlideProps): ReactElement {
   return (
     <button
       style={{ width: `${100 / groups}%` }}
-      className={styles.Slide}
+      className={Class("Slide", styles.Slide)}
       onClick={onClick}
     >
       {children}

@@ -1,5 +1,8 @@
-@use 'styles' as *;
 @use 'sass:color';
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
+@use 'gatsby/screen';
 
 .Landing {
   display: flex;
@@ -9,7 +12,7 @@
   color: palette(white);
   
   h1 {
-    @include text-heading;
+    @include text.heading;
     display: flex;
     gap: spacing(1);
     font-size: rem(50px);
@@ -17,10 +20,22 @@
   }
 
   h2 {
-    @include text-heading;
-    @include font-size(display-small);
+    @include text.heading;
+    font-size: text.$display-small;
     text-align: center;
     margin-top: spacing(1);
+  }
+
+  @include screen.min(850px) {
+    h1 {
+      font-size: rem(100px);
+      margin-top: calc(50vh - 180px);
+    }
+
+    h2 {
+      font-size: text.$display-medium;
+      margin-top: spacing(2);
+    }
   }
 }
 
@@ -32,6 +47,10 @@
   flex-shrink: 0;
   height: 100%;
   font-size: rem(50px);
+
+  @include screen.min(850px) {
+    font-size: rem(100px);
+  }
 }
 
 .CallsToAction {
@@ -39,16 +58,25 @@
   flex-direction: row;
   gap: spacing(1.5);
   margin-top: spacing(4);
+
+  @include screen.min(850px) {
+    gap: spacing(3);
+  }
 }
 
 .Link {
-  @include text-heading;
-  @include font-size(paragraph);
-  @include border-radius(small);
+  @include text.heading;
+  font-size: text.$paragraph;
   display: flex;
   flex-direction: row;
   gap: spacing(1);
   padding: spacing(1) spacing(1.5);
+  border-radius: border.$small;
+
+  @include screen.min(850px) {
+    font-size: text.$paragraph-large;
+    padding: spacing(1.5) spacing(2);
+  }
 }
 
 .GitHub {
@@ -64,33 +92,6 @@
 
   @include hover {
     background-color: color.adjust(#7289da, $lightness: 5%);
-  }
-}
-
-@include screen(850px) {
-  .Landing {
-    h1 {
-      font-size: rem(100px);
-      margin-top: calc(50vh - 180px);
-    }
-
-    h2 {
-      @include font-size(display-medium);
-      margin-top: spacing(2);
-    }
-  }
-
-  .CallsToAction {
-    gap: spacing(3);
-  }
-
-  .Link {
-    @include font-size(paragraph-large);
-    padding: spacing(1.5) spacing(2);
-  }
-
-  .Icon {
-    font-size: rem(100px);
   }
 }
 

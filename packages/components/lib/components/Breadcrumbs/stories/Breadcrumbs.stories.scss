@@ -1,7 +1,8 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Breadcrumbs {
-  @include font-size(display-small);
+  font-size: text.$display-small;
   min-height: spacing(3);
   margin-left: spacing(1);
 }

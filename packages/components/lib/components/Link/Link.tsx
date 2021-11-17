@@ -18,6 +18,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const rel = external ? 'noopener noreferrer' : undefined;
 
     const classes = Class(
+      "Link",
       className,
       underline && styles.Underline
     );

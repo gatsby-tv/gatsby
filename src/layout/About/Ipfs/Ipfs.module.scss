@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
+@use 'gatsby/screen';
 
 .Ipfs {
   display: grid;
@@ -18,6 +20,17 @@
     margin-bottom: spacing(2);
     grid-area: heading;
   }
+
+  @include screen.min(800px) {
+    grid-template-columns: 0.6fr 1fr;
+    grid-template-areas:
+      'icon paragraph'
+      'heading paragraph';
+
+    h3 {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .Stars {
@@ -31,33 +44,20 @@
   @include center;
   font-size: rem(140px);
   grid-area: icon;
+
+  @include screen.min(800px) {
+    font-size: rem(200px);
+  }
 }
 
 .Text {
   @include elevation(2);
-  @include border-radius(base);
   background-color: palette(overlay, opaque);
+  border-radius: border.$base;
   padding: spacing(2);
   grid-area: paragraph;
 
   & > p:not(:first-of-type) {
     margin-top: spacing(2);
-  }
-}
-
-@include screen(800px) {
-  .Ipfs {
-    grid-template-columns: 0.6fr 1fr;
-    grid-template-areas:
-      'icon paragraph'
-      'heading paragraph';
-
-    h3 {
-      margin-bottom: 0;
-    }
-  }
-
-  .Icon {
-    font-size: rem(200px);
   }
 }

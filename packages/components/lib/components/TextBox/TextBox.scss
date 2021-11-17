@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/gutter';
 
 .Clamp {
   display: -webkit-box;
@@ -6,8 +7,8 @@
   -webkit-box-orient: vertical;
 }
 
-@each $key, $value in $spacing-map {
-  .TextBox-spacing-#{$key} {
+@each $key, $value in gutter.$map {
+  .TextBox-#{$key} {
     white-space: pre-line;
 
     & > *:not(:first-child) {

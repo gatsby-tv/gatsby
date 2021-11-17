@@ -1,12 +1,13 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
+@use 'gatsby/screen';
 
 .Avatar {
   width: rem(100px);
   height: rem(100px);
-}
 
-@include screen(650px) {
-  .Avatar {
+  @include screen.min(650px) {
     width: rem(150px);
     height: rem(150px);
   }
@@ -24,34 +25,34 @@
 
 .Tint {
   @include expand(absolute);
-  @include border-radius(full);
+  border-radius: border.$full;
   background-color: palette(overlay, opaque);
 }
 
 .Icon {
-  @include border-radius(full);
   @include elevation(3);
   position: absolute;
   top: spacing(0.5);
   right: spacing(0.5);
   color: palette(grey, 5);
   background-color: palette(grey, 14);
+  border-radius: border.$full;
   padding: rem(7px);
 }
 
 .Text {
-  @include text-heading;
-  @include font-size(body-large);
   @include expand(absolute);
   @include center;
+  @include text.heading;
+  font-size: text.$body-large;
   padding: spacing(2);
 }
 
 .Modal {
-  @include border-radius(small);
   max-width: 100%;
   max-height: 70vh;
   background-color: palette(surface, 4);
+  border-radius: border.$small;
   padding: spacing(3);
 }
 

@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
 
 .Frame {
   @include expand(fixed);
@@ -8,29 +9,29 @@
 }
 
 .MainFrame {
-  @include expand();
+  @include expand;
   flex: 1 1 auto;
 }
 
 .TopFrame {
-  @include expand();
+  @include expand;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
 }
 
 .SideFrame {
-  @include expand();
+  @include expand;
   display: flex;
   flex: 1 1 auto;
 }
 
 .Bar {
   flex-shrink: 0;
-  transition: transform duration(base) ease duration(faster);
+  transition: transform duration.$base ease duration.$faster;
 }
 
 .Hidden {
-  @include expand();
+  @include expand;
   position: absolute;
 }

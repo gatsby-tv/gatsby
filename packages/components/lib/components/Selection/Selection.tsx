@@ -2,7 +2,6 @@ import { AriaAttributes, ReactNode, ReactElement } from 'react';
 import { Class, StylesContext } from '@gatsby-tv/utilities';
 
 import { SelectionContext } from '@lib/utilities/selection';
-import { ItemContext } from '@lib/utilities/item';
 import { Scroll } from '@lib/components/Scroll';
 import { Optional } from '@lib/components/Optional';
 
@@ -16,7 +15,6 @@ export type { ItemProps as SelectionItemProps };
 export interface SelectionProps extends AriaAttributes {
   children?: ReactNode;
   className?: string;
-  itemClass?: string;
   selection?: string;
   row?: boolean;
   scrollHidden?: boolean;
@@ -27,7 +25,6 @@ export function Selection(props: SelectionProps): ReactElement {
   const {
     children,
     className,
-    itemClass,
     selection,
     row,
     scrollHidden = true,
@@ -44,17 +41,15 @@ export function Selection(props: SelectionProps): ReactElement {
   return (
     <StylesContext.Provider value={styles}>
       <SelectionContext.Provider value={{ selection, setSelection: onSelect }}>
-        <ItemContext.Provider value={{ itemClass }}>
-          <Optional
-            component={Scroll}
-            active={!row}
-            $props={{ hide: scrollHidden }}
-          >
-            <div className={classes} role="tablist" aria-label={ariaLabel}>
-              {children}
-            </div>
-          </Optional>
-        </ItemContext.Provider>
+        <Optional
+          component={Scroll}
+          active={!row}
+          $props={{ hide: scrollHidden }}
+        >
+          <div className={classes} role="tablist" aria-label={ariaLabel}>
+            {children}
+          </div>
+        </Optional>
       </SelectionContext.Provider>
     </StylesContext.Provider>
   );

@@ -43,7 +43,7 @@ function AvatarURL(props: AvatarURLProps): ReactElement {
 
   useEffect(() => setLoading(true), [imgProps.src]);
 
-  const classes = Class(className, styles[`Viewport-${size}`]);
+  const classes = Class("Avatar", className, styles[`Viewport-${size}`]);
   const imageClasses = Class(styles.Image, loading && styles.Loading);
 
   return (

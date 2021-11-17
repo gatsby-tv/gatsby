@@ -20,7 +20,10 @@ module.exports = {
         },
         sassLoaderOptions: {
           sassOptions: {
-            includePaths: [path.join(__dirname, '..', 'lib')],
+            includePaths: [
+              path.join(__dirname, '..', 'lib'),
+              require('@gatsby-tv/styles'),
+            ],
           },
         },
       },
@@ -35,5 +38,5 @@ module.exports = {
   webpackFinal: (config) => {
     config.plugins.push(new NodePolyfillPlugin());
     return config;
-  }
+  },
 };

@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/screen';
 
 .Markup {
   h2 {
@@ -20,7 +22,7 @@
   }
 
   p, ul {
-    @include font-size(paragraph);
+    font-size: text.$paragraph;
     margin-bottom: spacing(2);
 
     &:last-child {
@@ -31,16 +33,14 @@
   li {
     margin-bottom: spacing(2);
   }
-}
 
-@include screen(1100px) {
-  .Markup {
+  @include screen.min(1100px) {
     ul {
       padding-left: spacing(5);
     }
 
     p, ul {
-      @include font-size(paragraph-large);
+      font-size: text.$paragraph-large;
     }
 
     li {

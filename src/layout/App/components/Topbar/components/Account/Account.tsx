@@ -27,7 +27,6 @@ export function Account(): ReactElement {
       <Menu
         for={menu.ref}
         className={styles.Menu}
-        itemClass={styles.MenuItem}
         placement="bottom-end"
         offset={[0, 7]}
         active={menu.active}

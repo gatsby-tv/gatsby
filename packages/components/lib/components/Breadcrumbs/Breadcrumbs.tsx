@@ -7,7 +7,7 @@ import {
   FC,
   ReactElement,
 } from 'react';
-import { Class, StylesContext } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Link } from '@lib/components/Link';
 
@@ -19,7 +19,6 @@ export type { Breadcrumb };
 
 export interface BreadcrumbsProps {
   className?: string;
-  itemClass?: string;
   link?: FC<any>;
   crumbs: Breadcrumb[];
   $props?: any;
@@ -27,14 +26,7 @@ export interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
-  const {
-    className,
-    itemClass,
-    crumbs,
-    link = Link,
-    $props = {},
-    onSelect,
-  } = props;
+  const { className, crumbs, link = Link, $props = {}, onSelect } = props;
 
   const original = useMemo(() => crumbs, []);
   const buffer = useRef(crumbs);
@@ -56,7 +48,6 @@ export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
   const CrumbsMarkup = crumbs.map((path, index) => (
     <Crumb
       key={`${path.label}.${index}`}
-      className={itemClass}
       animate={!original.includes(path)}
       link={link}
       path={path}
@@ -68,7 +59,6 @@ export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
   const ZombieMarkup = zombies.map((path, index) => (
     <Crumb
       key={`${path.label}.${index}.zombie`}
-      className={itemClass}
       zombie
       link={link}
       path={path}
@@ -77,11 +67,9 @@ export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
   ));
 
   return (
-    <StylesContext.Provider value={styles}>
-      <div className={Class(className, styles.Breadcrumbs)}>
-        {CrumbsMarkup}
-        {ZombieMarkup}
-      </div>
-    </StylesContext.Provider>
+    <div className={Class(className, styles.Breadcrumbs)}>
+      {CrumbsMarkup}
+      {ZombieMarkup}
+    </div>
   );
 }

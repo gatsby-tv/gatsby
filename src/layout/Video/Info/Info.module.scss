@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/screen';
 
 .Container {
   display: flex;
@@ -11,22 +12,20 @@
 
 .Credits {
   margin: 0 0 spacing(1);
-}
 
-@include screen(1000px) {
-  .Info {
-    flex: 2 2 65%;
-    padding-right: spacing(3);
-  }
-}
-
-@include screen(1200px) {
-  .Credits {
+  @include screen.min(1200px) {
     flex: 0 1 rem(350px);
     margin: 0 0 0 spacing(3);
 
     & > * {
       @include expand(absolute);
     }
+  }
+}
+
+@include screen.min(1000px) {
+  .Info {
+    flex: 2 2 65%;
+    padding-right: spacing(3);
   }
 }

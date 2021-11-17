@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/gutter';
 
 .Rule {
   border: none;
@@ -15,7 +17,7 @@
   align-items: center;
 
   & > span {
-    @include text-uppercase;
+    @include text.uppercase;
     flex-shrink: 0;
     text-align: center;
     vertical-align: middle;
@@ -32,7 +34,7 @@
   }
 }
 
-@each $key, $value in $spacing-map {
+@each $key, $value in gutter.$map {
   .Spacing-#{$key} {
     margin: $value 0;
   }

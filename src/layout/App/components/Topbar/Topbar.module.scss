@@ -1,13 +1,14 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/screen';
 
 .Topbar {
   display: flex;
   align-items: stretch;
-}
 
-@include screen(850px) {
-  .Topbar {
-    .NavigationContainer, .SearchContainer, .AccountContainer {
+  @include screen.min(850px) {
+    .NavigationContainer,
+    .SearchContainer,
+    .AccountContainer {
       width: 100%;
       flex: 1 1 auto;
     }

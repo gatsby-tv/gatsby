@@ -1,14 +1,14 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
 
 .Menu {
   width: rem(200px);
   background-color: palette(surface, 4);
-}
 
-.Item {
-  padding: spacing(1) spacing(1.5);
+  :global(.Item) {
+    padding: spacing(1) spacing(1.5);
 
-  &:hover {
-    background-color: palette(surface, 6);
+    &:hover {
+      background-color: palette(surface, 6);
+    }
   }
 }

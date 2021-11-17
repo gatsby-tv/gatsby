@@ -23,7 +23,6 @@ export const Example: Story<MenuProps> = () => {
       <Button ref={menu.ref} animate icon={Gear} onClick={menu.toggle} />
       <Menu
         className={styles.Menu}
-        itemClass={styles.Item}
         for={menu.ref}
         placement="bottom-start"
         active={menu.active}

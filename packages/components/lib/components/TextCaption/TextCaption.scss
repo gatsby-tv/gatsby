@@ -1,6 +1,7 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Caption {
-  @include text-caption;
+  @include text.caption;
   margin: 0;
 }

@@ -1,17 +1,17 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/screen';
 
 .Title {
-  @include text-clamp(1);
+  @include text.clamp(1);
 }
 
 .Subtitle {
-  @include text-subdued;
-  @include font-size(body-large);
-  @include font-weight(bold);
-}
+  @include text.subdued;
+  font-size: text.$body-large;
+  font-weight: 600;
 
-@include screen(650px) {
-  .Subtitle {
-    @include font-size(display-small);
+  @include screen.min(650px) {
+    font-size: text.$display-small;
   }
 }

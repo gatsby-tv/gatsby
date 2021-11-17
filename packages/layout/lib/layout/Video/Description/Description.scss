@@ -1,17 +1,18 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Mobile {
   width: 100%;
 }
 
 .Description {
-  @include font-size(body-large);
+  font-size: text.$body-large;
   width: 100%;
 }
 
 .ShowMoreButton {
-  @include font-size(caption);
-  @include text-no-break;
+  @include text.no-break;
+  font-size: text.$caption;
   width: fit-content;
   padding: 0;
 }

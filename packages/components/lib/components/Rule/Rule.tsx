@@ -16,6 +16,7 @@ export function Rule(props: RuleProps): ReactElement {
   const { children, className, thin, spacing = 'base' } = props;
 
   const classes = Class(
+    "Rule",
     className,
     styles.Rule,
     thin && styles.Thin,

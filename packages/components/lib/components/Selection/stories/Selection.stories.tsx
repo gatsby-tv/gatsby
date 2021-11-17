@@ -18,7 +18,6 @@ export const OneSection: Story<SelectionProps> = () => {
   return (
     <div className={styles.Selection}>
       <Selection
-        itemClass={styles.Item}
         scrollHidden
         selection={selection}
         onSelect={select}
@@ -45,7 +44,6 @@ export const MultipleSections: Story<SelectionProps> = () => {
   return (
     <div className={styles.Selection}>
       <Selection
-        itemClass={styles.Item}
         scrollHidden
         selection={selection}
         onSelect={select}
@@ -80,7 +78,6 @@ export const Row: Story<SelectionProps> = () => {
   return (
     <div className={Class(styles.Selection, styles.Wide)}>
       <Selection
-        itemClass={styles.Item}
         row
         selection={selection}
         onSelect={select}

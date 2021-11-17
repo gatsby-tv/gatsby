@@ -1,12 +1,11 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/screen';
 
 .Related {
   max-width: rem(650px);
   margin-top: spacing(1);
-}
 
-@include screen(1000px) {
-  .Related {
+  @include screen.min(1000px) {
     flex: 1 1 35%;
     margin-top: spacing(0.5);
     min-width: rem(450px);

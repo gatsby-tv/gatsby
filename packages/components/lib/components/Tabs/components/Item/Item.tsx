@@ -9,6 +9,6 @@ export type ItemProps = SelectionItemProps;
 
 export function Item(props: ItemProps): ReactElement {
   const { className, ...rest } = props;
-  const classes = Class(className, styles.Item);
+  const classes = Class("Item", className, styles.Item);
   return <Selection.Item className={classes} {...rest} />;
 }

@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/screen';
 
 .Listing {
   display: grid;
@@ -6,32 +7,26 @@
   justify-content: stretch;
   column-gap: spacing(1.5);
   row-gap: spacing(1.5);
-}
 
-.Column {
-  row-gap: spacing(2);
-}
-
-@include screen(650px) {
-  .Listing {
+  @include screen.min(650px) {
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
   }
 
-  .Column {
-    row-gap: spacing(3);
-  }
-}
-
-@include screen(1200px) {
-  .Listing {
+  @include screen.min(1200px) {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  @include screen.min(1600px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-@include screen(1600px) {
-  .Listing {
-    grid-template-columns: repeat(4, 1fr);
+.Column {
+  row-gap: spacing(2);
+
+  @include screen.min(650px) {
+    row-gap: spacing(3);
   }
 }

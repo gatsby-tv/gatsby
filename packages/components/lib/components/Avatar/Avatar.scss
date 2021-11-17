@@ -1,8 +1,10 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/avatar';
+@use 'gatsby/border';
 
 .Image {
-  @include expand();
-  @include border-radius(full);
+  @include expand;
+  border-radius: border.$full;
   display: block;
 }
 
@@ -11,7 +13,7 @@
   height: 0;
 }
 
-@each $key, $value in $avatar-size-map {
+@each $key, $value in avatar.$map {
   .Viewport-#{$key} {
     width: $value;
     height: $value;

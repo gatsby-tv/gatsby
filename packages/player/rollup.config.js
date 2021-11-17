@@ -26,7 +26,10 @@ const plugins = [
     plugins: [autoprefixer],
     use: {
       sass: {
-        includePaths: [path.join(__dirname, 'src')],
+        includePaths: [
+          path.join(__dirname, 'src'),
+          require('@gatsby-tv/styles'),
+        ],
       },
     },
   }),

@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/screen';
 
 .Listing {
   display: grid;
@@ -6,6 +8,12 @@
   justify-content: stretch;
   column-gap: spacing(1);
   row-gap: spacing(1);
+
+  @include screen.min(650px) {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .Column {
@@ -13,15 +21,7 @@
 }
 
 .NoContentText {
-  @include expand();
-  @include font-size(body-large);
+  @include expand;
+  font-size: text.$body-large;
   text-align: center;
-}
-
-@include screen(650px) {
-  .Listing {
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
-    align-items: center;
-  }
 }

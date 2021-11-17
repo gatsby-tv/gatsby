@@ -1,7 +1,7 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
 
 .Loading {
-  @include expand();
+  @include expand;
   @include center;
   grid-column: 1 / -1;
 }

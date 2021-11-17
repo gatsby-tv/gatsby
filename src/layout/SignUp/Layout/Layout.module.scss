@@ -1,20 +1,17 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/screen';
 
 .Layout {
   max-width: rem(2000px);
   margin: 0 auto;
   padding-top: rem(200px);
-}
 
-@include screen(500px) {
-  .Layout {
+  @include screen.min(500px) {
     padding-left: rem(25px);
     padding-top: rem(250px);
   }
-}
 
-@include screen(1000px) {
-  .Layout {
+  @include screen.min(1000px) {
     padding-left: rem(100px);
   }
 }

@@ -18,7 +18,7 @@ export const TextBox = forwardRef<HTMLDivElement, TextBoxProps>(
 
     const classes = Class(
       className,
-      styles[`TextBox-spacing-${gap}`],
+      styles[`TextBox-${gap}`],
       clamp && styles.Clamp
     );
 

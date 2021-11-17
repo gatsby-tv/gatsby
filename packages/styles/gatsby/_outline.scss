@@ -1,9 +1,9 @@
-@use './rem' as *;
-@use './duration' as *;
-@use './colors' as *;
+@use 'gatsby/rem' as *;
+@use 'gatsby/palette' as *;
+@use 'gatsby/duration';
 
 @mixin outline {
-  transition: box-shadow duration(faster) ease;
+  transition: box-shadow duration.$faster ease;
   box-shadow: inset 0 0 0 rem(2px) palette(outline);
 
   &:hover {

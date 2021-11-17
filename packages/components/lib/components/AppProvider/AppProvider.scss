@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/palette';
 
 * {
   position: relative;
@@ -16,7 +18,7 @@
 }
 
 :root {
-  @include root-palette;
+  @include palette.root;
 
   font-size: 62.5%;
   text-size-adjust: 100%;
@@ -29,9 +31,8 @@
 
 html,
 body {
-  @include expand();
-  @include font-size(body);
-  @include line-height(body);
+  @include expand;
+  @include text.body;
 
   color: palette(typography);
   overflow: hidden;

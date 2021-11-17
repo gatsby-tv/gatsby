@@ -1,0 +1,17 @@
+@use 'gatsby/rem' as *;
+
+$none: 0;
+$extratight: rem(5px);
+$tight: rem(10px);
+$base: rem(15px);
+$loose: rem(20px);
+$extraloose: rem(40px);
+
+$map: (
+  none: $none,
+  extratight: $extratight,
+  tight: $tight,
+  base: $base,
+  loose: $loose,
+  extraloose: $extraloose,
+);

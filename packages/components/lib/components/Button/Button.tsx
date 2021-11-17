@@ -42,6 +42,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const {
       children,
       className,
+      type = "button",
       unstyled,
       animate,
       tooltip,
@@ -136,23 +137,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [animate]
     );
 
-    const onPointerLeave = useCallback(
-      (event: any) => {
-        if (!animate) return;
-        setHeld(false);
-      },
-      [animate]
-    );
+    const onPointerLeave = useCallback(() => {
+      if (!animate) return;
+      setHeld(false);
+    }, [animate]);
 
     const onAnimationEnd = useCallback(() => setActive(false), []);
 
     const classes = Class(
+      'Button',
       className,
-      styles.Button,
-      !unstyled && styles.Styled,
-      !unstyled && animate && styles.Animation,
+      !icon && unstyled && styles.Action,
+      !icon && !unstyled && styles.Submit,
+      animate && styles.Animate,
       icon && styles.Icon,
-      asLabelFor && styles.FitContent
+      asLabelFor && styles.Label
     );
 
     const invalid =
@@ -180,13 +179,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children: ChildrenMarkup,
       ref: button,
       className: classes,
+      type,
       htmlFor: asLabelFor,
       tabIndex: Exists(asLabelFor, -1),
       disabled: Exists(invalid),
       'data-interactive': Exists(loading, 'false'),
-      'data-animating': Exists(
-        !unstyled && animate && !reset && (active || held)
-      ),
+      'data-active': Exists(animate && !reset && (active || held)),
       onClick,
       onPointerDown,
       onPointerUp,

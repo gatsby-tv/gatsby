@@ -14,7 +14,7 @@ export function Section(props: SectionProps): ReactElement {
   const { children, className, title, flush } = props;
   const styles = useStyles();
 
-  const classes = Class(className, styles.Section);
+  const classes = Class("Section", className, styles.Section);
 
   const TitleMarkup = title ? <TextSubheading>{title}</TextSubheading> : null;
 

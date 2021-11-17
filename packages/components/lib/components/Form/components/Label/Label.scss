@@ -1,24 +1,25 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Label {
-  @include text-break-word;
-  @include text-label;
+  @include text.break-word;
+  @include text.label;
   display: block;
   margin-bottom: spacing(0.5);
 }
 
 .Help {
-  @include text-label;
-  @include text-break-word;
-  @include text-subdued;
-  @include font-size(caption);
+  @include text.label;
+  @include text.break-word;
+  @include text.subdued;
+  font-size: text.$caption;
   margin-top: spacing(0.5);
 }
 
 .Error {
-  @include text-break-word;
-  @include text-error;
-  @include font-size(caption);
+  @include text.break-word;
+  @include text.error;
+  font-size: text.$caption;
   margin-top: spacing(0.5);
 
   &:before {

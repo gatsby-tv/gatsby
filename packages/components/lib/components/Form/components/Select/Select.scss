@@ -1,11 +1,13 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
+@use 'gatsby/duration';
 
 .Select {
   @include outline;
-  @include text-input;
-  @include border-radius(small);
-
+  @include text.input;
   display: flex;
+  border-radius: border.$small;
   align-items: center;
   background-color: palette(surface, 4);
   cursor: default;
@@ -23,7 +25,7 @@
     cursor: default;
 
     &::placeholder {
-      @include text-placeholder;
+      @include text.placeholder;
     }
   }
 }
@@ -50,7 +52,7 @@
   align-self: stretch;
   color: palette(icon);
   padding: 0 spacing(1);
-  transition: color duration(fastest) ease;
+  transition: color duration.$faster ease;
   cursor: default;
 
   @include hover {
@@ -63,14 +65,14 @@
 }
 
 .Selection {
-  @include text-no-break;
-  @include text-truncate;
+  @include text.no-break;
+  @include text.truncate;
   position: absolute;
   margin: 0 rem(2px);
 }
 
 .Mask {
-  @include border-radius(small);
+  border-radius: border.$small;
   overflow: hidden;
 }
 

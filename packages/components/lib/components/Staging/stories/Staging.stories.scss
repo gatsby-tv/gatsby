@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
+@use 'gatsby/border';
 
 .Container {
   width: rem(300px);
@@ -13,16 +15,16 @@
 .Switch {
   width: rem(150px);
   margin-bottom: spacing(2);
-}
 
-.Option {
-  @include border-radius(small);
-  padding: spacing(0.5) spacing(1.5);
-  background-color: palette(surface, 4);
-  transition: all duration(fastest) ease;
+  :global(.Item) {
+    border-radius: border.$small;
+    padding: spacing(0.5) spacing(1.5);
+    background-color: palette(surface, 4);
+    transition: all duration.$fastest ease;
 
-  &[aria-selected] {
-    color: palette(blue);
-    background-color: palette(surface, 6);
+    &[aria-selected] {
+      color: palette(blue);
+      background-color: palette(surface, 6);
+    }
   }
 }

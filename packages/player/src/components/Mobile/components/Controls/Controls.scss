@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Controls {
   @include expand(absolute);
@@ -45,12 +46,12 @@
 }
 
 .Backward {
-  @include expand();
+  @include expand;
   grid-column: skip-backward;
 }
 
 .Forward {
-  @include expand();
+  @include expand;
   grid-column: skip-forward;
 }
 
@@ -71,7 +72,7 @@
 }
 
 .ProgressText {
-  @include text-tabular-nums;
-  @include font-size(caption);
+  @include text.tabular-nums;
+  font-size: text.$caption;
   padding: spacing(1) spacing(2);
 }

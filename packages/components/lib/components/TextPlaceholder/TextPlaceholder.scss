@@ -1,18 +1,19 @@
-@use 'sass:map';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
+@use 'gatsby/text';
 
 .Placeholder {
-  @include border-radius(smallest);
+  border-radius: border.$smallest;
   background-color: palette(surface, placeholder);
   margin: spacing(0.5) 0;
 }
 
-@each $key, $value in $font-size-map {
+@each $key, $value in text.$map {
   .Placeholder-#{$key} {
     height: $value;
   }
 
   .Placeholder-heading-#{$key} {
-    height: calc(#{map.get($line-height-map, heading)} * #{$value});
+    height: calc(1.2 * #{$value});
   }
 }

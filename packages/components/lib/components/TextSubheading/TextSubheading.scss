@@ -1,5 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Subheading {
-  @include text-subheading;
+  @include text.subheading;
 }

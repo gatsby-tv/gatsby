@@ -1,12 +1,13 @@
-@use 'sass:color';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
+@use 'gatsby/text';
+@use 'gatsby/border';
 
 .Input {
   @include outline;
-  @include text-input;
-  @include border-radius(small);
-
+  @include text.input;
   display: flex;
+  border-radius: border.$small;
   padding: rem(7px) spacing(1);
   gap: spacing(1);
   align-items: center;
@@ -26,23 +27,23 @@
     outline: none;
 
     ::placeholder {
-      @include text-placeholder;
+      @include text.placeholder;
     }
   }
 }
 
 .Decorator {
-  @include text-placeholder;
+  @include text.placeholder;
   flex-shrink: 0;
 }
 
 .WithDefault {
   input,
   textarea {
-    transition: color duration(faster) ease;
+    transition: color duration.$faster ease;
 
     &:not(:focus) {
-      @include text-placeholder;
+      @include text.placeholder;
     }
   }
 }

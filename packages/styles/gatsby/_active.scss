@@ -1,0 +1,5 @@
+@mixin active {
+  &:not([disabled]):not([data-interactive="false"]):active {
+    @content
+  }
+}

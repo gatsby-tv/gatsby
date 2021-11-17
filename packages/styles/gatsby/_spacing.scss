@@ -1,16 +1,8 @@
 @use 'sass:map';
-@use './rem' as *;
+@use 'gatsby/rem' as *;
+@use 'gatsby/gutter';
 
-$spacing-map: (
-  none: 0,
-  extratight: rem(5px),
-  tight: rem(10px),
-  base: rem(15px),
-  loose: rem(20px),
-  extraloose: rem(40px),
-);
-
-$spacing-rem-map: (
+$spacing: (
   0: 0,
   0.5: rem(5px),
   1: rem(10px),
@@ -27,5 +19,5 @@ $spacing-rem-map: (
 );
 
 @function spacing($size) {
-  @return map.get(map.merge($spacing-map, $spacing-rem-map), $size);
+  @return map.get(map.merge(gutter.$map, $spacing), $size);
 }

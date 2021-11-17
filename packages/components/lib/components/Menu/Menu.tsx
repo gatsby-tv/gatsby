@@ -4,7 +4,6 @@ import { Class, StylesContext } from '@gatsby-tv/utilities';
 
 import { Modal } from '@lib/components/Modal';
 import { Connected } from '@lib/components/Connected';
-import { ItemContext } from '@lib/utilities/item';
 import { Placement } from '@lib/types';
 
 import { Item, ItemProps } from './components/Item';
@@ -17,7 +16,6 @@ export type { LinkProps as MenuLinkProps };
 export interface MenuProps {
   children?: ReactNode;
   className?: string;
-  itemClass?: string;
   for: RefObject<HTMLElement>;
   active?: boolean;
   placement?: Placement;
@@ -29,7 +27,6 @@ export function Menu(props: MenuProps): ReactElement {
   const {
     children,
     className,
-    itemClass,
     active,
     onExit,
     placement = 'bottom',
@@ -63,15 +60,13 @@ export function Menu(props: MenuProps): ReactElement {
 
   return (
     <StylesContext.Provider value={styles}>
-      <ItemContext.Provider value={{ itemClass }}>
-        <Modal active={active} onExit={onExit}>
-          <div ref={setPopper} style={style.popper} {...attributes.popper}>
-            <Connected className={classes} column>
-              {children}
-            </Connected>
-          </div>
-        </Modal>
-      </ItemContext.Provider>
+      <Modal active={active} onExit={onExit}>
+        <div ref={setPopper} style={style.popper} {...attributes.popper}>
+          <Connected className={classes} column>
+            {children}
+          </Connected>
+        </div>
+      </Modal>
     </StylesContext.Provider>
   );
 }

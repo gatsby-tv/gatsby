@@ -1,7 +1,9 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/duration';
 
 .Item {
-  @include text-tab;
+  @include text.tab;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +27,7 @@
     height: 2px;
     background-color: palette(gold);
     transform: scaleX(0);
-    transition: transform duration(fast) ease;
+    transition: transform duration.$fast ease;
   }
 
   &[aria-selected]:after {

@@ -1,7 +1,8 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .TextButton {
-  @include font-size(body-large);
+  font-size: text.$body-large;
   width: 100%;
   color: palette(surface, 4);
   background-color: palette(gold, 8);

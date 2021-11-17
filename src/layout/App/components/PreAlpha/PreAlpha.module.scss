@@ -1,13 +1,15 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
+@use 'gatsby/text';
 
 .PreAlpha {
-  @include border-radius(large);
-  @include font-size(body-large);
-  @include font-weight(bold);
+  font-size: text.$body-large;
+  font-weight: 600;
   position: fixed;
   right: spacing(2);
   bottom: spacing(2);
   background-color: palette(overlay, opaque);
+  border-radius: border.$large;
   padding: spacing(0.5) spacing(1);
 }
 

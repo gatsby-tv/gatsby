@@ -19,7 +19,10 @@ module.exports = {
         },
         sassLoaderOptions: {
           sassOptions: {
-            includePaths: [path.join(__dirname, '..', 'src')],
+            includePaths: [
+              path.join(__dirname, '..', 'src'),
+              require('@gatsby-tv/styles'),
+            ],
           },
         },
       },

@@ -357,7 +357,7 @@ export function Select(props: SelectProps): ReactElement {
       style={{ ...style.popper, width: `${width}px` }}
       {...attributes.popper}
     >
-      <Scroll className={styles.Menu} floating>
+      <Scroll className={styles.Menu} hide floating>
         {OptionsFilter.query(
           multiple
             ? OptionsFilter.unselected(options, state.selection)

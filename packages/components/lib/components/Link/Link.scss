@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
 
 .Underline {
   &:after {
@@ -11,7 +12,7 @@
     background-color: transparent;
     transform: scaleX(0);
     transform-origin: bottom left;
-    transition: transform duration(faster) ease;
+    transition: transform duration.$faster ease;
   }
 
   &:after:hover {

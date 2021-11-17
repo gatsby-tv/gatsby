@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/line-height';
 
 .Title {
   display: flex;
@@ -14,14 +16,14 @@
 }
 
 .TitleText {
-  @include font-size(display-small);
-  @include font-weight(bold);
-  @include line-height(heading);
+  font-size: text.$display-small;
+  font-weight: 600;
+  line-height: line-height.$heading;
 }
 
 .InfoText {
-  @include text-subdued;
-  @include font-size(body-large);
+  @include text.subdued;
+  font-size: text.$body-large;
 }
 
 .Peers {

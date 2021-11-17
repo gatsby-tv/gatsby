@@ -1,5 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
 
 .Video {
-  @include expand();
+  @include expand;
 }

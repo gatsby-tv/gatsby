@@ -22,7 +22,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       ...linkProps
     } = props;
 
-    const classes = Class(className, styles.Item);
+    const classes = Class("Item", className, styles.Item);
 
     return (
       <Selection.Item

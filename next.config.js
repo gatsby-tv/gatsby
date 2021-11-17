@@ -1,15 +1,15 @@
 const path = require('path');
-const webpack = require('webpack');
 const withTM = require('next-transpile-modules')([
   '@gatsby-tv/components',
   '@gatsby-tv/layout',
   '@gatsby-tv/services',
+  '@gatsby-tv/styles',
   '@gatsby-tv/utilities',
 ]);
 
 const config = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'src')],
+    includePaths: [path.join(__dirname, 'src'), require('@gatsby-tv/styles')],
   },
   webpack: (config) => {
     config.resolve.alias['@src'] = path.resolve(`${__dirname}/src`);

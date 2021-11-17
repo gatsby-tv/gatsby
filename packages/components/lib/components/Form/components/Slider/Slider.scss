@@ -1,11 +1,12 @@
-@use 'sass:color';
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
+@use 'gatsby/text';
 
 .Slider {
-  @include border-radius(small);
   cursor: pointer;
   margin: rem(10px) 0;
   height: rem(8px);
+  border-radius: border.$small;
   background-color: palette(slider, track);
 
   &:before {
@@ -27,9 +28,9 @@
 }
 
 .Progress {
-  @include border-radius(small);
   display: flex;
   align-items: center;
+  border-radius: border.$small;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -37,9 +38,9 @@
   background-color: palette(gold);
 
   &:after {
-    @include border-radius(full);
     cursor: col-resize;
     box-shadow: 0 0 rem(3px) rgba(0, 0, 0, 0.5);
+    border-radius: border.$full;
     content: "";
     position: absolute;
     right: rem(-8px);
@@ -50,9 +51,9 @@
 }
 
 .Stop {
-  @include font-size(caption);
-  @include font-weight(semi-bold);
   display: flex;
+  font-size: text.$caption;
+  font-weight: 500;
   align-items: center;
   flex-direction: column;
   position: absolute;
@@ -63,7 +64,7 @@
   background-color: palette(slider, track);
 
   span {
-    @include text-no-break;
+    @include text.no-break;
     top: -75%;
   }
 
@@ -78,9 +79,9 @@
 
 .Popper {
   @include elevation(3);
-  @include border-radius(base);
-  @include font-weight(bold);
+  font-weight: 600;
   font-stretch: condensed;
+  border-radius: border.$base;
   user-select: none;
   opacity: 0;
   transition: opacity 150ms ease;

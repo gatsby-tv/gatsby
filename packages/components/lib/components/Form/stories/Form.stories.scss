@@ -1,5 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Form {
-  @include font-size(body-large);
+  font-size: text.$body-large;
 }

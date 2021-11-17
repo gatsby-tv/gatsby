@@ -1,0 +1,93 @@
+@use 'gatsby/expand' as *;
+@use 'gatsby/spacing' as *;
+@use 'gatsby/palette' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
+@use 'gatsby/duration';
+
+@keyframes highlight {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@mixin animate {
+  &[data-active]:before {
+    opacity: 1;
+    animation: {
+      name: highlight;
+      duration: duration.$faster;
+      timing-function: cubic-bezier(0.2, 1, 0.6, 1);
+    }
+  }
+}
+
+@mixin action {
+  display: block;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  text-align: inherit;
+
+  &:disabled {
+    background-color: palette(surface, disabled);
+  }
+
+  &:before {
+    @include expand(absolute);
+    content: "";
+    display: block;
+    border-radius: border.$small;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+    background-color: palette(overlay, active);
+    transition: all duration.$faster ease;
+  }
+}
+
+@mixin submit {
+  @include action;
+  @include text.button;
+  border-radius: border.$small;
+  padding: spacing(extratight) spacing(tight);
+}
+
+@mixin label {
+  @include action;
+  width: fit-content;
+}
+
+@mixin icon {
+  display: block;
+  border-radius: border.$full;
+  width: fit-content;
+  padding: spacing(tight);
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+
+  &:disabled {
+    background-color: palette(surface, disabled);
+  }
+
+  &:before {
+    @include expand(absolute);
+    content: "";
+    display: block;
+    border-radius: border.$full;
+    pointer-events: none;
+    aspect-ratio: 1 / 1;
+    opacity: 0;
+    z-index: 1;
+    background-color: palette(overlay, active);
+    width: fit-content;
+    height: 100%;
+    margin: 0 auto;
+    transition: all duration.$faster ease;
+  }
+}

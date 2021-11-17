@@ -1,11 +1,12 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/gutter';
 
 .Tabs {
   height: 100%;
 }
 
-@each $key, $value in $spacing-map {
-  .Tabs-gap-#{$key} {
+@each $key, $value in gutter.$map {
+  .Gap-#{$key} {
     gap: $value;
   }
 }

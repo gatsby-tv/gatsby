@@ -1,8 +1,6 @@
 import {
   useState,
   useEffect,
-  Dispatch,
-  SetStateAction,
   ReactElement,
 } from 'react';
 import { Menu, MenuProps, Selection } from '@gatsby-tv/components';
@@ -58,7 +56,6 @@ export function Settings(props: SettingsProps): ReactElement {
     >
       <div>
         <Selection
-          itemClass={styles.Item}
           scrollHidden
           selection={resolution}
           onSelect={setResolution}

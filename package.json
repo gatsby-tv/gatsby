@@ -50,6 +50,7 @@
     "@gatsby-tv/player": "workspace:packages/player",
     "@gatsby-tv/preview": "workspace:packages/preview",
     "@gatsby-tv/services": "workspace:packages/services",
+    "@gatsby-tv/styles": "workspace:packages/styles",
     "@gatsby-tv/utilities": "workspace:packages/utilities",
     "abort-controller": "^3.0.0",
     "assert": "^2.0.0",

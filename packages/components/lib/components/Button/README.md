@@ -11,8 +11,8 @@ The `<button />` abstraction. The `Button` component supports more advanced
 ### `unstyled`
 > `boolean` (optional)
 
-Do not apply most CSS styling to the button. It is assumed that the caller has
-their own agenda in mind when using this option.
+Do not apply text styling or padding to the button. It is assumed that the
+caller has their own agenda in mind when using this option.
 
 ### `animate`
 > `animate` (optional)

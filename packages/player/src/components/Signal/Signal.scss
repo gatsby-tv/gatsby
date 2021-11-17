@@ -1,4 +1,6 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
+@use 'gatsby/duration';
 
 @keyframes signal-enter {
   0% {
@@ -17,9 +19,9 @@
 }
 
 .Signal {
-  @include border-radius(full);
   opacity: 0;
   color: palette(white);
+  border-radius: border.$full;
   background-color: palette(black);
 
   svg:global(#gz-pause) {
@@ -32,7 +34,7 @@
 
   animation: {
     name: signal-enter;
-    duration: duration(slow);
+    duration: duration.$slow;
     fill-direction: forwards;
   }
 }

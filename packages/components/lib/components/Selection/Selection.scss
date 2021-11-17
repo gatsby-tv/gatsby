@@ -1,4 +1,5 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
 .Selection {
   display: flex;
@@ -28,14 +29,14 @@
 }
 
 .Section {
-  @include expand();
+  @include expand;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
 .Heading {
-  @include text-subheading;
+  @include text.subheading;
 }
 
 .Item {

@@ -1,11 +1,14 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
+@use 'gatsby/border';
+@use 'gatsby/screen';
 
 .Card {
   @include elevation(8);
-  @include border-radius(small);
   max-width: rem(700px);
   min-height: rem(195px);
   background-color: palette(surface, 4);
+  border-radius: border.$small;
   padding: spacing(2);
 }
 
@@ -14,6 +17,11 @@
   gap: spacing(3);
   align-items: stretch;
   flex-direction: column;
+
+  @include screen.min(500px) {
+    align-items: flex-end;
+    flex-direction: row;
+  }
 }
 
 .Fields {
@@ -24,16 +32,16 @@
 }
 
 .Field {
-  @include font-size(body-large);
+  font-size: text.$body-large;
   background-color: palette(surface, 2);
 }
 
 .Label {
-  @include font-size(display-small);
+  font-size: text.$display-small;
 }
 
 .Loading {
-  @include expand();
+  @include expand;
   @include center;
 }
 
@@ -42,7 +50,7 @@
 }
 
 .Submit {
-  @include font-size(body-large);
+  font-size: text.$body-large;
   flex: 0 1 20%;
   width: 100%;
   color: palette(surface, 2);
@@ -55,13 +63,5 @@
 
   @include active {
     background-color: palette(gold, 7);
-  }
-}
-
-
-@include screen(500px) {
-  .Form {
-    align-items: flex-end;
-    flex-direction: row;
   }
 }

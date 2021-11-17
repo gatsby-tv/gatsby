@@ -16,6 +16,7 @@
   "peerDependencies": {
     "@gatsby-tv/components": "*",
     "@gatsby-tv/icons": "*",
+    "@gatsby-tv/styles": "*",
     "@gatsby-tv/utilities": "*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -33,6 +34,7 @@
     "@babel/preset-typescript": "^7.12.1",
     "@gatsby-tv/components": "workspace:packages/components",
     "@gatsby-tv/icons": "workspace:packages/icons",
+    "@gatsby-tv/styles": "workspace:packages/styles",
     "@gatsby-tv/types": "^0.5.5",
     "@gatsby-tv/utilities": "workspace:packages/utilities",
     "@rollup/plugin-babel": "^5.3.0",

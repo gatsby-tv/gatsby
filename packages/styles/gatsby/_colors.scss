@@ -1,0 +1,148 @@
+@use 'sass:color';
+
+$surface: hsl(0, 0%, 7%);
+$surface-1: hsl(0, 0%, 12%);
+$surface-2: hsl(0, 0%, 14%);
+$surface-3: hsl(0, 0%, 15%);
+$surface-4: hsl(0, 0%, 16%);
+$surface-5: hsl(0, 0%, 18%);
+$surface-6: hsl(0, 0%, 20%);
+$surface-7: hsl(0, 0%, 22%);
+$surface-8: hsl(0, 0%, 23%);
+$surface-9: hsl(0, 0%, 24%);
+
+$surface-disabled: $surface-6;
+$surface-placeholder: hsla(0, 0%, 40%, 0.5);
+
+$white: #fff;
+$black: #000;
+
+$typography: hsla(0, 0%, 100%, 0.87);
+$typography-inverted: hsla(0, 0%, 0%, 0.87);
+$typography-placeholder: hsla(0, 0%, 100%, 0.5);
+$typography-subdued: hsla(0, 0%, 100%, 0.6);
+$typography-disabled: hsla(0, 0%, 100%, 0.38);
+
+$icon: hsl(0, 0%, 32%);
+$icon-hover: hsl(0, 0%, 36%);
+$icon-focused: hsl(0, 0%, 44%);
+
+$tag: hsl(0, 0%, 32%);
+$tag-hover: hsl(0, 0%, 28%);
+
+$option-selected: $surface-4;
+$option-hover: hsl(0, 0%, 32%);
+
+$overlay-tint: hsla(0, 0%, 0%, 0.3);
+$overlay-opaque: hsla(0, 0%, 0%, 0.7);
+$overlay-active: hsla(0, 0%, 100%, 0.16);
+$overlay-hover: hsla(0, 0%, 100%, 0.12);
+$overlay-focused: hsla(0, 0%, 100%, 0.20);
+
+$snackbar: hsla(0, 0%, 22%, 0.9);
+
+$error: #f44336;
+$error-hover: color.adjust($error, $lightness: 4%);
+$error-focused: color.adjust($error, $lightness: 12%);
+
+$link: #5c73b2;
+$link-hover: color.adjust($link, $lightness: 4%);
+$link-focused: color.adjust($link, $lightness: 12%);
+
+$outline: hsla(0, 0%, 20%, 0.8);
+$outline-hover: hsla(0, 0%, 24%, 0.8);
+$outline-focused: hsla(0, 0%, 60%, 0.8);
+
+$separator: hsl(0, 0%, 24%);
+
+$shadow-1: hsla(0, 0%, 0%, 0.14);
+$shadow-2: hsla(0, 0%, 0%, 0.12);
+$shadow-3: hsla(0, 0%, 0%, 0.2);
+
+$slider-track: hsla(0, 0%, 100%, 0.16);
+$slider-ball: hsl(0, 0%, 85%);
+
+$gold: #b29b5c;
+$gold-1: #17140b;
+$gold-2: #2e2716;
+$gold-3: #453b20;
+$gold-4: #5c4f2b;
+$gold-5: #736236;
+$gold-6: #8a7641;
+$gold-7: #a08a4c;
+$gold-8: #b29b5c;
+$gold-9: #bca870;
+$gold-10: #c5b485;
+$gold-11: #cfc099;
+$gold-12: #d9cdad;
+$gold-13: #e2d9c2;
+$gold-14: #ece6d6;
+$gold-15: #f5f3eb;
+
+$grey: #808080;
+$grey-1: #101010;
+$grey-2: #202020;
+$grey-3: #303030;
+$grey-4: #404040;
+$grey-5: #505050;
+$grey-6: #606060;
+$grey-7: #707070;
+$grey-8: #808080;
+$grey-9: #8f8f8f;
+$grey-10: #9f9f9f;
+$grey-11: #afafaf;
+$grey-12: #bfbfbf;
+$grey-13: #cfcfcf;
+$grey-14: #dfdfdf;
+$grey-15: #efefef;
+
+$blue: #5c73b2;
+$blue-1: #0b0e17;
+$blue-2: #161c2e;
+$blue-3: #202a45;
+$blue-4: #2b385c;
+$blue-5: #364673;
+$blue-6: #41548a;
+$blue-7: #4c62a0;
+$blue-8: #5c73b2;
+$blue-9: #7084bc;
+$blue-10: #8596c5;
+$blue-11: #99a8cf;
+$blue-12: #adb9d9;
+$blue-13: #c2cbe2;
+$blue-14: #d6dcec;
+$blue-15: #ebeef5;
+
+$green: #4caf50;
+$green-1: #09160a;
+$green-2: #132c14;
+$green-3: #1c421e;
+$green-4: #265828;
+$green-5: #306d32;
+$green-6: #39833c;
+$green-7: #429946;
+$green-8: #4caf50;
+$green-9: #61ba65;
+$green-10: #78c47b;
+$green-11: #8ece91;
+$green-12: #a5d8a7;
+$green-13: #bbe2bd;
+$green-14: #d2ebd3;
+$green-15: #e8f5e9;
+
+$red: #f44336;
+$red-1: #230402;
+$red-2: #470804;
+$red-3: #6a0d06;
+$red-4: #8d1108;
+$red-5: #b1150a;
+$red-6: #d4190c;
+$red-7: #f22213;
+$red-8: #f44336;
+$red-9: #f55b4f;
+$red-10: #f77268;
+$red-11: #f88a81;
+$red-12: #faa19b;
+$red-13: #fbb9b4;
+$red-14: #fcd0cd;
+$red-15: #fee7e6;

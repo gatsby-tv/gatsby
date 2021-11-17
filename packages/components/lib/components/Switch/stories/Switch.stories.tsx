@@ -12,13 +12,11 @@ export default {
 } as Meta;
 
 export const TwoSettings: Story<SwitchProps> = () => {
-  const items = ['one', 'two'];
   const [selection, setSelection] = useState('one');
 
   return (
     <Switch
       className={styles.Switch}
-      itemClass={styles.Item}
       selection={selection}
       onSelect={setSelection}
     >
@@ -33,13 +31,11 @@ export const TwoSettings: Story<SwitchProps> = () => {
 };
 
 export const ThreeSettings: Story<SwitchProps> = () => {
-  const items = ['one', 'two', 'three'];
   const [selection, setSelection] = useState('one');
 
   return (
     <Switch
       className={styles.Switch}
-      itemClass={styles.Item}
       selection={selection}
       onSelect={setSelection}
     >

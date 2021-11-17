@@ -1,11 +1,12 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/border';
 
 .Overlay {
-  @include border-radius(full);
   position: absolute;
   bottom: 0;
   right: 0;
   width: rem(15px);
   height: rem(15px);
+  border-radius: border.$full;
   background-color: palette(gold);
 }

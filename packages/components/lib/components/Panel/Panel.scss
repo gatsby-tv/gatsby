@@ -1,8 +1,9 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/duration';
 
 .Panel {
   overflow: hidden;
-  transition: background-color duration(fast) ease-out;
+  transition: background-color duration.$fast ease-out;
 }
 
 .Absolute {
@@ -18,10 +19,10 @@
 }
 
 .Container {
-  @include expand();
+  @include expand;
 }
 
 .Slider {
   @include elevation(2);
-  transition: transform duration(fast) ease-out;
+  transition: transform duration.$fast ease-out;
 }

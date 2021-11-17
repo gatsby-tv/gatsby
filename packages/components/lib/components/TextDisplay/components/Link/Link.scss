@@ -1,14 +1,15 @@
-@use 'styles' as *;
+@use 'gatsby' as *;
+@use 'gatsby/text';
 
-@each $key, $value in $text-display-font-size-map {
+@each $key in (small, medium, large) {
   .Display-#{$key} {
-    @include text-display($key);
+    @include text.display($key);
     text-decoration: none;
   }
 }
 
 .Thin {
-  @include font-weight(semi-bold);
+  font-weight: 500;
 }
 
 .FitContent {

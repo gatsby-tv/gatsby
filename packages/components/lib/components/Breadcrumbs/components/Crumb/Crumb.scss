@@ -39,6 +39,8 @@
 
 .Chevron {
   font-size: 80%;
+  flex-shrink: 0;
+  margin: 0 spacing(tight);
 
   &:first-child {
     display: none;

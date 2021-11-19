@@ -1,6 +1,5 @@
 import {
-  useRef,
-  useState,
+  useReducer,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -17,6 +16,22 @@ import styles from './Breadcrumbs.scss';
 
 export type { Breadcrumb };
 
+type BufferState = {
+  crumbs: Breadcrumb[];
+  zombies: Breadcrumb[];
+};
+
+type BufferAction = { type: 'sync'; crumbs: Breadcrumb[] } | { type: 'clear' };
+
+function BreadcrumbFilter(
+  crumbs: Breadcrumb[]
+): (target: Breadcrumb) => boolean {
+  return (target) =>
+    !crumbs
+      .map((value) => JSON.stringify(value))
+      .includes(JSON.stringify(target));
+}
+
 export interface BreadcrumbsProps {
   className?: string;
   link?: FC<any>;
@@ -29,19 +44,30 @@ export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
   const { className, crumbs, link = Link, $props = {}, onSelect } = props;
 
   const original = useMemo(() => crumbs, []);
-  const buffer = useRef(crumbs);
-  const [zombies, setZombies] = useState<Breadcrumb[]>([]);
 
-  useLayoutEffect(() => {
-    setZombies((current) =>
-      buffer.current.filter((crumb) => !crumbs.includes(crumb)).concat(current)
-    );
+  const [{ zombies }, dispatch] = useReducer(
+    (state: BufferState, action: BufferAction) => {
+      switch (action.type) {
+        case 'sync':
+          return {
+            ...state,
+            crumbs: action.crumbs,
+            zombies: state.crumbs
+              .filter(BreadcrumbFilter(action.crumbs))
+              .concat(state.zombies),
+          };
 
-    buffer.current = crumbs;
-  }, [crumbs]);
+        case 'clear':
+          return { ...state, zombies: [] };
+      }
+    },
+    { crumbs, zombies: [] }
+  );
+
+  useLayoutEffect(() => dispatch({ type: 'sync', crumbs }), [crumbs]);
 
   useEffect(() => {
-    const id = setTimeout(() => setZombies([]), 300);
+    const id = setTimeout(() => dispatch({ type: 'clear' }), 300);
     return () => clearTimeout(id);
   }, [zombies.length]);
 

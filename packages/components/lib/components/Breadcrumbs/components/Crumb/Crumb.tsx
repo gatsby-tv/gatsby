@@ -36,6 +36,7 @@ export function Crumb(props: CrumbProps): ReactElement {
     <>
       <Icon
         className={Class(
+          "Separator",
           styles.Chevron,
           animate && styles.Appear,
           zombie && styles.Disappear

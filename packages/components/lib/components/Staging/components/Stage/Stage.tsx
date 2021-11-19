@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode, ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 
-import { useStaging } from '@lib/utilities';
+import { useStage } from '@lib/utilities';
 
 import styles from './Stage.scss';
 
@@ -13,10 +13,9 @@ export interface StageProps {
 
 export function Stage(props: StageProps): ReactElement {
   const { children, className, index } = props;
+  const { current, previous, sync } = useStage();
 
-  const { current, previous, onTransitionEnd } = useStaging();
   const active = [current, previous].includes(index);
-
   const classes = Class(className, styles.Stage, active && styles.Active);
   const direction = Math.min(Math.max(index - current, -1), 1);
 
@@ -25,7 +24,7 @@ export function Stage(props: StageProps): ReactElement {
   };
 
   return (
-    <div style={style} className={classes} onTransitionEnd={onTransitionEnd}>
+    <div style={style} className={classes} onTransitionEnd={sync}>
       {children}
     </div>
   );

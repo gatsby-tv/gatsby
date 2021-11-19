@@ -1,9 +1,9 @@
-import { createContext } from 'react';
+import { createContext, DispatchWithoutAction } from 'react';
 
 export type StagingContextType = {
   current: number;
   previous: number;
-  onTransitionEnd: () => void;
+  sync: DispatchWithoutAction;
 };
 
 export const StagingContext = createContext<StagingContextType | undefined>(

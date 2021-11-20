@@ -1,12 +1,16 @@
-import {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  DependencyList,
-} from 'react';
+import { useReducer, useEffect, useCallback, DependencyList } from 'react';
 
-export type ChangeState = {
+type ChangeState = {
+  initial: Record<string, unknown>;
+  values: Record<string, unknown>;
+  updates: Record<string, unknown>;
+};
+
+type ChangeAction =
+  | { type: 'set'; value: unknown; id: string }
+  | { type: 'reset'; initial: Record<string, unknown> };
+
+export type ChangeSet = {
   pristine: boolean;
   updates: Record<string, unknown>;
   values: Record<string, unknown>;
@@ -16,41 +20,57 @@ export type ChangeState = {
 export function useChangeSet(
   initial: Record<string, unknown>,
   deps: DependencyList
-): ChangeState {
-  const ref = useRef(initial);
-  const [values, setValues] = useState<Record<string, unknown>>(initial);
-  const [updates, setUpdates] = useState<Record<string, unknown>>({});
-  const pristine = Object.values(updates).length === 0;
+): ChangeSet {
+  const [{ values, updates }, dispatch] = useReducer(
+    (state: ChangeState, action: ChangeAction) => {
+      switch (action.type) {
+        case 'set':
+          const values = {
+            ...state.values,
+            [action.id]:
+              action.value !== undefined &&
+              action.value !== state.initial[action.id]
+                ? action.value
+                : state.initial[action.id],
+          };
+
+          return {
+            ...state,
+            values,
+            updates: Object.fromEntries(
+              Object.entries(values).filter(
+                ([key, value]) => value !== state.initial[key]
+              )
+            ),
+          };
+
+        case 'reset':
+          return {
+            ...state,
+            initial: action.initial,
+            values: action.initial,
+            updates: {},
+          };
+      }
+    },
+    {
+      initial,
+      values: initial,
+      updates: {},
+    }
+  );
 
   const setValue = useCallback(
-    (value: unknown, id: string) =>
-      setValues((current) => ({
-        ...current,
-        [id]:
-          value !== undefined && value !== ref.current[id]
-            ? value
-            : ref.current[id],
-      })),
+    (value: unknown, id: string) => dispatch({ type: 'set', value, id }),
     []
   );
 
-  useEffect(
-    () =>
-      setUpdates(
-        Object.fromEntries(
-          Object.entries(values).filter(
-            ([key, value]) => value !== ref.current[key]
-          )
-        )
-      ),
-    [values]
-  );
+  useEffect(() => dispatch({ type: 'reset', initial }), deps);
 
-  useEffect(() => {
-    setValues(initial);
-    setUpdates({});
-    ref.current = initial;
-  }, deps);
-
-  return { pristine, updates, values, setValue };
+  return {
+    pristine: !Object.values(updates).length,
+    updates,
+    values,
+    setValue,
+  };
 }

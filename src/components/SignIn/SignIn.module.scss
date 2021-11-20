@@ -1,6 +1,7 @@
 @use 'gatsby' as *;
 @use 'gatsby/text';
 @use 'gatsby/border';
+@use 'gatsby/icon';
 
 .Modal {
   width: rem(420px);
@@ -100,6 +101,7 @@
 
 .EmailDecorator {
   @include elevation(2);
+  font-size: icon.$base;
   border-radius: border.$full;
   background-color: palette(surface, 4);
   position: absolute;

@@ -18,31 +18,27 @@ export interface LinkProps extends Omit<LinkComponentProps, 'href'> {
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   (props: LinkProps, ref: Ref<HTMLAnchorElement>) => {
-    const { children, className, icon: IconComponent, ...rest } = props;
+    const { children, className, icon: Source, ...rest } = props;
     const styles = useStyles();
 
-    const classes = Class("Item", "Link", className, styles.Item);
+    const classes = Class("Item", className, styles.Item);
 
-    const IconMarkup = IconComponent ? (
-      <Icon src={IconComponent} size="smaller" />
+    const IconMarkup = Source ? (
+      <Icon src={Source} size="smaller" />
     ) : null;
 
     return (
-      <Optional
-        component={LinkComponent}
-        $props={{ ref, ...rest }}
-      >
+      <LinkComponent ref={ref} {...rest}>
         <Connected.Item className={classes}>
           <Optional
-            component="div"
-            active={Boolean(IconComponent)}
+            active={Boolean(Source)}
             $props={{ className: styles.Container }}
           >
             {IconMarkup}
             <div className={styles.Text}>{children}</div>
           </Optional>
         </Connected.Item>
-      </Optional>
+      </LinkComponent>
     );
   }
 );

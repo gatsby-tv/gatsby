@@ -30,4 +30,3 @@ export * from './global';
 export * from './form';
 export * from './validators';
 export * from './fetcher';
-export * from './styles';

@@ -6,11 +6,7 @@ import {
   ReactNode,
   ReactElement,
 } from 'react';
-import {
-  FrameContext,
-  StylesContext,
-  useResizeObserver,
-} from '@gatsby-tv/utilities';
+import { FrameContext, useResizeObserver } from '@gatsby-tv/utilities';
 
 import styles from './Frame.scss';
 import { MainFrame, TopFrame, SideFrame } from './components';
@@ -90,12 +86,10 @@ export function Frame(props: FrameProps): ReactElement {
   );
 
   return (
-    <StylesContext.Provider value={styles}>
-      <FrameContext.Provider value={context}>
-        <div ref={screen} className={styles.Frame}>
-          {ContentMarkup}
-        </div>
-      </FrameContext.Provider>
-    </StylesContext.Provider>
+    <FrameContext.Provider value={context}>
+      <div ref={screen} className={styles.Frame}>
+        {ContentMarkup}
+      </div>
+    </FrameContext.Provider>
   );
 }

@@ -1,7 +1,9 @@
 import { AriaAttributes, ReactNode, ReactElement } from 'react';
-import { Class, Exists, useStyles } from '@gatsby-tv/utilities';
+import { Class, Exists } from '@gatsby-tv/utilities';
 
 import { useSelection } from '@lib/utilities/selection';
+
+import styles from '@lib/components/Selection/Selection.scss';
 
 export interface ItemProps extends AriaAttributes {
   children?: ReactNode;
@@ -12,7 +14,6 @@ export interface ItemProps extends AriaAttributes {
 
 export function Item(props: ItemProps): ReactElement {
   const { children, id, className, option, ...aria } = props;
-  const styles = useStyles();
   const { selection, setSelection } = useSelection();
   const onClick = () => setSelection(option);
 

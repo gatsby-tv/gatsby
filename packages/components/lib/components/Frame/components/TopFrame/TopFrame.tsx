@@ -1,5 +1,7 @@
 import { forwardRef, Ref, ReactNode, ReactElement } from 'react';
-import { Class, useStyles, useForwardedRef } from '@gatsby-tv/utilities';
+import { Class, useForwardedRef } from '@gatsby-tv/utilities';
+
+import styles from '@lib/components/Frame/Frame.scss';
 
 export interface TopFrameProps {
   children?: ReactNode;
@@ -10,7 +12,6 @@ export interface TopFrameProps {
 export const TopFrame = forwardRef<HTMLDivElement, TopFrameProps>(
   (props: TopFrameProps, ref: Ref<HTMLDivElement>) => {
     const { children, content: Topbar, active } = props;
-    const styles = useStyles();
     const frame = useForwardedRef<HTMLDivElement>(ref);
 
     const classes = Class(styles.Bar, !active && styles.Hidden);

@@ -1,11 +1,13 @@
 import { ReactNode, ReactElement } from 'react';
-import { Class, useStyles } from '@gatsby-tv/utilities';
+import { Class } from '@gatsby-tv/utilities';
 
 import { Connected } from '@lib/components/Connected';
 import { Optional } from '@lib/components/Optional';
 import { Icon } from '@lib/components/Icon';
 import { Button, ButtonProps } from '@lib/components/Button';
 import { IconSource } from '@lib/types';
+
+import styles from '@lib/components/Menu/Menu.scss';
 
 export interface ItemProps extends Omit<ButtonProps, 'action'> {
   children?: ReactNode;
@@ -15,7 +17,6 @@ export interface ItemProps extends Omit<ButtonProps, 'action'> {
 
 export function Item(props: ItemProps): ReactElement {
   const { children, className, icon: IconComponent, ...rest } = props;
-  const styles = useStyles();
 
   const classes = Class("Item", className, styles.Item);
 

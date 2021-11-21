@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { Class } from '@gatsby-tv/utilities';
 import { IPFSContent } from '@gatsby-tv/types';
+import stringify from 'json-stable-stringify';
 
 import { Spacing, DiscreteSize } from '@lib/types';
 import { Avatar } from '@lib/components/Avatar';
@@ -24,7 +25,7 @@ export function AvatarCollation(props: AvatarCollationProps): ReactElement {
 
   const AvatarsMarkup = avatars.map((avatar, index) => (
     <Avatar
-      key={`${JSON.stringify(avatar)}.${index}`}
+      key={`${stringify(avatar)}.${index}`}
       src={avatar}
       size={size}
     />

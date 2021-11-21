@@ -7,6 +7,7 @@ import {
   ReactElement,
 } from 'react';
 import { Class } from '@gatsby-tv/utilities';
+import stringify from 'json-stable-stringify';
 
 import { Link } from '@lib/components/Link';
 
@@ -27,9 +28,7 @@ function BreadcrumbFilter(
   crumbs: Breadcrumb[]
 ): (target: Breadcrumb) => boolean {
   return (target) =>
-    !crumbs
-      .map((value) => JSON.stringify(value))
-      .includes(JSON.stringify(target));
+    !crumbs.map((value) => stringify(value)).includes(stringify(target));
 }
 
 export interface BreadcrumbsProps {
@@ -64,16 +63,19 @@ export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
     { crumbs, zombies: [] }
   );
 
-  useLayoutEffect(() => dispatch({ type: 'sync', crumbs }), [crumbs]);
+  useLayoutEffect(
+    () => dispatch({ type: 'sync', crumbs }),
+    [stringify(crumbs)]
+  );
 
   useEffect(() => {
     const id = setTimeout(() => dispatch({ type: 'clear' }), 300);
     return () => clearTimeout(id);
-  }, [zombies.length]);
+  }, [stringify(zombies)]);
 
   const CrumbsMarkup = crumbs.map((path, index) => (
     <Crumb
-      key={`${path.label}.${index}`}
+      key={`${stringify(path)}.${index}`}
       animate={!original.includes(path)}
       link={link}
       path={path}
@@ -84,7 +86,7 @@ export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
 
   const ZombieMarkup = zombies.map((path, index) => (
     <Crumb
-      key={`${path.label}.${index}.zombie`}
+      key={`${stringify(path)}.${index}.zombie`}
       zombie
       link={link}
       path={path}

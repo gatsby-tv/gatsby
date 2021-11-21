@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import {
@@ -16,10 +16,11 @@ export default {
 } as Meta;
 
 export const Example: Story<BreadcrumbsProps> = (props) => {
+  const key = useRef(0);
   const [crumbs, setCrumbs] = useState<BreadcrumbPath[]>([
-    { label: 'First' },
-    { label: 'Second' },
-    { label: 'Third' },
+    { label: 'First', key: key.current++ },
+    { label: 'Second', key: key.current++ },
+    { label: 'Third', key: key.current++ },
   ]);
 
   return (
@@ -36,21 +37,30 @@ export const Example: Story<BreadcrumbsProps> = (props) => {
         <Button onClick={() => setCrumbs([])}>Clear</Button>
         <Button
           onClick={() =>
-            setCrumbs((current) => [...current, { label: 'First' }])
+            setCrumbs((current) => [
+              ...current,
+              { label: 'First', key: key.current++ },
+            ])
           }
         >
           First
         </Button>
         <Button
           onClick={() =>
-            setCrumbs((current) => [...current, { label: 'Second' }])
+            setCrumbs((current) => [
+              ...current,
+              { label: 'Second', key: key.current++ },
+            ])
           }
         >
           Second
         </Button>
         <Button
           onClick={() =>
-            setCrumbs((current) => [...current, { label: 'Third' }])
+            setCrumbs((current) => [
+              ...current,
+              { label: 'Third', key: key.current++ },
+            ])
           }
         >
           Third
@@ -59,8 +69,8 @@ export const Example: Story<BreadcrumbsProps> = (props) => {
           onClick={() =>
             setCrumbs((current) => [
               ...current,
-              { label: 'First' },
-              { label: 'Second' },
+              { label: 'First', key: key.current++ },
+              { label: 'Second', key: key.current++ },
             ])
           }
         >

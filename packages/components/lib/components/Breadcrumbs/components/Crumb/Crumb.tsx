@@ -8,6 +8,7 @@ import styles from './Crumb.scss';
 
 export type Breadcrumb = {
   label: string;
+  key?: string;
   $link?: any;
 };
 

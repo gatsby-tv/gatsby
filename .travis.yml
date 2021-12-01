@@ -1,5 +1,5 @@
 language: node_js
-node_js: 12.18.3
+node_js: 16.13
 services: docker
 before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -16,7 +16,7 @@ stages:
 
 branches:
   only:
-    - main
+    - develop
 
 jobs:
   include:
@@ -26,7 +26,7 @@ jobs:
         - yarn run build
     # Build and publish docker tags
     - stage: publish
-      if: branch == main AND (NOT (type IN (pull_request)))
+      if: branch == develop AND (NOT (type IN (pull_request)))
       before_script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
       script:

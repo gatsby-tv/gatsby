@@ -27,8 +27,8 @@ type BufferAction = { type: 'sync'; crumbs: Breadcrumb[] } | { type: 'clear' };
 function BreadcrumbFilter(
   crumbs: Breadcrumb[]
 ): (target: Breadcrumb) => boolean {
-  return (target) =>
-    !crumbs.map((value) => stringify(value)).includes(stringify(target));
+  const stringified = crumbs.map((value) => stringify(value));
+  return (target) => !stringified.includes(stringify(target));
 }
 
 export interface BreadcrumbsProps {
@@ -48,12 +48,15 @@ export function Breadcrumbs(props: BreadcrumbsProps): ReactElement {
     (state: BufferState, action: BufferAction) => {
       switch (action.type) {
         case 'sync':
+          const zombies = state.crumbs.filter(BreadcrumbFilter(action.crumbs));
+
+          const offset =
+            action.crumbs.length + zombies.length - state.crumbs.length;
+
           return {
             ...state,
             crumbs: action.crumbs,
-            zombies: state.crumbs
-              .filter(BreadcrumbFilter(action.crumbs))
-              .concat(state.zombies),
+            zombies: zombies.slice(offset).concat(state.zombies),
           };
 
         case 'clear':

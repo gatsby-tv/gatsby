@@ -56,14 +56,9 @@ export const Example: Story<BreadcrumbsProps> = (props) => {
           Second
         </Button>
         <Button
-          onClick={() =>
-            setCrumbs((current) => [
-              ...current,
-              { label: 'Third', key: key.current++ },
-            ])
-          }
+          onClick={() => setCrumbs([{ label: 'Third', key: key.current++ }])}
         >
-          Third
+          Replace with Third
         </Button>
         <Button
           onClick={() =>

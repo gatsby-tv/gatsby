@@ -1,7 +1,7 @@
 {
   "name": "@gatsby-tv/styles",
   "description": "Gatsby shared scss styling library.",
-  "version": "0.7.1-0",
+  "version": "0.7.1-1",
   "license": "AGPL-3.0",
   "main": "index.js",
   "peerDependencies": {

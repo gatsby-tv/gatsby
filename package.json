@@ -1,7 +1,7 @@
 {
   "name": "gatsby",
   "description": "The transparent, distributed video sharing platform.",
-  "version": "0.7.1-0",
+  "version": "0.7.1-1",
   "license": "AGPL-3.0",
   "private": true,
   "main": "./dist/server.prod.js",

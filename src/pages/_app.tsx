@@ -1,7 +1,8 @@
-import { ReactElement } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
+import * as IPFS from 'ipfs';
 import { AppProvider } from '@gatsby-tv/components';
 import { useIPFSContext, IPFSContext } from '@gatsby-tv/utilities';
 import '@gatsby-tv/components/dist/styles.css';
@@ -23,11 +24,22 @@ export default function AppPage({
   Component,
   pageProps,
 }: AppProps): ReactElement {
+  const [ipfs, setIPFS] = useState<any>(undefined);
   const channelContext = useChannelModalContext();
   const sessionContext = useSessionContext();
+
   const nodeContext = useIPFSContext(
+    ipfs,
     process.env.NEXT_PUBLIC_BOOTSTRAP_NODES?.split(',').filter(Boolean)
   );
+
+  useEffect(() => {
+    async function init() {
+      setIPFS(await IPFS.create({ repo: '/ipfs/gatsby' }));
+    }
+
+    init();
+  }, []);
 
   const HeaderMarkup = (
     <Head>

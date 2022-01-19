@@ -2,10 +2,7 @@
 
 import { createContext } from 'react';
 
-export interface IPFSContextType {
-  readonly ipfs: any;
-  readonly error: Error | null;
-}
+export type IPFSContextType = any;
 
 export const IPFSContext = createContext<IPFSContextType | undefined>(
   undefined

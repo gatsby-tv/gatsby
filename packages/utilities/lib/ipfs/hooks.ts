@@ -11,8 +11,6 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
-// @ts-ignore
-import IPFS from 'ipfs';
 import HLS from 'hls.js';
 // @ts-ignore
 import HLSIPFSLoader from 'hlsjs-ipfs-loader';
@@ -24,50 +22,38 @@ import { ContextError, UniqueContextError } from '@lib/errors';
 
 import { IPFSContext, IPFSContextType } from './context';
 
-const IPFS_DEFAULT_CONFIG = {
-  repo: `/ipfs/gatsby`,
-};
-
-export function useIPFSContext(bootstrap: string[] = []): IPFSContextType {
+export function useIPFSContext(ipfs: any, bootstrap: string[] = []): IPFSContextType {
   const context = useContext(IPFSContext);
 
   if (context) {
     throw new UniqueContextError('IPFS');
   }
 
-  const ipfsRef = useRef<any>(null);
-  const [ipfs, setIPFS] = useState<any>(null);
-  const [error, setError] = useState<Error | null>(null);
+  const ipfsRef = useRef<any>(ipfs);
 
   useEffect(() => void (ipfsRef.current = ipfs), [ipfs]);
 
   useEffect(() => {
-    async function loadIPFS() {
+    async function load() {
       try {
-        if (ipfsRef.current) return;
-        const ipfs = await IPFS.create(IPFS_DEFAULT_CONFIG);
         bootstrap.forEach((addr) => ipfs.swarm.connect(addr));
         const { id } = await ipfs.id();
         console.log(`IPFS node ready at /p2p/${id}`);
-        setIPFS(ipfs);
       } catch (error) {
         console.error(error);
-        setIPFS(null);
-        setError(error);
       }
     }
 
-    loadIPFS();
+    if (ipfs) load();
     HLS.DefaultConfig.loader = HLSIPFSLoader;
 
     return () => {
       if (!ipfsRef.current || !ipfsRef.current.stop) return;
       ipfsRef.current.stop();
-      setIPFS(null);
     };
-  }, []);
+  }, [Boolean(ipfs)]);
 
-  return { ipfs, error };
+  return ipfsRef.current;
 }
 
 export function useIPFS(): IPFSContextType {
@@ -86,7 +72,7 @@ export type IPFSContentState = {
 };
 
 export function useIPFSContent(content?: IPFSContent): IPFSContentState {
-  const { ipfs } = useIPFS();
+  const ipfs = useIPFS();
 
   const [result, setResult] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(true);
@@ -132,7 +118,7 @@ export interface IPFSPeersState {
 }
 
 export function useIPFSPeers(): IPFSPeersState {
-  const { ipfs } = useIPFS();
+  const ipfs = useIPFS();
 
   const [peers, setPeers] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(true);
@@ -181,7 +167,7 @@ export function useIPFSVideoStream(hash?: string): IPFSStreamController {
   const ref = useRef<HTMLVideoElement>(null);
   const hls = useRef<HLS | null>(null);
   const [levels, setLevels] = useState<Record<number, number>>({});
-  const { ipfs } = useIPFS();
+  const ipfs = useIPFS();
 
   const setQuality = useCallback((value: SetStateAction<number>) => {
     if (!hls.current?.levels) return;
